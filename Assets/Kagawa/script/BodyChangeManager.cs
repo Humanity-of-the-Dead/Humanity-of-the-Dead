@@ -29,4 +29,28 @@ public class BodyChangeManager : MonoBehaviour
 
         headSP.sprite = head[headNumber];
     }
+
+
+    void ChangeArm(int armNumber)
+    {
+        if (armNumber > arm.Count)
+        {
+            Debug.LogWarning("‚»‚ñ‚È’l‚Í‚È‚¢‚æ");
+            return;
+        }
+
+        armSP.sprite = arm[armNumber];
+    }
+
+
+    void ChangeLeg(int legNumber)
+    {
+        if (legNumber > leg.Count)
+        {
+            Debug.LogWarning("‚»‚ñ‚È’l‚Í‚È‚¢‚æ");
+            return;
+        }
+
+        legSP.sprite = leg[legNumber];
+    }
 }
