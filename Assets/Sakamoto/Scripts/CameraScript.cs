@@ -2,65 +2,101 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum STATE { 
+    NONE,
+    NOMAL,//ノーマルステージ
+    BOSS,//ボスステージ
+}
+
+
 public class CameraScript : MonoBehaviour
 {
     [SerializeField] GameObject goTarget;
+    [SerializeField] float fMoveStart;
     [SerializeField] float fMoveLimit;
-    //カメラから見たターゲットの位置
-    Vector2 fTrgPosFromCamera;
 
-    bool fMoveRight;
-    bool fMoveLeft;
+    ////カメラから見たターゲットの位置
+    //Vector2 fTrgPosFromCamera;
+
+    //ゲームステート
+    STATE eState = STATE.NONE;
+
+    //bool fMoveRight;
+    //bool fMoveLeft;
     // Start is called before the first frame update
     void Start()
     {
-        fMoveRight = false;
-        fMoveLeft = false;
+        eState = STATE.NOMAL;
+        //fMoveRight = false;
+        //fMoveLeft = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //ターゲットの相対位置の取得
-        fTrgPosFromCamera = goTarget.transform.position - this.transform.position;
-        //ターゲットのx位置が3以上ならカメラを右に移動させる
-        if(fTrgPosFromCamera.x > 3 && fMoveRight == false)
+        switch (eState)
         {
-            fMoveRight = true;
-        }
-        //ターゲットのx位置が-3以下ならカメラを左手に移動させる
-        if (fTrgPosFromCamera.x < -3 && fMoveLeft == false)
-        {
-            fMoveLeft = true;
-        }
-
-        Debug.Log("右" + fMoveRight);
-        Debug.Log("左" + fMoveLeft);
-        if(fMoveRight == true)
-        {
-            if (this.transform.position.x < fMoveLimit)
-            {
-                Vector3 pos = this.transform.position;
-                pos.x += 0.2f;
-                this.transform.position = pos;
-                if(fTrgPosFromCamera.x < 0)
+            case STATE.NOMAL:
+                //プレイヤーが画面中央に来たら追従する
+                Vector3 vCamPos = this.GetComponent<Transform>().position;
+                if (goTarget.transform.position.x > fMoveStart)
                 {
-                    fMoveRight = false;
+                    vCamPos.x = goTarget.transform.position.x;
+                    this.GetComponent<Transform>().position = vCamPos; 
                 }
-            }
-        }
-        if(fMoveLeft == true)
-        {
-            if (this.transform.position.x > 0)
-            {
-                Vector3 pos = this.transform.position;
-                pos.x -= 0.2f;
-                this.transform.position = pos;
-                if(fTrgPosFromCamera.x > 0)
+                if(this.transform.position.x > fMoveLimit)
                 {
-                    fMoveLeft = false;
+                    vCamPos.x = fMoveLimit;
+                    this.GetComponent<Transform>().position = vCamPos;
+                    eState = STATE.BOSS;
                 }
-            }
+                break;
+            case STATE.BOSS:
+                //カメラ追従なし
+                break;
         }
     }
 }
+
+//旧アップデートの中身
+////ターゲットの相対位置の取得
+//fTrgPosFromCamera = goTarget.transform.position - this.transform.position;
+////ターゲットのx位置が3以上ならカメラを右に移動させる
+//if(fTrgPosFromCamera.x > 3 && fMoveRight == false)
+//{
+//    fMoveRight = true;
+//}
+////ターゲットのx位置が-3以下ならカメラを左手に移動させる
+//if (fTrgPosFromCamera.x < -3 && fMoveLeft == false)
+//{
+//    fMoveLeft = true;
+//}
+
+//Debug.Log("右" + fMoveRight);
+//Debug.Log("左" + fMoveLeft);
+//if(fMoveRight == true)
+//{
+//    if (this.transform.position.x < fMoveLimit)
+//    {
+//        Vector3 pos = this.transform.position;
+//        pos.x += 0.2f;
+//        this.transform.position = pos;
+//        if(fTrgPosFromCamera.x < 0)
+//        {
+//            fMoveRight = false;
+//        }
+//    }
+//}
+//if(fMoveLeft == true)
+//{
+//    if (this.transform.position.x > 0)
+//    {
+//        Vector3 pos = this.transform.position;
+//        pos.x -= 0.2f;
+//        this.transform.position = pos;
+//        if(fTrgPosFromCamera.x > 0)
+//        {
+//            fMoveLeft = false;
+//        }
+//    }
+//}
