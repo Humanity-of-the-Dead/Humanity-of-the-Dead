@@ -37,11 +37,12 @@ public class CharaControl : MonoBehaviour
     void Update()
     {
         //現在のポジションを取得
-        Vector2 vPosition = transform.position;
+        Vector2 vPosition = this.transform.position;
 
         //カメラとの距離の絶対値が一定以下ならプレイヤーが動く　画面外に出ないための処置
         //移動
-        Vector3 vPosFromCame = transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
+        Vector3 vPosFromCame = this.transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
+        //左移動
         if (Input.GetKey(KeyCode.A))
         {
             if (vPosFromCame.x > -fCameraWidth / 2)
@@ -49,6 +50,7 @@ public class CharaControl : MonoBehaviour
                 vPosition.x -= Time.deltaTime * fSpeed;
             }
         }
+        //右移動
         if (Input.GetKey(KeyCode.D))
         {
             if (fCameraWidth / 2 > vPosFromCame.x)
@@ -61,9 +63,16 @@ public class CharaControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) && bJump == false)
         {
-            this.rbody2D.AddForce(transform.up * fJmpPower);
+            this.rbody2D.AddForce(this.transform.up * fJmpPower);
             bJump = true;
         }
+
+        //体が回転しないようにする
+        //自分のtransformを取得
+        Quaternion quaternion = GetComponent<Transform>().rotation;
+        quaternion.z = 0.0f;
+        transform.rotation = quaternion; 
+
 
         //移動後のポジションを代入
         this.transform.position = vPosition;
