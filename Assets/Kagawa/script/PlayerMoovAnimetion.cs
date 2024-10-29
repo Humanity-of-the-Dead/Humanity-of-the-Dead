@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class PlayerMoveAnimetion : MonoBehaviour
 {
+    [Header("全身")]public GameObject playerRc;
     [SerializeField, Header("腕、先に右手")] GameObject[] arm;     
     [SerializeField, Header("太腿、先に右足")] GameObject[] leg;   
     [SerializeField, Header("すね、先に右足")] GameObject[] foot;
-    public GameObject[] test3;
-    public GameObject[] test4;
 
-    public float[] armRotation;
-    public float[] legRotation;
-    public float[] index6;
-    public float[] index7;
-    public float[] index8;
+    [Header("全身の角度")] public float[] playerRotation;
+    [Header("腕の角度")] public float[] armRotation;
+    [Header("太ももの前方の角度")] public float[] legForwardRotation;
+    [Header("太ももの後方の角度")] public float[] legBackRotation;
+    [Header("足の前方の角度")] public float[] footForwardRotation;
+    [Header("足の後ろ方の角度")] public float[] footBackRotation;
 
 
     int i = 0;
@@ -24,7 +24,7 @@ public class PlayerMoveAnimetion : MonoBehaviour
     bool isActive;
     float time = 0;
 
-    public float timeMax;
+    [Header("時間")] public float timeMax;
 
     private void Start()
     {
@@ -34,6 +34,7 @@ public class PlayerMoveAnimetion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        time -= Time.deltaTime;
         if (time < 0)
         {
             interval();
@@ -44,53 +45,57 @@ public class PlayerMoveAnimetion : MonoBehaviour
 
     void interval()
     {
-        if (test3 == null /*|| index4 == null*/)
+
+        playerRc.transform.rotation = Quaternion.Euler(0, 0, playerRotation[j]);
+        if (arm == null || armRotation == null)
         {
             return;
         }
         else
         {
-            //test3[0].transform.rotation = Quaternion.Euler(0, 0, index4[j]);
-            //test3[1].transform.rotation = Quaternion.Euler(0, 180, index4[j]);
+            arm[0].transform.rotation = Quaternion.Euler(0, 0, armRotation[j]);
+            arm[1].transform.rotation = Quaternion.Euler(0, 180, armRotation[j]);
         }
-        if (test4 == null /*|| index5 == null*/)
+
+
+        if (leg == null ||foot == null)
         {
+            Debug.Log("asa");
             return;
         }
         else
         {
             if (!isActive)
             {
-                //test4[0].transform.rotation = Quaternion.Euler(0, 0, index5[j]);
-                test4[1].transform.rotation = Quaternion.Euler(0, 0, index6[j]);
-                test4[2].transform.rotation = Quaternion.Euler(0, 0, index7[j]);
-                test4[3].transform.rotation = Quaternion.Euler(0, 0, index8[j]);
+                leg[0].transform.rotation = Quaternion.Euler(0, 0, legBackRotation[j]);
+                leg[1].transform.rotation = Quaternion.Euler(0, 0, legForwardRotation[j]);
+                foot[0].transform.rotation = Quaternion.Euler(0, 0,  footBackRotation[j]);
+                foot[1].transform.rotation = Quaternion.Euler(0, 0,  footForwardRotation[j]);
             }
             if (isActive)
             {
-                test4[0].transform.rotation = Quaternion.Euler(0, 0, index7[j]);
-                test4[1].transform.rotation = Quaternion.Euler(0, 0, index8[j]);
-                //test4[2].transform.rotation = Quaternion.Euler(0, 0, index5[j]);
-                test4[3].transform.rotation = Quaternion.Euler(0, 0, index6[j]);
+                leg[0].transform.rotation = Quaternion.Euler(0, 0, legForwardRotation[j]);
+                leg[1].transform.rotation = Quaternion.Euler(0, 0, legBackRotation[j]);
+                foot[0].transform.rotation = Quaternion.Euler(0, 0, footForwardRotation[j]);
+                foot[1].transform.rotation = Quaternion.Euler(0, 0, footBackRotation[j]);
             }
         }
 
-        
 
-        // jの値を増やす
-        //j = (j + 1) % index4.Length;
+
+        //// jの値を増やす
+        j = (j + 1) % armRotation.Length;
 
         // 配列番号が0に戻ったとき配列の値をマイナスに変える
         if (j == 0 && !isActive)
         {
-            //index4 = index4.Select(value => value > 0 ? -value : value).ToArray();
+            armRotation = armRotation.Select(value => value > 0 ? -value : value).ToArray();
             isActive = true;
             return;
         }
         else if (j == 0 && isActive)
         {
-            Debug.Log("asa");
-            //index4 = index4.Select(value => value < 0 ? -value : value).ToArray();
+            armRotation = armRotation.Select(value => value < 0 ? -value : value).ToArray();
             isActive = false;
         }
     }
