@@ -13,9 +13,9 @@ public class PlayerMoveAnimetion : MonoBehaviour
     [Header("‘Sg‚ÌŠp“x")] public float[] playerRotation;
     [Header("˜r‚ÌŠp“x")] public float[] armRotation;
     [Header("‘¾‚à‚à‚Ì‘O•û‚ÌŠp“x")] public float[] legForwardRotation;
-    [Header("‘¾‚à‚à‚ÌŒã•û‚ÌŠp“x")] public float[] legBackRotation;
     [Header("‘«‚Ì‘O•û‚ÌŠp“x")] public float[] footForwardRotation;
-    [Header("‘«‚ÌŒã‚ë•û‚ÌŠp“x")] public float[] footBackRotation;
+    [Header("‘¾‚à‚à‚ÌŒã•û‚ÌŠp“x")] public float[] legBackRotation;
+    [Header("‘«‚ÌŒã•û‚ÌŠp“x")] public float[] footBackRotation;
 
 
     int i = 0;
