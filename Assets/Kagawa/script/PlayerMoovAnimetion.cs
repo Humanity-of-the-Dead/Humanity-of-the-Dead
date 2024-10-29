@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerMoveAnimetion : MonoBehaviour
 {
     [Header("全身")]public GameObject playerRc;
-    [SerializeField, Header("腕、先に右手")] GameObject[] arm;     
-    [SerializeField, Header("太腿、先に右足")] GameObject[] leg;   
-    [SerializeField, Header("すね、先に右足")] GameObject[] foot;
+    [SerializeField, Header("腕、先に右手")] public GameObject[] arm;     
+    [SerializeField, Header("太腿、先に右足")] public GameObject[] leg;   
+    [SerializeField, Header("すね、先に右足")] public GameObject[] foot;
 
     [Header("全身の角度")] public float[] playerRotation;
     [Header("腕の角度")] public float[] armRotation;
