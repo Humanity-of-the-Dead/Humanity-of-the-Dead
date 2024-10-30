@@ -7,7 +7,10 @@ public class EnemyParameters : MonoBehaviour
 {
     //部位の耐久値を設定できる
     [SerializeField]
-    private int HP;
+    private int UpperHP;
+
+    [SerializeField]
+    private int LowerHP;
 
     //テスト用　敵に与えるダメージを設定できる
     [SerializeField]
@@ -19,7 +22,10 @@ public class EnemyParameters : MonoBehaviour
 
     //ボディパーツ
     [SerializeField]
-    private BodyPartsData bodypart;
+    private BodyPartsData Upperbodypart;
+
+    [SerializeField]
+    private BodyPartsData Lowerbodypart;
 
     //プレハブのパーツ
     [SerializeField]
@@ -30,16 +36,32 @@ public class EnemyParameters : MonoBehaviour
     void Update()
     {
         //もし耐久値が0になったらドロップする
-        if (HP <= 0)
+        if (UpperHP <= 0)
         {
-            Drop();
+           
+            Drop(Lowerbodypart);
+        }
+        if (LowerHP <= 0)
+        {
+           
+            Drop(Upperbodypart);
         }
     }
-    public void TakeDamage(int damage)
+    //bodyには0か1しか入れてはいけない　BA//GU/RU
+    //body : 0->上半身にダメージ
+    //body : 1->下半身にダメージ
+
+    public void TakeDamage(int damage, int body = 0)
     {
         //HPが減る仕組み
         //damageはテスト用の関数
-        HP -= damage;
+#if body
+    
+       UpperHP -= damage;
+#else
+       LowerHP -= damage;
+
+#endif
     }
     void ShowDeathImage()
     {
@@ -49,7 +71,7 @@ public class EnemyParameters : MonoBehaviour
         //    deathImage.enabled = true;
         //}
     }
-    public  void Drop()
+    public  void Drop(BodyPartsData part)
     {
         //プレハブをインスタンス化
         drop = Instantiate(prePart);
@@ -58,7 +80,7 @@ public class EnemyParameters : MonoBehaviour
         drop.transform.position = this.transform.position;
 
         //
-        drop.GetComponent<DropPart>().getPartsData(bodypart);
+        drop.GetComponent<DropPart>().getPartsData(part);
 
 
         //自分のゲームオブジェクトを消す
