@@ -71,7 +71,7 @@ public class PlayerParameter : MonoBehaviour
                 //SpriteRendererコンポーネント取得
                 spriteRenderer = goPlayer.transform.GetChild(0).transform.GetComponent<SpriteRenderer>();
                 //SpriteRendererのSpriteにパーツデータのSpriteを挿入
-                spriteRenderer.sprite = partsData.PartSprite;
+                spriteRenderer.sprite = partsData.sPartSprite;
                 break;
             case PartsType.Leg:
                 //パーツデータのHPをMax代入
@@ -80,7 +80,7 @@ public class PlayerParameter : MonoBehaviour
                 //SpriteRendererコンポーネント取得
                 spriteRenderer = goPlayer.transform.GetChild(1).transform.GetComponent<SpriteRenderer>();
                 //SpriteRendererのSpriteにパーツデータのSpriteを挿入
-                spriteRenderer.sprite = partsData.PartSprite;
+                spriteRenderer.sprite = partsData.sPartSprite;
                 break;
         }
 

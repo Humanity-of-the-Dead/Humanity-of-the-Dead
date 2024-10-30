@@ -46,4 +46,7 @@ public class EnemyParameters : MonoBehaviour
     //今はImageを入れることになってるけど、ここをSprite入れれるようにしたい
 
     //このプログラムの動きをテスト用に可視化する
+
+    //ダメージのgetとset
+
 }

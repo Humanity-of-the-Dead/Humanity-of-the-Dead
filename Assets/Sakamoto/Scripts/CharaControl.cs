@@ -12,6 +12,9 @@ public class CharaControl : MonoBehaviour
     [SerializeField] float fJmpPower;
     bool bJump = false;
 
+    //エネミー関連スクリプト
+   [SerializeField] EnemyParameters enemyParameters;
+
     //カメラ関連
     [SerializeField] Camera goCamera;
     //高さ
@@ -104,6 +107,7 @@ public class CharaControl : MonoBehaviour
         float fAttackReach = Vector3.Distance(vTargetPos,this.transform.position);
         if(fAttackReach < fReach)
         {
+            enemyParameters.TakeDamage(1);
             Debug.Log("上半身攻撃成功");
         }
         else
