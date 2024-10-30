@@ -7,8 +7,18 @@ public class DropPart : MonoBehaviour
 {
     //パーツのデータ
     private BodyPartsData partsData;
-    //プレイヤーのmanager
-    PlayerParameter playerManager;
+    ////プレイヤーのmanager
+    //PlayerParameter playerManager;
+
+    //プレイヤー情報
+    GameObject goPlayerParameter;
+
+    //クリアテキスト
+    GameObject goTextBox;
+
+    //ボスフラグ
+    bool bBoss;
+
     void Start()
     {
         //アイテムの画像になる
@@ -18,9 +28,23 @@ public class DropPart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Oキーを押したら慰霊する
+        if(Input.GetKeyUp(KeyCode.O)) {
+            goPlayerParameter.GetComponent<PlayerParameter>().comfort(10);
+            if (bBoss)
+            {
+                goTextBox.GetComponent<GoalScript>().showText();
+            }
+            Destroy(this.gameObject);
+
+        }
         //Pキーを押したら移植する
         if (Input.GetKeyDown(KeyCode.P)){
-            playerManager.transplant(partsData);
+            goPlayerParameter.GetComponent<PlayerParameter>().transplant(partsData);
+            if (bBoss)
+            {
+                goTextBox.GetComponent<GoalScript>().showText();
+            }
             Destroy(this.gameObject);
         }
     }
@@ -35,5 +59,21 @@ public class DropPart : MonoBehaviour
     {
         Image image = this.GetComponent<Image>();
         image.sprite = partsData.sPartSprite; 
+    }
+
+    public void getPlayerManegerObjet(GameObject obj)
+    {
+        goPlayerParameter = obj;
+    }
+
+    //テキストボックスの取得
+    public void getTextBox(GameObject obj)
+    {
+        goTextBox = obj;
+    }
+    //ボスフラグ
+    public void getBossf(bool flag)
+    {
+        bBoss = flag;
     }
 }
