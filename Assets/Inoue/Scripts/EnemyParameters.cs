@@ -54,8 +54,12 @@ public class EnemyParameters : MonoBehaviour
         //プレハブをインスタンス化
         drop = Instantiate(prePart);
 
+        //生成したパーツを自身の場所に持ってくる
+        drop.transform.position = this.transform.position;
+
         //
         drop.GetComponent<DropPart>().getPartsData(bodypart);
+
 
         //自分のゲームオブジェクトを消す
         Destroy(this.gameObject);
