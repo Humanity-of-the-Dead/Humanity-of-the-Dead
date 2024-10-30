@@ -35,11 +35,20 @@ public class PlayerMoveAnimetion : MonoBehaviour
     void Update()
     {
         time -= Time.deltaTime;
-        if (time < 0)
+
+        if(Input.GetKey(KeyCode.D))
         {
-            interval();
-            time = timeMax;
+            do
+            {
+                if (time < 0)
+                {
+                    interval();
+                }
+                time = timeMax;
+            } while (j != 0);
+           
         }
+        
 
     }
 

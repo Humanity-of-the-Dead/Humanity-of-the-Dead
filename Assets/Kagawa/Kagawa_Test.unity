@@ -208,7 +208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6185789322680993694, guid: fd15d0b7128bfbb45b13bdf135d64bb8, type: 3}
       propertyPath: footForwardRotation.Array.data[2]
-      value: 20
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 6185789322680993694, guid: fd15d0b7128bfbb45b13bdf135d64bb8, type: 3}
       propertyPath: footForwardRotation.Array.data[3]
