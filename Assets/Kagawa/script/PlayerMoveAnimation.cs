@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerMoveAnimetion : MonoBehaviour
+public class PlayerMoveAnimation : MonoBehaviour
 {
     [Header("全身")]public GameObject playerRc;
     [SerializeField, Header("腕、先に右手")] public GameObject[] arm;     
@@ -16,12 +16,14 @@ public class PlayerMoveAnimetion : MonoBehaviour
     [Header("足の前方の角度")] public float[] footForwardRotation;
     [Header("太ももの後方の角度")] public float[] legBackRotation;
     [Header("足の後方の角度")] public float[] footBackRotation;
+    [Header("歩きの継続時間")] public float timeWalk;
 
 
     int i = 0;
     int j = 0;
 
     bool isActive;
+    bool isWalk;
     float time = 0;
 
     [Header("時間")] public float timeMax;
@@ -29,18 +31,24 @@ public class PlayerMoveAnimetion : MonoBehaviour
     private void Start()
     {
         isActive = false;
+        isWalk = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        time -= Time.deltaTime;
-        if (time < 0)
+        time -= Time.deltaTime;        
+        if (Input.GetKey(KeyCode.D))
         {
-            interval();
-            time = timeMax;
+            if (time < 0)
+            {
+                if (!isWalk)
+                {
+                    time = timeMax * armRotation.Length;
+                    StartCoroutine(CallFunctionWithDelay());
+                }
+            }       
         }
-
     }
 
     void interval()
@@ -79,24 +87,28 @@ public class PlayerMoveAnimetion : MonoBehaviour
                 foot[0].transform.rotation = Quaternion.Euler(0, 0, footForwardRotation[j]);
                 foot[1].transform.rotation = Quaternion.Euler(0, 0, footBackRotation[j]);
             }
-        }
+        }    
+    }
 
-
-
-        //// jの値を増やす
-        j = (j + 1) % armRotation.Length;
-
-        // 配列番号が0に戻ったとき配列の値をマイナスに変える
-        if (j == 0 && !isActive)
+    private IEnumerator CallFunctionWithDelay()
+    {
+        for (int i = 0; i < armRotation.Length; i++)
         {
-            armRotation = armRotation.Select(value => value > 0 ? -value : value).ToArray();
-            isActive = true;
-            return;
-        }
-        else if (j == 0 && isActive)
-        {
-            armRotation = armRotation.Select(value => value < 0 ? -value : value).ToArray();
-            isActive = false;
+            interval();
+            //// jの値を増やす
+            j = (j + 1) % armRotation.Length;
+            // 配列番号が0に戻ったとき配列の値をマイナスに変える
+            if (j == 0 && !isActive)
+            {
+                armRotation = armRotation.Select(value => value > 0 ? -value : value).ToArray();
+                isActive = true;
+            }
+            else if (j == 0 && isActive)
+            {
+                armRotation = armRotation.Select(value => value < 0 ? -value : value).ToArray();
+                isActive = false;
+            }
+            yield return new WaitForSeconds(timeMax); 
         }
     }
 }
