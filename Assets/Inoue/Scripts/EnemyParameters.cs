@@ -13,16 +13,26 @@ public class EnemyParameters : MonoBehaviour
     [SerializeField]
     private int damage;
 
-    //ドロップする画像を設定できる
+    ////ドロップする画像を設定できる
+    //[SerializeField]
+    //private Image deathImage;
+
+    //ボディパーツ
     [SerializeField]
-    private Image deathImage;
+    private BodyPartsData bodypart;
+
+    //プレハブのパーツ
+    [SerializeField]
+    private GameObject prePart;
+
+    GameObject drop;
 
     void Update()
     {
         //もし耐久値が0になったらドロップする
         if (HP <= 0)
         {
-            ShowDeathImage();
+            Drop();
         }
     }
     public void TakeDamage(int damage)
@@ -33,12 +43,24 @@ public class EnemyParameters : MonoBehaviour
     }
     void ShowDeathImage()
     {
-        //多分ドロップ画像設定するとこ
-        if (deathImage != null)
-        {
-            deathImage.enabled = true;
-        }
+        ////多分ドロップ画像設定するとこ
+        //if (deathImage != null)
+        //{
+        //    deathImage.enabled = true;
+        //}
     }
+    public  void Drop()
+    {
+        //プレハブをインスタンス化
+        drop = Instantiate(prePart);
+
+        //
+        drop.GetComponent<DropPart>().getPartsData(bodypart);
+
+        //自分のゲームオブジェクトを消す
+        Destroy(this.gameObject);
+    }
+
 
     //ドロップの挙動作ってないから画面に出るだけなので調節する
     //倒されたら体が消失するプログラムが必要

@@ -12,6 +12,7 @@ public class DropPart : MonoBehaviour
     void Start()
     {
         //ƒAƒCƒeƒ€‚Ì‰æ‘œ‚É‚È‚é
+        
     }
 
     // Update is called once per frame
