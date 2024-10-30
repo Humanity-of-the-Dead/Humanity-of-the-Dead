@@ -12,6 +12,7 @@ public class CharaControl : MonoBehaviour
     [SerializeField] float fJmpPower;
     bool bJump = false;
 
+
     //カメラ関連
     [SerializeField] Camera goCamera;
     //高さ
@@ -20,7 +21,7 @@ public class CharaControl : MonoBehaviour
     float fCameraWidth;
 
     //仮ターゲット
-    [SerializeField] GameObject goObje; 
+    [SerializeField] GameObject[] goObje; 
 
     void Start()
     {
@@ -80,30 +81,36 @@ public class CharaControl : MonoBehaviour
         //攻撃関連
         //上半身攻撃
         if(Input.GetKeyDown(KeyCode.I)) {
-            //仮引数
-            UpperBodyAttack(goObje.gameObject.transform.position, 2.0f);
+            for(int i = 0; i < goObje.Length; i++) {
+                //仮引数
+                UpperBodyAttack(i,goObje[i].gameObject.transform.position, 5.0f);
+            }
         }
         //下半身攻撃
         if(Input.GetKeyDown(KeyCode.K)) {
-            //仮引数
-            LowerBodyAttack(goObje.gameObject.transform.position, 5.0f);
+            for (int i = 0; i < goObje.Length; i++)
+            {
+                //仮引数
+                LowerBodyAttack(i,goObje[i].gameObject.transform.position, 8.0f);
+            }
         }
 
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Floor"))
+        if (other.gameObject.CompareTag("Floor") || other.gameObject.CompareTag("Car"))
         {
             bJump = false;
         }
     }
 
     //上半身攻撃
-    public void UpperBodyAttack(Vector3 vTargetPos, float fReach)
+    public void UpperBodyAttack(int EnemyNum,Vector3 vTargetPos, float fReach)
     {
         float fAttackReach = Vector3.Distance(vTargetPos,this.transform.position);
         if(fAttackReach < fReach)
         {
+            goObje[EnemyNum].GetComponent<EnemyParameters>().TakeDamage(1,0);
             Debug.Log("上半身攻撃成功");
         }
         else
@@ -112,11 +119,12 @@ public class CharaControl : MonoBehaviour
         }
     }
     //下半身攻撃
-    public void LowerBodyAttack(Vector3 vTargetPos, float fReach)
+    public void LowerBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach)
     {
         float fAttackReach = Vector3.Distance(vTargetPos,this.transform.position);
         if(fAttackReach < fReach)
         {
+            goObje[EnemyNum].GetComponent<EnemyParameters>().TakeDamage(1, 1);
             Debug.Log("下半身攻撃成功");
         }
         else

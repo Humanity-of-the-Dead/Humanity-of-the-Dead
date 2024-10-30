@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
-  m_Name: DefaultTest
+  m_Name: DefaultTes_Upper
   m_EditorClassIdentifier: 
   enPartsType: 1
   sPartsName: "\u30C6\u30B9\u30C8\u306E\u4E0A\u534A\u8EAB"
   iPartHp: 50
   iPartAttack: 20
-  PartImage: {fileID: 21300000, guid: 1db96154fdd74034e87fedcc4ec30f4c, type: 3}
+  sPartSprite: {fileID: 21300000, guid: 1db96154fdd74034e87fedcc4ec30f4c, type: 3}

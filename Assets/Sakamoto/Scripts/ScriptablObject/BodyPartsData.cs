@@ -25,5 +25,5 @@ public class BodyPartsData : ScriptableObject
     [Header("パーツの攻撃力")]
     public int iPartAttack;
     [Header("パーツの画像")]
-    public Sprite PartSprite;
+    public Sprite sPartSprite;
 }
