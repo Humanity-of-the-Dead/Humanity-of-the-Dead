@@ -12,6 +12,7 @@ public class CharaControl : MonoBehaviour
     [SerializeField] float fJmpPower;
     bool bJump = false;
 
+
     //カメラ関連
     [SerializeField] Camera goCamera;
     //高さ
@@ -20,7 +21,7 @@ public class CharaControl : MonoBehaviour
     float fCameraWidth;
 
     //仮ターゲット
-    [SerializeField] GameObject goObje; 
+    [SerializeField] GameObject[] goObje; 
 
     void Start()
     {
@@ -37,11 +38,12 @@ public class CharaControl : MonoBehaviour
     void Update()
     {
         //現在のポジションを取得
-        Vector2 vPosition = transform.position;
+        Vector2 vPosition = this.transform.position;
 
         //カメラとの距離の絶対値が一定以下ならプレイヤーが動く　画面外に出ないための処置
         //移動
-        Vector3 vPosFromCame = transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
+        Vector3 vPosFromCame = this.transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
+        //左移動
         if (Input.GetKey(KeyCode.A))
         {
             if (vPosFromCame.x > -fCameraWidth / 2)
@@ -49,6 +51,7 @@ public class CharaControl : MonoBehaviour
                 vPosition.x -= Time.deltaTime * fSpeed;
             }
         }
+        //右移動
         if (Input.GetKey(KeyCode.D))
         {
             if (fCameraWidth / 2 > vPosFromCame.x)
@@ -61,9 +64,16 @@ public class CharaControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) && bJump == false)
         {
-            this.rbody2D.AddForce(transform.up * fJmpPower);
+            this.rbody2D.AddForce(this.transform.up * fJmpPower);
             bJump = true;
         }
+
+        //体が回転しないようにする
+        //自分のtransformを取得
+        Quaternion quaternion = GetComponent<Transform>().rotation;
+        quaternion.z = 0.0f;
+        transform.rotation = quaternion; 
+
 
         //移動後のポジションを代入
         this.transform.position = vPosition;
@@ -71,30 +81,36 @@ public class CharaControl : MonoBehaviour
         //攻撃関連
         //上半身攻撃
         if(Input.GetKeyDown(KeyCode.I)) {
-            //仮引数
-            UpperBodyAttack(goObje.gameObject.transform.position, 2.0f);
+            for(int i = 0; i < goObje.Length; i++) {
+                //仮引数
+                UpperBodyAttack(i,goObje[i].gameObject.transform.position, 5.0f);
+            }
         }
         //下半身攻撃
         if(Input.GetKeyDown(KeyCode.K)) {
-            //仮引数
-            LowerBodyAttack(goObje.gameObject.transform.position, 5.0f);
+            for (int i = 0; i < goObje.Length; i++)
+            {
+                //仮引数
+                LowerBodyAttack(i,goObje[i].gameObject.transform.position, 8.0f);
+            }
         }
 
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Floor"))
+        if (other.gameObject.CompareTag("Floor") || other.gameObject.CompareTag("Car"))
         {
             bJump = false;
         }
     }
 
     //上半身攻撃
-    public void UpperBodyAttack(Vector3 vTargetPos, float fReach)
+    public void UpperBodyAttack(int EnemyNum,Vector3 vTargetPos, float fReach)
     {
         float fAttackReach = Vector3.Distance(vTargetPos,this.transform.position);
         if(fAttackReach < fReach)
         {
+            goObje[EnemyNum].GetComponent<EnemyParameters>().TakeDamage(1,0);
             Debug.Log("上半身攻撃成功");
         }
         else
@@ -103,11 +119,12 @@ public class CharaControl : MonoBehaviour
         }
     }
     //下半身攻撃
-    public void LowerBodyAttack(Vector3 vTargetPos, float fReach)
+    public void LowerBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach)
     {
         float fAttackReach = Vector3.Distance(vTargetPos,this.transform.position);
         if(fAttackReach < fReach)
         {
+            goObje[EnemyNum].GetComponent<EnemyParameters>().TakeDamage(1, 1);
             Debug.Log("下半身攻撃成功");
         }
         else
