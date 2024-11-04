@@ -41,7 +41,12 @@ public class BodyChangeManager : MonoBehaviour
         }
     }
 
-    void ChangeHead(int headNumber)
+    /// <summary>
+    /// 頭の画像変化
+    /// プレイヤーか、エネミーに呼んでもらう
+    /// </summary>
+    /// <param name="headNumber">エネミーの識別番号</param>
+    public void ChangeHead(int headNumber)
     {
         if (headNumber > head.Count)
         {
@@ -53,7 +58,12 @@ public class BodyChangeManager : MonoBehaviour
     }
 
 
-    void ChangeArm(int armNumber)
+    /// <summary>
+    /// 腕の画像変化
+    /// プレイヤーか、エネミーに呼んでもらう
+    /// </summary>
+    /// <param name="armNumber">エネミーの識別番号</param>
+    public void ChangeArm(int armNumber)
     {
         if (armNumber > arm.Count)
         {
@@ -64,8 +74,12 @@ public class BodyChangeManager : MonoBehaviour
         armSR.sprite = arm[armNumber];
     }
 
-
-    void ChangeLeg(int legNumber)
+    /// <summary>
+    /// 足の画像変化
+    /// プレイヤーか、エネミーに呼んでもらう
+    /// </summary>
+    /// <param name="legNumber">エネミーの識別番号</param>
+    public void ChangeLeg(int legNumber)
     {
         if (legNumber > leg.Count)
         {
