@@ -568,9 +568,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iDownTime: 1
-  iHumanityMax: 30
-  iUpperHPMax: 38
-  iLowerHPMax: 29
+  iHumanityMax: 10
+  iUpperHPMax: 10
+  iLowerHPMax: 10
   goPlayer: {fileID: 614364183}
   DefaultData: {fileID: 11400000, guid: a72cdc466c72ac54b99427c79e98c125, type: 2}
 --- !u!4 &261565242
