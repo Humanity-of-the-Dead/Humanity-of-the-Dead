@@ -142,6 +142,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1427859609641132690, guid: fd15d0b7128bfbb45b13bdf135d64bb8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427859609641132690, guid: fd15d0b7128bfbb45b13bdf135d64bb8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427859609641132690, guid: fd15d0b7128bfbb45b13bdf135d64bb8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427859609641132690, guid: fd15d0b7128bfbb45b13bdf135d64bb8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1621141915461450963, guid: fd15d0b7128bfbb45b13bdf135d64bb8, type: 3}
       propertyPath: m_Name
       value: Player
@@ -811,9 +827,20 @@ MonoBehaviour:
   - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   colors:
-  - {r: 0.4198113, g: 1, b: 0.49440706, a: 1}
-  - {r: 1, g: 0, b: 0.18661785, a: 1}
-  - {r: 1, g: 0.43867922, b: 0.8393082, a: 1}
+  - r: 0.4198113
+    g: 1
+    b: 0.49440706
+    a: 1
+  - r: 1
+    g: 0
+    b: 0.18661785
+    a: 1
+  - r: 1
+    g: 0.43867922
+    b: 0.8393082
+    a: 1
+  currentColorIndex: 0
+  i: 0
 --- !u!4 &702972674
 Transform:
   m_ObjectHideFlags: 0
