@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class PlayerParameter : MonoBehaviour
 {
+    public static PlayerParameter Instance;
+
     [Header("1減少するのにかかる時間")]
     [SerializeField] int iDownTime;
 
@@ -23,12 +27,19 @@ public class PlayerParameter : MonoBehaviour
     //デフォルトのパーツデータ
     [SerializeField] BodyPartsData DefaultData;
 
+    public void Awake()
+    {
+        CheckInstance();
+    }
     private void Start()
     {
         //パラメータの初期化
         iHumanity = iHumanityMax;
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
+
+        //シーン遷移で破棄されない
+        DontDestroyOnLoad(gameObject);
     }
     private void Update()
     {
@@ -36,6 +47,12 @@ public class PlayerParameter : MonoBehaviour
         iHumanity -= Time.deltaTime / iDownTime;
         iUpperHP -= Time.deltaTime / iDownTime;
         iLowerHP -= Time.deltaTime / iDownTime;
+
+        //シーン移動
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SceneManager.LoadScene("Stage2");
+        }
     }
 
     //慰霊
@@ -106,4 +123,16 @@ public class PlayerParameter : MonoBehaviour
         set { iLowerHP = value; }
     }
 
+    //シングルトンのチェック
+    void CheckInstance()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 }
