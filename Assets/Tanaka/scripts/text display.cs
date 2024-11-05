@@ -10,7 +10,7 @@ public class textdisplay : MonoBehaviour
     [SerializeField]
     private Text text;  //画面上の文字
 
-    private int LoadText;   //何枚目のテキストを読み込んでいるのか
+    private int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
 
     private int n = 0;
     
