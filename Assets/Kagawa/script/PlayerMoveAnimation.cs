@@ -56,6 +56,9 @@ public class PlayerMoveAnimation : MonoBehaviour
     //体の軸
     int shaft;
 
+    //歩くアニメーションの角度の数
+    int walkLength;
+
     // 値を反転にするフラグ
     bool isActive;
 
@@ -65,8 +68,11 @@ public class PlayerMoveAnimation : MonoBehaviour
     // 方向フラグ(右 = false)
     bool isWalk;
 
+    // 静止しているか
+    bool isStop;
+
     // タイマー
-    float time = 0;
+    float time;
 
 
     private void Start()
@@ -77,6 +83,9 @@ public class PlayerMoveAnimation : MonoBehaviour
         isMirror = true;
         isActive = false;
         isWalk = false;
+        isStop = false;
+        walkLength = armWalkRotation.Length - 1;
+        time = 0;
     }
 
     // Update is called once per frame
@@ -84,52 +93,91 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         time -= Time.deltaTime;
 
-        // 歩く動作をしている時、呼ばせない
-        if (time < 0)
+
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            if (Input.GetKeyDown(KeyCode.D))
+            shaft = 0;
+
+            //静止状態から左向くとき
+            if (time < 0 && isWalk)
             {
-                    // プレイヤーの向きが左から右に変わったとき
-                    isWalk = false;
-                    shaft = 0;
-
-                    isActive = false;
-                    ChangeArmAnime();
-                    WalkStart();
+                isStop = true;
+                time = timeMax * 2;
+                Upright();
             }
-            else if (Input.GetKeyDown(KeyCode.A))
+
+            // プレイヤーの向きが左から右に変わったとき
+            isWalk = false;
+           
+
+            // 歩く動作をしている時、呼ばせない
+            WalkInstance();
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            shaft = 180;
+
+            //静止状態から左向くとき
+            if (time < 0 && !isWalk)
             {
-
-                // プレイヤーの向きが右から左に変わったとき
-                isWalk = true;
-                shaft = 180;
-
-                isActive = false;
-                ChangeArmAnime();
-                WalkStart();
+                isStop = true;
+                time = timeMax * 2;
+                Upright();
             }
-            else if (Input.GetKeyDown(KeyCode.Space))
+
+            // プレイヤーの向きが右から左に変わったとき
+            isWalk = true;
+            
+
+            // 歩く動作をしている時、呼ばせない
+            WalkInstance();
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // 歩く動作をしている時、呼ばせない
+            if (time < 0)
             {
                 PantieStart();
             }
-            else if (Input.GetKeyDown(KeyCode.K))
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            // 歩く動作をしている時、呼ばせない
+            if (time < 0)
             {
                 KickStart();
             }
         }
+        
 
         if (Input.GetKey(KeyCode.D))
         {
             if (!isWalk)
             {
-                KeepWalk();
+                if(isStop)
+                {
+                    isStop = false;
+                    WalkInstance();
+                }
+                else
+                {
+                    KeepWalk();
+                }
             }
         }
         else if (Input.GetKey(KeyCode.A))
         {
             if (isWalk)
             {
-                KeepWalk();
+                if (isStop)
+                {
+                    isStop = false;
+                    WalkInstance();
+                }
+                else
+                {
+                    KeepWalk();
+                }
             }
         }
     }
@@ -319,7 +367,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// 歩き始めの関数
+    /// 歩くことを開始の関数
     /// </summary>
     void WalkStart()
     {
@@ -334,6 +382,19 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         time = timeMax * armPatForwardRotation.Length;
         StartCoroutine(CallPantieWithDelay());
+    }
+
+    /// <summary>
+    /// 歩くことの初期化
+    /// </summary>
+    void WalkInstance()
+    {
+        if (time < 0)
+        {
+            isActive = false;
+            ChangeArmAnime();
+            WalkStart();
+        }
     }
 
     /// <summary>
@@ -357,6 +418,20 @@ public class PlayerMoveAnimation : MonoBehaviour
             ChangeArmAnime();
             WalkStart();
         }
+    }
+
+    /// <summary>
+    /// 直立する
+    /// </summary>
+    void Upright()
+    {
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[walkLength]);
+        arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[walkLength]);
+        arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armWalkRotation[walkLength]);
+        leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[walkLength]);
+        leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[walkLength]);
+        foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[walkLength]);
+        foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[walkLength]);
     }
 
     /// <summary>
