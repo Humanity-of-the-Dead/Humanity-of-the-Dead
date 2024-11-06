@@ -76,4 +76,16 @@ public class DropPart : MonoBehaviour
     {
         bBoss = flag;
     }
+    
+    //ˆÚA
+    void getTransplant()
+    {
+        goPlayerParameter.GetComponent<PlayerParameter>().transplant(partsData);
+    }
+    
+    //ˆÔ—ì
+    void getComfort()
+    {
+        goPlayerParameter.GetComponent<PlayerParameter>().comfort(10);
+    }
 }
