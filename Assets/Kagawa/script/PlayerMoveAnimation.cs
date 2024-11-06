@@ -5,24 +5,34 @@ using UnityEngine;
 
 public class PlayerMoveAnimation : MonoBehaviour
 {
-    [SerializeField, Header("頭のImage")] SpriteRenderer headSR;    
-    [SerializeField, Header("腕のImage、先に右手")] SpriteRenderer armSR;
-    [SerializeField, Header("足のImage、先に右足")] SpriteRenderer legSR;
+    [SerializeField, Header("頭のImage")] SpriteRenderer[] headSR;    
+    [SerializeField, Header("腕のImage、先に右手")] SpriteRenderer[] armSR;
+    [SerializeField, Header("足のImage、先に右足")] SpriteRenderer[] legSR;
 
     [Header("全身")] public GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")]  GameObject[] arm;
     [SerializeField, Header("太腿の角度、先に右足")]  GameObject[] leg;
     [SerializeField, Header("すねの角度、先に右足")]  GameObject[] foot;
 
-    [Header("全身の角度")] public float[] playerRotation;
-    [Header("腕の角度")] public float[] armRotation;
-    [Header("太ももの前方の角度")] public float[] legForwardRotation;
-    [Header("足の前方の角度")] public float[] footForwardRotation;
-    [Header("太ももの後方の角度")] public float[] legBackRotation;
-    [Header("足の後方の角度")] public float[] footBackRotation;
+    [Header("1コマの間隔の時間")] public float timeMax;
+
+    [Header("---歩きのアニメーション---")]
+    [Header("全身の角度")] public float[] playerWalkRotation;
+    [Header("腕の角度")] public float[] armWalkRotation;
+    [Header("太ももの前方の角度")] public float[] legWalkForwardRotation;
+    [Header("足の前方の角度")] public float[] footWalkForwardRotation;
+    [Header("太ももの後方の角度")] public float[] legWalkBackRotation;
+    [Header("足の後方の角度")] public float[] footWalkBackRotation;
     [Header("歩きの継続時間")] public float timeWalk;
 
-    [Header("1コマの間隔の時間")] public float timeMax;
+    [Header("---パンチのアニメーション---")]
+    [Header("全身の角度")] public float[] playerPatRotation;
+    [Header("腕の前方角度")] public float[] armPatForwardRotation;
+    [Header("腕の後方角度")] public float[] armPatBackRotation;
+    [Header("太ももの前方の角度")] public float[] legPatForwardRotation;
+    [Header("足の前方の角度")] public float[] footPatForwardRotation;
+    [Header("太ももの後方の角度")] public float[] legPatBackRotation;
+    [Header("足の後方の角度")] public float[] footPatBackRotation;
 
     //配列の番号
     int indexNumber;
@@ -109,27 +119,27 @@ public class PlayerMoveAnimation : MonoBehaviour
     void PlayerWalk()
     {
         // Quaternion.Euler: 回転軸( x, y, z)
-        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerRotation[indexNumber]);
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[indexNumber]);
 
         // 腕のアニメーション
-        if (arm == null || armRotation == null)
+        if (arm == null || armWalkRotation == null)
         {
             Debug.LogWarning("armのデータが何かしら抜けてる");
             return;
         }
         else
         {
-            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armRotation[indexNumber]);
-            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armRotation[indexNumber]);
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[indexNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armWalkRotation[indexNumber]);
         }
 
         // 足のアニメーション
-        if (leg == null || legBackRotation == null || legForwardRotation == null)
+        if (leg == null || legWalkBackRotation == null || legWalkForwardRotation == null)
         {
             Debug.LogWarning("Legのデータが何かしら抜けてる");
             return;
         }
-        else if (foot == null || footBackRotation == null || footForwardRotation == null) 
+        else if (foot == null || footWalkBackRotation == null || footWalkForwardRotation == null) 
         {
             Debug.LogWarning("footのデータが何かしら抜けてる");
             return;
@@ -139,30 +149,68 @@ public class PlayerMoveAnimation : MonoBehaviour
             // 歩き始めの場合
             if (!isActive)
             {
-                leg[0].transform.rotation = Quaternion.Euler(0, shaft, legBackRotation[indexNumber]);
-                leg[1].transform.rotation = Quaternion.Euler(0, shaft, legForwardRotation[indexNumber]);
-                foot[0].transform.rotation = Quaternion.Euler(0, shaft, footBackRotation[indexNumber]);
-                foot[1].transform.rotation = Quaternion.Euler(0, shaft, footForwardRotation[indexNumber]);
+                leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[indexNumber]);
+                leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[indexNumber]);
+                foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[indexNumber]);
+                foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[indexNumber]);
             }
             //歩き続けている場合
             if (isActive)
             {
-                leg[0].transform.rotation = Quaternion.Euler(0, shaft, legForwardRotation[indexNumber]);
-                leg[1].transform.rotation = Quaternion.Euler(0, shaft, legBackRotation[indexNumber]);
-                foot[0].transform.rotation = Quaternion.Euler(0, shaft, footForwardRotation[indexNumber]);
-                foot[1].transform.rotation = Quaternion.Euler(0, shaft, footBackRotation[indexNumber]);
+                leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[indexNumber]);
+                leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[indexNumber]);
+                foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[indexNumber]);
+                foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[indexNumber]);
             }
+        }
+    }
+
+
+    void PlayerPantie()
+    {
+        // Quaternion.Euler: 回転軸( x, y, z)
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerPatRotation[indexNumber]);
+
+        // 腕のアニメーション
+        if (arm == null || armPatForwardRotation == null || armPatBackRotation == null)
+        {
+            Debug.LogWarning("armのデータが何かしら抜けてる");
+            return;
+        }
+        else
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armPatForwardRotation[indexNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armPatBackRotation[indexNumber]);
+        }
+
+        // 足のアニメーション
+        if (leg == null || legPatBackRotation == null || legPatForwardRotation == null)
+        {
+            Debug.LogWarning("Legのデータが何かしら抜けてる");
+            return;
+        }
+        else if (foot == null || footPatBackRotation == null || footPatForwardRotation == null)
+        {
+            Debug.LogWarning("footのデータが何かしら抜けてる");
+            return;
+        }
+        else
+        {
+            leg[0].transform.rotation = Quaternion.Euler(0, shaft, legPatBackRotation[indexNumber]);
+            leg[1].transform.rotation = Quaternion.Euler(0, shaft, legPatForwardRotation[indexNumber]);
+            foot[0].transform.rotation = Quaternion.Euler(0, shaft, footPatBackRotation[indexNumber]);
+            foot[1].transform.rotation = Quaternion.Euler(0, shaft, footPatForwardRotation[indexNumber]);
         }
     }
 
     IEnumerator CallFunctionWithDelay()
     {
-        for (int i = 0; i < armRotation.Length; i++)
+        for (int i = 0; i < armWalkRotation.Length; i++)
         {
             PlayerWalk();
 
             // indexNumberの値を増やす(配列番号を上げる)
-            indexNumber = (indexNumber + 1) % armRotation.Length;
+            indexNumber = (indexNumber + 1) % armWalkRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
     }
@@ -176,11 +224,11 @@ public class PlayerMoveAnimation : MonoBehaviour
         //三項演算子(各要素に対して変換操作を行う)
         if (isActive)
         {
-            armRotation = armRotation.Select(value => value > 0 ? -value : value).ToArray();
+            armWalkRotation = armWalkRotation.Select(value => value > 0 ? -value : value).ToArray();
         }
         else if (!isActive)
         {
-            armRotation = armRotation.Select(value => value < 0 ? -value : value).ToArray();
+            armWalkRotation = armWalkRotation.Select(value => value < 0 ? -value : value).ToArray();
         }
     }
 
@@ -189,7 +237,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     void WalkStart()
     {
-        time = timeMax * armRotation.Length;
+        time = timeMax * armWalkRotation.Length;
         StartCoroutine(CallFunctionWithDelay());
     }
 
@@ -213,8 +261,10 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <param name="head">画像データ</param>
     public void ChangeHead(BodyPartsData head)
     {
-
-        headSR.sprite = head.sPartSprite;
+        for (int j = 0; j < headSR.Length; j++) 
+        {
+            headSR[j].sprite = head.sPartSprite;
+        }
     }
 
     /// <summary>
@@ -223,7 +273,10 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <param name="arm">画像データ</param>
     public void ChangeArm(BodyPartsData arm)
     {
-        armSR.sprite = arm.sPartSprite;
+        for (int j = 0; j < armSR.Length; j++)
+        {
+            armSR[j].sprite = arm.sPartSprite;
+        }
     }
 
     /// <summary>
@@ -232,7 +285,10 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <param name="leg">画像データ</param>
     public void ChangeLeg(BodyPartsData leg)
     {
-        legSR.sprite = leg.sPartSprite;
+        for (int j = 0; j < legSR.Length; j++)
+        {
+            legSR[j].sprite = leg.sPartSprite;
+        }
     }
 }
 
