@@ -58,7 +58,7 @@ public class DropPart : MonoBehaviour
     public void setImnage()
     {
         Image image = this.GetComponent<Image>();
-        image.sprite = partsData.sPartSprite; 
+        image.sprite = partsData.spBody; 
     }
 
     public void getPlayerManegerObjet(GameObject obj)

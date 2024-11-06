@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerParameter : MonoBehaviour
 {
+    //ゲームマネージャー
+    GameMgr scGameMgr;
+
     public static PlayerParameter Instance;
 
     [Header("1減少するのにかかる時間")]
@@ -24,8 +27,10 @@ public class PlayerParameter : MonoBehaviour
     [Header("プレイヤーオブジェクト")]
     [SerializeField] GameObject goPlayer;
 
-    //デフォルトのパーツデータ
-    [SerializeField] BodyPartsData DefaultData;
+    //上半身のパーツデータ
+    public BodyPartsData UpperDefaultData;
+    //下半身のパーツデータ
+    public BodyPartsData LowerDefaultData;
 
     public void Awake()
     {
@@ -33,6 +38,9 @@ public class PlayerParameter : MonoBehaviour
     }
     private void Start()
     {
+        //最大値を設定
+        iUpperHPMax = UpperDefaultData.iPartHp;
+        iLowerHPMax = LowerDefaultData.iPartHp;
         //パラメータの初期化
         iHumanity = iHumanityMax;
         iUpperHP = iUpperHPMax;
@@ -72,32 +80,36 @@ public class PlayerParameter : MonoBehaviour
     //テスト段階では引数はnullでいい
     public void transplant(BodyPartsData partsData)
     {
-        partsData = partsData ?? DefaultData;
+        //partsData = partsData ?? DefaultData;
 
         //キャラのイメージ取得用
         SpriteRenderer spriteRenderer;
 
         switch (partsData.enPartsType)
-        {          
-            case PartsType.Head:
-                break;
-            case PartsType.Arm:
+        {
+            case PartsType.Upper:
                 //パーツデータのHPをMaxに代入
                 iUpperHPMax = partsData.iPartHp;
                 iUpperHP = iUpperHPMax;
                 //SpriteRendererコンポーネント取得
                 spriteRenderer = goPlayer.transform.GetChild(0).transform.GetComponent<SpriteRenderer>();
+                /*
                 //SpriteRendererのSpriteにパーツデータのSpriteを挿入
-                spriteRenderer.sprite = partsData.sPartSprite;
+                spriteRenderer.sprite = partsData.spBody;
+                */
+                //見た目変更関数待ち
                 break;
-            case PartsType.Leg:
+            case PartsType.Lower:
                 //パーツデータのHPをMax代入
                 iLowerHPMax = partsData.iPartHp;
                 iLowerHP = iLowerHPMax;
                 //SpriteRendererコンポーネント取得
                 spriteRenderer = goPlayer.transform.GetChild(1).transform.GetComponent<SpriteRenderer>();
+                /*
                 //SpriteRendererのSpriteにパーツデータのSpriteを挿入
-                spriteRenderer.sprite = partsData.sPartSprite;
+                spriteRenderer.sprite = partsData.spWaist;
+                */
+                //見た目変更関数待ち
                 break;
         }
 
