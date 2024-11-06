@@ -568,13 +568,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f36aef9290bac749a33b7c6de7739be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scGameMgr: {fileID: 498662820}
   iDownTime: 1
   iHumanityMax: 100
   iUpperHPMax: 10
   iLowerHPMax: 10
   goPlayer: {fileID: 614364183}
-  UpperDefaultData: {fileID: 11400000, guid: a72cdc466c72ac54b99427c79e98c125, type: 2}
-  LowerDefaultData: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
+  UpperData: {fileID: 11400000, guid: a72cdc466c72ac54b99427c79e98c125, type: 2}
+  LowerData: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
 --- !u!4 &261565242
 Transform:
   m_ObjectHideFlags: 0
@@ -953,6 +954,51 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &498662819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 498662821}
+  - component: {fileID: 498662820}
+  m_Layer: 0
+  m_Name: GameMnager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &498662820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498662819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6bb10fc7c6e334c8889707b6537b39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enGameState: 0
+--- !u!4 &498662821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498662819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.10441, y: 0.7655417, z: -1.3745118}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &613798099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,6 +1240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a77a3114fa5a409a5786c62d230a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scGameMgr: {fileID: 0}
   fSpeed: 5
   fJmpPower: 450
   goCamera: {fileID: 244809042}
@@ -1606,7 +1653,6 @@ MonoBehaviour:
   goHumanity_Bar: {fileID: 252931442}
   goUpperHP_Bar: {fileID: 1440257034}
   goLowerHP_Bar: {fileID: 2076811909}
-  scSlayerParameter: {fileID: 261565241}
 --- !u!1 &1021531510
 GameObject:
   m_ObjectHideFlags: 0
@@ -3951,6 +3997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a77a3114fa5a409a5786c62d230a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scGameMgr: {fileID: 498662820}
   fSpeed: 3
   fJmpPower: 450
   goCamera: {fileID: 244809042}
@@ -4524,6 +4571,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 244809043}
+  - {fileID: 498662821}
   - {fileID: 261565242}
   - {fileID: 186059271}
   - {fileID: 92859004}

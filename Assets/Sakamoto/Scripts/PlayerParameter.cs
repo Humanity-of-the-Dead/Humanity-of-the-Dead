@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class PlayerParameter : MonoBehaviour
 {
     //ゲームマネージャー
-    GameMgr scGameMgr;
+    [SerializeField]GameMgr scGameMgr;
 
     public static PlayerParameter Instance;
 
@@ -28,9 +28,9 @@ public class PlayerParameter : MonoBehaviour
     [SerializeField] GameObject goPlayer;
 
     //上半身のパーツデータ
-    public BodyPartsData UpperDefaultData;
+    public BodyPartsData UpperData;
     //下半身のパーツデータ
-    public BodyPartsData LowerDefaultData;
+    public BodyPartsData LowerData;
 
     public void Awake()
     {
@@ -39,8 +39,8 @@ public class PlayerParameter : MonoBehaviour
     private void Start()
     {
         //最大値を設定
-        iUpperHPMax = UpperDefaultData.iPartHp;
-        iLowerHPMax = LowerDefaultData.iPartHp;
+        iUpperHPMax = UpperData.iPartHp;
+        iLowerHPMax = LowerData.iPartHp;
         //パラメータの初期化
         iHumanity = iHumanityMax;
         iUpperHP = iUpperHPMax;
@@ -51,15 +51,20 @@ public class PlayerParameter : MonoBehaviour
     }
     private void Update()
     {
-        //パラメータの値をiDownTime秒で1減少させる
-        iHumanity -= Time.deltaTime / iDownTime;
-        iUpperHP -= Time.deltaTime / iDownTime;
-        iLowerHP -= Time.deltaTime / iDownTime;
-
-        //シーン移動
-        if (Input.GetKeyDown(KeyCode.M))
+        switch (scGameMgr.enGameState)
         {
-            SceneManager.LoadScene("Stage2");
+            case GameState.Main:
+                //パラメータの値をiDownTime秒で1減少させる
+                iHumanity -= Time.deltaTime / iDownTime;
+                iUpperHP -= Time.deltaTime / iDownTime;
+                iLowerHP -= Time.deltaTime / iDownTime;
+
+                //シーン移動
+                if (Input.GetKeyDown(KeyCode.M))
+                {
+                    SceneManager.LoadScene("Stage2");
+                }
+                break;
         }
     }
 

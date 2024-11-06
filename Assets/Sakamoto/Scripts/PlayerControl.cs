@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    //ゲームマネージャー
+    [SerializeField] GameMgr scGameMgr;
+
     private Rigidbody2D rbody2D;
     [Header("移動スピード")]
     [SerializeField] float fSpeed;
@@ -40,64 +43,71 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //現在のポジションを取得
-        Vector2 vPosition = this.transform.position;
-
-        //カメラとの距離の絶対値が一定以下ならプレイヤーが動く　画面外に出ないための処置
-        //移動
-        Vector3 vPosFromCame = this.transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
-        //左移動
-        if (Input.GetKey(KeyCode.A))
+        switch (scGameMgr.enGameState)
         {
-            if (vPosFromCame.x > -fCameraWidth / 2)
-            {
-                vPosition.x -= Time.deltaTime * fSpeed;
-            }
+            case GameState.Main:
+                //現在のポジションを取得
+                Vector2 vPosition = this.transform.position;
+
+                //カメラとの距離の絶対値が一定以下ならプレイヤーが動く　画面外に出ないための処置
+                //移動
+                Vector3 vPosFromCame = this.transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
+                                                                                              //左移動
+                if (Input.GetKey(KeyCode.A))
+                {
+                    if (vPosFromCame.x > -fCameraWidth / 2)
+                    {
+                        vPosition.x -= Time.deltaTime * fSpeed;
+                    }
+                }
+                //右移動
+                if (Input.GetKey(KeyCode.D))
+                {
+                    if (fCameraWidth / 2 > vPosFromCame.x)
+                    {
+                        vPosition.x += Time.deltaTime * fSpeed;
+                    }
+                }
+
+                //ジャンプ
+
+                if (Input.GetKey(KeyCode.W) && bJump == false)
+                {
+                    this.rbody2D.AddForce(this.transform.up * fJmpPower);
+                    bJump = true;
+                }
+
+                //体が回転しないようにする
+                //自分のtransformを取得
+                Quaternion quaternion = GetComponent<Transform>().rotation;
+                quaternion.z = 0.0f;
+                transform.rotation = quaternion;
+
+
+                //移動後のポジションを代入
+                this.transform.position = vPosition;
+
+                //攻撃関連
+                //上半身攻撃
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    for (int i = 0; i < goObj.Length; i++)
+                    {
+                        //仮引数
+                        UpperBodyAttack(i, goObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea);
+                    }
+                }
+                //下半身攻撃
+                if (Input.GetKeyDown(KeyCode.K))
+                {
+                    for (int i = 0; i < goObj.Length; i++)
+                    {
+                        //仮引数
+                        LowerBodyAttack(i, goObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea);
+                    }
+                }
+                break;
         }
-        //右移動
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (fCameraWidth / 2 > vPosFromCame.x)
-            {
-                vPosition.x += Time.deltaTime * fSpeed;
-            }
-        }
-
-        //ジャンプ
-
-        if (Input.GetKey(KeyCode.W) && bJump == false)
-        {
-            this.rbody2D.AddForce(this.transform.up * fJmpPower);
-            bJump = true;
-        }
-
-        //体が回転しないようにする
-        //自分のtransformを取得
-        Quaternion quaternion = GetComponent<Transform>().rotation;
-        quaternion.z = 0.0f;
-        transform.rotation = quaternion; 
-
-
-        //移動後のポジションを代入
-        this.transform.position = vPosition;
-
-        //攻撃関連
-        //上半身攻撃
-        if(Input.GetKeyDown(KeyCode.I)) {
-            for(int i = 0; i < goObj.Length; i++) {
-                //仮引数
-                UpperBodyAttack(i,goObj[i].gameObject.transform.position, 5.0f);
-            }
-        }
-        //下半身攻撃
-        if(Input.GetKeyDown(KeyCode.K)) {
-            for (int i = 0; i < goObj.Length; i++)
-            {
-                //仮引数
-                LowerBodyAttack(i,goObj[i].gameObject.transform.position, 8.0f);
-            }
-        }
-
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
