@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class PlayerMoveAnimation : MonoBehaviour
 {
-    [SerializeField, Header("頭のImage")] SpriteRenderer[] headSR;    
-    [SerializeField, Header("腕のImage、先に右手")] SpriteRenderer[] armSR;
-    [SerializeField, Header("足のImage、先に右足")] SpriteRenderer[] legSR;
+    [SerializeField, Header("頭のImage")] SpriteRenderer headSR;
+    [SerializeField, Header("体ののImage")] SpriteRenderer bodySR;
+    [SerializeField, Header("右腕のImage、先に右手")] SpriteRenderer armRightSR;
+    [SerializeField, Header("左腕のImage、先に右手")] SpriteRenderer armLeftSR;
+    [SerializeField, Header("右手首のImage、先に右手")] SpriteRenderer handRightSR;
+    [SerializeField, Header("左手首のImage、先に右手")] SpriteRenderer handLeftSR;
+    [SerializeField, Header("右太腿のImage、先に右手")] SpriteRenderer footRightSR;
+    [SerializeField, Header("左太腿のImage、先に右手")] SpriteRenderer footLeftSR;
+    [SerializeField, Header("右足のImage、先に右足")] SpriteRenderer legRightSR;
+    [SerializeField, Header("左足のImage、先に右足")] SpriteRenderer legLeftSR;
 
     [Header("全身")] public GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")]  GameObject[] arm;
@@ -358,34 +365,88 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <param name="head">画像データ</param>
     public void ChangeHead(BodyPartsData head)
     {
-        for (int j = 0; j < headSR.Length; j++) 
-        {
-            headSR[j].sprite = head.spBody;
-        }
+        headSR.sprite = head.spBody;
     }
 
     /// <summary>
-    /// 腕のイメージ
+    /// 頭のイメージ
     /// </summary>
-    /// <param name="arm">画像データ</param>
-    public void ChangeArm(BodyPartsData arm)
+    /// <param name="body">画像データ</param>
+    public void ChangeBody(BodyPartsData body)
     {
-        for (int j = 0; j < armSR.Length; j++)
-        {
-            armSR[j].sprite = arm.spArm;
-        }
+        bodySR.sprite = body.spBody;
     }
 
     /// <summary>
-    /// 足のイメージ
+    /// 右腕腕のイメージ
     /// </summary>
-    /// <param name="leg">画像データ</param>
-    public void ChangeLeg(BodyPartsData leg)
+    /// <param name="armRight">画像データ</param>
+    public void ChangeArmRight(BodyPartsData armRight)
     {
-        for (int j = 0; j < legSR.Length; j++)
-        {
-            legSR[j].sprite = leg.spLeg;
-        }
+        armRightSR.sprite = armRight.spArm;
+    }
+
+    /// <summary>
+    /// 左腕のイメージ
+    /// </summary>
+    /// <param name="armLeft">画像データ</param>
+    public void ChangeArmLeft(BodyPartsData armLeft)
+    {
+        armLeftSR.sprite = armLeft.spArm;
+    }
+
+    /// <summary>
+    /// 右手首のイメージ
+    /// </summary>
+    /// <param name="handRight">画像データ</param>
+    public void ChangeHandRight(BodyPartsData handRight)
+    {
+        handRightSR.sprite = handRight.spArm;
+    }
+
+    /// <summary>
+    /// 右手首のイメージ
+    /// </summary>
+    /// <param name="handLeft">画像データ</param>
+    public void ChangeHandLeft(BodyPartsData handLeft)
+    {
+        handLeftSR.sprite = handLeft.spArm;
+    }
+
+    /// <summary>
+    /// 右太腿のイメージ
+    /// </summary>
+    /// <param name="footRight">画像データ</param>
+    public void ChangeFootRight(BodyPartsData footRight)
+    {
+        footRightSR.sprite = footRight.spLeg;
+    }
+
+    /// <summary>
+    /// 右太腿のイメージ
+    /// </summary>
+    /// <param name="footLeft">画像データ</param>
+    public void ChangeFootLeft(BodyPartsData footLeft)
+    {
+        footLeftSR.sprite = footLeft.spLeg;
+    }
+
+    /// <summary>
+    /// 右足のイメージ
+    /// </summary>
+    /// <param name="legRight">画像データ</param>
+    public void ChangeLegRight(BodyPartsData legRight)
+    {
+        legRightSR.sprite = legRight.spLeg;
+    }
+
+    /// <summary>
+    /// 左足のイメージ
+    /// </summary>
+    /// <param name="legLeft">画像データ</param>
+    public void ChangeLegLeft(BodyPartsData legLeft)
+    {
+        legLeftSR.sprite = legLeft.spLeg;
     }
 }
 
