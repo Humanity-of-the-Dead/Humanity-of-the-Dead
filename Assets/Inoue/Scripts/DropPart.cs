@@ -78,14 +78,16 @@ public class DropPart : MonoBehaviour
     }
     
     //ˆÚA
-    void getTransplant()
+    public void getTransplant()
     {
         goPlayerParameter.GetComponent<PlayerParameter>().transplant(partsData);
+        Destroy(this.gameObject);
     }
-    
+
     //ˆÔ—ì
-    void getComfort()
+    public void getComfort()
     {
         goPlayerParameter.GetComponent<PlayerParameter>().comfort(10);
+        Destroy(this.gameObject);
     }
 }
