@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PartsManager : MonoBehaviour
 {
+    private GameState enGameState;
     
     //各種パラメータ
     [SerializeField] string sPartsName;   //部位の名前
@@ -19,6 +20,9 @@ public class PartsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //ゲームステートの初期化
+        enGameState = GameState.Main;
+
         time = 0;
     }
 

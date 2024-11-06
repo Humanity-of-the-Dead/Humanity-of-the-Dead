@@ -572,7 +572,8 @@ MonoBehaviour:
   iUpperHPMax: 10
   iLowerHPMax: 10
   goPlayer: {fileID: 614364183}
-  DefaultData: {fileID: 11400000, guid: a72cdc466c72ac54b99427c79e98c125, type: 2}
+  UpperDefaultData: {fileID: 11400000, guid: 132fdde79a5eaad4cb0bcf62d7e90831, type: 2}
+  LowerDefaultData: {fileID: 11400000, guid: 009aff5779acc0849983a59cf5a51453, type: 2}
 --- !u!4 &261565242
 Transform:
   m_ObjectHideFlags: 0
@@ -1195,9 +1196,8 @@ MonoBehaviour:
   fSpeed: 5
   fJmpPower: 450
   goCamera: {fileID: 244809042}
-  goObje:
-  - {fileID: 277595279}
-  - {fileID: 769248073}
+  goObj: []
+  playerParameter: {fileID: 0}
 --- !u!1 &769248073
 GameObject:
   m_ObjectHideFlags: 0
