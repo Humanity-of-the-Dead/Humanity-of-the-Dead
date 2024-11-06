@@ -19,6 +19,8 @@ public class BodyPartsData : ScriptableObject
     public PartsType enPartsType;
     [Header("パーツの名前")]
     public string sPartsName;
+    [Header("アタック範囲")]
+    public float AttackArea;
     [Header("パーツのHP")]
     public int iPartHp;
     [Header("パーツの攻撃力")]
