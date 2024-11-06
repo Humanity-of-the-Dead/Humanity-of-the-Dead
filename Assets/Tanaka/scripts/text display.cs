@@ -10,6 +10,9 @@ public class textdisplay : MonoBehaviour
     [SerializeField]
     private Text text;  //画面上の文字
 
+    [SerializeField]
+    private float TypingSpeed = 0.5f;  //文字の表示速度
+
     private int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
 
     private int n = 0;
@@ -17,7 +20,7 @@ public class textdisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.text = "";// textAsset.text;
+        text.text = "";// 初期化
         Debug.Log(textAsset[0].text);
     }
 
@@ -26,10 +29,6 @@ public class textdisplay : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-
-            //for (int i = 0; i < textAsset.Length; i++)
-            //{
-             
             if (textAsset.Length > LoadText )
             {//テキストをLoadTextの分表示
                 text.text = textAsset[LoadText].text;
@@ -46,6 +45,7 @@ public class textdisplay : MonoBehaviour
 
                 //}
             }
+            
 
         }
         
