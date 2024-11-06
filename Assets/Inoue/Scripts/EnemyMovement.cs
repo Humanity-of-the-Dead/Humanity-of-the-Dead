@@ -3,8 +3,8 @@ using UnityEngine;
 public class EnemyMovement : EnemyAttack
 {
     // 移動を始める場所、終わりの場所、普段の移動速度、追跡中の移動速度、敵の索敵可能な範囲を設定
-    [SerializeField] private Vector3 pointA;
-    [SerializeField] private Vector3 pointB;
+    [SerializeField] private float pointA;
+    [SerializeField] private float pointB;
     [SerializeField] private float speed = 2f;
     [SerializeField] private float chaseSpeed = 2f;
     [SerializeField] private float chaseRange = 5f;
@@ -50,7 +50,8 @@ public class EnemyMovement : EnemyAttack
                         else
                         {
                             // いつもの挙動
-                            Vector3 target = movingToPointB ? pointB : pointA;
+                            float Target = movingToPointB ? pointB : pointA;
+                            Vector3 target = new Vector3(Target, this.transform.position.y, this.transform.position.z);
                             MoveTowards(target, speed);
 
                             // 敵が折り返し地点に到達したかどうか判断
