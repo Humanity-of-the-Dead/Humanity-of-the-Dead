@@ -1,19 +1,19 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class textdisplay : MonoBehaviour
 {
     [SerializeField]
-    private TextAsset[] textAsset;   //ƒƒ‚’ ‚Ìƒtƒ@ƒCƒ‹(.txt)@”z—ñ
+    private TextAsset[] textAsset;   //ãƒ¡ãƒ¢å¸³ã®ãƒ•ã‚¡ã‚¤ãƒ«(.txt)ã€€é…åˆ—
 
     [SerializeField]
-    private Text text;  //‰æ–Êã‚Ì•¶š
+    private Text text;  //ç”»é¢ä¸Šã®æ–‡å­—
 
     [SerializeField]
-    private float TypingSpeed = 0.5f;  //•¶š‚Ì•\¦‘¬“x
+    private float TypingSpeed = 0.5f;  //æ–‡å­—ã®è¡¨ç¤ºé€Ÿåº¦
 
-    private int LoadText = 0;   //‰½–‡–Ú‚ÌƒeƒLƒXƒg‚ğ“Ç‚İ‚ñ‚Å‚¢‚é‚Ì‚©
+    private int LoadText = 0;   //ä½•æšç›®ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚“ã§ã„ã‚‹ã®ã‹
 
     private int n = 0;
 
@@ -35,7 +35,7 @@ public class textdisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.text = "";// ‰Šú‰»
+        text.text = "";// åˆæœŸåŒ–
         Debug.Log(textAsset[0].text);
     }
 
@@ -47,17 +47,17 @@ public class textdisplay : MonoBehaviour
             case GameState.Main:
                 if (Player.transform.position.x > Position[1] && Flag[1] == false)
                 {
-                    TextImage.gameObject.SetActive(true);    //ƒIƒuƒWƒFƒNƒg‚ğ•\¦
-                    Flag[1] = true;     //Flag[1]‚ğ’Ê‚Á‚½
-                    GameManager.ChangeState(GameState.ShowText);    //GameState‚ªShowText‚É•Ï‚í‚é
+                    this.gameObject.SetActive(true);    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¡¨ç¤º
+                    Flag[1] = true;     //Flag[1]ã‚’é€šã£ãŸ
+                    GameManager.ChangeState(GameState.ShowText);    //GameStateãŒShowTextã«å¤‰ã‚ã‚‹
 
                     UpdateText();
                 }
                 if (Player.transform.position.x > Position[2] && Flag[2] == false)
                 {
-                    TextImage.gameObject.SetActive(true);    //ƒIƒuƒWƒFƒNƒg‚ğ•\¦
-                    Flag[2] = true;     //Flag[1]‚ğ’Ê‚Á‚½
-                    GameManager.ChangeState(GameState.ShowText);    //GameState‚ªShowText‚É•Ï‚í‚é
+                    this.gameObject.SetActive(true);    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¡¨ç¤º
+                    Flag[2] = true;     //Flag[1]ã‚’é€šã£ãŸ
+                    GameManager.ChangeState(GameState.ShowText);    //GameStateãŒShowTextã«å¤‰ã‚ã‚‹
 
                     UpdateText();
                 }
@@ -65,7 +65,7 @@ public class textdisplay : MonoBehaviour
             case GameState.ShowText:
                 if (Input.GetMouseButtonDown(0))
                 {
-                    TextImage.gameObject.SetActive(false);   //ƒIƒuƒWƒFƒNƒg‚ğ”ñ•\¦
+                    this.gameObject.SetActive(false);   //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’éè¡¨ç¤º
                     GameManager.ChangeState(GameState.Main);
                 }
                 break;
@@ -75,16 +75,16 @@ public class textdisplay : MonoBehaviour
     public void UpdateText()
     {
         if (textAsset.Length > LoadText)
-        {//ƒeƒLƒXƒg‚ğLoadText‚Ì•ª•\¦
+        {//ãƒ†ã‚­ã‚¹ãƒˆã‚’LoadTextã®åˆ†è¡¨ç¤º
             text.text = textAsset[LoadText].text;
 
 
             Debug.Log(textAsset[LoadText].text);
-            Debug.Log(textAsset[LoadText].text.Length); //ƒeƒLƒXƒgã‚É‰½•¶š‚ ‚é‚©ƒfƒoƒbƒN
+            Debug.Log(textAsset[LoadText].text.Length); //ãƒ†ã‚­ã‚¹ãƒˆä¸Šã«ä½•æ–‡å­—ã‚ã‚‹ã‹ãƒ‡ãƒãƒƒã‚¯
 
             //Debug.Log(textAsset[LoadText]);
-            Debug.Log(textAsset.Length);    //‘S‘Ì‚ÌƒeƒLƒXƒg”
-            Debug.Log(LoadText);            //Œ»İ•\¦‚³‚ê‚Ä‚¢‚éƒeƒLƒXƒg”Ô†
+            Debug.Log(textAsset.Length);    //å…¨ä½“ã®ãƒ†ã‚­ã‚¹ãƒˆæ•°
+            Debug.Log(LoadText);            //ç¾åœ¨è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹ãƒ†ã‚­ã‚¹ãƒˆç•ªå·
 
             LoadText++;
 
