@@ -341,6 +341,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: c304ff9bd852c4f4984b6f46cabe270b, type: 3}
   - {fileID: 4900000, guid: bcd6c9a146566ce4496b19eb3594b5e4, type: 3}
   - {fileID: 4900000, guid: 9f51a60990858db4784073db90ed78c1, type: 3}
+  - {fileID: 4900000, guid: c89c4e974f2726e4687f2aa7d2f95619, type: 3}
   text: {fileID: 1217219683}
 --- !u!1 &1540742847
 GameObject:
@@ -410,8 +411,8 @@ Canvas:
   m_GameObject: {fileID: 1540742847}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1356578311}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
