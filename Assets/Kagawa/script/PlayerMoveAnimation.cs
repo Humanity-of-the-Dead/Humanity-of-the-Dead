@@ -34,6 +34,15 @@ public class PlayerMoveAnimation : MonoBehaviour
     [Header("太ももの後方の角度")] public float[] legPatBackRotation;
     [Header("足の後方の角度")] public float[] footPatBackRotation;
 
+    [Header("---キックのアニメーション---")]
+    [Header("全身の角度")] public float[] playerKickRotation;
+    [Header("腕の前方角度")] public float[] armKickForwardRotation;
+    [Header("腕の後方角度")] public float[] armKickBackRotation;
+    [Header("太ももの前方の角度")] public float[] legKickForwardRotation;
+    [Header("足の前方の角度")] public float[] footKickForwardRotation;
+    [Header("太ももの後方の角度")] public float[] legKickBackRotation;
+    [Header("足の後方の角度")] public float[] footKickBackRotation;
+
     //配列の番号
     int indexNumber;
 
@@ -68,25 +77,22 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         time -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.D))
+        // 歩く動作をしている時、呼ばせない
+        if (time < 0)
         {
-            // 歩く動作をしている時、呼ばせない
-            if (time < 0)
+            if (Input.GetKeyDown(KeyCode.D))
             {
-                // プレイヤーの向きが左から右に変わったとき
-                isWalk = false;
-                shaft = 0;
+                    // プレイヤーの向きが左から右に変わったとき
+                    isWalk = false;
+                    shaft = 0;
 
-                isActive = false;
-                ChangeArmAnime();
-                WalkStart();
+                    isActive = false;
+                    ChangeArmAnime();
+                    WalkStart();
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            // 歩く動作をしている時、呼ばせない
-            if (time < 0)
+            else if (Input.GetKeyDown(KeyCode.A))
             {
+
                 // プレイヤーの向きが右から左に変わったとき
                 isWalk = true;
                 shaft = 180;
@@ -94,6 +100,14 @@ public class PlayerMoveAnimation : MonoBehaviour
                 isActive = false;
                 ChangeArmAnime();
                 WalkStart();
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                PantieStart();
+            }
+            else if (Input.GetKeyDown(KeyCode.K))
+            {
+                KickStart();
             }
         }
 
@@ -165,7 +179,9 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// パンチのモーション
+    /// </summary>
     void PlayerPantie()
     {
         // Quaternion.Euler: 回転軸( x, y, z)
@@ -203,7 +219,47 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-    IEnumerator CallFunctionWithDelay()
+    /// <summary>
+    /// キックのアニメーション
+    /// </summary>
+    void PlayerKick()
+    {
+        // Quaternion.Euler: 回転軸( x, y, z)
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerKickRotation[indexNumber]);
+
+        // 腕のアニメーション
+        if (arm == null || armKickForwardRotation == null || armKickBackRotation == null)
+        {
+            Debug.LogWarning("armのデータが何かしら抜けてる");
+            return;
+        }
+        else
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armKickForwardRotation[indexNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armKickBackRotation[indexNumber]);
+        }
+
+        // 足のアニメーション
+        if (leg == null || legKickBackRotation == null || legKickForwardRotation == null)
+        {
+            Debug.LogWarning("Legのデータが何かしら抜けてる");
+            return;
+        }
+        else if (foot == null || footKickBackRotation == null || footKickForwardRotation == null)
+        {
+            Debug.LogWarning("footのデータが何かしら抜けてる");
+            return;
+        }
+        else
+        {
+            leg[0].transform.rotation = Quaternion.Euler(0, shaft, legKickBackRotation[indexNumber]);
+            leg[1].transform.rotation = Quaternion.Euler(0, shaft, legKickForwardRotation[indexNumber]);
+            foot[0].transform.rotation = Quaternion.Euler(0, shaft, footKickBackRotation[indexNumber]);
+            foot[1].transform.rotation = Quaternion.Euler(0, shaft, footKickForwardRotation[indexNumber]);
+        }
+    }
+
+    IEnumerator CallWalkWithDelay()
     {
         for (int i = 0; i < armWalkRotation.Length; i++)
         {
@@ -215,6 +271,29 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
+    IEnumerator CallPantieWithDelay()
+    {
+        for (int i = 0; i < armPatForwardRotation.Length; i++)
+        {
+            PlayerPantie();
+
+            // indexNumberの値を増やす(配列番号を上げる)
+            indexNumber = (indexNumber + 1) % armPatForwardRotation.Length;
+            yield return new WaitForSeconds(timeMax);
+        }
+    }
+
+    IEnumerator CallKickWithDelay()
+    {
+        for (int i = 0; i < armKickForwardRotation.Length; i++)
+        {
+            PlayerKick();
+
+            // indexNumberの値を増やす(配列番号を上げる)
+            indexNumber = (indexNumber + 1) % armKickForwardRotation.Length;
+            yield return new WaitForSeconds(timeMax);
+        }
+    }
 
     /// <summary>
     /// 歩くことを継続した時、腕の配列の中の値を逆にする
@@ -238,7 +317,25 @@ public class PlayerMoveAnimation : MonoBehaviour
     void WalkStart()
     {
         time = timeMax * armWalkRotation.Length;
-        StartCoroutine(CallFunctionWithDelay());
+        StartCoroutine(CallWalkWithDelay());
+    }
+
+    /// <summary>
+    /// パンチのアニメーション開始するときの関数
+    /// </summary>
+    void PantieStart()
+    {
+        time = timeMax * armPatForwardRotation.Length;
+        StartCoroutine(CallPantieWithDelay());
+    }
+
+    /// <summary>
+    /// キックのアニメーション開始するときの関数
+    /// </summary>
+    void KickStart()
+    {
+        time = timeMax * armKickForwardRotation.Length;
+        StartCoroutine(CallKickWithDelay());
     }
 
     /// <summary>
@@ -263,7 +360,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         for (int j = 0; j < headSR.Length; j++) 
         {
-            headSR[j].sprite = head.sPartSprite;
+            headSR[j].sprite = head.spBody;
         }
     }
 
@@ -275,7 +372,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         for (int j = 0; j < armSR.Length; j++)
         {
-            armSR[j].sprite = arm.sPartSprite;
+            armSR[j].sprite = arm.spArm;
         }
     }
 
@@ -287,7 +384,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         for (int j = 0; j < legSR.Length; j++)
         {
-            legSR[j].sprite = leg.sPartSprite;
+            legSR[j].sprite = leg.spLeg;
         }
     }
 }
