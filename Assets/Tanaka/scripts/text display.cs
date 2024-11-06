@@ -28,7 +28,10 @@ public class textdisplay : MonoBehaviour
 
     [SerializeField]
     bool[] Flag;
-    
+
+    [SerializeField]
+    GameObject TextImage;
+
     // Start is called before the first frame update
     void Start()
     {
