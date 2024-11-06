@@ -7,14 +7,14 @@ public class PlayerMoveAnimation : MonoBehaviour
 {
     [SerializeField, Header("頭のImage")] SpriteRenderer headSR;
     [SerializeField, Header("体ののImage")] SpriteRenderer bodySR;
-    [SerializeField, Header("右腕のImage、先に右手")] SpriteRenderer armRightSR;
-    [SerializeField, Header("左腕のImage、先に右手")] SpriteRenderer armLeftSR;
-    [SerializeField, Header("右手首のImage、先に右手")] SpriteRenderer handRightSR;
-    [SerializeField, Header("左手首のImage、先に右手")] SpriteRenderer handLeftSR;
-    [SerializeField, Header("右太腿のImage、先に右手")] SpriteRenderer footRightSR;
-    [SerializeField, Header("左太腿のImage、先に右手")] SpriteRenderer footLeftSR;
-    [SerializeField, Header("右足のImage、先に右足")] SpriteRenderer legRightSR;
-    [SerializeField, Header("左足のImage、先に右足")] SpriteRenderer legLeftSR;
+    [SerializeField, Header("右腕のImage")] SpriteRenderer armRightSR;
+    [SerializeField, Header("左腕のImage")] SpriteRenderer armLeftSR;
+    [SerializeField, Header("右手首のImage")] SpriteRenderer handRightSR;
+    [SerializeField, Header("左手首のImage")] SpriteRenderer handLeftSR;
+    [SerializeField, Header("右太腿のImage")] SpriteRenderer footRightSR;
+    [SerializeField, Header("左太腿のImage")] SpriteRenderer footLeftSR;
+    [SerializeField, Header("右足のImage")] SpriteRenderer legRightSR;
+    [SerializeField, Header("左足のImage")] SpriteRenderer legLeftSR;
 
     [Header("全身")] public GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")]  GameObject[] arm;
