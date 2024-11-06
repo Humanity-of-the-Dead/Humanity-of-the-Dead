@@ -50,6 +50,14 @@ public class textdisplay : MonoBehaviour
 
                     UpdateText();
                 }
+                if (Player.transform.position.x > Position[2] && Flag[2] == false)
+                {
+                    this.gameObject.SetActive(true);    //オブジェクトを表示
+                    Flag[2] = true;     //Flag[1]を通った
+                    GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+
+                    UpdateText();
+                }
                 break;
             case GameState.ShowText:
                 if (Input.GetMouseButtonDown(0))
