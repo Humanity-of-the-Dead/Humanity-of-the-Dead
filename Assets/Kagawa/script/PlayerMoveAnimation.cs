@@ -214,7 +214,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     public void ChangeHead(BodyPartsData head)
     {
 
-        headSR.sprite = head.sPartSprite;
+        headSR.sprite = head.spHand;
     }
 
     /// <summary>
@@ -223,7 +223,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <param name="arm">�摜�f�[�^</param>
     public void ChangeArm(BodyPartsData arm)
     {
-        armSR.sprite = arm.sPartSprite;
+        armSR.sprite = arm.spArm;
     }
 
     /// <summary>
@@ -232,6 +232,6 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <param name="leg">�摜�f�[�^</param>
     public void ChangeLeg(BodyPartsData leg)
     {
-        legSR.sprite = leg.sPartSprite;
+        legSR.sprite = leg.spLeg;
     }
 }

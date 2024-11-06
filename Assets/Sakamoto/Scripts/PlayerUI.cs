@@ -14,11 +14,12 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject goUpperHP_Bar;//è„îºêgHPÇÃBar
     [SerializeField] GameObject goLowerHP_Bar;//â∫îºêgHPÇÃBar
 
-    [SerializeField] PlayerParameter scSlayerParameter;
+    PlayerParameter scSlayerParameter;
 
     // Start is called before the first frame update
     void Start()
     {
+        scSlayerParameter = PlayerParameter.Instance;
     }
 
     // Update is called once per frame
