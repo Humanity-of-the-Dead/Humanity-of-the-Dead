@@ -5,41 +5,41 @@ using UnityEngine;
 
 public class PlayerMoveAnimation : MonoBehaviour
 {
-    [SerializeField, Header("“ª‚ÌImage")] SpriteRenderer headSR;    
-    [SerializeField, Header("˜r‚ÌImageAæ‚É‰Eè")] SpriteRenderer armSR;
-    [SerializeField, Header("‘«‚ÌImageAæ‚É‰E‘«")] SpriteRenderer legSR;
+    [SerializeField, Header("ï¿½ï¿½ï¿½ï¿½Image")] SpriteRenderer headSR;
+    [SerializeField, Header("ï¿½rï¿½ï¿½Imageï¿½Aï¿½ï¿½É‰Eï¿½ï¿½")] SpriteRenderer armSR;
+    [SerializeField, Header("ï¿½ï¿½ï¿½ï¿½Imageï¿½Aï¿½ï¿½É‰Eï¿½ï¿½")] SpriteRenderer legSR;
 
-    [Header("‘Sg")] public GameObject playerRc;
-    [SerializeField, Header("˜r‚ÌŠp“xAæ‚É‰Eè")]  GameObject[] arm;
-    [SerializeField, Header("‘¾‘Ú‚ÌŠp“xAæ‚É‰E‘«")]  GameObject[] leg;
-    [SerializeField, Header("‚·‚Ë‚ÌŠp“xAæ‚É‰E‘«")]  GameObject[] foot;
+    [Header("ï¿½Sï¿½g")] public GameObject playerRc;
+    [SerializeField, Header("ï¿½rï¿½ÌŠpï¿½xï¿½Aï¿½ï¿½É‰Eï¿½ï¿½")] GameObject[] arm;
+    [SerializeField, Header("ï¿½ï¿½ï¿½Ú‚ÌŠpï¿½xï¿½Aï¿½ï¿½É‰Eï¿½ï¿½")] GameObject[] leg;
+    [SerializeField, Header("ï¿½ï¿½ï¿½Ë‚ÌŠpï¿½xï¿½Aï¿½ï¿½É‰Eï¿½ï¿½")] GameObject[] foot;
 
-    [Header("‘Sg‚ÌŠp“x")] public float[] playerRotation;
-    [Header("˜r‚ÌŠp“x")] public float[] armRotation;
-    [Header("‘¾‚à‚à‚Ì‘O•û‚ÌŠp“x")] public float[] legForwardRotation;
-    [Header("‘«‚Ì‘O•û‚ÌŠp“x")] public float[] footForwardRotation;
-    [Header("‘¾‚à‚à‚ÌŒã•û‚ÌŠp“x")] public float[] legBackRotation;
-    [Header("‘«‚ÌŒã•û‚ÌŠp“x")] public float[] footBackRotation;
-    [Header("•à‚«‚ÌŒp‘±ŠÔ")] public float timeWalk;
+    [Header("ï¿½Sï¿½gï¿½ÌŠpï¿½x")] public float[] playerRotation;
+    [Header("ï¿½rï¿½ÌŠpï¿½x")] public float[] armRotation;
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‘Oï¿½ï¿½ï¿½ÌŠpï¿½x")] public float[] legForwardRotation;
+    [Header("ï¿½ï¿½ï¿½Ì‘Oï¿½ï¿½ï¿½ÌŠpï¿½x")] public float[] footForwardRotation;
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½ï¿½ÌŠpï¿½x")] public float[] legBackRotation;
+    [Header("ï¿½ï¿½ï¿½ÌŒï¿½ï¿½ï¿½ÌŠpï¿½x")] public float[] footBackRotation;
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ÌŒpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")] public float timeWalk;
 
-    [Header("1ƒRƒ}‚ÌŠÔŠu‚ÌŠÔ")] public float timeMax;
+    [Header("1ï¿½Rï¿½}ï¿½ÌŠÔŠuï¿½Ìï¿½ï¿½ï¿½")] public float timeMax;
 
-    //”z—ñ‚Ì”Ô†
+    //ï¿½zï¿½ï¿½Ì”Ôï¿½
     int indexNumber;
 
-    //‘Ì‚Ì²
+    //ï¿½Ì‚Ìï¿½
     int shaft;
 
-    // ’l‚ğ”½“]‚É‚·‚éƒtƒ‰ƒO
+    // ï¿½lï¿½ğ”½“]ï¿½É‚ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½O
     bool isActive;
 
-    // Œü‚¢‚Ä‚¢‚é•ûŒü‚ª‰E‚ğŒü‚¢‚Ä‚¢‚é‚©
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©
     bool isMirror;
 
-    // •ûŒüƒtƒ‰ƒO(‰E = false)
+    // ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½O(ï¿½E = false)
     bool isWalk;
 
-    // ƒ^ƒCƒ}[
+    // ï¿½^ï¿½Cï¿½}ï¿½[
     float time = 0;
 
 
@@ -60,10 +60,10 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            // •à‚­“®ì‚ğ‚µ‚Ä‚¢‚éAŒÄ‚Î‚¹‚È‚¢
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éï¿½Aï¿½Ä‚Î‚ï¿½ï¿½È‚ï¿½
             if (time < 0)
             {
-                // ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ª¶‚©‚ç‰E‚É•Ï‚í‚Á‚½‚Æ‚«
+                // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½É•Ï‚ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½
                 isWalk = false;
                 shaft = 0;
 
@@ -74,10 +74,10 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            // •à‚­“®ì‚ğ‚µ‚Ä‚¢‚éAŒÄ‚Î‚¹‚È‚¢
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éï¿½Aï¿½Ä‚Î‚ï¿½ï¿½È‚ï¿½
             if (time < 0)
             {
-                // ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ª‰E‚©‚ç¶‚É•Ï‚í‚Á‚½‚Æ‚«
+                // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½ç¶ï¿½É•Ï‚ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½
                 isWalk = true;
                 shaft = 180;
 
@@ -104,17 +104,17 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚­ƒAƒjƒ[ƒVƒ‡ƒ“
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½
     /// </summary>
     void PlayerWalk()
     {
-        // Quaternion.Euler: ‰ñ“]²( x, y, z)
+        // Quaternion.Euler: ï¿½ï¿½]ï¿½ï¿½( x, y, z)
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerRotation[indexNumber]);
 
-        // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        // ï¿½rï¿½ÌƒAï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½
         if (arm == null || armRotation == null)
         {
-            Debug.LogWarning("arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            Debug.LogWarning("armï¿½Ìƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç”²ï¿½ï¿½ï¿½Ä‚ï¿½");
             return;
         }
         else
@@ -123,20 +123,20 @@ public class PlayerMoveAnimation : MonoBehaviour
             arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armRotation[indexNumber]);
         }
 
-        // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        // ï¿½ï¿½ï¿½ÌƒAï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½
         if (leg == null || legBackRotation == null || legForwardRotation == null)
         {
-            Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            Debug.LogWarning("Legï¿½Ìƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç”²ï¿½ï¿½ï¿½Ä‚ï¿½");
             return;
         }
-        else if (foot == null || footBackRotation == null || footForwardRotation == null) 
+        else if (foot == null || footBackRotation == null || footForwardRotation == null)
         {
-            Debug.LogWarning("foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            Debug.LogWarning("footï¿½Ìƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç”²ï¿½ï¿½ï¿½Ä‚ï¿½");
             return;
         }
         else
         {
-            // •à‚«n‚ß‚Ìê‡
+            // ï¿½ï¿½ï¿½ï¿½ï¿½nï¿½ß‚Ìê‡
             if (!isActive)
             {
                 leg[0].transform.rotation = Quaternion.Euler(0, shaft, legBackRotation[indexNumber]);
@@ -144,7 +144,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                 foot[0].transform.rotation = Quaternion.Euler(0, shaft, footBackRotation[indexNumber]);
                 foot[1].transform.rotation = Quaternion.Euler(0, shaft, footForwardRotation[indexNumber]);
             }
-            //•à‚«‘±‚¯‚Ä‚¢‚éê‡
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡
             if (isActive)
             {
                 leg[0].transform.rotation = Quaternion.Euler(0, shaft, legForwardRotation[indexNumber]);
@@ -161,7 +161,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         {
             PlayerWalk();
 
-            // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
+            // indexNumberï¿½Ì’lï¿½ğ‘‚â‚·(ï¿½zï¿½ï¿½Ôï¿½ï¿½ï¿½ï¿½ã‚°ï¿½ï¿½)
             indexNumber = (indexNumber + 1) % armRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
@@ -169,11 +169,11 @@ public class PlayerMoveAnimation : MonoBehaviour
 
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚ğŒp‘±‚µ‚½A˜r‚Ì”z—ñ‚Ì’†‚Ì’l‚ğ‹t‚É‚·‚é
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½rï¿½Ì”zï¿½ï¿½Ì’ï¿½ï¿½Ì’lï¿½ï¿½ï¿½tï¿½É‚ï¿½ï¿½ï¿½
     /// </summary>
     void ChangeArmAnime()
     {
-        //O€‰‰Zq(Še—v‘f‚É‘Î‚µ‚Ä•ÏŠ·‘€ì‚ğs‚¤)
+        //ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½q(ï¿½eï¿½vï¿½fï¿½É‘Î‚ï¿½ï¿½Ä•ÏŠï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½)
         if (isActive)
         {
             armRotation = armRotation.Select(value => value > 0 ? -value : value).ToArray();
@@ -185,7 +185,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚«n‚ß‚ÌŠÖ”
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½nï¿½ß‚ÌŠÖï¿½
     /// </summary>
     void WalkStart()
     {
@@ -194,11 +194,11 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚ğŒp‘±‚µ‚½‚Æ‚«
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½
     /// </summary>
     void KeepWalk()
     {
-        // ˜A‘±“ü—Í‚³‚ê‚Ä‚¢‚é‚©
+        // ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©
         if (time - 0.05 < 0)
         {
             isActive = !isActive;
@@ -208,9 +208,9 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// “ª‚ÌƒCƒ[ƒW
+    /// ï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½[ï¿½W
     /// </summary>
-    /// <param name="head">‰æ‘œƒf[ƒ^</param>
+    /// <param name="head">ï¿½æ‘œï¿½fï¿½[ï¿½^</param>
     public void ChangeHead(BodyPartsData head)
     {
 
@@ -218,21 +218,20 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ˜r‚ÌƒCƒ[ƒW
+    /// ï¿½rï¿½ÌƒCï¿½ï¿½ï¿½[ï¿½W
     /// </summary>
-    /// <param name="arm">‰æ‘œƒf[ƒ^</param>
+    /// <param name="arm">ï¿½æ‘œï¿½fï¿½[ï¿½^</param>
     public void ChangeArm(BodyPartsData arm)
     {
         armSR.sprite = arm.sPartSprite;
     }
 
     /// <summary>
-    /// ‘«‚ÌƒCƒ[ƒW
+    /// ï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½[ï¿½W
     /// </summary>
-    /// <param name="leg">‰æ‘œƒf[ƒ^</param>
+    /// <param name="leg">ï¿½æ‘œï¿½fï¿½[ï¿½^</param>
     public void ChangeLeg(BodyPartsData leg)
     {
         legSR.sprite = leg.sPartSprite;
     }
 }
-
