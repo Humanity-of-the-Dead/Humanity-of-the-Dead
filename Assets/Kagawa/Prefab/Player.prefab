@@ -1360,7 +1360,7 @@ MonoBehaviour:
   - 0
   legKickBackRotation:
   - -10
-  - -5
+  - 0
   footKickBackRotation:
   - -10
   - 0

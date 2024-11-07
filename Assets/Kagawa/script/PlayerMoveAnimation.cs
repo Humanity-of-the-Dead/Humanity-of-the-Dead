@@ -64,7 +64,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     bool isActive;
 
     // 向いている方向が右を向いているか
-    bool isMirror;
+    bool isAtack;
 
     // 方向フラグ(右 = false)
     bool isWalk;
@@ -81,7 +81,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         indexNumber = 0;
         shaft = 0;
 
-        isMirror = true;
+        isAtack = false;
         isActive = false;
         isWalk = false;
         isStop = false;
@@ -98,6 +98,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             shaft = 0;
+            isAtack = false;
 
             //静止状態から左向くとき
             if (time < 0 && isWalk)
@@ -117,6 +118,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.A))
         {
             shaft = 180;
+            isAtack = false;
 
             //静止状態から左向くとき
             if (time < 0 && !isWalk)
@@ -134,19 +136,19 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.I))
         {
+            isAtack = true;
             StopCoroutine(CallWalkWithDelay());
             Upright();
             indexNumber = 0;
             PantieStart();
-            indexNumber = 0;
         }
         else if (Input.GetKeyDown(KeyCode.K))
         {
+            isAtack = true;
             StopCoroutine(CallWalkWithDelay());
             Upright();
             indexNumber = 0;
             KickStart();
-            indexNumber = 0;
         }
         
 
@@ -318,12 +320,15 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         for (int i = 0; i < armWalkRotation.Length; i++)
         {
-            PlayerWalk();
+            if (!isAtack)
+            {
+                PlayerWalk();
 
-            Debug.Log(indexNumber);
-            // indexNumberの値を増やす(配列番号を上げる)
-            indexNumber = (indexNumber + 1) % armWalkRotation.Length;
-            yield return new WaitForSeconds(timeMax);
+                Debug.Log(indexNumber);
+                // indexNumberの値を増やす(配列番号を上げる)
+                indexNumber = (indexNumber + 1) % armWalkRotation.Length;
+                yield return new WaitForSeconds(timeMax);
+            }
         }
     }
 
