@@ -537,11 +537,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8df5f9b5c45b64448a020f12d8d2bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPanel: {fileID: 0}
-  subPanel: {fileID: 0}
-  OptionPanel: {fileID: 0}
-  QuitPanel: {fileID: 0}
-  startPanel: {fileID: 0}
+  mainPanel: {fileID: 438391158}
+  CreditPanel: {fileID: 0}
+  CreditButton: {fileID: 0}
+  StartButton: {fileID: 0}
+  eventTrigger_Credit: {fileID: 0}
+  eventTrigger_Start: {fileID: 0}
+  Credit: {fileID: 0}
+  start: {fileID: 0}
   speed: 1
   corrutin: 0
   StartPanel_X: 0
@@ -556,18 +559,6 @@ MonoBehaviour:
   startButton_End_X: 0
   startButton_End_Y: 0
   startButton_End_Z: 0
-  OptionPanel_X: 0
-  OptionPanel_Y: 0
-  OptionPanel_Z: 0
-  OptionPanel_End_X: 0
-  OptionPanel_End_Y: 0
-  OptionPanel_End_Z: 0
-  OptionButton_X: 0
-  OptionButton_Y: 0
-  OptionButton_Z: 0
-  OptionButton_End_X: 0
-  OptionButton_End_Y: 0
-  OptionButton_End_Z: 0
   CreditPanel_X: 0
   CreditPanel_Y: 0
   CreditPanel_Z: 0
@@ -580,37 +571,6 @@ MonoBehaviour:
   CreditButton_End_X: 0
   CreditButton_End_Y: 0
   CreditButton_End_Z: 0
-  QuitPanel_X: 0
-  QuitPanel_Y: 0
-  QuitPanel_Z: 0
-  QuitPanel_End_X: 0
-  QuitPanel_End_Y: 0
-  QuitPanel_End_Z: 0
-  QuitButton_X: 0
-  QuitButton_Y: 0
-  QuitButton_Z: 0
-  QuitButton_End_X: 0
-  QuitButton_End_Y: 0
-  QuitButton_End_Z: 0
-  ContinueButton_X: 0
-  ContinueButton_Y: 0
-  ContinueButton_Z: 0
-  ContinueButton_End_X: 0
-  ContinueButton_End_Y: 0
-  ContinueButton_End_Z: 0
-  startButton: {fileID: 0}
-  ContinueButton: {fileID: 0}
-  quitButton: {fileID: 0}
-  CreditButton: {fileID: 0}
-  optionButton: {fileID: 0}
-  eventTrigger_start: {fileID: 0}
-  eventTrigger_quit: {fileID: 0}
-  eventTrigger_Credit: {fileID: 0}
-  eventTrigger_option: {fileID: 0}
-  start: {fileID: 0}
-  quit: {fileID: 0}
-  Credit: {fileID: 0}
-  option: {fileID: 0}
 --- !u!1 &718348994
 GameObject:
   m_ObjectHideFlags: 0
