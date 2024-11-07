@@ -267,11 +267,11 @@ public class EnemyMoveAnimation : MonoBehaviour
         //三項演算子(各要素に対して変換操作を行う)
         if (isActive)
         {
-            armWalkRotation = armWalkRotation.Select(value => value > 0 ? -value : value).ToArray();
+            armWalkRotation = armWalkRotation.Select(value => value < 0 ? -value : value).ToArray();
         }
         else if (!isActive)
         {
-            armWalkRotation = armWalkRotation.Select(value => value < 0 ? -value : value).ToArray();
+            armWalkRotation = armWalkRotation.Select(value => value > 0 ? -value : value).ToArray();
         }
     }
 
