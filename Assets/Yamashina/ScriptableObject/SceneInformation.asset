@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SceneInformation
   m_EditorClassIdentifier: 
   sceneObject:
-  - m_SceneName: SceneTransition
+  - m_SceneName: 
   - m_SceneName: Stage1
   - m_SceneName: Stage2
   - m_SceneName: Stage2

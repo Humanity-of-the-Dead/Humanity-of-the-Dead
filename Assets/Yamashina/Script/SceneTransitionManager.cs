@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class SceneTransitionManager : MonoBehaviour
 {
     [SerializeField] private SceneInformation sceneInformation;
-    [SerializeField] private Image fade;                            // ƒtƒF[ƒh
-    [SerializeField] private SceneInformation.SCENE currentScene;                     // ¡‚ÌƒV[ƒ“
+    [SerializeField] private Image fade;                            // ãƒ•ã‚§ãƒ¼ãƒ‰
+    [SerializeField] private SceneInformation.SCENE currentScene;  // ä»Šã®ã‚·ãƒ¼ãƒ³                  // ä»Šã®ã‚·ãƒ¼ãƒ³
 
     //[SerializeField] AudioSource bgmAudioSource;
-    //private SoundTable soundTable;  // BGM ƒe[ƒuƒ‹
+    //private SoundTable soundTable;  // BGM ãƒ†ãƒ¼ãƒ–ãƒ«
 
     private void Start()
     {
@@ -33,10 +33,10 @@ public class SceneTransitionManager : MonoBehaviour
     //    AudioClip clip = null;
     //    SceneInformation.SCENE currentScene;
 
-    //    // Œ»İ‚ÌƒV[ƒ“–¼‚©‚ç T_SceneInformation.SCENE ‚Ì enum ’l‚ğæ“¾
+    //    // ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³åã‹ã‚‰ T_SceneInformation.SCENE ã® enum å€¤ã‚’å–å¾—
     //    string sceneName = SceneManager.GetActiveScene().name;
 
-    //    // ƒV[ƒ“–¼‚É‰‚¶‚½ BGM ‚ğæ“¾
+    //    // ã‚·ãƒ¼ãƒ³åã«å¿œã˜ãŸ BGM ã‚’å–å¾—
     //    if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.Title))
     //    {
 
@@ -82,7 +82,7 @@ public class SceneTransitionManager : MonoBehaviour
     //    else
     //        return;
 
-    //    // ƒV[ƒ“–¼‚É‰‚¶‚½ BGM ‚ğæ“¾ (‚±‚±‚Å•ÏX)
+    //    // ã‚·ãƒ¼ãƒ³åã«å¿œã˜ãŸ BGM ã‚’å–å¾— (ã“ã“ã§å¤‰æ›´)
     //    switch (currentScene)
     //    {
     //        case T_SceneInformation.SCENE.Title:
@@ -127,7 +127,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     //    }
 
-    //    // BGM ‚ğİ’è‚µ‚ÄÄ¶
+    //    // BGM ã‚’è¨­å®šã—ã¦å†ç”Ÿ
     //    if (clip != null && bgmAudioSource.clip != clip)
     //    {
     //        bgmAudioSource.clip = clip;
@@ -146,15 +146,16 @@ public class SceneTransitionManager : MonoBehaviour
 
 
     ///// <summary>
-    ///// ƒV[ƒ“‚ğ‘JˆÚ‚³‚¹‚é
+    ///// ã‚·ãƒ¼ãƒ³ã‚’é·ç§»ã•ã›ã‚‹
     ///// </summary>
     ///// <param name="scene"></param>
+    
     public void SceneChange(SceneInformation.SCENE scene)
     {
         StartCoroutine(FadeOut(sceneInformation.GetSceneObject(scene)));
     }
 
-
+    //ãƒœã‚¿ãƒ³ã§ã‚·ãƒ¼ãƒ³é·ç§»ã™ã‚‹å ´åˆ
     public void NextSceneButton(int index)
     {
         SceneChange((SceneInformation.SCENE)index);
@@ -162,7 +163,7 @@ public class SceneTransitionManager : MonoBehaviour
 
 
     // <summary>
-    // ‰æ–Ê‚ğ–¾‚é‚­‚·‚é
+    // ç”»é¢ã‚’æ˜ã‚‹ãã™ã‚‹
     // <summary>    / <returns
     private IEnumerator FadeIn()
     {
@@ -177,7 +178,7 @@ public class SceneTransitionManager : MonoBehaviour
     }
 
     // <summary>
-    // ‰æ–Ê‚ğˆÃ‚­‚·‚é
+    // ç”»é¢ã‚’æš—ãã™ã‚‹
     // </summary>
     // <returns></returns>
     private IEnumerator FadeOut(string stageName)

@@ -1,32 +1,31 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "SceneInformation", menuName = "ScriptableObjects/StageInformation")]
 
 public class SceneInformation : ScriptableObject
 {
-    // ‘S‚Ä‚ÌƒV[ƒ“
-    // ‘S‚Ä‚ÌƒV[ƒ“
+    // å…¨ã¦ã®ã‚·ãƒ¼ãƒ³
     [System.Serializable]
     public enum SCENE
     {
-        Title,      // ƒ^ƒCƒgƒ‹
-        StageOne,   // ƒXƒe[ƒW‚P
-        StageTwo,   // ƒXƒe[ƒW‚Q
-        StageThree, // ƒXƒe[ƒW‚R
+        Title,      // ã‚¿ã‚¤ãƒˆãƒ«
+        StageOne,   // ã‚¹ãƒ†ãƒ¼ã‚¸ï¼‘
+        StageTwo,   // ã‚¹ãƒ†ãƒ¼ã‚¸ï¼’
+        StageThree, // ã‚¹ãƒ†ãƒ¼ã‚¸ï¼“
 
     }
-    // ƒXƒe[ƒW‚ÌƒV[ƒ“
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ã®ã‚·ãƒ¼ãƒ³
     [System.Serializable]
     public enum STAGE
     {
-        One,      // ƒXƒe[ƒW‚P
-        Two,      // ƒXƒe[ƒW‚Q
-        Three,    // ƒXƒe[ƒW‚R
+        One,      // ã‚¹ãƒ†ãƒ¼ã‚¸ï¼‘
+        Two,      // ã‚¹ãƒ†ãƒ¼ã‚¸ï¼’
+        Three,    // ã‚¹ãƒ†ãƒ¼ã‚¸ï¼“
     }
 
     [SerializeField] public SceneObject[] sceneObject;
-    [SerializeField] public string[] sceneNames;// ƒV[ƒ“‚Ì–¼‘O
+    [SerializeField] public string[] sceneNames;// ã‚·ãƒ¼ãƒ³ã®åå‰
     [SerializeField] private SCENE previousScene;
 
     public SceneObject GetSceneObject(SCENE scene)
