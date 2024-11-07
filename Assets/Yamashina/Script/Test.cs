@@ -16,8 +16,8 @@ public class Test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sceneTransitionManager.SceneChange(SceneInformation.SCENE.StageOne);
-        sceneInformation.SetPreviousScene((SceneInformation.SCENE)SceneManager.GetActiveScene().buildIndex);
+        //sceneTransitionManager.SceneChange(SceneInformation.SCENE.StageOne);
+        //sceneInformation.SetPreviousScene((SceneInformation.SCENE)SceneManager.GetActiveScene().buildIndex);
 
     }
 }
