@@ -6,17 +6,6 @@ using UnityEngine;
 
 public class EnemyMoveAnimation : MonoBehaviour
 {
-    [SerializeField, Header("頭のImage")] SpriteRenderer headSR;
-    [SerializeField, Header("体ののImage")] SpriteRenderer bodySR;
-    [SerializeField, Header("右腕のImage")] SpriteRenderer armRightSR;
-    [SerializeField, Header("左腕のImage")] SpriteRenderer armLeftSR;
-    [SerializeField, Header("右手首のImage")] SpriteRenderer handRightSR;
-    [SerializeField, Header("左手首のImage")] SpriteRenderer handLeftSR;
-    [SerializeField, Header("右太腿のImage")] SpriteRenderer footRightSR;
-    [SerializeField, Header("左太腿のImage")] SpriteRenderer footLeftSR;
-    [SerializeField, Header("右足のImage")] SpriteRenderer legRightSR;
-    [SerializeField, Header("左足のImage")] SpriteRenderer legLeftSR;
-
     [Header("全身")] public GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")] GameObject[] arm;
     [SerializeField, Header("太腿の角度、先に右足")] GameObject[] leg;
@@ -79,7 +68,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     private void Start()
     {
         indexNumber = 0;
-        shaft = 180;
+        shaft = 0;
 
         isMirror = true;
         isActive = false;
@@ -338,19 +327,5 @@ public class EnemyMoveAnimation : MonoBehaviour
             ChangeArmAnime();
             WalkStart();
         }
-    }
-
-    /// <summary>
-    /// 直立する
-    /// </summary>
-    void Upright()
-    {
-        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[walkLength]);
-        arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[walkLength]);
-        arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armWalkRotation[walkLength]);
-        leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[walkLength]);
-        leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[walkLength]);
-        foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[walkLength]);
-        foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[walkLength]);
     }
 }

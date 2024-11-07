@@ -11,11 +11,11 @@ public class PlayerMoveAnimation : MonoBehaviour
     [SerializeField, Header("左腕のImage")] SpriteRenderer armLeftSR;
     [SerializeField, Header("右手首のImage")] SpriteRenderer handRightSR;
     [SerializeField, Header("左手首のImage")] SpriteRenderer handLeftSR;
-    [SerializeField, Header("右太腿のImage")] SpriteRenderer footRightSR;
     [SerializeField, Header("腰のImage")] SpriteRenderer waistSR;
-    [SerializeField, Header("左太腿のImage")] SpriteRenderer footLeftSR;
-    [SerializeField, Header("右足のImage")] SpriteRenderer legRightSR;
-    [SerializeField, Header("左足のImage")] SpriteRenderer legLeftSR;
+    [SerializeField, Header("右太腿のImage")] SpriteRenderer legRightSR;
+    [SerializeField, Header("左太腿のImage")] SpriteRenderer legLeftSR;
+    [SerializeField, Header("右足のImage")] SpriteRenderer footRightSR;
+    [SerializeField, Header("左足のImage")] SpriteRenderer footLeftSR;
 
     [Header("全身")] public GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")]  GameObject[] arm;
@@ -134,19 +134,19 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.I))
         {
-            // 歩く動作をしている時、呼ばせない
-            if (time < 0)
-            {
-                PantieStart();
-            }
+            StopCoroutine(CallWalkWithDelay());
+            Upright();
+            indexNumber = 0;
+            PantieStart();
+            indexNumber = 0;
         }
         else if (Input.GetKeyDown(KeyCode.K))
         {
-            // 歩く動作をしている時、呼ばせない
-            if (time < 0)
-            {
-                KickStart();
-            }
+            StopCoroutine(CallWalkWithDelay());
+            Upright();
+            indexNumber = 0;
+            KickStart();
+            indexNumber = 0;
         }
         
 
@@ -320,6 +320,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         {
             PlayerWalk();
 
+            Debug.Log(indexNumber);
             // indexNumberの値を増やす(配列番号を上げる)
             indexNumber = (indexNumber + 1) % armWalkRotation.Length;
             yield return new WaitForSeconds(timeMax);
@@ -385,6 +386,15 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
+    /// キックのアニメーション開始するときの関数
+    /// </summary>
+    void KickStart()
+    {
+        time = timeMax * armKickForwardRotation.Length;
+        StartCoroutine(CallKickWithDelay());
+    }
+
+    /// <summary>
     /// 歩くことの初期化
     /// </summary>
     void WalkInstance()
@@ -395,15 +405,6 @@ public class PlayerMoveAnimation : MonoBehaviour
             ChangeArmAnime();
             WalkStart();
         }
-    }
-
-    /// <summary>
-    /// キックのアニメーション開始するときの関数
-    /// </summary>
-    void KickStart()
-    {
-        time = timeMax * armKickForwardRotation.Length;
-        StartCoroutine(CallKickWithDelay());
     }
 
     /// <summary>
