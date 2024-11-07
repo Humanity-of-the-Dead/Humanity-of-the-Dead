@@ -244,7 +244,7 @@ RectTransform:
   m_GameObject: {fileID: 92859003}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1444707584}
@@ -253,8 +253,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &92859005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &92859007
 Canvas:
   m_ObjectHideFlags: 0
@@ -304,7 +304,7 @@ Canvas:
   m_GameObject: {fileID: 92859003}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 1
   m_Camera: {fileID: 244809042}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1856,15 +1856,15 @@ RectTransform:
   m_GameObject: {fileID: 1444707583}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 92859004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4043, y: 0}
-  m_SizeDelta: {x: 1000, y: 108}
+  m_AnchoredPosition: {x: 11540, y: 460.98}
+  m_SizeDelta: {x: 25000, y: 2001.9531}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1444707585
 MonoBehaviour:
@@ -1879,14 +1879,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9169811, g: 0.3027767, b: 0.3027767, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9b84c7a5b0877194f862819eb11839b7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4700014bad9e7eb499a09807326d9f3f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1931,8 +1931,8 @@ Transform:
   m_GameObject: {fileID: 1476838449}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.52, y: -4.83, z: 0}
-  m_LocalScale: {x: 100, y: 0.8824, z: 1}
+  m_LocalPosition: {x: 93.0416, y: -4.83, z: 0}
+  m_LocalScale: {x: 205.04202, y: 0.8824, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 186059271}
@@ -3823,9 +3823,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89432f0e7e9c8d64e9676b444e9145fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headSR: {fileID: 0}
-  armSR: {fileID: 0}
-  legSR: {fileID: 0}
+  headSR:
+  - {fileID: 0}
+  armSR:
+  - {fileID: 0}
+  legSR:
+  - {fileID: 0}
   playerRc: {fileID: 8644338710867896258}
   arm:
   - {fileID: 6626939338460135354}
@@ -3836,38 +3839,28 @@ MonoBehaviour:
   foot:
   - {fileID: 3841212833097251331}
   - {fileID: 3183093110995269562}
-  playerRotation:
-  - 0
-  - -2
-  - -5
-  - -2
-  armRotation:
-  - 15
-  - 30
-  - 15
-  - 0
-  legForwardRotation:
-  - 20
-  - 30
-  - 40
-  - 0
-  footForwardRotation:
-  - -10
-  - -20
-  - -10
-  - 0
-  legBackRotation:
-  - 0
-  - -15
-  - -10
-  - 0
-  footBackRotation:
-  - 0
-  - -15
-  - -15
-  - 0
-  timeWalk: 0
   timeMax: 0.3
+  playerWalkRotation: []
+  armWalkRotation: []
+  legWalkForwardRotation: []
+  footWalkForwardRotation: []
+  legWalkBackRotation: []
+  footWalkBackRotation: []
+  timeWalk: 0
+  playerPatRotation: []
+  armPatForwardRotation: []
+  armPatBackRotation: []
+  legPatForwardRotation: []
+  footPatForwardRotation: []
+  legPatBackRotation: []
+  footPatBackRotation: []
+  playerKickRotation: []
+  armKickForwardRotation: []
+  armKickBackRotation: []
+  legKickForwardRotation: []
+  footKickForwardRotation: []
+  legKickBackRotation: []
+  footKickBackRotation: []
 --- !u!1 &6397921676348784042
 GameObject:
   m_ObjectHideFlags: 0
@@ -4070,7 +4063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scGameMgr: {fileID: 498662820}
-  fSpeed: 3
+  fSpeed: 5
   fJmpPower: 450
   goCamera: {fileID: 244809042}
   goObj:

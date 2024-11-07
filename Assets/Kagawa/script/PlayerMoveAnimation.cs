@@ -5,9 +5,17 @@ using UnityEngine;
 
 public class PlayerMoveAnimation : MonoBehaviour
 {
-    [SerializeField, Header("頭のImage")] SpriteRenderer[] headSR;    
-    [SerializeField, Header("腕のImage、先に右手")] SpriteRenderer[] armSR;
-    [SerializeField, Header("足のImage、先に右足")] SpriteRenderer[] legSR;
+    [SerializeField, Header("頭のImage")] SpriteRenderer headSR;
+    [SerializeField, Header("体ののImage")] SpriteRenderer bodySR;
+    [SerializeField, Header("右腕のImage")] SpriteRenderer armRightSR;
+    [SerializeField, Header("左腕のImage")] SpriteRenderer armLeftSR;
+    [SerializeField, Header("右手首のImage")] SpriteRenderer handRightSR;
+    [SerializeField, Header("左手首のImage")] SpriteRenderer handLeftSR;
+    [SerializeField, Header("腰のImage")] SpriteRenderer waistSR;
+    [SerializeField, Header("右太腿のImage")] SpriteRenderer legRightSR;
+    [SerializeField, Header("左太腿のImage")] SpriteRenderer legLeftSR;
+    [SerializeField, Header("右足のImage")] SpriteRenderer footRightSR;
+    [SerializeField, Header("左足のImage")] SpriteRenderer footLeftSR;
 
     [Header("全身")] public GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")]  GameObject[] arm;
@@ -49,17 +57,23 @@ public class PlayerMoveAnimation : MonoBehaviour
     //体の軸
     int shaft;
 
+    //歩くアニメーションの角度の数
+    int walkLength;
+
     // 値を反転にするフラグ
     bool isActive;
 
     // 向いている方向が右を向いているか
-    bool isMirror;
+    bool isAtack;
 
     // 方向フラグ(右 = false)
     bool isWalk;
 
+    // 静止しているか
+    bool isStop;
+
     // タイマー
-    float time = 0;
+    float time;
 
 
     private void Start()
@@ -67,9 +81,12 @@ public class PlayerMoveAnimation : MonoBehaviour
         indexNumber = 0;
         shaft = 0;
 
-        isMirror = true;
+        isAtack = false;
         isActive = false;
         isWalk = false;
+        isStop = false;
+        walkLength = armWalkRotation.Length - 1;
+        time = 0;
     }
 
     // Update is called once per frame
@@ -77,52 +94,92 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         time -= Time.deltaTime;
 
-        // 歩く動作をしている時、呼ばせない
-        if (time < 0)
+
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                    // プレイヤーの向きが左から右に変わったとき
-                    isWalk = false;
-                    shaft = 0;
+            shaft = 0;
+            isAtack = false;
 
-                    isActive = false;
-                    ChangeArmAnime();
-                    WalkStart();
-            }
-            else if (Input.GetKeyDown(KeyCode.A))
+            //静止状態から左向くとき
+            if (time < 0 && isWalk)
             {
+                isStop = true;
+                time = timeMax * 2;
+                Upright();
+            }
 
-                // プレイヤーの向きが右から左に変わったとき
-                isWalk = true;
-                shaft = 180;
+            // プレイヤーの向きが左から右に変わったとき
+            isWalk = false;
+           
 
-                isActive = false;
-                ChangeArmAnime();
-                WalkStart();
-            }
-            else if (Input.GetKeyDown(KeyCode.Space))
-            {
-                PantieStart();
-            }
-            else if (Input.GetKeyDown(KeyCode.K))
-            {
-                KickStart();
-            }
+            // 歩く動作をしている時、呼ばせない
+            WalkInstance();
         }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            shaft = 180;
+            isAtack = false;
+
+            //静止状態から左向くとき
+            if (time < 0 && !isWalk)
+            {
+                isStop = true;
+                time = timeMax * 2;
+                Upright();
+            }
+
+            // プレイヤーの向きが右から左に変わったとき
+            isWalk = true;
+            
+            // 歩く動作をしている時、呼ばせない
+            WalkInstance();
+        }
+        else if (Input.GetKeyDown(KeyCode.I))
+        {
+            isAtack = true;
+            StopCoroutine(CallWalkWithDelay());
+            Upright();
+            indexNumber = 0;
+            PantieStart();
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            isAtack = true;
+            StopCoroutine(CallWalkWithDelay());
+            Upright();
+            indexNumber = 0;
+            KickStart();
+        }
+        
 
         if (Input.GetKey(KeyCode.D))
         {
             if (!isWalk)
             {
-                KeepWalk();
+                if(isStop)
+                {
+                    isStop = false;
+                    WalkInstance();
+                }
+                else
+                {
+                    KeepWalk();
+                }
             }
         }
         else if (Input.GetKey(KeyCode.A))
         {
             if (isWalk)
             {
-                KeepWalk();
+                if (isStop)
+                {
+                    isStop = false;
+                    WalkInstance();
+                }
+                else
+                {
+                    KeepWalk();
+                }
             }
         }
     }
@@ -263,11 +320,15 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         for (int i = 0; i < armWalkRotation.Length; i++)
         {
-            PlayerWalk();
+            if (!isAtack)
+            {
+                PlayerWalk();
 
-            // indexNumberの値を増やす(配列番号を上げる)
-            indexNumber = (indexNumber + 1) % armWalkRotation.Length;
-            yield return new WaitForSeconds(timeMax);
+                Debug.Log(indexNumber);
+                // indexNumberの値を増やす(配列番号を上げる)
+                indexNumber = (indexNumber + 1) % armWalkRotation.Length;
+                yield return new WaitForSeconds(timeMax);
+            }
         }
     }
 
@@ -312,7 +373,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// 歩き始めの関数
+    /// 歩くことを開始の関数
     /// </summary>
     void WalkStart()
     {
@@ -339,6 +400,19 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
+    /// 歩くことの初期化
+    /// </summary>
+    void WalkInstance()
+    {
+        if (time < 0)
+        {
+            isActive = false;
+            ChangeArmAnime();
+            WalkStart();
+        }
+    }
+
+    /// <summary>
     /// 歩くことを継続したとき
     /// </summary>
     void KeepWalk()
@@ -353,39 +427,43 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// 頭のイメージ
+    /// 直立する
     /// </summary>
-    /// <param name="head">画像データ</param>
-    public void ChangeHead(BodyPartsData head)
+    void Upright()
     {
-        for (int j = 0; j < headSR.Length; j++) 
-        {
-            headSR[j].sprite = head.spBody;
-        }
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[walkLength]);
+        arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[walkLength]);
+        arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armWalkRotation[walkLength]);
+        leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[walkLength]);
+        leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[walkLength]);
+        foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[walkLength]);
+        foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[walkLength]);
     }
 
     /// <summary>
-    /// 腕のイメージ
+    /// 上半身のイメージ
     /// </summary>
-    /// <param name="arm">画像データ</param>
-    public void ChangeArm(BodyPartsData arm)
+    /// <param name="upperBody">画像データ集合体</param>
+    public void ChangeUpperBody(BodyPartsData upperBody)
     {
-        for (int j = 0; j < armSR.Length; j++)
-        {
-            armSR[j].sprite = arm.spArm;
-        }
+        bodySR.sprite = upperBody.spBody;
+        armRightSR.sprite = upperBody.spRightArm;
+        armLeftSR.sprite = upperBody.spLeftArm;
+        handRightSR.sprite = upperBody.spRightHand;
+        handLeftSR.sprite = upperBody.spLeftHand;
     }
 
     /// <summary>
-    /// 足のイメージ
+    /// 下半身のイメージ
     /// </summary>
-    /// <param name="leg">画像データ</param>
-    public void ChangeLeg(BodyPartsData leg)
+    /// <param name="upperBody">画像データ集合体</param>
+    public void ChangeUnderBody(BodyPartsData underBody)
     {
-        for (int j = 0; j < legSR.Length; j++)
-        {
-            legSR[j].sprite = leg.spLeg;
-        }
+        waistSR.sprite = underBody.spWaist;
+        footRightSR.sprite = underBody.spRightFoot;
+        footLeftSR.sprite = underBody.spLeftFoot;
+        legRightSR.sprite = underBody.spRightLeg;
+        legLeftSR.sprite = underBody.spLeftHand;
     }
 }
 
