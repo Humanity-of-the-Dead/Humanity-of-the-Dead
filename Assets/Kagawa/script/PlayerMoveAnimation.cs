@@ -132,7 +132,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             // •à‚­“®ì‚ğ‚µ‚Ä‚¢‚éAŒÄ‚Î‚¹‚È‚¢
             WalkInstance();
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.I))
         {
             // •à‚­“®ì‚ğ‚µ‚Ä‚¢‚éAŒÄ‚Î‚¹‚È‚¢
             if (time < 0)
