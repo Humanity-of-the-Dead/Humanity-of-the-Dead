@@ -350,7 +350,6 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            Debug.Log("asa");
             shaft = 0;
             isWalk = false;
             WalkInstance();
@@ -379,7 +378,6 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            Debug.Log("asa");
             shaft = 0;
             isWalk = false;
             WalkInstance();
@@ -443,7 +441,6 @@ public class PlayerMoveAnimation : MonoBehaviour
       
         if (time < 0)
         {
-            Debug.Log("asa");
             isActive = false;
             ChangeArmAnime();
             WalkStart();
