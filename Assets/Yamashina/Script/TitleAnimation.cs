@@ -178,7 +178,7 @@ public class TitleAnimation : MonoBehaviour
         if (CreditPanel.activeSelf)
         {
             //subPanel.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            CreditPanel.transform.localPosition = new Vector3(CreditPanel_X, CreditPanel_Y, CreditPanel_Z);
+            CreditPanel.transform.localPosition = creditPanelStartPosition;
             StartSlideIn();
         }
     }
@@ -214,11 +214,11 @@ public class TitleAnimation : MonoBehaviour
 
         while (Credit <= 1.0f && CreditPanel.activeSelf)
         {
-            CreditPanel.transform.localPosition = Vector3.Lerp(new Vector3(CreditPanel_X, CreditPanel_Y, CreditPanel_Z), new Vector3(CreditPanel_End_X, CreditPanel_End_Y, CreditPanel_End_Z), Credit);
+            CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelStartPosition, creditButtonEndPosition, Credit);
 
             Credit += speed * Time.deltaTime;
 
-            yield return new WaitForSeconds(corrutin /** Time.deltaTime*/);
+            yield return new WaitForSeconds(Coroutine /** Time.deltaTime*/);
         }
 
     }
@@ -239,9 +239,9 @@ public class TitleAnimation : MonoBehaviour
         while (Credit <= 1.0f && CreditPanel.activeSelf)
         {
             //startPanel.transform.localScale = Vector3.Lerp(new Vector3(1.5f, 1.5f, 1.5f), new Vector3(1.0f, 1.0f, 1.0f), size);
-            CreditPanel.transform.localPosition = Vector3.Lerp(new Vector3(StartPanel_End_X, StartPanel_End_Y, StartPanel_End_Z), new Vector3(StartPanel_X, StartPanel_Y, StartPanel_Z), Credit);
+            CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelStartPosition, creditPanelStartPosition, Credit);
             Credit += speed * Time.deltaTime;
-            yield return new WaitForSeconds(corrutin);
+            yield return new WaitForSeconds(Coroutine);
         }
         Debug.Log("通った");
 
