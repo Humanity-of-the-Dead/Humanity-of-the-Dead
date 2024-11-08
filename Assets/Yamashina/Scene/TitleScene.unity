@@ -443,7 +443,6 @@ GameObject:
   - component: {fileID: 532598762}
   - component: {fileID: 532598761}
   - component: {fileID: 532598760}
-  - component: {fileID: 532598763}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -529,48 +528,6 @@ Transform:
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532598759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8df5f9b5c45b64448a020f12d8d2bda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainPanel: {fileID: 438391158}
-  CreditPanel: {fileID: 0}
-  CreditButton: {fileID: 0}
-  StartButton: {fileID: 0}
-  eventTrigger_Credit: {fileID: 0}
-  eventTrigger_Start: {fileID: 0}
-  Credit: {fileID: 0}
-  start: {fileID: 0}
-  speed: 1
-  corrutin: 0
-  StartPanel_X: 0
-  StartPanel_Y: 0
-  StartPanel_Z: 0
-  StartPanel_End_X: 0
-  StartPanel_End_Y: 0
-  StartPanel_End_Z: 0
-  startButton_X: 0
-  startButton_Y: 0
-  startButton_Z: 0
-  startButton_End_X: 0
-  startButton_End_Y: 0
-  startButton_End_Z: 0
-  CreditPanel_X: 0
-  CreditPanel_Y: 0
-  CreditPanel_Z: 0
-  CreditPanel_End_X: 0
-  CreditPanel_End_Y: 0
-  CreditPanel_End_Z: 0
-  CreditButton_X: 0
-  CreditButton_Y: 0
-  CreditButton_Z: 0
-  CreditButton_End_X: 0
-  CreditButton_End_Y: 0
-  CreditButton_End_Z: 0
 --- !u!1 &718348994
 GameObject:
   m_ObjectHideFlags: 0
