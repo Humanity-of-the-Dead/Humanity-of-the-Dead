@@ -97,6 +97,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.D))
         {
+            Debug.Log("aomori");
             shaft = 0;
             isAtack = false;
 
@@ -134,7 +135,9 @@ public class PlayerMoveAnimation : MonoBehaviour
             // 歩く動作をしている時、呼ばせない
             WalkInstance();
         }
-        else if (Input.GetKeyDown(KeyCode.I))
+
+
+        if (Input.GetKeyDown(KeyCode.I))
         {
             isAtack = true;
             StopCoroutine(CallWalkWithDelay());
@@ -324,7 +327,6 @@ public class PlayerMoveAnimation : MonoBehaviour
             {
                 PlayerWalk();
 
-                Debug.Log(indexNumber);
                 // indexNumberの値を増やす(配列番号を上げる)
                 indexNumber = (indexNumber + 1) % armWalkRotation.Length;
                 yield return new WaitForSeconds(timeMax);
@@ -342,6 +344,22 @@ public class PlayerMoveAnimation : MonoBehaviour
             indexNumber = (indexNumber + 1) % armPatForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
+
+        isAtack = false;
+        time = -1;
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            shaft = 0;
+            isWalk = false;
+            WalkInstance();
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            shaft = 180;
+            isWalk = true;
+            WalkInstance();
+        }
     }
 
     IEnumerator CallKickWithDelay()
@@ -353,6 +371,22 @@ public class PlayerMoveAnimation : MonoBehaviour
             // indexNumberの値を増やす(配列番号を上げる)
             indexNumber = (indexNumber + 1) % armKickForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
+        }
+
+        isAtack = false;
+        time = -1;
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            shaft = 0;
+            isWalk = false;
+            WalkInstance();
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            shaft = 180;
+            isWalk = true;
+            WalkInstance();
         }
     }
 
@@ -404,6 +438,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     void WalkInstance()
     {
+      
         if (time < 0)
         {
             isActive = false;
