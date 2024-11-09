@@ -60,16 +60,58 @@ public class SoundVolumeManager : MonoBehaviour
         //BGMスライダの値を変えたとき
         if (isBGM) {
             //ボリュームが0より大きいとき
-            if ( bGMVol> 0)
+            if (bGMVol > 0)
             {
-                //ここから書く
-                bGMDec = Mathf.Clamp(bGMVol, -80f, 0f);
+                //デシベル変換
+                bGMDec = Mathf.Clamp(Mathf.Log10((float)bGMVol / 100f) * 20f, -80f, 0f);
+                //BGMのボリュームが0というフラグを下げる
+                vol0Flag &= 1;
+            }
+            else
+            {
+                //BGMのボリュームが0というフラグを立てる
+                vol0Flag |= 2;
             }
         }
         //SEのスライダの値を変えたとき
         else
         {
+            //ボルームが0より大きいとき
+            if (sEVol > 0)
+            {
+                //デシベル変換
+                sEDec = Mathf.Clamp(Mathf.Log10((float)sEVol / 100f) * 20f, -80f, 0f);
+                //SEのボリュームが0というフラグを下げる
+                vol0Flag &= 2;
+            }
+            else
+            {
+                //SEのボリュームが0というフラグを立てる
+                vol0Flag |= 1;
+            }
+        }
 
+        switch (vol0Flag)
+        {
+            case 0:
+                Debug.Log("デシベル BGM:" + bGMDec + "\n" +
+                    "\tSE:" + sEDec);
+                break;
+
+            case 1:
+                Debug.Log("デシベル BGM:" + bGMDec + "\n" +
+                    "\tSE:ボリューム0");
+                break;
+
+            case 2:
+                Debug.Log("デシベル BGM:ボリューム0\n" +
+                    "\tSE:" + sEDec);
+                break;
+
+            case 3:
+                Debug.Log("デシベル BGM:ボリューム0\n" +
+                    "\tSE:ボリューム0");
+                break;
         }
     }
 }
