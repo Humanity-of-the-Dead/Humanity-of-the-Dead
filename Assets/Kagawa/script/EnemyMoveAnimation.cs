@@ -328,4 +328,20 @@ public class EnemyMoveAnimation : MonoBehaviour
             WalkStart();
         }
     }
+
+    /// <summary>
+    /// ‰E‚ğŒü‚­‚Æ‚«
+    /// </summary>
+    public void RightMove()
+    {
+        shaft = 180;
+    }
+
+    /// <summary>
+    /// ¶‚ğŒü‚­‚Æ‚«
+    /// </summary>
+    public void LeftMove()
+    {
+        shaft = 0;
+    }
 }
