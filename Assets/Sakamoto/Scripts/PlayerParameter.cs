@@ -88,7 +88,10 @@ public class PlayerParameter : MonoBehaviour
         //partsData = partsData ?? DefaultData;
 
         //キャラのイメージ取得用
-        SpriteRenderer spriteRenderer;
+        PlayerMoveAnimation scPlayerMoveAnimation;
+        //コンポーネント取得
+        scPlayerMoveAnimation = goPlayer.GetComponent<PlayerMoveAnimation>();
+
 
         switch (partsData.enPartsType)
         {
@@ -96,25 +99,23 @@ public class PlayerParameter : MonoBehaviour
                 //パーツデータのHPをMaxに代入
                 iUpperHPMax = partsData.iPartHp;
                 iUpperHP = iUpperHPMax;
-                //SpriteRendererコンポーネント取得
-                spriteRenderer = goPlayer.transform.GetChild(0).transform.GetComponent<SpriteRenderer>();
                 /*
                 //SpriteRendererのSpriteにパーツデータのSpriteを挿入
                 spriteRenderer.sprite = partsData.spBody;
                 */
                 //見た目変更関数待ち
+                scPlayerMoveAnimation.ChangeUpperBody(partsData);
                 break;
             case PartsType.Lower:
                 //パーツデータのHPをMax代入
                 iLowerHPMax = partsData.iPartHp;
                 iLowerHP = iLowerHPMax;
-                //SpriteRendererコンポーネント取得
-                spriteRenderer = goPlayer.transform.GetChild(1).transform.GetComponent<SpriteRenderer>();
                 /*
                 //SpriteRendererのSpriteにパーツデータのSpriteを挿入
                 spriteRenderer.sprite = partsData.spWaist;
                 */
                 //見た目変更関数待ち
+                scPlayerMoveAnimation.ChangeUnderBody(partsData);
                 break;
         }
 

@@ -141,7 +141,7 @@ public class TitleAnimation : MonoBehaviour
 
         if (CreditPanel.activeSelf)
         {
-            StartSlideOut();
+            //StartSlideOut();
         }
 
         mainPanel.SetActive(true);
@@ -213,8 +213,8 @@ public class TitleAnimation : MonoBehaviour
     public IEnumerator AnimateEachPanelIn()
     {
 
-        //var Option = 0f;
-        var Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
+//        //var Option = 0f;
+//        var Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
 
 
         //オプション画面のスライドインのアニメーション
@@ -233,12 +233,12 @@ public class TitleAnimation : MonoBehaviour
         {
             CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelStartPosition, creditButtonEndPosition, Credit);
 
-            Credit += speed * Time.deltaTime;
+//            //Credit += speed * Time.deltaTime;
 
             yield return new WaitForSeconds(Coroutine);
         }
 
-    }
+//    }
 
     public void StartSlideOut() //画面内から画面外へスライドアウトするための関数呼び出し開始
     {
@@ -260,52 +260,52 @@ public class TitleAnimation : MonoBehaviour
         }
         Debug.Log("通った");
 
-        //�p�l���k���i�I�v�V�����p�l���j
-        //while (size2 <= 1.0f && OptionPanel.activeSelf)
-        //{
-        //    //OptionPanel.transform.localScale = Vector3.Lerp(new Vector3(1.0f, 1.0f, 1.0f), new Vector3(0.5f, 0.5f, 0.5f), size2);
-        //    OptionPanel.transform.localPosition = Vector3.Lerp(new Vector3(OptionPanel_End_X, OptionPanel_End_Y, OptionPanel_End_Z), new Vector3(OptionPanel_X, OptionPanel_Y, OptionPanel_Z), size2);
+//    //    //�p�l���k���i�I�v�V�����p�l���j
+//    //    //while (size2 <= 1.0f && OptionPanel.activeSelf)
+//    //    //{
+//    //    //    //OptionPanel.transform.localScale = Vector3.Lerp(new Vector3(1.0f, 1.0f, 1.0f), new Vector3(0.5f, 0.5f, 0.5f), size2);
+//    //    //    OptionPanel.transform.localPosition = Vector3.Lerp(new Vector3(OptionPanel_End_X, OptionPanel_End_Y, OptionPanel_End_Z), new Vector3(OptionPanel_X, OptionPanel_Y, OptionPanel_Z), size2);
 
-        //    size2 += speed * Time.deltaTime;
-
-
-
-        //    yield return new WaitForSeconds(corrutin);
-        //}
-
-        Debug.Log("通った");
-        CreditPanel.SetActive(false);
-        //OptionPanel.SetActive(false);
-
-        Debug.Log("通った");
+//    //    //    size2 += speed * Time.deltaTime;
 
 
-    }
 
-    void Update()
-    {
-        //escape�L�[�Ή�
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
-        {
-            //�p�l���֌W
-            //OptionPanel.SetActive(false);
-            mainPanel.SetActive(true);
-            CreditPanel.SetActive(false);
+//    //    //    yield return new WaitForSeconds(corrutin);
+//    //    //}
 
-            //�Q�[���I�u�W�F�N�g�̃{�^��(Setactive)
-            StartButton.SetActive(true);
-            //optionButton.SetActive(true);
-            CreditButton.SetActive(true);
+//    //    Debug.Log("通った");
+//    //    CreditPanel.SetActive(false);
+//    //    //OptionPanel.SetActive(false);
 
-            //�{�^���@�\�֘A�iInteractive)
-            start.interactable = true;
-            Credit.interactable = true;
-            //option.interactable = true;
+//    //    Debug.Log("通った");
 
-            //�{�^���̃C�x���g�g���K�[�֘A
-            eventTrigger_Start.enabled = true;
-            //eventTrigger_option.enabled = true;
-            eventTrigger_Credit.enabled = true;
-        }
-    }
+
+//    //}
+
+//    void Update()
+//    {
+//        //escape�L�[�Ή�
+//        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
+//        {
+//            //�p�l���֌W
+//            //OptionPanel.SetActive(false);
+//            mainPanel.SetActive(true);
+//            CreditPanel.SetActive(false);
+
+//            //�Q�[���I�u�W�F�N�g�̃{�^��(Setactive)
+//            StartButton.SetActive(true);
+//            //optionButton.SetActive(true);
+//            CreditButton.SetActive(true);
+
+//            //�{�^���@�\�֘A�iInteractive)
+//            start.interactable = true;
+//            Credit.interactable = true;
+//            //option.interactable = true;
+
+//            //�{�^���̃C�x���g�g���K�[�֘A
+//            eventTrigger_Start.enabled = true;
+//            //eventTrigger_option.enabled = true;
+//            eventTrigger_Credit.enabled = true;
+//        }
+//    }
 }

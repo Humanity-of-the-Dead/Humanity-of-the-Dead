@@ -23,8 +23,9 @@ public class PlayerControl : MonoBehaviour
     //幅
     float fCameraWidth;
 
-    //仮ターゲット
-    [SerializeField] GameObject[] goObj;
+    //ターゲット
+    [SerializeField] List<GameObject> liObj;
+    //[SerializeField] GameObject[] goObj;
 
     //プレイヤーパラメーターの取得
     [SerializeField] PlayerParameter playerParameter;
@@ -91,19 +92,19 @@ public class PlayerControl : MonoBehaviour
                 //上半身攻撃
                 if (Input.GetKeyDown(KeyCode.I))
                 {
-                    for (int i = 0; i < goObj.Length; i++)
+                    for (int i = 0; i < liObj.Count; i++)
                     {
                         //仮引数
-                        UpperBodyAttack(i, goObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea);
+                        UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea);
                     }
                 }
                 //下半身攻撃
                 if (Input.GetKeyDown(KeyCode.K))
                 {
-                    for (int i = 0; i < goObj.Length; i++)
+                    for (int i = 0; i < liObj.Count; i++)
                     {
                         //仮引数
-                        LowerBodyAttack(i, goObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea);
+                        LowerBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea);
                     }
                 }
                 break;
@@ -123,7 +124,7 @@ public class PlayerControl : MonoBehaviour
         float fAttackReach = Vector3.Distance(vTargetPos,this.transform.position);
         if(fAttackReach < fReach)
         {
-            goObj[EnemyNum].GetComponent<EnemyParameters>().TakeDamage(1,0);
+            liObj[EnemyNum].GetComponent<EnemyParameters>().TakeDamage(1,0);
             Debug.Log("上半身攻撃成功");
         }
         else
@@ -137,7 +138,7 @@ public class PlayerControl : MonoBehaviour
         float fAttackReach = Vector3.Distance(vTargetPos,this.transform.position);
         if(fAttackReach < fReach)
         {
-            goObj[EnemyNum].GetComponent<EnemyParameters>().TakeDamage(1, 1);
+            liObj[EnemyNum].GetComponent<EnemyParameters>().TakeDamage(1, 1);
             Debug.Log("下半身攻撃成功");
         }
         else
