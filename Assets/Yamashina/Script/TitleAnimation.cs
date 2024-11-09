@@ -206,20 +206,18 @@ public class TitleAnimation : MonoBehaviour
     //スライドインするための関数呼び出し開始
     public void StartSlideIn()
     {
-        StartCoroutine(ChangePanelToBigSize());
+        StartCoroutine(AnimateEachPanelIn());
     }
 
-    public IEnumerator ChangePanelToBigSize()
+    //各オブジェクトのスライドイン
+    public IEnumerator AnimateEachPanelIn()
     {
 
         //var Option = 0f;
         var Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
 
 
-        //�p�l���g��i�X�^�[�g�p�l���j
-
-
-        //�p�l���g��i�I�v�V�����p�l���j
+        //オプション画面のスライドインのアニメーション
         //while (Option <= 1.0f && OptionPanel.activeSelf)
         //{
         //    //OptionPanel.transform.localScale = Vector3.Lerp(new Vector3(0.5f, 0.5f, 0.5f), new Vector3(1.0f, 1.0f, 1.0f), size2);
@@ -228,7 +226,8 @@ public class TitleAnimation : MonoBehaviour
 
         //    yield return new WaitForSeconds(corrutin /** Time.deltaTime*/);
         //}
-        //�p�l���g��i�N���W�b�g�p�l���j
+
+        //クレジット画面のスライドインのアニメーション
 
         while (Credit <= 1.0f && CreditPanel.activeSelf)
         {
@@ -236,27 +235,25 @@ public class TitleAnimation : MonoBehaviour
 
             Credit += speed * Time.deltaTime;
 
-            yield return new WaitForSeconds(Coroutine /** Time.deltaTime*/);
+            yield return new WaitForSeconds(Coroutine);
         }
 
     }
 
-    public void StartSlideOut()//�p�l���k���J�n�̂��߂̊֐�
+    public void StartSlideOut() //画面内から画面外へスライドアウトするための関数呼び出し開始
     {
-        StartCoroutine(ChangePanelToSmallSize());
+        StartCoroutine(AnimateEachPanelOut());
     }
 
 
-    //�p�l���k��(�ėp)
-    public IEnumerator ChangePanelToSmallSize()
+    //画面内から画面外へスライドアウトするための関数 
+    public IEnumerator AnimateEachPanelOut()
     {
-        var Credit = 0f;
+        var Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
         //var Option = 0f;
-        //�p�l���k���i�X�^�[�g�p�l���j
 
         while (Credit <= 1.0f && CreditPanel.activeSelf)
         {
-            //startPanel.transform.localScale = Vector3.Lerp(new Vector3(1.5f, 1.5f, 1.5f), new Vector3(1.0f, 1.0f, 1.0f), size);
             CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelStartPosition, creditPanelStartPosition, Credit);
             Credit += speed * Time.deltaTime;
             yield return new WaitForSeconds(Coroutine);
