@@ -17,9 +17,13 @@ MonoBehaviour:
   AttackArea: 15
   iPartHp: 200
   iPartAttack: 30
-  spBody: {fileID: 0}
-  spArm: {fileID: 0}
-  spHand: {fileID: 0}
-  spWaist: {fileID: 0}
-  spLeg: {fileID: 0}
-  spFoot: {fileID: 0}
+  spBody: {fileID: 21300000, guid: d34acd3dd609b744884e1c6e4e6bf527, type: 3}
+  spRightArm: {fileID: 21300000, guid: 69ff0336d5a29604ea864290b54d12fb, type: 3}
+  spRightHand: {fileID: 21300000, guid: 238834f36e2fcac45ad2d4691699af44, type: 3}
+  spLeftArm: {fileID: 21300000, guid: eb34ac4f4ae10d447b201443855f14ac, type: 3}
+  spLeftHand: {fileID: 21300000, guid: 6f85050510c5d594aaf6a399b739be6d, type: 3}
+  spWaist: {fileID: 21300000, guid: 9da2e8394c2fa474790a94603c425d83, type: 3}
+  spRightLeg: {fileID: 21300000, guid: dca129703da76924a9acb021b745e6c3, type: 3}
+  spRightFoot: {fileID: 21300000, guid: 6f4546b56babd774c915b113f4b492c0, type: 3}
+  spLeftLeg: {fileID: 21300000, guid: 57c23821f0d70a1468b11ce6899c1d55, type: 3}
+  spLeftFoot: {fileID: 21300000, guid: 74d188add41e93344a50d5425b9071fa, type: 3}
