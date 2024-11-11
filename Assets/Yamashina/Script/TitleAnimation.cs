@@ -57,35 +57,7 @@ public class TitleAnimation : MonoBehaviour
     [Tooltip("アニメーションの遅延（floatで入力、値が大きいほど遅延が長い）")]
 
     public float Coroutine;
-    [Header("メイン画面のアニメーション開始位置")]
-    [Tooltip("メイン画面が画面外に配置される位置")]
-    [SerializeField] Vector3 startPanelPosition;
-
-    [Header("メイン画面の終了位置")]
-
-    [SerializeField] Vector3 startPanelEndPosition;
-
-
-    //[Header("スタートボタンのアニメーション開始位置")]
-    //[SerializeField] Vector3 startButtonPosition;
-
-    //[Header("スタートボタンのアニメーション終了位置")]
-    //[SerializeField] Vector3 startButtonEndPosition;
-
-
-    //[Header("オプションボタンのアニメーション開始位置"")]
-    // [Tooltip("オプション画面が画面外に配置される位置")]
-    //[SerializeField] Vector3 OptionPanelPosition;
-
-    //[Header("オプション画面の終了位置")]
-    //[SerializeField] Vector3 OptionPanelEndPosition;
-
-    //[Header("オプションボタンのアニメーション開始位置")]
-
-    //[SerializeField] Vector3 OptionButtonPosition;
-
-    //[Header("オプションボタンのアニメーション終了位置")]
-    //[SerializeField] Vector3 OptionButtonEndPosition;
+   
 
 
     [Header("クレジット画面のアニメーション開始位置")]
@@ -96,11 +68,7 @@ public class TitleAnimation : MonoBehaviour
     [Header("クレジット画面の終了位置")]
     [SerializeField] Vector3 creditPanelEndPosition;
 
-    //[Header("クレジットボタンのアニメーション開始位置")]
-    //[SerializeField] Vector3 creditButtonStartPosition;
-
-    //[Header("クレジットボタンのアニメーション終了位置")]
-    //[SerializeField] Vector3 creditButtonEndPosition;
+   
 
     [Header("時間経過でボタン表示するためのFloat")]
     [Tooltip("何秒後にボタン表示するか")]
@@ -128,14 +96,7 @@ public class TitleAnimation : MonoBehaviour
 
     public void MainView()//メイン画面に戻る関数
     {
-        //オプション画面スライドアウト
-        //if (OptionPanel.activeSelf)
-        //{
-
-        //    StartSlideOut();
-
-        //}
-        //OptionPanel.SetActive(false);
+      
 
         //クレジット画面スライドアウト
 
@@ -174,6 +135,13 @@ public class TitleAnimation : MonoBehaviour
     }
     public void CreditView() //クレジット画面を表示
     {
+       
+      ;
+
+        
+
+      
+
         //パネルのオブジェクトのセットアクティブ切り替え
         mainPanel.SetActive(true);
         CreditPanel.SetActive(true);
@@ -182,12 +150,10 @@ public class TitleAnimation : MonoBehaviour
         //ボタンのオブジェクトのセットアクティブ切り替え
         StartButton.SetActive(false);
         CreditButton.SetActive(true);
-        //optionButton.SetActive(false);
 
         //ボタンのイベントトリガーのアクティブ切り替え
         eventTrigger_Start.enabled = false;
         eventTrigger_Credit.enabled = false;
-        //eventTrigger_option.enabled = false;
 
         //ボタンのアクティブ切り替え（インタラクティブ切り替え）
         start.interactable = false;
@@ -213,27 +179,16 @@ public class TitleAnimation : MonoBehaviour
     public IEnumerator AnimateEachPanelIn()
     {
 
-        //        //var Option = 0f;
         var Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
 
-
-        //オプション画面のスライドインのアニメーション
-        //while (Option <= 1.0f && OptionPanel.activeSelf)
-        //{
-        //    //OptionPanel.transform.localScale = Vector3.Lerp(new Vector3(0.5f, 0.5f, 0.5f), new Vector3(1.0f, 1.0f, 1.0f), size2);
-        //    OptionPanel.transform.localPosition = Vector3.Lerp(new Vector3(OptionPanel_X, OptionPanel_Y, OptionPanel_Z), new Vector3(OptionPanel_End_X, OptionPanel_End_Y, OptionPanel_End_Z), size2);
-        //    Option += speed * Time.deltaTime;
-
-        //    yield return new WaitForSeconds(corrutin /** Time.deltaTime*/);
-        //}
-
+      
         //クレジット画面のスライドインのアニメーション
 
         while (Credit <= 1.0f && CreditPanel.activeSelf)
         {
             CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelStartPosition, creditPanelEndPosition, Credit);
 
-            //            //Credit += speed * Time.deltaTime;
+            Credit += speed * Time.deltaTime;
 
             yield return new WaitForSeconds(Coroutine);
         }
@@ -250,8 +205,9 @@ public class TitleAnimation : MonoBehaviour
     public IEnumerator AnimateEachPanelOut()
     {
         var Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
-        //var Option = 0f;
+                        //var Option = 0f;
 
+        //クレジット画面のスライドアウトのアニメーション
         while (Credit <= 1.0f && CreditPanel.activeSelf)
         {
             CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelEndPosition, creditPanelStartPosition, Credit);
@@ -260,52 +216,15 @@ public class TitleAnimation : MonoBehaviour
         }
         Debug.Log("通った");
 
-        //    //    //�p�l���k���i�I�v�V�����p�l���j
-        //    //    //while (size2 <= 1.0f && OptionPanel.activeSelf)
-        //    //    //{
-        //    //    //    //OptionPanel.transform.localScale = Vector3.Lerp(new Vector3(1.0f, 1.0f, 1.0f), new Vector3(0.5f, 0.5f, 0.5f), size2);
-        //    //    //    OptionPanel.transform.localPosition = Vector3.Lerp(new Vector3(OptionPanel_End_X, OptionPanel_End_Y, OptionPanel_End_Z), new Vector3(OptionPanel_X, OptionPanel_Y, OptionPanel_Z), size2);
-
-        //    //    //    size2 += speed * Time.deltaTime;
-
-
-
-        //    //    //    yield return new WaitForSeconds(corrutin);
     }
-
-    //    //    Debug.Log("通った");
-    //    //    CreditPanel.SetActive(false);
-    //    //    //OptionPanel.SetActive(false);
-
-    //    //    Debug.Log("通った");
-
-
-    //    //}
 
     void Update()
     {
-        //escape�L�[�Ή�
+        //escapeキーもしくはマウス右クリック
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
         {
-            //�p�l���֌W
-            //OptionPanel.SetActive(false);
-            mainPanel.SetActive(true);
-            CreditPanel.SetActive(false);
-
-            //�Q�[���I�u�W�F�N�g�̃{�^��(Setactive)
-            StartButton.SetActive(true);
-            //optionButton.SetActive(true);
-            CreditButton.SetActive(true);
-
-            //�{�^���@�\�֘A�iInteractive)
-            start.interactable = true;
-            Credit.interactable = true;
-            //option.interactable = true;
-
-            //�{�^���̃C�x���g�g���K�[�֘A
-            eventTrigger_Start.enabled = true;
-            //eventTrigger_option.enabled = true;
-            eventTrigger_Credit.enabled = true;
+            MainView();
+           
         }
     }
 }
