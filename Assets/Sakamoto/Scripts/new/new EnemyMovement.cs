@@ -29,6 +29,9 @@ public class newEnemyMovement : EnemyAttack
 
     [SerializeField] GameMgr gamestate;
 
+    private float timer;
+    [SerializeField] float waitTime; //UŒ‚Œã‚ÌŒãŒ„
+
     void Start()
     {
         // ƒvƒŒƒCƒ„[‚ð’T‚·‚â‚Â
@@ -78,8 +81,16 @@ public class newEnemyMovement : EnemyAttack
                         break;
                     case EnemyState.attack:
                         UpperEnemyAttack((float)part.iPartAttack);
+                        enemystate = EnemyState.wait;
                         break;
                     case EnemyState.wait:
+                        if(timer > waitTime)
+                        {
+                            timer = 0;
+                            enemystate = EnemyState.search;
+                            break;
+                        }
+                        timer += Time.deltaTime;
                         break;
                 }
                 
