@@ -334,6 +334,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1356578311}
+    - target: {fileID: 6089080178840640277, guid: fdbf4c75abca5244ea7e05baeebdd6ec, type: 3}
+      propertyPath: TextSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859398457192295363, guid: fdbf4c75abca5244ea7e05baeebdd6ec, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859398457192295363, guid: fdbf4c75abca5244ea7e05baeebdd6ec, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: ad78c1f1c5014d847a427a4b02c329f8, type: 3}
     - target: {fileID: 7859398457192295363, guid: fdbf4c75abca5244ea7e05baeebdd6ec, type: 3}
       propertyPath: m_FontData.m_HorizontalOverflow
       value: 0
