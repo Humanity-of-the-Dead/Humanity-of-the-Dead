@@ -18,6 +18,7 @@ public class newDropPart : MonoBehaviour
 
     //ボスフラグ
     bool bBoss;
+     SceneTransitionManager sceneTransitionManager;
 
     void Start()
     {
@@ -34,6 +35,8 @@ public class newDropPart : MonoBehaviour
             if (bBoss)
             {
                 goTextBox.GetComponent<GoalScript>().showText();
+                sceneTransitionManager.SceneChange(SceneInformation.SCENE.Title);
+
             }
             Destroy(this.gameObject);
 
@@ -44,6 +47,7 @@ public class newDropPart : MonoBehaviour
             if (bBoss)
             {
                 goTextBox.GetComponent<GoalScript>().showText();
+                sceneTransitionManager.SceneChange(SceneInformation.SCENE.Title);
             }
             Destroy(this.gameObject);
         }
@@ -89,5 +93,10 @@ public class newDropPart : MonoBehaviour
     {
         goPlayerParameter.GetComponent<PlayerParameter>().comfort(10);
         Destroy(this.gameObject);
+    }
+    public void getSceneTransition(SceneTransitionManager sceneTransitionManager)
+    {
+       this.sceneTransitionManager = sceneTransitionManager;    
+
     }
 }

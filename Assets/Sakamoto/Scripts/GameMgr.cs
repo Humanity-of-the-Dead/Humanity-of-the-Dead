@@ -13,7 +13,7 @@ public class GameMgr : MonoBehaviour
 
     private void Start()
     {
-        enGameState = GameState.ShowText;
+        enGameState = GameState.Main;
     }
 
     //ステートチェンジ

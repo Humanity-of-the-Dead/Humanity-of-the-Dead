@@ -45,6 +45,11 @@ public class EnemyParameters : MonoBehaviour
     [SerializeField]
     GameObject textBox;
 
+    [SerializeField]SceneTransitionManager sceneTransitionManager;
+    private void Start()
+    {
+        sceneTransitionManager=GameObject.FindAnyObjectByType<SceneTransitionManager>();
+    }
     void Update()
     {
         //もし耐久値が0になったらドロップする
@@ -95,20 +100,19 @@ public class EnemyParameters : MonoBehaviour
         drop.transform.position = this.transform.position;
 
         //プレイヤーパラメーターを渡す
-        drop.GetComponent<DropPart>().getPlayerManegerObjet(PlayerParameter);
+        drop.GetComponent<newDropPart>().getPlayerManegerObjet(PlayerParameter);
 
         //テキストボックスを渡す
-        drop.GetComponent<DropPart>().getTextBox(textBox);
+        drop.GetComponent<newDropPart>().getTextBox(textBox);
 
         //ボスフラグを渡す
-        drop.GetComponent<DropPart>().getBossf(Boss);
+        drop.GetComponent<newDropPart>().getBossf(Boss);
 
 
 
         //
-        drop.GetComponent<DropPart>().getPartsData(part);
-
-
+        drop.GetComponent<newDropPart>().getPartsData(part);
+        drop.GetComponent<newDropPart>().getSceneTransition(sceneTransitionManager);
         //自分のゲームオブジェクトを消す
         this.gameObject.SetActive(false);
     }
