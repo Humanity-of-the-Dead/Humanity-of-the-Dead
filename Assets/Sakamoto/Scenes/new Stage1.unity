@@ -513,7 +513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -652,11 +652,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3213295717364946427, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.57
+      value: 36.74
       objectReference: {fileID: 0}
     - target: {fileID: 3213295717364946427, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.68
+      value: -1.74
       objectReference: {fileID: 0}
     - target: {fileID: 3213295717364946427, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1666,7 +1666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &964455193
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1771,7 +1771,7 @@ Transform:
   m_GameObject: {fileID: 968910982}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -8.48, y: -1.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1958,7 +1958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2419,11 +2419,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3213295717364946427, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 215
+      value: 75.14
       objectReference: {fileID: 0}
     - target: {fileID: 3213295717364946427, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.68
+      value: -1.64
       objectReference: {fileID: 0}
     - target: {fileID: 3213295717364946427, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2648,8 +2648,8 @@ MonoBehaviour:
   chaseSpeed: 2
   chaseRange: 5
   attackRange: 2
-  upperpart: {fileID: 0}
-  lowerpart: {fileID: 0}
+  upperpart: {fileID: 11400000, guid: e14baf2f3f4c6df40a37ca9c3d576095, type: 2}
+  lowerpart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
   moveAnimation: {fileID: 1809863006}
   gamestate: {fileID: 498662820}
   waitTime: 1
@@ -2841,7 +2841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2900,6 +2900,7 @@ MonoBehaviour:
   playerParameter: {fileID: 261565241}
   gameMgr: {fileID: 498662820}
   goTarget: {fileID: 285081240}
+  liEnemyList: []
 --- !u!4 &2094717531
 Transform:
   m_ObjectHideFlags: 0
@@ -2909,7 +2910,7 @@ Transform:
   m_GameObject: {fileID: 2094717529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.14, y: 0.63, z: 1.2903509}
+  m_LocalPosition: {x: 26.57, y: 5.88, z: 1.2903509}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

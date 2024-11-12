@@ -14,10 +14,18 @@ public class EnemySpooner : MonoBehaviour
     //プレイヤーオブジェクト
     [SerializeField] GameObject goTarget;
 
+    [SerializeField] List<GameObject> liEnemyList;
 
-    // Update is called once per frame
+    //タイマー
+    float fTimer;
+
     void Update()
     {
+        if(Vector2.Distance(this.transform.position,goTarget.transform.position) < 10)
+        {
+
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             createEnemy();
@@ -28,15 +36,15 @@ public class EnemySpooner : MonoBehaviour
     void createEnemy()
     {
         //敵のインスタンスを生成
-        Instantiate(goEnemyObject);
+        liEnemyList.Add(Instantiate(goEnemyObject));
         //プレイヤーパラメーターを渡す
-        goEnemyObject.GetComponent<EnemyParameters>().PlayerParameter = goPlayerParameter;
-        goEnemyObject.GetComponent<newEnemyMovement>().scPlayerParameter = playerParameter;
+        liEnemyList[liEnemyList.Count-1].GetComponent<EnemyParameters>().PlayerParameter = goPlayerParameter;
+        liEnemyList[liEnemyList.Count - 1].GetComponent<newEnemyMovement>().scPlayerParameter = playerParameter;
         //ゲームマネージャーを渡す
-        goEnemyObject.GetComponent<newEnemyMovement>().gamestate = gameMgr;
+        liEnemyList[liEnemyList.Count - 1].GetComponent<newEnemyMovement>().gamestate = gameMgr;
         //ポジションをスポナー座標に置く
-        goEnemyObject.transform.position = this.transform.position;
+        liEnemyList[liEnemyList.Count - 1].transform.position = this.transform.position;
 
-        goTarget.GetComponent<PlayerControl>().AddListItem(goEnemyObject);
+        goTarget.GetComponent<PlayerControl>().AddListItem(liEnemyList[liEnemyList.Count - 1]);
     }
 }
