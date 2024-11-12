@@ -34,7 +34,7 @@ public class EnemyParameters : MonoBehaviour
     GameObject drop;
 
     //プレイヤーパラメータ-
-    [SerializeField]
+    public 
     GameObject PlayerParameter;
 
     //ボスフラグ

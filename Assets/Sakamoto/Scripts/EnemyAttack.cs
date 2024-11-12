@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     //プレイヤーパラメーター
-    [SerializeField] PlayerParameter scPlayerParameter;
+    public PlayerParameter scPlayerParameter;
 
     protected void UpperEnemyAttack(float damage)
     {

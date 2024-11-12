@@ -146,4 +146,13 @@ public class PlayerControl : MonoBehaviour
             Debug.Log("â∫îºêgçUåÇé∏îs");
         }
     }
+
+    public void AddListItem(GameObject obj)
+    {
+        liObj.Add(obj);
+    }
+    public void RemoveListItem(GameObject obj)
+    {
+        liObj.Remove(obj);
+    }
 }
