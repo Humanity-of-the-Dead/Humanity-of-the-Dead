@@ -15,11 +15,15 @@ MonoBehaviour:
   enPartsType: 1
   sPartsName: "\u30C6\u30B9\u30C8\u306E\u4E0A\u534A\u8EAB"
   AttackArea: 5
-  iPartHp: 100
+  iPartHp: 30
   iPartAttack: 20
   spBody: {fileID: 0}
-  spArm: {fileID: 0}
-  spHand: {fileID: 0}
+  spRightArm: {fileID: 0}
+  spRightHand: {fileID: 0}
+  spLeftArm: {fileID: 0}
+  spLeftHand: {fileID: 0}
   spWaist: {fileID: 0}
-  spLeg: {fileID: 0}
-  spFoot: {fileID: 0}
+  spRightLeg: {fileID: 0}
+  spRightFoot: {fileID: 0}
+  spLeftLeg: {fileID: 0}
+  spLeftFoot: {fileID: 0}
