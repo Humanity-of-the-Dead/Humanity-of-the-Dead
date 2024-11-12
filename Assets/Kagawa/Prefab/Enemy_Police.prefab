@@ -1748,34 +1748,34 @@ MonoBehaviour:
   - {fileID: 5817238126142124967}
   timeMax: 0.3
   playerWalkRotation:
-  - 2
-  - 5
-  - 2
+  - -2
+  - -5
+  - -2
   - 0
   armWalkRotation:
-  - -15
-  - -30
-  - -15
+  - 15
+  - 30
+  - 15
   - 0
   legWalkForwardRotation:
-  - -20
-  - -40
-  - -30
+  - 20
+  - 40
+  - 30
   - 0
   footWalkForwardRotation:
-  - 10
-  - 40
-  - 10
+  - -10
+  - -40
+  - -10
   - 0
   legWalkBackRotation:
   - 0
-  - 15
-  - 10
+  - -15
+  - -10
   - 0
   footWalkBackRotation:
   - 0
-  - 15
-  - 15
+  - -15
+  - -15
   - 0
   timeWalk: 0
   playerPatRotation: []
