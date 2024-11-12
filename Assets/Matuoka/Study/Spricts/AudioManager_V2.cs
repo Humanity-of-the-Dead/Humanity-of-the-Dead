@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class SoundVolumeManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
     //BGMƒXƒ‰ƒCƒ_
     [SerializeField] Slider bGMSli;
