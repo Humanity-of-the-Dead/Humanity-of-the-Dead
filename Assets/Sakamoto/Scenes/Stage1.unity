@@ -1266,7 +1266,7 @@ MonoBehaviour:
   fSpeed: 5
   fJmpPower: 450
   goCamera: {fileID: 244809042}
-  goObj: []
+  liObj: []
   playerParameter: {fileID: 0}
 --- !u!1 &769248073
 GameObject:
@@ -1915,7 +1915,7 @@ GameObject:
   - component: {fileID: 1476838450}
   - component: {fileID: 1476838451}
   - component: {fileID: 1476838452}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -2604,7 +2604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4822389562234443128}
   - component: {fileID: 4872920044082590938}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2629,7 +2629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5413852694329736115}
   - component: {fileID: 5376344313915181101}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: img_LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2693,7 +2693,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8919798068018756029}
   - component: {fileID: 9006818438084295257}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3020,7 +3020,7 @@ GameObject:
   - component: {fileID: 6886720959119762909}
   - component: {fileID: 6886720959119762908}
   - component: {fileID: 6886720959119762907}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3055,7 +3055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 572306634002805899}
   - component: {fileID: 958935015899627277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: img_RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3170,7 +3170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7192376065421509302}
   - component: {fileID: 1419124251740552264}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: img_LeftArm_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3187,7 +3187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 984934547944245702}
   - component: {fileID: 9011132520533189578}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3275,7 +3275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1570801995326454751}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3363,7 +3363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4953683248915911460}
   - component: {fileID: 8724980618678831768}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3380,7 +3380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7876145301512122669}
   - component: {fileID: 4525345396269014363}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3397,7 +3397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1922944517469483247}
   - component: {fileID: 5388221526401741709}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: img_LeftArm_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3496,7 +3496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4132115713364076175}
   - component: {fileID: 4772689567950130819}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: mainchera_waist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3691,7 +3691,7 @@ MonoBehaviour:
   Player: {fileID: 1621141916327498409}
   GameManager: {fileID: 498662820}
   Flag: 010000
-  TextImage: {fileID: 1705169880489373691}
+  TextSpeed: 1
 --- !u!212 &5376344313915181101
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3823,12 +3823,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89432f0e7e9c8d64e9676b444e9145fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headSR:
-  - {fileID: 0}
-  armSR:
-  - {fileID: 0}
-  legSR:
-  - {fileID: 0}
+  headSR: {fileID: 0}
+  bodySR: {fileID: 0}
+  armRightSR: {fileID: 0}
+  armLeftSR: {fileID: 0}
+  handRightSR: {fileID: 0}
+  handLeftSR: {fileID: 0}
+  waistSR: {fileID: 0}
+  legRightSR: {fileID: 0}
+  legLeftSR: {fileID: 0}
+  footRightSR: {fileID: 0}
+  footLeftSR: {fileID: 0}
   playerRc: {fileID: 8644338710867896258}
   arm:
   - {fileID: 6626939338460135354}
@@ -3861,6 +3866,7 @@ MonoBehaviour:
   footKickForwardRotation: []
   legKickBackRotation: []
   footKickBackRotation: []
+  moveAnimation: {fileID: 0}
 --- !u!1 &6397921676348784042
 GameObject:
   m_ObjectHideFlags: 0
@@ -3889,7 +3895,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4721175981926981713}
   - component: {fileID: 8623728619464811278}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3975,7 +3981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6612270253935396167}
   - component: {fileID: 3419219677611109675}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4066,9 +4072,7 @@ MonoBehaviour:
   fSpeed: 5
   fJmpPower: 450
   goCamera: {fileID: 244809042}
-  goObj:
-  - {fileID: 277595279}
-  - {fileID: 769248073}
+  liObj: []
   playerParameter: {fileID: 261565241}
 --- !u!50 &6886720959119762908
 Rigidbody2D:
@@ -4167,7 +4171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8096680112633581163}
   - component: {fileID: 7642257143117877603}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4184,7 +4188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2919160419321333563}
   - component: {fileID: 6492518770323415557}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4216,7 +4220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 643409120315039634}
   - component: {fileID: 6769250345257383660}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: img_RightArm_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4301,7 +4305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1161600001832788360}
   - component: {fileID: 913813237014083084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: img_LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4335,7 +4339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6965318768575951520}
   - component: {fileID: 819063171932026336}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: img_RightArm_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4352,7 +4356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4556305776481511812}
   - component: {fileID: 32084661063974030}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4403,7 +4407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8390729985367370221}
   - component: {fileID: 2848531062425353013}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: img_RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4487,7 +4491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1427859607688613096}
   - component: {fileID: 3754986852337867117}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerRc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
