@@ -1,11 +1,14 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 
 public class newEnemyMovement : EnemyAttack
 {
     // 移動を始める場所、終わりの場所、普段の移動速度、追跡中の移動速度、敵の索敵可能な範囲を設定
-    [SerializeField] private float pointA;
-    [SerializeField] private float pointB;
+    [Header("移動の絶対値")]
+    [SerializeField] float moveAbs;
+    private float pointA;
+    private float pointB;
     [SerializeField] private float speed = 2f;
     [SerializeField] private float chaseSpeed = 2f;
     [SerializeField] private float chaseRange = 5f;
@@ -36,6 +39,8 @@ public class newEnemyMovement : EnemyAttack
     {
         // プレイヤーを探すやつ
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        pointA = this.transform.position.x + moveAbs;
+        pointB = this.transform.position.x - moveAbs;
     }
 
     void Update()
@@ -80,7 +85,7 @@ public class newEnemyMovement : EnemyAttack
                         }
                         break;
                     case EnemyState.attack:
-                        UpperEnemyAttack((float)part.iPartAttack);
+                        UpperEnemyAttack((float)part.iPartAttack * 0.1f);
                         enemystate = EnemyState.wait;
                         break;
                     case EnemyState.wait:

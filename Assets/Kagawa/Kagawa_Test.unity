@@ -786,6 +786,70 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy(Police)
       objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: armWalkRotation.Array.data[0]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: armWalkRotation.Array.data[1]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: armWalkRotation.Array.data[2]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: playerWalkRotation.Array.data[0]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: playerWalkRotation.Array.data[1]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: playerWalkRotation.Array.data[2]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: legWalkBackRotation.Array.data[1]
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: legWalkBackRotation.Array.data[2]
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: footWalkBackRotation.Array.data[1]
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: footWalkBackRotation.Array.data[2]
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: legWalkForwardRotation.Array.data[0]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: legWalkForwardRotation.Array.data[1]
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: legWalkForwardRotation.Array.data[2]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: footWalkForwardRotation.Array.data[0]
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: footWalkForwardRotation.Array.data[1]
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699447273547663766, guid: 92c9024e34a647d44a84ed3a5e61d71e, type: 3}
+      propertyPath: footWalkForwardRotation.Array.data[2]
+      value: -10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

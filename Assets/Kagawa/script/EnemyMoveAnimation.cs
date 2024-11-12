@@ -68,7 +68,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     private void Start()
     {
         indexNumber = 0;
-        shaft = 0;
+        shaft = 180;
 
         isMirror = true;
         isActive = false;
@@ -146,7 +146,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// <summary>
     /// パンチのモーション
     /// </summary>
-    void PlayerPantie()
+    public void PlayerPantie()
     {
         // Quaternion.Euler: 回転軸( x, y, z)
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerPatRotation[indexNumber]);
@@ -186,7 +186,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// <summary>
     /// キックのアニメーション
     /// </summary>
-    void PlayerKick()
+    public void PlayerKick()
     {
         // Quaternion.Euler: 回転軸( x, y, z)
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerKickRotation[indexNumber]);

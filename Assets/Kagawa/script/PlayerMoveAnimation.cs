@@ -99,7 +99,6 @@ public class PlayerMoveAnimation : MonoBehaviour
         {
             Debug.Log("aomori");
             shaft = 0;
-            isAtack = false;
 
             //Ã~ó‘Ô‚©‚ç¶Œü‚­‚Æ‚«
             if (time < 0 && isWalk)
@@ -119,7 +118,6 @@ public class PlayerMoveAnimation : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.A))
         {
             shaft = 180;
-            isAtack = false;
 
             //Ã~ó‘Ô‚©‚ç¶Œü‚­‚Æ‚«
             if (time < 0 && !isWalk)
