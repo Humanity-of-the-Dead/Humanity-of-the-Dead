@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class textdisplay : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class textdisplay : MonoBehaviour
     private Text text;  //画面上の文字
 
     [SerializeField]
-    private float TypingSpeed = 0.5f;  //文字の表示速度
+    private float TypingSpeed = 1.0f;  //文字の表示速度
 
     private int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
 
@@ -30,6 +31,8 @@ public class textdisplay : MonoBehaviour
     bool[] Flag;
 
     [SerializeField]
+    float TextSpeed = 1.0f;
+    
     GameObject TextImage;
 
     // Start is called before the first frame update
@@ -37,6 +40,7 @@ public class textdisplay : MonoBehaviour
     {
         text.text = "";// 初期化
         Debug.Log(textAsset[0].text);
+        //StartCoroutine("TextCoroutine");
     }
 
     // Update is called once per frame
@@ -47,7 +51,7 @@ public class textdisplay : MonoBehaviour
             case GameState.Main:
                 if (Player.transform.position.x > Position[1] && Flag[1] == false)
                 {
-                    TextImage.gameObject.SetActive(true);    //オブジェクトを表示
+                    //this.gameObject.SetActive(true);    //オブジェクトを表示
                     Flag[1] = true;     //Flag[1]を通った
                     GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
 
@@ -55,7 +59,7 @@ public class textdisplay : MonoBehaviour
                 }
                 if (Player.transform.position.x > Position[2] && Flag[2] == false)
                 {
-                    TextImage.gameObject.SetActive(true);    //オブジェクトを表示
+                    //this.gameObject.SetActive(true);    //オブジェクトを表示
                     Flag[2] = true;     //Flag[1]を通った
                     GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
 
@@ -65,30 +69,47 @@ public class textdisplay : MonoBehaviour
             case GameState.ShowText:
                 if (Input.GetMouseButtonDown(0))
                 {
-                    TextImage.gameObject.SetActive(false);   //オブジェクトを非表示
+                    //this.gameObject.SetActive(false);   //オブジェクトを非表示
                     GameManager.ChangeState(GameState.Main);
                 }
                 break;
         }
-
+   
     }
     public void UpdateText()
     {
+        int TextMax = 0;
+
         if (textAsset.Length > LoadText)
         {//テキストをLoadTextの分表示
-            text.text = textAsset[LoadText].text;
-
+            //text.text = //textAsset[LoadText].text;
+            text.text = ""; //からのテキストをおいて初期化しているように見せる
 
             Debug.Log(textAsset[LoadText].text);
             Debug.Log(textAsset[LoadText].text.Length); //テキスト上に何文字あるかデバック
 
             //Debug.Log(textAsset[LoadText]);
-            Debug.Log(textAsset.Length);    //全体のテキスト数
-            Debug.Log(LoadText);            //現在表示されているテキスト番号
+            // Debug.Log(textAsset.Length);    //全体のテキスト数
+            //Debug.Log(LoadText);            //現在表示されているテキスト番号
 
-            LoadText++;
-
+            StartCoroutine("TextCoroutine");        //テキストを呼び出されるたびにコルーチンを走らせて文字を加算していく
             //}
         }
+    }
+    IEnumerator TextCoroutine()
+    {
+        for (int i = 0; i < textAsset[LoadText].text.Length; i++)   //テキストの中の文字を取得して、文字数を増やしていく
+        {                                                           //テキストが進むたびにコルーチンが呼び出される
+            //textAsset[LoadText].text.Lengthのよって中のテキストデータの文字数の所得
+            yield return new WaitForSeconds(TextSpeed);
+
+            text.text += textAsset[LoadText].text[i];  //iが増えるたびに文字を一文字ずつ表示していく
+
+            //i++;
+
+            yield return null;
+            
+        }
+        LoadText++;  //ボタンを押すたびにテキストを進める
     }
 }
