@@ -31,7 +31,7 @@ public class newEnemyMovement : EnemyAttack
     private bool movingToPointB = false; // 進行方向
     private Transform player; // プレイヤーの位置
 
-    [SerializeField] GameMgr gamestate;
+    public GameMgr gamestate;
 
     private float timer;
     [SerializeField] float waitTime; //攻撃後の後隙
