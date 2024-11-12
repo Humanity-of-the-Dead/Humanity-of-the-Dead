@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -8,24 +8,24 @@ using UnityEngine.Audio;
 
 public class MultiAudio : MonoBehaviour
 {
-    public AudioClip[] audioClipsBGM; // BGM‰¹Œ¹
-    public AudioClip[] audioClipSE;   // SE‰¹Œ¹
+    public AudioClip[] audioClipsBGM; // BGMéŸ³æº
+    public AudioClip[] audioClipSE;   // SEéŸ³æº
 
     private AudioSource bgmSource;
     private AudioSource seSource;
 
-    // Audio Mixer‚ğInspector‚©‚çƒAƒ^ƒbƒ`
+    // Audio Mixerã‚’Inspectorã‹ã‚‰ã‚¢ã‚¿ãƒƒãƒ
     public AudioMixerGroup bgmMixerGroup;
     public AudioMixerGroup seMixerGroup;
     public AudioMixerGroup uiMixerGroup;
 
     private void Start()
     {
-        // BGM‚¨‚æ‚ÑSE‚ÌAudioSource‚ğæ“¾
+        // BGMãŠã‚ˆã³SEã®AudioSourceã‚’å–å¾—
         bgmSource = GameObject.FindWithTag("BGM").GetComponent<AudioSource>();
         seSource = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
 
-        // ŠeAudioSource‚ÉƒfƒtƒHƒ‹ƒg‚Ìƒ~ƒLƒT[ƒOƒ‹[ƒv‚ğŠ„‚è“–‚Ä‚é
+        // å„AudioSourceã«ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒŸã‚­ã‚µãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—ã‚’å‰²ã‚Šå½“ã¦ã‚‹
         if (bgmSource != null)
         {
             bgmSource.outputAudioMixerGroup = bgmMixerGroup;
@@ -42,7 +42,7 @@ public class MultiAudio : MonoBehaviour
     {
         AudioSource bgmSource = GameObject.FindWithTag("BGM").GetComponent<AudioSource>();
 
-        // ‰¹Œ¹‚Ì‘I‘ğ
+        // éŸ³æºã®é¸æŠ
         switch (num)
         {
             case 0:
@@ -59,7 +59,7 @@ public class MultiAudio : MonoBehaviour
                 break;
         }
 
-        // ‰¹Œ¹‚ªİ’è‚³‚ê‚½‚±‚Æ‚ğŠm”F
+        // éŸ³æºãŒè¨­å®šã•ã‚ŒãŸã“ã¨ã‚’ç¢ºèª
         if (bgmSource.clip != null)
         {
             Debug.Log("BGM clip set: " + bgmSource.clip.name);
@@ -77,20 +77,20 @@ public class MultiAudio : MonoBehaviour
         if (num >= 0 && num < audioClipSE.Length)
         {
 
-            // SE‰¹Œ¹‚ğƒZƒbƒg
+            // SEéŸ³æºã‚’ã‚»ãƒƒãƒˆ
             seSource.clip = audioClipSE[num];
 
-            // UIƒJƒeƒSƒŠ‚Ì‰¹Œ¹‚©”»•Ê
+            // UIã‚«ãƒ†ã‚´ãƒªã®éŸ³æºã‹åˆ¤åˆ¥
             if (audioClipSE[num].name.Contains("UI"))
             {
-                // UIƒJƒeƒSƒŠ‚Å‚ ‚ê‚ÎUIƒ~ƒLƒT[ƒOƒ‹[ƒv‚Éİ’è
+                // UIã‚«ãƒ†ã‚´ãƒªã§ã‚ã‚Œã°UIãƒŸã‚­ã‚µãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—ã«è¨­å®š
                 seSource.outputAudioMixerGroup = uiMixerGroup;
                 Debug.Log(seSource.outputAudioMixerGroup);
 
             }
             else
             {
-                // ’Êí‚ÌSEƒJƒeƒSƒŠ‚Å‚ ‚ê‚ÎSEƒ~ƒLƒT[ƒOƒ‹[ƒv‚Éİ’è
+                // é€šå¸¸ã®SEã‚«ãƒ†ã‚´ãƒªã§ã‚ã‚Œã°SEãƒŸã‚­ã‚µãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—ã«è¨­å®š
                 seSource.outputAudioMixerGroup = seMixerGroup;
                 Debug.Log(seSource.outputAudioMixerGroup);
             }

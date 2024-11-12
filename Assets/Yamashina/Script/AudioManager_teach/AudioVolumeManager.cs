@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,31 +6,31 @@ using UnityEngine.Audio;
 
 public class AudioVolumeManager : MonoBehaviour
 {
-    public AudioMixer audioMixer; // MainAudioMixer‚ðŠ„‚è“–‚Ä
+    public AudioMixer audioMixer; // MainAudioMixerã‚’å‰²ã‚Šå½“ã¦
     public Slider bgmSlider;
     public Slider seSlider;
     public Slider uiSlider;
 
     private void Start()
     {
-        // ƒXƒ‰ƒCƒ_[‚Ì‰Šú’l‚ðPlayerPrefs‚©‚çŽæ“¾‚Ü‚½‚ÍƒfƒtƒHƒ‹ƒg1.0f‚ÅÝ’è
+        // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®åˆæœŸå€¤ã‚’PlayerPrefsã‹ã‚‰å–å¾—ã¾ãŸã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ1.0fã§è¨­å®š
         bgmSlider.value = PlayerPrefs.GetFloat("BGM_Volume", 1.0f);
         seSlider.value = PlayerPrefs.GetFloat("SE_Volume", 1.0f);
         uiSlider.value = PlayerPrefs.GetFloat("UI_Volume", 1.0f);
 
-        // ƒXƒ‰ƒCƒ_[•ÏXŽž‚É‰¹—Ê‚ðXV‚µA•Û‘¶
+        // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼å¤‰æ›´æ™‚ã«éŸ³é‡ã‚’æ›´æ–°ã—ã€ä¿å­˜
         bgmSlider.onValueChanged.AddListener(value => SetVolume("BGM_Volume", value));
         seSlider.onValueChanged.AddListener(value => SetVolume("SE_Volume", value));
         uiSlider.onValueChanged.AddListener(value => SetVolume("UI_Volume", value));
     }
 
-    // ƒ{ƒŠƒ…[ƒ€‚ðdB‚É•ÏŠ·‚µ‚Äƒ~ƒLƒT[‚ÉÝ’è
+    // ãƒœãƒªãƒ¥ãƒ¼ãƒ ã‚’dBã«å¤‰æ›ã—ã¦ãƒŸã‚­ã‚µãƒ¼ã«è¨­å®š
     private void SetVolume(string exposedParam, float volume)
     {
         float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f;
         audioMixer.SetFloat(exposedParam, dbVolume);
 
-        // ƒ{ƒŠƒ…[ƒ€Ý’è‚ð•Û‘¶
+        // ãƒœãƒªãƒ¥ãƒ¼ãƒ è¨­å®šã‚’ä¿å­˜
         PlayerPrefs.SetFloat(exposedParam, volume);
     }
     private void Update()
@@ -43,7 +43,7 @@ public class AudioVolumeManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        // ƒXƒ‰ƒCƒ_[‚ÌƒŠƒXƒi[‰ðœ
+        // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®ãƒªã‚¹ãƒŠãƒ¼è§£é™¤
         bgmSlider.onValueChanged.RemoveListener(value => SetVolume("BGM_Volume", value));
         seSlider.onValueChanged.RemoveListener(value => SetVolume("SE_Volume", value));
         uiSlider.onValueChanged.RemoveListener(value => SetVolume("UI_Volume", value));
