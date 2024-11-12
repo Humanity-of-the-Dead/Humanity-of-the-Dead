@@ -13,7 +13,8 @@ public class newEnemyMovement : EnemyAttack
     [SerializeField] private float chaseSpeed = 2f;
     [SerializeField] private float chaseRange = 5f;
     [SerializeField] private float attackRange = 2f;
-    [SerializeField] private BodyPartsData part;
+    [SerializeField] private BodyPartsData upperpart;
+    [SerializeField] private BodyPartsData lowerpart;
 
     [SerializeField] EnemyMoveAnimation moveAnimation;
 
@@ -27,7 +28,7 @@ public class newEnemyMovement : EnemyAttack
 
     EnemyState enemystate;
 
-    private bool movingToPointB = true; // 進行方向
+    private bool movingToPointB = false; // 進行方向
     private Transform player; // プレイヤーの位置
 
     [SerializeField] GameMgr gamestate;
@@ -79,14 +80,23 @@ public class newEnemyMovement : EnemyAttack
                         // プレイヤーを追跡
                         MoveTowards(player.position, chaseSpeed);
                         // プレイヤーが攻撃範囲内に入っているかどうか判断
-                        if (distanceToPlayer < attackRange)
+                        if (distanceToPlayer < upperpart.AttackArea || distanceToPlayer < lowerpart.AttackArea)
                         {
                             enemystate = EnemyState.attack;
                         }
                         break;
                     case EnemyState.attack:
-                        UpperEnemyAttack((float)part.iPartAttack * 0.1f);
+                        if(distanceToPlayer < upperpart.AttackArea)
+                        {
+                            UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
+                        }
+                        else if(distanceToPlayer < lowerpart.AttackArea)
+                        {
+                            LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
+
+                        }
                         enemystate = EnemyState.wait;
+                        //moveAnimation.PlayerPantie();
                         break;
                     case EnemyState.wait:
                         if(timer > waitTime)
