@@ -15,7 +15,7 @@ MonoBehaviour:
   enPartsType: 2
   sPartsName: "\u30C6\u30B9\u30C8\u306E\u4E0B\u534A\u8EAB"
   AttackArea: 10
-  iPartHp: 10
+  iPartHp: 30
   iPartAttack: 15
   spBody: {fileID: 0}
   spRightArm: {fileID: 0}

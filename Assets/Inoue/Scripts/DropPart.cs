@@ -28,8 +28,8 @@ public class DropPart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Oキーを押したら慰霊する
-        if(Input.GetKeyUp(KeyCode.O)) {
+        //Jキーを押したら慰霊する
+        if(Input.GetKeyUp(KeyCode.J)) {
             goPlayerParameter.GetComponent<PlayerParameter>().comfort(10);
             if (bBoss)
             {
@@ -38,8 +38,8 @@ public class DropPart : MonoBehaviour
             Destroy(this.gameObject);
 
         }
-        //Pキーを押したら移植する
-        if (Input.GetKeyDown(KeyCode.P)){
+        //Lキーを押したら移植する
+        if (Input.GetKeyDown(KeyCode.L)){
             goPlayerParameter.GetComponent<PlayerParameter>().transplant(partsData);
             if (bBoss)
             {

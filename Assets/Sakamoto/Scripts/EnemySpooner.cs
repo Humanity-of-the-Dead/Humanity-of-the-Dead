@@ -21,15 +21,24 @@ public class EnemySpooner : MonoBehaviour
 
     void Update()
     {
-        if(Vector2.Distance(this.transform.position,goTarget.transform.position) < 10)
+        if(Vector2.Distance(this.transform.position,goTarget.transform.position) < 20)
         {
-
+            if(fTimer > 3) 
+            {
+                createEnemy();
+                fTimer = 0;
+            }
+            fTimer += Time.deltaTime;
+        }
+        else
+        {
+            fTimer = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            createEnemy();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    createEnemy();
+        //}
     }
 
     //エネミーの生成

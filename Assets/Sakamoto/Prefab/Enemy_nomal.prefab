@@ -192,8 +192,8 @@ MonoBehaviour:
   UpperHP: 1
   LowerHP: 1
   damage: 0
-  Upperbodypart: {fileID: 11400000, guid: a72cdc466c72ac54b99427c79e98c125, type: 2}
-  Lowerbodypart: {fileID: 11400000, guid: 823af4672cb62674f8af8f1d901261ae, type: 2}
+  Upperbodypart: {fileID: 11400000, guid: e14baf2f3f4c6df40a37ca9c3d576095, type: 2}
+  Lowerbodypart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
   prePart: {fileID: 2198627103825754482, guid: 9ef6486a8bc7b494c93dd6ae51d33677, type: 3}
   PlayerParameter: {fileID: 0}
   Boss: 0
@@ -211,13 +211,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scPlayerParameter: {fileID: 0}
-  moveAbs: 2
+  moveAbs: 10
   speed: 2
   chaseSpeed: 2
   chaseRange: 5
   attackRange: 2
-  upperpart: {fileID: 11400000, guid: a72cdc466c72ac54b99427c79e98c125, type: 2}
-  lowerpart: {fileID: 11400000, guid: 823af4672cb62674f8af8f1d901261ae, type: 2}
+  upperpart: {fileID: 11400000, guid: e14baf2f3f4c6df40a37ca9c3d576095, type: 2}
+  lowerpart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
   moveAnimation: {fileID: 7741963033953032288}
   gamestate: {fileID: 0}
   waitTime: 1
