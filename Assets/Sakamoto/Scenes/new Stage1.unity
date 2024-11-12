@@ -1514,7 +1514,7 @@ MonoBehaviour:
   Lowerbodypart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
   prePart: {fileID: 2198627103825754482, guid: 9ef6486a8bc7b494c93dd6ae51d33677, type: 3}
   PlayerParameter: {fileID: 261565240}
-  Boss: 1
+  Boss: 0
   textBox: {fileID: 64873705}
   sceneTransitionManager: {fileID: 721748177}
 --- !u!50 &609375192
