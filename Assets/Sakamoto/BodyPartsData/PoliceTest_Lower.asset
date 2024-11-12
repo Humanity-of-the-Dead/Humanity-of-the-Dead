@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
+  m_Name: PoliceTest_Lower
+  m_EditorClassIdentifier: 
+  enPartsType: 1
+  sPartsName: "\u8B66\u5BDF\u306E\u4E0B\u534A\u8EAB"
+  AttackArea: 30
+  iPartHp: 200
+  iPartAttack: 10
+  spBody: {fileID: 0}
+  spRightArm: {fileID: 0}
+  spRightHand: {fileID: 0}
+  spLeftArm: {fileID: 0}
+  spLeftHand: {fileID: 0}
+  spWaist: {fileID: 21300000, guid: 9da2e8394c2fa474790a94603c425d83, type: 3}
+  spRightLeg: {fileID: 21300000, guid: dca129703da76924a9acb021b745e6c3, type: 3}
+  spRightFoot: {fileID: 21300000, guid: 6f4546b56babd774c915b113f4b492c0, type: 3}
+  spLeftLeg: {fileID: 21300000, guid: 57c23821f0d70a1468b11ce6899c1d55, type: 3}
+  spLeftFoot: {fileID: 21300000, guid: 74d188add41e93344a50d5425b9071fa, type: 3}

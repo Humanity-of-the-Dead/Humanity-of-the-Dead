@@ -5,42 +5,75 @@ using UnityEngine;
 
 public class PlayerMoveAnimation : MonoBehaviour
 {
-    [SerializeField, Header("ï¿½ï¿½ï¿½ï¿½Image")] SpriteRenderer headSR;
-    [SerializeField, Header("ï¿½rï¿½ï¿½Imageï¿½Aï¿½ï¿½É‰Eï¿½ï¿½")] SpriteRenderer armSR;
-    [SerializeField, Header("ï¿½ï¿½ï¿½ï¿½Imageï¿½Aï¿½ï¿½É‰Eï¿½ï¿½")] SpriteRenderer legSR;
+    [SerializeField, Header("“ª‚ÌImage")] SpriteRenderer headSR;
+    [SerializeField, Header("‘Ì‚Ì‚ÌImage")] SpriteRenderer bodySR;
+    [SerializeField, Header("‰E˜r‚ÌImage")] SpriteRenderer armRightSR;
+    [SerializeField, Header("¶˜r‚ÌImage")] SpriteRenderer armLeftSR;
+    [SerializeField, Header("‰Eèñ‚ÌImage")] SpriteRenderer handRightSR;
+    [SerializeField, Header("¶èñ‚ÌImage")] SpriteRenderer handLeftSR;
+    [SerializeField, Header("˜‚ÌImage")] SpriteRenderer waistSR;
+    [SerializeField, Header("‰E‘¾‘Ú‚ÌImage")] SpriteRenderer legRightSR;
+    [SerializeField, Header("¶‘¾‘Ú‚ÌImage")] SpriteRenderer legLeftSR;
+    [SerializeField, Header("‰E‘«‚ÌImage")] SpriteRenderer footRightSR;
+    [SerializeField, Header("¶‘«‚ÌImage")] SpriteRenderer footLeftSR;
 
-    [Header("ï¿½Sï¿½g")] public GameObject playerRc;
-    [SerializeField, Header("ï¿½rï¿½ÌŠpï¿½xï¿½Aï¿½ï¿½É‰Eï¿½ï¿½")] GameObject[] arm;
-    [SerializeField, Header("ï¿½ï¿½ï¿½Ú‚ÌŠpï¿½xï¿½Aï¿½ï¿½É‰Eï¿½ï¿½")] GameObject[] leg;
-    [SerializeField, Header("ï¿½ï¿½ï¿½Ë‚ÌŠpï¿½xï¿½Aï¿½ï¿½É‰Eï¿½ï¿½")] GameObject[] foot;
+    [Header("‘Sg")] public GameObject playerRc;
+    [SerializeField, Header("˜r‚ÌŠp“xAæ‚É‰Eè")]  GameObject[] arm;
+    [SerializeField, Header("‘¾‘Ú‚ÌŠp“xAæ‚É‰E‘«")]  GameObject[] leg;
+    [SerializeField, Header("‚·‚Ë‚ÌŠp“xAæ‚É‰E‘«")]  GameObject[] foot;
 
-    [Header("ï¿½Sï¿½gï¿½ÌŠpï¿½x")] public float[] playerRotation;
-    [Header("ï¿½rï¿½ÌŠpï¿½x")] public float[] armRotation;
-    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‘Oï¿½ï¿½ï¿½ÌŠpï¿½x")] public float[] legForwardRotation;
-    [Header("ï¿½ï¿½ï¿½Ì‘Oï¿½ï¿½ï¿½ÌŠpï¿½x")] public float[] footForwardRotation;
-    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½ï¿½ÌŠpï¿½x")] public float[] legBackRotation;
-    [Header("ï¿½ï¿½ï¿½ÌŒï¿½ï¿½ï¿½ÌŠpï¿½x")] public float[] footBackRotation;
-    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ÌŒpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")] public float timeWalk;
+    [Header("1ƒRƒ}‚ÌŠÔŠu‚ÌŠÔ")] public float timeMax;
 
-    [Header("1ï¿½Rï¿½}ï¿½ÌŠÔŠuï¿½Ìï¿½ï¿½ï¿½")] public float timeMax;
+    [Header("---•à‚«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("‘Sg‚ÌŠp“x")] public float[] playerWalkRotation;
+    [Header("˜r‚ÌŠp“x")] public float[] armWalkRotation;
+    [Header("‘¾‚à‚à‚Ì‘O•û‚ÌŠp“x")] public float[] legWalkForwardRotation;
+    [Header("‘«‚Ì‘O•û‚ÌŠp“x")] public float[] footWalkForwardRotation;
+    [Header("‘¾‚à‚à‚ÌŒã•û‚ÌŠp“x")] public float[] legWalkBackRotation;
+    [Header("‘«‚ÌŒã•û‚ÌŠp“x")] public float[] footWalkBackRotation;
+    [Header("•à‚«‚ÌŒp‘±ŠÔ")] public float timeWalk;
 
-    //ï¿½zï¿½ï¿½Ì”Ôï¿½
+    [Header("---ƒpƒ“ƒ`‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("‘Sg‚ÌŠp“x")] public float[] playerPatRotation;
+    [Header("˜r‚Ì‘O•ûŠp“x")] public float[] armPatForwardRotation;
+    [Header("˜r‚ÌŒã•ûŠp“x")] public float[] armPatBackRotation;
+    [Header("‘¾‚à‚à‚Ì‘O•û‚ÌŠp“x")] public float[] legPatForwardRotation;
+    [Header("‘«‚Ì‘O•û‚ÌŠp“x")] public float[] footPatForwardRotation;
+    [Header("‘¾‚à‚à‚ÌŒã•û‚ÌŠp“x")] public float[] legPatBackRotation;
+    [Header("‘«‚ÌŒã•û‚ÌŠp“x")] public float[] footPatBackRotation;
+
+    [Header("---ƒLƒbƒN‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("‘Sg‚ÌŠp“x")] public float[] playerKickRotation;
+    [Header("˜r‚Ì‘O•ûŠp“x")] public float[] armKickForwardRotation;
+    [Header("˜r‚ÌŒã•ûŠp“x")] public float[] armKickBackRotation;
+    [Header("‘¾‚à‚à‚Ì‘O•û‚ÌŠp“x")] public float[] legKickForwardRotation;
+    [Header("‘«‚Ì‘O•û‚ÌŠp“x")] public float[] footKickForwardRotation;
+    [Header("‘¾‚à‚à‚ÌŒã•û‚ÌŠp“x")] public float[] legKickBackRotation;
+    [Header("‘«‚ÌŒã•û‚ÌŠp“x")] public float[] footKickBackRotation;
+
+    //”z—ñ‚Ì”Ô†
     int indexNumber;
 
-    //ï¿½Ì‚Ìï¿½
+    //‘Ì‚Ì²
     int shaft;
 
-    // ï¿½lï¿½ğ”½“]ï¿½É‚ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½O
+    //•à‚­ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŠp“x‚Ì”
+    int walkLength;
+
+    // ’l‚ğ”½“]‚É‚·‚éƒtƒ‰ƒO
     bool isActive;
 
-    // ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©
-    bool isMirror;
+    // Œü‚¢‚Ä‚¢‚é•ûŒü‚ª‰E‚ğŒü‚¢‚Ä‚¢‚é‚©
+    bool isAtack;
 
-    // ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½O(ï¿½E = false)
+    // •ûŒüƒtƒ‰ƒO(‰E = false)
     bool isWalk;
 
-    // ï¿½^ï¿½Cï¿½}ï¿½[
-    float time = 0;
+    // Ã~‚µ‚Ä‚¢‚é‚©
+    bool isStop;
+
+    // ƒ^ƒCƒ}[
+    float time;
 
 
     private void Start()
@@ -48,9 +81,12 @@ public class PlayerMoveAnimation : MonoBehaviour
         indexNumber = 0;
         shaft = 0;
 
-        isMirror = true;
+        isAtack = false;
         isActive = false;
         isWalk = false;
+        isStop = false;
+        walkLength = armWalkRotation.Length - 1;
+        time = 0;
     }
 
     // Update is called once per frame
@@ -58,147 +94,363 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         time -= Time.deltaTime;
 
+
         if (Input.GetKeyDown(KeyCode.D))
         {
-            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éï¿½Aï¿½Ä‚Î‚ï¿½ï¿½È‚ï¿½
-            if (time < 0)
-            {
-                // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½É•Ï‚ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½
-                isWalk = false;
-                shaft = 0;
+            Debug.Log("aomori");
+            shaft = 0;
 
-                isActive = false;
-                ChangeArmAnime();
-                WalkStart();
+            //Ã~ó‘Ô‚©‚ç¶Œü‚­‚Æ‚«
+            if (time < 0 && isWalk)
+            {
+                isStop = true;
+                time = timeMax * 2;
+                Upright();
             }
+
+            // ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ª¶‚©‚ç‰E‚É•Ï‚í‚Á‚½‚Æ‚«
+            isWalk = false;
+           
+
+            // •à‚­“®ì‚ğ‚µ‚Ä‚¢‚éAŒÄ‚Î‚¹‚È‚¢
+            WalkInstance();
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éï¿½Aï¿½Ä‚Î‚ï¿½ï¿½È‚ï¿½
-            if (time < 0)
-            {
-                // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½ç¶ï¿½É•Ï‚ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½
-                isWalk = true;
-                shaft = 180;
+            shaft = 180;
 
-                isActive = false;
-                ChangeArmAnime();
-                WalkStart();
+            //Ã~ó‘Ô‚©‚ç¶Œü‚­‚Æ‚«
+            if (time < 0 && !isWalk)
+            {
+                isStop = true;
+                time = timeMax * 2;
+                Upright();
             }
+
+            // ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ª‰E‚©‚ç¶‚É•Ï‚í‚Á‚½‚Æ‚«
+            isWalk = true;
+            
+            // •à‚­“®ì‚ğ‚µ‚Ä‚¢‚éAŒÄ‚Î‚¹‚È‚¢
+            WalkInstance();
         }
+
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            isAtack = true;
+            StopCoroutine(CallWalkWithDelay());
+            Upright();
+            indexNumber = 0;
+            PantieStart();
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            isAtack = true;
+            StopCoroutine(CallWalkWithDelay());
+            Upright();
+            indexNumber = 0;
+            KickStart();
+        }
+        
 
         if (Input.GetKey(KeyCode.D))
         {
             if (!isWalk)
             {
-                KeepWalk();
+                if(isStop)
+                {
+                    isStop = false;
+                    WalkInstance();
+                }
+                else
+                {
+                    KeepWalk();
+                }
             }
         }
         else if (Input.GetKey(KeyCode.A))
         {
             if (isWalk)
             {
-                KeepWalk();
+                if (isStop)
+                {
+                    isStop = false;
+                    WalkInstance();
+                }
+                else
+                {
+                    KeepWalk();
+                }
             }
         }
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½
+    /// •à‚­ƒAƒjƒ[ƒVƒ‡ƒ“
     /// </summary>
     void PlayerWalk()
     {
-        // Quaternion.Euler: ï¿½ï¿½]ï¿½ï¿½( x, y, z)
-        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerRotation[indexNumber]);
+        // Quaternion.Euler: ‰ñ“]²( x, y, z)
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[indexNumber]);
 
-        // ï¿½rï¿½ÌƒAï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½
-        if (arm == null || armRotation == null)
+        // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        if (arm == null || armWalkRotation == null)
         {
-            Debug.LogWarning("armï¿½Ìƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç”²ï¿½ï¿½ï¿½Ä‚ï¿½");
+            Debug.LogWarning("arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
             return;
         }
         else
         {
-            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armRotation[indexNumber]);
-            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armRotation[indexNumber]);
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[indexNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armWalkRotation[indexNumber]);
         }
 
-        // ï¿½ï¿½ï¿½ÌƒAï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½
-        if (leg == null || legBackRotation == null || legForwardRotation == null)
+        // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        if (leg == null || legWalkBackRotation == null || legWalkForwardRotation == null)
         {
-            Debug.LogWarning("Legï¿½Ìƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç”²ï¿½ï¿½ï¿½Ä‚ï¿½");
+            Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
             return;
         }
-        else if (foot == null || footBackRotation == null || footForwardRotation == null)
+        else if (foot == null || footWalkBackRotation == null || footWalkForwardRotation == null) 
         {
-            Debug.LogWarning("footï¿½Ìƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç”²ï¿½ï¿½ï¿½Ä‚ï¿½");
+            Debug.LogWarning("foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
             return;
         }
         else
         {
-            // ï¿½ï¿½ï¿½ï¿½ï¿½nï¿½ß‚Ìê‡
+            // •à‚«n‚ß‚Ìê‡
             if (!isActive)
             {
-                leg[0].transform.rotation = Quaternion.Euler(0, shaft, legBackRotation[indexNumber]);
-                leg[1].transform.rotation = Quaternion.Euler(0, shaft, legForwardRotation[indexNumber]);
-                foot[0].transform.rotation = Quaternion.Euler(0, shaft, footBackRotation[indexNumber]);
-                foot[1].transform.rotation = Quaternion.Euler(0, shaft, footForwardRotation[indexNumber]);
+                leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[indexNumber]);
+                leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[indexNumber]);
+                foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[indexNumber]);
+                foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[indexNumber]);
             }
-            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡
+            //•à‚«‘±‚¯‚Ä‚¢‚éê‡
             if (isActive)
             {
-                leg[0].transform.rotation = Quaternion.Euler(0, shaft, legForwardRotation[indexNumber]);
-                leg[1].transform.rotation = Quaternion.Euler(0, shaft, legBackRotation[indexNumber]);
-                foot[0].transform.rotation = Quaternion.Euler(0, shaft, footForwardRotation[indexNumber]);
-                foot[1].transform.rotation = Quaternion.Euler(0, shaft, footBackRotation[indexNumber]);
+                leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[indexNumber]);
+                leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[indexNumber]);
+                foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[indexNumber]);
+                foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[indexNumber]);
             }
         }
     }
 
-    IEnumerator CallFunctionWithDelay()
+    /// <summary>
+    /// ƒpƒ“ƒ`‚Ìƒ‚[ƒVƒ‡ƒ“
+    /// </summary>
+    void PlayerPantie()
     {
-        for (int i = 0; i < armRotation.Length; i++)
-        {
-            PlayerWalk();
+        // Quaternion.Euler: ‰ñ“]²( x, y, z)
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerPatRotation[indexNumber]);
 
-            // indexNumberï¿½Ì’lï¿½ğ‘‚â‚·(ï¿½zï¿½ï¿½Ôï¿½ï¿½ï¿½ï¿½ã‚°ï¿½ï¿½)
-            indexNumber = (indexNumber + 1) % armRotation.Length;
-            yield return new WaitForSeconds(timeMax);
+        // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        if (arm == null || armPatForwardRotation == null || armPatBackRotation == null)
+        {
+            Debug.LogWarning("arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            return;
+        }
+        else
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armPatForwardRotation[indexNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armPatBackRotation[indexNumber]);
+        }
+
+        // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        if (leg == null || legPatBackRotation == null || legPatForwardRotation == null)
+        {
+            Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            return;
+        }
+        else if (foot == null || footPatBackRotation == null || footPatForwardRotation == null)
+        {
+            Debug.LogWarning("foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            return;
+        }
+        else
+        {
+            leg[0].transform.rotation = Quaternion.Euler(0, shaft, legPatBackRotation[indexNumber]);
+            leg[1].transform.rotation = Quaternion.Euler(0, shaft, legPatForwardRotation[indexNumber]);
+            foot[0].transform.rotation = Quaternion.Euler(0, shaft, footPatBackRotation[indexNumber]);
+            foot[1].transform.rotation = Quaternion.Euler(0, shaft, footPatForwardRotation[indexNumber]);
         }
     }
 
+    /// <summary>
+    /// ƒLƒbƒN‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+    /// </summary>
+    void PlayerKick()
+    {
+        // Quaternion.Euler: ‰ñ“]²( x, y, z)
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerKickRotation[indexNumber]);
+
+        // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        if (arm == null || armKickForwardRotation == null || armKickBackRotation == null)
+        {
+            Debug.LogWarning("arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            return;
+        }
+        else
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armKickForwardRotation[indexNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armKickBackRotation[indexNumber]);
+        }
+
+        // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        if (leg == null || legKickBackRotation == null || legKickForwardRotation == null)
+        {
+            Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            return;
+        }
+        else if (foot == null || footKickBackRotation == null || footKickForwardRotation == null)
+        {
+            Debug.LogWarning("foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            return;
+        }
+        else
+        {
+            leg[0].transform.rotation = Quaternion.Euler(0, shaft, legKickBackRotation[indexNumber]);
+            leg[1].transform.rotation = Quaternion.Euler(0, shaft, legKickForwardRotation[indexNumber]);
+            foot[0].transform.rotation = Quaternion.Euler(0, shaft, footKickBackRotation[indexNumber]);
+            foot[1].transform.rotation = Quaternion.Euler(0, shaft, footKickForwardRotation[indexNumber]);
+        }
+    }
+
+    IEnumerator CallWalkWithDelay()
+    {
+        for (int i = 0; i < armWalkRotation.Length; i++)
+        {
+            if (!isAtack)
+            {
+                PlayerWalk();
+
+                // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
+                indexNumber = (indexNumber + 1) % armWalkRotation.Length;
+                yield return new WaitForSeconds(timeMax);
+            }
+        }
+    }
+
+    IEnumerator CallPantieWithDelay()
+    {
+        for (int i = 0; i < armPatForwardRotation.Length; i++)
+        {
+            PlayerPantie();
+
+            // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
+            indexNumber = (indexNumber + 1) % armPatForwardRotation.Length;
+            yield return new WaitForSeconds(timeMax);
+        }
+
+        isAtack = false;
+        time = -1;
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            shaft = 0;
+            isWalk = false;
+            WalkInstance();
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            shaft = 180;
+            isWalk = true;
+            WalkInstance();
+        }
+    }
+
+    IEnumerator CallKickWithDelay()
+    {
+        for (int i = 0; i < armKickForwardRotation.Length; i++)
+        {
+            PlayerKick();
+
+            // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
+            indexNumber = (indexNumber + 1) % armKickForwardRotation.Length;
+            yield return new WaitForSeconds(timeMax);
+        }
+
+        isAtack = false;
+        time = -1;
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            shaft = 0;
+            isWalk = false;
+            WalkInstance();
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            shaft = 180;
+            isWalk = true;
+            WalkInstance();
+        }
+    }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½rï¿½Ì”zï¿½ï¿½Ì’ï¿½ï¿½Ì’lï¿½ï¿½ï¿½tï¿½É‚ï¿½ï¿½ï¿½
+    /// •à‚­‚±‚Æ‚ğŒp‘±‚µ‚½A˜r‚Ì”z—ñ‚Ì’†‚Ì’l‚ğ‹t‚É‚·‚é
     /// </summary>
     void ChangeArmAnime()
     {
-        //ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½q(ï¿½eï¿½vï¿½fï¿½É‘Î‚ï¿½ï¿½Ä•ÏŠï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½)
+        //O€‰‰Zq(Še—v‘f‚É‘Î‚µ‚Ä•ÏŠ·‘€ì‚ğs‚¤)
         if (isActive)
         {
-            armRotation = armRotation.Select(value => value > 0 ? -value : value).ToArray();
+            armWalkRotation = armWalkRotation.Select(value => value > 0 ? -value : value).ToArray();
         }
         else if (!isActive)
         {
-            armRotation = armRotation.Select(value => value < 0 ? -value : value).ToArray();
+            armWalkRotation = armWalkRotation.Select(value => value < 0 ? -value : value).ToArray();
         }
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ï¿½nï¿½ß‚ÌŠÖï¿½
+    /// •à‚­‚±‚Æ‚ğŠJn‚ÌŠÖ”
     /// </summary>
     void WalkStart()
     {
-        time = timeMax * armRotation.Length;
-        StartCoroutine(CallFunctionWithDelay());
+        time = timeMax * armWalkRotation.Length;
+        StartCoroutine(CallWalkWithDelay());
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½
+    /// ƒpƒ“ƒ`‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ŠJn‚·‚é‚Æ‚«‚ÌŠÖ”
+    /// </summary>
+    void PantieStart()
+    {
+        time = timeMax * armPatForwardRotation.Length;
+        StartCoroutine(CallPantieWithDelay());
+    }
+
+    /// <summary>
+    /// ƒLƒbƒN‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ŠJn‚·‚é‚Æ‚«‚ÌŠÖ”
+    /// </summary>
+    void KickStart()
+    {
+        time = timeMax * armKickForwardRotation.Length;
+        StartCoroutine(CallKickWithDelay());
+    }
+
+    /// <summary>
+    /// •à‚­‚±‚Æ‚Ì‰Šú‰»
+    /// </summary>
+    void WalkInstance()
+    {
+      
+        if (time < 0)
+        {
+            isActive = false;
+            ChangeArmAnime();
+            WalkStart();
+        }
+    }
+
+    /// <summary>
+    /// •à‚­‚±‚Æ‚ğŒp‘±‚µ‚½‚Æ‚«
     /// </summary>
     void KeepWalk()
     {
-        // ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©
+        // ˜A‘±“ü—Í‚³‚ê‚Ä‚¢‚é‚©
         if (time - 0.05 < 0)
         {
             isActive = !isActive;
@@ -208,30 +460,43 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½[ï¿½W
+    /// ’¼—§‚·‚é
     /// </summary>
-    /// <param name="head">ï¿½æ‘œï¿½fï¿½[ï¿½^</param>
-    public void ChangeHead(BodyPartsData head)
+    void Upright()
     {
-
-        headSR.sprite = head.spHand;
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[walkLength]);
+        arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[walkLength]);
+        arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armWalkRotation[walkLength]);
+        leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[walkLength]);
+        leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[walkLength]);
+        foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[walkLength]);
+        foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[walkLength]);
     }
 
     /// <summary>
-    /// ï¿½rï¿½ÌƒCï¿½ï¿½ï¿½[ï¿½W
+    /// ã”¼g‚ÌƒCƒ[ƒW
     /// </summary>
-    /// <param name="arm">ï¿½æ‘œï¿½fï¿½[ï¿½^</param>
-    public void ChangeArm(BodyPartsData arm)
+    /// <param name="upperBody">‰æ‘œƒf[ƒ^W‡‘Ì</param>
+    public void ChangeUpperBody(BodyPartsData upperBody)
     {
-        armSR.sprite = arm.spArm;
+        bodySR.sprite = upperBody.spBody;
+        armRightSR.sprite = upperBody.spRightArm;
+        armLeftSR.sprite = upperBody.spLeftArm;
+        handRightSR.sprite = upperBody.spRightHand;
+        handLeftSR.sprite = upperBody.spLeftHand;
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½[ï¿½W
+    /// ‰º”¼g‚ÌƒCƒ[ƒW
     /// </summary>
-    /// <param name="leg">ï¿½æ‘œï¿½fï¿½[ï¿½^</param>
-    public void ChangeLeg(BodyPartsData leg)
+    /// <param name="upperBody">‰æ‘œƒf[ƒ^W‡‘Ì</param>
+    public void ChangeUnderBody(BodyPartsData underBody)
     {
-        legSR.sprite = leg.spLeg;
+        waistSR.sprite = underBody.spWaist;
+        footRightSR.sprite = underBody.spRightFoot;
+        footLeftSR.sprite = underBody.spLeftFoot;
+        legRightSR.sprite = underBody.spRightLeg;
+        legLeftSR.sprite = underBody.spLeftHand;
     }
 }
+

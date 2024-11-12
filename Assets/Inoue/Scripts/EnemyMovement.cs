@@ -24,7 +24,7 @@ public class EnemyMovement : EnemyAttack
     private bool movingToPointB = true; // 進行方向
     private Transform player; // プレイヤーの位置
 
-    GameState gamestate;
+    [SerializeField] GameMgr gamestate;
 
     void Start()
     {
@@ -36,7 +36,7 @@ public class EnemyMovement : EnemyAttack
     {
         // プレイヤーとの距離を計算
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        switch (gamestate)
+        switch (gamestate.enGameState)
         {
             case GameState.Main:
                 switch (enemystate)

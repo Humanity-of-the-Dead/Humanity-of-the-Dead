@@ -31,8 +31,13 @@ public class textdisplay : MonoBehaviour
     bool[] Flag;
 
     [SerializeField]
+<<<<<<< HEAD
     float TextSpeed = 1.0f;
     
+=======
+    GameObject TextImage;
+
+>>>>>>> f2c7774cefe9b97b9f5cec92c4e36b2d3efe6f4c
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +80,35 @@ public class textdisplay : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+<<<<<<< HEAD
             UpdateText();
+=======
+            case GameState.Main:
+                if (Player.transform.position.x > Position[1] && Flag[1] == false)
+                {
+                    TextImage.gameObject.SetActive(true);    //オブジェクトを表示
+                    Flag[1] = true;     //Flag[1]を通った
+                    GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+
+                    UpdateText();
+                }
+                if (Player.transform.position.x > Position[2] && Flag[2] == false)
+                {
+                    TextImage.gameObject.SetActive(true);    //オブジェクトを表示
+                    Flag[2] = true;     //Flag[1]を通った
+                    GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+
+                    UpdateText();
+                }
+                break;
+            case GameState.ShowText:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    TextImage.gameObject.SetActive(false);   //オブジェクトを非表示
+                    GameManager.ChangeState(GameState.Main);
+                }
+                break;
+>>>>>>> f2c7774cefe9b97b9f5cec92c4e36b2d3efe6f4c
         }
     }
     public void UpdateText()
