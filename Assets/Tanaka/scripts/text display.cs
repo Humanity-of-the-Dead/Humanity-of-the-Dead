@@ -51,7 +51,7 @@ public class textdisplay : MonoBehaviour
             case GameState.Main:
                 if (Player.transform.position.x > Position[1] && Flag[1] == false)
                 {
-                    this.gameObject.SetActive(true);    //オブジェクトを表示
+                    //this.gameObject.SetActive(true);    //オブジェクトを表示
                     Flag[1] = true;     //Flag[1]を通った
                     GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
 
@@ -59,7 +59,7 @@ public class textdisplay : MonoBehaviour
                 }
                 if (Player.transform.position.x > Position[2] && Flag[2] == false)
                 {
-                    this.gameObject.SetActive(true);    //オブジェクトを表示
+                    //this.gameObject.SetActive(true);    //オブジェクトを表示
                     Flag[2] = true;     //Flag[1]を通った
                     GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
 
@@ -69,7 +69,7 @@ public class textdisplay : MonoBehaviour
             case GameState.ShowText:
                 if (Input.GetMouseButtonDown(0))
                 {
-                    this.gameObject.SetActive(false);   //オブジェクトを非表示
+                    //this.gameObject.SetActive(false);   //オブジェクトを非表示
                     GameManager.ChangeState(GameState.Main);
                 }
                 break;
