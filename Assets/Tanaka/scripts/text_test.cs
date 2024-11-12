@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class textdisplay : MonoBehaviour
+public class text_test : MonoBehaviour
 {
     [SerializeField]
     private TextAsset[] textAsset;   //メモ帳のファイル(.txt)　配列
@@ -18,20 +18,7 @@ public class textdisplay : MonoBehaviour
 
     private int n = 0;
 
-    [SerializeField]
-    private float[] Position;
-
-    [SerializeField]
-    private GameObject Player;
-
-    [SerializeField]
-    private GameMgr GameManager;
-
-    [SerializeField]
-    bool[] Flag;
-
-    [Header("次の文字が表示されるまでの時間")]
-    [SerializeField]
+    [Header("次の文字が表示されるまでの時間")][SerializeField]
     float TextSpeed = 0.1f;
     
     GameObject TextImage;
@@ -47,39 +34,42 @@ public class textdisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (GameManager.enGameState)
-        {
-            case GameState.Main:
-                if (Player.transform.position.x > Position[1] && Flag[1] == false)
-                {
-                    //this.gameObject.SetActive(true);    //オブジェクトを表示
-                    Flag[1] = true;     //Flag[1]を通った
-                    GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+        //switch (GameManager.enGameState)
+        //{
+        //    case GameState.Main:
+        //        if (Player.transform.position.x > Position[1] && Flag[1] == false)
+        //        {
+        //            //this.gameObject.SetActive(true);    //オブジェクトを表示
+        //            Flag[1] = true;     //Flag[1]を通った
+        //            GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
 
-                    UpdateText();
-                }
-                if (Player.transform.position.x > Position[2] && Flag[2] == false)
-                {
-                    //this.gameObject.SetActive(true);    //オブジェクトを表示
-                    Flag[2] = true;     //Flag[1]を通った
-                    GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+        //            UpdateText();
+        //        }
+        //        if (Player.transform.position.x > Position[2] && Flag[2] == false)
+        //        {
+        //            //this.gameObject.SetActive(true);    //オブジェクトを表示
+        //            Flag[2] = true;     //Flag[1]を通った
+        //            GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
 
-                    UpdateText();
-                }
-                break;
-            case GameState.ShowText:
-                if (Input.GetMouseButtonDown(0))
-                {
-                    //this.gameObject.SetActive(false);   //オブジェクトを非表示
-                    GameManager.ChangeState(GameState.Main);
-                }
-                break;
-        }
+        //            UpdateText();
+        //        }
+        //        break;
+        //    case GameState.ShowText:
+        //        if (Input.GetMouseButtonDown(0))
+        //        {
+        //            //this.gameObject.SetActive(false);   //オブジェクトを非表示
+        //            GameManager.ChangeState(GameState.Main);
+        //        }
+        //        break;
+        //}
    
+        if (Input.GetMouseButtonUp(0)) 
+        {
+            UpdateText();
+        }
     }
     public void UpdateText()
     {
-        int TextMax = 0;
 
         if (textAsset.Length > LoadText)
         {//テキストをLoadTextの分表示
