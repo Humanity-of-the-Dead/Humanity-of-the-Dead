@@ -51,6 +51,8 @@ public class PlayerMoveAnimation : MonoBehaviour
     [Header("太ももの後方の角度")] public float[] legKickBackRotation;
     [Header("足の後方の角度")] public float[] footKickBackRotation;
 
+    [SerializeField] EnemyMoveAnimation moveAnimation;
+
     //配列の番号
     int indexNumber;
 
@@ -182,6 +184,18 @@ public class PlayerMoveAnimation : MonoBehaviour
                     KeepWalk();
                 }
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            Debug.Log("右");
+            moveAnimation.RightMove();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Debug.Log("左");
+            moveAnimation.LeftMove();
         }
     }
 

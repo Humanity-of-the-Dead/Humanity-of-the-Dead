@@ -68,7 +68,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     private void Start()
     {
         indexNumber = 0;
-        shaft = 180;
+        shaft = 0;
 
         isMirror = true;
         isActive = false;
@@ -334,7 +334,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     public void RightMove()
     {
-        shaft = 180;
+        shaft = 0;
     }
 
     /// <summary>
@@ -342,6 +342,6 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     public void LeftMove()
     {
-        shaft = 0;
+        shaft = 180;
     }
 }
