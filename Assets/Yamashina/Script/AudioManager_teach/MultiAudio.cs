@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 
-public class MultiAudioManager : MonoBehaviour
+public class MultiAudio : MonoBehaviour
 {
     public AudioClip[] audioClipsBGM; // Array for multiple BGM clips
     public AudioClip[] audioClipsSE;  // Array for multiple SE clips
