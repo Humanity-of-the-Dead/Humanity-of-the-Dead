@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 268063347}
   - component: {fileID: 268063346}
   - component: {fileID: 268063345}
+  - component: {fileID: 268063348}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -323,6 +324,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &268063348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268063344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d08de368cffc054583979b0127f244c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &280999900
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,10 +834,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 16ec2931e2ab30e4597596a7cd570fe7, type: 3}
   - {fileID: 8300000, guid: 8830af80d8c785843bc62458eb6f8e99, type: 3}
   - {fileID: 8300000, guid: 909a09a416891ff41896a636ca452f14, type: 3}
-  audioClipSE:
-  - {fileID: 8300000, guid: 73aa7ab87883fa04e862979898426030, type: 3}
-  - {fileID: 8300000, guid: c9de9b05c756cad42a786806548eead2, type: 3}
-  - {fileID: 8300000, guid: 35b1063a33c61564496222231495fa54, type: 3}
+  audioClipsSE: []
   bgmMixerGroup: {fileID: -4108538381236679251, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
   seMixerGroup: {fileID: -2155192936819050110, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
   uiMixerGroup: {fileID: 7232108298083354436, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}

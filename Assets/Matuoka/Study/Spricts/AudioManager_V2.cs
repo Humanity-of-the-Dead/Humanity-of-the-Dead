@@ -4,33 +4,38 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager_V2: MonoBehaviour
 {
+    //AudioMixer
+    [SerializeField] AudioMixer audMix;
+
     //BGMスライダ
     [SerializeField] Slider bGMSli;
     //SESlider
     [SerializeField]Slider sESli;
 
-    //BGMの現在ボリューム(0~100)
-    int bGMVol;
-    //SEの現在ボリューム(0~100)
-    int sEVol;
+    //SE
+    [SerializeField]AudioSource sE;
+
+    //BGMの現在ボリューム(整数0~100)
+    float bGMVol;
+    //SEの現在ボリューム(整数0~100)
+    float sEVol;
 
     //BGMのデシベル
     float bGMDec;
     //SEのデシベル
     float sEDec;
 
-    /*ボリュームが0かどうか
-    0:0でない
-    1:0
-    10:BGM
-    01:SE*/
-    int vol0Flag=0;
-
     // Start is called before the first frame update
     void Start()
     {
+        //BGM・SEのボリュームの初期化
+        bGMVol = 50;
+        sEVol = 50;
+        DecibelConversion(true);
+        DecibelConversion(false);
+        //\BGM・SEのボリュームの初期化
     }
 
     // Update is called once per frame
@@ -41,78 +46,44 @@ public class AudioManager : MonoBehaviour
     //BGMスライダの値が変えられたとき
     public void OnValueChangedBGM()
     {
-        //ボリュームの取得
-        bGMVol = (int)bGMSli.value;
-
         DecibelConversion(true);
     }
 
     //SEスライダの値が変えられたとき
     public void OnValueChangedSE()
     {
-        //ボリュームの取得
-        sEVol = (int)sESli.value;
-
         DecibelConversion(false);
+
+        //SEを流す
+        sE.PlayOneShot(sE.clip);
     }
 
     void DecibelConversion(bool isBGM)
     {
         //BGMスライダの値を変えたとき
         if (isBGM) {
-            //ボリュームが0より大きいとき
-            if (bGMVol > 0)
-            {
-                //デシベル変換
-                bGMDec = Mathf.Clamp(Mathf.Log10((float)bGMVol / 100f) * 20f, -80f, 0f);
-                //BGMのボリュームが0というフラグを下げる
-                vol0Flag &= 1;
-            }
-            else
-            {
-                //BGMのボリュームが0というフラグを立てる
-                vol0Flag |= 2;
-            }
+            //ボリュームの取得
+            //0~100の整数から0.00~1.00にする
+            bGMVol = bGMSli.value / 100;
+
+            //デシベル変換
+            bGMDec = Mathf.Clamp(Mathf.Log10(bGMVol) * 20f, -80f, 0f);
+            
+            //AudioMixerに代入
+            audMix.SetFloat("BGM",bGMDec);
         }
         //SEのスライダの値を変えたとき
         else
         {
-            //ボルームが0より大きいとき
-            if (sEVol > 0)
-            {
-                //デシベル変換
-                sEDec = Mathf.Clamp(Mathf.Log10((float)sEVol / 100f) * 20f, -80f, 0f);
-                //SEのボリュームが0というフラグを下げる
-                vol0Flag &= 2;
-            }
-            else
-            {
-                //SEのボリュームが0というフラグを立てる
-                vol0Flag |= 1;
-            }
-        }
+            //ボリュームの取得
+            //0~100の整数から0.00~1.00にする
+            sEVol = sESli.value / 100;
 
-        switch (vol0Flag)
-        {
-            case 0:
-                Debug.Log("デシベル BGM:" + bGMDec + "\n" +
-                    "\tSE:" + sEDec);
-                break;
+            //デシベル変換
+            sEDec = Mathf.Clamp(Mathf.Log10(sEVol) * 20f, -80f, 0f);
 
-            case 1:
-                Debug.Log("デシベル BGM:" + bGMDec + "\n" +
-                    "\tSE:ボリューム0");
-                break;
-
-            case 2:
-                Debug.Log("デシベル BGM:ボリューム0\n" +
-                    "\tSE:" + sEDec);
-                break;
-
-            case 3:
-                Debug.Log("デシベル BGM:ボリューム0\n" +
-                    "\tSE:ボリューム0");
-                break;
+            //AudioMixerに代入
+            audMix.SetFloat("SE", sEDec);
         }
     }
 }
