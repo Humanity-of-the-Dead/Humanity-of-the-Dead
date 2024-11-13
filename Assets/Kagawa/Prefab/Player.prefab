@@ -1079,7 +1079,7 @@ Transform:
   m_GameObject: {fileID: 6250563161395373809}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1.5, y: 8.94, z: 0}
+  m_LocalPosition: {x: -1.0799998, y: 8.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1278,8 +1278,8 @@ MonoBehaviour:
   waistSR: {fileID: 5852190028921739620}
   legRightSR: {fileID: 16527789392501723}
   legLeftSR: {fileID: 6950470393473325646}
-  footRightSR: {fileID: 6939545388138909550}
-  footLeftSR: {fileID: 3789773760685780882}
+  footRightSR: {fileID: 3789773760685780882}
+  footLeftSR: {fileID: 6939545388138909550}
   playerRc: {fileID: 1642587499483098088}
   arm:
   - {fileID: 7108029326718391314}
@@ -1435,7 +1435,7 @@ Transform:
   m_GameObject: {fileID: 7108029326718391314}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7900002, y: 8.9, z: 0}
+  m_LocalPosition: {x: -1.37, y: 8.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

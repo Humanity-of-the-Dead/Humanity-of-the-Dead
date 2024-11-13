@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class EnemyMoveAnimation : MonoBehaviour
 {
+    [Header("ゾンビ")] public bool zombie;
     [Header("全身")] public GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")] GameObject[] arm;
     [SerializeField, Header("太腿の角度、先に右足")] GameObject[] leg;
@@ -104,6 +105,11 @@ public class EnemyMoveAnimation : MonoBehaviour
         {
             Debug.LogWarning("armのデータが何かしら抜けてる");
             return;
+        }
+        else if(zombie)
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[indexNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, -armWalkRotation[indexNumber]);
         }
         else
         {
@@ -264,14 +270,18 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     void ChangeArmAnime()
     {
-        //三項演算子(各要素に対して変換操作を行う)
-        if (isActive)
+        // ゾンビではない場合　
+        if (!zombie)
         {
-            armWalkRotation = armWalkRotation.Select(value => value < 0 ? -value : value).ToArray();
-        }
-        else if (!isActive)
-        {
-            armWalkRotation = armWalkRotation.Select(value => value > 0 ? -value : value).ToArray();
+            //三項演算子(各要素に対して変換操作を行う)
+            if (isActive)
+            {
+                armWalkRotation = armWalkRotation.Select(value => value < 0 ? -value : value).ToArray();
+            }
+            else if (!isActive)
+            {
+                armWalkRotation = armWalkRotation.Select(value => value > 0 ? -value : value).ToArray();
+            }
         }
     }
 
@@ -335,6 +345,20 @@ public class EnemyMoveAnimation : MonoBehaviour
     public void RightMove()
     {
         shaft = 0;
+    }
+
+    /// <summary>
+    /// 直立する
+    /// </summary>
+    public void Upright()
+    {
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[walkLength]);
+        arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[walkLength]);
+        arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armWalkRotation[walkLength]);
+        leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[walkLength]);
+        leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[walkLength]);
+        foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[walkLength]);
+        foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[walkLength]);
     }
 
     /// <summary>
