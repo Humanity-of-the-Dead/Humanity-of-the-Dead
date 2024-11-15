@@ -19,6 +19,24 @@ public class MultiAudio_Matsuoka: MonoBehaviour
     //BGM,SE,UIのオーディオミキサーグループ
     AudioMixerGroup bGMAudMixGro, sEAudMixGro, uIAudMixGro;
 
+    //シングルトン
+    public static MultiAudio_Matsuoka ins;
+
+    private void Awake()
+    {
+        //シングルトン化
+        if (ins != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            ins = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        //\シングルトン化
+    }
+
     // Start is called before the first frame update
     void Start()
     {
