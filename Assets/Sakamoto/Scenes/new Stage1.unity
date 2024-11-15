@@ -3557,7 +3557,10 @@ MonoBehaviour:
   - {fileID: 4900000, guid: c89c4e974f2726e4687f2aa7d2f95619, type: 3}
   text: {fileID: 8347251639881320452}
   TypingSpeed: 0.5
-  Position: []
+  Position:
+  - 0
+  - 40
+  - 80
   Player: {fileID: 285081240}
   GameManager: {fileID: 498662820}
   Flag: 010000
