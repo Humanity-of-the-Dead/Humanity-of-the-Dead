@@ -17,7 +17,7 @@ public class MultiAudio_Matsuoka: MonoBehaviour
     AudioSource sEAudSou;
 
     //BGM,SE,UIのオーディオミキサーグループ
-    AudioMixerGroup bGMAudMixGro, sEAudMixGro, uIAudMixGro;
+    [SerializeField]AudioMixerGroup bGMAudMixGro, sEAudMixGro, uIAudMixGro;
 
     //シングルトン
     public static MultiAudio_Matsuoka ins;
