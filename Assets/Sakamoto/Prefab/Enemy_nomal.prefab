@@ -198,6 +198,7 @@ MonoBehaviour:
   PlayerParameter: {fileID: 0}
   Boss: 0
   textBox: {fileID: 0}
+  sceneTransitionManager: {fileID: 0}
 --- !u!114 &1027968669988611967
 MonoBehaviour:
   m_ObjectHideFlags: 0
