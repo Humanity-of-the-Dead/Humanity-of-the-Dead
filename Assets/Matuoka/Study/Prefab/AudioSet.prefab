@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 5009803700500600058}
   - component: {fileID: 8437473775506848735}
   m_Layer: 0
-  m_Name: Audio
+  m_Name: AudioSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,6 +182,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 484aa26a6ec4e4c469c3929da934ab91, type: 3}
   - {fileID: 8300000, guid: b9742bae17eb7a545b7fb630c150a3d2, type: 3}
   - {fileID: 8300000, guid: d327e35c5f3d39f43b18b177b46e740d, type: 3}
+  bGMAudMixGro: {fileID: 3679390433003195848, guid: 8acf0740df7f2384aa30521452f1b945, type: 2}
+  sEAudMixGro: {fileID: -1835925389188928416, guid: 8acf0740df7f2384aa30521452f1b945, type: 2}
+  uIAudMixGro: {fileID: 9138312347371035016, guid: 8acf0740df7f2384aa30521452f1b945, type: 2}
 --- !u!1 &1553061318831934779
 GameObject:
   m_ObjectHideFlags: 0
