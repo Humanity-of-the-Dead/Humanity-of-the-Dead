@@ -14,8 +14,8 @@ public class TitleAnimation : MonoBehaviour
     [Tooltip("クレジット画面のオブジェクトを入れる")]
     public GameObject CreditPanel;
 
-    //[Tooltip("オプション画面のオブジェクトを入れる")]
-    //public GameObject OptionPanel;
+    [Tooltip("オプション画面のオブジェクトを入れる")]
+    public GameObject OptionPanel;
 
     [Header("ボタンのオブジェクトのセットアクティブ切り替え用")]
     [Tooltip("クレジットボタンのオブジェクトを入れる")]
@@ -25,14 +25,14 @@ public class TitleAnimation : MonoBehaviour
     [Tooltip("初めからボタンのオブジェクトを入れる")]
     [SerializeField] GameObject StartButton; //初めから
 
-    //[Tooltip("オプションボタンのオブジェクトを入れる")]
-    //[SerializeField] GameObject optionButton;
+    [Tooltip("オプションボタンのオブジェクトを入れる")]
+    [SerializeField] GameObject optionButton;
 
     [Header("ボタンのイベントトリガーのアクティブ切り替え用")]
     [Tooltip("クレジットボタンのイベントトリガーを入れる")]
     [SerializeField] EventTrigger eventTrigger_Credit;
-    //[Tooltip("オプションボタンのイベントトリガーを入れる")]
-    //[SerializeField] EventTrigger eventTrigger_option;
+    [Tooltip("オプションボタンのイベントトリガーを入れる")]
+    [SerializeField] EventTrigger eventTrigger_option;
     [Tooltip("はじめからボタンのイベントトリガーを入れる")]
 
     [SerializeField] EventTrigger eventTrigger_Start;
@@ -44,9 +44,9 @@ public class TitleAnimation : MonoBehaviour
     [Tooltip("初めからボタンそのものを入れる")]
 
     public Button start;
-    //[Tooltip("オプションボタンそのものを入れる")]
+    [Tooltip("オプションボタンそのものを入れる")]
 
-    //public Button option;
+    public Button option;
     [Header("各オブジェクトのアニメーション速度設定")]
     [Tooltip("各オブジェクトの移動速度")]
 

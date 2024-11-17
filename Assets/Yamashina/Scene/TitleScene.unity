@@ -1615,6 +1615,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488613441}
   m_CullTransparentMesh: 1
+--- !u!1 &1642198400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2357531127260703785, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
+  m_PrefabInstance: {fileID: 8190313290627980610}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1693562214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1753,12 +1758,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainPanel: {fileID: 438391158}
   CreditPanel: {fileID: 1037245410}
+  OptionPanel: {fileID: 1642198400}
   CreditButton: {fileID: 1865540679}
   StartButton: {fileID: 2078186186}
+  optionButton: {fileID: 604563083}
   eventTrigger_Credit: {fileID: 1865540684}
+  eventTrigger_option: {fileID: 604563086}
   eventTrigger_Start: {fileID: 2078186191}
   Credit: {fileID: 1865540681}
   start: {fileID: 2078186188}
+  option: {fileID: 604563084}
   speed: 5
   Coroutine: 0
   creditPanelStartPosition: {x: 48, y: 1258, z: 0}
