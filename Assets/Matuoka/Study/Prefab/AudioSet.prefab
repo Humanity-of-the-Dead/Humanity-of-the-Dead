@@ -137,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5009803700500600058}
-  - component: {fileID: 8437473775506848735}
+  - component: {fileID: 2836153735995085346}
   m_Layer: 0
   m_Name: AudioSet
   m_TagString: Untagged
@@ -162,7 +162,7 @@ Transform:
   - {fileID: 2077059141076066767}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8437473775506848735
+--- !u!114 &2836153735995085346
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,20 +171,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1178248624856292866}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d0749d692df11b4c9270aeaceb9696f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0236a2453ffbb8449be86653adc62d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bGMAudCli:
-  - {fileID: 8300000, guid: 90e07d94ace7b6f45a7a301703aa540e, type: 3}
-  - {fileID: 8300000, guid: 81e3cbc9238dce54d97a23666f2e8eb9, type: 3}
-  - {fileID: 8300000, guid: b5f423df0a0bb0a4bae814bf81577fc5, type: 3}
-  sEAudCli:
-  - {fileID: 8300000, guid: 484aa26a6ec4e4c469c3929da934ab91, type: 3}
-  - {fileID: 8300000, guid: b9742bae17eb7a545b7fb630c150a3d2, type: 3}
-  - {fileID: 8300000, guid: d327e35c5f3d39f43b18b177b46e740d, type: 3}
-  bGMAudMixGro: {fileID: 3679390433003195848, guid: 8acf0740df7f2384aa30521452f1b945, type: 2}
-  sEAudMixGro: {fileID: -1835925389188928416, guid: 8acf0740df7f2384aa30521452f1b945, type: 2}
-  uIAudMixGro: {fileID: 9138312347371035016, guid: 8acf0740df7f2384aa30521452f1b945, type: 2}
+  bGMAudCli: []
+  sEAudCli: []
+  bGMAudMixGro: {fileID: 3679390433003195848, guid: 996736340159f8f4fabdd6fe3e6021a7, type: 2}
+  sEAudMixGro: {fileID: -1835925389188928416, guid: 996736340159f8f4fabdd6fe3e6021a7, type: 2}
+  uIAudMixGro: {fileID: 9138312347371035016, guid: 996736340159f8f4fabdd6fe3e6021a7, type: 2}
 --- !u!1 &1553061318831934779
 GameObject:
   m_ObjectHideFlags: 0

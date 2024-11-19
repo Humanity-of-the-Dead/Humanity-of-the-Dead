@@ -19,6 +19,8 @@ public class EnemySpooner : MonoBehaviour
 
     [SerializeField] List<GameObject> liEnemyList;
 
+    //マーカー
+    [SerializeField] GameObject goMarker;
     //タイマー
     float fTimer;
     //タイマーの最大値
@@ -28,11 +30,10 @@ public class EnemySpooner : MonoBehaviour
 
     private void Start()
     {
-        //エネミーを上限-1体生み出す
-        for(int i = 0; i < fEnemyMax - 1; i++)
-        {
-            createEnemy();
-        }
+        createEnemy();
+        fTimer = 0;
+        //マーカーを消す
+        goMarker.SetActive(false);
     }
 
     void Update()
@@ -81,5 +82,26 @@ public class EnemySpooner : MonoBehaviour
         liEnemyList[liEnemyList.Count - 1].transform.position = this.transform.position;
 
         goTarget.GetComponent<PlayerControl>().AddListItem(liEnemyList[liEnemyList.Count - 1]);
+    }
+
+    //ゲーム開始時のエネミー生成
+    IEnumerator startCreate()
+    {
+        //エネミーの最大数の-1体生成する
+        if(liEnemyList.Count < fEnemyMax - 1)
+        {
+            if(fTimer > 1)
+            {
+                //エネミー生成
+                createEnemy();
+                fTimer = 0;
+            }
+            fTimer += Time.deltaTime; 
+            yield return null;
+        }
+        else
+        {
+            yield break;
+        }
     }
 }

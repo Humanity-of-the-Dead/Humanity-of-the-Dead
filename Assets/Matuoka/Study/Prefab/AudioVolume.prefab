@@ -836,10 +836,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4342398986176325815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c4bac79750d375479c2708db9c4fb10, type: 3}
+  m_Script: {fileID: 11500000, guid: 651f060104d62454681a723b251f09ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audMix: {fileID: 24100000, guid: 8acf0740df7f2384aa30521452f1b945, type: 2}
+  audMix: {fileID: 24100000, guid: 996736340159f8f4fabdd6fe3e6021a7, type: 2}
   bGMSli: {fileID: 7627574054078012476}
   sESli: {fileID: 7942254754157535781}
   uISli: {fileID: 2090722119120766303}

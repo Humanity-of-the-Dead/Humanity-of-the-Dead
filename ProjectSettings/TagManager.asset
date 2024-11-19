@@ -8,6 +8,8 @@ TagManager:
   - Car
   - BGM
   - SE
+  - Enemy
+  - Dorops
   layers:
   - Default
   - TransparentFX
@@ -15,13 +17,13 @@ TagManager:
   - 
   - Water
   - UI
-  - MainObject
+  - Player
   - BG
   - Floor
   - Enemy
-  - 
-  - 
-  - 
+  - Object
+  - Car
+  - DoropButton
   - 
   - 
   - 
