@@ -1,30 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class AudioButtonHandler : MonoBehaviour
+public class AudioButtonHandler : MonoBehaviour, IPointerEnterHandler
+
 {
-    // 再生するBGMのインデックス
-    public int bgmIndex = -1;
-    // 再生するSEのインデックス
-    public int seIndex = -1;
+    public string clickSEName = "";
+    public string hoverSEName = "";
 
     // BGMを再生する
-    public void PlayBGM()
-    {
-        if (bgmIndex >= 0)
-        {
-            MultiAudio.ins.ChooseSongs_BGM(bgmIndex);
-        }
-    }
+   
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+
+       
+            MultiAudio.ins.PlaySEByName(hoverSEName);
+       
+    }
     // SEを再生する
     public void PlaySE()
     {
-        if (seIndex >= 0)
-        {
-            MultiAudio.ins.ChooseSongs_SE(seIndex);
-        }
+        MultiAudio.ins.PlaySEByName(clickSEName);
     }
 
    
