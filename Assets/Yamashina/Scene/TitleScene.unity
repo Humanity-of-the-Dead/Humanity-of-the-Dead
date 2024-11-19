@@ -951,7 +951,6 @@ GameObject:
   - component: {fileID: 532598762}
   - component: {fileID: 532598761}
   - component: {fileID: 532598760}
-  - component: {fileID: 532598763}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1033,27 +1032,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &532598763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532598759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a396791fc31e352438bbed9fab8d746f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClipsBGM:
-  - {fileID: 8300000, guid: 16ec2931e2ab30e4597596a7cd570fe7, type: 3}
-  - {fileID: 8300000, guid: 8830af80d8c785843bc62458eb6f8e99, type: 3}
-  - {fileID: 8300000, guid: 8830af80d8c785843bc62458eb6f8e99, type: 3}
-  - {fileID: 8300000, guid: 577d93e73cafd8f4f8c350ba015ee439, type: 3}
-  audioClipsSE: []
-  bgmMixerGroup: {fileID: -4108538381236679251, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
-  seMixerGroup: {fileID: -2155192936819050110, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
-  uiMixerGroup: {fileID: 7232108298083354436, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
 --- !u!1 &604563083
 GameObject:
   m_ObjectHideFlags: 0
