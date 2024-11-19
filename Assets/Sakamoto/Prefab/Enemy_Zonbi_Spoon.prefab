@@ -1663,7 +1663,7 @@ GameObject:
   - component: {fileID: 6605922515007862427}
   m_Layer: 9
   m_Name: Enemy_Zonbi_Spoon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1865,7 +1865,7 @@ MonoBehaviour:
   damage: 1
   Upperbodypart: {fileID: 11400000, guid: e14baf2f3f4c6df40a37ca9c3d576095, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
-  prePart: {fileID: 2198627103825754482, guid: 9ef6486a8bc7b494c93dd6ae51d33677, type: 3}
+  prePart: {fileID: 1386206347217571068, guid: 9ef6486a8bc7b494c93dd6ae51d33677, type: 3}
   PlayerParameter: {fileID: 0}
   PlayerControl: {fileID: 0}
   Boss: 0
