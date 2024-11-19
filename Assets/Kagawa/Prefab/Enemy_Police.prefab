@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 5066492829317263093}
   - component: {fileID: 6025226992257383609}
   m_Layer: 0
-  m_Name: Enemy_Zonbi
+  m_Name: Enemy_Police
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -74,6 +74,9 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     // タイマー
     float time;
+    
+    // タイマー
+    float timeAttack;
 
 
     private void Start()
@@ -87,13 +90,14 @@ public class PlayerMoveAnimation : MonoBehaviour
         isStop = false;
         walkLength = armWalkRotation.Length - 1;
         time = 0;
+        timeAttack = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         time -= Time.deltaTime;
-
+        timeAttack -= Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.D))
         {
@@ -134,22 +138,19 @@ public class PlayerMoveAnimation : MonoBehaviour
             WalkInstance();
         }
 
+        if (timeAttack < 0)
+        {
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                AttackWaite();
+                PantieStart();
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            isAtack = true;
-            StopCoroutine(CallWalkWithDelay());
-            Upright();
-            indexNumber = 0;
-            PantieStart();
-        }
-        else if (Input.GetKeyDown(KeyCode.K))
-        {
-            isAtack = true;
-            StopCoroutine(CallWalkWithDelay());
-            Upright();
-            indexNumber = 0;
-            KickStart();
+            }
+            else if (Input.GetKeyDown(KeyCode.K))
+            {
+                AttackWaite();
+                KickStart();
+            }
         }
         
 
@@ -343,21 +344,8 @@ public class PlayerMoveAnimation : MonoBehaviour
             yield return new WaitForSeconds(timeMax);
         }
 
+        time = 0;
         isAtack = false;
-        time = -1;
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            shaft = 0;
-            isWalk = false;
-            WalkInstance();
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            shaft = 180;
-            isWalk = true;
-            WalkInstance();
-        }
     }
 
     IEnumerator CallKickWithDelay()
@@ -371,21 +359,8 @@ public class PlayerMoveAnimation : MonoBehaviour
             yield return new WaitForSeconds(timeMax);
         }
 
+        time = 0;
         isAtack = false;
-        time = -1;
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            shaft = 0;
-            isWalk = false;
-            WalkInstance();
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            shaft = 180;
-            isWalk = true;
-            WalkInstance();
-        }
     }
 
     /// <summary>
@@ -439,6 +414,7 @@ public class PlayerMoveAnimation : MonoBehaviour
       
         if (time < 0)
         {
+            indexNumber = 0;
             isActive = false;
             ChangeArmAnime();
             WalkStart();
@@ -453,10 +429,23 @@ public class PlayerMoveAnimation : MonoBehaviour
         // 連続入力されているか
         if (time - 0.05 < 0)
         {
+            indexNumber = 0;
             isActive = !isActive;
             ChangeArmAnime();
             WalkStart();
         }
+    }
+
+    /// <summary>
+    /// 攻撃の初期化
+    /// </summary>
+    void AttackWaite()
+    {
+        timeAttack = timeMax * armKickBackRotation.Length;
+        isAtack = true;
+        StopCoroutine(CallWalkWithDelay());
+        Upright();
+        indexNumber = 0;
     }
 
     /// <summary>
