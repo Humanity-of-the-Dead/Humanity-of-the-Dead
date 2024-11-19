@@ -101,7 +101,6 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            Debug.Log("aomori");
             shaft = 0;
 
             //Ã~ó‘Ô‚©‚ç¶Œü‚­‚Æ‚«

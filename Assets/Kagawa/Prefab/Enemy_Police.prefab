@@ -389,13 +389,27 @@ MonoBehaviour:
   - -15
   - 0
   timeWalk: 0
-  playerPatRotation: []
-  armPatForwardRotation: []
-  armPatBackRotation: []
-  legPatForwardRotation: []
-  footPatForwardRotation: []
-  legPatBackRotation: []
-  footPatBackRotation: []
+  playerPatRotation:
+  - 0
+  - 0
+  armPatForwardRotation:
+  - 0
+  - 0
+  armPatBackRotation:
+  - 90
+  - 0
+  legPatForwardRotation:
+  - 20
+  - 0
+  footPatForwardRotation:
+  - 20
+  - 0
+  legPatBackRotation:
+  - -10
+  - 0
+  footPatBackRotation:
+  - -10
+  - 0
   playerKickRotation: []
   armKickForwardRotation: []
   armKickBackRotation: []

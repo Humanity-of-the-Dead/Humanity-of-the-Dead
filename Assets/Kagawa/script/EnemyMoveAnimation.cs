@@ -23,7 +23,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     [Header("足の後方の角度")] public float[] footWalkBackRotation;
     [Header("歩きの継続時間")] public float timeWalk;
 
-    [Header("---パンチのアニメーション---")]
+    [Header("---上半身のアニメーション---")]
     [Header("全身の角度")] public float[] playerPatRotation;
     [Header("腕の前方角度")] public float[] armPatForwardRotation;
     [Header("腕の後方角度")] public float[] armPatBackRotation;
@@ -32,7 +32,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     [Header("太ももの後方の角度")] public float[] legPatBackRotation;
     [Header("足の後方の角度")] public float[] footPatBackRotation;
 
-    [Header("---キックのアニメーション---")]
+    [Header("---下半身のアニメーション---")]
     [Header("全身の角度")] public float[] playerKickRotation;
     [Header("腕の前方角度")] public float[] armKickForwardRotation;
     [Header("腕の後方角度")] public float[] armKickBackRotation;
@@ -150,7 +150,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// パンチのモーション
+    /// 上半身のモーション
     /// </summary>
     public void PlayerPantie()
     {
@@ -190,7 +190,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// キックのアニメーション
+    /// 下半身のアニメーション
     /// </summary>
     public void PlayerKick()
     {
