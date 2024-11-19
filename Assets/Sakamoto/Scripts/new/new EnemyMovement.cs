@@ -18,7 +18,7 @@ public class newEnemyMovement : EnemyAttack
 
     [SerializeField] EnemyMoveAnimation moveAnimation;
 
-    enum EnemyState 
+    enum EnemyState
     {
         search,
         walk,
@@ -42,6 +42,7 @@ public class newEnemyMovement : EnemyAttack
         player = GameObject.FindGameObjectWithTag("Player").transform;
         pointA = this.transform.position.x + moveAbs;
         pointB = this.transform.position.x - moveAbs;
+
     }
 
     void Update()
@@ -86,11 +87,11 @@ public class newEnemyMovement : EnemyAttack
                         }
                         break;
                     case EnemyState.attack:
-                        if(distanceToPlayer < upperpart.AttackArea)
+                        if (distanceToPlayer < upperpart.AttackArea)
                         {
                             UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
                         }
-                        else if(distanceToPlayer < lowerpart.AttackArea)
+                        else if (distanceToPlayer < lowerpart.AttackArea)
                         {
                             LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
 
@@ -99,7 +100,7 @@ public class newEnemyMovement : EnemyAttack
                         //moveAnimation.PlayerPantie();
                         break;
                     case EnemyState.wait:
-                        if(timer > waitTime)
+                        if (timer > waitTime)
                         {
                             timer = 0;
                             enemystate = EnemyState.search;
@@ -108,24 +109,40 @@ public class newEnemyMovement : EnemyAttack
                         timer += Time.deltaTime;
                         break;
                 }
-                
 
-                
+
+
                 break;
             case GameState.ShowText:
                 break;
 
-            
+
         }
-
-        
-        
-
-
     }
     private void MoveTowards(Vector3 target, float moveSpeed)
     {
         transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("衝突イベント検知");
+        Debug.Log(collision.gameObject.tag);
+        Debug.Log(enemystate);
+        if (collision.gameObject.CompareTag("Enemy") && enemystate == EnemyState.search)
+        {
+            Debug.Log("敵同士が衝突し、回れ右");
+            if (movingToPointB)
+            {
+                moveAnimation.RightMove();
+            }
+            else
+            {
+                moveAnimation.LeftMove();
+            }
+            movingToPointB = !movingToPointB;
+        }
     }
 }
 // プレイヤーに向かって移動
