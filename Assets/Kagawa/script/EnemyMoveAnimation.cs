@@ -306,7 +306,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         if (timeAttack < 0)
         {
-            time = time = timeMax * armKickForwardRotation.Length;
+            time = timeMax * armKickForwardRotation.Length;
             timeAttack = timeMax * armPatBackRotation.Length;
             StopCoroutine(CallWalkWithDelay());
             Upright();
