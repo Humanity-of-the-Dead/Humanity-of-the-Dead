@@ -28,6 +28,8 @@ public class textdisplay : MonoBehaviour
     private GameMgr GameManager;
 
     [SerializeField]
+    private GameObject TextArea; //テキスト表示域
+
     bool[] Flag;
 
     [Header("次の文字が表示されるまでの時間")]
@@ -42,6 +44,9 @@ public class textdisplay : MonoBehaviour
         text.text = "";// 初期化
         Debug.Log(textAsset[0].text);
         //StartCoroutine("TextCoroutine");
+        //テキスト表示域を非表示
+        TextArea.SetActive(false);
+        Flag = new bool[Position.Length];
     }
 
     // Update is called once per frame
@@ -50,21 +55,19 @@ public class textdisplay : MonoBehaviour
         switch (GameManager.enGameState)
         {
             case GameState.Main:
-                if (Player.transform.position.x > Position[1] && Flag[1] == false)
+                for(int i = 0; i < Flag.Length; i++)
                 {
-                    //this.gameObject.SetActive(true);    //オブジェクトを表示
-                    Flag[1] = true;     //Flag[1]を通った
-                    GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+                    if (Player.transform.position.x > Position[i] && Flag[i] == false)
+                    {
+                        //this.gameObject.SetActive(true);    //オブジェクトを表示
+                        Flag[i] = true;     //Flag[i]を通った
+                        GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
 
-                    UpdateText();
-                }
-                if (Player.transform.position.x > Position[2] && Flag[2] == false)
-                {
-                    //this.gameObject.SetActive(true);    //オブジェクトを表示
-                    Flag[2] = true;     //Flag[1]を通った
-                    GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+                        //テキスト表示域を表示域
+                        TextArea.SetActive(true);
 
-                    UpdateText();
+                        UpdateText();
+                    }
                 }
                 break;
             case GameState.ShowText:
@@ -72,6 +75,9 @@ public class textdisplay : MonoBehaviour
                 {
                     //this.gameObject.SetActive(false);   //オブジェクトを非表示
                     GameManager.ChangeState(GameState.Main);
+
+                    //テキスト表示域を非表示
+                    TextArea.SetActive(false);
                 }
                 break;
         }

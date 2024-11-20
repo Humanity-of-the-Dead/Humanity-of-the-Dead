@@ -10,6 +10,9 @@ public class PlayerParameter : MonoBehaviour
     //ゲームマネージャー
     [SerializeField]GameMgr scGameMgr;
 
+    //移植時のモザイク
+    [SerializeField] GameObject goMosaic;
+
     public static PlayerParameter Instance;
 
     [Header("1減少するのにかかる時間")]
@@ -45,6 +48,9 @@ public class PlayerParameter : MonoBehaviour
         iHumanity = iHumanityMax;
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
+
+        //モザイクを非表示にする
+        goMosaic.SetActive(false);
 
         //シーン遷移で破棄されない
         DontDestroyOnLoad(gameObject);
@@ -85,6 +91,10 @@ public class PlayerParameter : MonoBehaviour
     //テスト段階では引数はnullでいい
     public void transplant(BodyPartsData partsData)
     {
+        //移植時にモザイクを表示させる
+        //モザイク自体が時間差で消えるから表示だけでいい
+        goMosaic.SetActive(true);
+
         //partsData = partsData ?? DefaultData;
 
         //キャラのイメージ取得用

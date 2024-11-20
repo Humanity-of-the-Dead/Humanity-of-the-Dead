@@ -7,6 +7,8 @@ public class Test_MultiAudio : MonoBehaviour
     [SerializeField] int num;
     [SerializeField] bool isBGM;
 
+    [SerializeField]MultiAudio_Matsuoka MulAud_Mat;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +23,11 @@ public class Test_MultiAudio : MonoBehaviour
     public void OnClickButton()
     {
         if (isBGM) {
-            MultiAudio_Matsuoka.ins.ChooseSongsBGM(num);
+            MulAud_Mat.ChooseSongsBGM(num);
         }
         else
         {
-            MultiAudio_Matsuoka.ins.ChooseSongsSE(num);
+            MulAud_Mat.ChooseSongsSE(num);
         }
     }
 }

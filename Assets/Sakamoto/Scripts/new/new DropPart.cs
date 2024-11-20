@@ -20,17 +20,23 @@ public class newDropPart : MonoBehaviour
     bool bBoss;
      SceneTransitionManager sceneTransitionManager;
 
+    //ボタンオブジェクト
+    [SerializeField] GameObject[] goButton;
+
+    //お墓
+    [SerializeField] GameObject goGrave;
+
     void Start()
     {
-        //アイテムの画像になる
         
+
     }
 
     // Update is called once per frame
     void Update()
     {
         //Jキーを押したら慰霊する
-        if(Input.GetKeyUp(KeyCode.J)) {
+        if(Input.GetKeyUp(KeyCode.J) && goButton[1].activeSelf == true) {
             goPlayerParameter.GetComponent<PlayerParameter>().comfort(10);
             if (bBoss)
             {
@@ -38,11 +44,16 @@ public class newDropPart : MonoBehaviour
                 sceneTransitionManager.SceneChange(SceneInformation.SCENE.Title);
 
             }
+            Debug.Log(this.transform.position);
+            GameObject obj = Instantiate(goGrave);
+            obj.transform.position = new Vector3(this.gameObject.transform.position.x,
+                                                        0.5f, this.gameObject.transform.position.z);
             Destroy(this.gameObject);
 
         }
         //Lキーを押したら移植する
-        if (Input.GetKeyDown(KeyCode.L)){
+        if (Input.GetKeyDown(KeyCode.L) && goButton[0].activeSelf == true)
+        {
             goPlayerParameter.GetComponent<PlayerParameter>().transplant(partsData);
             if (bBoss)
             {
@@ -99,4 +110,6 @@ public class newDropPart : MonoBehaviour
        this.sceneTransitionManager = sceneTransitionManager;    
 
     }
+
+
 }
