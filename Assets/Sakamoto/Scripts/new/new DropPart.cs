@@ -23,6 +23,8 @@ public class newDropPart : MonoBehaviour
     //ボタンオブジェクト
     [SerializeField] GameObject[] goButton;
 
+    //お墓
+    [SerializeField] GameObject goGrave;
 
     void Start()
     {
@@ -42,6 +44,10 @@ public class newDropPart : MonoBehaviour
                 sceneTransitionManager.SceneChange(SceneInformation.SCENE.Title);
 
             }
+            Debug.Log(this.transform.position);
+            GameObject obj = Instantiate(goGrave);
+            obj.transform.position = new Vector3(this.gameObject.transform.position.x,
+                                                        0.5f, this.gameObject.transform.position.z);
             Destroy(this.gameObject);
 
         }
