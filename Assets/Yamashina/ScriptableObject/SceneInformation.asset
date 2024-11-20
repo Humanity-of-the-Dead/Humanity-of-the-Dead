@@ -16,8 +16,8 @@ MonoBehaviour:
   - m_SceneName: TitleScene
   - m_SceneName: new Stage1
   - m_SceneName: Stage2
-  - m_SceneName: Stage2
   sceneNames:
   - TitleScene
   - new Stage1
+  - Stage2
   previousScene: 0
