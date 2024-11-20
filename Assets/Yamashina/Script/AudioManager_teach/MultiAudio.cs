@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 
 public class MultiAudio : MonoBehaviour
 {
-
-
-
     public AudioClip[] audioClipsBGM; // Array for multiple BGM clips
     public AudioClip[] audioClipsSE;  // Array for multiple SE clips
 
@@ -18,29 +13,6 @@ public class MultiAudio : MonoBehaviour
     public AudioMixerGroup bgmMixerGroup;
     public AudioMixerGroup seMixerGroup;
     public AudioMixerGroup uiMixerGroup;
-    //BGMのオーディオクリップ
-
-    private Dictionary<string, AudioClip> sEClipDictionary;
-
-    //シングルトン
-    public static MultiAudio ins;
-
-    private void Awake()
-    {
-        //シングルトン化
-        if (ins != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            ins = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        //\シングルトン化
-    }
-
-
 
     private void Start()
     {
@@ -50,12 +22,6 @@ public class MultiAudio : MonoBehaviour
         // Assign mixer groups to the audio sources
         if (bgmSource != null) bgmSource.outputAudioMixerGroup = bgmMixerGroup;
         if (seSource != null) seSource.outputAudioMixerGroup = seMixerGroup;
-        // SEクリップを辞書化して名前でアクセス可能に
-        sEClipDictionary = new Dictionary<string, AudioClip>();
-        foreach (var clip in audioClipsSE)
-        {
-            sEClipDictionary[clip.name] = clip;
-        }
     }
 
     // Method to play a selected BGM by index
@@ -80,24 +46,15 @@ public class MultiAudio : MonoBehaviour
         }
     }
 
-    public void PlaySEByName(string name)
+    // Method to play a selected SE by index
+    public void ChooseSongs_SE(int index)
     {
-        if (sEClipDictionary.TryGetValue(name, out var clip))
+        if (index >= 0 && index < audioClipsSE.Length)
         {
-            PlaySE(clip);
-        }
-        else
-        {
-            Debug.LogWarning("SE with name not found: " + name);
-        }
-    }
-    private void PlaySE(AudioClip clip)
-    {
-        if (clip != null)
-        {
-            seSource.clip = clip;
+            seSource.clip = audioClipsSE[index];
 
-            if (clip.name.StartsWith("UI"))
+            // Check if the SE clip name contains "UI" to assign UI mixer group
+            if (audioClipsSE[index].name.Contains("UI"))
             {
                 seSource.outputAudioMixerGroup = uiMixerGroup;
             }
@@ -106,26 +63,13 @@ public class MultiAudio : MonoBehaviour
                 seSource.outputAudioMixerGroup = seMixerGroup;
             }
 
+            // Play SE as a one-shot sound
             seSource.PlayOneShot(seSource.clip);
-            Debug.Log("Playing SE: " + clip.name);
+            Debug.Log("Playing SE: " + seSource.clip.name);
         }
         else
         {
-            Debug.LogWarning("SE clip is null");
+            Debug.LogWarning("SE index out of range.");
         }
     }
-    // Method to play a selected SE by index
-    public void ChooseSongs_SE(int index)
-    {
-        if (index >= 0 && index < audioClipsSE.Length)
-        {
-            PlaySE(audioClipsSE[index]);
-        }
-        else
-        {
-            Debug.LogWarning("SE index out of range");
-        }
-    }
-
-
 }

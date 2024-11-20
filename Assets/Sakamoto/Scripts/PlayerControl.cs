@@ -94,8 +94,6 @@ public class PlayerControl : MonoBehaviour
                 {
                     for (int i = 0; i < liObj.Count; i++)
                     {
-                        Debug.Log(liObj[i].gameObject.transform.position);
-                        Debug.Log(playerParameter.UpperData.AttackArea);
                         //‰¼ˆø”
                         UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea);
                     }
@@ -126,7 +124,7 @@ public class PlayerControl : MonoBehaviour
         float fAttackReach = Vector3.Distance(vTargetPos,this.transform.position);
         if(fAttackReach < fReach)
         {
-            liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(1,0);
+            liObj[EnemyNum].GetComponent<EnemyParameters>().TakeDamage(1,0);
             Debug.Log("ã”¼gUŒ‚¬Œ÷");
         }
         else
@@ -140,7 +138,7 @@ public class PlayerControl : MonoBehaviour
         float fAttackReach = Vector3.Distance(vTargetPos,this.transform.position);
         if(fAttackReach < fReach)
         {
-            liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(1, 1);
+            liObj[EnemyNum].GetComponent<EnemyParameters>().TakeDamage(1, 1);
             Debug.Log("‰º”¼gUŒ‚¬Œ÷");
         }
         else

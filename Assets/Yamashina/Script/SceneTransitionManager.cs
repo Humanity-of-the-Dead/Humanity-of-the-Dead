@@ -9,14 +9,16 @@ public class SceneTransitionManager : MonoBehaviour
     [SerializeField] private SceneInformation sceneInformation;
     [SerializeField] private Image fade;                            // フェード
     [SerializeField] private SceneInformation.SCENE currentScene;  // 今のシーン                  // 今のシーン
-    [SerializeField] AudioSource bgmAudioSource;
+    //MultiAudio multi;
+    //[SerializeField] AudioSource bgmAudioSource;
     //private SoundTable soundTable;  // BGM テーブル
 
     private void Start()
     {
-        bgmAudioSource = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
+        //bgmAudioSource = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
 
         SetCurrentScene(SceneManager.GetActiveScene().buildIndex);
+        //multi = GameObject.FindAnyObjectByType<MultiAudio>().GetComponent<MultiAudio>();
 
         StartCoroutine(FadeIn());
 
@@ -26,88 +28,55 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void SetCurrentScene(int sceneIndex) { currentScene = (SceneInformation.SCENE)sceneIndex; }
 
-    private void PlayBGMForScene()
-    {
-        // 現在のシーンに応じたBGMクリップを設定する
-        int bgmIndex = -1;
-        string sceneName = SceneManager.GetActiveScene().name;
-        Debug.Log(bgmIndex);
-        // 現在のシーン名をデバッグ出力
-        Debug.Log("Current Scene Name: '" + sceneName + "'");
+    //private void PlayBGMForScene()
+    //{
+    //    // 現在のシーンに応じたBGMクリップを設定する
+    //    int bgmIndex = -1;
+    //    string sceneName = SceneManager.GetActiveScene().name;
+    //    Debug.Log(bgmIndex);
+    //    // 現在のシーン名をデバッグ出力
+    //    Debug.Log("Current Scene Name: '" + sceneName + "'");
 
-        // sceneInformation から取得するシーン名をデバッグ出力（前後の空白を確認）
-        string titleSceneName = sceneInformation.GetSceneName(SceneInformation.SCENE.Title);
-        string stageOneSceneName = sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne);
-        string stageTwoSceneName = sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo);
+    //    // sceneInformation から取得するシーン名をデバッグ出力（前後の空白を確認）
+    //    string titleSceneName = sceneInformation.GetSceneName(SceneInformation.SCENE.Title);
+    //    string stageOneSceneName = sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne);
+    //    string stageTwoSceneName = sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo);
 
-        Debug.Log("Title Scene Name: '" + titleSceneName + "'");
-        Debug.Log("Stage One Scene Name: '" + stageOneSceneName + "'");
-        Debug.Log("Stage Two Scene Name: '" + stageTwoSceneName + "'");
+    //    Debug.Log("Title Scene Name: '" + titleSceneName + "'");
+    //    Debug.Log("Stage One Scene Name: '" + stageOneSceneName + "'");
+    //    Debug.Log("Stage Two Scene Name: '" + stageTwoSceneName + "'");
 
-        Debug.Log(bgmIndex);
-        //string bgmName = "";
+    //    Debug.Log(bgmIndex);
 
-        //if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.Title))
-        //{
-        //    bgmName = "TitleBGM"; // タイトル画面のBGM名
-        //}
-        //else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne))
-        //{
-        //    bgmName = "StageOneBGM"; // ステージ1のBGM名
-        //}
-        //else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo))
-        //{
-        //    bgmName = "StageTwoBGM"; // ステージ2のBGM名
-        //}
-        // シーンごとのBGM名をswitch-caseで設定
-        //switch (currentScene)
-        //{
-        //    case SceneInformation.SCENE.Title:
-        //        bgmName = "TitleBGM"; // タイトル画面のBGM
-        //        break;
+    //    if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.Title))
+    //    {
+    //        bgmIndex = 0;
+    //    }
+    //    else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne))
+    //    {
+    //        bgmIndex = 1;
+    //    }
+    //    else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo))
+    //    {
+    //        bgmIndex = 2;
+    //    }
 
-        //    case SceneInformation.SCENE.StageOne:
-        //        bgmName = "StageOneBGM"; // ステージ1のBGM
-        //        break;
+    //    if (bgmIndex >= 0)
+    //    {
 
-        //    case SceneInformation.SCENE.StageTwo:
-        //        bgmName = "StageTwoBGM"; // ステージ2のBGM
-        //        break;
+    //        Debug.Log("Selected BGM Index: " + bgmIndex);  // デバッグ用
+    //        multi.ChooseSongs_BGM(bgmIndex);
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("No matching scene found for BGM selection.");
+    //    }
 
-        //    default:
-        //        Debug.LogWarning($"No BGM assigned for the scene '{currentScene}'.");
-        //        return; // 未設定の場合は終了
-        //}
-        if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.Title))
-        {
-            bgmIndex = 0;
-        }
-        else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne))
-        {
-            bgmIndex = 1;
-        }
-        else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo))
-        {
-            bgmIndex = 2;
-        }
-
-        if (bgmIndex >= 0)
-        {
-
-            Debug.Log("Selected BGM Index: " + bgmIndex);  // デバッグ用
-            //MultiAudio.ins.PlaySEByName(bgmName);
-            MultiAudio_Matsuoka.ins.ChooseSongsBGM(bgmIndex);    
-        }
-        else
-        {
-            Debug.LogWarning("No matching scene found for BGM selection.");
-        }
-
-        if (sceneName.Trim() == titleSceneName.Trim())
-        {
-            bgmIndex = 0;
-        }
-    }
+    //    if (sceneName.Trim() == titleSceneName.Trim())
+    //    {
+    //        bgmIndex = 0;
+    //    }
+    //}
 
 
 

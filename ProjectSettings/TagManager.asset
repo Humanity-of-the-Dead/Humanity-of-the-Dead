@@ -8,8 +8,6 @@ TagManager:
   - Car
   - BGM
   - SE
-  - Enemy
-  - Dorops
   layers:
   - Default
   - TransparentFX
@@ -17,13 +15,13 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
+  - MainObject
   - BG
   - Floor
-  - Enemy
-  - Object
-  - Car
-  - DoropButton
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -46,16 +44,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Behind player
-    uniqueID: 1915076917
-    locked: 0
-  - name: Player
-    uniqueID: 2589156791
-    locked: 0
-  - name: Before Player
-    uniqueID: 1060245335
-    locked: 0
-  - name: AllFront
-    uniqueID: 2637622547
     locked: 0
