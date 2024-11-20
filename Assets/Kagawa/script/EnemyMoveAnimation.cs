@@ -306,11 +306,12 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         if (timeAttack < 0)
         {
+            time = timeMax * armKickForwardRotation.Length;
             timeAttack = timeMax * armPatBackRotation.Length;
             StopCoroutine(CallWalkWithDelay());
             Upright();
-            isAttack = true;
             indexNumber = 0;
+            isAttack = true;
             StartCoroutine(CallPantieWithDelay());
         }
     }
