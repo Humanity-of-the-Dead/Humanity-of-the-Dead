@@ -1669,7 +1669,7 @@ MonoBehaviour:
   Coroutine: 0
   creditPanelStartPosition: {x: 2247, y: 0, z: 0}
   creditPanelEndPosition: {x: 0, y: 0, z: 0}
-  OptionPanelStartPosition: {x: 1939, y: 0, z: 0}
+  OptionPanelStartPosition: {x: 2102, y: 0, z: 0}
   OptionPaneEndPosition: {x: -78.49, y: 0, z: 0}
   ButtonAnimation: 0
 --- !u!4 &1750266176
