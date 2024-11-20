@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class EnemyMoveAnimation : MonoBehaviour
 {
+    [Header("ゾンビ")] public bool zombie;
     [Header("全身")] public GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")] GameObject[] arm;
     [SerializeField, Header("太腿の角度、先に右足")] GameObject[] leg;
@@ -22,7 +23,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     [Header("足の後方の角度")] public float[] footWalkBackRotation;
     [Header("歩きの継続時間")] public float timeWalk;
 
-    [Header("---パンチのアニメーション---")]
+    [Header("---上半身のアニメーション---")]
     [Header("全身の角度")] public float[] playerPatRotation;
     [Header("腕の前方角度")] public float[] armPatForwardRotation;
     [Header("腕の後方角度")] public float[] armPatBackRotation;
@@ -31,7 +32,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     [Header("太ももの後方の角度")] public float[] legPatBackRotation;
     [Header("足の後方の角度")] public float[] footPatBackRotation;
 
-    [Header("---キックのアニメーション---")]
+    [Header("---下半身のアニメーション---")]
     [Header("全身の角度")] public float[] playerKickRotation;
     [Header("腕の前方角度")] public float[] armKickForwardRotation;
     [Header("腕の後方角度")] public float[] armKickBackRotation;
@@ -55,6 +56,9 @@ public class EnemyMoveAnimation : MonoBehaviour
     // 向いている方向が右を向いているか
     bool isMirror;
 
+    // 攻撃中かどうか
+    bool isAttack;
+
     // 方向フラグ(右 = false)
     bool isWalk;
 
@@ -64,6 +68,9 @@ public class EnemyMoveAnimation : MonoBehaviour
     // タイマー
     float time;
 
+    // 攻撃のタイマー
+    float timeAttack;
+
 
     private void Start()
     {
@@ -72,10 +79,12 @@ public class EnemyMoveAnimation : MonoBehaviour
 
         isMirror = true;
         isActive = false;
+        isAttack = false;
         isWalk = true;
         isStop = false;
         walkLength = armWalkRotation.Length - 1;
         time = 0;
+        timeAttack = 0;
     }
 
     // Update is called once per frame
@@ -89,7 +98,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くアニメーション
     /// </summary>
-    void PlayerWalk()
+    public void PlayerWalk()
     {
         // Quaternion.Euler: 回転軸( x, y, z)
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[indexNumber]);
@@ -100,10 +109,15 @@ public class EnemyMoveAnimation : MonoBehaviour
             Debug.LogWarning("armのデータが何かしら抜けてる");
             return;
         }
+        else if(zombie)
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[indexNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[indexNumber]);
+        }
         else
         {
             arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[indexNumber]);
-            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armWalkRotation[indexNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[indexNumber]);
         }
 
         // 足のアニメーション
@@ -139,7 +153,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// パンチのモーション
+    /// 上半身のモーション
     /// </summary>
     public void PlayerPantie()
     {
@@ -156,7 +170,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         else
         {
             arm[0].transform.rotation = Quaternion.Euler(0, shaft, armPatForwardRotation[indexNumber]);
-            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armPatBackRotation[indexNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, armPatBackRotation[indexNumber]);
         }
 
         // 足のアニメーション
@@ -180,7 +194,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// キックのアニメーション
+    /// 下半身のアニメーション
     /// </summary>
     public void PlayerKick()
     {
@@ -196,7 +210,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         else
         {
             arm[0].transform.rotation = Quaternion.Euler(0, shaft, armKickForwardRotation[indexNumber]);
-            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armKickBackRotation[indexNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, armKickBackRotation[indexNumber]);
         }
 
         // 足のアニメーション
@@ -264,14 +278,18 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     void ChangeArmAnime()
     {
-        //三項演算子(各要素に対して変換操作を行う)
-        if (isActive)
+        // ゾンビではない場合　
+        if (!zombie)
         {
-            armWalkRotation = armWalkRotation.Select(value => value < 0 ? -value : value).ToArray();
-        }
-        else if (!isActive)
-        {
-            armWalkRotation = armWalkRotation.Select(value => value > 0 ? -value : value).ToArray();
+            //三項演算子(各要素に対して変換操作を行う)
+            if (isActive)
+            {
+                armWalkRotation = armWalkRotation.Select(value => value < 0 ? -value : value).ToArray();
+            }
+            else if (!isActive)
+            {
+                armWalkRotation = armWalkRotation.Select(value => value > 0 ? -value : value).ToArray();
+            }
         }
     }
 
@@ -287,7 +305,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// <summary>
     /// パンチのアニメーション開始するときの関数
     /// </summary>
-    void PantieStart()
+    public void PantieStart()
     {
         if (timeAttack < 0)
         {
@@ -321,9 +339,9 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くことの初期化
     /// </summary>
-    void WalkInstance()
+    public void WalkInstance()
     {
-        if (time < 0)
+        if (time < 0 && !isAttack)
         {
             isActive = !isActive;
             ChangeArmAnime();
@@ -332,18 +350,9 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// キックのアニメーション開始するときの関数
-    /// </summary>
-    void KickStart()
-    {
-        time = timeMax * armKickForwardRotation.Length;
-        StartCoroutine(CallKickWithDelay());
-    }
-
-    /// <summary>
     /// 歩くことを継続したとき
     /// </summary>
-    void KeepWalk()
+    public void KeepWalk()
     {
         // 連続入力されているか
         if (time - 0.05 < 0)
@@ -360,6 +369,20 @@ public class EnemyMoveAnimation : MonoBehaviour
     public void RightMove()
     {
         shaft = 0;
+    }
+
+    /// <summary>
+    /// 直立する
+    /// </summary>
+    public void Upright()
+    {
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[walkLength]);
+        arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[walkLength]);
+        arm[1].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[walkLength]);
+        leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[walkLength]);
+        leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[walkLength]);
+        foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[walkLength]);
+        foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[walkLength]);
     }
 
     /// <summary>
