@@ -92,7 +92,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeAttack-= Time.deltaTime;
-        WalkInstance();
+
     }
 
     /// <summary>
@@ -157,6 +157,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     public void PlayerPantie()
     {
+        Debug.Log(indexNumber);
         // Quaternion.Euler: ‰ñ“]Ž²( x, y, z)
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerPatRotation[indexNumber]);
 
@@ -254,6 +255,7 @@ public class EnemyMoveAnimation : MonoBehaviour
             indexNumber = (indexNumber + 1) % armPatForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
+        time = timeMax;
         isAttack = false;
     }
 
@@ -267,6 +269,7 @@ public class EnemyMoveAnimation : MonoBehaviour
             indexNumber = (indexNumber + 1) % armKickForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
+        time = timeMax;
         isAttack = false;
     }
 
@@ -306,12 +309,12 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         if (timeAttack < 0)
         {
+            isAttack = true;
             time = timeMax * armKickForwardRotation.Length;
             timeAttack = timeMax * armPatBackRotation.Length;
             StopCoroutine(CallWalkWithDelay());
             Upright();
             indexNumber = 0;
-            isAttack = true;
             StartCoroutine(CallPantieWithDelay());
         }
     }
@@ -323,11 +326,11 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         if (timeAttack < 0)
         {
+            isAttack = true;
             time = timeMax * armKickForwardRotation.Length;
             timeAttack = timeMax * armKickBackRotation.Length;
             StopCoroutine(CallWalkWithDelay());
             Upright();
-            isAttack = true;
             indexNumber = 0;
             StartCoroutine(CallKickWithDelay());
         }
