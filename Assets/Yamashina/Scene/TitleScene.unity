@@ -1472,6 +1472,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioSet
       objectReference: {fileID: 0}
+    - target: {fileID: 2836153735995085346, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
+      propertyPath: bGMAudCli.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836153735995085346, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
+      propertyPath: bGMAudCli.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 16ec2931e2ab30e4597596a7cd570fe7, type: 3}
+    - target: {fileID: 2836153735995085346, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
+      propertyPath: bGMAudCli.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8830af80d8c785843bc62458eb6f8e99, type: 3}
+    - target: {fileID: 2836153735995085346, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
+      propertyPath: bGMAudCli.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8830af80d8c785843bc62458eb6f8e99, type: 3}
+    - target: {fileID: 2836153735995085346, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
+      propertyPath: bGMAudCli.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8830af80d8c785843bc62458eb6f8e99, type: 3}
+    - target: {fileID: 2836153735995085346, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
+      propertyPath: bGMAudCli.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8830af80d8c785843bc62458eb6f8e99, type: 3}
     - target: {fileID: 5009803700500600058, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
