@@ -83,12 +83,14 @@ public class newEnemyMovement : EnemyAttack
                         // プレイヤーが攻撃範囲内に入っているかどうか判断
                         if (distanceToPlayer < upperpart.AttackArea || distanceToPlayer < lowerpart.AttackArea)
                         {
-                            enemystate = EnemyState.attack;
+                            enemystate = EnemyState.wait;
                         }
                         break;
                     case EnemyState.attack:
                         if (distanceToPlayer < upperpart.AttackArea)
                         {
+                            moveAnimation.PantieStart();
+                            Debug.Log("パンチ");
                             UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
                         }
                         else if (distanceToPlayer < lowerpart.AttackArea)
@@ -96,14 +98,16 @@ public class newEnemyMovement : EnemyAttack
                             LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
 
                         }
-                        enemystate = EnemyState.wait;
+                        enemystate = EnemyState.search;
                         //moveAnimation.PlayerPantie();
                         break;
                     case EnemyState.wait:
+                        moveAnimation.Upright();
+                        Debug.Log("直立");
                         if (timer > waitTime)
                         {
                             timer = 0;
-                            enemystate = EnemyState.search;
+                            enemystate = EnemyState.attack;
                             break;
                         }
                         timer += Time.deltaTime;
