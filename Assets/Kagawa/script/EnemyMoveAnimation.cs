@@ -56,6 +56,9 @@ public class EnemyMoveAnimation : MonoBehaviour
     // 向いている方向が右を向いているか
     bool isMirror;
 
+    // 攻撃中かどうか
+    bool isAttack;
+
     // 方向フラグ(右 = false)
     bool isWalk;
 
@@ -65,6 +68,9 @@ public class EnemyMoveAnimation : MonoBehaviour
     // タイマー
     float time;
 
+    // 攻撃のタイマー
+    float timeAttack;
+
 
     private void Start()
     {
@@ -73,29 +79,26 @@ public class EnemyMoveAnimation : MonoBehaviour
 
         isMirror = true;
         isActive = false;
+        isAttack = false;
         isWalk = true;
         isStop = false;
         walkLength = armWalkRotation.Length - 1;
         time = 0;
+        timeAttack = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         time -= Time.deltaTime;
-
-        if(time < 0 )
-        {
-            WalkInstance();
-        }
-
-        
+        timeAttack-= Time.deltaTime;
+        WalkInstance();
     }
 
     /// <summary>
     /// 歩くアニメーション
     /// </summary>
-    void PlayerWalk()
+    public void PlayerWalk()
     {
         // Quaternion.Euler: 回転軸( x, y, z)
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[indexNumber]);
@@ -251,6 +254,7 @@ public class EnemyMoveAnimation : MonoBehaviour
             indexNumber = (indexNumber + 1) % armPatForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
+        isAttack = false;
     }
 
     IEnumerator CallKickWithDelay()
@@ -263,6 +267,7 @@ public class EnemyMoveAnimation : MonoBehaviour
             indexNumber = (indexNumber + 1) % armKickForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
+        isAttack = false;
     }
 
     /// <summary>
@@ -297,18 +302,42 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// <summary>
     /// パンチのアニメーション開始するときの関数
     /// </summary>
-    void PantieStart()
+    public void PantieStart()
     {
-        time = timeMax * armPatForwardRotation.Length;
-        StartCoroutine(CallPantieWithDelay());
+        if (timeAttack < 0)
+        {
+            timeAttack = timeMax * armPatBackRotation.Length;
+            StopCoroutine(CallWalkWithDelay());
+            Upright();
+            isAttack = true;
+            indexNumber = 0;
+            StartCoroutine(CallPantieWithDelay());
+        }
+    }
+
+    /// <summary>
+    /// キックのアニメーション開始するときの関数
+    /// </summary>
+    public void KickStart()
+    {
+        if (timeAttack < 0)
+        {
+            time = timeMax * armKickForwardRotation.Length;
+            timeAttack = timeMax * armKickBackRotation.Length;
+            StopCoroutine(CallWalkWithDelay());
+            Upright();
+            isAttack = true;
+            indexNumber = 0;
+            StartCoroutine(CallKickWithDelay());
+        }
     }
 
     /// <summary>
     /// 歩くことの初期化
     /// </summary>
-    void WalkInstance()
+    public void WalkInstance()
     {
-        if (time < 0)
+        if (time < 0 && !isAttack)
         {
             isActive = !isActive;
             ChangeArmAnime();
@@ -317,18 +346,9 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// キックのアニメーション開始するときの関数
-    /// </summary>
-    void KickStart()
-    {
-        time = timeMax * armKickForwardRotation.Length;
-        StartCoroutine(CallKickWithDelay());
-    }
-
-    /// <summary>
     /// 歩くことを継続したとき
     /// </summary>
-    void KeepWalk()
+    public void KeepWalk()
     {
         // 連続入力されているか
         if (time - 0.05 < 0)

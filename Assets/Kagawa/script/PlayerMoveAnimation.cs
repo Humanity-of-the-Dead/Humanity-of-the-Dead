@@ -63,8 +63,8 @@ public class PlayerMoveAnimation : MonoBehaviour
     // 値を反転にするフラグ
     bool isActive;
 
-    // 向いている方向が右を向いているか
-    bool isAtack;
+    // 攻撃中かどうか
+    bool isAttack;
 
     // 方向フラグ(右 = false)
     bool isWalk;
@@ -84,7 +84,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         indexNumber = 0;
         shaft = 0;
 
-        isAtack = false;
+        isAttack = false;
         isActive = false;
         isWalk = false;
         isStop = false;
@@ -141,13 +141,10 @@ public class PlayerMoveAnimation : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                AttackWaite();
                 PantieStart();
-
             }
             else if (Input.GetKeyDown(KeyCode.K))
             {
-                AttackWaite();
                 KickStart();
             }
         }
@@ -321,7 +318,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         for (int i = 0; i < armWalkRotation.Length; i++)
         {
-            if (!isAtack)
+            if (!isAttack)
             {
                 PlayerWalk();
 
@@ -344,7 +341,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
 
         time = 0;
-        isAtack = false;
+        isAttack = false;
     }
 
     IEnumerator CallKickWithDelay()
@@ -359,7 +356,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
 
         time = 0;
-        isAtack = false;
+        isAttack = false;
     }
 
     /// <summary>
@@ -392,6 +389,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     void PantieStart()
     {
+        AttackWaite();
         time = timeMax * armPatForwardRotation.Length;
         StartCoroutine(CallPantieWithDelay());
     }
@@ -401,6 +399,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     void KickStart()
     {
+        AttackWaite();
         time = timeMax * armKickForwardRotation.Length;
         StartCoroutine(CallKickWithDelay());
     }
@@ -410,7 +409,6 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     void WalkInstance()
     {
-      
         if (time < 0)
         {
             indexNumber = 0;
@@ -441,7 +439,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     void AttackWaite()
     {
         timeAttack = timeMax * armKickBackRotation.Length;
-        isAtack = true;
+        isAttack = true;
         StopCoroutine(CallWalkWithDelay());
         Upright();
         indexNumber = 0;
