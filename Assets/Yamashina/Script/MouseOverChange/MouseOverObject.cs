@@ -8,10 +8,10 @@ public class MouseOverObject: MonoBehaviour
 {
 
     public GameObject mouseover;
-    void Start()
-    {
-       mouseover.SetActive(false);  
-    }
+    //void Start()
+    //{
+    //    mouseover.SetActive(false);
+    //}
 
     //オブジェクトのセットアクティブを有効にするだけ
     public void OnPointerEnter()

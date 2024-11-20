@@ -176,6 +176,7 @@ MonoBehaviour:
   goButton:
   - {fileID: 2182874680941712295}
   - {fileID: 6055618513447132620}
+  goGrave: {fileID: 2839263780191614865, guid: fd771b76aae9c0641833c8c5eff54c82, type: 3}
 --- !u!1 &1919319660750788736
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +237,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1060245335
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &8221963130908395068
@@ -424,7 +425,7 @@ GameObject:
   - component: {fileID: 254828869262921440}
   - component: {fileID: 7669381271550534543}
   - component: {fileID: 8476585219988296273}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Static Sprite
   m_TagString: Dorops
   m_Icon: {fileID: 0}

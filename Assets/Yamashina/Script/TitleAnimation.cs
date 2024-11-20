@@ -127,7 +127,7 @@ public class TitleAnimation : MonoBehaviour
         eventTrigger_option.enabled = true;
 
         //ボタンのオブジェクトのセットアクティブ切り替え
-        //StartButton.SetActive(true);//初めからボタン
+
         //CreditButton.SetActive(true);//クレジットボタン
         //optionButton.SetActive(true);   
     }
@@ -136,6 +136,7 @@ public class TitleAnimation : MonoBehaviour
     public void True_SetActive_Button()//時間経過でボタン表示するための関数
     {
         //ボタンのオブジェクトのセットアクティブ切り替え
+        StartButton.SetActive(true);//初めからボタン
         optionButton.SetActive(true);
         CreditButton.SetActive(true);
 
