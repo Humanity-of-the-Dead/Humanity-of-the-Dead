@@ -92,7 +92,6 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeAttack-= Time.deltaTime;
-
     }
 
     /// <summary>
@@ -309,8 +308,9 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         if (timeAttack < 0)
         {
+            Debug.Log("パンチスタート");
             isAttack = true;
-            time = timeMax * armKickForwardRotation.Length;
+            time = timeMax * armKickForwardRotation.Length * 2;
             timeAttack = timeMax * armPatBackRotation.Length;
             StopCoroutine(CallWalkWithDelay());
             Upright();
@@ -341,6 +341,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     public void WalkInstance()
     {
+        Debug.Log("歩き始め");
         if (time < 0 && !isAttack)
         {
             isActive = !isActive;
@@ -376,6 +377,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     public void Upright()
     {
+        Debug.Log("アプライト");
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[walkLength]);
         arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[walkLength]);
         arm[1].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[walkLength]);

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enPartsType: 1
   sPartsName: "\u8B66\u5BDF\u306E\u4E0B\u534A\u8EAB"
-  AttackArea: 30
+  AttackArea: 5
   iPartHp: 45
   iPartAttack: 10
   spBody: {fileID: 0}
