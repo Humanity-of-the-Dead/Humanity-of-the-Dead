@@ -392,43 +392,57 @@ MonoBehaviour:
   playerPatRotation:
   - 0
   - 0
+  - 0
   armPatForwardRotation:
   - 0
   - 0
+  - 0
   armPatBackRotation:
+  - 0
   - 90
   - 0
   legPatForwardRotation:
+  - 0
   - 20
   - 0
   footPatForwardRotation:
+  - 0
   - 20
   - 0
   legPatBackRotation:
+  - 0
   - -10
   - 0
   footPatBackRotation:
+  - 0
   - -10
   - 0
   playerKickRotation:
+  - 0
   - 20
   - 0
   armKickForwardRotation:
   - 0
   - 0
+  - 0
   armKickBackRotation:
   - 0
   - 0
+  - 0
   legKickForwardRotation:
+  - 0
   - 70
   - 0
   footKickForwardRotation:
+  - 0
   - 70
   - 0
   legKickBackRotation:
+  - 0
   - -10
   - 0
   footKickBackRotation:
+  - 0
   - -10
   - 0
 --- !u!1 &1542777082605014598

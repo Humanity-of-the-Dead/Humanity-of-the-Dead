@@ -365,14 +365,6 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ‰E‚ðŒü‚­‚Æ‚«
-    /// </summary>
-    public void RightMove()
-    {
-        shaft = 0;
-    }
-
-    /// <summary>
     /// ’¼—§‚·‚é
     /// </summary>
     public void Upright()
@@ -385,6 +377,14 @@ public class EnemyMoveAnimation : MonoBehaviour
         leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[walkLength]);
         foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[walkLength]);
         foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[walkLength]);
+    }
+
+    /// <summary>
+    /// ‰E‚ðŒü‚­‚Æ‚«
+    /// </summary>
+    public void RightMove()
+    {
+        shaft = 0;
     }
 
     /// <summary>
