@@ -55,6 +55,7 @@ public class newEnemyMovement : EnemyAttack
                 switch (enemystate)
                 {
                     case EnemyState.search:
+                        moveAnimation.WalkInstance();
                         // プレイヤーが追跡範囲内に入っているかどうか判断
                         if (distanceToPlayer < chaseRange)
                         {
@@ -86,11 +87,27 @@ public class newEnemyMovement : EnemyAttack
                             enemystate = EnemyState.wait;
                         }
                         break;
+                    case EnemyState.wait:
+                        //moveAnimation.Upright();
+                        if (timer > waitTime)
+                        {
+                            timer = 0;
+                            if(distanceToPlayer < upperpart.AttackArea || distanceToPlayer < lowerpart.AttackArea)
+                            {
+                                enemystate = EnemyState.attack;
+                            }
+                            else
+                            {
+                                enemystate = EnemyState.search;
+                            }
+                            break;
+                        }
+                        timer += Time.deltaTime;
+                        break;
                     case EnemyState.attack:
                         if (distanceToPlayer < upperpart.AttackArea)
                         {
                             moveAnimation.PantieStart();
-                            Debug.Log("パンチ");
                             UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
                         }
                         else if (distanceToPlayer < lowerpart.AttackArea)
@@ -101,17 +118,7 @@ public class newEnemyMovement : EnemyAttack
                         enemystate = EnemyState.search;
                         //moveAnimation.PlayerPantie();
                         break;
-                    case EnemyState.wait:
-                        moveAnimation.Upright();
-                        Debug.Log("直立");
-                        if (timer > waitTime)
-                        {
-                            timer = 0;
-                            enemystate = EnemyState.attack;
-                            break;
-                        }
-                        timer += Time.deltaTime;
-                        break;
+
                 }
 
 
