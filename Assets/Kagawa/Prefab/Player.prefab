@@ -1364,6 +1364,69 @@ MonoBehaviour:
   footKickBackRotation:
   - -10
   - 0
+  poPlayerPatRotation:
+  - 0
+  - 0
+  poArmPatForwardRotation:
+  - 0
+  - 0
+  poArmPatBackRotation:
+  - 90
+  - 0
+  poLegPatForwardRotation:
+  - 0
+  - 0
+  poFootPatForwardRotation:
+  - 0
+  - 0
+  poLegPatBackRotation:
+  - 0
+  - 0
+  poFootPatBackRotation:
+  - 0
+  - 0
+  nuPlayerPatRotation:
+  - 0
+  - 0
+  nuArmPatForwardRotation:
+  - 0
+  - 0
+  nuArmPatBackRotation:
+  - 0
+  - 0
+  nuLegPatForwardRotation:
+  - 0
+  - 0
+  nuFootPatForwardRotation:
+  - 0
+  - 0
+  nuLegPatBackRotation:
+  - 0
+  - 0
+  nuFootPatBackRotation:
+  - 0
+  - 0
+  nuPlayerKickRotation:
+  - 0
+  - 0
+  nuArmKickForwardRotation:
+  - 0
+  - 0
+  nuArmKickBackRotation:
+  - 0
+  - 0
+  nuLegKickForwardRotation:
+  - 0
+  - 0
+  nuFootKickForwardRotation:
+  - 0
+  - 0
+  nuLegKickBackRotation:
+  - 0
+  - 0
+  nuFootKickBackRotation:
+  - 0
+  - 0
 --- !u!61 &1309253328765726476
 BoxCollider2D:
   m_ObjectHideFlags: 0
