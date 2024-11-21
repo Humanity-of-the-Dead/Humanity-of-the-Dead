@@ -24,7 +24,7 @@ public class EnemyMovement : EnemyAttack
     private bool movingToPointB = true; // 進行方向
     private Transform player; // プレイヤーの位置
 
-    [SerializeField] GameMgr gamestate;
+    GameState gamestate;
 
     void Start()
     {
@@ -36,7 +36,7 @@ public class EnemyMovement : EnemyAttack
     {
         // プレイヤーとの距離を計算
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        switch (gamestate.enGameState)
+        switch (gamestate)
         {
             case GameState.Main:
                 switch (enemystate)
@@ -73,6 +73,9 @@ public class EnemyMovement : EnemyAttack
                         break;
                     case EnemyState.attack:
                         UpperEnemyAttack((float)part.iPartAttack);
+                        //上半身と下半身はそもそも別に来るのか問題
+                        //上半身の方が近かったら上半身、下半身の方が近かったら下半身
+                        //上半身と下半身が移動距離が一緒なら上半身優先
                         break;
                     case EnemyState.wait:
                         break;
