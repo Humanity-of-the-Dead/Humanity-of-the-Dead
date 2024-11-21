@@ -1329,40 +1329,40 @@ MonoBehaviour:
   - 90
   - 0
   armPatBackRotation:
-  - 0
-  - 0
-  legPatForwardRotation:
-  - 30
-  - 0
-  footPatForwardRotation:
-  - 0
-  - 0
-  legPatBackRotation:
-  - -20
-  - 0
-  footPatBackRotation:
   - -30
   - 0
+  legPatForwardRotation:
+  - -15
+  - 0
+  footPatForwardRotation:
+  - -15
+  - 0
+  legPatBackRotation:
+  - 30
+  - 0
+  footPatBackRotation:
+  - -20
+  - 0
   playerKickRotation:
-  - 20
+  - 10
   - 0
   armKickForwardRotation:
-  - 0
+  - 10
   - 0
   armKickBackRotation:
-  - 0
+  - 10
   - 0
   legKickForwardRotation:
-  - 70
+  - 0
   - 0
   footKickForwardRotation:
-  - 70
+  - -15
   - 0
   legKickBackRotation:
-  - -10
+  - 40
   - 0
   footKickBackRotation:
-  - -10
+  - 40
   - 0
   poPlayerPatRotation:
   - 0
@@ -1374,16 +1374,16 @@ MonoBehaviour:
   - 90
   - 0
   poLegPatForwardRotation:
-  - 0
+  - -5
   - 0
   poFootPatForwardRotation:
-  - 0
+  - -5
   - 0
   poLegPatBackRotation:
-  - 0
+  - -10
   - 0
   poFootPatBackRotation:
-  - 0
+  - -10
   - 0
   nuPlayerPatRotation:
   - 0
@@ -1392,7 +1392,7 @@ MonoBehaviour:
   - 0
   - 0
   nuArmPatBackRotation:
-  - 0
+  - 90
   - 0
   nuLegPatForwardRotation:
   - 0
@@ -1413,7 +1413,7 @@ MonoBehaviour:
   - 0
   - 0
   nuArmKickBackRotation:
-  - 0
+  - -10
   - 0
   nuLegKickForwardRotation:
   - 0
@@ -1422,10 +1422,10 @@ MonoBehaviour:
   - 0
   - 0
   nuLegKickBackRotation:
-  - 0
+  - 40
   - 0
   nuFootKickBackRotation:
-  - 0
+  - 40
   - 0
 --- !u!61 &1309253328765726476
 BoxCollider2D:

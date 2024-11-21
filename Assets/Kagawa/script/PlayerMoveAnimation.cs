@@ -41,56 +41,56 @@ public class PlayerMoveAnimation : MonoBehaviour
     [Header("---歩きのアニメーション---")]
     [Header("全身の角度")] public float[] playerWalkRotation;
     [Header("腕の角度")] public float[] armWalkRotation;
-    [Header("太ももの前方の角度")] public float[] legWalkForwardRotation;
-    [Header("足の前方の角度")] public float[] footWalkForwardRotation;
-    [Header("太ももの後方の角度")] public float[] legWalkBackRotation;
-    [Header("足の後方の角度")] public float[] footWalkBackRotation;
+    [Header("太ももの前方角度")] public float[] legWalkForwardRotation;
+    [Header("足の前方角度")] public float[] footWalkForwardRotation;
+    [Header("太ももの後方角度")] public float[] legWalkBackRotation;
+    [Header("足の後方角度")] public float[] footWalkBackRotation;
     [Header("歩きの継続時間")] public float timeWalk;
 
     [Header("---デフォルトパンチのアニメーション---")]
     [Header("全身の角度")] public float[] playerPatRotation;
     [Header("腕の前方角度")] public float[] armPatForwardRotation;
     [Header("腕の後方角度")] public float[] armPatBackRotation;
-    [Header("太ももの前方の角度")] public float[] legPatForwardRotation;
-    [Header("足の前方の角度")] public float[] footPatForwardRotation;
-    [Header("太ももの後方の角度")] public float[] legPatBackRotation;
-    [Header("足の後方の角度")] public float[] footPatBackRotation;
+    [Header("太ももの奥角度")] public float[] legPatForwardRotation;
+    [Header("足の奥角度")] public float[] footPatForwardRotation;
+    [Header("太ももの手前角度")] public float[] legPatBackRotation;
+    [Header("足の手前角度")] public float[] footPatBackRotation;
 
     [Header("---デフォルトキックのアニメーション---")]
     [Header("全身の角度")] public float[] playerKickRotation;
     [Header("腕の前方角度")] public float[] armKickForwardRotation;
     [Header("腕の後方角度")] public float[] armKickBackRotation;
-    [Header("太ももの前方の角度")] public float[] legKickForwardRotation;
-    [Header("足の前方の角度")] public float[] footKickForwardRotation;
-    [Header("太ももの後方の角度")] public float[] legKickBackRotation;
-    [Header("足の後方の角度")] public float[] footKickBackRotation;
+    [Header("太ももの奥角度")] public float[] legKickForwardRotation;
+    [Header("足の奥角度")] public float[] footKickForwardRotation;
+    [Header("太ももの手前角度")] public float[] legKickBackRotation;
+    [Header("足の手前角度")] public float[] footKickBackRotation;
 
-    [Header("---警察パンチのアニメーション---")]
+    [Header("---警察拳銃のアニメーション---")]
     [Header("全身の角度")] public float[]         poPlayerPatRotation;
-    [Header("腕の前方角度")] public float[]       poArmPatForwardRotation;
-    [Header("腕の後方角度")] public float[]       poArmPatBackRotation;
-    [Header("太ももの前方の角度")] public float[] poLegPatForwardRotation;
-    [Header("足の前方の角度")] public float[]     poFootPatForwardRotation;
-    [Header("太ももの後方の角度")] public float[] poLegPatBackRotation;
-    [Header("足の後方の角度")] public float[]     poFootPatBackRotation;
+    [Header("腕の手前角度")] public float[]       poArmPatForwardRotation;
+    [Header("腕の奥角度")] public float[]       poArmPatBackRotation;
+    [Header("太ももの奥角度")] public float[] poLegPatForwardRotation;
+    [Header("足の奥角度")] public float[]     poFootPatForwardRotation;
+    [Header("太ももの手前角度")] public float[] poLegPatBackRotation;
+    [Header("足の手前角度")] public float[]     poFootPatBackRotation;
 
     [Header("---ナースパンチのアニメーション---")]
     [Header("全身の角度")] public float[]         nuPlayerPatRotation;
-    [Header("腕の前方角度")] public float[]       nuArmPatForwardRotation;
-    [Header("腕の後方角度")] public float[]       nuArmPatBackRotation;
-    [Header("太ももの前方の角度")] public float[] nuLegPatForwardRotation;
-    [Header("足の前方の角度")] public float[]     nuFootPatForwardRotation;
-    [Header("太ももの後方の角度")] public float[] nuLegPatBackRotation;
-    [Header("足の後方の角度")] public float[]     nuFootPatBackRotation;
+    [Header("腕の手前角度")] public float[]       nuArmPatForwardRotation;
+    [Header("腕の奥角度")] public float[]       nuArmPatBackRotation;
+    [Header("太ももの奥角度")] public float[] nuLegPatForwardRotation;
+    [Header("足の奥角度")] public float[]     nuFootPatForwardRotation;
+    [Header("太ももの手前角度")] public float[] nuLegPatBackRotation;
+    [Header("足の手前角度")] public float[]     nuFootPatBackRotation;
 
     [Header("---ナースキックのアニメーション---")]
     [Header("全身の角度")] public float[]         nuPlayerKickRotation;
-    [Header("腕の前方角度")] public float[]       nuArmKickForwardRotation;
-    [Header("腕の後方角度")] public float[]       nuArmKickBackRotation;
-    [Header("太ももの前方の角度")] public float[] nuLegKickForwardRotation;
-    [Header("足の前方の角度")] public float[]     nuFootKickForwardRotation;
-    [Header("太ももの後方の角度")] public float[] nuLegKickBackRotation;
-    [Header("足の後方の角度")] public float[]     nuFootKickBackRotation;
+    [Header("腕の手前方角度")] public float[]       nuArmKickForwardRotation;
+    [Header("腕の奥角度")] public float[]       nuArmKickBackRotation;
+    [Header("太ももの奥角度")] public float[] nuLegKickForwardRotation;
+    [Header("足の奥角度")] public float[]     nuFootKickForwardRotation;
+    [Header("太ももの手前角度")] public float[] nuLegKickBackRotation;
+    [Header("足の手前角度")] public float[]     nuFootKickBackRotation;
 
     UpperAttack upperAttack;
 

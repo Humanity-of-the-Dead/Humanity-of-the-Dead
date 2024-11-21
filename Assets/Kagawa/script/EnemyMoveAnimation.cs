@@ -25,21 +25,21 @@ public class EnemyMoveAnimation : MonoBehaviour
 
     [Header("---上半身のアニメーション---")]
     [Header("全身の角度")] public float[] playerPatRotation;
-    [Header("腕の前方角度")] public float[] armPatForwardRotation;
-    [Header("腕の後方角度")] public float[] armPatBackRotation;
-    [Header("太ももの前方の角度")] public float[] legPatForwardRotation;
-    [Header("足の前方の角度")] public float[] footPatForwardRotation;
-    [Header("太ももの後方の角度")] public float[] legPatBackRotation;
-    [Header("足の後方の角度")] public float[] footPatBackRotation;
+    [Header("腕の手前角度")] public float[] armPatForwardRotation;
+    [Header("腕の奥角度")] public float[] armPatBackRotation;
+    [Header("太ももの奥角度")] public float[] legPatForwardRotation;
+    [Header("足の奥角度")] public float[] footPatForwardRotation;
+    [Header("太ももの手前角度")] public float[] legPatBackRotation;
+    [Header("足の手前角度")] public float[] footPatBackRotation;
 
     [Header("---下半身のアニメーション---")]
     [Header("全身の角度")] public float[] playerKickRotation;
-    [Header("腕の前方角度")] public float[] armKickForwardRotation;
-    [Header("腕の後方角度")] public float[] armKickBackRotation;
-    [Header("太ももの前方の角度")] public float[] legKickForwardRotation;
-    [Header("足の前方の角度")] public float[] footKickForwardRotation;
-    [Header("太ももの後方の角度")] public float[] legKickBackRotation;
-    [Header("足の後方の角度")] public float[] footKickBackRotation;
+    [Header("腕の手前角度")] public float[] armKickForwardRotation;
+    [Header("腕の奥角度")] public float[] armKickBackRotation;
+    [Header("太ももの奥角度")] public float[] legKickForwardRotation;
+    [Header("足の奥角度")] public float[] footKickForwardRotation;
+    [Header("太ももの手前角度")] public float[] legKickBackRotation;
+    [Header("足の手前角度")] public float[] footKickBackRotation;
 
     //配列の番号
     int indexNumber;
@@ -92,6 +92,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeAttack-= Time.deltaTime;
+        KickStart();
     }
 
     /// <summary>
