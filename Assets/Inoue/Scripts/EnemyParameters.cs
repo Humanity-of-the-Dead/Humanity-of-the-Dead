@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyParameters : MonoBehaviour
+public class sEnemyParameters : MonoBehaviour
 {
+
     //部位の耐久値を設定できる
     [SerializeField]
     private int UpperHP;
@@ -34,8 +35,9 @@ public class EnemyParameters : MonoBehaviour
     GameObject drop;
 
     //プレイヤーパラメータ-
-    public 
-    GameObject PlayerParameter;
+    public GameObject PlayerParameter;
+    //プレイヤーコントローラ
+    public GameObject PlayerControl;
 
     //ボスフラグ
     [SerializeField]
@@ -45,44 +47,62 @@ public class EnemyParameters : MonoBehaviour
     [SerializeField]
     GameObject textBox;
 
-    [SerializeField]SceneTransitionManager sceneTransitionManager;
+    [SerializeField] SceneTransitionManager sceneTransitionManager;
+
+    //エネミーが銃を撃つかどうかを示すフラグ
+    public bool canShoot = false;
+
+    // FirePoint の参照
+    public Transform firePoint;
+
     private void Start()
     {
-        sceneTransitionManager=GameObject.FindAnyObjectByType<SceneTransitionManager>();
+        sceneTransitionManager = GameObject.FindAnyObjectByType<SceneTransitionManager>();
+
+        // canShoot が true の場合のみ FirePoint を探す
+        if (canShoot)
+        {
+            firePoint = transform.Find("FirePoint");
+
+            if (firePoint == null)
+            {
+                Debug.LogWarning("FirePoint が見つかりませんでした。");
+            }
+        }
     }
+
     void Update()
     {
-        //もし耐久値が0になったらドロップする
+        // もし耐久値が0になったらドロップする
         if (UpperHP <= 0)
         {
-           
-            Drop(Lowerbodypart);
+            PlayerControl.GetComponent<PlayerControl>().RemoveListItem(this.gameObject);
             Debug.Log("下半身が落ちたよ");
+            Drop(Lowerbodypart);
         }
         if (LowerHP <= 0)
         {
-            Drop(Upperbodypart);
+            PlayerControl.GetComponent<PlayerControl>().RemoveListItem(this.gameObject);
             Debug.Log("上半身が落ちたよ");
+            Drop(Upperbodypart);
         }
     }
-    //bodyには0か1しか入れてはいけない　BA//GU/RU
-    //body : 0->上半身にダメージ
-    //body : 1->下半身にダメージ
 
     public void TakeDamage(int damage, int body = 0)
     {
-        //HPが減る仕組み
-        //damageはテスト用の関数
-    if(body == 0)
+        // HPが減る仕組み
+        // damageはテスト用の関数
+        if (body == 0)
         {
             UpperHP -= damage;
         }
 
-    if(body == 1)
+        if (body == 1)
         {
             LowerHP -= damage;
         }
     }
+
     void ShowDeathImage()
     {
         ////多分ドロップ画像設定するとこ
@@ -91,40 +111,30 @@ public class EnemyParameters : MonoBehaviour
         //    deathImage.enabled = true;
         //}
     }
-    public  void Drop(BodyPartsData part)
+
+    public void Drop(BodyPartsData part)
     {
-        //プレハブをインスタンス化
+        // プレハブをインスタンス化
         drop = Instantiate(prePart);
 
-        //生成したパーツを自身の場所に持ってくる
+        // 生成したパーツを自身の場所に持ってくる
         drop.transform.position = this.transform.position;
 
-        //プレイヤーパラメーターを渡す
+        // プレイヤーパラメーターを渡す
         drop.GetComponent<newDropPart>().getPlayerManegerObjet(PlayerParameter);
 
-        //テキストボックスを渡す
+        // テキストボックスを渡す
         drop.GetComponent<newDropPart>().getTextBox(textBox);
 
-        //ボスフラグを渡す
+        // ボスフラグを渡す
         drop.GetComponent<newDropPart>().getBossf(Boss);
 
-
-
-        //
+        // データとシーン遷移マネージャーを渡す
         drop.GetComponent<newDropPart>().getPartsData(part);
         drop.GetComponent<newDropPart>().getSceneTransition(sceneTransitionManager);
-        //自分のゲームオブジェクトを消す
+
+        // 自分のゲームオブジェクトを消す
         this.gameObject.SetActive(false);
     }
-
-
-    //ドロップの挙動作ってないから画面に出るだけなので調節する
-    //倒されたら体が消失するプログラムが必要
-    //今の時点だと両方ドロップしてしまうので修正する
-    //今はImageを入れることになってるけど、ここをSprite入れれるようにしたい
-
-    //このプログラムの動きをテスト用に可視化する
-
-    //ダメージのgetとset
-
 }
+
