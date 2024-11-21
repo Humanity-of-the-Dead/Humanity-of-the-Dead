@@ -71,7 +71,7 @@ public class TextDisplay_Yamashina : MonoBehaviour
                 }
                 break;
             case GameState.ShowText:
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return))
                 {
                     //this.gameObject.SetActive(false);   //オブジェクトを非表示
                     GameManager.ChangeState(GameState.Main);

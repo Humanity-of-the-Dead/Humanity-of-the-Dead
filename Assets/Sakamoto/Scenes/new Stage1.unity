@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 32426232}
   - component: {fileID: 32426231}
   - component: {fileID: 32426230}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: Car (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,8 +266,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1817916389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 138ec3d84c107814882dad35f8ff28ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 92859007}
   - component: {fileID: 92859006}
   - component: {fileID: 92859005}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,12 +497,12 @@ Transform:
   m_Children:
   - {fileID: 285081239}
   - {fileID: 1476838450}
-  - {fileID: 574564436}
   - {fileID: 377555327}
   - {fileID: 259418452}
   - {fileID: 1632990567}
   - {fileID: 1685975154}
   - {fileID: 32426229}
+  - {fileID: 574564436}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &244809040
@@ -787,7 +787,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -1657344749
+  m_SortingLayerID: 1817916389
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &261565240
@@ -1052,7 +1052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6785881330273000347, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: m_SortingLayerID
-      value: -1705810505
+      value: -1745115145
       objectReference: {fileID: 0}
     - target: {fileID: 6908733285454812978, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: m_Name
@@ -1392,7 +1392,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 1060245335
+  m_SortingLayerID: -1745115145
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &396787228
@@ -2562,7 +2562,7 @@ GameObject:
   - component: {fileID: 1444707584}
   - component: {fileID: 1444707586}
   - component: {fileID: 1444707585}
-  m_Layer: 11
+  m_Layer: 7
   m_Name: BG
   m_TagString: Car
   m_Icon: {fileID: 0}
@@ -2796,7 +2796,7 @@ GameObject:
   - component: {fileID: 1476838450}
   - component: {fileID: 1476838451}
   - component: {fileID: 1476838452}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -2856,8 +2856,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1817916389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
@@ -3165,7 +3165,7 @@ GameObject:
   - component: {fileID: 1632990570}
   - component: {fileID: 1632990569}
   - component: {fileID: 1632990568}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3297,8 +3297,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1817916389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 138ec3d84c107814882dad35f8ff28ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3549,7 +3549,7 @@ GameObject:
   - component: {fileID: 1685975157}
   - component: {fileID: 1685975156}
   - component: {fileID: 1685975155}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: Car (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3681,8 +3681,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1817916389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 138ec3d84c107814882dad35f8ff28ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
