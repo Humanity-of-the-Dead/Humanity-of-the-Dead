@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class textdisplay : MonoBehaviour
+public class TextDisplay_Yamashina : MonoBehaviour
 {
     [SerializeField]
     private TextAsset[] textAsset;   //メモ帳のファイル(.txt)　配列
@@ -71,7 +71,7 @@ public class textdisplay : MonoBehaviour
                 }
                 break;
             case GameState.ShowText:
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return))
                 {
                     //this.gameObject.SetActive(false);   //オブジェクトを非表示
                     GameManager.ChangeState(GameState.Main);

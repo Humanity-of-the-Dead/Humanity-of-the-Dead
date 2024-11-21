@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     {
         // ターゲットに当たったかどうかを衝突したオブジェクトのタグによって判断する
         // たぶん銃を撃ったのがプレイヤーかエネミーか等、場合によって反応するタグを変える必要があるので未完成
-        if (hitInfo.gameObject.tag == "")
+        if (hitInfo.gameObject.tag == "Player" || hitInfo.gameObject.tag == "Enemy")
         {
             Destroy(gameObject); // 銃弾を消す
         }
