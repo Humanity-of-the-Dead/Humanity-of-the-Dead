@@ -10,6 +10,8 @@ public class MultiAudio_Matsuoka: MonoBehaviour
     [SerializeField] AudioClip[] bGMAudCli;
     //SEのオーディオクリップ
     [SerializeField] AudioClip[] sEAudCli;
+    //SEを名前で呼び出せるように、名前と要素番号を紐付ける変数
+    Dictionary<string, AudioClip> sEAudCliDic;
 
     //BGM用のオーディオソース
     AudioSource bGMAudSou;
@@ -48,6 +50,14 @@ public class MultiAudio_Matsuoka: MonoBehaviour
         //AudioSourceにオーディオミキサーグループを割り当てる
         if(bGMAudSou != null )bGMAudSou.outputAudioMixerGroup = bGMAudMixGro;
         if (sEAudSou != null) sEAudSou.outputAudioMixerGroup = sEAudMixGro;
+
+        //初期化
+        sEAudCliDic = new Dictionary<string, AudioClip>();
+        //SEのオーディオクリップと要素番号を紐づける
+        foreach(AudioClip clip in sEAudCli)
+        {
+            sEAudCliDic[clip.name]= clip;
+        }
     }
 
     // Update is called once per frame
@@ -86,6 +96,21 @@ public class MultiAudio_Matsuoka: MonoBehaviour
         //indがsEAudCliの要素番号のとき
         if (ind >= 0 && ind < sEAudCli.Length)
         {
+            //SEの再生
+            SoundAnSE(sEAudCli[ind]);
+        }
+        else
+        {
+            Debug.LogWarning("SE index out of range");
+        }
+    }
+
+    //SEを名前で選んで再生
+    public void ChooseSongsSE_Name(string name)
+    {
+        //その名前のSEがあるか判断しつつ、そのSEのオーディオクリップを取得
+        if (sEAudCliDic.TryGetValue(name,out AudioClip clip))
+        {
             sEAudSou.clip = sEAudCli[ind];
 
             if (sEAudSou != null)
@@ -113,6 +138,32 @@ public class MultiAudio_Matsuoka: MonoBehaviour
         else
         {
             Debug.LogWarning("SE index out of range");
+        }
+    }
+
+    //SEの再生
+    void SoundAnSE(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            //clip名にの行頭がUIのとき
+            if (clip.name.StartsWith("UI"))
+            {
+                sEAudSou.outputAudioMixerGroup = uIAudMixGro;
+                Debug.Log("行頭がUI");
+            }
+            else
+            {
+                sEAudSou.outputAudioMixerGroup = sEAudMixGro;
+            }
+    
+            sEAudSou.PlayOneShot(sEAudSou.clip);
+            Debug.Log("Playing SE:" + sEAudSou.clip.name);
+        }
+        else
+        {
+            //警告メッセージ
+            Debug.LogWarning("SE clip not set");
         }
     }
 }
