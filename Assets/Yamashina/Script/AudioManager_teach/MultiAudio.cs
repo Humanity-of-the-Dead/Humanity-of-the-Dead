@@ -21,6 +21,7 @@ public class MultiAudio : MonoBehaviour
     //BGMのオーディオクリップ
 
     private Dictionary<string, AudioClip> sEClipDictionary;
+    private Dictionary<string , AudioClip> BGMClipDictionary;   
 
     //シングルトン
     public static MultiAudio ins;
@@ -56,6 +57,11 @@ public class MultiAudio : MonoBehaviour
         {
             sEClipDictionary[clip.name] = clip;
         }
+        BGMClipDictionary = new Dictionary<string , AudioClip>();
+        foreach (var clip in audioClipsBGM)
+        {
+            BGMClipDictionary[clip.name] = clip;
+        }
     }
 
     // Method to play a selected BGM by index
@@ -79,7 +85,21 @@ public class MultiAudio : MonoBehaviour
             Debug.LogWarning("BGM index out of range.");
         }
     }
+    public void PlayBGM_ByName(string bgmName)
+    {
+        if (BGMClipDictionary.TryGetValue(bgmName, out var clip))
+        {
+            PlayBGM(clip);
+        }
+        else
+        {
+            Debug.LogWarning("BGM with name not found: " + bgmName);
+        }
+        // AudioSourceに設定して再生
+      
 
+        Debug.Log($"Playing BGM: {bgmName}");
+    }
     public void PlaySEByName(string name)
     {
         if (sEClipDictionary.TryGetValue(name, out var clip))
@@ -114,8 +134,22 @@ public class MultiAudio : MonoBehaviour
             Debug.LogWarning("SE clip is null");
         }
     }
-    // Method to play a selected SE by index
-    public void ChooseSongs_SE(int index)
+    private void PlayBGM(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            bgmSource.clip = clip;
+            bgmSource.loop = true; // ループ再生
+            bgmSource.Play();
+
+        }
+        else
+        {
+            Debug.LogWarning("BGMs clip is null");
+        }
+    }
+            // Method to play a selected SE by index
+            public void ChooseSongs_SE(int index)
     {
         if (index >= 0 && index < audioClipsSE.Length)
         {

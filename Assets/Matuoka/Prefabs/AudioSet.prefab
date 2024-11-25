@@ -137,6 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5009803700500600058}
+  - component: {fileID: 5933921192334385028}
   - component: {fileID: 2836153735995085346}
   m_Layer: 0
   m_Name: AudioSet
@@ -162,6 +163,33 @@ Transform:
   - {fileID: 2077059141076066767}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5933921192334385028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178248624856292866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a396791fc31e352438bbed9fab8d746f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipsBGM:
+  - {fileID: 8300000, guid: d361ea104a58d3849a6b3c7288c2d459, type: 3}
+  - {fileID: 8300000, guid: dba261f97389e0e44958e71a776122ef, type: 3}
+  - {fileID: 8300000, guid: 159bf061b7ab9a849ade2319832ad65b, type: 3}
+  - {fileID: 8300000, guid: 714ecc5b185c1194a9c9d2e2fcdc7a00, type: 3}
+  - {fileID: 8300000, guid: f8b26dcd4cdd78b4eb2f83d79e486d4d, type: 3}
+  - {fileID: 8300000, guid: 3e13c1a33278d5549af5a868b8d93115, type: 3}
+  - {fileID: 8300000, guid: 96d9da29975ab5c46a2011c8309a181e, type: 3}
+  - {fileID: 8300000, guid: 7a8d6e8379e8c8c47b4843bd905fe5ef, type: 3}
+  audioClipsSE:
+  - {fileID: 8300000, guid: 4bcfb5dde5584f846bab4d8855cf8107, type: 3}
+  - {fileID: 8300000, guid: 0cff2a0e63292ca44b02a8dc7654bb0a, type: 3}
+  bgmMixerGroup: {fileID: -4108538381236679251, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
+  seMixerGroup: {fileID: -2155192936819050110, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
+  uiMixerGroup: {fileID: 7232108298083354436, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
 --- !u!114 &2836153735995085346
 MonoBehaviour:
   m_ObjectHideFlags: 0

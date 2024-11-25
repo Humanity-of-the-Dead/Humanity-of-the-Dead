@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using Unity.VisualScripting;
 
 public class AudioVolumeManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class AudioVolumeManager : MonoBehaviour
     public Slider bgmSlider;
     public Slider seSlider;
     public Slider uiSlider;
+    public AudioSource BGM;
+    public AudioSource SE;
 
     // Keys for saving volume preferences
     private const string BGM_PREF_KEY = "BGM_Volume";
@@ -19,24 +22,52 @@ public class AudioVolumeManager : MonoBehaviour
 
     private void Start()
     {
+        BGM = GameObject.FindWithTag("BGM").GetComponent<AudioSource>();
+        SE = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
+
         // Set slider values from saved preferences or default to 1.0f
         bgmSlider.value = PlayerPrefs.GetFloat(BGM_PREF_KEY, 1.0f);
         seSlider.value = PlayerPrefs.GetFloat(SE_PREF_KEY, 1.0f);
         uiSlider.value = PlayerPrefs.GetFloat(UI_PREF_KEY, 1.0f);
 
         // Set up slider listeners to update and save volume changes
-        bgmSlider.onValueChanged.AddListener(value => SetVolume(BGM_PREF_KEY, "BGM_Volume", value));
-        seSlider.onValueChanged.AddListener(value => SetVolume(SE_PREF_KEY, "SE_Volume", value));
-        uiSlider.onValueChanged.AddListener(value => SetVolume(UI_PREF_KEY, "UI_Volume", value));
+        bgmSlider.onValueChanged.AddListener(SetBGMVolume);
+        seSlider.onValueChanged.AddListener(SetSEVolume);
+        uiSlider.onValueChanged.AddListener(SetUIVolume);
+        BGM.volume=bgmSlider.value; 
+        SE.volume = seSlider.value;
+
     }
+    private void SetBGMVolume(float value) => SetVolume(BGM_PREF_KEY, "BGM_Volume", value);
+    private void SetSEVolume(float value) => SetVolume(SE_PREF_KEY, "SE_Volume", value);
+    private void SetUIVolume(float value) => SetVolume(UI_PREF_KEY, "UI_Volume", value);
 
     // Method to set volume and save to PlayerPrefs
-    private void SetVolume(string prefKey, string exposedParam, float volume)
+    public void SetVolume(string prefKey, string exposedParam, float volume)
     {
         float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f;
         audioMixer.SetFloat(exposedParam, dbVolume);
         PlayerPrefs.SetFloat(prefKey, volume);
         PlayerPrefs.Save();
+
+        // BGM 音量を設定
+
+        if (BGM != null && PlayerPrefs.HasKey(BGM_PREF_KEY))
+        {
+            BGM.volume = PlayerPrefs.GetFloat(BGM_PREF_KEY);
+        }
+
+        // SE 音量を設定
+      if(SE != null && PlayerPrefs.HasKey(UI_PREF_KEY)&&SE.outputAudioMixerGroup == MultiAudio.ins.uiMixerGroup)
+        {
+            SE.volume= PlayerPrefs.GetFloat(UI_PREF_KEY);
+        }
+
+        if (SE != null && PlayerPrefs.HasKey(SE_PREF_KEY) && SE.outputAudioMixerGroup == MultiAudio.ins.seMixerGroup)
+        {
+            SE.volume = PlayerPrefs.GetFloat(SE_PREF_KEY);
+        }
+
     }
 
     private void OnDestroy()
