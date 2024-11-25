@@ -56,8 +56,8 @@ public class MultiAudio_Matsuoka: MonoBehaviour
         
     }
 
-    //BGM‚ğ‘I‚ñ‚ÅÄ¶
-    public void ChooseSongsBGM(int ind) {
+    //BGM‚ğ—v‘f”Ô†‚Å‘I‚ñ‚ÅÄ¶
+    public void ChooseSongsBGM_Num(int ind) {
         //ind‚ªbGMAudCli‚Ì—v‘f”Ô†‚Ì‚Æ‚«
         if (ind >= 0 && ind < bGMAudCli.Length)
         {
@@ -80,8 +80,8 @@ public class MultiAudio_Matsuoka: MonoBehaviour
         }
     }
 
-    //SE‚ğ‘I‚ñ‚ÅÄ¶
-    public void ChooseSongsSE(int ind)
+    //SE‚ğ—v‘f”Ô†‚Å‘I‚ñ‚ÅÄ¶
+    public void ChooseSongsSE_Num(int ind)
     {
         //ind‚ªsEAudCli‚Ì—v‘f”Ô†‚Ì‚Æ‚«
         if (ind >= 0 && ind < sEAudCli.Length)
