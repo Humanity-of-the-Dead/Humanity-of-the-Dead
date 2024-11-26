@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayerParameter : MonoBehaviour
 {
     //ゲームマネージャー
-    [SerializeField]GameMgr scGameMgr;
+    [SerializeField]GameObject scGameMgr;
 
     //移植時のモザイク
     [SerializeField] GameObject goMosaic;
@@ -35,12 +36,20 @@ public class PlayerParameter : MonoBehaviour
     //下半身のパーツデータ
     public BodyPartsData LowerData;
 
+
+    //ゲームオーバーの標準
+    [SerializeField] GameObject goPanel;
+    SceneTransitionManager sceneTransitionManager;
+
+
     public void Awake()
     {
         CheckInstance();
     }
     private void Start()
     {
+        InitializeReferences();
+
         //最大値を設定
         iUpperHPMax = UpperData.iPartHp;
         iLowerHPMax = LowerData.iPartHp;
@@ -52,18 +61,27 @@ public class PlayerParameter : MonoBehaviour
         //モザイクを非表示にする
         goMosaic.SetActive(false);
 
+        goPanel.SetActive(false);
+
         //シーン遷移で破棄されない
         DontDestroyOnLoad(gameObject);
+
+        sceneTransitionManager = GameObject.FindAnyObjectByType<SceneTransitionManager>();
     }
     private void Update()
     {
-        switch (scGameMgr.enGameState)
+        switch (scGameMgr.GetComponent<GameMgr>().enGameState)
         {
             case GameState.Main:
                 //パラメータの値をiDownTime秒で1減少させる
                 iHumanity -= Time.deltaTime / iDownTime;
                 iUpperHP -= Time.deltaTime / iDownTime;
                 iLowerHP -= Time.deltaTime / iDownTime;
+
+                if(iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
+                {
+                    sceneTransitionManager.SceneChange(SceneInformation.SCENE.StageOne);
+                }
 
                 //シーン移動
                 if (Input.GetKeyDown(KeyCode.M))
@@ -109,6 +127,8 @@ public class PlayerParameter : MonoBehaviour
                 //パーツデータのHPをMaxに代入
                 iUpperHPMax = partsData.iPartHp;
                 iUpperHP = iUpperHPMax;
+                //partDataの上書き
+                UpperData = partsData;
                 /*
                 //SpriteRendererのSpriteにパーツデータのSpriteを挿入
                 spriteRenderer.sprite = partsData.spBody;
@@ -120,6 +140,8 @@ public class PlayerParameter : MonoBehaviour
                 //パーツデータのHPをMax代入
                 iLowerHPMax = partsData.iPartHp;
                 iLowerHP = iLowerHPMax;
+                //partDataの上書き
+                LowerData = partsData;
                 /*
                 //SpriteRendererのSpriteにパーツデータのSpriteを挿入
                 spriteRenderer.sprite = partsData.spWaist;
@@ -162,5 +184,39 @@ public class PlayerParameter : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+
+    private void InitializeReferences()
+    {
+        // シーン遷移後に必要なオブジェクトを再取得
+        scGameMgr = GameObject.FindGameObjectWithTag("GameManager");
+        goMosaic = GameObject.FindGameObjectWithTag("Mosaic");
+        goPlayer = GameObject.FindGameObjectWithTag("Player");
+        goPanel = GameObject.FindGameObjectWithTag("GameOver");
+
+        if (scGameMgr == null || goMosaic == null || goPanel == null)
+        {
+            Debug.LogWarning("必要なオブジェクトが見つかりません");
+        }
+
+    }
+    private void OnEnable()
+    {
+        // シーンがロードされた後に参照を再取得
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        // イベントの解除
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // シーン遷移後に参照を再取得
+        InitializeReferences();
+        Debug.Log($"シーン {scene.name} がロードされました");
     }
 }

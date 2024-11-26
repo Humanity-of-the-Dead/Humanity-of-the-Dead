@@ -30,6 +30,9 @@ public class PlayerControl : MonoBehaviour
     //プレイヤーパラメーターの取得
     [SerializeField] PlayerParameter playerParameter;
 
+
+    [SerializeField] SceneTransitionManager sceneTransitionManager;
+
     void Start()
     {
         rbody2D = GetComponent<Rigidbody2D>();
@@ -124,10 +127,19 @@ public class PlayerControl : MonoBehaviour
     public void UpperBodyAttack(int EnemyNum,Vector3 vTargetPos, float fReach)
     {
         float fAttackReach = Vector3.Distance(vTargetPos,this.transform.position);
-        if(fAttackReach < fReach)
+        if (playerParameter.UpperData.sPartsName == "警察の上半身")
         {
-            liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(1,0);
+            Debug.Log("ここに銃弾の発射のプログラムをかいでね");
+            //この下
+
+            //システム待ち
+        }
+        else if (fAttackReach < fReach)
+        {
+
+            liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(1, 0);
             Debug.Log("上半身攻撃成功");
+
         }
         else
         {
