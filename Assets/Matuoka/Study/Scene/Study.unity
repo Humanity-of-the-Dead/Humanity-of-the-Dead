@@ -174,9 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514d69b2b5f58694e8ca0a739b6bd55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num: 2
-  isBGM: 1
-  MulAud_Mat: {fileID: 0}
 --- !u!114 &134212576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,11 +496,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
---- !u!82 &527340039 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 4651609467027161685, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
-  m_PrefabInstance: {fileID: 527340038}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &590393190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,10 +1061,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7903384029834647285, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
-      propertyPath: sE
-      value: 
-      objectReference: {fileID: 527340039}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1214,9 +1202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514d69b2b5f58694e8ca0a739b6bd55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num: 2
-  isBGM: 0
-  MulAud_Mat: {fileID: 0}
 --- !u!114 &1169994429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1363,9 +1348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514d69b2b5f58694e8ca0a739b6bd55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num: 0
-  isBGM: 0
-  MulAud_Mat: {fileID: 0}
 --- !u!114 &1172288777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1512,9 +1494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514d69b2b5f58694e8ca0a739b6bd55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num: 0
-  isBGM: 1
-  MulAud_Mat: {fileID: 0}
 --- !u!114 &1409200815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1819,9 +1798,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514d69b2b5f58694e8ca0a739b6bd55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num: 1
-  isBGM: 0
-  MulAud_Mat: {fileID: 0}
 --- !u!114 &1621418383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2047,9 +2023,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514d69b2b5f58694e8ca0a739b6bd55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num: 1
-  isBGM: 1
-  MulAud_Mat: {fileID: 0}
 --- !u!114 &1831277741
 MonoBehaviour:
   m_ObjectHideFlags: 0
