@@ -22,12 +22,12 @@ public class Test_MultiAudio : MonoBehaviour
 
     public void OnClickButton()
     {
-        if (isBGM) {
-            MulAud_Mat.ChooseSongsBGM(num);
-        }
-        else
-        {
-            MulAud_Mat.ChooseSongsSE(num);
-        }
+        //if (isBGM) {
+        //    MulAud_Mat.ChooseSongsBGM(num);
+        //}
+        //else
+        //{
+        //    MulAud_Mat.ChooseSongsSE(num);
+        //}
     }
 }

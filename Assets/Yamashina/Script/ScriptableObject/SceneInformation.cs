@@ -13,6 +13,7 @@ public class SceneInformation : ScriptableObject
         StageOne,   // ステージ１
         StageTwo,   // ステージ２
         StageThree, // ステージ３
+        StageFour,
 
     }
     // ステージのシーン
@@ -22,6 +23,7 @@ public class SceneInformation : ScriptableObject
         One,      // ステージ１
         Two,      // ステージ２
         Three,    // ステージ３
+        Four,
     }
 
     [SerializeField] public SceneObject[] sceneObject;

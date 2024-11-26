@@ -57,7 +57,7 @@ public class newDropPart : MonoBehaviour
             goPlayerParameter.GetComponent<PlayerParameter>().transplant(partsData);
             if (bBoss)
             {
-                goTextBox.GetComponent<GoalScript>().showText();
+                //goTextBox.GetComponent<GoalScript>().showText();
                 sceneTransitionManager.SceneChange(SceneInformation.SCENE.Title);
             }
             Destroy(this.gameObject);

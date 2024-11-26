@@ -127,6 +127,7 @@ public class TitleAnimation : MonoBehaviour
         eventTrigger_option.enabled = true;
 
         //ボタンのオブジェクトのセットアクティブ切り替え
+        MultiAudio.ins.PlayBGM_ByName("BGM_title");
 
         //CreditButton.SetActive(true);//クレジットボタン
         //optionButton.SetActive(true);   
@@ -174,6 +175,7 @@ public class TitleAnimation : MonoBehaviour
             CreditPanel.transform.localPosition = creditPanelStartPosition;
             StartSlideIn();
         }
+        MultiAudio.ins.PlayBGM_ByName("BGM_credit");
     }
 
     public void OptionView() //クレジット画面を表示
