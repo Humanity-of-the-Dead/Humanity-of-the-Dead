@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
-  m_Name: NurseTes_Upper
+  m_Name: Nurse_Upper
   m_EditorClassIdentifier: 
   enPartsType: 0
   sPartsName: "\u770B\u8B77\u5E2B\u306E\u4E0A\u534A\u8EAB"
