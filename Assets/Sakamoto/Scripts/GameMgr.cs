@@ -5,6 +5,7 @@ using UnityEngine;
 public enum GameState { 
     Main,
     ShowText,
+    GameOver,
 }
 
 public class GameMgr : MonoBehaviour

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,9 +28,13 @@ public class newEnemyParameters : MonoBehaviour
     [SerializeField]
     private BodyPartsData Lowerbodypart;
 
-    //プレハブのパーツ
+    //上半身のドロップパーツ
     [SerializeField]
-    private GameObject prePart;
+    private GameObject preUpperPart;
+
+    //下半身のドロップパーツ
+    [SerializeField]
+    private GameObject preLowerPart;
 
     GameObject drop;
 
@@ -59,13 +64,13 @@ public class newEnemyParameters : MonoBehaviour
         {
             PlayerControl.GetComponent<PlayerControl>().RemoveListItem(this.gameObject);
             Debug.Log("下半身が落ちたよ");
-            Drop(Lowerbodypart);
+            Drop(Lowerbodypart,false);
         }
         if (LowerHP <= 0)
         {
             PlayerControl.GetComponent<PlayerControl>().RemoveListItem(this.gameObject);
             Debug.Log("上半身が落ちたよ");
-            Drop(Upperbodypart);
+            Drop(Upperbodypart,true);
         }
     }
     //bodyには0か1しか入れてはいけない　BA//GU/RU
@@ -94,10 +99,23 @@ public class newEnemyParameters : MonoBehaviour
         //    deathImage.enabled = true;
         //}
     }
-    public  void Drop(BodyPartsData part)
+
+    //ドロップアイテムを生成する関数　
+    //BodyPartsData part->生成した後に与えるパラメータデータ
+    //int typ->trueなら上半身が落ちる:falseなら下半身が落ちる
+    //デフォルト引数はtrue
+    public void Drop(BodyPartsData part , bool typ = true)
     {
-        //プレハブをインスタンス化
-        drop = Instantiate(prePart);
+        if(typ == true)
+        {
+            //プレハブをインスタンス化
+            drop = Instantiate(preUpperPart);
+        }
+        else
+        {
+            //プレハブをインスタンス化
+            drop = Instantiate(preLowerPart);
+        }
 
         //生成したパーツを自身の場所に持ってくる
         drop.transform.position = this.transform.position;
