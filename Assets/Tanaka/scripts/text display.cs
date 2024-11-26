@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class TextDisplay_Yamashina : MonoBehaviour
+public class textdisplay: MonoBehaviour
 {
     [SerializeField]
     private TextAsset[] textAsset;   //メモ帳のファイル(.txt)　配列

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class TextDisplay : MonoBehaviour
+public class TextDisplay_Yamashina : MonoBehaviour
 {
     [SerializeField]
     private TextAsset[] textAsset;   // メモ帳のファイル(.txt) 配列
@@ -116,6 +116,7 @@ public class TextDisplay : MonoBehaviour
             yield return new WaitForSeconds(TextSpeed);
 
             text.text += currentText[i]; // 一文字ずつ追加
+           
             yield return null;
         }
 
