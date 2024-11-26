@@ -1322,111 +1322,12 @@ MonoBehaviour:
   - -15
   - 0
   timeWalk: 0
-  playerPatRotation:
-  - -10
-  - 0
-  armPatForwardRotation:
-  - 90
-  - 0
-  armPatBackRotation:
-  - -30
-  - 0
-  legPatForwardRotation:
-  - -15
-  - 0
-  footPatForwardRotation:
-  - -15
-  - 0
-  legPatBackRotation:
-  - 30
-  - 0
-  footPatBackRotation:
-  - -20
-  - 0
-  playerKickRotation:
-  - 10
-  - 0
-  armKickForwardRotation:
-  - 10
-  - 0
-  armKickBackRotation:
-  - 10
-  - 0
-  legKickForwardRotation:
-  - 0
-  - 0
-  footKickForwardRotation:
-  - -15
-  - 0
-  legKickBackRotation:
-  - 40
-  - 0
-  footKickBackRotation:
-  - 40
-  - 0
-  poPlayerPatRotation:
-  - 0
-  - 0
-  poArmPatForwardRotation:
-  - 0
-  - 0
-  poArmPatBackRotation:
-  - 100
-  - 0
-  poLegPatForwardRotation:
-  - -5
-  - 0
-  poFootPatForwardRotation:
-  - -5
-  - 0
-  poLegPatBackRotation:
-  - -10
-  - 0
-  poFootPatBackRotation:
-  - -10
-  - 0
-  nuPlayerPatRotation:
-  - 0
-  - 0
-  nuArmPatForwardRotation:
-  - 0
-  - 0
-  nuArmPatBackRotation:
-  - 90
-  - 0
-  nuLegPatForwardRotation:
-  - 0
-  - 0
-  nuFootPatForwardRotation:
-  - 0
-  - 0
-  nuLegPatBackRotation:
-  - 0
-  - 0
-  nuFootPatBackRotation:
-  - 0
-  - 0
-  nuPlayerKickRotation:
-  - 0
-  - 0
-  nuArmKickForwardRotation:
-  - 0
-  - 0
-  nuArmKickBackRotation:
-  - -10
-  - 0
-  nuLegKickForwardRotation:
-  - 0
-  - 0
-  nuFootKickForwardRotation:
-  - 0
-  - 0
-  nuLegKickBackRotation:
-  - 40
-  - 0
-  nuFootKickBackRotation:
-  - 40
-  - 0
+  playerUpper: {fileID: 11400000, guid: f576e3c5f7acada4d9403d71bce716e3, type: 2}
+  playerLower: {fileID: 11400000, guid: ecfa70eea4c6e214c83dc4f596887b28, type: 2}
+  policeUpper: {fileID: 11400000, guid: 3712727c393e03d4fa3bee2b8c8f1272, type: 2}
+  policeLower: {fileID: 11400000, guid: aa05b8f6075e3ab43b279f1352aa56c2, type: 2}
+  nurseUpper: {fileID: 11400000, guid: e7766c1a6f6fc414e9785188e74f2397, type: 2}
+  nurseLower: {fileID: 11400000, guid: ef21a595c3cba254db490f8dfd49a9c1, type: 2}
 --- !u!61 &1309253328765726476
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1459,7 +1360,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.40702772, y: 0.0332222}
+  m_Offset: {x: -0.35790396, y: -0.64171696}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1470,7 +1371,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.4742, y: 35.195312}
+  m_Size: {x: 6.944337, y: 36.54519}
   m_EdgeRadius: 0
 --- !u!1 &7108029326718391314
 GameObject:

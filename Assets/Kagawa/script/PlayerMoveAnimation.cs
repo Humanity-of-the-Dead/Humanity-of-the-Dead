@@ -48,49 +48,22 @@ public class PlayerMoveAnimation : MonoBehaviour
     [Header("歩きの継続時間")] public float timeWalk;
 
     [Header("---デフォルトパンチのアニメーション---")]
-    [Header("全身の角度")] public float[] playerPatRotation;
-    [Header("腕の前方角度")] public float[] armPatForwardRotation;
-    [Header("腕の後方角度")] public float[] armPatBackRotation;
-    [Header("太ももの奥角度")] public float[] legPatForwardRotation;
-    [Header("足の奥角度")] public float[] footPatForwardRotation;
-    [Header("太ももの手前角度")] public float[] legPatBackRotation;
-    [Header("足の手前角度")] public float[] footPatBackRotation;
+    public AnimationData playerUpper;
 
     [Header("---デフォルトキックのアニメーション---")]
-    [Header("全身の角度")] public float[] playerKickRotation;
-    [Header("腕の前方角度")] public float[] armKickForwardRotation;
-    [Header("腕の後方角度")] public float[] armKickBackRotation;
-    [Header("太ももの奥角度")] public float[] legKickForwardRotation;
-    [Header("足の奥角度")] public float[] footKickForwardRotation;
-    [Header("太ももの手前角度")] public float[] legKickBackRotation;
-    [Header("足の手前角度")] public float[] footKickBackRotation;
+    public AnimationData playerLower;
 
     [Header("---警察拳銃のアニメーション---")]
-    [Header("全身の角度")] public float[]         poPlayerPatRotation;
-    [Header("腕の手前角度")] public float[]       poArmPatForwardRotation;
-    [Header("腕の奥角度")] public float[]       poArmPatBackRotation;
-    [Header("太ももの奥角度")] public float[] poLegPatForwardRotation;
-    [Header("足の奥角度")] public float[]     poFootPatForwardRotation;
-    [Header("太ももの手前角度")] public float[] poLegPatBackRotation;
-    [Header("足の手前角度")] public float[]     poFootPatBackRotation;
+    public AnimationData policeUpper;
+
+    [Header("---警察下半身のアニメーション---")]
+    public AnimationData policeLower;
 
     [Header("---ナースパンチのアニメーション---")]
-    [Header("全身の角度")] public float[]         nuPlayerPatRotation;
-    [Header("腕の手前角度")] public float[]       nuArmPatForwardRotation;
-    [Header("腕の奥角度")] public float[]       nuArmPatBackRotation;
-    [Header("太ももの奥角度")] public float[] nuLegPatForwardRotation;
-    [Header("足の奥角度")] public float[]     nuFootPatForwardRotation;
-    [Header("太ももの手前角度")] public float[] nuLegPatBackRotation;
-    [Header("足の手前角度")] public float[]     nuFootPatBackRotation;
+    public AnimationData nurseUpper;
 
     [Header("---ナースキックのアニメーション---")]
-    [Header("全身の角度")] public float[]         nuPlayerKickRotation;
-    [Header("腕の手前方角度")] public float[]       nuArmKickForwardRotation;
-    [Header("腕の奥角度")] public float[]       nuArmKickBackRotation;
-    [Header("太ももの奥角度")] public float[] nuLegKickForwardRotation;
-    [Header("足の奥角度")] public float[]     nuFootKickForwardRotation;
-    [Header("太ももの手前角度")] public float[] nuLegKickBackRotation;
-    [Header("足の手前角度")] public float[]     nuFootKickBackRotation;
+    public AnimationData nurseLower;
 
     UpperAttack upperAttack;
 
@@ -240,7 +213,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         // 腕のアニメーション
         if (arm == null || armWalkRotation == null)
         {
-            Debug.LogWarning("armのデータが何かしら抜けてる");
+            Debug.LogWarning("Armのデータが何かしら抜けてる");
             return;
         }
         else
@@ -257,7 +230,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
         else if (foot == null || footWalkBackRotation == null || footWalkForwardRotation == null) 
         {
-            Debug.LogWarning("footのデータが何かしら抜けてる");
+            Debug.LogWarning("Footのデータが何かしら抜けてる");
             return;
         }
         else
@@ -290,109 +263,109 @@ public class PlayerMoveAnimation : MonoBehaviour
         {
             case UpperAttack.NORMAL:
                 // Quaternion.Euler: 回転軸( x, y, z)
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerPatRotation[indexNumber]);
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerUpper.wholeRotation[indexNumber]);
 
                 // 腕のアニメーション
-                if (arm == null || armPatForwardRotation == null || armPatBackRotation == null)
+                if (playerUpper.armForwardRotation == null || playerUpper.armBackRotation == null)
                 {
-                    Debug.LogWarning("armのデータが何かしら抜けてる");
+                    Debug.LogWarning("Armのデータが何かしら抜けてる");
                     return;
                 }
                 else
                 {
-                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, armPatForwardRotation[indexNumber]);
-                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, armPatBackRotation[indexNumber]);
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.armForwardRotation[indexNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.armBackRotation[indexNumber]);
                 }
 
                 // 足のアニメーション
-                if (leg == null || legPatBackRotation == null || legPatForwardRotation == null)
+                if (playerUpper.legForwardRotation == null || playerUpper.legBackRotation == null)
                 {
                     Debug.LogWarning("Legのデータが何かしら抜けてる");
                     return;
                 }
-                else if (foot == null || footPatBackRotation == null || footPatForwardRotation == null)
+                else if (playerUpper.footBackRotation == null || playerUpper.footForwardRotation == null)
                 {
-                    Debug.LogWarning("footのデータが何かしら抜けてる");
+                    Debug.LogWarning("Footのデータが何かしら抜けてる");
                     return;
                 }
                 else
                 {
-                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, legPatBackRotation[indexNumber]);
-                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, legPatForwardRotation[indexNumber]);
-                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, footPatBackRotation[indexNumber]);
-                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, footPatForwardRotation[indexNumber]);
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.legBackRotation[indexNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.legForwardRotation[indexNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.footBackRotation[indexNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.footForwardRotation[indexNumber]);
                 }
                 break;
             case UpperAttack.POLICE:
 
                 // Quaternion.Euler: 回転軸( x, y, z)
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, poPlayerPatRotation[indexNumber]);
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, policeUpper.wholeRotation[indexNumber]);
 
                 // 腕のアニメーション
-                if (armPatForwardRotation == null || poArmPatBackRotation == null)
+                if (policeUpper.armForwardRotation == null || policeUpper.armBackRotation == null)
                 {
-                    Debug.LogWarning("警察のArmのデータが何かしら抜けてる");
+                    Debug.LogWarning("警察Armのデータが何かしら抜けてる");
                     return;
                 }
                 else
                 {
-                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, poArmPatForwardRotation[indexNumber]);
-                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, poArmPatBackRotation[indexNumber]);
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.armForwardRotation[indexNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.armBackRotation[indexNumber]);
                 }
 
                 // 足のアニメーション
-                if (poLegPatBackRotation == null || poLegPatForwardRotation == null)
+                if (policeUpper.legForwardRotation == null || policeUpper.legBackRotation == null)
                 {
-                    Debug.LogWarning("警察のLegのデータが何かしら抜けてる");
+                    Debug.LogWarning("警察Legのデータが何かしら抜けてる");
                     return;
                 }
-                else if (poFootPatBackRotation == null || poFootPatForwardRotation == null)
+                else if (policeUpper.footBackRotation == null || policeUpper.footForwardRotation == null)
                 {
-                    Debug.LogWarning("警察のFootのデータが何かしら抜けてる");
+                    Debug.LogWarning("警察Footのデータが何かしら抜けてる");
                     return;
                 }
                 else
                 {
-                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, poLegPatBackRotation[indexNumber]);
-                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, poLegPatForwardRotation[indexNumber]);
-                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, poFootPatBackRotation[indexNumber]);
-                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, poFootPatForwardRotation[indexNumber]);
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.legBackRotation[indexNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.legForwardRotation[indexNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.footBackRotation[indexNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.footForwardRotation[indexNumber]);
                 }
                 break;
             case UpperAttack.NURSE:
 
                 // Quaternion.Euler: 回転軸( x, y, z)
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, nuPlayerPatRotation[indexNumber]);
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.wholeRotation[indexNumber]);
 
                 // 腕のアニメーション
-                if (nuArmPatForwardRotation == null || nuArmPatBackRotation == null)
+                if (nurseUpper.armForwardRotation == null || nurseUpper.armBackRotation == null)
                 {
-                    Debug.LogWarning("ナースの上半身攻撃のArmのデータが何かしら抜けてる");
+                    Debug.LogWarning("ナースArmのデータが何かしら抜けてる");    
                     return;
                 }
                 else
                 {
-                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, nuArmPatForwardRotation[indexNumber]);
-                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, nuArmPatBackRotation[indexNumber]);
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.armForwardRotation[indexNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.armBackRotation[indexNumber]);
                 }
 
                 // 足のアニメーション
-                if (nuLegPatBackRotation == null || nuLegPatForwardRotation == null)
+                if (nurseUpper.legForwardRotation == null || nurseUpper.legBackRotation == null)
                 {
-                    Debug.LogWarning("ナースの上半身攻撃のLegのデータが何かしら抜けてる");
+                    Debug.LogWarning("ナースLegのデータが何かしら抜けてる");
                     return;
                 }
-                else if (nuFootPatBackRotation == null || nuFootPatForwardRotation == null)
+                else if (nurseUpper.footBackRotation == null || nurseUpper.footForwardRotation == null)
                 {
-                    Debug.LogWarning("ナースの上半身攻撃のFootのデータが何かしら抜けてる");
+                    Debug.LogWarning("ナースFootのデータが何かしら抜けてる");
                     return;
                 }
                 else
                 {
-                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, nuLegPatBackRotation[indexNumber]);
-                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, nuLegPatForwardRotation[indexNumber]);
-                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, nuFootPatBackRotation[indexNumber]);
-                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, nuFootPatForwardRotation[indexNumber]);
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.legBackRotation[indexNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.legForwardRotation[indexNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.footBackRotation[indexNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.footForwardRotation[indexNumber]);
                 }
                 break;
         }
@@ -406,77 +379,108 @@ public class PlayerMoveAnimation : MonoBehaviour
         switch(downAttack)
         {
             case DownAttack.NORMAL:
-            case DownAttack.POLICE:
-
                 // Quaternion.Euler: 回転軸( x, y, z)
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerKickRotation[indexNumber]);
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerLower.wholeRotation[indexNumber]);
 
                 // 腕のアニメーション
-                if (armKickForwardRotation == null || armKickBackRotation == null)
+                if (playerLower.armForwardRotation == null || playerLower.armBackRotation == null)
                 {
-                    Debug.LogWarning("armのデータが何かしら抜けてる");
+                    Debug.LogWarning("Armのデータが何かしら抜けてる");
                     return;
                 }
                 else
                 {
-                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, armKickForwardRotation[indexNumber]);
-                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, armKickBackRotation[indexNumber]);
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, playerLower.armForwardRotation[indexNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, playerLower.armBackRotation[indexNumber]);
                 }
 
                 // 足のアニメーション
-                if (legKickBackRotation == null || legKickForwardRotation == null)
+                if (playerLower.legBackRotation == null || playerLower.legForwardRotation == null)
                 {
                     Debug.LogWarning("Legのデータが何かしら抜けてる");
                     return;
                 }
-                else if (footKickBackRotation == null || footKickForwardRotation == null)
+                else if (playerLower.footBackRotation == null || playerLower.footForwardRotation == null)
                 {
-                    Debug.LogWarning("footのデータが何かしら抜けてる");
+                    Debug.LogWarning("Footのデータが何かしら抜けてる");
                     return;
                 }
                 else
                 {
-                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, legKickBackRotation[indexNumber]);
-                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, legKickForwardRotation[indexNumber]);
-                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, footKickBackRotation[indexNumber]);
-                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, footKickForwardRotation[indexNumber]);
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, playerLower.legBackRotation[indexNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, playerLower.legForwardRotation[indexNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, playerLower.footBackRotation[indexNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, playerLower.footForwardRotation[indexNumber]);
                 }
                 break;
-
-            case DownAttack.NURSE:
-
-                // Quaternion.Euler: 回転軸( x, y, z)
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, nuPlayerKickRotation[indexNumber]);
+            case DownAttack.POLICE:
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, policeLower.wholeRotation[indexNumber]);
 
                 // 腕のアニメーション
-                if (nuArmKickForwardRotation == null || nuArmKickBackRotation == null)
+                if (policeLower.armForwardRotation == null || policeLower.armBackRotation == null)
                 {
-                    Debug.LogWarning("ナースの下半身攻撃のArmのデータが何かしら抜けてる");
+                    Debug.LogWarning("警察Armのデータが何かしら抜けてる");
                     return;
                 }
                 else
                 {
-                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, nuArmKickForwardRotation[indexNumber]);
-                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, nuArmKickBackRotation[indexNumber]);
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, policeLower.armForwardRotation[indexNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, policeLower.armBackRotation[indexNumber]);
                 }
 
                 // 足のアニメーション
-                if (nuLegKickBackRotation == null || nuLegKickForwardRotation == null)
+                if (policeLower.legForwardRotation == null || policeLower.legBackRotation == null)
                 {
-                    Debug.LogWarning("ナースの下半身攻撃のLegのデータが何かしら抜けてる");
+                    Debug.LogWarning("警察Legのデータが何かしら抜けてる");
                     return;
                 }
-                else if (nuFootKickBackRotation == null || nuFootKickForwardRotation == null)
+                else if (policeLower.footBackRotation == null || policeLower.footForwardRotation == null)
                 {
-                    Debug.LogWarning("ナースの下半身攻撃のFootのデータが何かしら抜けてる");
+                    Debug.LogWarning("警察Footのデータが何かしら抜けてる");
+                    return;
+                }
+                else
+                {   
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, policeLower.legBackRotation[indexNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, policeLower.legForwardRotation[indexNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, policeLower.footBackRotation[indexNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, policeLower.footForwardRotation[indexNumber]);
+                }
+                break;
+            case DownAttack.NURSE:
+
+                // Quaternion.Euler: 回転軸( x, y, z)
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, nurseLower.wholeRotation[indexNumber]);
+
+                // 腕のアニメーション
+                if (nurseLower.armForwardRotation == null || nurseLower.armBackRotation == null)
+                {
+                    Debug.LogWarning("ナースArmのデータが何かしら抜けてる");
                     return;
                 }
                 else
                 {
-                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, nuLegKickBackRotation[indexNumber]);
-                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, nuLegKickForwardRotation[indexNumber]);
-                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, nuFootKickBackRotation[indexNumber]);
-                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, nuFootKickForwardRotation[indexNumber]);
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.armForwardRotation[indexNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.armBackRotation[indexNumber]);
+                }
+
+                // 足のアニメーション
+                if (nurseLower.legForwardRotation == null || nurseLower.legBackRotation == null)
+                {
+                    Debug.LogWarning("ナースLegのデータが何かしら抜けてる");
+                    return;
+                }
+                else if (nurseLower.footBackRotation == null || nurseLower.footForwardRotation == null)
+                {
+                    Debug.LogWarning("ナースFootのデータが何かしら抜けてる");
+                    return;
+                }
+                else
+                {
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.legBackRotation[indexNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.legForwardRotation[indexNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.footBackRotation[indexNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.footForwardRotation[indexNumber]);
                 }
                 break;
         }
@@ -499,12 +503,12 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     IEnumerator CallPantieWithDelay()
     {
-        for (int i = 0; i < armPatForwardRotation.Length; i++)
+        for (int i = 0; i < playerUpper.armForwardRotation.Length; i++)
         {
             PlayerPantie();
 
             // indexNumberの値を増やす(配列番号を上げる)
-            indexNumber = (indexNumber + 1) % armPatForwardRotation.Length;
+            indexNumber = (indexNumber + 1) % playerUpper.armForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
 
@@ -514,12 +518,12 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     IEnumerator CallKickWithDelay()
     {
-        for (int i = 0; i < armKickForwardRotation.Length; i++)
+        for (int i = 0; i < playerLower.armForwardRotation.Length; i++)
         {
             PlayerKick();
 
             // indexNumberの値を増やす(配列番号を上げる)
-            indexNumber = (indexNumber + 1) % armKickForwardRotation.Length;
+            indexNumber = (indexNumber + 1) % playerLower.armForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
 
@@ -558,7 +562,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     void PantieStart()
     {
         AttackWaite();
-        time = timeMax * armPatForwardRotation.Length;
+        time = timeMax * playerUpper.armForwardRotation.Length;
         StartCoroutine(CallPantieWithDelay());
     }
 
@@ -568,7 +572,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     void KickStart()
     {
         AttackWaite();
-        time = timeMax * armKickForwardRotation.Length;
+        time = timeMax * playerLower.armForwardRotation.Length;
         StartCoroutine(CallKickWithDelay());
     }
 
@@ -606,11 +610,11 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     void AttackWaite()
     {
-        timeAttack = timeMax * armKickBackRotation.Length;
+        timeAttack = timeMax * playerLower.armForwardRotation.Length;
         isAttack = true;
         StopCoroutine(CallWalkWithDelay());
         Upright();
-        indexNumber = 0;
+        indexNumber = 1;
     }
 
     /// <summary>
