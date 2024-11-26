@@ -111,20 +111,20 @@ public class MultiAudio_Matsuoka: MonoBehaviour
         //その名前のSEがあるか判断しつつ、そのSEのオーディオクリップを取得
         if (sEAudCliDic.TryGetValue(name,out AudioClip clip))
         {
-            sEAudSou.clip = sEAudCli[ind];
+            //sEAudSou.clip = sEAudCli[ind];
 
             if (sEAudSou != null)
             {
                 //clip名にの行頭がUIのとき
-                if (sEAudCli[ind].name.StartsWith("UI"))
-                {
-                    sEAudSou.outputAudioMixerGroup = uIAudMixGro;
-                    Debug.Log("行頭がUI");
-                }
-                else
-                {
-                    sEAudSou.outputAudioMixerGroup= sEAudMixGro;
-                }
+                //if (sEAudCli[ind].name.StartsWith("UI"))
+                //{
+                //    sEAudSou.outputAudioMixerGroup = uIAudMixGro;
+                //    Debug.Log("行頭がUI");
+                //}
+                //else
+                //{
+                //    sEAudSou.outputAudioMixerGroup= sEAudMixGro;
+                //}
 
                 sEAudSou.PlayOneShot(sEAudSou.clip);
                 Debug.Log("Playing SE:" + sEAudSou.clip.name);

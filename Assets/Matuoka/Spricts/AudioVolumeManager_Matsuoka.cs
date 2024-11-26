@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class AudioVolumeManager_Matsuoka: MonoBehaviour
+public class AudioVolumeManager_Matsuoka : MonoBehaviour
 {
     //AudioMixer
     [SerializeField] AudioMixer audMix;
