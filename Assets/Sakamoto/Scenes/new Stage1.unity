@@ -404,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7860053639961644261, guid: 482ce8b28315a9847a901f767318d0f7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7860053639961644261, guid: 482ce8b28315a9847a901f767318d0f7, type: 3}
       propertyPath: m_TagString
