@@ -26,6 +26,8 @@ public class TextDisplay_Yamashina : MonoBehaviour
 
     [SerializeField]
     private GameMgr GameManager;
+    [SerializeField]
+    private string customNewline = "[BR]"; // 改行として扱う文字列を指定
 
     [SerializeField]
     private GameObject TextArea; // テキスト表示域
@@ -111,12 +113,20 @@ public class TextDisplay_Yamashina : MonoBehaviour
     {
         string currentText = textAsset[LoadText].text;
 
+        // 特定の文字列を改行文字に変換
+        if (!string.IsNullOrEmpty(customNewline))
+        {
+            currentText = currentText.Replace(customNewline, "\n");
+        }
+
         for (int i = 0; i < currentText.Length; i++)
         {
+            string currentChar = currentText[i].ToString();
+            if (currentChar == "") continue;
+
             yield return new WaitForSeconds(TextSpeed);
 
-            text.text += currentText[i]; // 一文字ずつ追加
-           
+            text.text += currentChar;
             yield return null;
         }
 
@@ -130,9 +140,15 @@ public class TextDisplay_Yamashina : MonoBehaviour
         {
             StopCoroutine(currentCoroutine); // コルーチンを停止
         }
+        string fullText = textAsset[LoadText].text;
 
+        if (!string.IsNullOrEmpty(customNewline))
+        {
+
+            fullText = fullText.Replace(customNewline, "\n");
+        }
         // 現在のテキストをすべて表示
-        text.text = textAsset[LoadText].text;
+        text.text = fullText;
 
         isTextFullyDisplayed = true; // 完全表示状態にする
     }
