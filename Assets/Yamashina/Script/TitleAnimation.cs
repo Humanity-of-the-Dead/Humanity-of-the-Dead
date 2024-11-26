@@ -279,7 +279,7 @@ public class TitleAnimation : MonoBehaviour
     void Update()
     {
         //escapeキーもしくはマウス右クリック
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.G))
         {
             //パネルのセットアクティブ
             OptionPanel.SetActive(false);
