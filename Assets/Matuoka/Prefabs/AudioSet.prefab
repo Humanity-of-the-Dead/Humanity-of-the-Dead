@@ -138,7 +138,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5009803700500600058}
   - component: {fileID: 5933921192334385028}
-  - component: {fileID: 2836153735995085346}
   m_Layer: 0
   m_Name: AudioSet
   m_TagString: Untagged
@@ -154,7 +153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178248624856292866}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -187,26 +186,20 @@ MonoBehaviour:
   audioClipsSE:
   - {fileID: 8300000, guid: 4bcfb5dde5584f846bab4d8855cf8107, type: 3}
   - {fileID: 8300000, guid: 0cff2a0e63292ca44b02a8dc7654bb0a, type: 3}
+  - {fileID: 8300000, guid: b270645f696e5f44bb8b80dc48e5aef3, type: 3}
+  - {fileID: 8300000, guid: c2f12e71ba12a9f4dad155d34b4c94f2, type: 3}
+  - {fileID: 8300000, guid: 4816688eab7d4ef4eb003c4b9cb8f955, type: 3}
+  - {fileID: 8300000, guid: 63fd6d87bb634624f990449fba40b2d1, type: 3}
+  - {fileID: 8300000, guid: f77392ea8792e26449d7ac4c2beaacd3, type: 3}
+  - {fileID: 8300000, guid: 75fef2225f5b5644781bcf11151da759, type: 3}
+  - {fileID: 8300000, guid: bbd09632ce4260644aaa512a77abfe06, type: 3}
+  - {fileID: 8300000, guid: d6f2580bae7658047957655d4044e87f, type: 3}
+  - {fileID: 8300000, guid: 341de6a496e487943a85fdb76eb76c70, type: 3}
+  - {fileID: 8300000, guid: 092730ebee901e349b1190762df4aac7, type: 3}
+  - {fileID: 8300000, guid: 7f0373ddab592134fb171f942396da87, type: 3}
   bgmMixerGroup: {fileID: -4108538381236679251, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
   seMixerGroup: {fileID: -2155192936819050110, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
   uiMixerGroup: {fileID: 7232108298083354436, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
---- !u!114 &2836153735995085346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1178248624856292866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0236a2453ffbb8449be86653adc62d32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bGMAudCli: []
-  sEAudCli: []
-  bGMAudMixGro: {fileID: 3679390433003195848, guid: 996736340159f8f4fabdd6fe3e6021a7, type: 2}
-  sEAudMixGro: {fileID: -1835925389188928416, guid: 996736340159f8f4fabdd6fe3e6021a7, type: 2}
-  uIAudMixGro: {fileID: 9138312347371035016, guid: 996736340159f8f4fabdd6fe3e6021a7, type: 2}
 --- !u!1 &1553061318831934779
 GameObject:
   m_ObjectHideFlags: 0

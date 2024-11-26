@@ -222,7 +222,7 @@ public class TitleAnimation : MonoBehaviour
     public IEnumerator AnimateEachPanelIn()
     {
 
-        var Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
+        float Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
 
 
         //クレジット画面のスライドインのアニメーション
@@ -255,7 +255,7 @@ public class TitleAnimation : MonoBehaviour
     //画面内から画面外へスライドアウトするための関数 
     public IEnumerator AnimateEachPanelOut()
     {
-        var Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
+        float Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
                         //var Option = 0f;
 
         //クレジット画面のスライドアウトのアニメーション
