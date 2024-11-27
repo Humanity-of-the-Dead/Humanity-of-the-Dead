@@ -12,10 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4baf05cd9d1c8074ba7e49a082233737, type: 3}
   m_Name: Enemy_Walk
   m_EditorClassIdentifier: 
-  wholeRotation: []
-  armForwardRotation: []
-  armBackRotation: []
-  legForwardRotation: []
-  footForwardRotation: []
-  legBackRotation: []
-  footBackRotation: []
+  wholeRotation:
+  - -2
+  - -5
+  - -2
+  - 0
+  armForwardRotation:
+  - 90
+  - 90
+  - 90
+  - 90
+  armBackRotation:
+  - 90
+  - 90
+  - 90
+  - 90
+  legForwardRotation:
+  - 10
+  - 15
+  - 10
+  - 0
+  footForwardRotation:
+  - 10
+  - 15
+  - 10
+  - 0
+  legBackRotation:
+  - -10
+  - -15
+  - -10
+  - 0
+  footBackRotation:
+  - -10
+  - -15
+  - -10
+  - 0
