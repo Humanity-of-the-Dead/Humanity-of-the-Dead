@@ -30,6 +30,9 @@ public class PlayerControl : MonoBehaviour
     //プレイヤーパラメーターの取得
     [SerializeField] PlayerParameter playerParameter;
 
+    public GameObject gunObject;    //Gunコンポーネントがアタッチされているオブジェクト
+    private Gun gun;                //Gunスクリプトのインスタンス
+
     void Start()
     {
         rbody2D = GetComponent<Rigidbody2D>();
@@ -39,6 +42,8 @@ public class PlayerControl : MonoBehaviour
 
         // カメラの幅はアスペクト比に基づいて計算する
         fCameraWidth = fCameraHeight * goCamera.aspect;
+
+        gun = gunObject.GetComponent<Gun>();    //gunObjectにアタッチされているGunコンポーネントを取得
     }
 
     // Update is called once per frame
@@ -108,6 +113,11 @@ public class PlayerControl : MonoBehaviour
                         //仮引数
                         LowerBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea);
                     }
+                }
+                //遠距離攻撃
+                if(Input.GetKeyDown(KeyCode.U))
+                {
+                    gun.Shoot();
                 }
                 break;
         }
