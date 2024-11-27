@@ -80,7 +80,11 @@ public class PlayerParameter : MonoBehaviour
 
                 if(iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
                 {
-                    sceneTransitionManager.SceneChange(SceneInformation.SCENE.StageOne);
+
+                    Debug.Log("リロードを開始します"); // デバッグログで確認
+
+                    GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
+                    SceneTransitionManager.instance.ReloadCurrentScene();
                 }
 
                 //シーン移動
