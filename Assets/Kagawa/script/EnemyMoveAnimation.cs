@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
 public enum Status
 {
     Zombie,
     Boss,
+}
+public enum DebugMove
+{
+    None,
+    Walk,
+    Kick,
+    Pantie
 }
 
 
 public class EnemyMoveAnimation : MonoBehaviour
 {
     [Header("敵の種類")] public Status status;
+
+    [Header("デバッグ用(通常、None)")] public DebugMove debugMoves;
 
     [Header("全身")] public GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")] GameObject[] arm;
@@ -82,8 +90,23 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeAttack -= Time.deltaTime;
-    }
 
+        if (debugMoves != DebugMove.None)
+        {
+            switch (debugMoves)
+            {
+                case DebugMove.Walk:
+                    WalkInstance();
+                    break;
+                case DebugMove.Pantie:
+                    PantieStart();
+                    break;
+                case DebugMove.Kick:
+                    KickStart();
+                    break;
+            }
+        }
+    }
     /// <summary>
     /// 歩くアニメーション
     /// </summary>
