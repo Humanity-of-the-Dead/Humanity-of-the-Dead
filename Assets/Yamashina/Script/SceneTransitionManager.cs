@@ -7,10 +7,14 @@ using UnityEngine.UI;
 public class SceneTransitionManager : MonoBehaviour
 {
     [SerializeField] private SceneInformation sceneInformation;
-    [SerializeField] private Image fade;                            // フェード
+    [SerializeField] private GameObject fadePrefab; // フェード用プレハブ
+    private Image fadeInstance; // 実際に使用するフェード用 Image
     [SerializeField] private SceneInformation.SCENE currentScene;  // 今のシーン                  // 今のシーン
     [SerializeField] AudioSource bgmAudioSource;
     //private SoundTable soundTable;  // BGM テーブル
+    private bool isReloading = false; // リロード中かどうかを判定するフラグ
+
+    public static SceneTransitionManager instance;
 
     private void Start()
     {
@@ -24,6 +28,70 @@ public class SceneTransitionManager : MonoBehaviour
 
     }
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Managerオブジェクト全体を保持
+            
+            SceneManager.sceneLoaded += OnSceneLoaded; // イベント登録
+        }
+        else
+        {
+            Destroy(gameObject); // 二重生成防止
+        }
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        InitializeReferences(); // シーンロード後に再取得
+        PlayBGMForScene();
+
+    }
+    private void Update()
+    {
+    }
+    public void ReloadCurrentScene()
+    {
+        if (isReloading) return; // リロード中なら処理をスキップ
+        isReloading = true; // リロード中に設定
+        StartCoroutine(FadeOut(SceneManager.GetActiveScene().name));
+    }
+    public void InitializeReferences()
+    {
+
+        if (fadeInstance == null)
+        {
+            if (fadePrefab != null)
+            {
+                GameObject fadeObject = Instantiate(fadePrefab);
+                fadeInstance = fadeObject.GetComponentInChildren<Image>(); // 子オブジェクトから Image を取得
+
+                if (fadeInstance == null)
+                {
+                    Debug.LogError("fadePrefab に Image コンポーネントがありません。");
+                }
+                else
+                {
+                    Debug.Log("fadeInstance が正常に設定されました。");
+                }
+
+                // Canvas の設定
+                Canvas fadeCanvas = fadeObject.GetComponent<Canvas>();
+                if (fadeCanvas != null)
+                {
+                    fadeCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+                    fadeCanvas.sortingOrder = 100;
+                }
+                fadeInstance.gameObject.SetActive(false);
+                DontDestroyOnLoad(fadeObject);
+            }
+            else
+            {
+                Debug.LogError("フェード用プレハブが設定されていません。");
+            }
+        }
+    }
     public void SetCurrentScene(int sceneIndex) { currentScene = (SceneInformation.SCENE)sceneIndex; }
 
     private void PlayBGMForScene()
@@ -48,7 +116,7 @@ public class SceneTransitionManager : MonoBehaviour
             bgmName = "BGM_stage_03"; // ステージ2のBGM名
 
         }
-        else if(sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour))
+        else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour))
         {
             bgmName = "BGM_stage_04"; // ステージ2のBGM名
 
@@ -67,7 +135,6 @@ public class SceneTransitionManager : MonoBehaviour
     }
 
 
-
     ///// <summary>
     ///// シーンを遷移させる
     ///// </summary>
@@ -75,9 +142,10 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void SceneChange(SceneInformation.SCENE scene)
     {
+        if (isReloading) return; // シーン変更中なら処理をスキップ
+        isReloading = true; // シーン変更中に設定
         StartCoroutine(FadeOut(sceneInformation.GetSceneObject(scene)));
     }
-
     //ボタンでシーン遷移する場合
     public void NextSceneButton(int index)
     {
@@ -85,19 +153,29 @@ public class SceneTransitionManager : MonoBehaviour
     }
 
 
+
     // <summary>
     // 画面を明るくする
     // <summary>    / <returns
     private IEnumerator FadeIn()
     {
-        fade.gameObject.SetActive(true);
-        fade.color = Color.black;
-        while (fade.color.a > 0)
+        fadeInstance.gameObject.SetActive(true);
+        Color fadeColor = fadeInstance.color; // 一時変数を使用
+        fadeColor.a = 1; // 最初は完全に不透明
+        fadeInstance.color = fadeColor;
+
+        // 徐々に透明にする処理
+        while (fadeInstance.color.a > 0)
         {
-            fade.color += new Color(0, 0, 0, -Time.deltaTime);
+            fadeColor.a -= Time.deltaTime; // アルファ値を減少
+            fadeInstance.color = fadeColor; // 更新
             yield return null;
         }
-        fade.gameObject.SetActive(false);
+
+        // 完全に透明になったら非アクティブ化
+        fadeInstance.gameObject.SetActive(false);
+        isReloading = false; // リロードが完了したのでフラグをリセット
+
     }
 
     // <summary>
@@ -106,13 +184,47 @@ public class SceneTransitionManager : MonoBehaviour
     // <returns></returns>
     private IEnumerator FadeOut(string stageName)
     {
-        fade.gameObject.SetActive(true);
-        while (fade.color.a < 1)
+        fadeInstance.gameObject.SetActive(true);
+        Color fadeColor = fadeInstance.color; // 一時変数を使用
+        fadeColor.a = 0; // 最初は完全に透明
+        fadeInstance.color = fadeColor;
+
+        // 徐々に不透明にする処理
+        while (fadeInstance.color.a < 1)
         {
-            fade.color += new Color(0, 0, 0, Time.deltaTime);
+            fadeColor.a += Time.deltaTime; // アルファ値を増加
+            fadeInstance.color = fadeColor; // 更新
             yield return null;
         }
+
         sceneInformation.SetPreviousScene((SceneInformation.SCENE)SceneManager.GetActiveScene().buildIndex);
-        SceneManager.LoadScene(stageName);
+
+        // シーンの非同期読み込み
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(stageName);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        StartCoroutine(FadeIn()); // フェードイン開始
     }
+  
+    
+
+   
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    
+   
+
+
+  
+   
+
+    
+   
 }
+
