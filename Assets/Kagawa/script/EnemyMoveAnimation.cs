@@ -82,7 +82,6 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeAttack -= Time.deltaTime;
-        KickStart();
     }
 
     /// <summary>
