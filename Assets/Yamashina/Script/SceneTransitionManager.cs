@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SceneTransitionManager : MonoBehaviour
 {
-    [SerializeField] private SceneInformation sceneInformation;
+    [SerializeField]  public  SceneInformation sceneInformation;
     [SerializeField] private GameObject fadePrefab; // フェード用プレハブ
     private Image fadeInstance; // 実際に使用するフェード用 Image
     [SerializeField] private SceneInformation.SCENE currentScene;  // 今のシーン                  // 今のシーン
