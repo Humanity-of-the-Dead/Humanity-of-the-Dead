@@ -40,7 +40,7 @@ public class newEnemyParameters : MonoBehaviour
 
     //プレイヤーパラメータ-
     public 
-    GameObject PlayerParameter;
+    PlayerParameter scPlayerParameter;
     //プレイヤーコントローラ
     public GameObject PlayerControl;
 
@@ -121,7 +121,7 @@ public class newEnemyParameters : MonoBehaviour
         drop.transform.position = this.transform.position;
 
         //プレイヤーパラメーターを渡す
-        drop.GetComponent<newDropPart>().getPlayerManegerObjet(PlayerParameter);
+        drop.GetComponent<newDropPart>().getPlayerManegerObjet(scPlayerParameter);
 
         //テキストボックスを渡す
         drop.GetComponent<newDropPart>().getTextBox(textBox);
