@@ -351,6 +351,9 @@ MonoBehaviour:
   arm:
   - {fileID: 9028895253583278988}
   - {fileID: 1162082761540882526}
+  hand:
+  - {fileID: 6042060343829840776}
+  - {fileID: 3210825693605044959}
   leg:
   - {fileID: 2349829986928354073}
   - {fileID: 7597773970816706462}
@@ -794,7 +797,7 @@ GameObject:
   - component: {fileID: 5662596021776132318}
   - component: {fileID: 6159961934230635668}
   m_Layer: 0
-  m_Name: Square
+  m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1079,7 +1082,7 @@ GameObject:
   - component: {fileID: 1166149486672254211}
   - component: {fileID: 753144693715060830}
   m_Layer: 0
-  m_Name: Square
+  m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
