@@ -363,7 +363,7 @@ MonoBehaviour:
   timeMax: 0.3
   walk: {fileID: 11400000, guid: ec962bc88a02d70429ef611b231b5e38, type: 2}
   upper: {fileID: 11400000, guid: e7766c1a6f6fc414e9785188e74f2397, type: 2}
-  lower: {fileID: 0}
+  lower: {fileID: 11400000, guid: ef21a595c3cba254db490f8dfd49a9c1, type: 2}
 --- !u!1 &1542777082605014598
 GameObject:
   m_ObjectHideFlags: 0
