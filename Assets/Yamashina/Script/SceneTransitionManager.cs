@@ -96,6 +96,11 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void PlayBGMForScene()
     {
+        if (MultiAudio.ins == null)
+        {
+            Debug.LogError("MultiAudio instance is not initialized.");
+            return;
+        }
         string sceneName = SceneManager.GetActiveScene().name;
         string bgmName = "";
 
