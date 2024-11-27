@@ -87,18 +87,24 @@ public class MultiAudio : MonoBehaviour
     }
     public void PlayBGM_ByName(string bgmName)
     {
+        if (BGMClipDictionary == null)
+        {
+            Debug.LogError("BGMClipDictionary is not initialized.");
+            return;
+        }
+
         if (BGMClipDictionary.TryGetValue(bgmName, out var clip))
         {
             PlayBGM(clip);
+            Debug.Log($"Playing BGM: {bgmName}");
         }
         else
         {
             Debug.LogWarning("BGM with name not found: " + bgmName);
         }
         // AudioSourceに設定して再生
-      
 
-        Debug.Log($"Playing BGM: {bgmName}");
+
     }
     public void PlaySEByName(string name)
     {
