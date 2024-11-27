@@ -11,7 +11,7 @@ public class newDropPart : MonoBehaviour
     //PlayerParameter playerManager;
 
     //プレイヤー情報
-    GameObject goPlayerParameter;
+    PlayerParameter scPlayerParameter;
 
     //クリアテキスト
     GameObject goTextBox;
@@ -37,7 +37,7 @@ public class newDropPart : MonoBehaviour
     {
         //Jキーを押したら慰霊する
         if(Input.GetKeyUp(KeyCode.J) && goButton[1].activeSelf == true) {
-            goPlayerParameter.GetComponent<PlayerParameter>().comfort(10);
+            scPlayerParameter.comfort(10);
             if (bBoss)
             {
                 goTextBox.GetComponent<GoalScript>().showText();
@@ -54,7 +54,7 @@ public class newDropPart : MonoBehaviour
         //Lキーを押したら移植する
         if (Input.GetKeyDown(KeyCode.L) && goButton[0].activeSelf == true)
         {
-            goPlayerParameter.GetComponent<PlayerParameter>().transplant(partsData);
+            scPlayerParameter.transplant(partsData);
             if (bBoss)
             {
                 //goTextBox.GetComponent<GoalScript>().showText();
@@ -76,9 +76,9 @@ public class newDropPart : MonoBehaviour
         image.sprite = partsData.spBody; 
     }
 
-    public void getPlayerManegerObjet(GameObject obj)
+    public void getPlayerManegerObjet(PlayerParameter scr)
     {
-        goPlayerParameter = obj;
+        scPlayerParameter = scr;
     }
 
     //テキストボックスの取得
@@ -95,14 +95,14 @@ public class newDropPart : MonoBehaviour
     //移植
     public void getTransplant()
     {
-        goPlayerParameter.GetComponent<PlayerParameter>().transplant(partsData);
+        scPlayerParameter.transplant(partsData);
         Destroy(this.gameObject);
     }
 
     //慰霊
     public void getComfort()
     {
-        goPlayerParameter.GetComponent<PlayerParameter>().comfort(10);
+        scPlayerParameter.comfort(10);
         Destroy(this.gameObject);
     }
     public void getSceneTransition(SceneTransitionManager sceneTransitionManager)

@@ -120,8 +120,8 @@ public class sEnemyParameters : MonoBehaviour
         // 生成したパーツを自身の場所に持ってくる
         drop.transform.position = this.transform.position;
 
-        // プレイヤーパラメーターを渡す
-        drop.GetComponent<newDropPart>().getPlayerManegerObjet(PlayerParameter);
+        //// プレイヤーパラメーターを渡す
+        //drop.GetComponent<newDropPart>().getPlayerManegerObjet(PlayerParameter);
 
         // テキストボックスを渡す
         drop.GetComponent<newDropPart>().getTextBox(textBox);

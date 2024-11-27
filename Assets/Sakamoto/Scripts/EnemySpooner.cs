@@ -7,9 +7,9 @@ public class EnemySpooner : MonoBehaviour
 {
     //生成するオブジェクト
     [SerializeField] GameObject goEnemyObject;
-    //プレイヤーパラメーター
-    [SerializeField] GameObject goPlayerParameter;
-    [SerializeField] PlayerParameter playerParameter;
+    ////プレイヤーパラメーター
+    //[SerializeField] GameObject goPlayerParameter;
+    [SerializeField] PlayerParameter scPlayerParameter;
     //プレイヤーコントローラ
     [SerializeField] GameObject goPlayerControl;
     //ゲームマネージャー
@@ -30,10 +30,14 @@ public class EnemySpooner : MonoBehaviour
 
     private void Start()
     {
+        //PlayerParameterスクリプトを取得
+        scPlayerParameter = GameObject.FindAnyObjectByType<PlayerParameter>().GetComponent<PlayerParameter>();
+        Debug.Log(scPlayerParameter + "が代入されました");
         createEnemy();
         fTimer = 0;
         //マーカーを消す
         goMarker.SetActive(false);
+
     }
 
     void Update()
@@ -72,10 +76,10 @@ public class EnemySpooner : MonoBehaviour
         //敵のインスタンスを生成
         liEnemyList.Add(Instantiate(goEnemyObject));
         //プレイヤーパラメーターを渡す
-        liEnemyList[liEnemyList.Count　-　1].GetComponent<newEnemyParameters>().PlayerParameter = goPlayerParameter;
+        liEnemyList[liEnemyList.Count　-　1].GetComponent<newEnemyParameters>().scPlayerParameter = this.scPlayerParameter;
         //プレイヤーコントローラを渡す
         liEnemyList[liEnemyList.Count　-　1].GetComponent<newEnemyParameters>().PlayerControl = goPlayerControl;
-        liEnemyList[liEnemyList.Count - 1].GetComponent<newEnemyMovement>().scPlayerParameter = playerParameter;
+        liEnemyList[liEnemyList.Count - 1].GetComponent<newEnemyMovement>().scPlayerParameter = this.scPlayerParameter;
         //ゲームマネージャーを渡す
         liEnemyList[liEnemyList.Count - 1].GetComponent<newEnemyMovement>().gamestate = gameMgr;
         //ポジションをスポナー座標に置く

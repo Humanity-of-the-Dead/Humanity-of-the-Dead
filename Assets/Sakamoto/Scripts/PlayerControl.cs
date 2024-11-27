@@ -28,13 +28,16 @@ public class PlayerControl : MonoBehaviour
     //[SerializeField] GameObject[] goObj;
 
     //プレイヤーパラメーターの取得
-    [SerializeField] PlayerParameter playerParameter;
+    PlayerParameter playerParameter;
 
 
     [SerializeField] SceneTransitionManager sceneTransitionManager;
 
     void Start()
     {
+        playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
+
+
         rbody2D = GetComponent<Rigidbody2D>();
 
         // カメラの高さ（orthographicSize）はカメラの中央から上下の距離を表す
