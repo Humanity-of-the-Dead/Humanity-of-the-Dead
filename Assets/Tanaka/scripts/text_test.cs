@@ -23,6 +23,8 @@ public class text_test : MonoBehaviour
     
     GameObject TextImage;
 
+    private bool isTextFullyDisplayed = false; // 現在のテキストが完全に表示されたか
+
     private Coroutine TypingCroutine;  //コルーチンの管理
 
     // Start is called before the first frame update
@@ -70,6 +72,11 @@ public class text_test : MonoBehaviour
    
         if (Input.GetMouseButtonUp(0)) 
         {
+            if (isTextFullyDisplayed)
+            {
+                Debug.Log("クリック無効");
+                return;
+            }
             if (TypingCroutine != null)
             {
                 StopCoroutine(TypingCroutine); //コルーチン実行中の場合文章を表示する
@@ -84,11 +91,20 @@ public class text_test : MonoBehaviour
                 else
                 {
                     Debug.Log("最後の文章");
+                    isTextFullyDisplayed = true;
                 }
             }
             else
             {
-                UpdateText();
+                if (LoadText < textAsset.Length)
+                {
+                    UpdateText();
+                }
+                else
+                {
+                    Debug.Log("全テキストが既に表示されています。");
+                    isTextFullyDisplayed = true; // 再確認して終了フラグを設定
+                }
             }
         }
     }
@@ -124,8 +140,8 @@ public class text_test : MonoBehaviour
     {
         for (int i = 0; i < textAsset[LoadText].text.Length; i++)   //テキストの中の文字を取得して、文字数を増やしていく
         {                                                           //テキストが進むたびにコルーチンが呼び出される
-            //textAsset[LoadText].text.Lengthのよって中のテキストデータの文字数の所得
-            yield return new WaitForSeconds(TextSpeed);
+            //textAsset[LoadText].text.Lengthによって中のテキストデータの文字数の所得
+            yield return new WaitForSeconds(TextSpeed); //TextSpeed文待機して文字を増やす
 
             text.text += textAsset[LoadText].text[i];  //iが増えるたびに文字を一文字ずつ表示していく
 
@@ -137,6 +153,7 @@ public class text_test : MonoBehaviour
         else
         {
             Debug.Log("最後の文章");
+            isTextFullyDisplayed = true;
         }
         TypingCroutine = null;
     }
