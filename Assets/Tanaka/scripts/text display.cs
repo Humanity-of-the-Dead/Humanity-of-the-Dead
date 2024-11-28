@@ -9,9 +9,6 @@ public class textdisplay: MonoBehaviour
     private TextAsset[] textAsset;   //メモ帳のファイル(.txt)　配列
 
     [SerializeField]
-    private TextAsset[,] textAsset2;   //メモ帳のファイル(.txt)　配列
-
-    [SerializeField]
     private Text text;  //画面上の文字
 
     [SerializeField]
@@ -171,8 +168,19 @@ public class textdisplay: MonoBehaviour
     }
     IEnumerator TextCoroutine()
     {
-        for (int i = 0; i < textAsset[LoadText].text.Length; i++)   //テキストの中の文字を取得して、文字数を増やしていく
-        {                                                           //テキストが進むたびにコルーチンが呼び出される
+        string currentText = textAsset[LoadText].text;
+
+        if (!string.IsNullOrEmpty(customNewline))
+        {
+           currentText = currentText.Replace(customNewline, "\n");
+        }
+
+        for (int i = 0; i < currentText.Length; i++)   //テキストの中の文字を取得して、文字数を増やしていく
+        {
+            string currentChra = currentText[i].ToString();
+            if (currentChra == "") continue;  //改行処理
+                
+                //テキストが進むたびにコルーチンが呼び出される
             //textAsset[LoadText].text.Lengthのよって中のテキストデータの文字数の所得
             yield return new WaitForSeconds(TextSpeed);
 
