@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 20f; // 銃弾の速度
+    public float speed = 1f; // 銃弾の速度
     public Rigidbody2D rb;    // Rigidbody2Dでスプライトの向きを計算する
 
     void Start()
@@ -15,9 +15,10 @@ public class Bullet : MonoBehaviour
     {
         // ターゲットに当たったかどうかを衝突したオブジェクトのタグによって判断する
         // たぶん銃を撃ったのがプレイヤーかエネミーか等、場合によって反応するタグを変える必要があるので未完成
-        if (hitInfo.gameObject.tag == "Player" || hitInfo.gameObject.tag == "Enemy")
+        if (hitInfo.gameObject.CompareTag("Player") || hitInfo.gameObject.CompareTag("Enemy"))
         {
-            Destroy(gameObject); // 銃弾を消す
+            Debug.Log("当たった");
+            Destroy(this.gameObject); // 銃弾を消す
         }
     }
 

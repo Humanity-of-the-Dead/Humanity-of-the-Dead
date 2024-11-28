@@ -190,4 +190,20 @@ public class PlayerControl : MonoBehaviour
     {
         liObj.Remove(obj);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EnemyShoot"))
+        {
+            if(0 < this.transform.position.y - collision.gameObject.transform.position.y)
+            {
+                playerParameter.UpperHP -= 3;
+            }
+            else
+            {
+                playerParameter.LowerHP -= 3;
+            }
+        }
+
+    }
 }

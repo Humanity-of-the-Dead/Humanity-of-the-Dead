@@ -143,7 +143,7 @@ public class newEnemyParameters : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PlayerShoot"))
         {
-            TakeDamage(100, 0);
+            TakeDamage(1, 0);
         }
     }
 
