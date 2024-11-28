@@ -15,6 +15,7 @@ public class newEnemyMovement : EnemyAttack
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private BodyPartsData upperpart;
     [SerializeField] private BodyPartsData lowerpart;
+    [SerializeField] private Gun Juu;
 
     
     [SerializeField] EnemyMoveAnimation moveAnimation;
@@ -114,6 +115,26 @@ public class newEnemyMovement : EnemyAttack
                             {
                                 //上半身攻撃
                                 moveAnimation.PantieStart();
+                                if(upperpart.sPartsName == "警察の上半身")
+                                {
+                                    Vector2 ShootMoveBector = new Vector2(0, 0);
+                                    //子のplayerRCのローテーションYを持ってくる
+                                    // y = 0のときは右向き、0 y = 180のときは左向き
+                                    Debug.Log(this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y);
+                                    if (this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y == 180)
+                                    {
+                                        ShootMoveBector.x = -1;
+                                    }
+                                    else
+                                    {
+                                        ShootMoveBector.x = 1;
+                                    }
+
+                                    Debug.Log(ShootMoveBector);
+                                    Juu.Shoot(ShootMoveBector, this.transform);
+
+                                    return;
+                                }
                                 UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
                             }
                             if (num == 1)
