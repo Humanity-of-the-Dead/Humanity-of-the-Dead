@@ -82,6 +82,11 @@ public class TitleAnimation : MonoBehaviour
 
     void Start()
     {
+
+        start.onClick.AddListener(() => 
+            SceneTransitionManager.instance.NextSceneButton(1));
+
+
         //パネルのオブジェクトのセットアクティブ切り替え
         mainPanel.SetActive(true);　　//タイトル画面
         CreditPanel.SetActive(false);//クレジット画面
