@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Gun : MonoBehaviour
 {
@@ -42,6 +43,12 @@ public class Gun : MonoBehaviour
         // e’e‚ÌŒü‚«‚ğİ’è
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bullet.GetComponent<Bullet>().speed;
+        if (rb.velocity.x > 0)
+        {
+            Quaternion rotate = rb.transform.rotation;
+            rotate.y = 180;
+            rb.transform.rotation = rotate;
+        }
     }
 }
 
