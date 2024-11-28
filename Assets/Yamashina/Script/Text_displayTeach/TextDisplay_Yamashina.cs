@@ -69,21 +69,18 @@ public class TextDisplay_Yamashina : MonoBehaviour
             case GameState.ShowText:
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    if (isTextFullyDisplayed)
+                    if (!isTextFullyDisplayed)
+                    {
+                        DisplayFullText(); // 現在のテキストを一気に表示
+                    }
+                    else if (LoadText < textAsset.Length - 1)
                     {
                         LoadNextText(); // 次のテキストを表示
                     }
                     else
                     {
-                        DisplayFullText(); // テキストを一気に表示
+                        CloseTextArea(); // 全てのテキストを読み終えたら閉じる
                     }
-                }
-
-                // 完全表示後、マウスクリックで閉じる
-                if (isTextFullyDisplayed && Input.GetMouseButtonDown(0))
-                {
-                    GameManager.ChangeState(GameState.Main);
-                    TextArea.SetActive(false); // テキストエリアを非表示
                 }
                 break;
         }
@@ -163,5 +160,12 @@ public class TextDisplay_Yamashina : MonoBehaviour
         {
             Debug.Log("最後のテキストです");
         }
+    }
+
+    // テキストエリアを閉じる
+    private void CloseTextArea()
+    {
+        GameManager.ChangeState(GameState.Main);
+        TextArea.SetActive(false); // テキストエリアを非表示
     }
 }
