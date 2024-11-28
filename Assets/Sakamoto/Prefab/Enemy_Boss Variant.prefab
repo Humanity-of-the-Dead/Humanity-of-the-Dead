@@ -52,6 +52,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5066492829317263093, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: m_Size.y
+      value: 34.81395
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066492829317263093, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: m_Offset.x
+      value: -1.451251
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066492829317263093, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.608819
+      objectReference: {fileID: 0}
     - target: {fileID: 6025226992257383609, guid: cdf94058954888c498d04b05f2685229, type: 3}
       propertyPath: boss
       value: 1
@@ -69,6 +81,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1481237974272629741, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 343083938577656536}
+    - targetCorrespondingSourceObject: {fileID: 1481237974272629741, guid: cdf94058954888c498d04b05f2685229, type: 3}
       insertIndex: -1
       addedObject: {fileID: -3137860054857002523}
     - targetCorrespondingSourceObject: {fileID: 1481237974272629741, guid: cdf94058954888c498d04b05f2685229, type: 3}
@@ -80,6 +95,33 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1481237974272629741, guid: cdf94058954888c498d04b05f2685229, type: 3}
   m_PrefabInstance: {fileID: 4039862833261499177}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &343083938577656536
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3215028904872642756}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &-3137860054857002523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +144,7 @@ MonoBehaviour:
   lowerpart: {fileID: 11400000, guid: 9be24730dcd468c4593ce730030bff5f, type: 2}
   moveAnimation: {fileID: 7750010862643081104}
   gamestate: {fileID: 0}
-  waitTime: 0
+  waitTime: 1
 --- !u!114 &6868419856064601450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,14 +157,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fca371783d21544a6bd076acd24c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpperHP: 0
-  LowerHP: 0
+  UpperHP: 10
+  LowerHP: 10
   damage: 0
   Upperbodypart: {fileID: 11400000, guid: 52c75d8f30fdb5840bc98bdc62f54324, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: 9be24730dcd468c4593ce730030bff5f, type: 2}
-  preUpperPart: {fileID: 0}
-  preLowerPart: {fileID: 0}
-  PlayerParameter: {fileID: 0}
+  preUpperPart: {fileID: 1386206347217571068, guid: 9ef6486a8bc7b494c93dd6ae51d33677, type: 3}
+  preLowerPart: {fileID: 1386206347217571068, guid: f6b212fa74ac2e345911fcdee1d5d9de, type: 3}
+  scPlayerParameter: {fileID: 0}
   PlayerControl: {fileID: 0}
   Boss: 0
   textBox: {fileID: 0}
