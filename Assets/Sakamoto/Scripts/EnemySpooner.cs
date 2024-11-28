@@ -9,7 +9,7 @@ public class EnemySpooner : MonoBehaviour
     [SerializeField] GameObject goEnemyObject;
     ////プレイヤーパラメーター
     //[SerializeField] GameObject goPlayerParameter;
-    [SerializeField] PlayerParameter scPlayerParameter;
+    /*[SerializeField]*/ PlayerParameter scPlayerParameter;
     //プレイヤーコントローラ
     [SerializeField] GameObject goPlayerControl;
     //ゲームマネージャー
@@ -37,7 +37,7 @@ public class EnemySpooner : MonoBehaviour
         fTimer = 0;
         //マーカーを消す
         goMarker.SetActive(false);
-
+        Debug.Log(scPlayerParameter + "は健在です");
     }
 
     void Update()

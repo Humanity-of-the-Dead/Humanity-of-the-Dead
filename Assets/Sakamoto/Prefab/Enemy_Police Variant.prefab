@@ -171,7 +171,7 @@ MonoBehaviour:
   Lowerbodypart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
   preUpperPart: {fileID: 1386206347217571068, guid: 9ef6486a8bc7b494c93dd6ae51d33677, type: 3}
   preLowerPart: {fileID: 1386206347217571068, guid: f6b212fa74ac2e345911fcdee1d5d9de, type: 3}
-  PlayerParameter: {fileID: 0}
+  scPlayerParameter: {fileID: 0}
   PlayerControl: {fileID: 0}
   Boss: 0
   textBox: {fileID: 0}
