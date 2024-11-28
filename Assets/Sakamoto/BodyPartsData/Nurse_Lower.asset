@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enPartsType: 1
   upperAttack: 0
-  lowerAttack: 0
+  lowerAttack: 3
   sPartsName: "\u770B\u8B77\u5E2B\u306E\u4E0B\u534A\u8EAB"
   AttackArea: 5
   iPartHp: 45

@@ -105,12 +105,29 @@ public class newEnemyMovement : EnemyAttack
                         timer += Time.deltaTime;
                         break;
                     case EnemyState.attack:
+                        if (distanceToPlayer < upperpart.AttackArea && distanceToPlayer < lowerpart.AttackArea)
+                        {
+                            //—”‚ðŽæ“¾‚·‚é
+                            int num = UnityEngine.Random.Range(0, 2);
+                            if (num == 0)
+                            {
+                                //ã”¼gUŒ‚
+                                moveAnimation.PantieStart();
+                                UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
+                            }
+                            if (num == 1)
+                            {
+                                //‰º”¼gUŒ‚
+                                moveAnimation.KickStart();
+                                LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
+                            }
+                        }
                         if (distanceToPlayer < upperpart.AttackArea)
                         {
                             moveAnimation.PantieStart();
                             UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
                         }
-                        else if (distanceToPlayer < lowerpart.AttackArea)
+                        if (distanceToPlayer < lowerpart.AttackArea)
                         {
                             moveAnimation.KickStart();
                             LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
