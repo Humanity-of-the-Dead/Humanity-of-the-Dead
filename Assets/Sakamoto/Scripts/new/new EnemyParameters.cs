@@ -139,6 +139,16 @@ public class newEnemyParameters : MonoBehaviour
     }
 
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerShoot"))
+        {
+            TakeDamage(100, 0);
+        }
+
+    }
+
+
     //ドロップの挙動作ってないから画面に出るだけなので調節する
     //倒されたら体が消失するプログラムが必要
     //今の時点だと両方ドロップしてしまうので修正する
