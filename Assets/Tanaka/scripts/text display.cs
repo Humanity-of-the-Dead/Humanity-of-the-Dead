@@ -80,89 +80,42 @@ public class textdisplay: MonoBehaviour
             case GameState.ShowText:
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    if (isTextFullyDisplayed)
+                    if (!isTextFullyDisplayed)
                     {
-                        return;
+                        DisplayFullText(); //テキスト全表示
                     }
-                    // テキストをすべて表示
-                    DisplayFullText();
-                }
-
-                    if (isTextFullyDisplayed && Input.GetMouseButtonDown(0))
+                    else if (LoadText < textAsset.Length - 1)
                     {
-                        //this.gameObject.SetActive(false);   //オブジェクトを非表示
-                        GameManager.ChangeState(GameState.Main);
-
-                        //テキスト表示域を非表示
-                        TextArea.SetActive(false);
+                        LoadNextText(); // 次のテキストを表示
                     }
-                
+                    else
+                    {
+                        CloseTextArea(); // 全てのテキストを読み終えたら閉じる
+                    }
+
+                }                
                 break;
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (isTextFullyDisplayed)
-            {
-                Debug.Log("クリック無効");
-                return;
-            }
-            if (TypingCroutine != null)
-            {
-                StopCoroutine(TypingCroutine); //コルーチン実行中の場合文章を表示する
-                text.text = textAsset[LoadText].text; //テキストを全て表示
-                TypingCroutine = null;
-
-                //配列の範囲内かどうか確認
-                if (LoadText < textAsset.Length - 1)
-                {
-                    LoadText++;
-                }
-                else
-                {
-                    Debug.Log("最後の文章");
-                    isTextFullyDisplayed = true;
-                }
-            }
-            else
-            {
-                if (LoadText < textAsset.Length)
-                {
-                    UpdateText();
-                }
-                else
-                {
-                    Debug.Log("全テキストが既に表示されています。");
-                    isTextFullyDisplayed = true; // 再確認して終了フラグを設定
-                }
-            }
         }
 
     }
     public void UpdateText()
     {
+        if (TypingCroutine != null)
+        {
+            StopCoroutine(TypingCroutine); // コルーチンの競合を防ぐ
+        }
         if (textAsset.Length > LoadText)
-        {//テキストをLoadTextの分表示
-            //text.text = //textAsset[LoadText].text;
+        {  
             text.text = ""; //からのテキストをおいて初期化しているように見せる
+            isTextFullyDisplayed = false; // テキストが完全に表示されていない
 
-            //Debug.Log(textAsset[LoadText].text);
-            //Debug.Log(textAsset[LoadText].text.Length); //テキスト上に何文字あるかデバック
             Debug.Log($"テキスト{LoadText}を表示開始: {textAsset[LoadText].text}");
-
-            //Debug.Log(textAsset[LoadText]);
-            // Debug.Log(textAsset.Length);    //全体のテキスト数
-            //Debug.Log(LoadText);            //現在表示されているテキスト番号
 
             TypingCroutine = StartCoroutine(TextCoroutine()); //コルーチンを再スタート       //テキストを呼び出されるたびにコルーチンを走らせて文字を加算していく
         }
         else
         {
             Debug.Log("全テキストが表示された");
-        }
-        if (textAsset == null || textAsset.Length == 0)
-        {
-            Debug.LogError("textAssetがない");
-            return;
         }
 
     }
@@ -187,16 +140,8 @@ public class textdisplay: MonoBehaviour
             text.text += textAsset[LoadText].text[i];  //iが増えるたびに文字を一文字ずつ表示していく
            
         }
-        if (LoadText < textAsset.Length - 1)
-        {
-            LoadText++;
-        }
-        else
-        {
-            Debug.Log("最後の文章");
+
             isTextFullyDisplayed = true;
-        }
-        TypingCroutine = null;
     }
     private void DisplayFullText()
     {
@@ -215,5 +160,25 @@ public class textdisplay: MonoBehaviour
         text.text = fullText;
 
         isTextFullyDisplayed = true; // 完全表示状態にする
+    }
+    // 次のテキストを読み込む
+    private void LoadNextText()
+    {
+        if (LoadText < textAsset.Length - 1)
+        {
+            LoadText++;
+            UpdateText(); // 新しいテキストを表示
+        }
+        else
+        {
+            Debug.Log("最後のテキストです");
+        }
+    }
+
+    // テキストエリアを閉じる
+    private void CloseTextArea()
+    {
+        GameManager.ChangeState(GameState.Main);
+        TextArea.SetActive(false); // テキストエリアを非表示
     }
 }
