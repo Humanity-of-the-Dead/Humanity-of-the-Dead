@@ -7,8 +7,8 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        // 銃弾の進行方向に速度を設定
-        rb.velocity = transform.right * speed;
+        //// 銃弾の進行方向に速度を設定
+        //rb.velocity = transform.right * speed;
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
