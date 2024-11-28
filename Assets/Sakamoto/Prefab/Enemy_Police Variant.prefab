@@ -85,6 +85,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1481237974272629741, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4938219355749494688}
+    - targetCorrespondingSourceObject: {fileID: 1481237974272629741, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3530047645205038771}
   m_SourcePrefab: {fileID: 100100000, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
 --- !u!114 &744358186740427958 stripped
 MonoBehaviour:
@@ -149,6 +152,7 @@ MonoBehaviour:
   attackRange: 2
   upperpart: {fileID: 11400000, guid: e14baf2f3f4c6df40a37ca9c3d576095, type: 2}
   lowerpart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
+  Juu: {fileID: 3530047645205038771}
   moveAnimation: {fileID: 744358186740427958}
   gamestate: {fileID: 0}
   waitTime: 1
@@ -176,3 +180,16 @@ MonoBehaviour:
   Boss: 0
   textBox: {fileID: 0}
   sceneTransitionManager: {fileID: 0}
+--- !u!114 &3530047645205038771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568700679576308706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b42dbc9ca8a0654788e1757177e4818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 9036471482523323409, guid: b4f8e28a4fea30c4daa6c4a716a01087, type: 3}
