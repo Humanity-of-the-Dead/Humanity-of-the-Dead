@@ -1,60 +1,53 @@
-﻿using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI; // Text コンポーネント用
 using System.Collections;
 
 public class TextDisplay_Yamashina : MonoBehaviour
 {
     [SerializeField]
-    private TextAsset[] textAsset;   // メモ帳のファイル(.txt) 配列
+    private TextAsset[] textAsset;   // テキストファイル配列
 
     [SerializeField]
-    private Text text;  // 画面上の文字
+    private Text text;  // UnityのTextコンポーネント
 
     [SerializeField]
-    private float TypingSpeed = 1.0f;  // 文字の表示速度
+    private float TypingSpeed = 1.0f;  // 文字表示速度
 
-    private int LoadText = 0;   // 何枚目のテキストを読み込んでいるのか
-
-    private int n = 0;
+    private int LoadText = 0;   // 現在表示中のテキストのインデックス
 
     [SerializeField]
-    private float[] Position;
+    private float[] Position; // 位置配列
 
     [SerializeField]
-    private GameObject Player;
+    private GameObject Player; // プレイヤーの参照
 
     [SerializeField]
-    private GameMgr GameManager;
+    private GameMgr GameManager; // ゲーム管理スクリプト
 
     [SerializeField]
-    private GameObject TextArea; // テキスト表示域
+    private GameObject TextArea; // テキスト表示エリア
 
     [SerializeField]
-    private string customNewline = "[BR]"; // 改行として扱う文字列を指定
+    private string customNewline = "[BR]"; // カスタム改行文字列
 
-    bool[] Flag;
+    private bool[] Flag; // フラグでテキストの表示を制御
 
-    [Header("次の文字が表示されるまでの時間")]
+    [Header("1文字あたりの表示間隔")]
     [SerializeField]
-    float TextSpeed = 0.1f;
+    private float TextSpeed = 0.1f;
 
-    GameObject TextImage;
+    private Coroutine TypingCoroutine; // 現在のコルーチンを保持
+    private bool isTextFullyDisplayed = false; // 現在のテキストが完全に表示されているか
 
-    private bool isTextFullyDisplayed = false; // 現在のテキストが完全に表示されたか
-
-    private Coroutine TypingCroutine;  // コルーチンの管理
-
-    // Start is called before the first frame update
+    // 開始時に実行される
     void Start()
     {
         text.text = "";  // 初期化
-        Debug.Log(textAsset[0].text);
-        TextArea.SetActive(false);  // テキスト表示域を非表示
+        TextArea.SetActive(false);  // テキスト表示領域を非表示
         Flag = new bool[Position.Length];
     }
 
-    // Update is called once per frame
+    // 毎フレーム実行される
     void Update()
     {
         switch (GameManager.enGameState)
@@ -64,111 +57,107 @@ public class TextDisplay_Yamashina : MonoBehaviour
                 {
                     if (Player.transform.position.x > Position[i] && Flag[i] == false)
                     {
-                        Flag[i] = true; // Flag[i]を通った
-                        GameManager.ChangeState(GameState.ShowText); // GameStateがShowTextに変わる
+                        Flag[i] = true; // 一度だけ通る
+                        GameManager.ChangeState(GameState.ShowText);
 
-                        TextArea.SetActive(true); // テキスト表示域を表示
-
+                        TextArea.SetActive(true);
                         UpdateText(); // 最初のテキストを更新
                     }
                 }
                 break;
+
             case GameState.ShowText:
-                // エンターキーでアニメーションを再開
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     if (isTextFullyDisplayed)
                     {
-                        // 次のテキストを表示
-                        LoadNextText();
+                        LoadNextText(); // 次のテキストを表示
                     }
                     else
                     {
-                        // テキストが完全に表示されていない場合、アニメーションを再開
-                        DisplayFullText();
+                        DisplayFullText(); // テキストを一気に表示
                     }
                 }
 
-                // テキストが完全に表示された状態で、クリックで閉じる
+                // 完全表示後、マウスクリックで閉じる
                 if (isTextFullyDisplayed && Input.GetMouseButtonDown(0))
                 {
                     GameManager.ChangeState(GameState.Main);
-                    TextArea.SetActive(false); // テキスト表示域を非表示
+                    TextArea.SetActive(false); // テキストエリアを非表示
                 }
                 break;
         }
     }
 
+    // テキストを更新
     public void UpdateText()
     {
+        if (TypingCoroutine != null)
+        {
+            StopCoroutine(TypingCoroutine); // コルーチンの競合を防ぐ
+        }
+
         if (textAsset.Length > LoadText)
         {
-            text.text = ""; // テキストを空にして初期化
-
-            TypingCroutine = StartCoroutine(TextCoroutine()); // コルーチンを開始
+            text.text = ""; // テキストをクリア
+            isTextFullyDisplayed = false; // テキストが完全に表示されていない
+            TypingCoroutine = StartCoroutine(TextCoroutine()); // コルーチン開始
         }
         else
         {
-            Debug.Log("全てのテキストが表示されました");
+            Debug.Log("すべてのテキストが表示されました");
         }
     }
 
+    // コルーチンで1文字ずつ表示
     IEnumerator TextCoroutine()
     {
         string currentText = textAsset[LoadText].text;
 
-        // 改行処理: [BR]を\nに変換
+        // 改行処理: [BR] を \n に変換
         if (!string.IsNullOrEmpty(customNewline))
         {
             currentText = currentText.Replace(customNewline, "\n");
         }
 
+        // テキストを一文字ずつ表示
         for (int i = 0; i < currentText.Length; i++)
         {
-            // 改行があった場合はそのまま表示し、次の行に進む
-            if (currentText[i] == '\n')
-            {
-                text.text += "\n";  // 改行を追加
-                continue;
-            }
-
-            yield return new WaitForSeconds(TextSpeed);  // 文字が表示されるまで待機
-            text.text += currentText[i];  // 一文字ずつ追加
+            text.text += currentText[i];
+            yield return new WaitForSeconds(TextSpeed);
         }
 
-        // テキストが完全に表示された後、次のテキストへ進む処理
-        isTextFullyDisplayed = true; // 現在のテキストが完全に表示された
+        // テキストが完全に表示された
+        isTextFullyDisplayed = true;
     }
 
+    // テキストを一気に表示
     private void DisplayFullText()
     {
-        // コルーチンがまだ走っている場合は止めて全て表示する
-        if (TypingCroutine != null)
+        if (TypingCoroutine != null)
         {
-            StopCoroutine(TypingCroutine);
+            StopCoroutine(TypingCoroutine); // コルーチン停止
         }
 
         string fullText = textAsset[LoadText].text;
 
-        // 改行処理: [BR]を\nに変換
+        // 改行処理: [BR] を \n に変換
         if (!string.IsNullOrEmpty(customNewline))
         {
             fullText = fullText.Replace(customNewline, "\n");
         }
 
-        text.text = fullText; // 完全に表示
-        isTextFullyDisplayed = true; // 完全表示状態にする
+        text.text = fullText; // テキストを完全表示
+        isTextFullyDisplayed = true; // フラグを更新
     }
 
+    // 次のテキストを読み込む
     private void LoadNextText()
     {
-        // 次のテキストを読み込む
         if (LoadText < textAsset.Length - 1)
         {
             LoadText++;
-            isTextFullyDisplayed = false; // 次のテキストはまだ完全に表示されていない
-
-            UpdateText(); // 新しいテキストを表示する
+            UpdateText(); // 新しいテキストを表示
         }
         else
         {
