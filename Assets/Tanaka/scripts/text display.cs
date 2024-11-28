@@ -89,6 +89,7 @@ public class textdisplay: MonoBehaviour
                     }
                     // テキストをすべて表示
                     DisplayFullText();
+                }
 
                     if (isTextFullyDisplayed && Input.GetMouseButtonDown(0))
                     {
@@ -98,7 +99,7 @@ public class textdisplay: MonoBehaviour
                         //テキスト表示域を非表示
                         TextArea.SetActive(false);
                     }
-                }
+                
                 break;
         }
         if (Input.GetMouseButtonUp(0))
