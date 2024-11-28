@@ -2,11 +2,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class text_test : MonoBehaviour
 {
     [SerializeField]
     private TextAsset[] textAsset;   //メモ帳のファイル(.txt)　配列
+
+    [SerializeField]
+    private TextAsset[][] textAsset2;   //メモ帳のファイル(.txt)　配列
 
     [SerializeField]
     private Text text;  //画面上の文字
