@@ -40,7 +40,7 @@ public class newDropPart : MonoBehaviour
             scPlayerParameter.comfort(10);
             if (bBoss)
             {
-                goTextBox.GetComponent<GoalScript>().showText();
+                //goTextBox.GetComponent<GoalScript>().showText();
                 sceneTransitionManager.SceneChange(SceneInformation.SCENE.Title);
 
             }
