@@ -28,7 +28,9 @@ public class EnemyMoveAnimation : MonoBehaviour
     [SerializeField, Header("太腿の角度、先に右足")] GameObject[] leg;
     [SerializeField, Header("すねの角度、先に右足")] GameObject[] foot;
 
-    [Header("1コマの間隔の時間")] public float timeMax;
+    [Header("1コマの間隔の時間(歩き)")] public float timeMax;
+
+    [Header("1コマの間隔の時間(攻撃)")] public float timeAttackMax;
 
     [Header("---歩きのアニメーション---")]
     public AnimationData walk;
@@ -464,8 +466,8 @@ public class EnemyMoveAnimation : MonoBehaviour
         if (timeAttack < 0)
         {
             isAttack = true;
-            time = timeMax * upper.armForwardRotation.Length * 2;
-            timeAttack = timeMax * upper.armForwardRotation.Length;
+            time = timeAttackMax * upper.armForwardRotation.Length * 2;
+            timeAttack = timeAttackMax * upper.armForwardRotation.Length;
             StopCoroutine(CallWalkWithDelay());
             Upright();
             indexNumber = 0;
@@ -481,8 +483,8 @@ public class EnemyMoveAnimation : MonoBehaviour
         if (timeAttack < 0)
         {
             isAttack = true;
-            time = timeMax * lower.armForwardRotation.Length;
-            timeAttack = timeMax * lower.armForwardRotation.Length;
+            time = timeAttackMax * lower.armForwardRotation.Length;
+            timeAttack = timeAttackMax * lower.armForwardRotation.Length;
             StopCoroutine(CallWalkWithDelay());
             Upright();
             indexNumber = 0;

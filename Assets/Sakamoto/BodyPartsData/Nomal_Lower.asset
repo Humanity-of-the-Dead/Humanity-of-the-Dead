@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
   m_Name: Nomal_Lower
   m_EditorClassIdentifier: 
-  enPartsType: 0
+  enPartsType: 1
+  upperAttack: 0
+  lowerAttack: 0
   sPartsName: "\u8B66\u5BDF\u306E\u4E0A\u534A\u8EAB"
   AttackArea: 5
   iPartHp: 45
