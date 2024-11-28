@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8518237200061102869}
   - component: {fileID: 1960726576125117671}
   - component: {fileID: 9201402167512030773}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: PolliceUpperDrop
   m_TagString: Dorops
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 3285362210479346668}
   - component: {fileID: 8221963130908395068}
   - component: {fileID: 5530022034640104885}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 5221732014799308699}
   - component: {fileID: 3149063996674686189}
   - component: {fileID: 3624648889174595128}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: IsyokuButton (Legacy)
   m_TagString: Dorops
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 254828869262921440}
   - component: {fileID: 7669381271550534543}
   - component: {fileID: 8476585219988296273}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Static Sprite
   m_TagString: Dorops
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 3768222486081512666}
   - component: {fileID: 8986021473806046105}
   - component: {fileID: 5605474958882896209}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: IreiButton (Legacy)
   m_TagString: Dorops
   m_Icon: {fileID: 0}

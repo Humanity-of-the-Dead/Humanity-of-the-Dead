@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6708512944317616109}
   - component: {fileID: 8123674460896654658}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Static Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 751393710090963265}
   - component: {fileID: 3658733591243064101}
   - component: {fileID: 2296132227754832353}
-  m_Layer: 12
-  m_Name: Bullet 1
+  m_Layer: 0
+  m_Name: EnemyShot
   m_TagString: PlayerShoot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
