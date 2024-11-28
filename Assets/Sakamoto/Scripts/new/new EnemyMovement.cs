@@ -16,6 +16,7 @@ public class newEnemyMovement : EnemyAttack
     [SerializeField] private BodyPartsData upperpart;
     [SerializeField] private BodyPartsData lowerpart;
 
+    
     [SerializeField] EnemyMoveAnimation moveAnimation;
 
     enum EnemyState

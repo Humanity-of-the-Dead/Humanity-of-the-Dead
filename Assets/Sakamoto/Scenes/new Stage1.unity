@@ -236,6 +236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Police Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5568700679576308706, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7118450785217948117, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: gamestate
       value: 
@@ -1030,6 +1034,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6908733285454812978, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 285081242}
+    - targetCorrespondingSourceObject: {fileID: 6908733285454812978, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 285081243}
   m_SourcePrefab: {fileID: 100100000, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
 --- !u!4 &285081239 stripped
 Transform:
@@ -1087,6 +1094,20 @@ MonoBehaviour:
   liObj:
   - {fileID: 1227688782}
   sceneTransitionManager: {fileID: 0}
+  Juu: {fileID: 285081243}
+--- !u!114 &285081243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285081240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b42dbc9ca8a0654788e1757177e4818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 9036471482523323409, guid: b4f8e28a4fea30c4daa6c4a716a01087, type: 3}
 --- !u!1 &377555326
 GameObject:
   m_ObjectHideFlags: 0
@@ -5203,6 +5224,7 @@ MonoBehaviour:
   Player: {fileID: 285081240}
   GameManager: {fileID: 3111287980887441161}
   TextArea: {fileID: 259418451}
+  customNewline: '[BR]'
   TextSpeed: 0.1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

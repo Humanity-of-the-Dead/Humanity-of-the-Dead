@@ -97,6 +97,29 @@ public class PlayerControl : MonoBehaviour
                 //上半身攻撃
                 if (Input.GetKeyDown(KeyCode.I))
                 {
+                    if (playerParameter.UpperData.sPartsName == "警察の上半身")
+                    {
+                        Debug.Log("ここに銃弾の発射のプログラムをかいでね");
+                        //この下
+                        Vector2 ShootMoveBector = new Vector2(0, 0);
+                        //子のplayerRCのローテーションYを持ってくる
+                        // y = 0のときは右向き、0 y = 180のときは左向き
+                        Debug.Log(this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y);
+                        if (this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y == 180)
+                        {
+                            ShootMoveBector.x = -1;
+                        }
+                        else
+                        {
+                            ShootMoveBector.x = 1;
+                        }
+
+                        Debug.Log(ShootMoveBector);
+                        Juu.Shoot(ShootMoveBector, this.transform);
+
+                        return;
+                    }
+
                     for (int i = 0; i < liObj.Count; i++)
                     {
                         Debug.Log(liObj[i].gameObject.transform.position);
@@ -132,31 +155,7 @@ public class PlayerControl : MonoBehaviour
     public void UpperBodyAttack(int EnemyNum,Vector3 vTargetPos, float fReach)
     {
         float fAttackReach = Vector3.Distance(vTargetPos,this.transform.position);
-        if (playerParameter.UpperData.sPartsName == "警察の上半身")
-        {
-            Debug.Log("ここに銃弾の発射のプログラムをかいでね");
-            //この下
-            Vector2 ShootMoveBector = new Vector2(0, 0);
-            //子のplayerRCのローテーションYを持ってくる
-            // y < 0のときは左向き、0 <= yのときは右向き
-            if(this.gameObject.transform.GetChild(0).gameObject.transform.rotation.y < 0)
-            { 
-                ShootMoveBector.x = -1; 
-            }
-            else
-            {
-                ShootMoveBector.x = 1;
-            }
-
-            for (int i = 0; i < liObj.Count; i++)
-            {
-
-                Juu.Shoot(ShootMoveBector);
-            }
-
-            //システム待ち
-        }
-        else if (fAttackReach < fReach)
+        if (fAttackReach < fReach)
         {
 
             liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(1, 0);
