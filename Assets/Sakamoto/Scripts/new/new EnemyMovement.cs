@@ -112,6 +112,7 @@ public class newEnemyMovement : EnemyAttack
                         }
                         else if (distanceToPlayer < lowerpart.AttackArea)
                         {
+                            moveAnimation.KickStart();
                             LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
 
                         }
