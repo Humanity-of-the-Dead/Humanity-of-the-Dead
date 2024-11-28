@@ -66,37 +66,41 @@ public class PlayerParameter : MonoBehaviour
     }
     private void Update()
     {
-        switch (scGameMgr.GetComponent<GameMgr>().enGameState)
+       string SceneName = SceneManager.GetActiveScene().name;
+        if(!(SceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title)))
         {
-            case GameState.Main:
-                //パラメータの値をiDownTime秒で1減少させる
-                iHumanity -= Time.deltaTime / iDownTime;
-                iUpperHP -= Time.deltaTime / iDownTime;
-                iLowerHP -= Time.deltaTime / iDownTime;
+            switch (scGameMgr.GetComponent<GameMgr>().enGameState)
+            {
+                case GameState.Main:
+                    //パラメータの値をiDownTime秒で1減少させる
+                    iHumanity -= Time.deltaTime / iDownTime;
+                    iUpperHP -= Time.deltaTime / iDownTime;
+                    iLowerHP -= Time.deltaTime / iDownTime;
 
-                if(iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
-                {
+                    if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
+                    {
 
-                    Debug.Log("リロードを開始します"); // デバッグログで確認
+                        Debug.Log("リロードを開始します"); // デバッグログで確認
 
-                    GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
-                    SceneTransitionManager.instance.ReloadCurrentScene();
+                        GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
+                        SceneTransitionManager.instance.ReloadCurrentScene();
 
-                    //ゲームオーバーの標準
-                    goPanel.SetActive(true);
-                    //パラメータの全回復
-                    iHumanity = iHumanityMax;
-                    iUpperHP = iUpperHPMax;
-                    iLowerHP = iLowerHPMax;
+                        //ゲームオーバーの標準
+                        goPanel.SetActive(true);
+                        //パラメータの全回復
+                        iHumanity = iHumanityMax;
+                        iUpperHP = iUpperHPMax;
+                        iLowerHP = iLowerHPMax;
 
-                }
+                    }
 
-                //シーン移動
-                if (Input.GetKeyDown(KeyCode.M))
-                {
-                    SceneManager.LoadScene("Stage2");
-                }
-                break;
+                    //シーン移動
+                    if (Input.GetKeyDown(KeyCode.M))
+                    {
+                        SceneManager.LoadScene("Stage2");
+                    }
+                    break;
+            }
         }
     }
 
@@ -106,11 +110,13 @@ public class PlayerParameter : MonoBehaviour
     {
         iHumanity += iRecovery;
         //回復した値が最大値を超えていたら最大値にする
-        if(iHumanity > iHumanityMax)
+        if (iHumanity > iHumanityMax)
         {
             iHumanity = iHumanityMax;
         }
+
     }
+   
     //移植
     //パーツの画像とパラメータを入れ替える
     //BodyPartsData partsData : 入れ替えるパーツのスクリプタブルオブジェクト
