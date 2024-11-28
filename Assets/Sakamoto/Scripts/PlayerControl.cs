@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
@@ -33,6 +31,7 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] SceneTransitionManager sceneTransitionManager;
 
+    [SerializeField] Gun Juu;
     void Start()
     {
         playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
@@ -115,6 +114,9 @@ public class PlayerControl : MonoBehaviour
                         LowerBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea);
                     }
                 }
+                if(Input.GetKeyDown(KeyCode.U))
+                {
+                }
                 break;
         }
     }
@@ -134,6 +136,23 @@ public class PlayerControl : MonoBehaviour
         {
             Debug.Log("ここに銃弾の発射のプログラムをかいでね");
             //この下
+            Vector2 ShootMoveBector = new Vector2(0, 0);
+            //子のplayerRCのローテーションYを持ってくる
+            // y < 0のときは左向き、0 <= yのときは右向き
+            if(this.gameObject.transform.GetChild(0).gameObject.transform.rotation.y < 0)
+            { 
+                ShootMoveBector.x = -1; 
+            }
+            else
+            {
+                ShootMoveBector.x = 1;
+            }
+
+            for (int i = 0; i < liObj.Count; i++)
+            {
+
+                Juu.Shoot(ShootMoveBector);
+            }
 
             //システム待ち
         }
