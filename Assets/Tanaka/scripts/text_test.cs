@@ -83,7 +83,7 @@ public class text_test : MonoBehaviour
                 }
                 else
                 {
-                    TypingCroutine = null; //コルーチンをリセット
+                    Debug.Log("最後の文章");
                 }
             }
             else
@@ -100,15 +100,24 @@ public class text_test : MonoBehaviour
             //text.text = //textAsset[LoadText].text;
             text.text = ""; //からのテキストをおいて初期化しているように見せる
 
-            Debug.Log(textAsset[LoadText].text);
-            Debug.Log(textAsset[LoadText].text.Length); //テキスト上に何文字あるかデバック
+            //Debug.Log(textAsset[LoadText].text);
+            //Debug.Log(textAsset[LoadText].text.Length); //テキスト上に何文字あるかデバック
+            Debug.Log($"テキスト{LoadText}を表示開始: {textAsset[LoadText].text}");
 
             //Debug.Log(textAsset[LoadText]);
-            // Debug.Log(textAsset.Length);    //全体のテキスト数
-            //Debug.Log(LoadText);            //現在表示されているテキスト番号
+            //Debug.Log(textAsset.Length);    //全体のテキスト数
+           // Debug.Log(LoadText);            //現在表示されているテキスト番号
 
             TypingCroutine = StartCoroutine(TextCoroutine()); //コルーチンを再スタート       //テキストを呼び出されるたびにコルーチンを走らせて文字を加算していく
-            //}
+            }
+        else
+        {
+            Debug.Log("全テキストが表示された");
+        }
+        if (textAsset == null || textAsset.Length == 0)
+        {
+            Debug.LogError("textAssetがない");
+            return;
         }
     }
     IEnumerator TextCoroutine()
@@ -124,6 +133,10 @@ public class text_test : MonoBehaviour
         if (LoadText < textAsset.Length - 1)
         {
             LoadText++;
+        }
+        else
+        {
+            Debug.Log("最後の文章");
         }
         TypingCroutine = null;
     }
