@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
+/// <summary>
+/// 敵の種類
+/// </summary>
 public enum Status
 {
     Zombie,
     Boss,
 }
+
+/// <summary>
+/// デバック用
+/// </summary>
 public enum DebugMove
 {
     None,
@@ -14,7 +22,6 @@ public enum DebugMove
     Kick,
     Pantie
 }
-
 
 public class EnemyMoveAnimation : MonoBehaviour
 {
