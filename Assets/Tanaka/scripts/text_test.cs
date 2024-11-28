@@ -23,11 +23,16 @@ public class text_test : MonoBehaviour
     
     GameObject TextImage;
 
+    private Coroutine TypingCroutine;  //コルーチンの管理
+
     // Start is called before the first frame update
     void Start()
     {
         text.text = "";// 初期化
-        Debug.Log(textAsset[0].text);
+        if (textAsset.Length > 0)
+        {
+            Debug.Log(textAsset[0].text);
+        }
         //StartCoroutine("TextCoroutine");
     }
 
@@ -65,7 +70,26 @@ public class text_test : MonoBehaviour
    
         if (Input.GetMouseButtonUp(0)) 
         {
-            UpdateText();
+            if (TypingCroutine != null)
+            {
+                StopCoroutine(TypingCroutine); //コルーチン実行中の場合文章を表示する
+                text.text = textAsset[LoadText].text; //テキストを全て表示
+               TypingCroutine = null;
+
+                //配列の範囲内かどうか確認
+                if (LoadText < textAsset.Length - 1)
+                {
+                    LoadText++;
+                }
+                else
+                {
+                    TypingCroutine = null; //コルーチンをリセット
+                }
+            }
+            else
+            {
+                UpdateText();
+            }
         }
     }
     public void UpdateText()
@@ -83,7 +107,7 @@ public class text_test : MonoBehaviour
             // Debug.Log(textAsset.Length);    //全体のテキスト数
             //Debug.Log(LoadText);            //現在表示されているテキスト番号
 
-            StartCoroutine("TextCoroutine");        //テキストを呼び出されるたびにコルーチンを走らせて文字を加算していく
+            TypingCroutine = StartCoroutine(TextCoroutine()); //コルーチンを再スタート       //テキストを呼び出されるたびにコルーチンを走らせて文字を加算していく
             //}
         }
     }
@@ -96,11 +120,11 @@ public class text_test : MonoBehaviour
 
             text.text += textAsset[LoadText].text[i];  //iが増えるたびに文字を一文字ずつ表示していく
 
-            //i++;
-
-            yield return null;
-            
         }
-        LoadText++;  //ボタンを押すたびにテキストを進める
+        if (LoadText < textAsset.Length - 1)
+        {
+            LoadText++;
+        }
+        TypingCroutine = null;
     }
 }
