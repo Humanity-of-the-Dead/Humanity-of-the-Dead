@@ -9,6 +9,9 @@ public class textdisplay: MonoBehaviour
     private TextAsset[] textAsset;   //メモ帳のファイル(.txt)　配列
 
     [SerializeField]
+    private TextAsset[,] textAsset2;   //メモ帳のファイル(.txt)　配列
+
+    [SerializeField]
     private Text text;  //画面上の文字
 
     [SerializeField]
@@ -29,6 +32,9 @@ public class textdisplay: MonoBehaviour
 
     [SerializeField]
     private GameObject TextArea; //テキスト表示域
+
+    [SerializeField]
+    private string customNewline = "[BR]"; // 改行として扱う文字列を指定
 
     bool[] Flag;
 
@@ -75,13 +81,23 @@ public class textdisplay: MonoBehaviour
                 }
                 break;
             case GameState.ShowText:
-                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    //this.gameObject.SetActive(false);   //オブジェクトを非表示
-                    GameManager.ChangeState(GameState.Main);
+                    if (isTextFullyDisplayed)
+                    {
+                        return;
+                    }
+                    // テキストをすべて表示
+                    DisplayFullText();
 
-                    //テキスト表示域を非表示
-                    TextArea.SetActive(false);
+                    if (isTextFullyDisplayed && Input.GetMouseButtonDown(0))
+                    {
+                        //this.gameObject.SetActive(false);   //オブジェクトを非表示
+                        GameManager.ChangeState(GameState.Main);
+
+                        //テキスト表示域を非表示
+                        TextArea.SetActive(false);
+                    }
                 }
                 break;
         }
@@ -172,5 +188,23 @@ public class textdisplay: MonoBehaviour
             isTextFullyDisplayed = true;
         }
         TypingCroutine = null;
+    }
+    private void DisplayFullText()
+    {
+        if (TypingCroutine != null)
+        {
+            StopCoroutine(TypingCroutine); // コルーチンを停止
+        }
+        string fullText = textAsset[LoadText].text;
+
+        if (!string.IsNullOrEmpty(customNewline))
+        {
+
+            fullText = fullText.Replace(customNewline, "\n");
+        }
+        // 現在のテキストをすべて表示
+        text.text = fullText;
+
+        isTextFullyDisplayed = true; // 完全表示状態にする
     }
 }
