@@ -38,6 +38,10 @@ public class textdisplay: MonoBehaviour
     
     GameObject TextImage;
 
+    private bool isTextFullyDisplayed = false; // 現在のテキストが完全に表示されたか
+
+    private Coroutine TypingCroutine;  //コルーチンの管理
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,27 +85,72 @@ public class textdisplay: MonoBehaviour
                 }
                 break;
         }
-   
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (isTextFullyDisplayed)
+            {
+                Debug.Log("クリック無効");
+                return;
+            }
+            if (TypingCroutine != null)
+            {
+                StopCoroutine(TypingCroutine); //コルーチン実行中の場合文章を表示する
+                text.text = textAsset[LoadText].text; //テキストを全て表示
+                TypingCroutine = null;
+
+                //配列の範囲内かどうか確認
+                if (LoadText < textAsset.Length - 1)
+                {
+                    LoadText++;
+                }
+                else
+                {
+                    Debug.Log("最後の文章");
+                    isTextFullyDisplayed = true;
+                }
+            }
+            else
+            {
+                if (LoadText < textAsset.Length)
+                {
+                    UpdateText();
+                }
+                else
+                {
+                    Debug.Log("全テキストが既に表示されています。");
+                    isTextFullyDisplayed = true; // 再確認して終了フラグを設定
+                }
+            }
+        }
+
     }
     public void UpdateText()
     {
-        int TextMax = 0;
-
         if (textAsset.Length > LoadText)
         {//テキストをLoadTextの分表示
             //text.text = //textAsset[LoadText].text;
             text.text = ""; //からのテキストをおいて初期化しているように見せる
 
-            Debug.Log(textAsset[LoadText].text);
-            Debug.Log(textAsset[LoadText].text.Length); //テキスト上に何文字あるかデバック
+            //Debug.Log(textAsset[LoadText].text);
+            //Debug.Log(textAsset[LoadText].text.Length); //テキスト上に何文字あるかデバック
+            Debug.Log($"テキスト{LoadText}を表示開始: {textAsset[LoadText].text}");
 
             //Debug.Log(textAsset[LoadText]);
             // Debug.Log(textAsset.Length);    //全体のテキスト数
             //Debug.Log(LoadText);            //現在表示されているテキスト番号
 
-            StartCoroutine("TextCoroutine");        //テキストを呼び出されるたびにコルーチンを走らせて文字を加算していく
-            //}
+            TypingCroutine = StartCoroutine(TextCoroutine()); //コルーチンを再スタート       //テキストを呼び出されるたびにコルーチンを走らせて文字を加算していく
         }
+        else
+        {
+            Debug.Log("全テキストが表示された");
+        }
+        if (textAsset == null || textAsset.Length == 0)
+        {
+            Debug.LogError("textAssetがない");
+            return;
+        }
+
     }
     IEnumerator TextCoroutine()
     {
@@ -111,12 +160,17 @@ public class textdisplay: MonoBehaviour
             yield return new WaitForSeconds(TextSpeed);
 
             text.text += textAsset[LoadText].text[i];  //iが増えるたびに文字を一文字ずつ表示していく
-
-            //i++;
-
-            yield return null;
-            
+           
         }
-        LoadText++;  //ボタンを押すたびにテキストを進める
+        if (LoadText < textAsset.Length - 1)
+        {
+            LoadText++;
+        }
+        else
+        {
+            Debug.Log("最後の文章");
+            isTextFullyDisplayed = true;
+        }
+        TypingCroutine = null;
     }
 }
