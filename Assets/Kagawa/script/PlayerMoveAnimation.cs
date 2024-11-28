@@ -5,13 +5,15 @@ using UnityEngine;
 
 public enum UpperAttack
 {
+    NONE,
     NORMAL,
     POLICE,
     NURSE,
 }
 
-public enum DownAttack
+public enum LowerAttack
 {
+    NONE,
     NORMAL,
     POLICE,
     NURSE,
@@ -61,7 +63,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     UpperAttack upperAttack;
 
-    DownAttack downAttack;
+    LowerAttack downAttack;
 
     //配列の番号
     int indexNumber;
@@ -104,7 +106,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeAttack = 0;
 
         upperAttack = UpperAttack.NORMAL;
-        downAttack = DownAttack.NORMAL; 
+        downAttack = LowerAttack.NORMAL; 
     }
 
     // Update is called once per frame
@@ -122,7 +124,6 @@ public class PlayerMoveAnimation : MonoBehaviour
             {
                 isStop = true;
                 time = timeMax * 2;
-                Upright();
             }
 
             // プレイヤーの向きが左から右に変わったとき
@@ -141,7 +142,6 @@ public class PlayerMoveAnimation : MonoBehaviour
             {
                 isStop = true;
                 time = timeMax * 2;
-                Upright();
             }
 
             // プレイヤーの向きが右から左に変わったとき
@@ -372,7 +372,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         switch(downAttack)
         {
-            case DownAttack.NORMAL:
+            case LowerAttack.NORMAL:
                 // Quaternion.Euler: 回転軸( x, y, z)
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerLower.wholeRotation[indexNumber]);
 
@@ -407,7 +407,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                     foot[1].transform.rotation = Quaternion.Euler(0, shaft, playerLower.footForwardRotation[indexNumber]);
                 }
                 break;
-            case DownAttack.POLICE:
+            case LowerAttack.POLICE:
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, policeLower.wholeRotation[indexNumber]);
 
                 // 腕のアニメーション
@@ -441,7 +441,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                     foot[1].transform.rotation = Quaternion.Euler(0, shaft, policeLower.footForwardRotation[indexNumber]);
                 }
                 break;
-            case DownAttack.NURSE:
+            case LowerAttack.NURSE:
 
                 // Quaternion.Euler: 回転軸( x, y, z)
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, nurseLower.wholeRotation[indexNumber]);
@@ -607,22 +607,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeAttack = timeMax * playerLower.armForwardRotation.Length;
         isAttack = true;
         StopCoroutine(CallWalkWithDelay());
-        Upright();
         indexNumber = 1;
-    }
-
-    /// <summary>
-    /// 直立する
-    /// </summary>
-    void Upright()
-    {
-        playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[walkLength]);
-        arm[0].transform.rotation = Quaternion.Euler(0, shaft, walk.armForwardRotation[walkLength]);
-        arm[1].transform.rotation = Quaternion.Euler(0, shaft, walk.armForwardRotation[walkLength]);
-        leg[0].transform.rotation = Quaternion.Euler(0, shaft, walk.legBackRotation[walkLength]);
-        leg[1].transform.rotation = Quaternion.Euler(0, shaft, walk.legForwardRotation[walkLength]);
-        foot[0].transform.rotation = Quaternion.Euler(0, shaft, walk.footBackRotation[walkLength]);
-        foot[1].transform.rotation = Quaternion.Euler(0, shaft, walk.footForwardRotation[walkLength]);
     }
 
     /// <summary>
@@ -664,7 +649,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// 下半身の攻撃の変化
     /// </summary>
     /// <param name="isName">移植する物体</param>
-    public void ChangeDownMove(DownAttack isName)
+    public void ChangeLowerMove(LowerAttack isName)
     {
         downAttack = isName;
     }

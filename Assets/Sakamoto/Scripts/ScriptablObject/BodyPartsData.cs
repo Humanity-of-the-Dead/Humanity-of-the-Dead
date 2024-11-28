@@ -17,6 +17,11 @@ public class BodyPartsData : ScriptableObject
 {
     [Header("パーツの部位")]
     public PartsType enPartsType;
+    [Header("パーツの上半身攻撃")]
+    public UpperAttack upperAttack;
+    [Header("パーツの下半身攻撃")]
+    public LowerAttack lowerAttack;
+
     [Header("パーツの名前")]
     public string sPartsName;
     [Header("アタック範囲")]

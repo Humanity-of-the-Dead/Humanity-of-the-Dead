@@ -346,7 +346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24e1091aa6b4ca4dbf1c364e0bc3451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombie: 1
+  status: 0
+  debugMoves: 0
   playerRc: {fileID: 8938612358802894502}
   arm:
   - {fileID: 9028895253583278988}
@@ -361,6 +362,7 @@ MonoBehaviour:
   - {fileID: 1326105128507523825}
   - {fileID: 8809193021365678528}
   timeMax: 0.3
+  timeAttackMax: 0.3
   walk: {fileID: 11400000, guid: 932175a6bee7c6145a43026e23c6e9ab, type: 2}
   upper: {fileID: 11400000, guid: e7766c1a6f6fc414e9785188e74f2397, type: 2}
   lower: {fileID: 11400000, guid: ef21a595c3cba254db490f8dfd49a9c1, type: 2}

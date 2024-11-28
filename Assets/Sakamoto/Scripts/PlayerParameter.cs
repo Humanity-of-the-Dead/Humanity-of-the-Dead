@@ -149,6 +149,8 @@ public class PlayerParameter : MonoBehaviour
                 */
                 //見た目変更関数待ち
                 scPlayerMoveAnimation.ChangeUpperBody(partsData);
+                //攻撃モーションの変更
+                scPlayerMoveAnimation.ChangeUpperMove(partsData.upperAttack);
                 break;
             case PartsType.Lower:
                 //パーツデータのHPをMax代入
@@ -162,6 +164,8 @@ public class PlayerParameter : MonoBehaviour
                 */
                 //見た目変更関数待ち
                 scPlayerMoveAnimation.ChangeUnderBody(partsData);
+                //攻撃モーションの変更
+                scPlayerMoveAnimation.ChangeLowerMove(partsData.lowerAttack);
                 break;
         }
 
