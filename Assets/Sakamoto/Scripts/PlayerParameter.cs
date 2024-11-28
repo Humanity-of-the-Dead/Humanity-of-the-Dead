@@ -12,7 +12,7 @@ public class PlayerParameter : MonoBehaviour
     [SerializeField]GameObject scGameMgr;
 
     //移植時のモザイク
-    [SerializeField] GameObject goMosaic;
+    GameObject goMosaic;
 
     public static PlayerParameter Instance;
 
@@ -38,7 +38,7 @@ public class PlayerParameter : MonoBehaviour
 
 
     //ゲームオーバーの標準
-    [SerializeField] GameObject goPanel;
+     GameObject goPanel;
     SceneTransitionManager sceneTransitionManager;
 
 
@@ -58,10 +58,6 @@ public class PlayerParameter : MonoBehaviour
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
 
-        //モザイクを非表示にする
-        goMosaic.SetActive(false);
-
-        goPanel.SetActive(false);
 
         //シーン遷移で破棄されない
         DontDestroyOnLoad(gameObject);
@@ -80,7 +76,19 @@ public class PlayerParameter : MonoBehaviour
 
                 if(iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
                 {
-                    sceneTransitionManager.SceneChange(SceneInformation.SCENE.StageOne);
+
+                    Debug.Log("リロードを開始します"); // デバッグログで確認
+
+                    GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
+                    SceneTransitionManager.instance.ReloadCurrentScene();
+
+                    //ゲームオーバーの標準
+                    goPanel.SetActive(true);
+                    //パラメータの全回復
+                    iHumanity = iHumanityMax;
+                    iUpperHP = iUpperHPMax;
+                    iLowerHP = iLowerHPMax;
+
                 }
 
                 //シーン移動

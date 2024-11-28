@@ -10,33 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4baf05cd9d1c8074ba7e49a082233737, type: 3}
-  m_Name: Nurse_Upper
+  m_Name: Player_Walk
   m_EditorClassIdentifier: 
   wholeRotation:
-  - 0
-  - 0
+  - -2
+  - -5
+  - -2
   - 0
   armForwardRotation:
+  - 15
+  - 30
+  - 15
   - 0
-  - 0
-  - 0
-  armBackRotation:
-  - 0
-  - 90
-  - 0
+  armBackRotation: []
+  handForwardRotation: []
+  handBackRotation: []
   legForwardRotation:
-  - 0
-  - 0
+  - 20
+  - 40
+  - 30
   - 0
   footForwardRotation:
-  - 0
-  - 0
+  - -10
+  - -40
+  - -10
   - 0
   legBackRotation:
   - 0
-  - 0
+  - -15
+  - -10
   - 0
   footBackRotation:
   - 0
-  - 0
+  - -15
+  - -15
   - 0
