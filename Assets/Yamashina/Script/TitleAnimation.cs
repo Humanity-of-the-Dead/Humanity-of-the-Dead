@@ -176,6 +176,7 @@ public class TitleAnimation : MonoBehaviour
             StartSlideIn();
         }
         MultiAudio.ins.PlayBGM_ByName("BGM_credit");
+        MultiAudio.ins.bgmSource.loop = false;  
     }
 
     public void OptionView() //クレジット画面を表示
