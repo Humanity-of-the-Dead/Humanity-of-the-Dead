@@ -33,8 +33,8 @@ public class EnemySpooner : MonoBehaviour
         //PlayerParameterスクリプトを取得
         scPlayerParameter = GameObject.FindAnyObjectByType<PlayerParameter>().GetComponent<PlayerParameter>();
         Debug.Log(scPlayerParameter + "が代入されました");
-        createEnemy();
-        fTimer = 0;
+        //createEnemy();
+        fTimer = fEnemyMax;
         //マーカーを消す
         goMarker.SetActive(false);
         Debug.Log(scPlayerParameter + "は健在です");
