@@ -31,7 +31,7 @@ public class EnemySpooner : MonoBehaviour
     private void Start()
     {
         //PlayerParameterスクリプトを取得
-        scPlayerParameter = GameObject.FindAnyObjectByType<PlayerParameter>().GetComponent<PlayerParameter>();
+        scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
         Debug.Log(scPlayerParameter + "が代入されました");
         createEnemy();
         fTimer = 0;

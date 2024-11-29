@@ -98,11 +98,11 @@ public class PlayerParameter : MonoBehaviour
 
                     }
 
-                    //シーン移動
-                    if (Input.GetKeyDown(KeyCode.M))
-                    {
-                        SceneManager.LoadScene("Stage2");
-                    }
+                    ////シーン移動
+                    //if (Input.GetKeyDown(KeyCode.M))
+                    //{
+                    //    SceneManager.LoadScene("Stage2");
+                    //}
                     break;
             }
         }
@@ -213,11 +213,19 @@ public class PlayerParameter : MonoBehaviour
     {
         // シーン遷移後に必要なオブジェクトを再取得
         scGameMgr = GameObject.FindGameObjectWithTag("GameManager");
-        goMosaic = GameObject.FindGameObjectWithTag("Mosaic").gameObject;
+        goMosaic = GameObject.Find("Player").gameObject;
+        goMosaic = goMosaic.transform.Find("Mosaic").gameObject;
         goPlayer = GameObject.FindGameObjectWithTag("Player");
         goPanel = GameObject.FindGameObjectWithTag("GameOver");
 
-        //goMosaic.SetActive(false);
+        //最大値を設定
+        iUpperHPMax = UpperData.iPartHp;
+        iLowerHPMax = LowerData.iPartHp;
+        //パラメータの初期化
+        iHumanity = iHumanityMax;
+        iUpperHP = iUpperHPMax;
+        iLowerHP = iLowerHPMax;
+
 
         if (scGameMgr == null || goMosaic == null || goPanel == null)
         {

@@ -55,7 +55,8 @@ public class newEnemyParameters : MonoBehaviour
     [SerializeField]SceneTransitionManager sceneTransitionManager;
     private void Start()
     {
-        sceneTransitionManager=GameObject.FindAnyObjectByType<SceneTransitionManager>();
+        scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
+        sceneTransitionManager =GameObject.FindAnyObjectByType<SceneTransitionManager>();
     }
     void Update()
     {
