@@ -2159,17 +2159,17 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ee9eb5ef76e37954eb6b5e587a676133, type: 3}
-    m_FontSize: 80
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 1
+    m_MinSize: 0
     m_MaxSize: 140
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
-    m_LineSpacing: 0.3
+    m_LineSpacing: 0.5
   m_Text: New Text
 --- !u!222 &977587878
 CanvasRenderer:
@@ -4974,7 +4974,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2118250933476055593}
-  - component: {fileID: 2118250933476055594}
   - component: {fileID: 5351848988657350866}
   m_Layer: 0
   m_Name: TextDisplay
@@ -5135,31 +5134,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2118250933476055594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 591199979426214683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fff64af8f4e83a40be6445a900d9f81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textAsset:
-  - {fileID: 4900000, guid: af676c543ef8ccb47afe2706b024e6aa, type: 3}
-  - {fileID: 4900000, guid: 478d4cadb84d9134b8a4467790e977cc, type: 3}
-  text: {fileID: 977587877}
-  TypingSpeed: 1
-  Position:
-  - 0
-  - 0
-  Player: {fileID: 285081240}
-  GameManager: {fileID: 3111287980887441161}
-  TextArea: {fileID: 259418451}
-  customNewline: '[BR]'
-  TextSpeed: 0.1
 --- !u!114 &3111287980887441161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5246,10 +5220,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAsset:
-  - {fileID: 4900000, guid: c304ff9bd852c4f4984b6f46cabe270b, type: 3}
-  - {fileID: 4900000, guid: bcd6c9a146566ce4496b19eb3594b5e4, type: 3}
-  - {fileID: 4900000, guid: 9f51a60990858db4784073db90ed78c1, type: 3}
-  - {fileID: 4900000, guid: c89c4e974f2726e4687f2aa7d2f95619, type: 3}
+  - {fileID: 4900000, guid: af676c543ef8ccb47afe2706b024e6aa, type: 3}
+  - {fileID: 4900000, guid: 478d4cadb84d9134b8a4467790e977cc, type: 3}
+  - {fileID: 4900000, guid: 8cdae2e1204e8d04baca12f1dfd9113d, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:
