@@ -49,7 +49,13 @@ public class CameraScript : MonoBehaviour
                     vCamPos.x = fMoveLimit;
                     this.GetComponent<Transform>().position = vCamPos;
                     eState = STATE.BOSS;
+                }               
+                vCamPos.y = goTarget.transform.position.y;
+                if(vCamPos.y < 0)
+                {
+                    vCamPos.y = 0;
                 }
+                this.GetComponent<Transform>().position = vCamPos;
                 break;
             case STATE.BOSS:
                 //ÉJÉÅÉâí«è]Ç»Çµ
