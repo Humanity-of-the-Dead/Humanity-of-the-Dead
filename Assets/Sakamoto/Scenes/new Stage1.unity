@@ -2362,7 +2362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 34, y: -17}
+  m_AnchoredPosition: {x: 19.01, y: -17}
   m_SizeDelta: {x: 1500, y: 391.4702}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977587877
@@ -2395,7 +2395,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 0.5
   m_Text: New Text
@@ -5510,9 +5510,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAsset:
-  - {fileID: 4900000, guid: af676c543ef8ccb47afe2706b024e6aa, type: 3}
-  - {fileID: 4900000, guid: 478d4cadb84d9134b8a4467790e977cc, type: 3}
-  - {fileID: 4900000, guid: 8cdae2e1204e8d04baca12f1dfd9113d, type: 3}
+  - {fileID: 4900000, guid: b9fa64873ee6da445b1b46517b1140a4, type: 3}
+  - {fileID: 4900000, guid: b329413050f7e40469c324ef28c5b8f0, type: 3}
+  - {fileID: 4900000, guid: cee1f46d89f7f324f8a577910ed6514d, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:
