@@ -2052,6 +2052,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OpitonButton
       objectReference: {fileID: 0}
+    - target: {fileID: 4340838722434831479, guid: 30c0124c102e88140a55432e3ded1312, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2358,7 +2362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 34, y: -17}
+  m_AnchoredPosition: {x: 19.01, y: -17}
   m_SizeDelta: {x: 1500, y: 391.4702}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977587877
@@ -2391,7 +2395,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 0.5
   m_Text: New Text
