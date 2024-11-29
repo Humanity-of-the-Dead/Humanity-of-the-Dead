@@ -34,8 +34,10 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] Gun Juu;
     void Start()
     {
-        playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
-
+        //Ç±ÇÍÉ_ÉÅÇ»ìz
+        //playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
+        //Ç±ÇÍÇ¢Ç¢Ç‚Ç¬
+        playerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
 
         rbody2D = GetComponent<Rigidbody2D>();
 
