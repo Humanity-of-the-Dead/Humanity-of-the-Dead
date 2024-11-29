@@ -29,7 +29,7 @@ public class SceneInformation : ScriptableObject
     [SerializeField] public SceneObject[] sceneObject;
     [SerializeField] public string[] sceneNames;// シーンの名前
     [SerializeField] private SCENE previousScene;
-
+    [SerializeField] public int[] sceneCount;
     public SceneObject GetSceneObject(SCENE scene)
     {
         return sceneObject[(int)scene];
@@ -39,7 +39,15 @@ public class SceneInformation : ScriptableObject
     {
         return sceneNames[(int)scene];
     }
+    public int GetSceneInt(SCENE scene)
+    {
+        return (int)scene;
+    }
 
+    public int GetSceneIndex(SCENE scene)
+    {
+        return sceneCount[(int)scene];
+    }
     public SCENE GetPreviousScene() { return previousScene; }
 
     public void SetPreviousScene(SCENE scene) { previousScene = scene; }
