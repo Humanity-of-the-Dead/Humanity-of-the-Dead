@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Nomal_Upper
   m_EditorClassIdentifier: 
   enPartsType: 0
-  upperAttack: 1
-  lowerAttack: 0
+  upperAttack: 2
+  lowerAttack: 3
   sPartsName: "\u8B66\u5BDF\u306E\u4E0A\u534A\u8EAB"
   AttackArea: 5
   iPartHp: 45
