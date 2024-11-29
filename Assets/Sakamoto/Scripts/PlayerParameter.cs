@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -62,6 +61,8 @@ public class PlayerParameter : MonoBehaviour
         //シーン遷移で破棄されない
         DontDestroyOnLoad(gameObject);
 
+        // シーンがロードされた後に参照を再取得
+        SceneManager.sceneLoaded += OnSceneLoaded;
         sceneTransitionManager = GameObject.FindAnyObjectByType<SceneTransitionManager>();
     }
     private void Update()
@@ -209,9 +210,11 @@ public class PlayerParameter : MonoBehaviour
     {
         // シーン遷移後に必要なオブジェクトを再取得
         scGameMgr = GameObject.FindGameObjectWithTag("GameManager");
-        goMosaic = GameObject.FindGameObjectWithTag("Mosaic");
+        goMosaic = GameObject.FindGameObjectWithTag("Mosaic").gameObject;
         goPlayer = GameObject.FindGameObjectWithTag("Player");
         goPanel = GameObject.FindGameObjectWithTag("GameOver");
+
+        //goMosaic.SetActive(false);
 
         if (scGameMgr == null || goMosaic == null || goPanel == null)
         {

@@ -26,10 +26,15 @@ public class newDropPart : MonoBehaviour
     //お墓
     [SerializeField] GameObject goGrave;
 
+    //ゲームクリアの標準
+    GameObject goPanel;
+
+
     void Start()
     {
-        
-
+        //GameClearタグを持つゲームオブジェクトを取得
+        goPanel = GameObject.Find("GameResult").gameObject;
+        goPanel = goPanel.transform.Find("GameClear").gameObject;
     }
 
     // Update is called once per frame
@@ -57,8 +62,11 @@ public class newDropPart : MonoBehaviour
             scPlayerParameter.transplant(partsData);
             if (bBoss)
             {
+                //ゲームクリアを表示
+                goPanel.SetActive(true);
                 //goTextBox.GetComponent<GoalScript>().showText();
                 sceneTransitionManager.SceneChange(SceneInformation.SCENE.Title);
+
             }
             Destroy(this.gameObject);
         }
