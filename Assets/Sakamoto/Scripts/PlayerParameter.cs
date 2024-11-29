@@ -90,7 +90,7 @@ public class PlayerParameter : MonoBehaviour
                         goPanel.SetActive(true);
 
                         //GameOverのBGM鳴らす箇所
-                        //MultiAudio.ins.PlayBGM_ByName("BGM_defeated");
+                        MultiAudio.ins.PlayBGM_ByName("BGM_defeated");
                         //パラメータの全回復
                         iHumanity = iHumanityMax;
                         iUpperHP = iUpperHPMax;
