@@ -215,7 +215,7 @@ public class PlayerParameter : MonoBehaviour
         scGameMgr = GameObject.FindGameObjectWithTag("GameManager");
         goMosaic = GameObject.Find("Player").gameObject;
         goMosaic = goMosaic.transform.Find("Mosaic").gameObject;
-        goPlayer = GameObject.FindGameObjectWithTag("Player");
+        goPlayer = GameObject.Find("Player").gameObject;
         goPanel = GameObject.FindGameObjectWithTag("GameOver");
 
         //ç≈ëÂílÇê›íË
