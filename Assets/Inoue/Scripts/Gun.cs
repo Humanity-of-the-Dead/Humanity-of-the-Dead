@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Gun : MonoBehaviour
 {
@@ -34,21 +35,20 @@ public class Gun : MonoBehaviour
     //    }
     //}
 
-    [SerializeField]
-    public Vector2 offset  = new Vector2(0,0.1f); //e’e‚ªo‚éˆÊ’u(Y²)‚ğ’²®
-
     public void Shoot(Vector2 direction, Transform firePoint)
     {
-
-        //e’e‚ğ¶¬‚·‚éˆÊ’u‚ğ’²®
-        Vector2 adjustedPosition = (Vector2)firePoint.position + offset;
-
         // e’e‚ğ¶¬
-        GameObject bullet = Instantiate(bulletPrefab, (Vector3)adjustedPosition, firePoint.rotation); // Vector3‚ÉƒLƒƒƒXƒg‚µ‚Ä¶¬
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
         // e’e‚ÌŒü‚«‚ğİ’è
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bullet.GetComponent<Bullet>().speed;
+        if (rb.velocity.x > 0)
+        {
+            Quaternion rotate = rb.transform.rotation;
+            rotate.y = 180;
+            rb.transform.rotation = rotate;
+        }
     }
 }
 

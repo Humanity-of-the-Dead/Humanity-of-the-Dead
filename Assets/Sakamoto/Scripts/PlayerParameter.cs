@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -62,6 +61,8 @@ public class PlayerParameter : MonoBehaviour
         //シーン遷移で破棄されない
         DontDestroyOnLoad(gameObject);
 
+        // シーンがロードされた後に参照を再取得
+        SceneManager.sceneLoaded += OnSceneLoaded;
         sceneTransitionManager = GameObject.FindAnyObjectByType<SceneTransitionManager>();
     }
     private void Update()
@@ -87,6 +88,9 @@ public class PlayerParameter : MonoBehaviour
 
                         //ゲームオーバーの標準
                         goPanel.SetActive(true);
+
+                        //GameOverのBGM鳴らす箇所
+                        MultiAudio.ins.PlayBGM_ByName("BGM_defeated");
                         //パラメータの全回復
                         iHumanity = iHumanityMax;
                         iUpperHP = iUpperHPMax;
@@ -94,11 +98,11 @@ public class PlayerParameter : MonoBehaviour
 
                     }
 
-                    //シーン移動
-                    if (Input.GetKeyDown(KeyCode.M))
-                    {
-                        SceneManager.LoadScene("Stage2");
-                    }
+                    ////シーン移動
+                    //if (Input.GetKeyDown(KeyCode.M))
+                    //{
+                    //    SceneManager.LoadScene("Stage2");
+                    //}
                     break;
             }
         }
@@ -209,9 +213,19 @@ public class PlayerParameter : MonoBehaviour
     {
         // シーン遷移後に必要なオブジェクトを再取得
         scGameMgr = GameObject.FindGameObjectWithTag("GameManager");
-        goMosaic = GameObject.FindGameObjectWithTag("Mosaic");
-        goPlayer = GameObject.FindGameObjectWithTag("Player");
+        goMosaic = GameObject.Find("Player").gameObject;
+        goMosaic = goMosaic.transform.Find("Mosaic").gameObject;
+        goPlayer = GameObject.Find("Player").gameObject;
         goPanel = GameObject.FindGameObjectWithTag("GameOver");
+
+        //最大値を設定
+        iUpperHPMax = UpperData.iPartHp;
+        iLowerHPMax = LowerData.iPartHp;
+        //パラメータの初期化
+        iHumanity = iHumanityMax;
+        iUpperHP = iUpperHPMax;
+        iLowerHP = iLowerHPMax;
+
 
         if (scGameMgr == null || goMosaic == null || goPanel == null)
         {

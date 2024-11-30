@@ -15,7 +15,10 @@ public class AudioVolumeManager : MonoBehaviour
     public AudioSource BGM;
     public AudioSource SE;
 
-    // Keys for saving volume preferences
+    public float initial_BGM = 0.5f;
+    public float initial_SE = 0.5f;
+    public float initial_UI= 0.5f;
+
     private const string BGM_PREF_KEY = "BGM_Volume";
     private const string SE_PREF_KEY = "SE_Volume";
     private const string UI_PREF_KEY = "UI_Volume";
@@ -26,9 +29,9 @@ public class AudioVolumeManager : MonoBehaviour
         SE = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
 
         // Set slider values from saved preferences or default to 1.0f
-        bgmSlider.value = PlayerPrefs.GetFloat(BGM_PREF_KEY, 1.0f);
-        seSlider.value = PlayerPrefs.GetFloat(SE_PREF_KEY, 1.0f);
-        uiSlider.value = PlayerPrefs.GetFloat(UI_PREF_KEY, 1.0f);
+        bgmSlider.value = PlayerPrefs.GetFloat(BGM_PREF_KEY, initial_BGM);
+        seSlider.value = PlayerPrefs.GetFloat(SE_PREF_KEY, initial_SE);
+        uiSlider.value = PlayerPrefs.GetFloat(UI_PREF_KEY, initial_UI);
 
         // Set up slider listeners to update and save volume changes
         bgmSlider.onValueChanged.AddListener(SetBGMVolume);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class newDropPart : MonoBehaviour
@@ -26,10 +27,15 @@ public class newDropPart : MonoBehaviour
     //お墓
     [SerializeField] GameObject goGrave;
 
+    //ゲームクリアの標準
+    GameObject goPanel;
+
+
     void Start()
     {
-        
-
+        //GameClearタグを持つゲームオブジェクトを取得
+        goPanel = GameObject.Find("GameResult").gameObject;
+        goPanel = goPanel.transform.Find("GameClear").gameObject;
     }
 
     // Update is called once per frame
@@ -40,7 +46,11 @@ public class newDropPart : MonoBehaviour
             scPlayerParameter.comfort(10);
             if (bBoss)
             {
+                //ゲームクリアを表示
+                goPanel.SetActive(true);
                 //goTextBox.GetComponent<GoalScript>().showText();
+                //DontDestroyOnLoadになっているPlayerParameterオブジェクトを削除
+                SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
                 sceneTransitionManager.SceneChange(SceneInformation.SCENE.Title);
 
             }
@@ -57,8 +67,14 @@ public class newDropPart : MonoBehaviour
             scPlayerParameter.transplant(partsData);
             if (bBoss)
             {
+                //ゲームクリアを表示
+                goPanel.SetActive(true);
                 //goTextBox.GetComponent<GoalScript>().showText();
+                //DontDestroyOnLoadになっているPlayerParameterオブジェクトを削除
+                SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
                 sceneTransitionManager.SceneChange(SceneInformation.SCENE.Title);
+
+
             }
             Destroy(this.gameObject);
         }

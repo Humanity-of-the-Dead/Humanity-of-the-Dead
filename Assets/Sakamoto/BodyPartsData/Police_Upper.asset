@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Police_Upper
   m_EditorClassIdentifier: 
   enPartsType: 0
-  upperAttack: 2
-  lowerAttack: 0
+  upperAttack: 1
+  lowerAttack: 3
   sPartsName: "\u8B66\u5BDF\u306E\u4E0A\u534A\u8EAB"
-  AttackArea: 5
+  AttackArea: 20
   iPartHp: 45
   iPartAttack: 30
-  spBody: {fileID: 21300000, guid: d34acd3dd609b744884e1c6e4e6bf527, type: 3}
-  spRightArm: {fileID: 21300000, guid: 69ff0336d5a29604ea864290b54d12fb, type: 3}
-  spRightHand: {fileID: 21300000, guid: 238834f36e2fcac45ad2d4691699af44, type: 3}
-  spLeftArm: {fileID: 21300000, guid: eb34ac4f4ae10d447b201443855f14ac, type: 3}
-  spLeftHand: {fileID: 21300000, guid: 6f85050510c5d594aaf6a399b739be6d, type: 3}
+  spBody: {fileID: 21300000, guid: 48b9fb5556c2ef1489b2dc984fa0aeb2, type: 3}
+  spRightArm: {fileID: 21300000, guid: dc750b6b0672f8d41aa91bdbf6711c56, type: 3}
+  spRightHand: {fileID: 21300000, guid: e265b6f9306ca5f42ab1272cb54add6b, type: 3}
+  spLeftArm: {fileID: 21300000, guid: fe70839ab46b6364983c7d70f4ab64b7, type: 3}
+  spLeftHand: {fileID: 21300000, guid: 42a0824069f7fbb43a750951a8704675, type: 3}
   spWaist: {fileID: 21300000, guid: 9da2e8394c2fa474790a94603c425d83, type: 3}
   spRightLeg: {fileID: 21300000, guid: dca129703da76924a9acb021b745e6c3, type: 3}
   spRightFoot: {fileID: 21300000, guid: 6f4546b56babd774c915b113f4b492c0, type: 3}

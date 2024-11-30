@@ -14,6 +14,8 @@ TagManager:
   - GameManager
   - Mosaic
   - PlayerShoot
+  - EnemyShoot
+  - GameClear
   layers:
   - Default
   - TransparentFX
@@ -28,8 +30,8 @@ TagManager:
   - Enemy
   - 
   - PlayerShoot
-  - 
-  - 
+  - EnemyShoot
+  - Fire
   - Floor
   - 
   - 

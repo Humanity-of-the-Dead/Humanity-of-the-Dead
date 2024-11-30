@@ -34,8 +34,10 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] Gun Juu;
     void Start()
     {
-        playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
-
+        //Ç±ÇÍÉ_ÉÅÇ»ìz
+        //playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
+        //Ç±ÇÍÇ¢Ç¢Ç‚Ç¬
+        playerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
 
         rbody2D = GetComponent<Rigidbody2D>();
 
@@ -189,5 +191,21 @@ public class PlayerControl : MonoBehaviour
     public void RemoveListItem(GameObject obj)
     {
         liObj.Remove(obj);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EnemyShoot"))
+        {
+            if(0 < this.transform.position.y - collision.gameObject.transform.position.y)
+            {
+                playerParameter.UpperHP -= 3;
+            }
+            else
+            {
+                playerParameter.LowerHP -= 3;
+            }
+        }
+
     }
 }
