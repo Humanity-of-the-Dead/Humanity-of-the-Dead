@@ -1108,6 +1108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 9036471482523323409, guid: b4f8e28a4fea30c4daa6c4a716a01087, type: 3}
+  offset: {x: 0, y: 1.4}
 --- !u!1 &377555326
 GameObject:
   m_ObjectHideFlags: 0
@@ -4975,6 +4976,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2118250933476055593}
   - component: {fileID: 2118250933476055594}
+  - component: {fileID: 5351848988657350866}
   m_Layer: 0
   m_Name: TextDisplay
   m_TagString: Untagged

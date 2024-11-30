@@ -34,10 +34,17 @@ public class Gun : MonoBehaviour
     //    }
     //}
 
+    [SerializeField]
+    public Vector2 offset  = new Vector2(0,0.1f); //e’e‚ªo‚éˆÊ’u(Y²)‚ğ’²®
+
     public void Shoot(Vector2 direction, Transform firePoint)
     {
+
+        //e’e‚ğ¶¬‚·‚éˆÊ’u‚ğ’²®
+        Vector2 adjustedPosition = (Vector2)firePoint.position + offset;
+
         // e’e‚ğ¶¬
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, (Vector3)adjustedPosition, firePoint.rotation); // Vector3‚ÉƒLƒƒƒXƒg‚µ‚Ä¶¬
 
         // e’e‚ÌŒü‚«‚ğİ’è
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
