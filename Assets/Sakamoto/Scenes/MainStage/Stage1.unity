@@ -857,8 +857,8 @@ MonoBehaviour:
   scGameMgr: {fileID: 0}
   iDownTime: 1
   iHumanityMax: 100
-  iUpperHPMax: 30
-  iLowerHPMax: 30
+  iUpperHPMax: 500
+  iLowerHPMax: 500
   goPlayer: {fileID: 0}
   UpperData: {fileID: 11400000, guid: a72cdc466c72ac54b99427c79e98c125, type: 2}
   LowerData: {fileID: 11400000, guid: 823af4672cb62674f8af8f1d901261ae, type: 2}

@@ -46,13 +46,7 @@ public class newDropPart : MonoBehaviour
             scPlayerParameter.comfort(10);
             if (bBoss)
             {
-                //ゲームクリアを表示
-                goPanel.SetActive(true);
-                //goTextBox.GetComponent<GoalScript>().showText();
-                //DontDestroyOnLoadになっているPlayerParameterオブジェクトを削除
-                SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
-                sceneTransitionManager.SceneChange(SceneInformation.SCENE.Title);
-
+                GameClear();
             }
             Debug.Log(this.transform.position);
             GameObject obj = Instantiate(goGrave);
@@ -67,14 +61,7 @@ public class newDropPart : MonoBehaviour
             scPlayerParameter.transplant(partsData);
             if (bBoss)
             {
-                //ゲームクリアを表示
-                goPanel.SetActive(true);
-                //goTextBox.GetComponent<GoalScript>().showText();
-                //DontDestroyOnLoadになっているPlayerParameterオブジェクトを削除
-                SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
-                sceneTransitionManager.SceneChange(SceneInformation.SCENE.Title);
-
-
+                GameClear();
             }
             Destroy(this.gameObject);
         }
@@ -127,5 +114,23 @@ public class newDropPart : MonoBehaviour
 
     }
 
+    //ゲームクリア処理
+    private void GameClear()
+    {
+        //ゲームクリアを表示
+        goPanel.SetActive(true);
+        //goTextBox.GetComponent<GoalScript>().showText();
+        //DontDestroyOnLoadになっているPlayerParameterオブジェクトを削除
+        SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
+        //現在のシーンの一つ先のシーンのインデックスを取得
+        int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetSceneInt(SceneTransitionManager.instance.sceneInformation.GetPreviousScene()) + 1;
+        //インデックスが上限に行ったらタイトルのインデックスを代入
+        if (iNextIndex > 3)
+        {
+            iNextIndex = 0;
+        }
+        sceneTransitionManager.NextSceneButton(iNextIndex);
 
+
+    }
 }
