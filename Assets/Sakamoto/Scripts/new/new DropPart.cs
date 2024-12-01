@@ -120,13 +120,14 @@ public class newDropPart : MonoBehaviour
         //ゲームクリアを表示
         goPanel.SetActive(true);
         //goTextBox.GetComponent<GoalScript>().showText();
-        //DontDestroyOnLoadになっているPlayerParameterオブジェクトを削除
-        SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
+        
         //現在のシーンの一つ先のシーンのインデックスを取得
         int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetSceneInt(SceneTransitionManager.instance.sceneInformation.GetPreviousScene()) + 2;
         //インデックスが上限に行ったらタイトルのインデックスを代入
         if (iNextIndex > 3)
         {
+            //DontDestroyOnLoadになっているPlayerParameterオブジェクトを削除
+            SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
             iNextIndex = 0;
         }
         sceneTransitionManager.NextSceneButton(iNextIndex);
