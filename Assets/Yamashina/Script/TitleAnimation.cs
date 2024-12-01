@@ -92,6 +92,7 @@ public class TitleAnimation : MonoBehaviour
             SceneTransitionManager.instance.NextSceneButton(1));
         MultiAudio.ins.bgmSource.volume = BGMVolume;
         MultiAudio.ins.seSource.volume = UIVolume;
+        MultiAudio.ins.PlayBGM_ByName("BGM_title");
 
         //パネルのオブジェクトのセットアクティブ切り替え
         mainPanel.SetActive(true);　　//タイトル画面
