@@ -57,7 +57,12 @@ public class TitleAnimation : MonoBehaviour
     [Tooltip("アニメーションの遅延（floatで入力、値が大きいほど遅延が長い）")]
 
     public float Coroutine;
-
+    [Header("初期BGMの音量、スライダーの値と同じでお願いします！")]
+    [Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
+    public float BGMVolume;
+    [Header("初期UIの音量、スライダーの値と同じでお願いします！")]
+    [Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
+    public float UIVolume;
 
 
     [Header("クレジット画面のアニメーション開始位置")]
@@ -85,7 +90,8 @@ public class TitleAnimation : MonoBehaviour
 
         start.onClick.AddListener(() => 
             SceneTransitionManager.instance.NextSceneButton(1));
-
+        MultiAudio.ins.bgmSource.volume = BGMVolume;
+        MultiAudio.ins.seSource.volume = UIVolume;
 
         //パネルのオブジェクトのセットアクティブ切り替え
         mainPanel.SetActive(true);　　//タイトル画面
@@ -113,8 +119,6 @@ public class TitleAnimation : MonoBehaviour
         if (CreditPanel.activeSelf)
         {
             StartSlideOut();
-            MultiAudio.ins.PlayBGM_ByName("BGM_title");
-
         }
         if (OptionPanel.activeSelf) { StartSlideOut(); }
 
@@ -134,6 +138,7 @@ public class TitleAnimation : MonoBehaviour
         eventTrigger_option.enabled = true;
 
         //ボタンのオブジェクトのセットアクティブ切り替え
+        MultiAudio.ins.PlayBGM_ByName("BGM_title");
 
         //CreditButton.SetActive(true);//クレジットボタン
         //optionButton.SetActive(true);   
