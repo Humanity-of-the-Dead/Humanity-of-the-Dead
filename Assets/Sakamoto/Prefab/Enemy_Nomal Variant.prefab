@@ -66,6 +66,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -5728493241584073441}
   m_SourcePrefab: {fileID: 100100000, guid: 9c5b3b85ba82ed54f937494b1be1ac33, type: 3}
+--- !u!114 &1924099738880734706 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6025226992257383609, guid: 9c5b3b85ba82ed54f937494b1be1ac33, type: 3}
+  m_PrefabInstance: {fileID: 5273203351405775179}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6746467646807872166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24e1091aa6b4ca4dbf1c364e0bc3451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6746467646807872166 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1481237974272629741, guid: 9c5b3b85ba82ed54f937494b1be1ac33, type: 3}
@@ -119,7 +130,7 @@ MonoBehaviour:
   upperpart: {fileID: 11400000, guid: 1f44a247b0640614c8806fd0c1ddc7e1, type: 2}
   lowerpart: {fileID: 11400000, guid: e7e6579bcbac34e4190ebc1c174e3a77, type: 2}
   Juu: {fileID: 0}
-  moveAnimation: {fileID: 0}
+  moveAnimation: {fileID: 1924099738880734706}
   gamestate: {fileID: 0}
   waitTime: 0
 --- !u!114 &-5728493241584073441
@@ -134,9 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fca371783d21544a6bd076acd24c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpperHP: 0
-  LowerHP: 0
-  damage: 0
+  UpperHP: 2
+  LowerHP: 2
+  damage: 1
   Upperbodypart: {fileID: 11400000, guid: 1f44a247b0640614c8806fd0c1ddc7e1, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: e7e6579bcbac34e4190ebc1c174e3a77, type: 2}
   preUpperPart: {fileID: 1386206347217571068, guid: d7ba048aa67839d4c9d43f365b2308b9, type: 3}
