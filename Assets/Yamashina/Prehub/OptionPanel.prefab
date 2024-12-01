@@ -40,7 +40,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 950, y: 453}
-  m_SizeDelta: {x: 148.09, y: 130.38}
+  m_SizeDelta: {x: 135, y: 135}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &360269000539229372
 CanvasRenderer:
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 38b0a3dca46bfd64aa2504af4f3a2334, type: 3}
+  m_Sprite: {fileID: 21300000, guid: caa870893bd714f4598a14ed890822f1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1917,6 +1917,9 @@ MonoBehaviour:
   uiSlider: {fileID: 5712834787507670375}
   BGM: {fileID: 0}
   SE: {fileID: 0}
+  initial_BGM: 0.5
+  initial_SE: 0.5
+  initial_UI: 0.5
 --- !u!1001 &5985610858340386862
 PrefabInstance:
   m_ObjectHideFlags: 0
