@@ -15,8 +15,14 @@ public class AudioVolumeManager : MonoBehaviour
     public AudioSource BGM;
     public AudioSource SE;
 
+    [Header("初期BGMのスライダーの値")]
+    [Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
     public float initial_BGM = 0.5f;
+    [Header("初期SEのスライダーの値")]
+    [Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
     public float initial_SE = 0.5f;
+    [Header("初期UIのスライダーの値")]
+    [Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
     public float initial_UI= 0.5f;
 
     private const string BGM_PREF_KEY = "BGM_Volume";
@@ -29,6 +35,18 @@ public class AudioVolumeManager : MonoBehaviour
         SE = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
 
         // Set slider values from saved preferences or default to 1.0f
+        // 保存時に丸める(BGM)
+        float valueToSave_BGM = Mathf.Round(initial_BGM * 100f) / 100f;
+        float valueToSave_SE = Mathf.Round(initial_SE * 100f) / 100f;
+        float valueToSave_UI=Mathf.Round(initial_UI * 100f) / 100f;
+
+
+        // 読み込むときはそのまま適用
+        PlayerPrefs.SetFloat(BGM_PREF_KEY, valueToSave_BGM);
+        PlayerPrefs.SetFloat(SE_PREF_KEY, valueToSave_SE);
+        PlayerPrefs.SetFloat(UI_PREF_KEY, valueToSave_UI);
+
+        // 読み込むときはそのまま適用
         bgmSlider.value = PlayerPrefs.GetFloat(BGM_PREF_KEY, initial_BGM);
         seSlider.value = PlayerPrefs.GetFloat(SE_PREF_KEY, initial_SE);
         uiSlider.value = PlayerPrefs.GetFloat(UI_PREF_KEY, initial_UI);

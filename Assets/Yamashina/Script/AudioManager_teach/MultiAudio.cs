@@ -12,7 +12,7 @@ public class MultiAudio : MonoBehaviour
     public AudioClip[] audioClipsSE;  // Array for multiple SE clips
 
     public AudioSource bgmSource;
-    private AudioSource seSource;
+    public AudioSource seSource;
 
     // Audio Mixer Groups to assign different mixer settings
     public AudioMixerGroup bgmMixerGroup;
