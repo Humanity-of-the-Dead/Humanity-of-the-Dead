@@ -118,7 +118,10 @@ public class TitleAnimation : MonoBehaviour
 
         if (CreditPanel.activeSelf)
         {
+            MultiAudio.ins.PlayBGM_ByName("BGM_title");
+
             StartSlideOut();
+
         }
         if (OptionPanel.activeSelf) { StartSlideOut(); }
 
@@ -138,7 +141,6 @@ public class TitleAnimation : MonoBehaviour
         eventTrigger_option.enabled = true;
 
         //ボタンのオブジェクトのセットアクティブ切り替え
-        MultiAudio.ins.PlayBGM_ByName("BGM_title");
 
         //CreditButton.SetActive(true);//クレジットボタン
         //optionButton.SetActive(true);   
