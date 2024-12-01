@@ -1198,7 +1198,7 @@ MonoBehaviour:
   fJmpPower: 500
   goCamera: {fileID: 244809042}
   liObj:
-  - {fileID: 0}
+  - {fileID: 1150669389}
   sceneTransitionManager: {fileID: 0}
   Juu: {fileID: 285081243}
 --- !u!114 &285081243
@@ -2607,6 +2607,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
+--- !u!1 &1150669389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5568700679576308706, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
+  m_PrefabInstance: {fileID: 1150669388}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1173337675
 GameObject:
   m_ObjectHideFlags: 0

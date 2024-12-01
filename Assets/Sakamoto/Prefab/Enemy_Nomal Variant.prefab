@@ -132,7 +132,7 @@ MonoBehaviour:
   Juu: {fileID: 0}
   moveAnimation: {fileID: 1924099738880734706}
   gamestate: {fileID: 0}
-  waitTime: 0
+  waitTime: 1
 --- !u!114 &-5728493241584073441
 MonoBehaviour:
   m_ObjectHideFlags: 0

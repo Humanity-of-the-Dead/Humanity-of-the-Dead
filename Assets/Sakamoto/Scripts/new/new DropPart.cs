@@ -123,7 +123,7 @@ public class newDropPart : MonoBehaviour
         //DontDestroyOnLoadになっているPlayerParameterオブジェクトを削除
         SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
         //現在のシーンの一つ先のシーンのインデックスを取得
-        int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetSceneInt(SceneTransitionManager.instance.sceneInformation.GetPreviousScene()) + 1;
+        int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetSceneInt(SceneTransitionManager.instance.sceneInformation.GetPreviousScene()) + 2;
         //インデックスが上限に行ったらタイトルのインデックスを代入
         if (iNextIndex > 3)
         {
