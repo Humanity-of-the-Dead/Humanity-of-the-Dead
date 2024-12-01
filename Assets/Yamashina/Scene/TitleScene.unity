@@ -1688,8 +1688,8 @@ MonoBehaviour:
   option: {fileID: 604563084}
   speed: 5
   Coroutine: 0
-  BGMVolume: 0
-  UIVolume: 0
+  BGMVolume: 0.5
+  UIVolume: 0.5
   creditPanelStartPosition: {x: 2247, y: 0, z: 0}
   creditPanelEndPosition: {x: 0, y: 0, z: 0}
   OptionPanelStartPosition: {x: 2102, y: 0, z: 0}
