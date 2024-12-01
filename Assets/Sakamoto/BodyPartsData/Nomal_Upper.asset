@@ -20,7 +20,7 @@ MonoBehaviour:
   iPartHp: 45
   iPartAttack: 30
   spBody: {fileID: 21300000, guid: 94432c861e2c1c74fb0bc74cfc3d6103, type: 3}
-  spRightArm: {fileID: 21300000, guid: 5a0fb0a1856266e4197e213103481b33, type: 3}
+  spRightArm: {fileID: 21300000, guid: 0fe652ada577a2847aca76149dbee7d7, type: 3}
   spRightHand: {fileID: 21300000, guid: 5a0fb0a1856266e4197e213103481b33, type: 3}
   spLeftArm: {fileID: 21300000, guid: 654269b94c815fa4990563c68ae67aa2, type: 3}
   spLeftHand: {fileID: 21300000, guid: 3d6d05d33c41600428e2aa8ab55124a0, type: 3}
