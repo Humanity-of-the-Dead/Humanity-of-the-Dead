@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneObject:
   - m_SceneName: TitleScene
-  - m_SceneName: new Stage1
+  - m_SceneName: Stage1
   - m_SceneName: Stage2
+  - m_SceneName: Stage3
   sceneNames:
   - TitleScene
-  - new Stage1
+  - Stage1
   - Stage2
-  previousScene: 0
+  - Stage3
+  previousScene: 1
+  sceneCount: 
