@@ -47,6 +47,7 @@ public class MultiAudio : MonoBehaviour
     private void Start()
     {
          bgmSource = GameObject.FindWithTag("BGM").GetComponent<AudioSource>();
+        
         seSource = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
 
         // Assign mixer groups to the audio sources
@@ -59,8 +60,10 @@ public class MultiAudio : MonoBehaviour
             sEClipDictionary[clip.name] = clip;
         }
         BGMClipDictionary = new Dictionary<string, AudioClip>();
+        Debug.Log(BGMClipDictionary);
         foreach (var clip in audioClipsBGM)
         {
+            Debug.Log($"{clip.name}");  
             BGMClipDictionary[clip.name] = clip;
         }
     }
@@ -70,6 +73,7 @@ public class MultiAudio : MonoBehaviour
         {
             Debug.LogError("BGMClipDictionary is not initialized.");
             return;
+            
         }
 
         if (BGMClipDictionary.TryGetValue(bgmName, out var clip))

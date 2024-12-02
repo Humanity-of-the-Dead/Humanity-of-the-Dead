@@ -17,21 +17,27 @@ public class SceneTransitionManager : MonoBehaviour
     private void Start()
     {
 
+        if (MultiAudio.ins == null || MultiAudio.ins.bgmSource == null)
+        {
+            Debug.LogError("MultiAudio or its bgmSource is not initialized.");
+            return;
+        }
         SetCurrentScene(SceneManager.GetActiveScene().buildIndex);
 
         StartCoroutine(FadeIn());
 
+        Debug.Log(MultiAudio.ins.bgmSource);
         // MultiAudio の初期化を確認
         if (MultiAudio.ins != null && MultiAudio.ins.bgmSource != null)
         {
             PlayBGMForScene();
         }
-        else
-        {
-            Debug.LogWarning("MultiAudio or bgmSource is not ready in Start.");
-        }
+
+        
 
     }
+
+   
 
     private void Awake()
     {
@@ -102,11 +108,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void PlayBGMForScene()
     {
-        if (MultiAudio.ins == null || MultiAudio.ins.bgmSource == null)
-        {
-            Debug.LogError("MultiAudio or its bgmSource is not initialized.");
-            return;
-        }
+        
         string sceneName = SceneManager.GetActiveScene().name;
         string bgmName = "";
 
@@ -137,7 +139,8 @@ public class SceneTransitionManager : MonoBehaviour
         if (!string.IsNullOrEmpty(bgmName))
         {
             MultiAudio.ins.PlayBGM_ByName(bgmName); // BGMを再生
-            Debug.Log(bgmName);
+            Debug.Log(MultiAudio.ins.bgmSource.clip);   
+            //Debug.Log(bgmName);
         }
         else
         {
