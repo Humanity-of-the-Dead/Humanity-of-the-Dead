@@ -173,11 +173,13 @@ public class SceneTransitionManager : MonoBehaviour
         Color fadeColor = fadeInstance.color; // 一時変数を使用
         fadeColor.a = 1; // 最初は完全に不透明
         fadeInstance.color = fadeColor;
+        float speed = 1.0f / 0.5f;  // 0.5秒でアルファ値が減少
+
 
         // 徐々に透明にする処理
         while (fadeInstance.color.a > 0)
         {
-            fadeColor.a -= Time.deltaTime; // アルファ値を減少
+            fadeColor.a -= Time.deltaTime*speed; // アルファ値を減少
             fadeInstance.color = fadeColor; // 更新
             yield return null;
         }
@@ -198,11 +200,12 @@ public class SceneTransitionManager : MonoBehaviour
         Color fadeColor = fadeInstance.color; // 一時変数を使用
         fadeColor.a = 0; // 最初は完全に透明
         fadeInstance.color = fadeColor;
+        float speed = 1.0f / 0.5f;  // 0.5秒でアルファ値が減少
 
         // 徐々に不透明にする処理
         while (fadeInstance.color.a < 1)
         {
-            fadeColor.a += Time.deltaTime; // アルファ値を増加
+            fadeColor.a += Time.deltaTime*speed; // アルファ値を増加
             fadeInstance.color = fadeColor; // 更新
             yield return null;
         }
