@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
       value: 
@@ -149,7 +149,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goPlayerControl
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: playerParameter
       value: 
@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e64e587ce64c564690165bf81b64b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goTarget: {fileID: 0}
+  goTarget: {fileID: 798675964}
   fMoveStart: 0
   fMoveLimit: 195
 --- !u!1 &247270896
@@ -854,12 +854,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f36aef9290bac749a33b7c6de7739be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scGameMgr: {fileID: 0}
+  scGameMgr: {fileID: 4664960667363613010}
   iDownTime: 1
   iHumanityMax: 100
   iUpperHPMax: 500
   iLowerHPMax: 500
-  goPlayer: {fileID: 0}
+  goPlayer: {fileID: 798675964}
   UpperData: {fileID: 11400000, guid: 1f44a247b0640614c8806fd0c1ddc7e1, type: 2}
   LowerData: {fileID: 11400000, guid: e7e6579bcbac34e4190ebc1c174e3a77, type: 2}
 --- !u!4 &261565242
@@ -1460,7 +1460,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
       value: 
@@ -1468,7 +1468,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goPlayerControl
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: playerParameter
       value: 
@@ -1649,6 +1649,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1259289707992017263, guid: 30c0124c102e88140a55432e3ded1312, type: 3}
   m_PrefabInstance: {fileID: 752691866}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &798675964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8462856283274023862, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+  m_PrefabInstance: {fileID: 967675286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &840118038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1668,7 +1673,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
       value: 
@@ -1676,7 +1681,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goPlayerControl
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: playerParameter
       value: 
@@ -2547,7 +2552,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
       value: 
@@ -2555,7 +2560,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goPlayerControl
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: playerParameter
       value: 
@@ -3438,7 +3443,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
       value: 
@@ -3446,7 +3451,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goPlayerControl
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: playerParameter
       value: 
@@ -3589,7 +3594,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fEnemyMax
       value: 10
@@ -3605,7 +3610,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goPlayerControl
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: playerParameter
       value: 
@@ -3825,7 +3830,7 @@ MonoBehaviour:
   Position:
   - -1
   - 180
-  Player: {fileID: 0}
+  Player: {fileID: 798675964}
   GameManager: {fileID: 3111287980887441161}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'

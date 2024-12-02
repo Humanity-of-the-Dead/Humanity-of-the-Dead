@@ -52,6 +52,17 @@ public class PlayerParameter : MonoBehaviour
     {
         InitializeReferences();
 
+        //最大値を設定
+        iUpperHPMax = UpperData.iPartHp;
+        iLowerHPMax = LowerData.iPartHp;
+        //パラメータの初期化
+        iHumanity = iHumanityMax;
+        iUpperHP = iUpperHPMax;
+        iLowerHP = iLowerHPMax;
+
+        //コンポーネント取得
+        scPlayerMoveAnimation = goPlayer.GetComponent<PlayerMoveAnimation>();
+
         //シーン遷移で破棄されない
         DontDestroyOnLoad(gameObject);
 
@@ -203,13 +214,10 @@ public class PlayerParameter : MonoBehaviour
     {
         // シーン遷移後に必要なオブジェクトを再取得
         scGameMgr = GameObject.FindGameObjectWithTag("GameManager");
-        goMosaic = GameObject.Find("Player").gameObject;
+        goMosaic = GameObject.Find("Player Variant").gameObject;
         goMosaic = goMosaic.transform.Find("Mosaic").gameObject;
-        goPlayer = GameObject.Find("Player").gameObject;
+        goPlayer = GameObject.Find("Player Variant").gameObject;
         goPanel = GameObject.FindGameObjectWithTag("GameOver");
-
-        //コンポーネント取得
-        scPlayerMoveAnimation = goPlayer.GetComponent<PlayerMoveAnimation>();
 
         //最大値を設定
         iUpperHPMax = UpperData.iPartHp;
@@ -219,8 +227,8 @@ public class PlayerParameter : MonoBehaviour
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
 
-        scPlayerMoveAnimation.ChangeUpperBody(UpperData);
-        scPlayerMoveAnimation.ChangeUnderBody(LowerData);
+        //scPlayerMoveAnimation.ChangeUpperBody(UpperData);
+        //scPlayerMoveAnimation.ChangeUnderBody(LowerData);
 
         if (scGameMgr == null || goMosaic == null || goPanel == null)
         {

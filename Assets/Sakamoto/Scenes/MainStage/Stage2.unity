@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1443765028}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
       value: 
@@ -149,7 +149,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goPlayerControl
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1443765028}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: playerParameter
       value: 
@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e64e587ce64c564690165bf81b64b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goTarget: {fileID: 0}
+  goTarget: {fileID: 1443765028}
   fMoveStart: 0
   fMoveLimit: 213.5
 --- !u!1 &247270896
@@ -859,7 +859,7 @@ MonoBehaviour:
   iHumanityMax: 100
   iUpperHPMax: 30
   iLowerHPMax: 30
-  goPlayer: {fileID: 0}
+  goPlayer: {fileID: 1443765028}
   UpperData: {fileID: 11400000, guid: a72cdc466c72ac54b99427c79e98c125, type: 2}
   LowerData: {fileID: 11400000, guid: 823af4672cb62674f8af8f1d901261ae, type: 2}
 --- !u!4 &261565242
@@ -1528,7 +1528,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1443765028}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
       value: 
@@ -1536,7 +1536,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goPlayerControl
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1443765028}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: playerParameter
       value: 
@@ -2587,6 +2587,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1150826654535052386, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
   m_PrefabInstance: {fileID: 1443765026}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1443765028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8462856283274023862, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+  m_PrefabInstance: {fileID: 1443765026}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1444628926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2606,7 +2611,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1443765028}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
       value: 
@@ -2614,7 +2619,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goPlayerControl
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1443765028}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: playerParameter
       value: 
@@ -4630,7 +4635,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1443765028}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
       value: 
@@ -4638,7 +4643,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goPlayerControl
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1443765028}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: playerParameter
       value: 
@@ -4781,7 +4786,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1443765028}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fEnemyMax
       value: 10
@@ -4797,7 +4802,7 @@ PrefabInstance:
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goPlayerControl
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1443765028}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: playerParameter
       value: 
@@ -4960,7 +4965,7 @@ MonoBehaviour:
   Position:
   - -1
   - 180
-  Player: {fileID: 0}
+  Player: {fileID: 1443765028}
   GameManager: {fileID: 3111287980887441161}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'

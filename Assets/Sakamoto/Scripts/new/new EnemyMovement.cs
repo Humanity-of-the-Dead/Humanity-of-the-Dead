@@ -41,7 +41,7 @@ public class newEnemyMovement : EnemyAttack
     void Start()
     {
         // ƒvƒŒƒCƒ„[‚ğ’T‚·‚â‚Â
-        player = GameObject.Find("Player").gameObject.transform;
+        player = GameObject.Find("Player Variant").gameObject.transform;
         pointA = this.transform.position.x + moveAbs;
         pointB = this.transform.position.x - moveAbs;
 
