@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    //モーションアニメスクリプト
+    [SerializeField] PlayerMoveAnimation scPlayerMoveAnimation;
+
     //ゲームマネージャー
     [SerializeField] GameMgr scGameMgr;
 
@@ -32,8 +35,13 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] SceneTransitionManager sceneTransitionManager;
 
     [SerializeField] Gun Juu;
+
+    //拳銃のショットフラグ
+    bool bShootFlag;
     void Start()
     {
+        
+
         //これダメな奴
         //playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
         //これいいやつ
@@ -61,6 +69,15 @@ public class PlayerControl : MonoBehaviour
         switch (scGameMgr.enGameState)
         {
             case GameState.Main:
+                //bShootFlagをfalseにする
+                bShootFlag = false;
+                //攻撃アニメーション中でなければbShootFlagをtrueにする
+                Debug.Log(scPlayerMoveAnimation.SetAttack());
+                if(scPlayerMoveAnimation.SetAttack() == false)
+                {
+                    bShootFlag = true;
+                }
+
                 MainExecution();
                 break;
         }
@@ -132,7 +149,14 @@ public class PlayerControl : MonoBehaviour
                 }
 
                 Debug.Log(ShootMoveBector);
-                Juu.Shoot(ShootMoveBector, this.transform);
+                Debug.Log("shootFlagは" + bShootFlag);
+
+                //bShootFlagがtrueなら銃を発射する
+                if(bShootFlag == true) {
+                    Debug.Log("弾発射");
+                    Juu.Shoot(ShootMoveBector, this.transform);
+                    //bShootFlag = false;
+                }
 
                 return;
             }
