@@ -51,100 +51,116 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //プレイヤーのY座標の制限
+        //プレイヤーのY座標が8.0を超えたらリジッドボディのフォースを0にする
+        if(8.0f < this.transform.position.y)
+        {
+            this.rbody2D.velocity = new Vector2(0.0f,-1);
+        }
+
         switch (scGameMgr.enGameState)
         {
             case GameState.Main:
-                //現在のポジションを取得
-                Vector2 vPosition = this.transform.position;
-
-                //カメラとの距離の絶対値が一定以下ならプレイヤーが動く　画面外に出ないための処置
-                //移動
-                Vector3 vPosFromCame = this.transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
-                                                                                              //左移動
-                if (Input.GetKey(KeyCode.A))
-                {
-                    if (vPosFromCame.x > -fCameraWidth / 2)
-                    {
-                        vPosition.x -= Time.deltaTime * fSpeed;
-                    }
-                }
-                //右移動
-                if (Input.GetKey(KeyCode.D))
-                {
-                    if (fCameraWidth / 2 > vPosFromCame.x)
-                    {
-                        vPosition.x += Time.deltaTime * fSpeed;
-                    }
-                }
-
-                //ジャンプ
-
-                if (Input.GetKey(KeyCode.W) && bJump == false)
-                {
-                    this.rbody2D.AddForce(this.transform.up * fJmpPower);
-                    bJump = true;
-                }
-
-                //体が回転しないようにする
-                //自分のtransformを取得
-                Quaternion quaternion = GetComponent<Transform>().rotation;
-                quaternion.z = 0.0f;
-                transform.rotation = quaternion;
-
-
-                //移動後のポジションを代入
-                this.transform.position = vPosition;
-
-                //攻撃関連
-                //上半身攻撃
-                if (Input.GetKeyDown(KeyCode.I))
-                {
-                    if (playerParameter.UpperData.sPartsName == "警察の上半身")
-                    {
-                        Debug.Log("ここに銃弾の発射のプログラムをかいでね");
-                        //この下
-                        Vector2 ShootMoveBector = new Vector2(0, 0);
-                        //子のplayerRCのローテーションYを持ってくる
-                        // y = 0のときは右向き、0 y = 180のときは左向き
-                        Debug.Log(this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y);
-                        if (this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y == 180)
-                        {
-                            ShootMoveBector.x = -1;
-                        }
-                        else
-                        {
-                            ShootMoveBector.x = 1;
-                        }
-
-                        Debug.Log(ShootMoveBector);
-                        Juu.Shoot(ShootMoveBector, this.transform);
-
-                        return;
-                    }
-
-                    for (int i = 0; i < liObj.Count; i++)
-                    {
-                        Debug.Log(liObj[i].gameObject.transform.position);
-                        Debug.Log(playerParameter.UpperData.AttackArea);
-                        //仮引数
-                        UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea);
-                    }
-                }
-                //下半身攻撃
-                if (Input.GetKeyDown(KeyCode.K))
-                {
-                    for (int i = 0; i < liObj.Count; i++)
-                    {
-                        //仮引数
-                        LowerBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea);
-                    }
-                }
-                if(Input.GetKeyDown(KeyCode.U))
-                {
-                }
+                MainExecution();
                 break;
         }
     }
+
+    //ゲームメインのエクスキュート
+    void MainExecution()
+    {
+        //現在のポジションを取得
+        Vector2 vPosition = this.transform.position;
+
+        //カメラとの距離の絶対値が一定以下ならプレイヤーが動く　画面外に出ないための処置
+        //移動
+        Vector3 vPosFromCame = this.transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
+                                                                                      //左移動
+        if (Input.GetKey(KeyCode.A))
+        {
+            if (vPosFromCame.x > -fCameraWidth / 2)
+            {
+                vPosition.x -= Time.deltaTime * fSpeed;
+            }
+        }
+        //右移動
+        if (Input.GetKey(KeyCode.D))
+        {
+            if (fCameraWidth / 2 > vPosFromCame.x)
+            {
+                vPosition.x += Time.deltaTime * fSpeed;
+            }
+        }
+
+        //ジャンプ
+
+        if (Input.GetKey(KeyCode.W) && bJump == false)
+        {
+            this.rbody2D.AddForce(this.transform.up * fJmpPower);
+            bJump = true;
+        }
+
+        //体が回転しないようにする
+        //自分のtransformを取得
+        Quaternion quaternion = GetComponent<Transform>().rotation;
+        quaternion.z = 0.0f;
+        transform.rotation = quaternion;
+
+
+        //移動後のポジションを代入
+        this.transform.position = vPosition;
+
+        //攻撃関連
+        //上半身攻撃
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (playerParameter.UpperData.sPartsName == "警察の上半身")
+            {
+                Debug.Log("ここに銃弾の発射のプログラムをかいでね");
+                //この下
+                Vector2 ShootMoveBector = new Vector2(0, 0);
+                //子のplayerRCのローテーションYを持ってくる
+                // y = 0のときは右向き、0 y = 180のときは左向き
+                Debug.Log(this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y);
+                if (this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y == 180)
+                {
+                    ShootMoveBector.x = -1;
+                }
+                else
+                {
+                    ShootMoveBector.x = 1;
+                }
+
+                Debug.Log(ShootMoveBector);
+                Juu.Shoot(ShootMoveBector, this.transform);
+
+                return;
+            }
+
+            for (int i = 0; i < liObj.Count; i++)
+            {
+                Debug.Log(liObj[i].gameObject.transform.position);
+                Debug.Log(playerParameter.UpperData.AttackArea);
+                //仮引数
+                UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea);
+            }
+        }
+        //下半身攻撃
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            for (int i = 0; i < liObj.Count; i++)
+            {
+                //仮引数
+                LowerBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+        }
+
+    }
+
+    //床判定
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Floor") || other.gameObject.CompareTag("Car"))
@@ -193,6 +209,8 @@ public class PlayerControl : MonoBehaviour
         liObj.Remove(obj);
     }
 
+
+    //敵の弾都の当たり判定
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("EnemyShoot"))
