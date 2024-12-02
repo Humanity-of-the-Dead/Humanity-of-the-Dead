@@ -298,13 +298,13 @@ public class TitleAnimation : MonoBehaviour
 
     void Update()
     {
-        //escapeキーもしくはマウス右クリック
+        //Gキーもしくはマウス右クリック
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.G))
         {
             //パネルのセットアクティブ
-            OptionPanel.SetActive(false);
+            OptionPanel.SetActive(!OptionPanel.activeSelf);
             mainPanel.SetActive(true);
-            CreditPanel.SetActive(false);
+            CreditPanel.SetActive(!CreditPanel.activeSelf);
 
             //ボタンのセットアクティブ
             CreditButton.SetActive(true);
