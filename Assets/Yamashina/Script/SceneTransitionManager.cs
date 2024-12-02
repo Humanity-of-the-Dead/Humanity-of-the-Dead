@@ -20,7 +20,6 @@ public class SceneTransitionManager : MonoBehaviour
         SetCurrentScene(SceneManager.GetActiveScene().buildIndex);
 
         StartCoroutine(FadeIn());
-        MultiAudio.ins.PlayBGM_ByName("BGM_title");
 
         // MultiAudio の初期化を確認
         if (MultiAudio.ins != null && MultiAudio.ins.bgmSource != null)

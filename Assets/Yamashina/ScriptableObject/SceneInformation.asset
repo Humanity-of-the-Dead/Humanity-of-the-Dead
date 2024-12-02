@@ -22,5 +22,5 @@ MonoBehaviour:
   - Stage1
   - Stage2
   - Stage3
-  previousScene: 1
+  previousScene: 0
   sceneCount: 
