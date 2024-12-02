@@ -1534,6 +1534,10 @@ PrefabInstance:
       propertyPath: audioClipsSE.Array.data[17]
       value: 
       objectReference: {fileID: 8300000, guid: b9742bae17eb7a545b7fb630c150a3d2, type: 3}
+    - target: {fileID: 6852113580496414506, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -4108538381236679251, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

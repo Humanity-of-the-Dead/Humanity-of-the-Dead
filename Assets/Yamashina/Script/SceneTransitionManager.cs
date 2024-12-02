@@ -35,6 +35,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void Awake()
     {
+
         if (instance == null)
         {
             instance = this;

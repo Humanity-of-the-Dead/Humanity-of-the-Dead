@@ -46,65 +46,22 @@ public class MultiAudio : MonoBehaviour
 
     private void Start()
     {
-        // bgmSourceの初期化確認
-        bgmSource = GameObject.Find("AudioSet")?.transform.Find("BGM")?.GetComponent<AudioSource>();
+         bgmSource = GameObject.FindWithTag("BGM").GetComponent<AudioSource>();
+        seSource = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
 
-        if (bgmSource == null)
+        // Assign mixer groups to the audio sources
+        if (bgmSource != null) bgmSource.outputAudioMixerGroup = bgmMixerGroup;
+        if (seSource != null) seSource.outputAudioMixerGroup = seMixerGroup;
+        // SEクリップを辞書化して名前でアクセス可能に
+        sEClipDictionary = new Dictionary<string, AudioClip>();
+        foreach (var clip in audioClipsSE)
         {
-            Debug.LogError("BGM AudioSource is not assigned or found. Please ensure that 'AudioSet' and 'BGM' exist in the scene.");
+            sEClipDictionary[clip.name] = clip;
         }
-
-        // seSourceの初期化確認
-        seSource = GameObject.FindWithTag("SE")?.GetComponent<AudioSource>();
-        if (seSource == null)
-        {
-            Debug.LogError("SE AudioSource not found. Ensure the tag 'SE' is correctly set.");
-        }
-
-        // audioClipsBGMの初期化確認
-        if (audioClipsBGM == null || audioClipsBGM.Length == 0)
-        {
-            Debug.LogError("audioClipsBGM array is not initialized or is empty.");
-            return; // audioClipsBGMが空の場合、処理を中断
-        }
-
-        // BGMClipDictionaryの初期化
         BGMClipDictionary = new Dictionary<string, AudioClip>();
         foreach (var clip in audioClipsBGM)
         {
             BGMClipDictionary[clip.name] = clip;
-        }
-
-        // SEクリップ辞書の初期化
-        sEClipDictionary = new Dictionary<string, AudioClip>();
-        foreach (var clip in audioClipsSE)
-        {
-            if (clip != null)
-            {
-                sEClipDictionary[clip.name] = clip;
-            }
-        }
-    }
-
-    // Method to play a selected BGM by index
-    public void ChooseSongs_BGM(int index)
-    {
-        if (index >= 0 && index < audioClipsBGM.Length)
-        {
-            bgmSource.clip = audioClipsBGM[index];
-            if (bgmSource.clip != null)
-            {
-                bgmSource.Play();
-                Debug.Log("Playing BGM: " + bgmSource.clip.name);
-            }
-            else
-            {
-                Debug.LogWarning("BGM clip not set.");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("BGM index out of range.");
         }
     }
     public void PlayBGM_ByName(string bgmName)
