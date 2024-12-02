@@ -88,11 +88,24 @@ public class TitleAnimation : MonoBehaviour
     void Start()
     {
 
-        start.onClick.AddListener(() => 
+        start.onClick.AddListener(() =>
             SceneTransitionManager.instance.NextSceneButton(1));
+        if (MultiAudio.ins == null)
+        {
+            Debug.LogError("MultiAudio instance is not available. Check initialization.");
+            return;
+        }
+        if (MultiAudio.ins.bgmSource == null)
+        {
+            MultiAudio.ins.bgmSource=GameObject.FindGameObjectWithTag("BGM").gameObject.GetComponent<AudioSource>();
+            Debug.LogError(GameObject.FindGameObjectWithTag("BGM").gameObject);
+            Debug.LogError("MultiAudio instance BGM is not available. Check initialization.");
+            return;
+        }
         MultiAudio.ins.bgmSource.volume = BGMVolume;
         MultiAudio.ins.seSource.volume = UIVolume;
-        MultiAudio.ins.PlayBGM_ByName("BGM_title");
+        Debug.Log(MultiAudio.ins.bgmSource);
+        //MultiAudio.ins.PlayBGM_ByName("BGM_title");
 
         //パネルのオブジェクトのセットアクティブ切り替え
         mainPanel.SetActive(true);　　//タイトル画面
@@ -119,9 +132,10 @@ public class TitleAnimation : MonoBehaviour
 
         if (CreditPanel.activeSelf)
         {
-            MultiAudio.ins.PlayBGM_ByName("BGM_title");
 
             StartSlideOut();
+            MultiAudio.ins.PlayBGM_ByName("BGM_title");
+
 
         }
         if (OptionPanel.activeSelf) { StartSlideOut(); }
@@ -190,7 +204,7 @@ public class TitleAnimation : MonoBehaviour
             StartSlideIn();
         }
         MultiAudio.ins.PlayBGM_ByName("BGM_credit");
-        MultiAudio.ins.bgmSource.loop = false;  
+        MultiAudio.ins.bgmSource.loop = false;
     }
 
     public void OptionView() //クレジット画面を表示
@@ -271,7 +285,7 @@ public class TitleAnimation : MonoBehaviour
     public IEnumerator AnimateEachPanelOut()
     {
         float Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
-                        //var Option = 0f;
+                          //var Option = 0f;
 
         //クレジット画面のスライドアウトのアニメーション
         while (Credit <= 1.0f && CreditPanel.activeSelf)

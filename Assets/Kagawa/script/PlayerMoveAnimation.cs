@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -21,78 +21,78 @@ public enum LowerAttack
 
 public class PlayerMoveAnimation : MonoBehaviour
 {
-    [SerializeField, Header("“ª‚ÌImage")] SpriteRenderer headSR;
-    [SerializeField, Header("‘Ì‚Ì‚ÌImage")] SpriteRenderer bodySR;
-    [SerializeField, Header("‰E˜r‚ÌImage")] SpriteRenderer armRightSR;
-    [SerializeField, Header("¶˜r‚ÌImage")] SpriteRenderer armLeftSR;
-    [SerializeField, Header("‰Eèñ‚ÌImage")] SpriteRenderer handRightSR;
-    [SerializeField, Header("¶èñ‚ÌImage")] SpriteRenderer handLeftSR;
-    [SerializeField, Header("˜‚ÌImage")] SpriteRenderer waistSR;
-    [SerializeField, Header("‰E‘¾‘Ú‚ÌImage")] SpriteRenderer legRightSR;
-    [SerializeField, Header("¶‘¾‘Ú‚ÌImage")] SpriteRenderer legLeftSR;
-    [SerializeField, Header("‰E‘«‚ÌImage")] SpriteRenderer footRightSR;
-    [SerializeField, Header("¶‘«‚ÌImage")] SpriteRenderer footLeftSR;
+    [SerializeField, Header("é ­ã®Image")] SpriteRenderer headSR;
+    [SerializeField, Header("ä½“ã®ã®Image")] SpriteRenderer bodySR;
+    [SerializeField, Header("å³è…•ã®Image")] SpriteRenderer armRightSR;
+    [SerializeField, Header("å·¦è…•ã®Image")] SpriteRenderer armLeftSR;
+    [SerializeField, Header("å³æ‰‹é¦–ã®Image")] SpriteRenderer handRightSR;
+    [SerializeField, Header("å·¦æ‰‹é¦–ã®Image")] SpriteRenderer handLeftSR;
+    [SerializeField, Header("è…°ã®Image")] SpriteRenderer waistSR;
+    [SerializeField, Header("å³å¤ªè…¿ã®Image")] SpriteRenderer legRightSR;
+    [SerializeField, Header("å·¦å¤ªè…¿ã®Image")] SpriteRenderer legLeftSR;
+    [SerializeField, Header("å³è¶³ã®Image")] SpriteRenderer footRightSR;
+    [SerializeField, Header("å·¦è¶³ã®Image")] SpriteRenderer footLeftSR;
 
-    [Header("‘Sg")] public GameObject playerRc;
-    [SerializeField, Header("˜r‚ÌŠp“xAæ‚É‰Eè")]  GameObject[] arm;
-    [SerializeField, Header("‘¾‘Ú‚ÌŠp“xAæ‚É‰E‘«")]  GameObject[] leg;
-    [SerializeField, Header("‚·‚Ë‚ÌŠp“xAæ‚É‰E‘«")]  GameObject[] foot;
+    [Header("å…¨èº«")] public GameObject playerRc;
+    [SerializeField, Header("è…•ã®è§’åº¦ã€å…ˆã«å³æ‰‹")]  GameObject[] arm;
+    [SerializeField, Header("å¤ªè…¿ã®è§’åº¦ã€å…ˆã«å³è¶³")]  GameObject[] leg;
+    [SerializeField, Header("ã™ã­ã®è§’åº¦ã€å…ˆã«å³è¶³")]  GameObject[] foot;
 
-    [Header("1ƒRƒ}‚ÌŠÔŠu‚ÌŠÔ")] public float timeMax;
+    [Header("1ã‚³ãƒã®é–“éš”ã®æ™‚é–“")] public float timeMax;
 
-    [Header("---•à‚«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("---æ­©ãã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
     public AnimationData walk;
 
-    [Header("---ƒfƒtƒHƒ‹ƒgƒpƒ“ƒ`‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("---ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ‘ãƒ³ãƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
     public AnimationData playerUpper;
 
-    [Header("---ƒfƒtƒHƒ‹ƒgƒLƒbƒN‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("---ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚­ãƒƒã‚¯ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
     public AnimationData playerLower;
 
-    [Header("---Œx@Œe‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("---è­¦å¯Ÿæ‹³éŠƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
     public AnimationData policeUpper;
 
-    [Header("---Œx@‰º”¼g‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("---è­¦å¯Ÿä¸‹åŠèº«ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
     public AnimationData policeLower;
 
-    [Header("---ƒi[ƒXƒpƒ“ƒ`‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("---ãƒŠãƒ¼ã‚¹ãƒ‘ãƒ³ãƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
     public AnimationData nurseUpper;
 
-    [Header("---ƒi[ƒXƒLƒbƒN‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("---ãƒŠãƒ¼ã‚¹ã‚­ãƒƒã‚¯ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
     public AnimationData nurseLower;
 
     UpperAttack upperAttack;
 
     LowerAttack downAttack;
 
-    //•à‚«‚Ì”z—ñ‚Ì”Ô†
+    //æ­©ãã®é…åˆ—ã®ç•ªå·
     int walkNumber;
 
-    //UŒ‚‚Ì”z—ñ‚Ì”Ô†
+    //æ”»æ’ƒã®é…åˆ—ã®ç•ªå·
     int attackNumber;
 
-    //‘Ì‚Ì²
+    //ä½“ã®è»¸
     int shaft;
 
-    //•à‚­ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŠp“x‚Ì”
+    //æ­©ãã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®è§’åº¦ã®æ•°
     int walkLength;
 
-    // ’l‚ğ”½“]‚É‚·‚éƒtƒ‰ƒO
+    // å€¤ã‚’åè»¢ã«ã™ã‚‹ãƒ•ãƒ©ã‚°
     bool isActive;
 
-    // UŒ‚’†‚©‚Ç‚¤‚©
+    // æ”»æ’ƒä¸­ã‹ã©ã†ã‹
     bool isAttack;
 
-    // •ûŒüƒtƒ‰ƒO(‰E = false)
-    bool isWalk;
+    // æ–¹å‘ãƒ•ãƒ©ã‚°(å³ = false)
+    bool isDirection;
 
-    // Ã~‚µ‚Ä‚¢‚é‚©
+    // é™æ­¢ã—ã¦ã„ã‚‹ã‹
     bool isStop;
 
-    // ƒ^ƒCƒ}[
+    // ã‚¿ã‚¤ãƒãƒ¼
     float time;
     
-    // ƒ^ƒCƒ}[
+    // æ”»æ’ƒã®ã‚¿ã‚¤ãƒãƒ¼
     float timeAttack;
 
     private void Start()
@@ -103,7 +103,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         isAttack = false;
         isActive = false;
-        isWalk = false;
+        isDirection = false;
         isStop = false;
         walkLength = walk.armForwardRotation.Length - 1;
         time = 0;
@@ -120,35 +120,35 @@ public class PlayerMoveAnimation : MonoBehaviour
         {
             shaft = 0;
 
-            ////Ã~ó‘Ô‚©‚ç¶Œü‚­‚Æ‚«
+            ////é™æ­¢çŠ¶æ…‹ã‹ã‚‰å·¦å‘ãã¨ã
             //if (time < 0 && isWalk)
             //{
             //    isStop = true;
             //    time = timeMax * 2;
             //}
 
-            // ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ª¶‚©‚ç‰E‚É•Ï‚í‚Á‚½‚Æ‚«
-            isWalk = false;
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‘ããŒå·¦ã‹ã‚‰å³ã«å¤‰ã‚ã£ãŸã¨ã
+            isDirection = false;
            
 
-            // •à‚­“®ì‚ğ‚µ‚Ä‚¢‚éAŒÄ‚Î‚¹‚È‚¢
+            // æ­©ãå‹•ä½œã‚’ã—ã¦ã„ã‚‹æ™‚ã€å‘¼ã°ã›ãªã„
             WalkInstance();
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
             shaft = 180;
 
-            ////Ã~ó‘Ô‚©‚ç¶Œü‚­‚Æ‚«
+            ////é™æ­¢çŠ¶æ…‹ã‹ã‚‰å·¦å‘ãã¨ã
             //if (time < 0 && !isWalk)
             //{
             //    isStop = true;
             //    time = timeMax * 2;
             //}
 
-            // ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ª‰E‚©‚ç¶‚É•Ï‚í‚Á‚½‚Æ‚«
-            isWalk = true;
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‘ããŒå³ã‹ã‚‰å·¦ã«å¤‰ã‚ã£ãŸã¨ã
+            isDirection = true;
             
-            // •à‚­“®ì‚ğ‚µ‚Ä‚¢‚éAŒÄ‚Î‚¹‚È‚¢
+            // æ­©ãå‹•ä½œã‚’ã—ã¦ã„ã‚‹æ™‚ã€å‘¼ã°ã›ãªã„
             WalkInstance();
         }
 
@@ -167,7 +167,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            if (!isWalk)
+            if (!isDirection)
             {
                 if(isStop)
                 {
@@ -182,7 +182,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            if (isWalk)
+            if (isDirection)
             {
                 if (isStop)
                 {
@@ -198,17 +198,17 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚­ƒAƒjƒ[ƒVƒ‡ƒ“
+    /// æ­©ãã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
     void PlayerWalk()
     {
-        // Quaternion.Euler: ‰ñ“]²( x, y, z)
+        // Quaternion.Euler: å›è»¢è»¸( x, y, z)
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[walkNumber]);
 
-        // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
         if (arm == null || walk.armForwardRotation == null)
         {
-            Debug.LogWarning("Arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
             return;
         }
         else
@@ -217,20 +217,20 @@ public class PlayerMoveAnimation : MonoBehaviour
             arm[1].transform.rotation = Quaternion.Euler(0, shaft, -walk.armForwardRotation[walkNumber]);
         }
 
-        // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
         if (leg == null || walk.legForwardRotation == null || walk.legBackRotation == null)
         {
-            Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
             return;
         }
         else if (foot == null || walk.footForwardRotation == null || walk.footBackRotation == null) 
         {
-            Debug.LogWarning("Foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
             return;
         }
         else
         {
-            // •à‚«n‚ß‚Ìê‡
+            // æ­©ãå§‹ã‚ã®å ´åˆ
             if (!isActive)
             {
                 leg[0].transform.rotation = Quaternion.Euler(0, shaft, walk.legBackRotation[walkNumber]);
@@ -238,7 +238,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                 foot[0].transform.rotation = Quaternion.Euler(0, shaft, walk.footBackRotation[walkNumber]);
                 foot[1].transform.rotation = Quaternion.Euler(0, shaft, walk.footForwardRotation[walkNumber]);
             }
-            //•à‚«‘±‚¯‚Ä‚¢‚éê‡
+            //æ­©ãç¶šã‘ã¦ã„ã‚‹å ´åˆ
             if (isActive)
             {
                 leg[0].transform.rotation = Quaternion.Euler(0, shaft, walk.legForwardRotation[walkNumber]);
@@ -250,20 +250,20 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ã”¼g‚Ìƒ‚[ƒVƒ‡ƒ“
+    /// ä¸ŠåŠèº«ã®ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
     void PlayerPantie()
     {
         switch(upperAttack)
         {
             case UpperAttack.NORMAL:
-                // Quaternion.Euler: ‰ñ“]²( x, y, z)
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerUpper.wholeRotation[attackNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (playerUpper.armForwardRotation == null || playerUpper.armBackRotation == null)
                 {
-                    Debug.LogWarning("Arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -272,15 +272,15 @@ public class PlayerMoveAnimation : MonoBehaviour
                     arm[1].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.armBackRotation[attackNumber]);
                 }
 
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (playerUpper.legForwardRotation == null || playerUpper.legBackRotation == null)
                 {
-                    Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (playerUpper.footBackRotation == null || playerUpper.footForwardRotation == null)
                 {
-                    Debug.LogWarning("Foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -293,13 +293,13 @@ public class PlayerMoveAnimation : MonoBehaviour
                 break;
             case UpperAttack.POLICE:
 
-                // Quaternion.Euler: ‰ñ“]²( x, y, z)
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, policeUpper.wholeRotation[attackNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (policeUpper.armForwardRotation == null || policeUpper.armBackRotation == null)
                 {
-                    Debug.LogWarning("Œx@Arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("è­¦å¯ŸArmã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -308,15 +308,15 @@ public class PlayerMoveAnimation : MonoBehaviour
                     arm[1].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.armBackRotation[attackNumber]);
                 }
 
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (policeUpper.legForwardRotation == null || policeUpper.legBackRotation == null)
                 {
-                    Debug.LogWarning("Œx@Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("è­¦å¯ŸLegã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (policeUpper.footBackRotation == null || policeUpper.footForwardRotation == null)
                 {
-                    Debug.LogWarning("Œx@Foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("è­¦å¯ŸFootã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -329,13 +329,13 @@ public class PlayerMoveAnimation : MonoBehaviour
                 break;
             case UpperAttack.NURSE:
 
-                // Quaternion.Euler: ‰ñ“]²( x, y, z)
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.wholeRotation[attackNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (nurseUpper.armForwardRotation == null || nurseUpper.armBackRotation == null)
                 {
-                    Debug.LogWarning("ƒi[ƒXArm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");    
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");    
                     return;
                 }
                 else
@@ -344,15 +344,15 @@ public class PlayerMoveAnimation : MonoBehaviour
                     arm[1].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.armBackRotation[attackNumber]);
                 }
 
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (nurseUpper.legForwardRotation == null || nurseUpper.legBackRotation == null)
                 {
-                    Debug.LogWarning("ƒi[ƒXLeg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (nurseUpper.footBackRotation == null || nurseUpper.footForwardRotation == null)
                 {
-                    Debug.LogWarning("ƒi[ƒXFoot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -367,20 +367,20 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒLƒbƒN‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+    /// ã‚­ãƒƒã‚¯ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
     void PlayerKick()
     {
         switch(downAttack)
         {
             case LowerAttack.NORMAL:
-                // Quaternion.Euler: ‰ñ“]²( x, y, z)
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerLower.wholeRotation[attackNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (playerLower.armForwardRotation == null || playerLower.armBackRotation == null)
                 {
-                    Debug.LogWarning("Arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -389,15 +389,15 @@ public class PlayerMoveAnimation : MonoBehaviour
                     arm[1].transform.rotation = Quaternion.Euler(0, shaft, playerLower.armBackRotation[attackNumber]);
                 }
 
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (playerLower.legBackRotation == null || playerLower.legForwardRotation == null)
                 {
-                    Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (playerLower.footBackRotation == null || playerLower.footForwardRotation == null)
                 {
-                    Debug.LogWarning("Foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -411,10 +411,10 @@ public class PlayerMoveAnimation : MonoBehaviour
             case LowerAttack.POLICE:
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, policeLower.wholeRotation[attackNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (policeLower.armForwardRotation == null || policeLower.armBackRotation == null)
                 {
-                    Debug.LogWarning("Œx@Arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("è­¦å¯ŸArmã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -423,15 +423,15 @@ public class PlayerMoveAnimation : MonoBehaviour
                     arm[1].transform.rotation = Quaternion.Euler(0, shaft, policeLower.armBackRotation[attackNumber]);
                 }
 
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (policeLower.legForwardRotation == null || policeLower.legBackRotation == null)
                 {
-                    Debug.LogWarning("Œx@Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("è­¦å¯ŸLegã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (policeLower.footBackRotation == null || policeLower.footForwardRotation == null)
                 {
-                    Debug.LogWarning("Œx@Foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("è­¦å¯ŸFootã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -444,13 +444,13 @@ public class PlayerMoveAnimation : MonoBehaviour
                 break;
             case LowerAttack.NURSE:
 
-                // Quaternion.Euler: ‰ñ“]²( x, y, z)
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, nurseLower.wholeRotation[attackNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (nurseLower.armForwardRotation == null || nurseLower.armBackRotation == null)
                 {
-                    Debug.LogWarning("ƒi[ƒXArm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -459,15 +459,15 @@ public class PlayerMoveAnimation : MonoBehaviour
                     arm[1].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.armBackRotation[attackNumber]);
                 }
 
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (nurseLower.legForwardRotation == null || nurseLower.legBackRotation == null)
                 {
-                    Debug.LogWarning("ƒi[ƒXLeg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (nurseLower.footBackRotation == null || nurseLower.footForwardRotation == null)
                 {
-                    Debug.LogWarning("ƒi[ƒXFoot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -489,7 +489,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             {
                 PlayerWalk();
 
-                // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
+                // indexNumberã®å€¤ã‚’å¢—ã‚„ã™(é…åˆ—ç•ªå·ã‚’ä¸Šã’ã‚‹)
                 walkNumber = (walkNumber + 1) % walk.armForwardRotation.Length;
                 yield return new WaitForSeconds(timeMax);
             }
@@ -502,7 +502,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         {
             PlayerPantie();
 
-            // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
+            // indexNumberã®å€¤ã‚’å¢—ã‚„ã™(é…åˆ—ç•ªå·ã‚’ä¸Šã’ã‚‹)
             attackNumber = (attackNumber + 1) % playerUpper.armForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
@@ -517,7 +517,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         {
             PlayerKick();
 
-            // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
+            // indexNumberã®å€¤ã‚’å¢—ã‚„ã™(é…åˆ—ç•ªå·ã‚’ä¸Šã’ã‚‹)
             attackNumber = (attackNumber + 1) % playerLower.armForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
@@ -527,11 +527,11 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚ğŒp‘±‚µ‚½A˜r‚Ì”z—ñ‚Ì’†‚Ì’l‚ğ‹t‚É‚·‚é
+    /// æ­©ãã“ã¨ã‚’ç¶™ç¶šã—ãŸæ™‚ã€è…•ã®é…åˆ—ã®ä¸­ã®å€¤ã‚’é€†ã«ã™ã‚‹
     /// </summary>
     void ChangeArmAnime()
     {
-        //O€‰‰Zq(Še—v‘f‚É‘Î‚µ‚Ä•ÏŠ·‘€ì‚ğs‚¤)
+        //ä¸‰é …æ¼”ç®—å­(å„è¦ç´ ã«å¯¾ã—ã¦å¤‰æ›æ“ä½œã‚’è¡Œã†)
         if (isActive)
         {
             walk.armForwardRotation = walk.armForwardRotation.Select(value => value > 0 ? -value : value).ToArray();
@@ -543,7 +543,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚ğŠJn‚ÌŠÖ”
+    /// æ­©ãã“ã¨ã‚’é–‹å§‹ã®é–¢æ•°
     /// </summary>
     void WalkStart()
     {
@@ -552,7 +552,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒpƒ“ƒ`‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ŠJn‚·‚é‚Æ‚«‚ÌŠÖ”
+    /// ãƒ‘ãƒ³ãƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹ã™ã‚‹ã¨ãã®é–¢æ•°
     /// </summary>
     void PantieStart()
     {
@@ -562,7 +562,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒLƒbƒN‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ŠJn‚·‚é‚Æ‚«‚ÌŠÖ”
+    /// ã‚­ãƒƒã‚¯ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹ã™ã‚‹ã¨ãã®é–¢æ•°
     /// </summary>
     void KickStart()
     {
@@ -572,7 +572,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚Ì‰Šú‰»
+    /// æ­©ãã“ã¨ã®åˆæœŸåŒ–
     /// </summary>
     void WalkInstance()
     {
@@ -587,11 +587,11 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚ğŒp‘±‚µ‚½‚Æ‚«
+    /// æ­©ãã“ã¨ã‚’ç¶™ç¶šã—ãŸã¨ã
     /// </summary>
     void KeepWalk()
     {
-        // ˜A‘±“ü—Í‚³‚ê‚Ä‚¢‚é‚©
+        // é€£ç¶šå…¥åŠ›ã•ã‚Œã¦ã„ã‚‹ã‹
         if (time - 0.05 < 0)
         {
             walkNumber = 0;
@@ -603,7 +603,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// UŒ‚‚Ì‰Šú‰»
+    /// æ”»æ’ƒã®åˆæœŸåŒ–
     /// </summary>
     void AttackWaite()
     {
@@ -614,9 +614,9 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ã”¼g‚ÌƒCƒ[ƒW
+    /// ä¸ŠåŠèº«ã®ã‚¤ãƒ¡ãƒ¼ã‚¸
     /// </summary>
-    /// <param name="upperBody">‰æ‘œƒf[ƒ^W‡‘Ì</param>
+    /// <param name="upperBody">ç”»åƒãƒ‡ãƒ¼ã‚¿é›†åˆä½“</param>
     public void ChangeUpperBody(BodyPartsData upperBody)
     {
         bodySR.sprite = upperBody.spBody;
@@ -627,9 +627,9 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ‰º”¼g‚ÌƒCƒ[ƒW
+    /// ä¸‹åŠèº«ã®ã‚¤ãƒ¡ãƒ¼ã‚¸
     /// </summary>
-    /// <param name="underBody">‰æ‘œƒf[ƒ^W‡‘Ì</param>
+    /// <param name="underBody">ç”»åƒãƒ‡ãƒ¼ã‚¿é›†åˆä½“</param>
     public void ChangeUnderBody(BodyPartsData underBody)
     {
         waistSR.sprite = underBody.spWaist;
@@ -640,21 +640,30 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ã”¼g‚ÌUŒ‚‚Ì•Ï‰»
+    /// ä¸ŠåŠèº«ã®æ”»æ’ƒã®å¤‰åŒ–
     /// </summary>
-    /// <param name="isName">ˆÚA‚·‚é•¨‘Ì</param>
+    /// <param name="isName">ç§»æ¤ã™ã‚‹ç‰©ä½“</param>
     public void ChangeUpperMove(UpperAttack isName)
     {
         upperAttack = isName;
     }
 
     /// <summary>
-    /// ‰º”¼g‚ÌUŒ‚‚Ì•Ï‰»
+    /// ä¸‹åŠèº«ã®æ”»æ’ƒã®å¤‰åŒ–
     /// </summary>
-    /// <param name="isName">ˆÚA‚·‚é•¨‘Ì</param>
+    /// <param name="isName">ç§»æ¤ã™ã‚‹ç‰©ä½“</param>
     public void ChangeLowerMove(LowerAttack isName)
     {
         downAttack = isName;
+    }
+
+    /// <summary>
+    /// æ”»æ’ƒä¸­ã‹ã©ã†ã‹ã‚’æ¸¡ã™
+    /// </summary>
+    /// <returns></returns>
+    public bool SetAttack()
+    {
+        return isAttack;
     }
 }
 

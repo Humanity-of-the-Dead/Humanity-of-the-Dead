@@ -2,6 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UIElements;
 
 public class MultiAudio : MonoBehaviour
 {
@@ -28,25 +29,43 @@ public class MultiAudio : MonoBehaviour
 
     private void Awake()
     {
-        //シングルトン化
-        if (ins != null)
-        {
-            Destroy(gameObject);
-        }
-        else
+        if (ins == null)
         {
             ins = this;
             DontDestroyOnLoad(gameObject);
         }
-        //\シングルトン化
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        if (bgmSource == null)
+        {
+            bgmSource = GameObject.Find("AudioSet").gameObject.transform.Find("BGM").GetComponent<AudioSource>();
+            Debug.Log(bgmSource);
+            if (bgmSource == null)
+            {
+                Debug.LogError("bgmSource is not assigned or found on the MultiAudio object.");
+            }
+        }
+
     }
 
-
+   
+    
 
     private void Start()
     {
-        bgmSource = GameObject.FindWithTag("BGM").GetComponent<AudioSource>();
+        bgmSource = GameObject.Find("AudioSet").gameObject.transform.Find("BGM").GetComponent<AudioSource>();   
+       
         seSource = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
+        Debug.Log("Start呼ばれた_Multi");
+        if (bgmSource == null)
+        {
+            bgmSource = GetComponent<AudioSource>();
+            Debug.Log($"bgmSource assigned: {bgmSource != null}");
+        }
+        if (seSource == null) Debug.LogError("SE AudioSource not found. Ensure the tag 'SE' is correctly set.");
 
         // Assign mixer groups to the audio sources
         if (bgmSource != null) bgmSource.outputAudioMixerGroup = bgmMixerGroup;
@@ -60,7 +79,15 @@ public class MultiAudio : MonoBehaviour
         BGMClipDictionary = new Dictionary<string , AudioClip>();
         foreach (var clip in audioClipsBGM)
         {
-            BGMClipDictionary[clip.name] = clip;
+            if (clip != null)
+            {
+                BGMClipDictionary[clip.name] = clip;
+                Debug.Log($"Added BGM Clip: {clip.name}");
+            }
+            else
+            {
+                Debug.LogWarning("Null BGM Clip found in audioClipsBGM array.");
+            }
         }
     }
 
@@ -87,22 +114,21 @@ public class MultiAudio : MonoBehaviour
     }
     public void PlayBGM_ByName(string bgmName)
     {
-        if (BGMClipDictionary == null)
-        {
-            Debug.LogError("BGMClipDictionary is not initialized.");
-            return;
-        }
+        if (BGMClipDictionary == null || BGMClipDictionary.Count == 0)
+    {
+        Debug.LogError("BGMClipDictionary is not initialized or is empty.");
+        return;
+    }
 
-        if (BGMClipDictionary.TryGetValue(bgmName, out var clip))
-        {
-            PlayBGM(clip);
-            Debug.Log($"Playing BGM: {bgmName}");
-        }
-        else
-        {
-            Debug.LogWarning("BGM with name not found: " + bgmName);
-        }
-        // AudioSourceに設定して再生
+    if (BGMClipDictionary.TryGetValue(bgmName, out var clip))
+    {
+        PlayBGM(clip);
+        Debug.Log($"Playing BGM: {bgmName}");
+    }
+    else
+    {
+        Debug.LogWarning("BGM with name not found: " + bgmName);
+    }
 
 
     }
