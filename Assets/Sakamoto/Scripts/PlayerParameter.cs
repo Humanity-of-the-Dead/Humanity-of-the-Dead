@@ -34,10 +34,13 @@ public class PlayerParameter : MonoBehaviour
     public BodyPartsData UpperData;
     //下半身のパーツデータ
     public BodyPartsData LowerData;
+    //キャラのイメージ取得用
+    PlayerMoveAnimation scPlayerMoveAnimation;
+
 
 
     //ゲームオーバーの標準
-     GameObject goPanel;
+    GameObject goPanel;
     SceneTransitionManager sceneTransitionManager;
 
 
@@ -57,6 +60,8 @@ public class PlayerParameter : MonoBehaviour
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
 
+        //コンポーネント取得
+        scPlayerMoveAnimation = goPlayer.GetComponent<PlayerMoveAnimation>();
 
         //シーン遷移で破棄されない
         DontDestroyOnLoad(gameObject);
@@ -133,10 +138,6 @@ public class PlayerParameter : MonoBehaviour
 
         //partsData = partsData ?? DefaultData;
 
-        //キャラのイメージ取得用
-        PlayerMoveAnimation scPlayerMoveAnimation;
-        //コンポーネント取得
-        scPlayerMoveAnimation = goPlayer.GetComponent<PlayerMoveAnimation>();
 
 
         switch (partsData.enPartsType)
@@ -226,6 +227,8 @@ public class PlayerParameter : MonoBehaviour
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
 
+        //scPlayerMoveAnimation.ChangeUpperBody(UpperData);
+        //scPlayerMoveAnimation.ChangeUnderBody(LowerData);
 
         if (scGameMgr == null || goMosaic == null || goPanel == null)
         {

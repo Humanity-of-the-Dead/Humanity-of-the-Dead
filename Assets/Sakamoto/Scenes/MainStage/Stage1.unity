@@ -1193,6 +1193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a77a3114fa5a409a5786c62d230a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scPlayerMoveAnimation: {fileID: 285081245}
   scGameMgr: {fileID: 3111287980887441161}
   fSpeed: 7
   fJmpPower: 500
@@ -1214,6 +1215,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 9036471482523323409, guid: eace3d31a7aa3bd499d0e70c48096a7f, type: 3}
+--- !u!114 &285081245 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+  m_PrefabInstance: {fileID: 285081238}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285081240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89432f0e7e9c8d64e9676b444e9145fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &377555326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2864,63 +2876,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fTimerMax: 1
---- !u!1001 &1391830553
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7095476645965438067, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 11.294372
-      objectReference: {fileID: 0}
-    - target: {fileID: 7095476645965438067, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.3067079
-      objectReference: {fileID: 0}
-    - target: {fileID: 7095476645965438067, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7095476645965438067, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7095476645965438067, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7095476645965438067, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7095476645965438067, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7095476645965438067, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7095476645965438067, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7095476645965438067, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7120178539330783282, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
-      propertyPath: m_Name
-      value: FireFloor
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f183d48a3be47e94b853967a34bf683b, type: 3}
 --- !u!1 &1440257034
 GameObject:
   m_ObjectHideFlags: 0
@@ -4550,4 +4505,3 @@ SceneRoots:
   - {fileID: 613798102}
   - {fileID: 492203196}
   - {fileID: 1655271197}
-  - {fileID: 1391830553}
