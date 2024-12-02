@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// “G‚Ìí—Ş
+/// æ•µã®ç¨®é¡
 /// </summary>
 public enum Status
 {
@@ -13,7 +13,7 @@ public enum Status
 }
 
 /// <summary>
-/// ƒfƒoƒbƒN—p
+/// ãƒ‡ãƒãƒƒã‚¯ç”¨
 /// </summary>
 public enum DebugMove
 {
@@ -25,57 +25,57 @@ public enum DebugMove
 
 public class EnemyMoveAnimation : MonoBehaviour
 {
-    [Header("“G‚Ìí—Ş")] public Status status;
+    [Header("æ•µã®ç¨®é¡")] public Status status;
 
-    [Header("ƒfƒoƒbƒO—p(’ÊíANone)")] public DebugMove debugMoves;
+    [Header("ãƒ‡ãƒãƒƒã‚°ç”¨(é€šå¸¸ã€None)")] public DebugMove debugMoves;
 
-    [Header("‘Sg")] public GameObject playerRc;
-    [SerializeField, Header("˜r‚ÌŠp“xAæ‚É‰Eè")] GameObject[] arm;
-    [SerializeField, Header("èñ‚ÌŠp“xAæ‚É‰Eè")] GameObject[] hand;
-    [SerializeField, Header("‘¾‘Ú‚ÌŠp“xAæ‚É‰E‘«")] GameObject[] leg;
-    [SerializeField, Header("‚·‚Ë‚ÌŠp“xAæ‚É‰E‘«")] GameObject[] foot;
+    [Header("å…¨èº«")] public GameObject playerRc;
+    [SerializeField, Header("è…•ã®è§’åº¦ã€å…ˆã«å³æ‰‹")] GameObject[] arm;
+    [SerializeField, Header("æ‰‹é¦–ã®è§’åº¦ã€å…ˆã«å³æ‰‹")] GameObject[] hand;
+    [SerializeField, Header("å¤ªè…¿ã®è§’åº¦ã€å…ˆã«å³è¶³")] GameObject[] leg;
+    [SerializeField, Header("ã™ã­ã®è§’åº¦ã€å…ˆã«å³è¶³")] GameObject[] foot;
 
-    [Header("1ƒRƒ}‚ÌŠÔŠu‚ÌŠÔ(•à‚«)")] public float timeMax;
+    [Header("1ã‚³ãƒã®é–“éš”ã®æ™‚é–“(æ­©ã)")] public float timeMax;
 
-    [Header("1ƒRƒ}‚ÌŠÔŠu‚ÌŠÔ(UŒ‚)")] public float timeAttackMax;
+    [Header("1ã‚³ãƒã®é–“éš”ã®æ™‚é–“(æ”»æ’ƒ)")] public float timeAttackMax;
 
-    [Header("---•à‚«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("---æ­©ãã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
     public AnimationData walk;
 
-    [Header("---ã”¼g‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("---ä¸ŠåŠèº«ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
     public AnimationData upper;
 
-    [Header("---‰º”¼g‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
+    [Header("---ä¸‹åŠèº«ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
     public AnimationData lower;
 
-    //”z—ñ‚Ì”Ô†
+    //é…åˆ—ã®ç•ªå·
     int indexNumber;
 
-    //‘Ì‚Ì²
+    //ä½“ã®è»¸
     int shaft;
 
-    //•à‚­ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŠp“x‚Ì”
+    //æ­©ãã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®è§’åº¦ã®æ•°
     int walkLength;
 
-    // ’l‚ğ”½“]‚É‚·‚éƒtƒ‰ƒO
+    // å€¤ã‚’åè»¢ã«ã™ã‚‹ãƒ•ãƒ©ã‚°
     bool isActive;
 
-    // Œü‚¢‚Ä‚¢‚é•ûŒü‚ª‰E‚ğŒü‚¢‚Ä‚¢‚é‚©
+    // å‘ã„ã¦ã„ã‚‹æ–¹å‘ãŒå³ã‚’å‘ã„ã¦ã„ã‚‹ã‹
     bool isMirror;
 
-    // UŒ‚’†‚©‚Ç‚¤‚©
+    // æ”»æ’ƒä¸­ã‹ã©ã†ã‹
     bool isAttack;
 
-    // •ûŒüƒtƒ‰ƒO(‰E = false)
-    bool isWalk;
+    // æ–¹å‘ãƒ•ãƒ©ã‚°(å³ = false)
+    bool isDirection;
 
-    // Ã~‚µ‚Ä‚¢‚é‚©
+    // é™æ­¢ã—ã¦ã„ã‚‹ã‹
     bool isStop;
 
-    // ƒ^ƒCƒ}[
+    // ã‚¿ã‚¤ãƒãƒ¼
     float time;
 
-    // UŒ‚‚Ìƒ^ƒCƒ}[
+    // æ”»æ’ƒã®ã‚¿ã‚¤ãƒãƒ¼
     float timeAttack;
 
 
@@ -87,7 +87,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         isMirror = true;
         isActive = false;
         isAttack = false;
-        isWalk = true;
+        isDirection = true;
         isStop = false;
         walkLength = walk.armForwardRotation.Length - 1;
         time = 0;
@@ -117,20 +117,20 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
     }
     /// <summary>
-    /// •à‚­ƒAƒjƒ[ƒVƒ‡ƒ“
+    /// æ­©ãã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
     public void PlayerWalk()
     {
         switch (status)
         {
             case Status.Zombie:
-                // Quaternion.Euler: ‰ñ“]²( x, y, z)
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[indexNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (walk.armForwardRotation == null)
                 {
-                    Debug.LogWarning("Arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -141,15 +141,15 @@ public class EnemyMoveAnimation : MonoBehaviour
                     hand[1].transform.rotation = Quaternion.Euler(0, shaft, walk.armForwardRotation[indexNumber]);
                 }
 
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (walk.legForwardRotation == null || walk.legBackRotation == null)
                 {
-                    Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (walk.footBackRotation == null || walk.footForwardRotation == null)
                 {
-                    Debug.LogWarning("Foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -174,10 +174,10 @@ public class EnemyMoveAnimation : MonoBehaviour
             case Status.Boss:
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[indexNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (walk.armForwardRotation == null)
                 {
-                    Debug.LogWarning("Arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -187,15 +187,15 @@ public class EnemyMoveAnimation : MonoBehaviour
                     hand[0].transform.rotation = Quaternion.Euler(0, shaft, walk.armForwardRotation[indexNumber]);
                     hand[1].transform.rotation = Quaternion.Euler(0, shaft, -walk.armForwardRotation[indexNumber]);
                 }
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (walk.legForwardRotation == null || walk.legBackRotation == null)
                 {
-                    Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (walk.footBackRotation == null || walk.footForwardRotation == null)
                 {
-                    Debug.LogWarning("Foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -222,20 +222,20 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ã”¼g‚Ìƒ‚[ƒVƒ‡ƒ“
+    /// ä¸ŠåŠèº«ã®ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
     public void PlayerPantie()
     {
         switch (status)
         {
             case Status.Zombie:
-                // Quaternion.Euler: ‰ñ“]²( x, y, z)
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, upper.wholeRotation[indexNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (upper.armForwardRotation == null || upper.armBackRotation == null)
                 {
-                    Debug.LogWarning("Arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -246,15 +246,15 @@ public class EnemyMoveAnimation : MonoBehaviour
                     hand[1].transform.rotation = Quaternion.Euler(0, shaft, upper.armBackRotation[indexNumber]);
                 }
 
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (upper.legForwardRotation == null || upper.legBackRotation == null)
                 {
-                    Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (upper.footBackRotation == null || upper.footForwardRotation == null)
                 {
-                    Debug.LogWarning("Foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -269,15 +269,15 @@ public class EnemyMoveAnimation : MonoBehaviour
 
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, upper.wholeRotation[indexNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (upper.armForwardRotation == null || upper.armBackRotation == null)
                 {
-                    Debug.LogWarning("Arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (lower.handForwardRotation == null || lower.handBackRotation == null)
                 {
-                    Debug.LogWarning("Hand‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚¢‚é");
+                    Debug.LogWarning("Handã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã„ã‚‹");
                 }
                 else
                 {
@@ -287,15 +287,15 @@ public class EnemyMoveAnimation : MonoBehaviour
                     hand[1].transform.rotation = Quaternion.Euler(0, shaft, upper.handBackRotation[indexNumber]);
                 }
 
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (upper.legForwardRotation == null || upper.legBackRotation == null)
                 {
-                    Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (upper.footBackRotation == null || upper.footForwardRotation == null)
                 {
-                    Debug.LogWarning("Foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -310,20 +310,20 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ‰º”¼g‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+    /// ä¸‹åŠèº«ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
     public void PlayerKick()
     {
         switch (status)
         {
             case Status.Zombie:
-                // Quaternion.Euler: ‰ñ“]²( x, y, z)
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, lower.wholeRotation[indexNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (lower.armForwardRotation == null || lower.armBackRotation == null)
                 {
-                    Debug.LogWarning("Arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -334,15 +334,15 @@ public class EnemyMoveAnimation : MonoBehaviour
                     hand[1].transform.rotation = Quaternion.Euler(0, shaft, lower.armBackRotation[indexNumber]);
                 }
 
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (lower.legForwardRotation == null || lower.legBackRotation == null)
                 {
-                    Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (lower.footBackRotation == null || lower.footForwardRotation == null)
                 {
-                    Debug.LogWarning("Foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -356,15 +356,15 @@ public class EnemyMoveAnimation : MonoBehaviour
             case Status.Boss:
                 playerRc.transform.rotation = Quaternion.Euler(0, shaft, lower.wholeRotation[indexNumber]);
 
-                // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (lower.armForwardRotation == null || lower.armBackRotation == null)
                 {
-                    Debug.LogWarning("Arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (lower.handForwardRotation == null || lower.handBackRotation == null)
                 {
-                    Debug.LogWarning("Hand‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚¢‚é");
+                    Debug.LogWarning("Handã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã„ã‚‹");
                 }
                 else
                 {
@@ -374,15 +374,15 @@ public class EnemyMoveAnimation : MonoBehaviour
                     hand[1].transform.rotation = Quaternion.Euler(0, shaft, lower.handBackRotation[indexNumber]);
                 }
 
-                // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (lower.legForwardRotation == null || lower.legBackRotation == null)
                 {
-                    Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else if (lower.footBackRotation == null || lower.footForwardRotation == null)
                 {
-                    Debug.LogWarning("Foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+                    Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
                     return;
                 }
                 else
@@ -402,7 +402,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         {
             PlayerWalk();
 
-            // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
+            // indexNumberã®å€¤ã‚’å¢—ã‚„ã™(é…åˆ—ç•ªå·ã‚’ä¸Šã’ã‚‹)
             indexNumber = (indexNumber + 1) % walk.wholeRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
@@ -414,7 +414,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         {
             PlayerPantie();
 
-            // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
+            // indexNumberã®å€¤ã‚’å¢—ã‚„ã™(é…åˆ—ç•ªå·ã‚’ä¸Šã’ã‚‹)
             indexNumber = (indexNumber + 1) % upper.armForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
@@ -428,7 +428,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         {
             PlayerKick();
 
-            // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
+            // indexNumberã®å€¤ã‚’å¢—ã‚„ã™(é…åˆ—ç•ªå·ã‚’ä¸Šã’ã‚‹)
             indexNumber = (indexNumber + 1) % lower.armForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
@@ -437,14 +437,14 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚ğŒp‘±‚µ‚½A˜r‚Ì”z—ñ‚Ì’†‚Ì’l‚ğ‹t‚É‚·‚é
+    /// æ­©ãã“ã¨ã‚’ç¶™ç¶šã—ãŸæ™‚ã€è…•ã®é…åˆ—ã®ä¸­ã®å€¤ã‚’é€†ã«ã™ã‚‹
     /// </summary>
     void ChangeArmAnime()
     {
-        // ƒ]ƒ“ƒr‚Å‚Í‚È‚¢ê‡@
+        // ã‚¾ãƒ³ãƒ“ã§ã¯ãªã„å ´åˆã€€
         if (status !=Status.Zombie)
         {
-            //O€‰‰Zq(Še—v‘f‚É‘Î‚µ‚Ä•ÏŠ·‘€ì‚ğs‚¤)
+            //ä¸‰é …æ¼”ç®—å­(å„è¦ç´ ã«å¯¾ã—ã¦å¤‰æ›æ“ä½œã‚’è¡Œã†)
             if (isActive)
             {
                 walk.armForwardRotation = walk.armForwardRotation.Select(value => value < 0 ? -value : value).ToArray();
@@ -457,7 +457,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚ğŠJn‚ÌŠÖ”
+    /// æ­©ãã“ã¨ã‚’é–‹å§‹ã®é–¢æ•°
     /// </summary>
     void WalkStart()
     {
@@ -466,7 +466,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒpƒ“ƒ`‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ŠJn‚·‚é‚Æ‚«‚ÌŠÖ”
+    /// ãƒ‘ãƒ³ãƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹ã™ã‚‹ã¨ãã®é–¢æ•°
     /// </summary>
     public void PantieStart()
     {
@@ -483,7 +483,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒLƒbƒN‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ŠJn‚·‚é‚Æ‚«‚ÌŠÖ”
+    /// ã‚­ãƒƒã‚¯ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹ã™ã‚‹ã¨ãã®é–¢æ•°
     /// </summary>
     public void KickStart()
     {
@@ -500,7 +500,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚Ì‰Šú‰»
+    /// æ­©ãã“ã¨ã®åˆæœŸåŒ–
     /// </summary>
     public void WalkInstance()
     {
@@ -513,11 +513,11 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚ğŒp‘±‚µ‚½‚Æ‚«
+    /// æ­©ãã“ã¨ã‚’ç¶™ç¶šã—ãŸã¨ã
     /// </summary>
     public void KeepWalk()
     {
-        // ˜A‘±“ü—Í‚³‚ê‚Ä‚¢‚é‚©
+        // é€£ç¶šå…¥åŠ›ã•ã‚Œã¦ã„ã‚‹ã‹
         if (time - 0.05 < 0)
         {
             isActive = !isActive;
@@ -527,7 +527,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ’¼—§‚·‚é
+    /// ç›´ç«‹ã™ã‚‹
     /// </summary>
     public void Upright()
     {
@@ -535,7 +535,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ‰E‚ğŒü‚­‚Æ‚«
+    /// å³ã‚’å‘ãã¨ã
     /// </summary>
     public void RightMove()
     {
@@ -543,7 +543,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// ¶‚ğŒü‚­‚Æ‚«
+    /// å·¦ã‚’å‘ãã¨ã
     /// </summary>
     public void LeftMove()
     {
