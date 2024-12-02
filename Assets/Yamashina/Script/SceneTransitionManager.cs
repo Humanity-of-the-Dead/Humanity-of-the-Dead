@@ -21,7 +21,15 @@ public class SceneTransitionManager : MonoBehaviour
 
         StartCoroutine(FadeIn());
 
-        PlayBGMForScene();
+        // MultiAudio の初期化を確認
+        if (MultiAudio.ins != null && MultiAudio.ins.bgmSource != null)
+        {
+            PlayBGMForScene();
+        }
+        else
+        {
+            Debug.LogWarning("MultiAudio or bgmSource is not ready in Start.");
+        }
 
     }
 
@@ -66,11 +74,11 @@ public class SceneTransitionManager : MonoBehaviour
 
                 if (fadeInstance == null)
                 {
-                    Debug.LogError("fadePrefab に Image コンポーネントがありません。");
+                    //Debug.LogError("fadePrefab に Image コンポーネントがありません。");
                 }
                 else
                 {
-                    Debug.Log("fadeInstance が正常に設定されました。");
+                    //Debug.Log("fadeInstance が正常に設定されました。");
                 }
 
                 // Canvas の設定
@@ -85,7 +93,7 @@ public class SceneTransitionManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("フェード用プレハブが設定されていません。");
+                //Debug.LogError("フェード用プレハブが設定されていません。");
             }
         }
     }
@@ -93,9 +101,9 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void PlayBGMForScene()
     {
-        if (MultiAudio.ins == null)
+        if (MultiAudio.ins == null || MultiAudio.ins.bgmSource == null)
         {
-            Debug.LogError("MultiAudio instance is not initialized.");
+            Debug.LogError("MultiAudio or its bgmSource is not initialized.");
             return;
         }
         string sceneName = SceneManager.GetActiveScene().name;
