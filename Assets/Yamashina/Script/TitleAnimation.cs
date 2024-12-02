@@ -83,7 +83,10 @@ public class TitleAnimation : MonoBehaviour
     [Header("時間経過でボタン表示するためのFloat")]
     [Tooltip("何秒後にボタン表示するか")]
     public float ButtonAnimation;
+    private void Awake()
+    {
 
+    }
 
     void Start()
     {
@@ -103,9 +106,10 @@ public class TitleAnimation : MonoBehaviour
             return;
         }
         MultiAudio.ins.bgmSource.volume = BGMVolume;
+
         MultiAudio.ins.seSource.volume = UIVolume;
         Debug.Log(MultiAudio.ins.bgmSource);
-        //MultiAudio.ins.PlayBGM_ByName("BGM_title");
+
 
         //パネルのオブジェクトのセットアクティブ切り替え
         mainPanel.SetActive(true);　　//タイトル画面
@@ -307,6 +311,8 @@ public class TitleAnimation : MonoBehaviour
 
     void Update()
     {
+        MultiAudio.ins.PlayBGM_ByName("BGM_title");
+
         //escapeキーもしくはマウス右クリック
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.G))
         {
