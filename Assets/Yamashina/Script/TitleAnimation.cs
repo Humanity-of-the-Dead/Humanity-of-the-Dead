@@ -90,10 +90,16 @@ public class TitleAnimation : MonoBehaviour
 
         start.onClick.AddListener(() =>
             SceneTransitionManager.instance.NextSceneButton(1));
+
         MultiAudio.ins.bgmSource.volume = BGMVolume;
         MultiAudio.ins.seSource.volume = UIVolume;
 
-        //パネルのオブジェクトのセットアクティブ切り替え
+        if (!CreditPanel.activeSelf&& !OptionPanel.activeSelf)
+        {
+            MultiAudio.ins.PlayBGM_ByName("BGM_title");
+
+
+        }
         mainPanel.SetActive(true);　　//タイトル画面
         CreditPanel.SetActive(false);//クレジット画面
         OptionPanel.SetActive(false);
@@ -119,6 +125,9 @@ public class TitleAnimation : MonoBehaviour
         if (CreditPanel.activeSelf)
         {
             StartSlideOut();
+            MultiAudio.ins.PlayBGM_ByName("BGM_title");
+
+
         }
         if (OptionPanel.activeSelf) { StartSlideOut(); }
 
@@ -138,7 +147,6 @@ public class TitleAnimation : MonoBehaviour
         eventTrigger_option.enabled = true;
 
         //ボタンのオブジェクトのセットアクティブ切り替え
-        MultiAudio.ins.PlayBGM_ByName("BGM_title");
 
         //CreditButton.SetActive(true);//クレジットボタン
         //optionButton.SetActive(true);   
