@@ -10,15 +10,12 @@ public class SceneTransitionManager : MonoBehaviour
     [SerializeField] private GameObject fadePrefab; // フェード用プレハブ
     private Image fadeInstance; // 実際に使用するフェード用 Image
     [SerializeField] private SceneInformation.SCENE currentScene;  // 今のシーン                  // 今のシーン
-    [SerializeField] AudioSource bgmAudioSource;
-    //private SoundTable soundTable;  // BGM テーブル
     private bool isReloading = false; // リロード中かどうかを判定するフラグ
 
     public static SceneTransitionManager instance;
 
     private void Start()
     {
-        bgmAudioSource = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
 
         SetCurrentScene(SceneManager.GetActiveScene().buildIndex);
 
