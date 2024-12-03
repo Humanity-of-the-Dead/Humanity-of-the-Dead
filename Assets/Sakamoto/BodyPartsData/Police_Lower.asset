@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Police_Lower
   m_EditorClassIdentifier: 
   enPartsType: 1
-  upperAttack: 3
+  upperAttack: 4
   lowerAttack: 1
   sPartsName: "\u8B66\u5BDF\u306E\u4E0B\u534A\u8EAB"
   AttackArea: 5

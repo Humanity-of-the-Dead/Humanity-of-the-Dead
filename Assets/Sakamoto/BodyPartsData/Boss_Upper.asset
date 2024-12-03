@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Boss_Upper
   m_EditorClassIdentifier: 
   enPartsType: 0
+  upperAttack: 3
+  lowerAttack: 4
   sPartsName: "\u30DC\u30B9\u306E\u4E0A\u534A\u8EAB"
   AttackArea: 5
   iPartHp: 45
