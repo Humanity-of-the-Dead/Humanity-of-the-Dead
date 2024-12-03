@@ -44,6 +44,7 @@ public class newDropPart : MonoBehaviour
         //JÉLÅ[ÇâüÇµÇΩÇÁà‘óÏÇ∑ÇÈ
         if(Input.GetKeyUp(KeyCode.J) && goButton[1].activeSelf == true) {
             scPlayerParameter.comfort(10);
+            MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
             if (bBoss)
             {
                 GameClear();
@@ -59,6 +60,7 @@ public class newDropPart : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L) && goButton[0].activeSelf == true)
         {
             scPlayerParameter.transplant(partsData);
+            MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
             if (bBoss)
             {
                 GameClear();
