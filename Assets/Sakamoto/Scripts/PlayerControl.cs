@@ -98,6 +98,7 @@ public class PlayerControl : MonoBehaviour
             if (vPosFromCame.x > -fCameraWidth / 2)
             {
                 vPosition.x -= Time.deltaTime * fSpeed;
+                MultiAudio.ins.PlaySEByName("SE_hero_action_run");
             }
         }
         //‰EˆÚ“®
@@ -106,6 +107,7 @@ public class PlayerControl : MonoBehaviour
             if (fCameraWidth / 2 > vPosFromCame.x)
             {
                 vPosition.x += Time.deltaTime * fSpeed;
+                MultiAudio.ins.PlaySEByName("SE_hero_action_run");
             }
         }
 
@@ -114,6 +116,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.W) && bJump == false)
         {
             this.rbody2D.AddForce(this.transform.up * fJmpPower);
+            MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
             bJump = true;
         }
 

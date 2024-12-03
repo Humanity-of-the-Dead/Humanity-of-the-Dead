@@ -292,6 +292,8 @@ GameObject:
   - component: {fileID: 5221732014799308699}
   - component: {fileID: 3149063996674686189}
   - component: {fileID: 3624648889174595128}
+  - component: {fileID: 803551711450563849}
+  - component: {fileID: 5588515484702631185}
   m_Layer: 6
   m_Name: IsyokuButton (Legacy)
   m_TagString: Dorops
@@ -400,9 +402,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DropPart, Assembly-CSharp
-        m_MethodName: getTransplant
+      - m_Target: {fileID: 5588515484702631185}
+        m_TargetAssemblyTypeName: AudioButtonHandler, Assembly-CSharp
+        m_MethodName: PlaySE
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -412,6 +414,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &803551711450563849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2182874680941712295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &5588515484702631185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2182874680941712295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327fa0d8abae87b43b3c73fe95d8d8e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSEName: UI_click
+  hoverSEName: UI_mouseover
 --- !u!1 &4296511423400201671
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,6 +631,8 @@ GameObject:
   - component: {fileID: 3768222486081512666}
   - component: {fileID: 8986021473806046105}
   - component: {fileID: 5605474958882896209}
+  - component: {fileID: 4246061609702059101}
+  - component: {fileID: 8343801075922974534}
   m_Layer: 6
   m_Name: IreiButton (Legacy)
   m_TagString: Dorops
@@ -706,9 +741,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DropPart, Assembly-CSharp
-        m_MethodName: getComfort
+      - m_Target: {fileID: 4246061609702059101}
+        m_TargetAssemblyTypeName: AudioButtonHandler, Assembly-CSharp
+        m_MethodName: PlaySE
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -718,3 +753,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4246061609702059101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6055618513447132620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327fa0d8abae87b43b3c73fe95d8d8e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSEName: UI_click
+  hoverSEName: UI_mouseover
+--- !u!114 &8343801075922974534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6055618513447132620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls: []

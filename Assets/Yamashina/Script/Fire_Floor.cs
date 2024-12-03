@@ -29,6 +29,7 @@ public class Fire_Floor : MonoBehaviour
 
             UpperEnemyAttack(damage);
             LowerEnemyAttack(damage);
+            MultiAudio.ins.PlaySEByName("SE_hero_hit_fire");
         }
     }
 }
