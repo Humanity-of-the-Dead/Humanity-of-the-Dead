@@ -132,6 +132,7 @@ public class newDropPart : MonoBehaviour
             SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
             iNextIndex = 0;
         }
+        MultiAudio.ins.PlayBGM_ByName("BGM_clear");
         sceneTransitionManager.NextSceneButton(iNextIndex);
 
 

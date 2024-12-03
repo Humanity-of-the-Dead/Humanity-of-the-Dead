@@ -66,12 +66,14 @@ public class newEnemyParameters : MonoBehaviour
             PlayerControl.GetComponent<PlayerControl>().RemoveListItem(this.gameObject);
             Debug.Log("‰º”¼g‚ª—‚¿‚½‚æ");
             Drop(Lowerbodypart,false);
+            MultiAudio.ins.PlaySEByName("SE_common_breakbody");
         }
         if (LowerHP <= 0)
         {
             PlayerControl.GetComponent<PlayerControl>().RemoveListItem(this.gameObject);
             Debug.Log("ã”¼g‚ª—‚¿‚½‚æ");
             Drop(Upperbodypart,true);
+            MultiAudio.ins.PlaySEByName("SE_common_breakbody");
         }
     }
     //body‚É‚Í0‚©1‚µ‚©“ü‚ê‚Ä‚Í‚¢‚¯‚È‚¢@BA//GU/RU

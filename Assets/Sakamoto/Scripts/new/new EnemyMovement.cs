@@ -1,3 +1,4 @@
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
@@ -136,24 +137,27 @@ public class newEnemyMovement : EnemyAttack
                                     return;
                                 }
                                 UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
+                                MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                             }
                             if (num == 1)
                             {
                                 //â∫îºêgçUåÇ
                                 moveAnimation.KickStart();
                                 LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
+                                MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                             }
                         }
                         if (distanceToPlayer < upperpart.AttackArea)
                         {
                             moveAnimation.PantieStart();
                             UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
+                            MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                         }
                         if (distanceToPlayer < lowerpart.AttackArea)
                         {
                             moveAnimation.KickStart();
                             LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
-
+                            MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                         }
                         enemystate = EnemyState.search;
                         //moveAnimation.PlayerPantie();
