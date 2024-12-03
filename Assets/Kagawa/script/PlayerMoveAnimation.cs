@@ -8,6 +8,7 @@ public enum UpperAttack
     NORMAL,
     POLICE,
     NURSE,
+    BOSS,
     NONE,
 }
 
@@ -16,6 +17,7 @@ public enum LowerAttack
     NORMAL,
     POLICE,
     NURSE,
+    BOSS,
     NONE,
 }
 
@@ -101,18 +103,6 @@ public class PlayerMoveAnimation : MonoBehaviour
         walkNumber = 0;
         attackNumber = 0;
         shaft = 0;
-
-        headSR = gameObject.GetComponent<SpriteRenderer>();
-        bodySR = gameObject.GetComponent<SpriteRenderer>();
-        armRightSR = gameObject.GetComponent<SpriteRenderer>();
-        armLeftSR = gameObject.GetComponent<SpriteRenderer>();
-        handRightSR = gameObject.GetComponent<SpriteRenderer>();
-        handLeftSR = gameObject.GetComponent<SpriteRenderer>();
-        waistSR = gameObject.GetComponent<SpriteRenderer>();
-        legRightSR = gameObject.GetComponent<SpriteRenderer>();
-        legLeftSR = gameObject.GetComponent<SpriteRenderer>();
-        footRightSR = gameObject.GetComponent<SpriteRenderer>();
-        footLeftSR = gameObject.GetComponent<SpriteRenderer>();
 
         isAttack = false;
         isActive = false;
