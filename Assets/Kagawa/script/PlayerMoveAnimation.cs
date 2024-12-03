@@ -552,6 +552,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         time = timeMax * walk.armForwardRotation.Length;
         StartCoroutine(CallWalkWithDelay());
+        MultiAudio.ins.PlaySEByName("SE_hero_action_run");
     }
 
     /// <summary>
