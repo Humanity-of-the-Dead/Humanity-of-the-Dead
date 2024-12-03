@@ -139,10 +139,10 @@ public class textdisplay: MonoBehaviour
 
             }
                 //テキストが進むたびにコルーチンが呼び出される
-            //textAsset[LoadText].text.Lengthのよって中のテキストデータの文字数の所得
+            //textAsset[LoadText].text.Lengthによって中のテキストデータの文字数の所得
             yield return new WaitForSeconds(TextSpeed); //指定された時間待機する
 
-            text.text += currentChra;  //iが増えるたびに文字を一文字ずつ表示していく
+            text.text = currentChra;  //iが増えるたびに文字を一文字ずつ表示していく
            
         }
 
