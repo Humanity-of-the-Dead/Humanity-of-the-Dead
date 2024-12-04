@@ -2238,6 +2238,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6489148027962693718, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: offset.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: goCamera
       value: 

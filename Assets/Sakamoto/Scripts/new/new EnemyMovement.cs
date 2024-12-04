@@ -199,6 +199,20 @@ public class newEnemyMovement : EnemyAttack
             movingToPointB = !movingToPointB;
         }
     }
+
+    //PlayerPositionFromEnemy右向いてたら＋、左向いてたらー
+    bool PlayerPositionFromEnemy() 
+    {
+        float Direction = player.position.x - this.gameObject.transform.position.x;
+        if (Direction < 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 // プレイヤーに向かって移動
 //ゾンビ(仮)の画像を使っています。本来のオブジェクトにアタッチする。
