@@ -1,104 +1,119 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class AudioVolumeManager : MonoBehaviour
 {
-
     public AudioMixer audioMixer; // Reference to the main AudioMixer
     public Slider bgmSlider;
     public Slider seSlider;
     public Slider uiSlider;
-    public AudioSource BGM;
-    public AudioSource SE;
+    private AudioSource BGM;
+    private AudioSource SE;
 
     [Header("初期BGMのスライダーの値")]
-    [Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
+    [Tooltip("Floatの小数点第１まで入力、0.0～1.0まで")]
     public float initial_BGM = 0.5f;
     [Header("初期SEのスライダーの値")]
-    [Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
+    [Tooltip("Floatの小数点第１まで入力、0.0～1.0まで")]
     public float initial_SE = 0.5f;
     [Header("初期UIのスライダーの値")]
-    [Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
-    public float initial_UI= 0.5f;
+    [Tooltip("Floatの小数点第１まで入力、0.0～1.0まで")]
+    public float initial_UI = 0.5f;
 
     private const string BGM_PREF_KEY = "BGM_Volume";
     private const string SE_PREF_KEY = "SE_Volume";
     private const string UI_PREF_KEY = "UI_Volume";
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject); // このオブジェクトをシーン間で保持
+    }
+
     private void Start()
     {
-        BGM = GameObject.FindWithTag("BGM").GetComponent<AudioSource>();
-        SE = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
+        // AudioSourceの取得
+        BGM = GameObject.FindWithTag("BGM")?.GetComponent<AudioSource>();
+        SE = GameObject.FindWithTag("SE")?.GetComponent<AudioSource>();
 
-        // Set slider values from saved preferences or default to 1.0f
-        // 保存時に丸める(BGM)
-        float valueToSave_BGM = Mathf.Round(initial_BGM * 100f) / 100f;
-        float valueToSave_SE = Mathf.Round(initial_SE * 100f) / 100f;
-        float valueToSave_UI=Mathf.Round(initial_UI * 100f) / 100f;
+        // PlayerPrefsから音量を取得してスライダーとAudioSourceに反映
+        float savedBGMVolume = PlayerPrefs.GetFloat(BGM_PREF_KEY, initial_BGM);
+        float savedSEVolume = PlayerPrefs.GetFloat(SE_PREF_KEY, initial_SE);
+        float savedUIVolume = PlayerPrefs.GetFloat(UI_PREF_KEY, initial_UI);
 
+        bgmSlider.value = savedBGMVolume;
+        seSlider.value = savedSEVolume;
+        uiSlider.value = savedUIVolume;
 
-        // 読み込むときはそのまま適用
-        PlayerPrefs.SetFloat(BGM_PREF_KEY, valueToSave_BGM);
-        PlayerPrefs.SetFloat(SE_PREF_KEY, valueToSave_SE);
-        PlayerPrefs.SetFloat(UI_PREF_KEY, valueToSave_UI);
+        if (BGM != null) BGM.volume = savedBGMVolume;
+        if (SE != null) SE.volume = savedSEVolume;
 
-        // 読み込むときはそのまま適用
-        bgmSlider.value = PlayerPrefs.GetFloat(BGM_PREF_KEY, initial_BGM);
-        seSlider.value = PlayerPrefs.GetFloat(SE_PREF_KEY, initial_SE);
-        uiSlider.value = PlayerPrefs.GetFloat(UI_PREF_KEY, initial_UI);
-
-        // Set up slider listeners to update and save volume changes
+        // スライダー変更時のリスナーを設定
         bgmSlider.onValueChanged.AddListener(SetBGMVolume);
         seSlider.onValueChanged.AddListener(SetSEVolume);
         uiSlider.onValueChanged.AddListener(SetUIVolume);
-        BGM.volume=bgmSlider.value; 
-        SE.volume = seSlider.value;
 
+        // シーン遷移時のイベントを登録
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    private void SetBGMVolume(float value) => SetVolume(BGM_PREF_KEY, "BGM_Volume", value);
-    private void SetSEVolume(float value) => SetVolume(SE_PREF_KEY, "SE_Volume", value);
-    private void SetUIVolume(float value) => SetVolume(UI_PREF_KEY, "UI_Volume", value);
 
-    // Method to set volume and save to PlayerPrefs
-    public void SetVolume(string prefKey, string exposedParam, float volume)
+    private void SetBGMVolume(float value)
     {
+        SetVolume(BGM_PREF_KEY, "BGM_Volume", value);
+        if (BGM != null) BGM.volume = value;
+    }
+
+    private void SetSEVolume(float value)
+    {
+        SetVolume(SE_PREF_KEY, "SE_Volume", value);
+        if (SE != null) SE.volume = value;
+    }
+
+    private void SetUIVolume(float value)
+    {
+        SetVolume(UI_PREF_KEY, "UI_Volume", value);
+    }
+
+    private void SetVolume(string prefKey, string exposedParam, float volume)
+    {
+        // AudioMixerに設定
         float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f;
         audioMixer.SetFloat(exposedParam, dbVolume);
+
+        // PlayerPrefsに保存
         PlayerPrefs.SetFloat(prefKey, volume);
         PlayerPrefs.Save();
+    }
 
-        // BGM 音量を設定
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // シーン遷移後にAudioSourceを再取得
+        BGM = GameObject.FindWithTag("BGM")?.GetComponent<AudioSource>();
+        SE = GameObject.FindWithTag("SE")?.GetComponent<AudioSource>();
 
-        if (BGM != null && PlayerPrefs.HasKey(BGM_PREF_KEY))
+        // 再取得したAudioSourceに音量を適用
+        if (BGM != null)
         {
-            BGM.volume = PlayerPrefs.GetFloat(BGM_PREF_KEY);
+            float savedBGMVolume = PlayerPrefs.GetFloat(BGM_PREF_KEY, initial_BGM);
+            BGM.volume = savedBGMVolume;
         }
 
-        // SE 音量を設定
-      if(SE != null && PlayerPrefs.HasKey(UI_PREF_KEY)&&SE.outputAudioMixerGroup == MultiAudio.ins.uiMixerGroup)
+        if (SE != null)
         {
-            SE.volume= PlayerPrefs.GetFloat(UI_PREF_KEY);
+            float savedSEVolume = PlayerPrefs.GetFloat(SE_PREF_KEY, initial_SE);
+            SE.volume = savedSEVolume;
         }
-
-        if (SE != null && PlayerPrefs.HasKey(SE_PREF_KEY) && SE.outputAudioMixerGroup == MultiAudio.ins.seMixerGroup)
-        {
-            SE.volume = PlayerPrefs.GetFloat(SE_PREF_KEY);
-        }
-
     }
 
     private void OnDestroy()
     {
-        // Remove listeners to prevent memory leaks
-        bgmSlider.onValueChanged.RemoveListener(value => SetVolume(BGM_PREF_KEY, "BGM_Volume", value));
-        seSlider.onValueChanged.RemoveListener(value => SetVolume(SE_PREF_KEY, "SE_Volume", value));
-        uiSlider.onValueChanged.RemoveListener(value => SetVolume(UI_PREF_KEY, "UI_Volume", value));
+        // リスナーを解除してメモリリークを防止
+        bgmSlider.onValueChanged.RemoveListener(SetBGMVolume);
+        seSlider.onValueChanged.RemoveListener(SetSEVolume);
+        uiSlider.onValueChanged.RemoveListener(SetUIVolume);
+
+        // シーンロードイベントを解除
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
-
-
-

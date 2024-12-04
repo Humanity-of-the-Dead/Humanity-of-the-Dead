@@ -36,6 +36,10 @@ public class PlayerParameter : MonoBehaviour
     public BodyPartsData LowerData;
     //キャラのイメージ取得用
     PlayerMoveAnimation scPlayerMoveAnimation;
+    //上半身のパーツデータ
+    private BodyPartsData upperIndex;
+    //下半身のパーツデータ
+    private BodyPartsData lowerIndex;
 
 
 
@@ -50,15 +54,9 @@ public class PlayerParameter : MonoBehaviour
     }
     private void Start()
     {
+        upperIndex = UpperData;
+        lowerIndex = LowerData;
         InitializeReferences();
-
-        //最大値を設定
-        iUpperHPMax = UpperData.iPartHp;
-        iLowerHPMax = LowerData.iPartHp;
-        //パラメータの初期化
-        iHumanity = iHumanityMax;
-        iUpperHP = iUpperHPMax;
-        iLowerHP = iLowerHPMax;
 
         //コンポーネント取得
         scPlayerMoveAnimation = goPlayer.GetComponent<PlayerMoveAnimation>();
@@ -100,7 +98,9 @@ public class PlayerParameter : MonoBehaviour
                         iHumanity = iHumanityMax;
                         iUpperHP = iUpperHPMax;
                         iLowerHP = iLowerHPMax;
-
+                        //プレイヤーを初期化
+                        UpperData = upperIndex;
+                        LowerData = lowerIndex;                      
                     }
 
                     ////シーン移動
@@ -219,6 +219,9 @@ public class PlayerParameter : MonoBehaviour
         goPlayer = GameObject.Find("Player Variant").gameObject;
         goPanel = GameObject.FindGameObjectWithTag("GameOver");
 
+        //コンポーネント取得
+        scPlayerMoveAnimation = goPlayer.GetComponent<PlayerMoveAnimation>();
+
         //最大値を設定
         iUpperHPMax = UpperData.iPartHp;
         iLowerHPMax = LowerData.iPartHp;
@@ -227,8 +230,10 @@ public class PlayerParameter : MonoBehaviour
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
 
-        //scPlayerMoveAnimation.ChangeUpperBody(UpperData);
-        //scPlayerMoveAnimation.ChangeUnderBody(LowerData);
+        scPlayerMoveAnimation.ChangeUpperBody(UpperData);
+        scPlayerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
+        scPlayerMoveAnimation.ChangeUnderBody(LowerData);
+        scPlayerMoveAnimation.ChangeLowerMove(LowerData.lowerAttack);
 
         if (scGameMgr == null || goMosaic == null || goPanel == null)
         {

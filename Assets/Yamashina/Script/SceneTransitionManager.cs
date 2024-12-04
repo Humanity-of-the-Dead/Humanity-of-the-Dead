@@ -11,20 +11,22 @@ public class SceneTransitionManager : MonoBehaviour
     private Image fadeInstance; // 実際に使用するフェード用 Image
     [SerializeField] private SceneInformation.SCENE currentScene;  // 今のシーン                  // 今のシーン
     private bool isReloading = false; // リロード中かどうかを判定するフラグ
-
+    [Header("フェード速度、 0.1 ～ 5.0の間で入力")]
+    [SerializeField] private float fadeSpeed = 2.0f; // フェード速度
     public static SceneTransitionManager instance;
 
     private void Start()
     {
       
         SetCurrentScene(SceneManager.GetActiveScene().buildIndex);
+        PlayBGMForScene();
+
 
         StartCoroutine(FadeIn());
 
         // MultiAudio の初期化を確認
        
-            PlayBGMForScene();
-        
+                 
 
         
 
@@ -53,9 +55,6 @@ public class SceneTransitionManager : MonoBehaviour
         PlayBGMForScene();
 
     }
-    private void Update()
-    {
-    }
     public void ReloadCurrentScene()
     {
         if (isReloading) return; // リロード中なら処理をスキップ
@@ -74,11 +73,11 @@ public class SceneTransitionManager : MonoBehaviour
 
                 if (fadeInstance == null)
                 {
-                    //Debug.LogError("fadePrefab に Image コンポーネントがありません。");
+                    Debug.LogError("fadePrefab に Image コンポーネントがありません。");
                 }
                 else
                 {
-                    //Debug.Log("fadeInstance が正常に設定されました。");
+                    Debug.Log("fadeInstance が正常に設定されました。");
                 }
 
                 // Canvas の設定
@@ -93,7 +92,7 @@ public class SceneTransitionManager : MonoBehaviour
             }
             else
             {
-                //Debug.LogError("フェード用プレハブが設定されていません。");
+                Debug.LogError("フェード用プレハブが設定されていません。");
             }
         }
     }
@@ -132,7 +131,7 @@ public class SceneTransitionManager : MonoBehaviour
         if (!string.IsNullOrEmpty(bgmName))
         {
             MultiAudio.ins.PlayBGM_ByName(bgmName); // BGMを再生
-            //Debug.Log(bgmName);
+            Debug.Log(bgmName);
         }
         else
         {
@@ -169,7 +168,7 @@ public class SceneTransitionManager : MonoBehaviour
         Color fadeColor = fadeInstance.color; // 一時変数を使用
         fadeColor.a = 1; // 最初は完全に不透明
         fadeInstance.color = fadeColor;
-        float speed = 1.0f / 0.5f;  // 0.5秒でアルファ値が減少
+        float speed = 1.0f / fadeSpeed; // インスペクターから設定された速度を使用
 
 
         // 徐々に透明にする処理
@@ -196,7 +195,7 @@ public class SceneTransitionManager : MonoBehaviour
         Color fadeColor = fadeInstance.color; // 一時変数を使用
         fadeColor.a = 0; // 最初は完全に透明
         fadeInstance.color = fadeColor;
-        float speed = 1.0f / 0.5f;  // 0.5秒でアルファ値が減少
+        float speed = 1.0f / fadeSpeed; // インスペクターから設定された速度を使用
 
         // 徐々に不透明にする処理
         while (fadeInstance.color.a < 1)

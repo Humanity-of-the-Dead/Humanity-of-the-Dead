@@ -5,6 +5,8 @@ using UnityEngine;
 public enum GameState { 
     Main,
     ShowText,
+    BeforeBoss, //ボス前
+    AfterBOss,//ボス後
     GameOver,
 }
 

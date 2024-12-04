@@ -130,18 +130,23 @@ public class textdisplay: MonoBehaviour
 
         for (int i = 0; i < currentText.Length; i++)   //テキストの中の文字を取得して、文字数を増やしていく
         {
-            string currentChra = currentText[i].ToString();
-            if (currentChra == "") continue;  //改行処理
-                
-                //テキストが進むたびにコルーチンが呼び出される
-            //textAsset[LoadText].text.Lengthのよって中のテキストデータの文字数の所得
-            yield return new WaitForSeconds(TextSpeed);
+            string currentChra = currentText.Substring(0,i); //現在の文字を所得する
+            if (string.IsNullOrWhiteSpace(currentChra))
+            {
+                text.text = currentChra; //空白部分をそのまま設定する
+                yield return new WaitForSeconds(TextSpeed);
+                continue;  //次のループへ
 
-            text.text += textAsset[LoadText].text[i];  //iが増えるたびに文字を一文字ずつ表示していく
+            }
+                //テキストが進むたびにコルーチンが呼び出される
+            //textAsset[LoadText].text.Lengthによって中のテキストデータの文字数の所得
+            yield return new WaitForSeconds(TextSpeed); //指定された時間待機する
+
+            text.text = currentChra;  //iが増えるたびに文字を一文字ずつ表示していく
            
         }
 
-            isTextFullyDisplayed = true;
+            isTextFullyDisplayed = true; //全ての文字が表示されたかを示すフラグ
     }
     private void DisplayFullText()
     {

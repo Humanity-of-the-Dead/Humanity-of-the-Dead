@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Nomal_Lower
   m_EditorClassIdentifier: 
   enPartsType: 1
-  upperAttack: 3
+  upperAttack: 4
   lowerAttack: 0
   sPartsName: 
   AttackArea: 5
