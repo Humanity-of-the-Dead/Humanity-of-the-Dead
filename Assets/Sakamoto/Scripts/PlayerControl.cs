@@ -279,13 +279,13 @@ public class PlayerControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyShoot"))
         {
-            if (0 < this.transform.position.y - collision.gameObject.transform.position.y)
+            if (0 > this.transform.position.y - collision.gameObject.transform.position.y)
             {
-                playerParameter.UpperHP -= 3;
+                playerParameter.UpperHP -= 1;
             }
             else
             {
-                playerParameter.LowerHP -= 3;
+                playerParameter.LowerHP -= 1;
             }
         }
 
