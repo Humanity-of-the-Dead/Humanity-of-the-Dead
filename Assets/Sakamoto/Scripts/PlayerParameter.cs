@@ -89,8 +89,6 @@ public class PlayerParameter : MonoBehaviour
                         GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
                         SceneTransitionManager.instance.ReloadCurrentScene();
 
-                        //ゲームオーバーの標準
-                        goPanel.SetActive(true);
 
                         //GameOverのBGM鳴らす箇所
                         MultiAudio.ins.PlayBGM_ByName("BGM_defeated");
@@ -100,7 +98,11 @@ public class PlayerParameter : MonoBehaviour
                         iLowerHP = iLowerHPMax;
                         //プレイヤーを初期化
                         UpperData = upperIndex;
-                        LowerData = lowerIndex;                      
+                        LowerData = lowerIndex;
+
+                        //ゲームオーバーの標準
+                        goPanel.SetActive(true);
+
                     }
 
                     ////シーン移動
@@ -257,8 +259,8 @@ public class PlayerParameter : MonoBehaviour
     {
         // シーン遷移後に参照を再取得
         InitializeReferences();
-        upperIndex = UpperData;
-        lowerIndex = LowerData;
+        //upperIndex = UpperData;
+        //lowerIndex = LowerData;
         Debug.Log($"シーン {scene.name} がロードされました");
     }
 }

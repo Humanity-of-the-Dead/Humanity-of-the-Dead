@@ -1133,7 +1133,7 @@ MonoBehaviour:
   iLowerHPMax: 500
   goPlayer: {fileID: 798675964}
   UpperData: {fileID: 11400000, guid: fcc706bf8f9cb204382c81235b20a96a, type: 2}
-  LowerData: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
+  LowerData: {fileID: 11400000, guid: dfc091647e8e229438c5335ae549e2ac, type: 2}
 --- !u!4 &261565242
 Transform:
   m_ObjectHideFlags: 0
@@ -1464,7 +1464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &493126646
 Transform:
   m_ObjectHideFlags: 0
