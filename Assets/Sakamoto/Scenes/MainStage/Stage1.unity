@@ -1127,8 +1127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scGameMgr: {fileID: 4664960667363613010}
-  iDownTime: 1
-  iHumanityMax: 100
+  iDownTime: 3
+  iHumanityMax: 10
   iUpperHPMax: 500
   iLowerHPMax: 500
   goPlayer: {fileID: 798675964}

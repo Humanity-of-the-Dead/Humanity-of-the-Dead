@@ -185,7 +185,7 @@ public class PlayerControl : MonoBehaviour
                 Debug.Log(liObj[i].gameObject.transform.position);
                 Debug.Log(playerParameter.UpperData.AttackArea);
                 //âºà¯êî
-                UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea);
+                UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea,playerParameter.UpperData.iPartAttack);
             }
         }
         //â∫îºêgçUåÇ
@@ -208,7 +208,7 @@ public class PlayerControl : MonoBehaviour
             for (int i = 0; i < liObj.Count; i++)
             {
                 //âºà¯êî
-                LowerBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea);
+                LowerBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea, playerParameter.LowerData.iPartAttack);
             }
         }
         if (Input.GetKeyDown(KeyCode.U))
@@ -227,13 +227,13 @@ public class PlayerControl : MonoBehaviour
     }
 
     //è„îºêgçUåÇ
-    public void UpperBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach)
+    public void UpperBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach,int iDamage)
     {
         float fAttackReach = Vector3.Distance(vTargetPos, this.transform.position);
         if (fAttackReach < fReach)
         {
 
-            liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(1, 0);
+            liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(iDamage, 0);
             Debug.Log("è„îºêgçUåÇê¨å˜");
 
         }
@@ -243,12 +243,12 @@ public class PlayerControl : MonoBehaviour
         }
     }
     //â∫îºêgçUåÇ
-    public void LowerBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach)
+    public void LowerBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
         float fAttackReach = Vector3.Distance(vTargetPos, this.transform.position);
         if (fAttackReach < fReach)
         {
-            liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(1, 1);
+            liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(iDamage, 1);
             Debug.Log("â∫îºêgçUåÇê¨å˜");
         }
         else
