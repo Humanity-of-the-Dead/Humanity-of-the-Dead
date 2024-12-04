@@ -74,6 +74,7 @@ public class PlayerControl : MonoBehaviour
             case GameState.Main:
                 //bShootFlagをfalseにする
                 bShootFlag = false;
+                GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = true;
                 //攻撃アニメーション中でなければbShootFlagをtrueにする
                 Debug.Log(scPlayerMoveAnimation.SetAttack());
                 if (scPlayerMoveAnimation.SetAttack() == false)
@@ -135,6 +136,7 @@ public class PlayerControl : MonoBehaviour
         //上半身攻撃
         if (Input.GetKeyDown(KeyCode.I))
         {
+
             switch (playerParameter.UpperData.upperAttack)
             {
                 case UpperAttack.NORMAL:
@@ -165,7 +167,12 @@ public class PlayerControl : MonoBehaviour
                     {
                         Debug.Log("弾発射");
                         Juu.Shoot(ShootMoveBector, this.transform);
-                        MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_upper");
+                        if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                        {
+                            MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_upper");
+                            GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+
+                        }
                         //bShootFlag = false;
                     }
                     break;
