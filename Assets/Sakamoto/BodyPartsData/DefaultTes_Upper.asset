@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: DefaultTes_Upper
   m_EditorClassIdentifier: 
   enPartsType: 1
+  upperAttack: 0
+  lowerAttack: 0
   sPartsName: "\u30C6\u30B9\u30C8\u306E\u4E0A\u534A\u8EAB"
   AttackArea: 5
   iPartHp: 30
-  iPartAttack: 20
+  iPartAttack: 1
   spBody: {fileID: 0}
   spRightArm: {fileID: 0}
   spRightHand: {fileID: 0}

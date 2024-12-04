@@ -18,7 +18,7 @@ MonoBehaviour:
   sPartsName: "\u8B66\u5BDF\u306E\u4E0A\u534A\u8EAB"
   AttackArea: 20
   iPartHp: 45
-  iPartAttack: 30
+  iPartAttack: 1
   spBody: {fileID: 21300000, guid: 48b9fb5556c2ef1489b2dc984fa0aeb2, type: 3}
   spRightArm: {fileID: 21300000, guid: dc750b6b0672f8d41aa91bdbf6711c56, type: 3}
   spRightHand: {fileID: 21300000, guid: e265b6f9306ca5f42ab1272cb54add6b, type: 3}
