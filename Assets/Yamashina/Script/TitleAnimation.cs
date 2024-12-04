@@ -152,8 +152,9 @@ public class TitleAnimation : MonoBehaviour
         {
             CreditPanel.transform.localPosition = creditPanelStartPosition;
             StartSlideIn();
+            MultiAudio.ins.PlayBGM_ByName("BGM_credit");
+
         }
-        MultiAudio.ins.PlayBGM_ByName("BGM_credit");
         MultiAudio.ins.bgmSource.loop = false;
     }
 
