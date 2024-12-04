@@ -18,7 +18,7 @@ MonoBehaviour:
   sPartsName: 
   AttackArea: 5
   iPartHp: 45
-  iPartAttack: 30
+  iPartAttack: 1
   spBody: {fileID: 0}
   spRightArm: {fileID: 0}
   spRightHand: {fileID: 0}

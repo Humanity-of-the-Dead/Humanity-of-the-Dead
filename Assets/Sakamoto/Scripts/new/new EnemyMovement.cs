@@ -144,14 +144,14 @@ public class newEnemyMovement : EnemyAttack
 
                                     return;
                                 }
-                                UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
+                                UpperEnemyAttack((float)upperpart.iPartAttack);
                                 MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                             }
                             if (num == 1)
                             {
                                 //â∫îºêgçUåÇ
                                 moveAnimation.KickStart();
-                                LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
+                                LowerEnemyAttack((float)lowerpart.iPartAttack);
                                 MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                             }
                         }
