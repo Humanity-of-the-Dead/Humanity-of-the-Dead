@@ -36,6 +36,10 @@ public class PlayerParameter : MonoBehaviour
     public BodyPartsData LowerData;
     //キャラのイメージ取得用
     PlayerMoveAnimation scPlayerMoveAnimation;
+    //上半身のパーツデータ
+    private BodyPartsData upperIndex;
+    //下半身のパーツデータ
+    private BodyPartsData lowerIndex;
 
 
 
@@ -50,9 +54,10 @@ public class PlayerParameter : MonoBehaviour
     }
     private void Start()
     {
+        upperIndex = UpperData;
+        lowerIndex = LowerData;
         InitializeReferences();
 
-        
         //コンポーネント取得
         scPlayerMoveAnimation = goPlayer.GetComponent<PlayerMoveAnimation>();
 
@@ -93,7 +98,9 @@ public class PlayerParameter : MonoBehaviour
                         iHumanity = iHumanityMax;
                         iUpperHP = iUpperHPMax;
                         iLowerHP = iLowerHPMax;
-
+                        //プレイヤーを初期化
+                        UpperData = upperIndex;
+                        LowerData = lowerIndex;                      
                     }
 
                     ////シーン移動
@@ -224,7 +231,9 @@ public class PlayerParameter : MonoBehaviour
         iLowerHP = iLowerHPMax;
 
         scPlayerMoveAnimation.ChangeUpperBody(UpperData);
+        scPlayerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
         scPlayerMoveAnimation.ChangeUnderBody(LowerData);
+        scPlayerMoveAnimation.ChangeLowerMove(LowerData.lowerAttack);
 
         if (scGameMgr == null || goMosaic == null || goPanel == null)
         {
