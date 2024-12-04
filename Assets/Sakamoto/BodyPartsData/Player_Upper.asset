@@ -15,7 +15,7 @@ MonoBehaviour:
   enPartsType: 0
   upperAttack: 0
   lowerAttack: 4
-  sPartsName: "\u8B66\u5BDF\u306E\u4E0A\u534A\u8EAB"
+  sPartsName: "\u521D\u671F\u306E\u4E0A\u534A\u8EAB"
   AttackArea: 20
   iPartHp: 45
   iPartAttack: 1
