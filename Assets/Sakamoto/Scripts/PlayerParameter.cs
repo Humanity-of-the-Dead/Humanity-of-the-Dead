@@ -36,9 +36,9 @@ public class PlayerParameter : MonoBehaviour
     public BodyPartsData LowerData;
     //キャラのイメージ取得用
     PlayerMoveAnimation scPlayerMoveAnimation;
-    //上半身のパーツデータ
+    //上半身のパーツデータ(初期)
     private BodyPartsData upperIndex;
-    //下半身のパーツデータ
+    //下半身のパーツデータ(初期)
     private BodyPartsData lowerIndex;
 
 
@@ -257,6 +257,8 @@ public class PlayerParameter : MonoBehaviour
     {
         // シーン遷移後に参照を再取得
         InitializeReferences();
+        upperIndex = UpperData;
+        lowerIndex = LowerData;
         Debug.Log($"シーン {scene.name} がロードされました");
     }
 }
