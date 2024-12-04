@@ -84,8 +84,16 @@ public class newEnemyMovement : EnemyAttack
                     case EnemyState.walk:
                         // プレイヤーを追跡
                         MoveTowards(player.position, chaseSpeed);
+                        if(PlayerPositionFromEnemy() != movingToPointB)
+                        {
+                            if (movingToPointB == true) moveAnimation.RightMove();
+                            else moveAnimation.LeftMove();
+                            movingToPointB = !movingToPointB;
+
+                        }
                         // プレイヤーが攻撃範囲内に入っているかどうか判断
-                        if (distanceToPlayer < upperpart.AttackArea || distanceToPlayer < lowerpart.AttackArea)
+                        if ((distanceToPlayer < upperpart.AttackArea || distanceToPlayer < lowerpart.AttackArea)
+                            && PlayerPositionFromEnemy() == movingToPointB)
                         {
                             enemystate = EnemyState.wait;
                         }
@@ -95,7 +103,7 @@ public class newEnemyMovement : EnemyAttack
                         if (timer > waitTime)
                         {
                             timer = 0;
-                            if(distanceToPlayer < upperpart.AttackArea || distanceToPlayer < lowerpart.AttackArea)
+                            if((distanceToPlayer < upperpart.AttackArea || distanceToPlayer < lowerpart.AttackArea) && PlayerPositionFromEnemy() == movingToPointB)
                             {
                                 enemystate = EnemyState.attack;
                             }
@@ -108,7 +116,7 @@ public class newEnemyMovement : EnemyAttack
                         timer += Time.deltaTime;
                         break;
                     case EnemyState.attack:
-                        if (distanceToPlayer < upperpart.AttackArea && distanceToPlayer < lowerpart.AttackArea)
+                        if (distanceToPlayer < upperpart.AttackArea && distanceToPlayer < lowerpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
                             //乱数を取得する
                             int num = UnityEngine.Random.Range(0, 2);
@@ -147,13 +155,13 @@ public class newEnemyMovement : EnemyAttack
                                 MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                             }
                         }
-                        if (distanceToPlayer < upperpart.AttackArea)
+                        if (distanceToPlayer < upperpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
                             moveAnimation.PantieStart();
                             UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
                             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                         }
-                        if (distanceToPlayer < lowerpart.AttackArea)
+                        if (distanceToPlayer < lowerpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
                             moveAnimation.KickStart();
                             LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
