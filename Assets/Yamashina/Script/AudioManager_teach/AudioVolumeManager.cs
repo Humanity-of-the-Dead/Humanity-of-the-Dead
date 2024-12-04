@@ -47,7 +47,9 @@ public class AudioVolumeManager : MonoBehaviour
         uiSlider.value = savedUIVolume;
 
         if (BGM != null) BGM.volume = savedBGMVolume;
-        if (SE != null) SE.volume = savedSEVolume;
+        if (SE != null && SE.outputAudioMixerGroup == MultiAudio.ins.seMixerGroup) SE.volume = savedSEVolume;
+        else if (SE != null && SE.outputAudioMixerGroup == MultiAudio.ins.uiMixerGroup) SE.volume = savedUIVolume;
+
 
         // スライダー変更時のリスナーを設定
         bgmSlider.onValueChanged.AddListener(SetBGMVolume);
@@ -67,12 +69,13 @@ public class AudioVolumeManager : MonoBehaviour
     private void SetSEVolume(float value)
     {
         SetVolume(SE_PREF_KEY, "SE_Volume", value);
-        if (SE != null) SE.volume = value;
+        if (SE != null && SE.outputAudioMixerGroup == MultiAudio.ins.seMixerGroup) SE.volume = value;
     }
 
     private void SetUIVolume(float value)
     {
         SetVolume(UI_PREF_KEY, "UI_Volume", value);
+        if (SE != null && SE.outputAudioMixerGroup == MultiAudio.ins.uiMixerGroup) SE.volume = value;
     }
 
     private void SetVolume(string prefKey, string exposedParam, float volume)
@@ -99,10 +102,15 @@ public class AudioVolumeManager : MonoBehaviour
             BGM.volume = savedBGMVolume;
         }
 
-        if (SE != null)
+        if (SE != null && SE.outputAudioMixerGroup == MultiAudio.ins.seMixerGroup)
         {
             float savedSEVolume = PlayerPrefs.GetFloat(SE_PREF_KEY, initial_SE);
             SE.volume = savedSEVolume;
+        }
+        else if (SE != null && SE.outputAudioMixerGroup == MultiAudio.ins.uiMixerGroup)
+        {
+            float savedUIVolume = PlayerPrefs.GetFloat(SE_PREF_KEY, initial_UI);
+            SE.volume = savedUIVolume;
         }
     }
 

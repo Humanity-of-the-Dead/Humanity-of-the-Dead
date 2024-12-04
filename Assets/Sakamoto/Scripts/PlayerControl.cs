@@ -74,12 +74,13 @@ public class PlayerControl : MonoBehaviour
             case GameState.Main:
                 //bShootFlagをfalseにする
                 bShootFlag = false;
-                GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = true;
                 //攻撃アニメーション中でなければbShootFlagをtrueにする
                 Debug.Log(scPlayerMoveAnimation.SetAttack());
                 if (scPlayerMoveAnimation.SetAttack() == false)
                 {
                     bShootFlag = true;
+                    GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = true;
+
                 }
 
                 MainExecution();
@@ -140,7 +141,11 @@ public class PlayerControl : MonoBehaviour
             switch (playerParameter.UpperData.upperAttack)
             {
                 case UpperAttack.NORMAL:
-                    MultiAudio.ins.PlaySEByName("SE_hero_attack_upper");
+                    if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                    {
+                        MultiAudio.ins.PlaySEByName("SE_hero_attack_upper");
+                        GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                    }
                     break;
 
                 case UpperAttack.POLICE:
@@ -178,7 +183,11 @@ public class PlayerControl : MonoBehaviour
                     break;
 
                 case UpperAttack.NURSE:
-                    MultiAudio.ins.PlaySEByName("SE_nurse_attack_upper");
+                    if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                    {
+                        MultiAudio.ins.PlaySEByName("SE_nurse_attack_upper");
+                        GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                    }
                     break;
             }
 
@@ -192,7 +201,7 @@ public class PlayerControl : MonoBehaviour
                 Debug.Log(liObj[i].gameObject.transform.position);
                 Debug.Log(playerParameter.UpperData.AttackArea);
                 //仮引数
-                UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea,playerParameter.UpperData.iPartAttack);
+                UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea, playerParameter.UpperData.iPartAttack);
             }
         }
         //下半身攻撃
@@ -201,15 +210,27 @@ public class PlayerControl : MonoBehaviour
             switch (playerParameter.LowerData.lowerAttack)
             {
                 case LowerAttack.NORMAL:
-                    MultiAudio.ins.PlaySEByName("SE_hero_attack_lower");
+                    if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                    {
+                        MultiAudio.ins.PlaySEByName("SE_hero_attack_lower");
+                        GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                    }
+
                     break;
 
                 case LowerAttack.POLICE:
-                    MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_lower");
+                    if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                    {
+                        MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_lower");
+                        GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                    }
                     break;
 
                 case LowerAttack.NURSE:
-                    MultiAudio.ins.PlaySEByName("SE_nurse_attack_lower");
+                    if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                    {
+                        MultiAudio.ins.PlaySEByName("SE_nurse_attack_lower");
+                    }
                     break;
             }
             for (int i = 0; i < liObj.Count; i++)
@@ -234,7 +255,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     //上半身攻撃
-    public void UpperBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach,int iDamage)
+    public void UpperBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
         float fAttackReach = Vector3.Distance(vTargetPos, this.transform.position);
         if (fAttackReach < fReach)
