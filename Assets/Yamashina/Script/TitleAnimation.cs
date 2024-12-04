@@ -101,7 +101,6 @@ public class TitleAnimation : MonoBehaviour
        
        
     }
-
     public void MainView()//メイン画面に戻る関数
     {
 
@@ -111,14 +110,17 @@ public class TitleAnimation : MonoBehaviour
         if (CreditPanel.activeSelf)
         {
             StartSlideOut();
-            MultiAudio.ins.PlayBGM_ByName("BGM_title");
-
 
         }
         if (OptionPanel.activeSelf) { StartSlideOut(); }
 
 
+        if (panalView == PanalView.Credit)
+        {
+            MultiAudio.ins.PlayBGM_ByName("BGM_title");
+        }
         mainPanel.SetActive(true);
+      
         OptionPanel.SetActive(false) ;
         CreditPanel.SetActive(false);
 
@@ -273,21 +275,28 @@ public class TitleAnimation : MonoBehaviour
                     OptionPanel.transform.localPosition = OptionPaneEndPosition;
                     CreditPanel.SetActive(false);
                     mainPanel.SetActive(true);
+
                    
                     break;
                 case PanalView.Credit:
                     CreditPanel.SetActive(false);
                     mainPanel.SetActive(true);
                     OptionPanel.SetActive(false);
-                    
+                    if (mainPanel.activeSelf)
+                    {
+                        MultiAudio.ins.PlayBGM_ByName("BGM_title");
+
+                    }
+
                     break;
                 case PanalView.Option:
                     CreditPanel.SetActive(false);
                     mainPanel.SetActive(true);
                     OptionPanel.SetActive(false);
+                   
 
-                   
-                   
+
+
                     break;
 
 
