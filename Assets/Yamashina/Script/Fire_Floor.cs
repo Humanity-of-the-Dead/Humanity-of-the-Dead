@@ -17,13 +17,11 @@ public class Fire_Floor : MonoBehaviour
     protected void UpperEnemyAttack(float damage)
     {
         scPlayerParameter.UpperHP -= damage;
-        MultiAudio.ins.PlaySEByName("SE_hero_hit_fire");
 
     }
     protected void LowerEnemyAttack(float damage)
     {
         scPlayerParameter.LowerHP -= damage;
-        MultiAudio.ins.PlaySEByName("SE_hero_hit_fire");
 
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -33,6 +31,8 @@ public class Fire_Floor : MonoBehaviour
 
             UpperEnemyAttack(damage);
             LowerEnemyAttack(damage);
+            MultiAudio.ins.PlaySEByName("SE_hero_hit_fire");
+
         }
     }
 }
