@@ -1132,8 +1132,8 @@ MonoBehaviour:
   iUpperHPMax: 500
   iLowerHPMax: 500
   goPlayer: {fileID: 798675964}
-  UpperData: {fileID: 11400000, guid: 1f44a247b0640614c8806fd0c1ddc7e1, type: 2}
-  LowerData: {fileID: 11400000, guid: e7e6579bcbac34e4190ebc1c174e3a77, type: 2}
+  UpperData: {fileID: 11400000, guid: fcc706bf8f9cb204382c81235b20a96a, type: 2}
+  LowerData: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
 --- !u!4 &261565242
 Transform:
   m_ObjectHideFlags: 0

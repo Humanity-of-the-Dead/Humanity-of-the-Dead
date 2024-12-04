@@ -45,14 +45,14 @@ public class newDropPart : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.J) && goButton[1].activeSelf == true) {
             scPlayerParameter.comfort(10);
             MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
-            if (bBoss)
-            {
-                GameClear();
-            }
             Debug.Log(this.transform.position);
             GameObject obj = Instantiate(goGrave);
             obj.transform.position = new Vector3(this.gameObject.transform.position.x,
                                                         0.5f, this.gameObject.transform.position.z);
+            if (bBoss)
+            {
+                GameClear();
+            }
             Destroy(this.gameObject);
 
         }
@@ -126,7 +126,7 @@ public class newDropPart : MonoBehaviour
         //現在のシーンの一つ先のシーンのインデックスを取得
         int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetSceneInt(SceneTransitionManager.instance.sceneInformation.GetPreviousScene()) + 2;
         //インデックスが上限に行ったらタイトルのインデックスを代入
-        if (iNextIndex > 3)
+        if (iNextIndex > 4)
         {
             //DontDestroyOnLoadになっているPlayerParameterオブジェクトを削除
             SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
