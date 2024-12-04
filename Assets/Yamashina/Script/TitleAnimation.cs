@@ -17,25 +17,12 @@ public class TitleAnimation : MonoBehaviour
     [Tooltip("オプション画面のオブジェクトを入れる")]
     public GameObject OptionPanel;
 
-    [Header("ボタンのオブジェクトのセットアクティブ切り替え用")]
-    [Tooltip("クレジットボタンのオブジェクトを入れる")]
-
-    [SerializeField] GameObject CreditButton; //クレジット
-
-    [Tooltip("初めからボタンのオブジェクトを入れる")]
-    [SerializeField] GameObject StartButton; //初めから
-
-    [Tooltip("オプションボタンのオブジェクトを入れる")]
-    [SerializeField] GameObject optionButton;
-
+   
     [Header("ボタンのイベントトリガーのアクティブ切り替え用")]
-    [Tooltip("クレジットボタンのイベントトリガーを入れる")]
-    [SerializeField] EventTrigger eventTrigger_Credit;
+  
     [Tooltip("オプションボタンのイベントトリガーを入れる")]
     [SerializeField] EventTrigger eventTrigger_option;
-    [Tooltip("はじめからボタンのイベントトリガーを入れる")]
-
-    [SerializeField] EventTrigger eventTrigger_Start;
+   
     [Header("ボタンのアクティブ切り替え")]
 
     [Tooltip("クレジットボタンそのものを入れる")]
@@ -80,9 +67,16 @@ public class TitleAnimation : MonoBehaviour
     [Header("オプション画面の終了位置")]
     [SerializeField] Vector3 OptionPaneEndPosition;
 
-    [Header("時間経過でボタン表示するためのFloat")]
-    [Tooltip("何秒後にボタン表示するか")]
-    public float ButtonAnimation;
+    
+
+    enum PanalView
+    {
+        None,
+        Credit,
+        Option,
+
+    }
+    PanalView panalView = PanalView.None;
 
 
     void Start()
@@ -91,10 +85,11 @@ public class TitleAnimation : MonoBehaviour
         start.onClick.AddListener(() =>
             SceneTransitionManager.instance.NextSceneButton(1));
 
+
         MultiAudio.ins.bgmSource.volume = BGMVolume;
         MultiAudio.ins.seSource.volume = UIVolume;
 
-        if (!CreditPanel.activeSelf&& !OptionPanel.activeSelf)
+        if (!CreditPanel.activeSelf && !OptionPanel.activeSelf)
         {
             MultiAudio.ins.PlayBGM_ByName("BGM_title");
 
@@ -103,17 +98,8 @@ public class TitleAnimation : MonoBehaviour
         mainPanel.SetActive(true);　　//タイトル画面
         CreditPanel.SetActive(false);//クレジット画面
         OptionPanel.SetActive(false);
-        //ボタンのオブジェクトのセットアクティブ切り替え
-        StartButton.SetActive(true);//初めからボタン
-        CreditButton.SetActive(true);//クレジットボタン
-        optionButton.SetActive(true);
-        //ボタンのイベントトリガーのアクティブ切り替え
-        eventTrigger_Start.enabled = true;//初めからボタンのイベントトリガー
-        eventTrigger_Credit.enabled = true;//クレジットボタンのイベントトリガー
-        eventTrigger_option.enabled = true;
-        //ボタンのアクティブ切り替え（インタラクティブ切り替え）
-        start.interactable = true;//初めからボタン
-        Credit.interactable = true;//クレジットボタン
+       
+       
     }
 
     public void MainView()//メイン画面に戻る関数
@@ -132,19 +118,11 @@ public class TitleAnimation : MonoBehaviour
         if (OptionPanel.activeSelf) { StartSlideOut(); }
 
 
-        //時間経過でボタン表示する、ButtonAnimationで秒数指定
-        Invoke(nameof(True_SetActive_Button), ButtonAnimation);
         mainPanel.SetActive(true);
+        OptionPanel.SetActive(false) ;
+        CreditPanel.SetActive(false);
 
-        //ボタンのアクティブ切り替え（インタラクティブ切り替え）
-        start.interactable = true;//初めからボタン
-        Credit.interactable = true;//クレジットボタン
-        option.interactable = true;
-
-        //ボタンのイベントトリガーのアクティブ切り替え
-        eventTrigger_Start.enabled = true;//初めからボタンのイベントトリガー
-        eventTrigger_Credit.enabled = true;//クレジットボタンのイベントトリガー
-        eventTrigger_option.enabled = true;
+       
 
         //ボタンのオブジェクトのセットアクティブ切り替え
 
@@ -153,14 +131,7 @@ public class TitleAnimation : MonoBehaviour
     }
 
 
-    public void True_SetActive_Button()//時間経過でボタン表示するための関数
-    {
-        //ボタンのオブジェクトのセットアクティブ切り替え
-        StartButton.SetActive(true);//初めからボタン
-        optionButton.SetActive(true);
-        CreditButton.SetActive(true);
-
-    }
+   
     public void CreditView() //クレジット画面を表示
     {
 
@@ -171,23 +142,11 @@ public class TitleAnimation : MonoBehaviour
 
 
         //パネルのオブジェクトのセットアクティブ切り替え
-        mainPanel.SetActive(true);
+        mainPanel.SetActive(false);
         CreditPanel.SetActive(true);
         OptionPanel.SetActive(false);
 
-        //ボタンのオブジェクトのセットアクティブ切り替え
-        StartButton.SetActive(false);
-        CreditButton.SetActive(true);
-        optionButton.SetActive(false);
-        //ボタンのイベントトリガーのアクティブ切り替え
-        eventTrigger_Start.enabled = false;
-        eventTrigger_Credit.enabled = false;
-        eventTrigger_option.enabled = false;
-        //ボタンのアクティブ切り替え（インタラクティブ切り替え）
-        start.interactable = false;
-        Credit.interactable = false;
-        option.interactable = false;
-
+        
         //クレジット画面スライドイン開始
         if (CreditPanel.activeSelf)
         {
@@ -198,7 +157,7 @@ public class TitleAnimation : MonoBehaviour
         MultiAudio.ins.bgmSource.loop = false;
     }
 
-    public void OptionView() //クレジット画面を表示
+    public void OptionView() //オプション画面を表示
     {
 
 
@@ -212,19 +171,8 @@ public class TitleAnimation : MonoBehaviour
         CreditPanel.SetActive(false);
         OptionPanel.SetActive(true);
 
-        //ボタンのオブジェクトのセットアクティブ切り替え
-        StartButton.SetActive(false);
-        CreditButton.SetActive(false);
-        optionButton.SetActive(true);
-        //ボタンのイベントトリガーのアクティブ切り替え
-        eventTrigger_Start.enabled = false;
-        eventTrigger_Credit.enabled = false;
-        eventTrigger_option.enabled = false;
-        //ボタンのアクティブ切り替え（インタラクティブ切り替え）
-        start.interactable = false;
-        Credit.interactable = false;
-        option.interactable = false;
-
+      
+      
         //クレジット画面スライドイン開始
         if (OptionPanel.activeSelf)
         {
@@ -299,29 +247,56 @@ public class TitleAnimation : MonoBehaviour
     void Update()
     {
         //Gキーもしくはマウス右クリック
+
+
+        if (!OptionPanel.activeSelf && !CreditPanel.activeSelf && mainPanel.activeSelf)
+        {
+            panalView = PanalView.None;
+        }
+        else if (!OptionPanel.activeSelf && CreditPanel.activeSelf && !mainPanel.activeSelf)
+        {
+            panalView = PanalView.Credit;
+        }
+        else if (OptionPanel.activeSelf && !CreditPanel.activeSelf && mainPanel.activeSelf)
+        {
+            panalView = PanalView.Option;
+        }
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.G))
         {
-            //パネルのセットアクティブ
-            OptionPanel.SetActive(!OptionPanel.activeSelf);
-            mainPanel.SetActive(true);
-            CreditPanel.SetActive(!CreditPanel.activeSelf);
+            switch (panalView)
+            {
 
-            //ボタンのセットアクティブ
-            CreditButton.SetActive(true);
-            StartButton.SetActive(true);
-            optionButton.SetActive(true);
+                case PanalView.None:
+
+                    OptionPanel.SetActive(true);
+                    OptionPanel.transform.localPosition = OptionPaneEndPosition;
+                    CreditPanel.SetActive(false);
+                    mainPanel.SetActive(true);
+                   
+                    break;
+                case PanalView.Credit:
+                    CreditPanel.SetActive(false);
+                    mainPanel.SetActive(true);
+                    OptionPanel.SetActive(false);
+                    
+                    break;
+                case PanalView.Option:
+                    CreditPanel.SetActive(false);
+                    mainPanel.SetActive(true);
+                    OptionPanel.SetActive(false);
+
+                   
+                   
+                    break;
 
 
-            //ボタンのインタラクティブ
-            start.interactable = true;
-            Credit.interactable = true;
-            option.interactable = true;
-
-            //イベントトリガーの有効化
-            eventTrigger_Start.enabled = true;
-            eventTrigger_option.enabled = true;
-            eventTrigger_Credit.enabled = true;
+            }
         }
+
+
+
+       
     }
 }
+
 
