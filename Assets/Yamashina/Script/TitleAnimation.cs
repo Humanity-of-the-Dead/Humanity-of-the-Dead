@@ -107,12 +107,12 @@ public class TitleAnimation : MonoBehaviour
 
         //クレジット画面スライドアウト
 
-        if (CreditPanel.activeSelf)
-        {
-            StartSlideOut();
+        //if (CreditPanel.activeSelf)
+        //{
+        //    StartSlideOut();
 
-        }
-        if (OptionPanel.activeSelf) { StartSlideOut(); }
+        //}
+        //if (OptionPanel.activeSelf) { StartSlideOut(); }
 
 
         if (panalView == PanalView.Credit)
@@ -149,14 +149,14 @@ public class TitleAnimation : MonoBehaviour
         OptionPanel.SetActive(false);
 
         
-        //クレジット画面スライドイン開始
-        if (CreditPanel.activeSelf)
-        {
-            CreditPanel.transform.localPosition = creditPanelStartPosition;
-            StartSlideIn();
+        ////クレジット画面スライドイン開始
+        //if (CreditPanel.activeSelf)
+        //{
+        //    CreditPanel.transform.localPosition = creditPanelStartPosition;
+        //    StartSlideIn();
             MultiAudio.ins.PlayBGM_ByName("BGM_credit");
 
-        }
+        //}
         MultiAudio.ins.bgmSource.loop = false;
     }
 
@@ -177,75 +177,75 @@ public class TitleAnimation : MonoBehaviour
       
       
         //クレジット画面スライドイン開始
-        if (OptionPanel.activeSelf)
-        {
-            OptionPanel.transform.localPosition = OptionPanelStartPosition;
-            StartSlideIn();
-        }
+        //if (OptionPanel.activeSelf)
+        //{
+        //    OptionPanel.transform.localPosition = OptionPanelStartPosition;
+        //    StartSlideIn();
+        //}
     }
     //スライドインするための関数呼び出し開始
-    public void StartSlideIn()
-    {
-        StartCoroutine(AnimateEachPanelIn());
-    }
+    //public void StartSlideIn()
+    //{
+    //    StartCoroutine(AnimateEachPanelIn());
+    //}
 
-    //各オブジェクトのスライドイン
-    public IEnumerator AnimateEachPanelIn()
-    {
+    ////各オブジェクトのスライドイン
+    //public IEnumerator AnimateEachPanelIn()
+    //{
 
-        float Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
+    //    float Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
 
 
-        //クレジット画面のスライドインのアニメーション
+    //    //クレジット画面のスライドインのアニメーション
 
-        while (Credit <= 1.0f && CreditPanel.activeSelf)
-        {
-            CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelStartPosition, creditPanelEndPosition, Credit);
+    //    while (Credit <= 1.0f && CreditPanel.activeSelf)
+    //    {
+    //        CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelStartPosition, creditPanelEndPosition, Credit);
 
-            Credit += speed * Time.deltaTime;
+    //        Credit += speed * Time.deltaTime;
 
-            yield return new WaitForSeconds(Coroutine);
-        }
-        while (Credit <= 1.0f && OptionPanel.activeSelf)
-        {
-            OptionPanel.transform.localPosition = Vector3.Lerp(OptionPanelStartPosition, OptionPaneEndPosition, Credit);
+    //        yield return new WaitForSeconds(Coroutine);
+    //    }
+    //    while (Credit <= 1.0f && OptionPanel.activeSelf)
+    //    {
+    //        OptionPanel.transform.localPosition = Vector3.Lerp(OptionPanelStartPosition, OptionPaneEndPosition, Credit);
 
-            Credit += speed * Time.deltaTime;
+    //        Credit += speed * Time.deltaTime;
 
-            yield return new WaitForSeconds(Coroutine);
-        }
+    //        yield return new WaitForSeconds(Coroutine);
+    //    }
 
-    }
+    //}
 
-    public void StartSlideOut() //画面内から画面外へスライドアウトするための関数呼び出し開始
-    {
-        StartCoroutine(AnimateEachPanelOut());
-    }
+    //public void StartSlideOut() //画面内から画面外へスライドアウトするための関数呼び出し開始
+    //{
+    //    StartCoroutine(AnimateEachPanelOut());
+    //}
 
 
     //画面内から画面外へスライドアウトするための関数 
-    public IEnumerator AnimateEachPanelOut()
-    {
-        float Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
-                          //var Option = 0f;
+    //public IEnumerator AnimateEachPanelOut()
+    //{
+    //    float Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
+    //                      //var Option = 0f;
 
-        //クレジット画面のスライドアウトのアニメーション
-        while (Credit <= 1.0f && CreditPanel.activeSelf)
-        {
-            CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelEndPosition, creditPanelStartPosition, Credit);
-            Credit += speed * Time.deltaTime;
-            yield return new WaitForSeconds(Coroutine);
-        }
-        //クレジット画面のスライドアウトのアニメーション
-        while (Credit <= 1.0f && OptionPanel.activeSelf)
-        {
-            OptionPanel.transform.localPosition = Vector3.Lerp(OptionPaneEndPosition, OptionPanelStartPosition, Credit);
-            Credit += speed * Time.deltaTime;
-            yield return new WaitForSeconds(Coroutine);
-        }
-        Debug.Log("通った");
+    //    //クレジット画面のスライドアウトのアニメーション
+    //    while (Credit <= 1.0f && CreditPanel.activeSelf)
+    //    {
+    //        CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelEndPosition, creditPanelStartPosition, Credit);
+    //        Credit += speed * Time.deltaTime;
+    //        yield return new WaitForSeconds(Coroutine);
+    //    }
+    //    //クレジット画面のスライドアウトのアニメーション
+    //    while (Credit <= 1.0f && OptionPanel.activeSelf)
+    //    {
+    //        OptionPanel.transform.localPosition = Vector3.Lerp(OptionPaneEndPosition, OptionPanelStartPosition, Credit);
+    //        Credit += speed * Time.deltaTime;
+    //        yield return new WaitForSeconds(Coroutine);
+    //    }
+    //    Debug.Log("通った");
 
-    }
+    //}
 
     void Update()
     {
