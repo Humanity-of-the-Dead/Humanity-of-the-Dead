@@ -197,6 +197,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 341de6a496e487943a85fdb76eb76c70, type: 3}
   - {fileID: 8300000, guid: 092730ebee901e349b1190762df4aac7, type: 3}
   - {fileID: 8300000, guid: 7f0373ddab592134fb171f942396da87, type: 3}
+  bgmSource: {fileID: 0}
+  seSource: {fileID: 0}
   bgmMixerGroup: {fileID: -4108538381236679251, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
   seMixerGroup: {fileID: -2155192936819050110, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
   uiMixerGroup: {fileID: 7232108298083354436, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
@@ -210,6 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2077059141076066767}
   - component: {fileID: 4651609467027161685}
+  - component: {fileID: 4406120658172269113}
   m_Layer: 0
   m_Name: SE
   m_TagString: SE
@@ -328,3 +331,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4406120658172269113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553061318831934779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fafd2ced1cab1842a32f9d9d6e681f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolTime: 0
+  canPlay: 1
+  realTime: 0
