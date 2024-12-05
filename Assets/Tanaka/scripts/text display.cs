@@ -87,13 +87,36 @@ public class textdisplay: MonoBehaviour
                     else if (LoadText < textAsset.Length - 1)
                     {
                         LoadNextText(); // 次のテキストを表示
+                        GameManager.ChangeState(GameState.AfterBOss);    //GameStateがShowTextに変わる
+
                     }
                     else
                     {
                         CloseTextArea(); // 全てのテキストを読み終えたら閉じる
                     }
 
-                }                
+
+                }
+                break;
+            case GameState.AfterBOss:
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    if (!isTextFullyDisplayed)
+                    {
+                        DisplayFullText(); //テキスト全表示
+                    }
+                    else if (LoadText < textAsset.Length - 1)
+                    {
+                        LoadNextText(); // 次のテキストを表示
+                    }
+                    else
+                    {
+                        CloseTextArea(); // 全てのテキストを読み終えたら閉じる
+                    }
+
+
+                }
+
                 break;
         }
 
@@ -172,7 +195,7 @@ public class textdisplay: MonoBehaviour
         if (LoadText < textAsset.Length - 1)
         {
             LoadText++;
-            UpdateText(); // 新しいテキストを表示
+            //UpdateText(); // 新しいテキストを表示
         }
         else
         {
