@@ -119,8 +119,8 @@ public class newDropPart : MonoBehaviour
     //ゲームクリア処理
     private void GameClear()
     {
-        //ゲームクリアを表示
-        goPanel.SetActive(true);
+        ////ゲームクリアを表示
+        //goPanel.SetActive(true);
         //goTextBox.GetComponent<GoalScript>().showText();
 
         //プレイヤーの状態を保持する
@@ -143,7 +143,6 @@ public class newDropPart : MonoBehaviour
         GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
 
         MultiAudio.ins.PlayBGM_ByName("BGM_clear");
-        GameMgr.ChangeState(GameState.Clear);
 
 
         //テキストボックスの表示

@@ -46,6 +46,8 @@ public class textdisplay: MonoBehaviour
 
     private Coroutine TypingCroutine;  //コルーチンの管理
 
+    float timer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,6 +103,18 @@ public class textdisplay: MonoBehaviour
                         }
                     }
                 }
+                break;
+            case GameState.Clear:
+                if(timer > 1)
+                {
+                    //テキストボックスの表示
+                    TextArea.SetActive(true);
+                    //GameStateをAfterBOssに切り替える
+                    GameMgr.ChangeState(GameState.AfterBOss);
+                    timer = 0;
+                }
+                timer += Time.deltaTime;
+
                 break;
             case GameState.AfterBOss:
                 if (Input.GetKeyDown(KeyCode.Return))
