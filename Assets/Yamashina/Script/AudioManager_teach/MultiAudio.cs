@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#define DEBUG 
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+
 
 public class MultiAudio : MonoBehaviour
 {
 
 
-
+    
     public AudioClip[] audioClipsBGM; // Array for multiple BGM clips
     public AudioClip[] audioClipsSE;  // Array for multiple SE clips
 
@@ -25,6 +27,7 @@ public class MultiAudio : MonoBehaviour
 
     //シングルトン
     public static MultiAudio ins;
+
 
     private void Awake()
     {
@@ -69,13 +72,14 @@ public class MultiAudio : MonoBehaviour
     }
     public void PlayBGM_ByName(string bgmName)
     {
+#if DEBUG
         if (BGMClipDictionary == null)
         {
-            Debug.LogError("BGMClipDictionary is not initialized.");
+            Debug.LogWarning("BGMClipDictionary is not initialized.");
             return;
-            
-        }
 
+        }
+#endif
         if (BGMClipDictionary.TryGetValue(bgmName, out var clip))
         {
             PlayBGM(clip);
