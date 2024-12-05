@@ -1585,11 +1585,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1870882201301314316, guid: 891af02d74a4d78449dd3f38dfe6aaa8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -100
+      value: -103
       objectReference: {fileID: 0}
     - target: {fileID: 1870882201301314316, guid: 891af02d74a4d78449dd3f38dfe6aaa8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -120
+      value: -81
       objectReference: {fileID: 0}
     - target: {fileID: 1870882201301314316, guid: 891af02d74a4d78449dd3f38dfe6aaa8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2096,8 +2096,6 @@ MonoBehaviour:
   bgmSlider: {fileID: 4292276209558164484}
   seSlider: {fileID: 4355863568775309853}
   uiSlider: {fileID: 5712834787507670375}
-  BGM: {fileID: 0}
-  SE: {fileID: 0}
   initial_BGM: 0.5
   initial_SE: 0.5
   initial_UI: 0.5
