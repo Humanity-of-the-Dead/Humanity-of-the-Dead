@@ -268,6 +268,8 @@ public class PlayerParameter : MonoBehaviour
     {
         UpperData = upperPlayer;
         LowerData = lowerPlayer;
+        upperIndex = upperPlayer;
+        lowerIndex = lowerPlayer;
     }
     private void OnEnable()
     {
