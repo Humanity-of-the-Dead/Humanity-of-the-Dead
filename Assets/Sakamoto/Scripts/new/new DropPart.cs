@@ -143,7 +143,11 @@ public class newDropPart : MonoBehaviour
         GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
 
         MultiAudio.ins.PlayBGM_ByName("BGM_clear");
-        sceneTransitionManager.NextSceneButton(iNextIndex);
+        //テキストボックスの表示
+        goTextBox.SetActive(true);
+        //GameStateをAfterBOssに切り替える
+        GameMgr.ChangeState(GameState.AfterBOss);
+        //SceneTransitionManager.instance.NextSceneButton(iNextIndex);
 
 
     }

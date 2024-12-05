@@ -992,7 +992,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 1705519285
+  m_SortingLayerID: 1817916389
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &252931442
@@ -1169,7 +1169,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 1817916389
+  m_SortingLayerID: 1705519285
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &261565240
@@ -3610,6 +3610,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
+      propertyPath: textBox
+      value: 
+      objectReference: {fileID: 259418451}
+    - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: PlayerControl
       value: 
       objectReference: {fileID: 798675964}
@@ -3856,7 +3860,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 1705519285
+  m_SortingLayerID: 1817916389
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &1971099306

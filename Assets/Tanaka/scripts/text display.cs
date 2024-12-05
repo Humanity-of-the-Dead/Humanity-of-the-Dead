@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class textdisplay: MonoBehaviour
 {
@@ -80,23 +81,25 @@ public class textdisplay: MonoBehaviour
             case GameState.ShowText:
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    if (!isTextFullyDisplayed)
+
+                    if (Input.GetKeyDown(KeyCode.Return))
                     {
-                        DisplayFullText(); //テキスト全表示
-                    }
-                    else
-                    {
-                        if (LoadText < textAsset.Length - 1)
+                        if (!isTextFullyDisplayed)
                         {
-                            LoadNextText(); // 次のテキストを表示
+                            DisplayFullText(); //テキスト全表示
                         }
-                        Debug.Log(textAsset.Length);
-                        GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
+                        else
+                        {
+                            if (LoadText < textAsset.Length - 1)
+                            {
+                                LoadNextText(); // 次のテキストを表示
+                            }
+                            Debug.Log(textAsset.Length);
+                            GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
 
-                        CloseTextArea(); // 全てのテキストを読み終えたら閉じる
+                            CloseTextArea(); // 全てのテキストを読み終えたら閉じる
+                        }
                     }
-
-
                 }
                 break;
             case GameState.AfterBOss:
@@ -106,16 +109,23 @@ public class textdisplay: MonoBehaviour
                     {
                         DisplayFullText(); //テキスト全表示
                     }
-                    else if (LoadText < textAsset.Length - 1)
-                    {
-                        LoadNextText(); // 次のテキストを表示
-                    }
                     else
                     {
+                        //if (LoadText < textAsset.Length - 1)
+                        //{
+                        //    LoadNextText(); // 次のテキストを表示
+                        //}
+                        Debug.Log(textAsset.Length);
+                        GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
+
                         CloseTextArea(); // 全てのテキストを読み終えたら閉じる
+                        int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
+                        if (iNextIndex > 4)
+                        {
+                            iNextIndex = 0;
+                        }
+                        SceneTransitionManager.instance.NextSceneButton(iNextIndex);
                     }
-
-
                 }
 
                 break;

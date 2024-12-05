@@ -46,7 +46,6 @@ public class newEnemyMovement : EnemyAttack
         scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
         pointA = this.transform.position.x + moveAbs;
         pointB = this.transform.position.x - moveAbs;
-
     }
 
     void Update()
