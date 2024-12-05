@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public enum GameState { 
     Main,
     ShowText,
-    BeforeBoss, //ボス前
+    Clear, //クリア表示
     AfterBOss,//ボス後
     GameOver,
 }
