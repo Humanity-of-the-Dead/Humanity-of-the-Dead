@@ -29,6 +29,7 @@ public class SceneInformation : ScriptableObject
     [SerializeField] public SceneObject[] sceneObject;
     [SerializeField] public string[] sceneNames;// シーンの名前
     [SerializeField] private SCENE previousScene;
+    [SerializeField] private SCENE currentScene;
     [SerializeField] public int[] sceneCount;
     public SceneObject GetSceneObject(SCENE scene)
     {
@@ -43,6 +44,8 @@ public class SceneInformation : ScriptableObject
     {
         return (int)scene;
     }
+    public void GetCurrentScene(int sceneIndex) { currentScene = (SceneInformation.SCENE)sceneIndex; }
+
 
     public int GetSceneIndex(SCENE scene)
     {
@@ -51,6 +54,9 @@ public class SceneInformation : ScriptableObject
     public SCENE GetPreviousScene() { return previousScene; }
 
     public void SetPreviousScene(SCENE scene) { previousScene = scene; }
+    public void SetCurrentScene(SCENE scene) { currentScene = scene; }
+
+
 }
 
 
