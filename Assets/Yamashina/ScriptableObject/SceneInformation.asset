@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5025a4a3305792429ce10294ad4e75f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9086b5b8994860f4f93f3ed552ac1172, type: 3}
   m_Name: SceneInformation
   m_EditorClassIdentifier: 
   sceneObject:
@@ -25,4 +25,5 @@ MonoBehaviour:
   - Stage3
   - Stage4
   previousScene: 0
+  currentScene: 0
   sceneCount: 
