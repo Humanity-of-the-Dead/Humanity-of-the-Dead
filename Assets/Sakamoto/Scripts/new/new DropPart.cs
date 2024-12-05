@@ -122,9 +122,17 @@ public class newDropPart : MonoBehaviour
         //ゲームクリアを表示
         goPanel.SetActive(true);
         //goTextBox.GetComponent<GoalScript>().showText();
+
+        //プレイヤーの状態を保持する
+        scPlayerParameter.KeepBodyData();
         
         //現在のシーンの一つ先のシーンのインデックスを取得
         int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetSceneInt(SceneTransitionManager.instance.sceneInformation.GetPreviousScene()) + 2;
+        //ステージが4の時
+        if (iNextIndex == 4)
+        {
+            scPlayerParameter.DefaultBodyData();
+        }
         //インデックスが上限に行ったらタイトルのインデックスを代入
         if (iNextIndex > 4)
         {
