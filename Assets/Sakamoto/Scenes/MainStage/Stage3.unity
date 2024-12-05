@@ -398,6 +398,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6868419856064601450, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: textBox
+      value: 
+      objectReference: {fileID: 259418451}
+    - target: {fileID: 6868419856064601450, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: PlayerControl
       value: 
       objectReference: {fileID: 2023898247}
@@ -4637,7 +4641,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OptionButton: {fileID: 752691868}
   OptionReturnButton: {fileID: 235816321}
-  enGameState: 1
 --- !u!4 &3183673208756527799
 Transform:
   m_ObjectHideFlags: 0
@@ -4725,6 +4728,7 @@ MonoBehaviour:
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
   TextSpeed: 0.1
+  GameClear: {fileID: 247270896}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -48,6 +48,9 @@ public class textdisplay: MonoBehaviour
 
     float timer = 0;
 
+    //ゲームクリアパネル
+    [SerializeField] GameObject GameClear;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -107,10 +110,12 @@ public class textdisplay: MonoBehaviour
             case GameState.Clear:
                 if(timer > 1)
                 {
-                    //テキストボックスの表示
-                    TextArea.SetActive(true);
-                    //GameStateをAfterBOssに切り替える
-                    GameMgr.ChangeState(GameState.AfterBOss);
+                    int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
+                    if (iNextIndex > 4)
+                    {
+                        iNextIndex = 0;
+                    }
+                    SceneTransitionManager.instance.NextSceneButton(iNextIndex);
                     timer = 0;
                 }
                 timer += Time.deltaTime;
@@ -130,15 +135,12 @@ public class textdisplay: MonoBehaviour
                         //    LoadNextText(); // 次のテキストを表示
                         //}
                         Debug.Log(textAsset.Length);
-                        GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
 
                         CloseTextArea(); // 全てのテキストを読み終えたら閉じる
-                        int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
-                        if (iNextIndex > 4)
-                        {
-                            iNextIndex = 0;
-                        }
-                        SceneTransitionManager.instance.NextSceneButton(iNextIndex);
+
+                        GameMgr.ChangeState(GameState.Clear);    //GameStateがClearに変わる
+
+                        GameClear.SetActive(true); // ゲームクリア表示を表示する
                     }
                 }
 
