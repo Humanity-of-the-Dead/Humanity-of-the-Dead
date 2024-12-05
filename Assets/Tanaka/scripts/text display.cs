@@ -54,6 +54,7 @@ public class textdisplay: MonoBehaviour
         //テキスト表示域を非表示
         TextArea.SetActive(false);
         Flag = new bool[Position.Length];
+        UpdateText();
     }
 
     // Update is called once per frame
@@ -69,11 +70,10 @@ public class textdisplay: MonoBehaviour
                         //this.gameObject.SetActive(true);    //オブジェクトを表示
                         Flag[i] = true;     //Flag[i]を通った
                         GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
-
+                        UpdateText();
                         //テキスト表示域を表示域
                         TextArea.SetActive(true);
 
-                        UpdateText();
                     }
                 }
                 break;
@@ -87,6 +87,7 @@ public class textdisplay: MonoBehaviour
                     else if (LoadText < textAsset.Length - 1)
                     {
                         LoadNextText(); // 次のテキストを表示
+                        Debug.Log(textAsset.Length);
                         GameManager.ChangeState(GameState.AfterBOss);    //GameStateがShowTextに変わる
 
                     }
@@ -125,22 +126,21 @@ public class textdisplay: MonoBehaviour
     {
         if (TypingCroutine != null)
         {
-            StopCoroutine(TypingCroutine); // コルーチンの競合を防ぐ
+            StopCoroutine(TypingCroutine);
         }
+
+        Debug.Log($"UpdateText: LoadText = {LoadText}");
         if (textAsset.Length > LoadText)
-        {  
-            text.text = ""; //からのテキストをおいて初期化しているように見せる
-            isTextFullyDisplayed = false; // テキストが完全に表示されていない
-
-            Debug.Log($"テキスト{LoadText}を表示開始: {textAsset[LoadText].text}");
-
-            TypingCroutine = StartCoroutine(TextCoroutine()); //コルーチンを再スタート       //テキストを呼び出されるたびにコルーチンを走らせて文字を加算していく
+        {
+            text.text = "";
+            isTextFullyDisplayed = false;
+            Debug.Log($"表示テキスト: {textAsset[LoadText].text}");
+            TypingCroutine = StartCoroutine(TextCoroutine());
         }
         else
         {
-            Debug.Log("全テキストが表示された");
+            Debug.Log("全テキストが表示されました");
         }
-
     }
     IEnumerator TextCoroutine()
     {
