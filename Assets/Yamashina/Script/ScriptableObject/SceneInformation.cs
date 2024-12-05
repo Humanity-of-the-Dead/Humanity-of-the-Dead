@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 [CreateAssetMenu(fileName = "SceneInformation", menuName = "ScriptableObjects/StageInformation")]
 
 public class SceneInformation : ScriptableObject
@@ -44,7 +46,7 @@ public class SceneInformation : ScriptableObject
     {
         return (int)scene;
     }
-    public void GetCurrentScene(int sceneIndex) { currentScene = (SceneInformation.SCENE)sceneIndex; }
+    public int GetCurrentScene() {  return SceneManager.GetActiveScene().buildIndex; }
 
 
     public int GetSceneIndex(SCENE scene)
