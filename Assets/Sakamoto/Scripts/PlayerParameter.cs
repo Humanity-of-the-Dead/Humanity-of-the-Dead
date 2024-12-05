@@ -79,7 +79,7 @@ public class PlayerParameter : MonoBehaviour
        string SceneName = SceneManager.GetActiveScene().name;
         if(!(SceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title)))
         {
-            switch (scGameMgr.GetComponent<GameMgr>().enGameState)
+            switch (GameMgr.GetState())
             {
                 case GameState.Main:
                     //パラメータの値をiDownTime秒で1減少させる

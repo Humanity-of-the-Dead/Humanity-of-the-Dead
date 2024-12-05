@@ -1,9 +1,15 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Fire_Floor : MonoBehaviour
 {
+#if DEBUG
+
+#endif
     //プレイヤーパラメーター
     private PlayerParameter scPlayerParameter;
     
@@ -14,7 +20,7 @@ public class Fire_Floor : MonoBehaviour
     private void Start()
     {
         time = 0;
-        scPlayerParameter= GameObject.FindAnyObjectByType<PlayerParameter>().GetComponent<PlayerParameter>();
+        scPlayerParameter= GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
     }
 
     protected void UpperEnemyAttack(float damage)

@@ -16,7 +16,7 @@ public class GameMgr : MonoBehaviour
     [SerializeField] Button OptionButton;
     [SerializeField] Button OptionReturnButton;
 
-    public GameState enGameState;
+    static GameState enGameState;
 
     private void Start()
     {
@@ -38,10 +38,13 @@ public class GameMgr : MonoBehaviour
     }
 
     //ステートチェンジ
-    public void ChangeState(GameState newState)
+    public static void ChangeState(GameState newState)
     {
         enGameState = newState;
     }
-
+    public static GameState GetState()
+    {
+        return enGameState;
+    }
 }
 

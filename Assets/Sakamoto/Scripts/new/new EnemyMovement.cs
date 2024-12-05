@@ -43,6 +43,7 @@ public class newEnemyMovement : EnemyAttack
     {
         // プレイヤーを探すやつ
         player = GameObject.Find("Player Variant").gameObject.transform;
+        scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
         pointA = this.transform.position.x + moveAbs;
         pointB = this.transform.position.x - moveAbs;
 
@@ -52,7 +53,7 @@ public class newEnemyMovement : EnemyAttack
     {
         // プレイヤーとの距離を計算
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        switch (gamestate.enGameState)
+        switch (GameMgr.GetState())
         {
             case GameState.Main:
                 switch (enemystate)

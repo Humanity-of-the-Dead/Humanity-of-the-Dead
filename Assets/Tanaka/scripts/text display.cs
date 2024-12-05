@@ -60,7 +60,7 @@ public class textdisplay: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (GameManager.enGameState)
+        switch (GameMgr.GetState())
         {
             case GameState.Main:
                 for(int i = 0; i < Flag.Length; i++)
@@ -69,7 +69,7 @@ public class textdisplay: MonoBehaviour
                     {
                         //this.gameObject.SetActive(true);    //オブジェクトを表示
                         Flag[i] = true;     //Flag[i]を通った
-                        GameManager.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+                        GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
                         UpdateText();
                         //テキスト表示域を表示域
                         TextArea.SetActive(true);
@@ -84,15 +84,15 @@ public class textdisplay: MonoBehaviour
                     {
                         DisplayFullText(); //テキスト全表示
                     }
-                    else if (LoadText < textAsset.Length - 1)
-                    {
-                        LoadNextText(); // 次のテキストを表示
-                        Debug.Log(textAsset.Length);
-                        GameManager.ChangeState(GameState.AfterBOss);    //GameStateがShowTextに変わる
-
-                    }
                     else
                     {
+                        if (LoadText < textAsset.Length - 1)
+                        {
+                            LoadNextText(); // 次のテキストを表示
+                        }
+                        Debug.Log(textAsset.Length);
+                        GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
+
                         CloseTextArea(); // 全てのテキストを読み終えたら閉じる
                     }
 
@@ -206,7 +206,7 @@ public class textdisplay: MonoBehaviour
     // テキストエリアを閉じる
     private void CloseTextArea()
     {
-        GameManager.ChangeState(GameState.Main);
+        GameMgr.ChangeState(GameState.Main);
         TextArea.SetActive(false); // テキストエリアを非表示
     }
 }

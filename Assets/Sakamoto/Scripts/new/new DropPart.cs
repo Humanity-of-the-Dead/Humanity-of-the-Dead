@@ -127,7 +127,7 @@ public class newDropPart : MonoBehaviour
         scPlayerParameter.KeepBodyData();
         
         //現在のシーンの一つ先のシーンのインデックスを取得
-        int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetSceneInt(SceneTransitionManager.instance.sceneInformation.GetPreviousScene()) + 2;
+        int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
         //ステージが4の時
         if (iNextIndex == 4)
         {

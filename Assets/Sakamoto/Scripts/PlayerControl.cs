@@ -69,7 +69,7 @@ public class PlayerControl : MonoBehaviour
             this.rbody2D.velocity = new Vector2(0.0f, -1);
         }
 
-        switch (scGameMgr.enGameState)
+        switch (GameMgr.GetState())
         {
             case GameState.Main:
                 //bShootFlag‚ðfalse‚É‚·‚é

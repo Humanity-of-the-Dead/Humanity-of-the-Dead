@@ -49,7 +49,7 @@ public class EnemyMovement : EnemyAttack
     {
         // プレイヤーとの距離を計算
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        switch (gamestate.enGameState)
+        switch (GameMgr.GetState())
         {
             case GameState.Main:
                 switch (enemystate)
