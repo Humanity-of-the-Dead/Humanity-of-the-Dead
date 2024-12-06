@@ -1929,7 +1929,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4342398986176325815, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3971554612639283650}
+      addedObject: {fileID: 7675996808352432732}
     - targetCorrespondingSourceObject: {fileID: 324430537954622746, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3828968067219170531}
@@ -2080,7 +2080,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4342398986176325815, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
   m_PrefabInstance: {fileID: 5930022760068499512}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3971554612639283650
+--- !u!114 &7675996808352432732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2089,16 +2089,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7928834082859065487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05f5f08ecc3d82240864c4b505ee811a, type: 3}
+  m_Script: {fileID: 11500000, guid: 47ee305e0200dd94ab810dc341d59271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
-  bgmSlider: {fileID: 4292276209558164484}
-  seSlider: {fileID: 4355863568775309853}
-  uiSlider: {fileID: 5712834787507670375}
-  initial_BGM: 0.5
-  initial_SE: 0.5
-  initial_UI: 0.5
+  BGMSlider: {fileID: 4292276209558164484}
+  SESlider: {fileID: 4355863568775309853}
+  UIVolumeSlider: {fileID: 5712834787507670375}
+  initialAudioSettings:
+    BGMVolume: 0.5
+    SEVolume: 0.5
+    UIVolume: 0.5
 --- !u!1001 &5985610858340386862
 PrefabInstance:
   m_ObjectHideFlags: 0
