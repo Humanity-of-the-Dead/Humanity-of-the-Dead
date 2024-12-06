@@ -3724,6 +3724,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -7373263027973009250, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
+      propertyPath: moveAbs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -7373263027973009250, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: gamestate
       value: 
       objectReference: {fileID: 3111287980887441161}
@@ -3741,7 +3745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: UpperHP
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: textBox

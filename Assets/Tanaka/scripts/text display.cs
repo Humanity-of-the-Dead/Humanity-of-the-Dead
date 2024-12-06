@@ -111,9 +111,9 @@ public class textdisplay: MonoBehaviour
                 if(timer > 1)
                 {
                     int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
-                    if (iNextIndex > 4)
+                    if (iNextIndex > 5)
                     {
-                        iNextIndex = 0;
+                        iNextIndex = 5;
                     }
                     SceneTransitionManager.instance.NextSceneButton(iNextIndex);
                     timer = 0;

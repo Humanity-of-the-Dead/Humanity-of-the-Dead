@@ -198,8 +198,8 @@ public class PlayerControl : MonoBehaviour
 
             for (int i = 0; i < liObj.Count; i++)
             {
-                Debug.Log(liObj[i].gameObject.transform.position);
-                Debug.Log(playerParameter.UpperData.AttackArea);
+                //Debug.Log(liObj[i].gameObject.transform.position);
+                //Debug.Log(playerParameter.UpperData.AttackArea);
                 //‰¼ˆø”
                 UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea, playerParameter.UpperData.iPartAttack);
             }
