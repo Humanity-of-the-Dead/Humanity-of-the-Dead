@@ -42,7 +42,7 @@ public class newDropPart : MonoBehaviour
     void Update()
     {
         //Jキーを押したら慰霊する
-        if(Input.GetKeyUp(KeyCode.J) && goButton[1].activeSelf == true) {
+        if(Input.GetKeyUp(KeyCode.J) && goButton[0].activeSelf == true) {
             scPlayerParameter.comfort(10);
             MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
             Debug.Log(this.transform.position);
@@ -57,7 +57,7 @@ public class newDropPart : MonoBehaviour
 
         }
         //Lキーを押したら移植する
-        if (Input.GetKeyDown(KeyCode.L) && goButton[0].activeSelf == true)
+        if (Input.GetKeyDown(KeyCode.L) && goButton[1].activeSelf == true)
         {
             scPlayerParameter.transplant(partsData);
             MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
