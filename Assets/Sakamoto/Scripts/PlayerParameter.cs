@@ -93,7 +93,7 @@ public class PlayerParameter : MonoBehaviour
                         Debug.Log("リロードを開始します"); // デバッグログで確認
 
                         GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
-                        SceneTransitionManager.instance.ReloadCurrentScene();
+                        
 
 
                         //GameOverのBGM鳴らす箇所
@@ -108,6 +108,7 @@ public class PlayerParameter : MonoBehaviour
 
                         //ゲームオーバーの標準
                         goPanel.SetActive(true);
+                        GameMgr.ChangeState(GameState.GameOver);
 
                     }
 
