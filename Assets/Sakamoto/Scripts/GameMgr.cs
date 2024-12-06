@@ -19,6 +19,7 @@ public class GameMgr : MonoBehaviour
 
     static GameState enGameState;
 
+    float timer = 0;
     private void Start()
     {
         enGameState = GameState.Main;
@@ -35,6 +36,16 @@ public class GameMgr : MonoBehaviour
         {
             OptionReturnButton.onClick.Invoke();
             //enGameState = GameState.Main;
+        }
+
+        if(enGameState == GameState.GameOver)
+        {
+            if(timer > 1)
+            {
+                SceneTransitionManager.instance.ReloadCurrentScene();
+                timer = 0;
+            }
+            timer += Time.deltaTime;
         }
     }
 
