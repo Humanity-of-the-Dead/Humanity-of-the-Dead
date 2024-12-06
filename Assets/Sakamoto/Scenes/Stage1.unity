@@ -567,9 +567,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f36aef9290bac749a33b7c6de7739be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scGameMgr: {fileID: 498662820}
+  scGameMgr: {fileID: 0}
   iDownTime: 1
-  iHumanityMax: 100
+  iHumanityMax: 50
   iUpperHPMax: 10
   iLowerHPMax: 10
   goPlayer: {fileID: 614364183}
@@ -769,8 +769,12 @@ MonoBehaviour:
   Lowerbodypart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
   prePart: {fileID: 2198627103825754482, guid: b5aa889dd13af4649b260f79baf2c924, type: 3}
   PlayerParameter: {fileID: 261565240}
+  PlayerControl: {fileID: 0}
   Boss: 0
   textBox: {fileID: 0}
+  sceneTransitionManager: {fileID: 0}
+  canShoot: 0
+  firePoint: {fileID: 0}
 --- !u!114 &277595286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,14 +788,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scPlayerParameter: {fileID: 261565241}
-  pointA: 55
-  pointB: 45
+  moveAbs: 0
   speed: 2
   chaseSpeed: 2
   chaseRange: 5
   attackRange: 2
-  part: {fileID: 11400000, guid: e14baf2f3f4c6df40a37ca9c3d576095, type: 2}
+  upperpart: {fileID: 0}
+  lowerpart: {fileID: 0}
+  moveAnimation: {fileID: 0}
   gamestate: {fileID: 498662820}
+  waitTime: 0
 --- !u!1 &278691174
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,7 +1011,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6bb10fc7c6e334c8889707b6537b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enGameState: 0
+  OptionButton: {fileID: 0}
+  OptionReturnButton: {fileID: 0}
 --- !u!4 &498662821
 Transform:
   m_ObjectHideFlags: 0
@@ -1262,12 +1269,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a77a3114fa5a409a5786c62d230a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scPlayerMoveAnimation: {fileID: 0}
   scGameMgr: {fileID: 0}
   fSpeed: 5
   fJmpPower: 450
   goCamera: {fileID: 244809042}
   liObj: []
-  playerParameter: {fileID: 0}
+  sceneTransitionManager: {fileID: 0}
+  Juu: {fileID: 0}
 --- !u!1 &769248073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,8 +1403,12 @@ MonoBehaviour:
   Lowerbodypart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
   prePart: {fileID: 2198627103825754482, guid: b5aa889dd13af4649b260f79baf2c924, type: 3}
   PlayerParameter: {fileID: 261565240}
+  PlayerControl: {fileID: 0}
   Boss: 1
   textBox: {fileID: 64873705}
+  sceneTransitionManager: {fileID: 0}
+  canShoot: 0
+  firePoint: {fileID: 0}
 --- !u!212 &769248078
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3690,8 +3703,10 @@ MonoBehaviour:
   - 70
   Player: {fileID: 1621141916327498409}
   GameManager: {fileID: 498662820}
-  Flag: 010000
+  TextArea: {fileID: 0}
+  customNewline: '[BR]'
   TextSpeed: 1
+  GameClear: {fileID: 0}
 --- !u!212 &5376344313915181101
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3845,28 +3860,13 @@ MonoBehaviour:
   - {fileID: 3841212833097251331}
   - {fileID: 3183093110995269562}
   timeMax: 0.3
-  playerWalkRotation: []
-  armWalkRotation: []
-  legWalkForwardRotation: []
-  footWalkForwardRotation: []
-  legWalkBackRotation: []
-  footWalkBackRotation: []
-  timeWalk: 0
-  playerPatRotation: []
-  armPatForwardRotation: []
-  armPatBackRotation: []
-  legPatForwardRotation: []
-  footPatForwardRotation: []
-  legPatBackRotation: []
-  footPatBackRotation: []
-  playerKickRotation: []
-  armKickForwardRotation: []
-  armKickBackRotation: []
-  legKickForwardRotation: []
-  footKickForwardRotation: []
-  legKickBackRotation: []
-  footKickBackRotation: []
-  moveAnimation: {fileID: 0}
+  walk: {fileID: 0}
+  playerUpper: {fileID: 0}
+  playerLower: {fileID: 0}
+  policeUpper: {fileID: 0}
+  policeLower: {fileID: 0}
+  nurseUpper: {fileID: 0}
+  nurseLower: {fileID: 0}
 --- !u!1 &6397921676348784042
 GameObject:
   m_ObjectHideFlags: 0
@@ -4068,12 +4068,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a77a3114fa5a409a5786c62d230a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scPlayerMoveAnimation: {fileID: 0}
   scGameMgr: {fileID: 498662820}
   fSpeed: 5
   fJmpPower: 450
   goCamera: {fileID: 244809042}
   liObj: []
-  playerParameter: {fileID: 261565241}
+  sceneTransitionManager: {fileID: 0}
+  Juu: {fileID: 0}
 --- !u!50 &6886720959119762908
 Rigidbody2D:
   serializedVersion: 4
