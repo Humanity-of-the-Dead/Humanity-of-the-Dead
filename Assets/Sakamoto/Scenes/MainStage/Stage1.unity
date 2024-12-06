@@ -2090,7 +2090,7 @@ PrefabInstance:
       objectReference: {fileID: 261565240}
     - target: {fileID: 7604454603304143861, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 122.43
+      value: 125.57
       objectReference: {fileID: 0}
     - target: {fileID: 7604454603304143861, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4376,7 +4376,7 @@ MonoBehaviour:
   TypingSpeed: 0.5
   Position:
   - -1
-  - 180
+  - 190
   Player: {fileID: 798675964}
   GameManager: {fileID: 3111287980887441161}
   TextArea: {fileID: 259418451}

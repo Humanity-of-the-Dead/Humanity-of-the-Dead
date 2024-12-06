@@ -42,7 +42,8 @@ public class EnemySpooner : MonoBehaviour
 
     void Update()
     {
-        if(Vector2.Distance(this.transform.position,goTarget.transform.position) < 20)
+        //if(Vector2.Distance(this.transform.position,goTarget.transform.position) < 20
+        //    && this.transform.position.x - goTarget.transform.position.x > 0)
         {
             if (fTimer > fTimerMax && liEnemyList.Count < fEnemyMax) 
             {
@@ -51,10 +52,10 @@ public class EnemySpooner : MonoBehaviour
             }
             fTimer += Time.deltaTime;
         }
-        else
-        {
-            fTimer = 0;
-        }
+        //else
+        //{
+        //    fTimer = 0;
+        //}
 
         for(int i = 0; i < liEnemyList.Count; i++)
         {

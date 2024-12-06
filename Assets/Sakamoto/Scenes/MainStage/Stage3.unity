@@ -4740,7 +4740,7 @@ MonoBehaviour:
   TypingSpeed: 0.5
   Position:
   - -1
-  - 205
+  - 208
   Player: {fileID: 2023898247}
   GameManager: {fileID: 3111287980887441161}
   TextArea: {fileID: 259418451}

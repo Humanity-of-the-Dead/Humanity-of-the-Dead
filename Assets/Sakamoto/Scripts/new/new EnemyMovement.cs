@@ -190,10 +190,7 @@ public class newEnemyMovement : EnemyAttack
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("衝突イベント検知");
-        Debug.Log(collision.gameObject.tag);
-        Debug.Log(enemystate);
-        if (collision.gameObject.CompareTag("Enemy") && enemystate == EnemyState.search)
+        //if (collision.gameObject.CompareTag("Floor"))
         {
             Debug.Log("敵同士が衝突し、回れ右");
             if (movingToPointB)
