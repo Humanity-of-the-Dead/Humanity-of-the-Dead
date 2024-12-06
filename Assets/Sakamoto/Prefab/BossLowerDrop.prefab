@@ -175,7 +175,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goButton:
   - {fileID: 2182874680941712295}
-  - {fileID: 6055618513447132620}
   goGrave: {fileID: 2839263780191614865, guid: fd771b76aae9c0641833c8c5eff54c82, type: 3}
 --- !u!1 &1919319660750788736
 GameObject:
@@ -295,7 +294,7 @@ GameObject:
   - component: {fileID: 8179793562423747912}
   - component: {fileID: 8246827288547028697}
   m_Layer: 6
-  m_Name: IsyokuButton (Legacy)
+  m_Name: IreiButton (Legacy)
   m_TagString: Dorops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -618,7 +617,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goButton:
   - {fileID: 2182874680941712295}
-  - {fileID: 6055618513447132620}
 --- !u!1 &6055618513447132620
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,12 +632,12 @@ GameObject:
   - component: {fileID: 5176474489442788651}
   - component: {fileID: 543924641547830364}
   m_Layer: 6
-  m_Name: IreiButton (Legacy)
+  m_Name: IsyokuButton(Legacy)
   m_TagString: Dorops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7920036717445132605
 RectTransform:
   m_ObjectHideFlags: 0

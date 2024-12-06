@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public enum GameState { 
     Main,
+    ShowOption,
     ShowText,
     Clear, //クリア表示
     AfterBOss,//ボス後
@@ -28,12 +29,12 @@ public class GameMgr : MonoBehaviour
         if(enGameState == GameState.Main && Input.GetKeyDown(KeyCode.G))
         {
             OptionButton.onClick.Invoke();
-            enGameState = GameState.ShowText;
+            //enGameState = GameState.ShowText;
         }
-        else if (enGameState == GameState.ShowText && Input.GetKeyDown(KeyCode.G))
+        else if (enGameState == GameState.ShowOption && Input.GetKeyDown(KeyCode.G))
         {
             OptionReturnButton.onClick.Invoke();
-            enGameState = GameState.Main;
+            //enGameState = GameState.Main;
         }
     }
 
