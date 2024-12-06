@@ -190,7 +190,7 @@ public class newEnemyMovement : EnemyAttack
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("Floor"))
         {
             Debug.Log("“G“¯m‚ªÕ“Ë‚µA‰ñ‚ê‰E");
             if (movingToPointB)
