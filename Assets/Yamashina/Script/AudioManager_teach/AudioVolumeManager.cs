@@ -29,10 +29,10 @@ public class AudioVolumeManager : MonoBehaviour
     private const string SE_PREF_KEY = "SE_Volume";
     private const string UI_PREF_KEY = "UI_Volume";
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject); // このオブジェクトをシーン間で保持
-    }
+    //private void Awake()
+    //{
+    //    DontDestroyOnLoad(gameObject); // このオブジェクトをシーン間で保持
+    //}
 
     private void Start()
     {
