@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Sakamoto/Scenes/MainStage/Stage4.unity
     guid: eabb4fbe596d6044ba738ff58703f202
+  - enabled: 1
+    path: Assets/Sakamoto/Scenes/MainStage/Stage5.unity
+    guid: c42ed8d6bcab5e145be856f3d3fca55f
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729

@@ -18,12 +18,14 @@ MonoBehaviour:
   - m_SceneName: Stage2
   - m_SceneName: Stage3
   - m_SceneName: Stage4
+  - m_SceneName: Stage5
   sceneNames:
   - TitleScene
   - Stage1
   - Stage2
   - Stage3
   - Stage4
+  - Stage5
   previousScene: 0
   currentScene: 0
   sceneCount: 
