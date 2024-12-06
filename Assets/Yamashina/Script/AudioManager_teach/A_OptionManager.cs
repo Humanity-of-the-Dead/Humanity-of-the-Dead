@@ -117,10 +117,10 @@ public class A_OptionManager : MonoBehaviour
 
         // 表示速度も初期設定に反映
         int savedSpeedIndex = PlayerPrefs.GetInt(DisplaySpeedKey, 1);
-        T_ScenarioManager.displaySpeed = displaySpeedSettings.MediumSpeed; // デフォルト値設定
+        //T_ScenarioManager.displaySpeed = displaySpeedSettings.MediumSpeed; // デフォルト値設定
         SetDisplaySpeed(savedSpeedIndex); // スライダーの値を使って設定
 
-        Debug.Log("Initial Display Speed: " + T_ScenarioManager.displaySpeed);
+        //Debug.Log("Initial Display Speed: " + T_ScenarioManager.displaySpeed);
 
         InitializeSliders(); // スライダーの初期化
     }
@@ -224,7 +224,7 @@ public class A_OptionManager : MonoBehaviour
             _ => displaySpeedSettings.MediumSpeed
         };
 
-        T_ScenarioManager.displaySpeed = speed;
+        //T_ScenarioManager.displaySpeed = speed;
         PlayerPrefs.SetInt(DisplaySpeedKey, speedIndex);
         PlayerPrefs.Save();
     }
