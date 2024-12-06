@@ -43,16 +43,16 @@ public class newEnemyMovement : EnemyAttack
     {
         // プレイヤーを探すやつ
         player = GameObject.Find("Player Variant").gameObject.transform;
+        scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
         pointA = this.transform.position.x + moveAbs;
         pointB = this.transform.position.x - moveAbs;
-
     }
 
     void Update()
     {
         // プレイヤーとの距離を計算
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        switch (gamestate.enGameState)
+        switch (GameMgr.GetState())
         {
             case GameState.Main:
                 switch (enemystate)
@@ -190,10 +190,7 @@ public class newEnemyMovement : EnemyAttack
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("衝突イベント検知");
-        Debug.Log(collision.gameObject.tag);
-        Debug.Log(enemystate);
-        if (collision.gameObject.CompareTag("Enemy") && enemystate == EnemyState.search)
+        if (!collision.gameObject.CompareTag("Floor"))
         {
             Debug.Log("敵同士が衝突し、回れ右");
             if (movingToPointB)

@@ -15,9 +15,10 @@ public class Bullet : MonoBehaviour
     {
         // ターゲットに当たったかどうかを衝突したオブジェクトのタグによって判断する
         // たぶん銃を撃ったのがプレイヤーかエネミーか等、場合によって反応するタグを変える必要があるので未完成
-        if (hitInfo.gameObject.CompareTag("Player") || hitInfo.gameObject.CompareTag("Enemy"))
+        if (hitInfo.gameObject.CompareTag("Player") || hitInfo.gameObject.CompareTag("Enemy") || hitInfo.gameObject.CompareTag("Car"))
         {
             Debug.Log("当たった");
+            Debug.Log(hitInfo.gameObject.tag);
             Destroy(this.gameObject); // 銃弾を消す
         }
     }
@@ -27,6 +28,7 @@ public class Bullet : MonoBehaviour
         // 銃弾が画面外に出たかどうかをチェック
         if (IsOutOfScreen())
         {
+            Debug.Log("銃弾が画面外に出ました");
             Destroy(gameObject); // 銃弾を消す
         }
     }

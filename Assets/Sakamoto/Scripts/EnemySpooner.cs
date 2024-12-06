@@ -42,32 +42,37 @@ public class EnemySpooner : MonoBehaviour
 
     void Update()
     {
-        if(Vector2.Distance(this.transform.position,goTarget.transform.position) < 20)
+        if(GameMgr.GetState() == GameState.Main)
         {
-            if (fTimer > fTimerMax && liEnemyList.Count < fEnemyMax) 
+            if (Vector2.Distance(this.transform.position, goTarget.transform.position) < 20
+    && this.transform.position.x - goTarget.transform.position.x > 0)
             {
-                createEnemy();
+                if (fTimer > fTimerMax && liEnemyList.Count < fEnemyMax)
+                {
+                    createEnemy();
+                    fTimer = 0;
+                }
+                fTimer += Time.deltaTime;
+            }
+            else
+            {
                 fTimer = 0;
             }
-            fTimer += Time.deltaTime;
-        }
-        else
-        {
-            fTimer = 0;
-        }
 
-        for(int i = 0; i < liEnemyList.Count; i++)
-        {
-            if(liEnemyList[i] == null)
+            for (int i = 0; i < liEnemyList.Count; i++)
             {
-                liEnemyList.Remove(liEnemyList[i]);
-            } 
-        }
+                if (liEnemyList[i] == null)
+                {
+                    liEnemyList.Remove(liEnemyList[i]);
+                }
+            }
 
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    createEnemy();
-        //}
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    createEnemy();
+            //}
+
+        }
     }
 
     //エネミーの生成

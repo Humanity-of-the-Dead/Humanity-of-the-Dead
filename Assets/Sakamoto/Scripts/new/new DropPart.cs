@@ -42,7 +42,7 @@ public class newDropPart : MonoBehaviour
     void Update()
     {
         //Jキーを押したら慰霊する
-        if(Input.GetKeyUp(KeyCode.J) && goButton[1].activeSelf == true) {
+        if(Input.GetKeyUp(KeyCode.J) && goButton[0].activeSelf == true) {
             scPlayerParameter.comfort(10);
             MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
             Debug.Log(this.transform.position);
@@ -57,7 +57,7 @@ public class newDropPart : MonoBehaviour
 
         }
         //Lキーを押したら移植する
-        if (Input.GetKeyDown(KeyCode.L) && goButton[0].activeSelf == true)
+        if (Input.GetKeyDown(KeyCode.L) && goButton[1].activeSelf == true)
         {
             scPlayerParameter.transplant(partsData);
             MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
@@ -119,12 +119,20 @@ public class newDropPart : MonoBehaviour
     //ゲームクリア処理
     private void GameClear()
     {
-        //ゲームクリアを表示
-        goPanel.SetActive(true);
+        ////ゲームクリアを表示
+        //goPanel.SetActive(true);
         //goTextBox.GetComponent<GoalScript>().showText();
+
+        //プレイヤーの状態を保持する
+        scPlayerParameter.KeepBodyData();
         
         //現在のシーンの一つ先のシーンのインデックスを取得
-        int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetSceneInt(SceneTransitionManager.instance.sceneInformation.GetPreviousScene()) + 2;
+        int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
+        //ステージが4の時
+        if (iNextIndex == 4)
+        {
+            scPlayerParameter.DefaultBodyData();
+        }
         //インデックスが上限に行ったらタイトルのインデックスを代入
         if (iNextIndex > 4)
         {
@@ -135,7 +143,13 @@ public class newDropPart : MonoBehaviour
         GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
 
         MultiAudio.ins.PlayBGM_ByName("BGM_clear");
-        sceneTransitionManager.NextSceneButton(iNextIndex);
+
+
+        //テキストボックスの表示
+        goTextBox.SetActive(true);
+        //GameStateをAfterBOssに切り替える
+        GameMgr.ChangeState(GameState.AfterBOss);
+        //SceneTransitionManager.instance.NextSceneButton(iNextIndex);
 
 
     }

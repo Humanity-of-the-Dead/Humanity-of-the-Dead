@@ -6,8 +6,10 @@ public class DropButton : MonoBehaviour
 
     void Start()
     {
-        goButton[0].SetActive(false);
-        goButton[1].SetActive(false);
+        for(int i = 0; i < goButton.Length; i++)
+        {
+            goButton[i].SetActive(false);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -17,8 +19,10 @@ public class DropButton : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.attachedRigidbody?.WakeUp(); // スリープ状態を解除
-            goButton[0].SetActive(true);
-            goButton[1].SetActive(true);
+            for(int i = 0; i < goButton.Length;i++)
+            {
+                goButton[i].SetActive(true);
+            }
         }
     }
 
@@ -27,8 +31,10 @@ public class DropButton : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Debug.Log("プレイヤーがトリガー範囲外に出ました");
-            goButton[0].SetActive(false);
-            goButton[1].SetActive(false);
+            for(int i = 0; i < goButton.Length; i++)
+            {
+                goButton[i].SetActive(false);
+            }
         }
     }
 }

@@ -36,10 +36,14 @@ public class PlayerParameter : MonoBehaviour
     public BodyPartsData LowerData;
     //キャラのイメージ取得用
     PlayerMoveAnimation scPlayerMoveAnimation;
-    //上半身のパーツデータ(初期)
+    //上半身のパーツデータ(保存用)
     private BodyPartsData upperIndex;
-    //下半身のパーツデータ(初期)
+    //下半身のパーツデータ(保存用)
     private BodyPartsData lowerIndex;
+    //上半身のパーツデータ(ステージ4用)
+    private BodyPartsData upperPlayer;
+    //下半身のパーツデータ(ステージ4用)
+    private BodyPartsData lowerPlayer;
 
 
 
@@ -56,6 +60,8 @@ public class PlayerParameter : MonoBehaviour
     {
         upperIndex = UpperData;
         lowerIndex = LowerData;
+        upperPlayer = UpperData;
+        lowerPlayer = LowerData;
         InitializeReferences();
 
         //コンポーネント取得
@@ -73,7 +79,7 @@ public class PlayerParameter : MonoBehaviour
        string SceneName = SceneManager.GetActiveScene().name;
         if(!(SceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title)))
         {
-            switch (scGameMgr.GetComponent<GameMgr>().enGameState)
+            switch (GameMgr.GetState())
             {
                 case GameState.Main:
                     //パラメータの値をiDownTime秒で1減少させる
@@ -87,7 +93,7 @@ public class PlayerParameter : MonoBehaviour
                         Debug.Log("リロードを開始します"); // デバッグログで確認
 
                         GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
-                        SceneTransitionManager.instance.ReloadCurrentScene();
+                        
 
 
                         //GameOverのBGM鳴らす箇所
@@ -102,6 +108,7 @@ public class PlayerParameter : MonoBehaviour
 
                         //ゲームオーバーの標準
                         goPanel.SetActive(true);
+                        GameMgr.ChangeState(GameState.GameOver);
 
                     }
 
@@ -242,6 +249,28 @@ public class PlayerParameter : MonoBehaviour
             Debug.LogWarning("必要なオブジェクトが見つかりません");
         }
 
+    }
+
+    /// <summary>
+    /// ステージクリア時プレイヤーの状態を保持する
+    /// DropPartに呼んでもらう
+    /// </summary>
+    public void KeepBodyData()
+    {
+        upperIndex = UpperData;
+        lowerIndex = LowerData;
+    }
+
+    /// <summary>
+    /// ステージクリア4の時デフォルトの状態にする
+    /// DropPartに呼んでもらう
+    /// </summary>
+    public void DefaultBodyData()
+    {
+        UpperData = upperPlayer;
+        LowerData = lowerPlayer;
+        upperIndex = upperPlayer;
+        lowerIndex = lowerPlayer;
     }
     private void OnEnable()
     {

@@ -16,6 +16,7 @@ TagManager:
   - PlayerShoot
   - EnemyShoot
   - GameClear
+  - UI
   layers:
   - Default
   - TransparentFX

@@ -50,7 +50,7 @@ public class TextDisplay_Yamashina : MonoBehaviour
     // 毎フレーム実行される
     void Update()
     {
-        switch (GameManager.enGameState)
+        switch (GameMgr.GetState())
         {
             case GameState.Main:
                 for (int i = 0; i < Flag.Length; i++)
@@ -58,7 +58,7 @@ public class TextDisplay_Yamashina : MonoBehaviour
                     if (Player.transform.position.x > Position[i] && Flag[i] == false)
                     {
                         Flag[i] = true; // 一度だけ通る
-                        GameManager.ChangeState(GameState.ShowText);
+                        GameMgr.ChangeState(GameState.ShowText);
 
                         TextArea.SetActive(true);
                         UpdateText(); // 最初のテキストを更新
@@ -165,7 +165,7 @@ public class TextDisplay_Yamashina : MonoBehaviour
     // テキストエリアを閉じる
     private void CloseTextArea()
     {
-        GameManager.ChangeState(GameState.Main);
+        GameMgr.ChangeState(GameState.Main);
         TextArea.SetActive(false); // テキストエリアを非表示
     }
 }

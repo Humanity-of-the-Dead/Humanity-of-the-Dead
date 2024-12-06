@@ -69,7 +69,7 @@ public class PlayerControl : MonoBehaviour
             this.rbody2D.velocity = new Vector2(0.0f, -1);
         }
 
-        switch (scGameMgr.enGameState)
+        switch (GameMgr.GetState())
         {
             case GameState.Main:
                 //bShootFlag‚ðfalse‚É‚·‚é
@@ -198,8 +198,8 @@ public class PlayerControl : MonoBehaviour
 
             for (int i = 0; i < liObj.Count; i++)
             {
-                Debug.Log(liObj[i].gameObject.transform.position);
-                Debug.Log(playerParameter.UpperData.AttackArea);
+                //Debug.Log(liObj[i].gameObject.transform.position);
+                //Debug.Log(playerParameter.UpperData.AttackArea);
                 //‰¼ˆø”
                 UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea, playerParameter.UpperData.iPartAttack);
             }
@@ -300,13 +300,13 @@ public class PlayerControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyShoot"))
         {
-            if (0 < this.transform.position.y - collision.gameObject.transform.position.y)
+            if (0 > this.transform.position.y - collision.gameObject.transform.position.y)
             {
-                playerParameter.UpperHP -= 3;
+                playerParameter.UpperHP -= 1;
             }
             else
             {
-                playerParameter.LowerHP -= 3;
+                playerParameter.LowerHP -= 1;
             }
         }
 

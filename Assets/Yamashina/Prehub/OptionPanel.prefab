@@ -1585,11 +1585,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1870882201301314316, guid: 891af02d74a4d78449dd3f38dfe6aaa8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -100
+      value: -103
       objectReference: {fileID: 0}
     - target: {fileID: 1870882201301314316, guid: 891af02d74a4d78449dd3f38dfe6aaa8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -120
+      value: -81
       objectReference: {fileID: 0}
     - target: {fileID: 1870882201301314316, guid: 891af02d74a4d78449dd3f38dfe6aaa8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1929,7 +1929,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4342398986176325815, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6709600532840300289}
+      addedObject: {fileID: 3971554612639283650}
     - targetCorrespondingSourceObject: {fileID: 324430537954622746, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3828968067219170531}
@@ -2080,7 +2080,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4342398986176325815, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
   m_PrefabInstance: {fileID: 5930022760068499512}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6709600532840300289
+--- !u!114 &3971554612639283650
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2096,8 +2096,6 @@ MonoBehaviour:
   bgmSlider: {fileID: 4292276209558164484}
   seSlider: {fileID: 4355863568775309853}
   uiSlider: {fileID: 5712834787507670375}
-  BGM: {fileID: 0}
-  SE: {fileID: 0}
   initial_BGM: 0.5
   initial_SE: 0.5
   initial_UI: 0.5

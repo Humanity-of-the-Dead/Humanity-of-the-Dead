@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1481237974272629741, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1542777082605014598, guid: cdf94058954888c498d04b05f2685229, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -251,8 +255,8 @@ MonoBehaviour:
   damage: 0
   Upperbodypart: {fileID: 11400000, guid: 52c75d8f30fdb5840bc98bdc62f54324, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: 9be24730dcd468c4593ce730030bff5f, type: 2}
-  preUpperPart: {fileID: 1386206347217571068, guid: 9ef6486a8bc7b494c93dd6ae51d33677, type: 3}
-  preLowerPart: {fileID: 1386206347217571068, guid: f6b212fa74ac2e345911fcdee1d5d9de, type: 3}
+  preUpperPart: {fileID: 1386206347217571068, guid: 37654147b537c0d40b79ca38c22382bb, type: 3}
+  preLowerPart: {fileID: 1386206347217571068, guid: 48a944faabba3dc4b9d759dd674bf257, type: 3}
   scPlayerParameter: {fileID: 0}
   PlayerControl: {fileID: 0}
   Boss: 0
