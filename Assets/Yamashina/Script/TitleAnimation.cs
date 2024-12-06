@@ -45,11 +45,11 @@ public class TitleAnimation : MonoBehaviour
 
     public float Coroutine;
     [Header("初期BGMの音量、スライダーの値と同じでお願いします！")]
-    [Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
-    public float BGMVolume;
-    [Header("初期UIの音量、スライダーの値と同じでお願いします！")]
-    [Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
-    public float UIVolume;
+    //[Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
+    //public float BGMVolume;
+    //[Header("初期UIの音量、スライダーの値と同じでお願いします！")]
+    //[Tooltip("Floatの小数点第１まで入力、0.0～１.0まで")]
+    //public float UIVolume;
 
 
     [Header("クレジット画面のアニメーション開始位置")]
@@ -86,8 +86,8 @@ public class TitleAnimation : MonoBehaviour
             SceneTransitionManager.instance.NextSceneButton(1));
 
 
-        MultiAudio.ins.bgmSource.volume = BGMVolume;
-        MultiAudio.ins.seSource.volume = UIVolume;
+        //MultiAudio.ins.bgmSource.volume = BGMVolume;
+        //MultiAudio.ins.seSource.volume = UIVolume;
 
         if (!CreditPanel.activeSelf && !OptionPanel.activeSelf)
         {

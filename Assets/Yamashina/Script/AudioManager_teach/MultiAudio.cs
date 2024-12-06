@@ -1,37 +1,33 @@
-﻿#define DEBUG 
+﻿#define DEBUG
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
-
 public class MultiAudio : MonoBehaviour
 {
-
-
-    
     public AudioClip[] audioClipsBGM; // Array for multiple BGM clips
     public AudioClip[] audioClipsSE;  // Array for multiple SE clips
+    public AudioClip[] audioClipsUI;  // Array for multiple UI clips
 
     public AudioSource bgmSource;
     public AudioSource seSource;
+    public AudioSource uiSource; // New UI AudioSource
 
     // Audio Mixer Groups to assign different mixer settings
     public AudioMixerGroup bgmMixerGroup;
     public AudioMixerGroup seMixerGroup;
     public AudioMixerGroup uiMixerGroup;
-    //BGMのオーディオクリップ
 
     private Dictionary<string, AudioClip> sEClipDictionary;
     private Dictionary<string, AudioClip> BGMClipDictionary;
+    private Dictionary<string, AudioClip> UIClipDictionary; // Dictionary for UI clips
 
-    //シングルトン
+    // Singleton
     public static MultiAudio ins;
-
 
     private void Awake()
     {
-        //シングルトン化
+        // Singleton pattern
         if (ins != null)
         {
             Destroy(gameObject);
@@ -41,35 +37,47 @@ public class MultiAudio : MonoBehaviour
             ins = this;
             DontDestroyOnLoad(gameObject);
         }
-        //\シングルトン化
     }
-
-
-
 
     private void Start()
     {
-         bgmSource = GameObject.FindWithTag("BGM").GetComponent<AudioSource>();
-        
+        bgmSource = GameObject.FindWithTag("BGM").GetComponent<AudioSource>();
         seSource = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
+        uiSource = GameObject.FindWithTag("UI").GetComponent<AudioSource>(); // New UI AudioSource
 
         // Assign mixer groups to the audio sources
         if (bgmSource != null) bgmSource.outputAudioMixerGroup = bgmMixerGroup;
         if (seSource != null) seSource.outputAudioMixerGroup = seMixerGroup;
-        // SEクリップを辞書化して名前でアクセス可能に
+        if (uiSource != null) uiSource.outputAudioMixerGroup = uiMixerGroup; // Assign UI Mixer Group
+
+        // Initialize dictionaries for easy access by name
+        InitializeDictionaries();
+    }
+
+    private void InitializeDictionaries()
+    {
+        // SE clips
         sEClipDictionary = new Dictionary<string, AudioClip>();
         foreach (var clip in audioClipsSE)
         {
             sEClipDictionary[clip.name] = clip;
         }
+
+        // BGM clips
         BGMClipDictionary = new Dictionary<string, AudioClip>();
-        Debug.Log(BGMClipDictionary);
         foreach (var clip in audioClipsBGM)
         {
-            Debug.Log($"{clip.name}");  
             BGMClipDictionary[clip.name] = clip;
         }
+
+        // UI clips
+        UIClipDictionary = new Dictionary<string, AudioClip>();
+        foreach (var clip in audioClipsUI)
+        {
+            UIClipDictionary[clip.name] = clip;
+        }
     }
+
     public void PlayBGM_ByName(string bgmName)
     {
 #if DEBUG
@@ -77,7 +85,6 @@ public class MultiAudio : MonoBehaviour
         {
             Debug.LogWarning("BGMClipDictionary is not initialized.");
             return;
-
         }
 #endif
         if (BGMClipDictionary.TryGetValue(bgmName, out var clip))
@@ -89,10 +96,8 @@ public class MultiAudio : MonoBehaviour
         {
             Debug.LogWarning("BGM with name not found: " + bgmName);
         }
-        // AudioSourceに設定して再生
-
-
     }
+
     public void PlaySEByName(string name)
     {
         if (sEClipDictionary.TryGetValue(name, out var clip))
@@ -104,21 +109,24 @@ public class MultiAudio : MonoBehaviour
             Debug.LogWarning("SE with name not found: " + name);
         }
     }
+
+    public void PlayUIByName(string name)
+    {
+        if (UIClipDictionary.TryGetValue(name, out var clip))
+        {
+            PlayUI(clip);
+        }
+        else
+        {
+            Debug.LogWarning("UI with name not found: " + name);
+        }
+    }
+
     private void PlaySE(AudioClip clip)
     {
         if (clip != null)
         {
             seSource.clip = clip;
-
-            if (clip.name.StartsWith("UI"))
-            {
-                seSource.outputAudioMixerGroup = uiMixerGroup;
-            }
-            else
-            {
-                seSource.outputAudioMixerGroup = seMixerGroup;
-            }
-
             seSource.PlayOneShot(seSource.clip);
             Debug.Log("Playing SE: " + clip.name);
         }
@@ -127,21 +135,36 @@ public class MultiAudio : MonoBehaviour
             Debug.LogWarning("SE clip is null");
         }
     }
+
+    private void PlayUI(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            uiSource.clip = clip;
+            uiSource.PlayOneShot(uiSource.clip);
+            Debug.Log("Playing UI: " + clip.name);
+        }
+        else
+        {
+            Debug.LogWarning("UI clip is null");
+        }
+    }
+
     private void PlayBGM(AudioClip clip)
     {
         if (clip != null)
         {
             bgmSource.clip = clip;
-            bgmSource.loop = true; // ループ再生
+            bgmSource.loop = true; // Loop playback
             bgmSource.Play();
-
         }
         else
         {
-            Debug.LogWarning("BGMs clip is null");
+            Debug.LogWarning("BGM clip is null");
         }
     }
-    // Method to play a selected SE by index
+
+    // Optional: Play SE by index
     public void ChooseSongs_SE(int index)
     {
         if (index >= 0 && index < audioClipsSE.Length)
@@ -154,5 +177,16 @@ public class MultiAudio : MonoBehaviour
         }
     }
 
-
+    // Optional: Play UI sound by index
+    public void ChooseSongs_UI(int index)
+    {
+        if (index >= 0 && index < audioClipsUI.Length)
+        {
+            PlayUI(audioClipsUI[index]);
+        }
+        else
+        {
+            Debug.LogWarning("UI index out of range");
+        }
+    }
 }

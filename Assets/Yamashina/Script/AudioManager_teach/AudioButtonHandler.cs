@@ -16,13 +16,13 @@ public class AudioButtonHandler : MonoBehaviour, IPointerEnterHandler
     {
 
        
-            MultiAudio.ins.PlaySEByName(hoverSEName);
+            MultiAudio.ins.PlayUIByName(hoverSEName);
        
     }
     // SEを再生する
     public void PlaySE()
     {
-        MultiAudio.ins.PlaySEByName(clickSEName);
+        MultiAudio.ins.PlayUIByName(clickSEName);
     }
 
    
