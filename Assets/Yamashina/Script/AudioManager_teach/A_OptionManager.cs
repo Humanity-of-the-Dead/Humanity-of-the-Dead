@@ -23,17 +23,17 @@ public class AudioSettings
 
     public float SEVolume;
 
-    [Header("Master音量")]
+    [Header("UI音量")]
     [Tooltip("Floatで入力")]
 
-    public float MasterVolume;
+    public float UIVolume;
     public float GetVolume(string volumeType)
     {
         switch (volumeType)
         {
             case "BGM": return BGMVolume;
             case "SE": return SEVolume;
-            case "Master": return MasterVolume;
+            case "UI": return UIVolume;
             default: throw new ArgumentException("Invalid volume type");
         }
     }
@@ -48,8 +48,8 @@ public class AudioSettings
             case "SE":
                 SEVolume = value;
                 break;
-            case "Master":
-                MasterVolume = value;
+            case "UI":
+                UIVolume = value;
                 break;
             default:
                 throw new ArgumentException("Invalid volume type");
@@ -58,25 +58,6 @@ public class AudioSettings
 }
 [System.Serializable]
 
-public class DisplaySpeedSettings
-{
-    [Header("テキスト表示速度の設定")]
-    [Tooltip("テキスト表示速度: 低速\nfloatで設定、おそらく0.3で適正")]
-    [Range(0, 2)]
-
-    public float SlowSpeed = 0.3f;
-
-    [Tooltip("テキスト表示速度: 中速\nfloatで設定,おそらく0.2で適正")]
-    [Range(0, 2)]
-
-    public float MediumSpeed = 0.2f;
-
-    [Tooltip("テキスト表示速度: 高速\nfloatで設定,0.05～0.1の間が適正")]
-    [Range(0, 2)]
-
-    public float FastSpeed = 0.1f;
-
-}
 
 
 public class A_OptionManager : MonoBehaviour
@@ -84,18 +65,15 @@ public class A_OptionManager : MonoBehaviour
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Slider BGMSlider;
     [SerializeField] Slider SESlider;
-    [SerializeField] Slider MasterVolumeSlider;
-    [SerializeField] Slider DisplaySpeedSlider;
+    [SerializeField] Slider UIVolumeSlider;
 
-    public DisplaySpeedSettings displaySpeedSettings;
     [Header("初期音量設定")]
 
     public AudioSettings initialAudioSettings;
 
     private const string BGMVolumeKey = "BGMVolume";
-    private const string MasterVolumeKey = "MasterVolume";
+    private const string UIVolumeKey = "UIVolume";
     private const string SEVolumeKey = "SEVolume";
-    private const string DisplaySpeedKey = "DisplaySpeed";
 
 
 
@@ -112,14 +90,10 @@ public class A_OptionManager : MonoBehaviour
         float savedSEVolume = PlayerPrefs.GetFloat(SEVolumeKey, initialAudioSettings.GetVolume("SE"));
         SetVolume("SE", savedSEVolume);
 
-        float savedMasterVolume = PlayerPrefs.GetFloat(MasterVolumeKey, initialAudioSettings.GetVolume("Master"));
-        SetVolume("Master", savedMasterVolume);
+        float savedUIVolume = PlayerPrefs.GetFloat(UIVolumeKey, initialAudioSettings.GetVolume("UI"));
+        SetVolume("UI", savedUIVolume);
 
-        // 表示速度も初期設定に反映
-        int savedSpeedIndex = PlayerPrefs.GetInt(DisplaySpeedKey, 1);
-        //T_ScenarioManager.displaySpeed = displaySpeedSettings.MediumSpeed; // デフォルト値設定
-        SetDisplaySpeed(savedSpeedIndex); // スライダーの値を使って設定
-
+       
         //Debug.Log("Initial Display Speed: " + T_ScenarioManager.displaySpeed);
 
         InitializeSliders(); // スライダーの初期化
@@ -144,22 +118,19 @@ public class A_OptionManager : MonoBehaviour
     {
         // 設定をリセット
         PlayerPrefs.DeleteKey(BGMVolumeKey);
-        PlayerPrefs.DeleteKey(MasterVolumeKey);
+        PlayerPrefs.DeleteKey(UIVolumeKey);
         PlayerPrefs.DeleteKey(SEVolumeKey);
-        PlayerPrefs.DeleteKey(DisplaySpeedKey);
         PlayerPrefs.Save(); // 変更を保存
 
         // スライダーをデフォルト値に戻す
         BGMSlider.value = initialAudioSettings.GetVolume("BGM");
-        MasterVolumeSlider.value = initialAudioSettings.GetVolume("Master");
+        UIVolumeSlider.value = initialAudioSettings.GetVolume("UI");
         SESlider.value = initialAudioSettings.GetVolume("SE");
-        DisplaySpeedSlider.value = 1;  // 中速がデフォルト
 
         // オーディオと表示速度のデフォルト設定を適用
         SetVolume("BGM", initialAudioSettings.GetVolume("BGM"));
-        SetVolume("Master", initialAudioSettings.GetVolume("Master"));
+        SetVolume("UI", initialAudioSettings.GetVolume("UI"));
         SetVolume("SE", initialAudioSettings.GetVolume("SE"));
-        SetDisplaySpeed(1); // 中速
     }
 
     private void InitializeSliders()
@@ -170,11 +141,11 @@ public class A_OptionManager : MonoBehaviour
         BGMSlider.onValueChanged.RemoveAllListeners();
         BGMSlider.onValueChanged.AddListener(value => SetVolume("BGM", value));
 
-        // MasterVolumeスライダー
-        float MasterVolume = PlayerPrefs.GetFloat(MasterVolumeKey, initialAudioSettings.GetVolume("Master"));
-        MasterVolumeSlider.value = MasterVolume;
-        MasterVolumeSlider.onValueChanged.RemoveAllListeners();
-        MasterVolumeSlider.onValueChanged.AddListener(value => SetVolume("Master", value));
+        // UIVolumeスライダー
+        float UIVolume = PlayerPrefs.GetFloat(UIVolumeKey, initialAudioSettings.GetVolume("UI"));
+        UIVolumeSlider.value = UIVolume;
+        UIVolumeSlider.onValueChanged.RemoveAllListeners();
+        UIVolumeSlider.onValueChanged.AddListener(value => SetVolume("UI", value));
 
         // SEスライダー
         float SEVolume = PlayerPrefs.GetFloat(SEVolumeKey, initialAudioSettings.GetVolume("SE"));
@@ -182,14 +153,7 @@ public class A_OptionManager : MonoBehaviour
         SESlider.onValueChanged.RemoveAllListeners();
         SESlider.onValueChanged.AddListener(value => SetVolume("SE", value));
 
-        // 表示速度スライダー
-        DisplaySpeedSlider.minValue = 0;
-        DisplaySpeedSlider.maxValue = 2;
-        DisplaySpeedSlider.wholeNumbers = true;
-        DisplaySpeedSlider.value = PlayerPrefs.GetInt(DisplaySpeedKey, 1); // デフォルトは1（中速）
-        DisplaySpeedSlider.onValueChanged.RemoveAllListeners();
-        DisplaySpeedSlider.onValueChanged.AddListener(SetDisplaySpeed);
-    }
+           }
 
     // 汎用音量設定メソッド
     public void SetVolume(string volumeType, float volume)
@@ -206,28 +170,17 @@ public class A_OptionManager : MonoBehaviour
         {
             Audiovolume.SetSeVolume(volume);
         }
+        else if (volumeType == "UI")
+        {
+            Audiovolume.SetUIVolume(volume);    
+        }
 
-        initialAudioSettings.SetVolume(volumeType, volume); // AudioSettingsにも保存
+            initialAudioSettings.SetVolume(volumeType, volume); // AudioSettingsにも保存
         PlayerPrefs.SetFloat(volumeType + "Volume", volume); // PlayerPrefsに保存
         PlayerPrefs.Save();
     }
 
     // テキスト表示速度の変更
-    public void SetDisplaySpeed(float sliderValue)
-    {
-        int speedIndex = Mathf.RoundToInt(sliderValue);
-        float speed = speedIndex switch
-        {
-            0 => displaySpeedSettings.SlowSpeed,
-            1 => displaySpeedSettings.MediumSpeed,
-            2 => displaySpeedSettings.FastSpeed,
-            _ => displaySpeedSettings.MediumSpeed
-        };
-
-        //T_ScenarioManager.displaySpeed = speed;
-        PlayerPrefs.SetInt(DisplaySpeedKey, speedIndex);
-        PlayerPrefs.Save();
-    }
 
     // 音量をデシベルに変換
     private float ChangeVolumeToDB(float volume)

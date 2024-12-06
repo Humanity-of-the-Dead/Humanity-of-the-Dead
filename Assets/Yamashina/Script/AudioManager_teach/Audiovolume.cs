@@ -4,9 +4,7 @@ public class Audiovolume : MonoBehaviour
 {
     public static AudioSource audioSourceBGM; // 現在のシーンのBGM
     public static AudioSource audioSourceSE;  // 現在のシーンのSE (汎用)
-
-    // 文字送りSE用のオーディオソース
-    public static AudioSource audioSourceTextSE;
+    public static AudioSource audioSourceUI;
 
     public static float BGM
     {
@@ -18,11 +16,18 @@ public class Audiovolume : MonoBehaviour
         get { return PlayerPrefs.GetFloat(SE_PREF_KEY, 1.0f); }  // デフォルト値 1.0f
         set { SetSeVolume(value); }  // プロパティに値を設定すると自動的に音量も更新
     }
+    public static float UI
+    {
+        get { return PlayerPrefs.GetFloat(UIVolumeKey, 1.0f); }  // デフォルト値 1.0f
+        set { SetUIVolume(value); }  // プロパティに値を設定すると自動的に音量も更新
+    }
+
 
     // PlayerPrefs に保存されるキー名
     private const string BGM_PREF_KEY = "BGM_VOLUME";
     private const string SE_PREF_KEY = "SE_VOLUME";
 
+    private const string UIVolumeKey = "UI_VOLUME";
     // シーンが読み込まれたときにオーディオソースを初期化
     private void Start()
     {
@@ -39,7 +44,7 @@ public class Audiovolume : MonoBehaviour
         audioSourceSE = GameObject.FindWithTag("SE")?.GetComponent<AudioSource>();
 
         // 文字送り用SEと草をかき分けるSE用のオーディオソースを取得
-        audioSourceTextSE = GameObject.FindWithTag("TextSE")?.GetComponent<AudioSource>();
+        audioSourceUI = GameObject.FindWithTag("UI")?.GetComponent<AudioSource>();
         // 取得したBGM、SEオーディオソースに音量を適用
 
         ApplySavedVolumes();
@@ -67,16 +72,27 @@ public class Audiovolume : MonoBehaviour
             audioSourceSE.volume = seVolume;
         }
 
-        if (audioSourceTextSE != null)
-        {
-            audioSourceTextSE.volume = seVolume;
-        }
+
         // 音量を PlayerPrefs に保存
 
         PlayerPrefs.SetFloat(SE_PREF_KEY, seVolume);
         PlayerPrefs.Save();
         Debug.Log($"SE Volume set to: {seVolume}");
     }
+    public static void SetUIVolume(float UIVolume)
+    {
+        if (audioSourceUI != null)
+        {
+            audioSourceUI.volume = UIVolume;
+        }
+        // 音量を PlayerPrefs に保存
+
+        PlayerPrefs.SetFloat(UIVolumeKey, UIVolume);
+        PlayerPrefs.Save();
+        Debug.Log($"UI Volume set to: {UIVolume}");
+
+    }
+
 
     // PlayerPrefs から音量設定を読み込み、オーディオソースに適用
     private void LoadVolumeSettings()
@@ -95,6 +111,12 @@ public class Audiovolume : MonoBehaviour
             float seVolume = PlayerPrefs.GetFloat(SE_PREF_KEY);
             SetSeVolume(seVolume);
         }
+        if (PlayerPrefs.HasKey(UIVolumeKey))
+        {
+            float UIVolume = PlayerPrefs.GetFloat(UIVolumeKey);
+            SetSeVolume(UIVolume);
+        }
+    
     }
 
     // 保存された音量設定をオーディオソースに適用
@@ -116,32 +138,15 @@ public class Audiovolume : MonoBehaviour
 
         //TextSE 音量を設定
 
-        if (audioSourceTextSE != null && PlayerPrefs.HasKey(SE_PREF_KEY))
+        if (audioSourceUI != null && PlayerPrefs.HasKey(UIVolumeKey))
         {
-            audioSourceTextSE.volume = PlayerPrefs.GetFloat(SE_PREF_KEY);
+            audioSourceUI.volume = PlayerPrefs.GetFloat(UIVolumeKey);
         }
 
-        
-    }
 
-    // 文字送りSEを再生
-    public static void PlayTextSE()
-    {
-        if (audioSourceTextSE != null)
-        {
-           
-            if (audioSourceTextSE.isPlaying)
-            {
-                audioSourceTextSE.Stop();
-            }
-            else
-            {
-                audioSourceTextSE.PlayOneShot(audioSourceTextSE.clip);
-
-            }
-            Debug.Log(audioSourceSE.isPlaying); 
-        }
     }
 
    
+
+
 }
