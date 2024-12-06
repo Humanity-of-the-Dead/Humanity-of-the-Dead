@@ -261,8 +261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpperHP: 2
-  LowerHP: 2
-  damage: 1
+  LowerHP: 5
+  damage: 2
   Upperbodypart: {fileID: 11400000, guid: e14baf2f3f4c6df40a37ca9c3d576095, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
   preUpperPart: {fileID: 1386206347217571068, guid: 9ef6486a8bc7b494c93dd6ae51d33677, type: 3}
