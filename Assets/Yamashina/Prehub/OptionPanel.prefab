@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 8425784399654880535}
   - component: {fileID: 1355453482371252758}
   - component: {fileID: 4149371976805216332}
+  - component: {fileID: 4888065692384960677}
   m_Layer: 5
   m_Name: OptionPanel
   m_TagString: Untagged
@@ -481,6 +482,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4888065692384960677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2357531127260703785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12fbf1ca8dcfd74b9910db692bea324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  operationButton: {fileID: 4926364517891182728}
+  volumeButton: {fileID: 1803590359336405965}
+  selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  unselectedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &2586084831610162257
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +598,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
     m_HighlightedColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
@@ -649,6 +666,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4888065692384960677}
+        m_TargetAssemblyTypeName: ButtonHighlighter, Assembly-CSharp
+        m_MethodName: OnButtonSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1803590359336405965}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1132,7 +1161,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
     m_HighlightedColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
@@ -1200,6 +1229,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4888065692384960677}
+        m_TargetAssemblyTypeName: ButtonHighlighter, Assembly-CSharp
+        m_MethodName: OnButtonSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 4926364517891182728}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1927,9 +1968,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4342398986176325815, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7675996808352432732}
     - targetCorrespondingSourceObject: {fileID: 324430537954622746, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3828968067219170531}
@@ -1946,28 +1984,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 379400666807131533}
   m_SourcePrefab: {fileID: 100100000, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
---- !u!114 &4292276209558164484 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7627574054078012476, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
-  m_PrefabInstance: {fileID: 5930022760068499512}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6254153611544081698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4355863568775309853 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7942254754157535781, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
-  m_PrefabInstance: {fileID: 5930022760068499512}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6423444436437391741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &4515936576138787404 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7845402679696126580, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
@@ -2009,17 +2025,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickSEName: UI_click
   hoverSEName: UI_mouseover
---- !u!114 &5712834787507670375 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2090722119120766303, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
-  m_PrefabInstance: {fileID: 5930022760068499512}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5209639472845457423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6254153611544081698 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 324430537954622746, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
@@ -2075,31 +2080,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickSEName: UI_click
   hoverSEName: UI_mouseover
---- !u!1 &7928834082859065487 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4342398986176325815, guid: 2d1fc3cb919b11947a05c44da4b86044, type: 3}
-  m_PrefabInstance: {fileID: 5930022760068499512}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7675996808352432732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7928834082859065487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47ee305e0200dd94ab810dc341d59271, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 887ea55bfa346ea44a967272b02d32fb, type: 2}
-  BGMSlider: {fileID: 4292276209558164484}
-  SESlider: {fileID: 4355863568775309853}
-  UIVolumeSlider: {fileID: 5712834787507670375}
-  initialAudioSettings:
-    BGMVolume: 0.5
-    SEVolume: 0.5
-    UIVolume: 0.5
 --- !u!1001 &5985610858340386862
 PrefabInstance:
   m_ObjectHideFlags: 0
