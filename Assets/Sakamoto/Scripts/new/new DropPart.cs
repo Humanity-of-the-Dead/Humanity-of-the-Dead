@@ -19,7 +19,7 @@ public class newDropPart : MonoBehaviour
 
     //ボスフラグ
     bool bBoss;
-     SceneTransitionManager sceneTransitionManager;
+    SceneTransitionManager sceneTransitionManager;
 
     //ボタンオブジェクト
     [SerializeField] GameObject[] goButton;
@@ -42,7 +42,8 @@ public class newDropPart : MonoBehaviour
     void Update()
     {
         //Jキーを押したら慰霊する
-        if(Input.GetKeyUp(KeyCode.J) && goButton[0].activeSelf == true) {
+        if (Input.GetKeyUp(KeyCode.J) && goButton[0].activeSelf == true)
+        {
             scPlayerParameter.comfort(10);
             MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
             Debug.Log(this.transform.position);
@@ -78,7 +79,7 @@ public class newDropPart : MonoBehaviour
     public void setImnage()
     {
         Image image = this.GetComponent<Image>();
-        image.sprite = partsData.spBody; 
+        image.sprite = partsData.spBody;
     }
 
     public void getPlayerManegerObjet(PlayerParameter scr)
@@ -96,7 +97,7 @@ public class newDropPart : MonoBehaviour
     {
         bBoss = flag;
     }
-    
+
     //移植
     public void getTransplant()
     {
@@ -112,7 +113,7 @@ public class newDropPart : MonoBehaviour
     }
     public void getSceneTransition(SceneTransitionManager sceneTransitionManager)
     {
-       this.sceneTransitionManager = sceneTransitionManager;    
+        this.sceneTransitionManager = sceneTransitionManager;
 
     }
 
@@ -122,10 +123,15 @@ public class newDropPart : MonoBehaviour
         ////ゲームクリアを表示
         //goPanel.SetActive(true);
         //goTextBox.GetComponent<GoalScript>().showText();
+        //テキストボックスの表示
+        goTextBox.SetActive(true);
+        //GameStateをAfterBOssに切り替える
+        GameMgr.ChangeState(GameState.AfterBOss);
+        //SceneTransitionManager.instance.NextSceneButton(iNextIndex);
 
         //プレイヤーの状態を保持する
         scPlayerParameter.KeepBodyData();
-        
+
         //現在のシーンの一つ先のシーンのインデックスを取得
         int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
         //ステージが4の時
@@ -140,17 +146,9 @@ public class newDropPart : MonoBehaviour
             SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
             iNextIndex = 0;
         }
-        GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
+       
 
-        MultiAudio.ins.PlayBGM_ByName("BGM_clear");
-
-
-        //テキストボックスの表示
-        goTextBox.SetActive(true);
-        //GameStateをAfterBOssに切り替える
-        GameMgr.ChangeState(GameState.AfterBOss);
-        //SceneTransitionManager.instance.NextSceneButton(iNextIndex);
-
+     
 
     }
 }

@@ -137,6 +137,11 @@ public class textdisplay: MonoBehaviour
                         Debug.Log(textAsset.Length);
 
                         CloseTextArea(); // 全てのテキストを読み終えたら閉じる
+                        AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
+                        BGM.Stop();
+                        MultiAudio.ins.PlayBGM_ByName("BGM_clear");
+
+                        BGM.loop = false;
 
                         GameMgr.ChangeState(GameState.Clear);    //GameStateがClearに変わる
 
