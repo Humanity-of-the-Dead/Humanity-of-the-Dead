@@ -4,50 +4,72 @@ using System.Collections;
 
 public class TextDisplay_Yamashina : MonoBehaviour
 {
-    [SerializeField]
-    private TextAsset[] textAsset;   // テキストファイル配列
 
-    [SerializeField]
-    private Text text;  // UnityのTextコンポーネント
-
-    [SerializeField]
-    private float TypingSpeed = 1.0f;  // 文字表示速度
-
-    private int LoadText = 0;   // 現在表示中のテキストのインデックス
-
-    [SerializeField]
-    private float[] Position; // 位置配列
-
-    [SerializeField]
-    private GameObject Player; // プレイヤーの参照
-
-    [SerializeField]
-    private GameMgr GameManager; // ゲーム管理スクリプト
-
-    [SerializeField]
-    private GameObject TextArea; // テキスト表示エリア
-
-    [SerializeField]
-    private string customNewline = "[BR]"; // カスタム改行文字列
-
-    private bool[] Flag; // フラグでテキストの表示を制御
-
-    [Header("1文字あたりの表示間隔")]
-    [SerializeField]
-    private float TextSpeed = 0.1f;
-
-    private Coroutine TypingCoroutine; // 現在のコルーチンを保持
-    private bool isTextFullyDisplayed = false; // 現在のテキストが完全に表示されているか
-
-    // 開始時に実行される
-    void Start()
+    [System.Serializable]　//2次元配列をインスペクター上で表示するため
+    struct TexeDataSet　//一個のアセットの配列のまとまり
     {
-        text.text = "";  // 初期化
-        TextArea.SetActive(false);  // テキスト表示領域を非表示
-        Flag = new bool[Position.Length];
+        public TextAsset[] textAsset; //メモ帳のファイル(.txt) 配列
     }
 
-    // 毎フレーム実行される
+    [SerializeField]
+    private TexeDataSet[] textData;   //メモ帳のファイル(.txt)　配列
+
+    [SerializeField]
+    private Text text;  //画面上の文字
+
+    [SerializeField]
+    private float TypingSpeed = 1.0f;  //文字の表示速度
+
+    private int LoadDataIndex = 0;
+    private int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
+
+    private int n = 0;
+
+    [SerializeField]
+    private float[] Position;
+
+    [SerializeField]
+    private GameObject Player;
+
+    [SerializeField]
+    private GameMgr GameManager;
+
+    [SerializeField]
+    private GameObject TextArea; //テキスト表示域
+
+    [SerializeField]
+    private string customNewline = "[BR]"; // 改行として扱う文字列を指定
+
+    bool[] Flag;
+
+    [Header("次の文字が表示されるまでの時間")]
+    [SerializeField]
+    float TextSpeed = 0.1f;
+
+    GameObject TextImage;
+
+    private bool isTextFullyDisplayed = false; // 現在のテキストが完全に表示されたか
+
+    private Coroutine TypingCroutine;  //コルーチンの管理
+
+    float timer = 0;
+
+    //ゲームクリアパネル
+    [SerializeField] GameObject GameClear;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        text.text = "";// 初期化
+        //Debug.Log(textAsset[0].text);
+        //StartCoroutine("TextCoroutine");
+        //テキスト表示域を非表示
+        TextArea.SetActive(false);
+        Flag = new bool[Position.Length];
+        UpdateText();
+    }
+
+    // Update is called once per frame
     void Update()
     {
         switch (GameMgr.GetState())
@@ -57,104 +79,157 @@ public class TextDisplay_Yamashina : MonoBehaviour
                 {
                     if (Player.transform.position.x > Position[i] && Flag[i] == false)
                     {
-                        Flag[i] = true; // 一度だけ通る
-                        GameMgr.ChangeState(GameState.ShowText);
-
+                        //this.gameObject.SetActive(true);    //オブジェクトを表示
+                        Flag[i] = true;     //Flag[i]を通った
+                        GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+                        UpdateText();
+                        //テキスト表示域を表示域
                         TextArea.SetActive(true);
-                        UpdateText(); // 最初のテキストを更新
+
                     }
                 }
                 break;
-
             case GameState.ShowText:
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     if (!isTextFullyDisplayed)
                     {
-                        DisplayFullText(); // 現在のテキストを一気に表示
-                    }
-                    else if (LoadText < textAsset.Length - 1)
-                    {
-                        LoadNextText(); // 次のテキストを表示
+                        DisplayFullText(); //テキスト全表示
                     }
                     else
                     {
+                        if (LoadText < textData[LoadDataIndex].textAsset.Length - 1)
+                        {
+                            LoadNextText(); // 次のテキストを表示
+                            UpdateText();
+                            return;
+                        }
+                        //Debug.Log(textAsset.Length);
+                        LoadDataIndex++;
                         CloseTextArea(); // 全てのテキストを読み終えたら閉じる
                     }
                 }
                 break;
-        }
-    }
+            case GameState.Clear:
+                if (timer > 1)
+                {
+                    int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
+                    if (iNextIndex > 5)
+                    {
+                        iNextIndex = 5;
+                    }
+                    SceneTransitionManager.instance.NextSceneButton(iNextIndex);
+                    timer = 0;
+                }
+                timer += Time.deltaTime;
 
-    // テキストを更新
+                break;
+            case GameState.AfterBOss:
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    if (!isTextFullyDisplayed)
+                    {
+                        DisplayFullText(); //テキスト全表示
+                    }
+                    else
+                    {
+                        //if (LoadText < textAsset.Length - 1)
+                        //{
+                        //    LoadNextText(); // 次のテキストを表示
+                        //}
+                        //Debug.Log(textAsset.Length);
+
+                        CloseTextArea(); // 全てのテキストを読み終えたら閉じる
+                        AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
+                        BGM.Stop();
+                        MultiAudio.ins.PlayBGM_ByName("BGM_clear");
+
+                        BGM.loop = false;
+
+                        GameMgr.ChangeState(GameState.Clear);    //GameStateがClearに変わる
+
+                        GameClear.SetActive(true); // ゲームクリア表示を表示する
+                    }
+                }
+
+                break;
+        }
+
+    }
     public void UpdateText()
     {
-        if (TypingCoroutine != null)
+        if (TypingCroutine != null)
         {
-            StopCoroutine(TypingCoroutine); // コルーチンの競合を防ぐ
+            StopCoroutine(TypingCroutine);
         }
 
-        if (textAsset.Length > LoadText)
+        Debug.Log($"UpdateText: LoadText = {LoadText}");
+        if (textData[LoadDataIndex].textAsset.Length > LoadText)
         {
-            text.text = ""; // テキストをクリア
-            isTextFullyDisplayed = false; // テキストが完全に表示されていない
-            TypingCoroutine = StartCoroutine(TextCoroutine()); // コルーチン開始
+            text.text = "";
+            isTextFullyDisplayed = false;
+            Debug.Log($"表示テキスト: {textData[LoadDataIndex].textAsset[LoadText].text}");
+            TypingCroutine = StartCoroutine(TextCoroutine());
         }
         else
         {
-            Debug.Log("すべてのテキストが表示されました");
+            Debug.Log("全テキストが表示されました");
         }
     }
-
-    // コルーチンで1文字ずつ表示
     IEnumerator TextCoroutine()
     {
-        string currentText = textAsset[LoadText].text;
+        string currentText = textData[LoadDataIndex].textAsset[LoadText].text;
 
-        // 改行処理: [BR] を \n に変換
         if (!string.IsNullOrEmpty(customNewline))
         {
             currentText = currentText.Replace(customNewline, "\n");
         }
 
-        // テキストを一文字ずつ表示
-        for (int i = 0; i < currentText.Length; i++)
+        for (int i = 0; i < currentText.Length; i++)   //テキストの中の文字を取得して、文字数を増やしていく
         {
-            text.text += currentText[i];
-            yield return new WaitForSeconds(TextSpeed);
+            string currentChra = currentText.Substring(0, i); //現在の文字を所得する
+            if (string.IsNullOrWhiteSpace(currentChra))
+            {
+                text.text = currentChra; //空白部分をそのまま設定する
+                yield return new WaitForSeconds(TextSpeed);
+                continue;  //次のループへ
+
+            }
+            //テキストが進むたびにコルーチンが呼び出される
+            //textAsset[LoadText].text.Lengthによって中のテキストデータの文字数の所得
+            yield return new WaitForSeconds(TextSpeed); //指定された時間待機する
+
+            text.text = currentChra;  //iが増えるたびに文字を一文字ずつ表示していく
+
         }
 
-        // テキストが完全に表示された
-        isTextFullyDisplayed = true;
+        isTextFullyDisplayed = true; //全ての文字が表示されたかを示すフラグ
     }
-
-    // テキストを一気に表示
     private void DisplayFullText()
     {
-        if (TypingCoroutine != null)
+        if (TypingCroutine != null)
         {
-            StopCoroutine(TypingCoroutine); // コルーチン停止
+            StopCoroutine(TypingCroutine); // コルーチンを停止
         }
+        string fullText = textData[LoadDataIndex].textAsset[LoadText].text;
 
-        string fullText = textAsset[LoadText].text;
-
-        // 改行処理: [BR] を \n に変換
         if (!string.IsNullOrEmpty(customNewline))
         {
+
             fullText = fullText.Replace(customNewline, "\n");
         }
+        // 現在のテキストをすべて表示
+        text.text = fullText;
 
-        text.text = fullText; // テキストを完全表示
-        isTextFullyDisplayed = true; // フラグを更新
+        isTextFullyDisplayed = true; // 完全表示状態にする
     }
-
     // 次のテキストを読み込む
     private void LoadNextText()
     {
-        if (LoadText < textAsset.Length - 1)
+        if (LoadText < textData[LoadDataIndex].textAsset.Length - 1)
         {
             LoadText++;
-            UpdateText(); // 新しいテキストを表示
+            //UpdateText(); // 新しいテキストを表示
         }
         else
         {
@@ -169,3 +244,5 @@ public class TextDisplay_Yamashina : MonoBehaviour
         TextArea.SetActive(false); // テキストエリアを非表示
     }
 }
+
+
