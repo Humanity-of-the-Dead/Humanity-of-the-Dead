@@ -12,7 +12,7 @@ public class TextDisplay_Yamashina : MonoBehaviour
     }
 
     [SerializeField]
-    private TexeDataSet[] textData;   //メモ帳のファイル(.txt)　配列
+    private TexeDataSet[] textData;  //構造体の配列
 
     [SerializeField]
     private Text text;  //画面上の文字
@@ -20,7 +20,7 @@ public class TextDisplay_Yamashina : MonoBehaviour
     [SerializeField]
     private float TypingSpeed = 1.0f;  //文字の表示速度
 
-    private int LoadDataIndex = 0;
+    private int LoadDataIndex = 0;　//今何個目の構造体を読み込んでいるか
     private int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
 
     private int n = 0;
@@ -101,11 +101,11 @@ public class TextDisplay_Yamashina : MonoBehaviour
                         if (LoadText < textData[LoadDataIndex].textAsset.Length - 1)
                         {
                             LoadNextText(); // 次のテキストを表示
-                            UpdateText();
-                            return;
+                            UpdateText();//ここでコルーチンを一度再開
+                            return;//一度処理を停止
                         }
                         //Debug.Log(textAsset.Length);
-                        LoadDataIndex++;
+                        LoadDataIndex++;　//構造体の配列番号を勧める
                         CloseTextArea(); // 全てのテキストを読み終えたら閉じる
                     }
                 }
@@ -164,7 +164,7 @@ public class TextDisplay_Yamashina : MonoBehaviour
         }
 
         Debug.Log($"UpdateText: LoadText = {LoadText}");
-        if (textData[LoadDataIndex].textAsset.Length > LoadText)
+        if (textData[LoadDataIndex].textAsset.Length > LoadText)//構造体の読み込みたい配列番号のテキストアセットの長さとLoadTextを比較
         {
             text.text = "";
             isTextFullyDisplayed = false;
