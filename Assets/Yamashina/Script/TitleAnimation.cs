@@ -17,12 +17,12 @@ public class TitleAnimation : MonoBehaviour
     [Tooltip("オプション画面のオブジェクトを入れる")]
     public GameObject OptionPanel;
 
-   
+
     [Header("ボタンのイベントトリガーのアクティブ切り替え用")]
-  
+
     [Tooltip("オプションボタンのイベントトリガーを入れる")]
     [SerializeField] EventTrigger eventTrigger_option;
-   
+
     [Header("ボタンのアクティブ切り替え")]
 
     [Tooltip("クレジットボタンそのものを入れる")]
@@ -67,7 +67,7 @@ public class TitleAnimation : MonoBehaviour
     [Header("オプション画面の終了位置")]
     [SerializeField] Vector3 OptionPaneEndPosition;
 
-    
+
 
     enum PanalView
     {
@@ -98,8 +98,8 @@ public class TitleAnimation : MonoBehaviour
         mainPanel.SetActive(true);　　//タイトル画面
         CreditPanel.SetActive(false);//クレジット画面
         OptionPanel.SetActive(false);
-       
-       
+
+
     }
     public void MainView()//メイン画面に戻る関数
     {
@@ -120,11 +120,11 @@ public class TitleAnimation : MonoBehaviour
             MultiAudio.ins.PlayBGM_ByName("BGM_title");
         }
         mainPanel.SetActive(true);
-      
-        OptionPanel.SetActive(false) ;
+
+        OptionPanel.SetActive(false);
         CreditPanel.SetActive(false);
 
-       
+
 
         //ボタンのオブジェクトのセットアクティブ切り替え
 
@@ -133,7 +133,7 @@ public class TitleAnimation : MonoBehaviour
     }
 
 
-   
+
     public void CreditView() //クレジット画面を表示
     {
 
@@ -148,13 +148,13 @@ public class TitleAnimation : MonoBehaviour
         CreditPanel.SetActive(true);
         OptionPanel.SetActive(false);
 
-        
+
         ////クレジット画面スライドイン開始
         //if (CreditPanel.activeSelf)
         //{
         //    CreditPanel.transform.localPosition = creditPanelStartPosition;
         //    StartSlideIn();
-            MultiAudio.ins.PlayBGM_ByName("BGM_credit");
+        MultiAudio.ins.PlayBGM_ByName("BGM_credit");
 
         //}
         MultiAudio.ins.bgmSource.loop = false;
@@ -174,8 +174,8 @@ public class TitleAnimation : MonoBehaviour
         CreditPanel.SetActive(false);
         OptionPanel.SetActive(true);
 
-      
-      
+
+
         //クレジット画面スライドイン開始
         //if (OptionPanel.activeSelf)
         //{
@@ -276,7 +276,7 @@ public class TitleAnimation : MonoBehaviour
                     CreditPanel.SetActive(false);
                     mainPanel.SetActive(true);
 
-                   
+
                     break;
                 case PanalView.Credit:
                     CreditPanel.SetActive(false);
@@ -293,7 +293,7 @@ public class TitleAnimation : MonoBehaviour
                     CreditPanel.SetActive(false);
                     mainPanel.SetActive(true);
                     OptionPanel.SetActive(false);
-                   
+
 
 
 
@@ -303,9 +303,13 @@ public class TitleAnimation : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit(); 
+        }
 
 
-       
+
     }
 }
 
