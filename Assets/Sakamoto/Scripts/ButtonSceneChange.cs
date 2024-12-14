@@ -10,7 +10,10 @@ public class ButtonSceneChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        MultiAudio.ins.PlayBGM_ByName("BGM_credit");
+
+
+        MultiAudio.ins.bgmSource.loop = false; if (Input.GetKeyDown(KeyCode.G))
         {
             OptionReturnButton.onClick.Invoke();
             //enGameState = GameState.ShowText;

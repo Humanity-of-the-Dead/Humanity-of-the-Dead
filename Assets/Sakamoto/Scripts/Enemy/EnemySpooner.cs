@@ -9,7 +9,8 @@ public class EnemySpooner : MonoBehaviour
     [SerializeField] GameObject goEnemyObject;
     ////プレイヤーパラメーター
     //[SerializeField] GameObject goPlayerParameter;
-    /*[SerializeField]*/ PlayerParameter scPlayerParameter;
+    /*[SerializeField]*/
+    PlayerParameter scPlayerParameter;
     //プレイヤーコントローラ
     [SerializeField] GameObject goPlayerControl;
     //ゲームマネージャー
@@ -18,6 +19,12 @@ public class EnemySpooner : MonoBehaviour
     [SerializeField] GameObject goTarget;
 
     [SerializeField] List<GameObject> liEnemyList;
+    [Header("敵がスポーンする場所のランダムオフセット範囲")]
+    [Tooltip("敵がスポーンする位置のX軸のランダム範囲（負の値も指定可能）")]
+    [SerializeField] private float randomOffsetXRange = 2f;
+
+    [Tooltip("敵がスポーンする位置のY軸のランダム範囲（負の値も指定可能）")]
+    [SerializeField] private float randomOffsetYRange = 2f;
 
     //マーカー
     [SerializeField] GameObject goMarker;
@@ -42,7 +49,7 @@ public class EnemySpooner : MonoBehaviour
 
     void Update()
     {
-        if(GameMgr.GetState() == GameState.Main)
+        if (GameMgr.GetState() == GameState.Main)
         {
             if (Vector2.Distance(this.transform.position, goTarget.transform.position) < 20
     && this.transform.position.x - goTarget.transform.position.x > 0)
@@ -78,39 +85,51 @@ public class EnemySpooner : MonoBehaviour
     //エネミーの生成
     void createEnemy()
     {
-        //敵のインスタンスを生成
+        // 敵のインスタンスを生成
         liEnemyList.Add(Instantiate(goEnemyObject));
-        //プレイヤーパラメーターを渡す
-        liEnemyList[liEnemyList.Count　-　1].GetComponent<newEnemyParameters>().scPlayerParameter = this.scPlayerParameter;
-        //プレイヤーコントローラを渡す
-        liEnemyList[liEnemyList.Count　-　1].GetComponent<newEnemyParameters>().PlayerControl = goPlayerControl;
+
+        // ランダムなオフセットを生成 (スポナーの周囲にスポーンさせる)
+        // ランダムなオフセットを専用メソッドで生成
+        Vector3 randomOffset = GenerateRandomSpawnOffset();
+        // 生成する敵の位置を設定
+        liEnemyList[liEnemyList.Count - 1].transform.position = this.transform.position + randomOffset;
+
+        // 他のパラメーターを設定する（元のコードのまま）
+        liEnemyList[liEnemyList.Count - 1].GetComponent<newEnemyParameters>().scPlayerParameter = this.scPlayerParameter;
+        liEnemyList[liEnemyList.Count - 1].GetComponent<newEnemyParameters>().PlayerControl = goPlayerControl;
         liEnemyList[liEnemyList.Count - 1].GetComponent<newEnemyMovement>().scPlayerParameter = this.scPlayerParameter;
-        //ゲームマネージャーを渡す
         liEnemyList[liEnemyList.Count - 1].GetComponent<newEnemyMovement>().gamestate = gameMgr;
-        //ポジションをスポナー座標に置く
-        liEnemyList[liEnemyList.Count - 1].transform.position = this.transform.position;
 
+        // プレイヤーのリストに追加
         goTarget.GetComponent<PlayerControl>().AddListItem(liEnemyList[liEnemyList.Count - 1]);
-    }
 
-    //ゲーム開始時のエネミー生成
-    IEnumerator startCreate()
+    }
+    public Vector3 GenerateRandomSpawnOffset()
     {
-        //エネミーの最大数の-1体生成する
-        if(liEnemyList.Count < fEnemyMax - 1)
+        return new Vector3(
+            Random.Range(-randomOffsetXRange, randomOffsetXRange),
+            Random.Range(-randomOffsetYRange, randomOffsetYRange),
+            0
+        );
+    }
+        //ゲーム開始時のエネミー生成
+        IEnumerator startCreate()
         {
-            if(fTimer > 1)
+            //エネミーの最大数の-1体生成する
+            if (liEnemyList.Count < fEnemyMax - 1)
             {
-                //エネミー生成
-                createEnemy();
-                fTimer = 0;
+                if (fTimer > 1)
+                {
+                    //エネミー生成
+                    createEnemy();
+                    fTimer = 0;
+                }
+                fTimer += Time.deltaTime;
+                yield return null;
             }
-            fTimer += Time.deltaTime; 
-            yield return null;
-        }
-        else
-        {
-            yield break;
+            else
+            {
+                yield break;
+            }
         }
     }
-}
