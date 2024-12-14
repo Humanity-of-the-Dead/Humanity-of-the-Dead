@@ -86,7 +86,7 @@ public class PlayerParameter : MonoBehaviour
                     iHumanity -= Time.deltaTime / iDownTime;
                     iUpperHP -= Time.deltaTime / iDownTime;
                     iLowerHP -= Time.deltaTime / iDownTime;
-
+                    Debug.Log(iDownTime);
                     if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
                     {
 
@@ -98,10 +98,13 @@ public class PlayerParameter : MonoBehaviour
 
                         //GameOverのBGM鳴らす箇所
                         MultiAudio.ins.PlayBGM_ByName("BGM_defeated");
-                        //パラメータの全回復
-                        iHumanity = iHumanityMax;
-                        iUpperHP = iUpperHPMax;
-                        iLowerHP = iLowerHPMax;
+                        #region 山品変更
+                        ////パラメータの全回復
+                        //iHumanity = iHumanityMax;
+                        //iUpperHP = iUpperHPMax;
+                        //iLowerHP = iLowerHPMax;
+
+                        #endregion
                         //プレイヤーを初期化
                         UpperData = upperIndex;
                         LowerData = lowerIndex;
