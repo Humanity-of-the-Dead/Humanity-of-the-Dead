@@ -138,109 +138,112 @@ public class PlayerControl : MonoBehaviour
         this.transform.position = vPosition;
 
         //攻撃関連
-        //上半身攻撃
-        if (Input.GetKeyDown(KeyCode.I))
+        if (!scPlayerMoveAnimation.SetAttack())
         {
-
-            switch (playerParameter.UpperData.upperAttack)
+            //上半身攻撃
+            if (Input.GetKeyDown(KeyCode.I))
             {
-                case UpperAttack.NORMAL:
-                    if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
-                    {
-                        MultiAudio.ins.PlaySEByName("SE_hero_attack_upper");
-                        GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
-                    }
-                    break;
 
-                case UpperAttack.POLICE:
-                    Debug.Log("ここに銃弾の発射のプログラムをかいでね");
-                    //この下
-                    Vector2 ShootMoveBector = new Vector2(0, 0);
-                    //子のplayerRCのローテーションYを持ってくる
-                    // y = 0のときは右向き、0 y = 180のときは左向き
-                    Debug.Log(this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y);
-                    if (this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y == 180)
-                    {
-                        ShootMoveBector.x = -1;
-                    }
-                    else
-                    {
-                        ShootMoveBector.x = 1;
-                    }
-
-                    Debug.Log(ShootMoveBector);
-                    Debug.Log("shootFlagは" + bShootFlag);
-
-                    //bShootFlagがtrueなら銃を発射する
-                    if (bShootFlag == true)
-                    {
-                        Debug.Log("弾発射");
-                        Juu.Shoot(ShootMoveBector, this.transform);
+                switch (playerParameter.UpperData.upperAttack)
+                {
+                    case UpperAttack.NORMAL:
                         if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
                         {
-                            MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_upper");
+                            MultiAudio.ins.PlaySEByName("SE_hero_attack_upper");
                             GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
-
                         }
-                        //bShootFlag = false;
-                    }
-                    break;
+                        break;
 
-                case UpperAttack.NURSE:
-                    if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
-                    {
-                        MultiAudio.ins.PlaySEByName("SE_nurse_attack_upper");
-                        GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
-                    }
-                    break;
+                    case UpperAttack.POLICE:
+                        Debug.Log("ここに銃弾の発射のプログラムをかいでね");
+                        //この下
+                        Vector2 ShootMoveBector = new Vector2(0, 0);
+                        //子のplayerRCのローテーションYを持ってくる
+                        // y = 0のときは右向き、0 y = 180のときは左向き
+                        Debug.Log(this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y);
+                        if (this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y == 180)
+                        {
+                            ShootMoveBector.x = -1;
+                        }
+                        else
+                        {
+                            ShootMoveBector.x = 1;
+                        }
+
+                        Debug.Log(ShootMoveBector);
+                        Debug.Log("shootFlagは" + bShootFlag);
+
+                        //bShootFlagがtrueなら銃を発射する
+                        if (bShootFlag == true)
+                        {
+                            Debug.Log("弾発射");
+                            Juu.Shoot(ShootMoveBector, this.transform);
+                            if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                            {
+                                MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_upper");
+                                GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+
+                            }
+                            //bShootFlag = false;
+                        }
+                        break;
+
+                    case UpperAttack.NURSE:
+                        if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                        {
+                            MultiAudio.ins.PlaySEByName("SE_nurse_attack_upper");
+                            GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                        }
+                        break;
+                }
+
+                if (playerParameter.UpperData.sPartsName == "ボスの上半身")
+                {
+                    MultiAudio.ins.PlaySEByName("SE_lastboss_attack_upper");
+                }
+
+                for (int i = 0; i < liObj.Count; i++)
+                {
+                    //Debug.Log(liObj[i].gameObject.transform.position);
+                    //Debug.Log(playerParameter.UpperData.AttackArea);
+                    //仮引数
+                    UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea, playerParameter.UpperData.iPartAttack);
+                }
             }
-
-            if (playerParameter.UpperData.sPartsName == "ボスの上半身")
+            //下半身攻撃
+            if (Input.GetKeyDown(KeyCode.K))
             {
-                MultiAudio.ins.PlaySEByName("SE_lastboss_attack_upper");
-            }
+                switch (playerParameter.LowerData.lowerAttack)
+                {
+                    case LowerAttack.NORMAL:
+                        if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                        {
+                            MultiAudio.ins.PlaySEByName("SE_hero_attack_lower");
+                            GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                        }
 
-            for (int i = 0; i < liObj.Count; i++)
-            {
-                //Debug.Log(liObj[i].gameObject.transform.position);
-                //Debug.Log(playerParameter.UpperData.AttackArea);
-                //仮引数
-                UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea, playerParameter.UpperData.iPartAttack);
-            }
-        }
-        //下半身攻撃
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            switch (playerParameter.LowerData.lowerAttack)
-            {
-                case LowerAttack.NORMAL:
-                    if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
-                    {
-                        MultiAudio.ins.PlaySEByName("SE_hero_attack_lower");
-                        GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
-                    }
+                        break;
 
-                    break;
+                    case LowerAttack.POLICE:
+                        if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                        {
+                            MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_lower");
+                            GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                        }
+                        break;
 
-                case LowerAttack.POLICE:
-                    if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
-                    {
-                        MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_lower");
-                        GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
-                    }
-                    break;
-
-                case LowerAttack.NURSE:
-                    if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
-                    {
-                        MultiAudio.ins.PlaySEByName("SE_nurse_attack_lower");
-                    }
-                    break;
-            }
-            for (int i = 0; i < liObj.Count; i++)
-            {
-                //仮引数
-                LowerBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea, playerParameter.LowerData.iPartAttack);
+                    case LowerAttack.NURSE:
+                        if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                        {
+                            MultiAudio.ins.PlaySEByName("SE_nurse_attack_lower");
+                        }
+                        break;
+                }
+                for (int i = 0; i < liObj.Count; i++)
+                {
+                    //仮引数
+                    LowerBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea, playerParameter.LowerData.iPartAttack);
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.U))
