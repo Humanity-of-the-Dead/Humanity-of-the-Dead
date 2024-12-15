@@ -550,7 +550,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     void WalkStart()
     {
-        time = timeMax * walk.armForwardRotation.Length;
+        time = timeMax * playerUpper.armForwardRotation.Length;
         StartCoroutine(CallWalkWithDelay());
         MultiAudio.ins.PlaySEByName("SE_hero_action_run");
     }
@@ -561,7 +561,6 @@ public class PlayerMoveAnimation : MonoBehaviour
     void PantieStart()
     {
         AttackWaite();
-        time = timeMax * playerUpper.armForwardRotation.Length;
         StartCoroutine(CallPantieWithDelay());
     }
 
@@ -571,7 +570,6 @@ public class PlayerMoveAnimation : MonoBehaviour
     void KickStart()
     {
         AttackWaite();
-        time = timeMax * playerLower.armForwardRotation.Length;
         StartCoroutine(CallKickWithDelay());
     }
 
@@ -611,6 +609,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     void AttackWaite()
     {
+        time = timeMax * playerUpper.armForwardRotation.Length;
         timeAttack = timeMax * playerLower.armForwardRotation.Length;
         isAttack = true;
         StopCoroutine(CallWalkWithDelay());

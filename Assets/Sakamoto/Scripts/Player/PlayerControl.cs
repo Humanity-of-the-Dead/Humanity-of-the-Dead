@@ -97,30 +97,34 @@ public class PlayerControl : MonoBehaviour
         //カメラとの距離の絶対値が一定以下ならプレイヤーが動く　画面外に出ないための処置
         //移動
         Vector3 vPosFromCame = this.transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
-                                                                                      //左移動
-        if (Input.GetKey(KeyCode.A))
-        {
-            if (vPosFromCame.x > -fCameraWidth / 2)
-            {
-                vPosition.x -= Time.deltaTime * fSpeed;
-            }
-        }
-        //右移動
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (fCameraWidth / 2 > vPosFromCame.x)
-            {
-                vPosition.x += Time.deltaTime * fSpeed;
-            }
-        }
 
-        //ジャンプ
-
-        if (Input.GetKey(KeyCode.W) && bJump == false)
+        if (!scPlayerMoveAnimation.SetAttack())
         {
-            this.rbody2D.AddForce(this.transform.up * fJmpPower);
-            MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
-            bJump = true;
+            //左移動
+            if (Input.GetKey(KeyCode.A))
+            {
+                if (vPosFromCame.x > -fCameraWidth / 2)
+                {
+                    vPosition.x -= Time.deltaTime * fSpeed;
+                }
+            }
+            //右移動
+            if (Input.GetKey(KeyCode.D))
+            {
+                if (fCameraWidth / 2 > vPosFromCame.x)
+                {
+                    vPosition.x += Time.deltaTime * fSpeed;
+                }
+            }
+
+            //ジャンプ
+
+            if (Input.GetKey(KeyCode.W) && bJump == false)
+            {
+                this.rbody2D.AddForce(this.transform.up * fJmpPower);
+                MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
+                bJump = true;
+            }
         }
 
         //体が回転しないようにする
