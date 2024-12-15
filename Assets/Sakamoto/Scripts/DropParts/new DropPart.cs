@@ -27,6 +27,12 @@ public class newDropPart : MonoBehaviour
     //お墓
     [SerializeField] GameObject goGrave;
 
+    //Rigidbody2D
+    [SerializeField] Rigidbody2D rigidbody2;
+
+    //BoxCollider2D
+    [SerializeField] BoxCollider2D boxCollider2D;
+
     //ゲームクリアの標準
     GameObject goPanel;
 
@@ -69,6 +75,8 @@ public class newDropPart : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+
 
     //パーツデータの取得
     public void getPartsData(BodyPartsData partsData)
@@ -146,9 +154,18 @@ public class newDropPart : MonoBehaviour
             SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
             iNextIndex = 0;
         }
-       
+    }
 
-     
-
+    /// <summary>
+    /// 床と接した時
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Car"))
+        {
+            rigidbody2.gravityScale = 0f;
+            boxCollider2D.isTrigger = true;
+        }
     }
 }
