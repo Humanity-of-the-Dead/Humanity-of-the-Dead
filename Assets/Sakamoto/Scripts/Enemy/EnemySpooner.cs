@@ -112,24 +112,24 @@ public class EnemySpooner : MonoBehaviour
             0
         );
     }
-        //ゲーム開始時のエネミー生成
-        IEnumerator startCreate()
-        {
-            //エネミーの最大数の-1体生成する
-            if (liEnemyList.Count < fEnemyMax - 1)
-            {
-                if (fTimer > 1)
-                {
-                    //エネミー生成
-                    createEnemy();
-                    fTimer = 0;
-                }
-                fTimer += Time.deltaTime;
-                yield return null;
-            }
-            else
-            {
-                yield break;
-            }
-        }
-    }
+    //    //ゲーム開始時のエネミー生成
+    //    IEnumerator startCreate()
+    //    {
+    //        //エネミーの最大数の-1体生成する
+    //        if (liEnemyList.Count < fEnemyMax - 1)
+    //        {
+    //            if (fTimer > 1)
+    //            {
+    //                //エネミー生成
+    //                createEnemy();
+    //                fTimer = 0;
+    //            }
+    //            fTimer += Time.deltaTime;
+    //            yield return null;
+    //        }
+    //        else
+    //        {
+    //            yield break;
+    //        }
+    //    }
+}
