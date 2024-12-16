@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpooner : MonoBehaviour
 {
@@ -82,7 +83,13 @@ public class EnemySpooner : MonoBehaviour
             Destroy(newEnemy); // 上限を超える場合は生成を中止
         }
     }
-
+    private void InitializeReferences()
+    {
+        if (GlobalEnemyManager.Instance.MaxGlobalEnemies > GlobalEnemyManager.Instance.GetEnemyCount())
+        {
+            GlobalEnemyManager.Instance.allEnemies.RemoveAll(GlobalEnemyManager.Instance.AddEnemy);
+        }
+    }
     public Vector3 GenerateRandomSpawnOffset()
     {
         return new Vector3(
@@ -91,4 +98,24 @@ public class EnemySpooner : MonoBehaviour
             0
         );
     }
+    private void OnEnable()
+    {
+        // シーンがロードされた後に参照を再取得
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        // イベントの解除
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // シーン遷移後に参照を再取得
+        InitializeReferences();
+        
+        Debug.Log($"シーン {scene.name} がロードされました");
+    }
+
 }

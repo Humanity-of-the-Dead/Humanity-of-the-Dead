@@ -5,13 +5,14 @@ public class GlobalEnemyManager : MonoBehaviour
 {
     public static GlobalEnemyManager Instance; // シングルトンとして利用
     public int MaxGlobalEnemies = 20; // 全体の敵の最大数
-    private List<GameObject> allEnemies = new List<GameObject>(); // 全敵を管理
+    public List<GameObject> allEnemies = new List<GameObject>(); // 全敵を管理
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+        //DontDestroyOnLoad(gameObject);  
         }
         else
         {
@@ -44,4 +45,7 @@ public class GlobalEnemyManager : MonoBehaviour
     {
         return allEnemies.Count;
     }
+
+   
+
 }

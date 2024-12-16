@@ -63,6 +63,9 @@ TagManager:
   - name: Before Player
     uniqueID: 1817916389
     locked: 0
+  - name: GameOver
+    uniqueID: 2368994759
+    locked: 0
   - name: All Before
     uniqueID: 1705519285
     locked: 0
