@@ -126,11 +126,17 @@ public class PlayerControl : MonoBehaviour
                 MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
                 bJump = true;
             }
-            //楽に次のシーン行きたいならこの下のコードをコメントアウト解除
+            //楽に次のシーン行きたいならこの下のコードをコメントアウト解除　確認後コメントアウトしておいて
 
             //if (Input.GetKeyDown(KeyCode.Escape))
             //{
             //    SceneTransitionManager.instance.NextSceneButton(SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1); 
+            //}
+            //ここまで
+            //楽にボス戦行きたいなら以下のコードをコメント解除
+            //if (Input.GetKeyDown(KeyCode.S))
+            //{
+            //    vPosition = new Vector2(190.0f, -1.536416f);
             //}
             //ここまで
 

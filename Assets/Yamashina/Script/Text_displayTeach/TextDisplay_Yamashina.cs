@@ -118,7 +118,13 @@ public class TextDisplay_Yamashina : MonoBehaviour
                     {
                         iNextIndex = 5;
                     }
-                    SceneTransitionManager.instance.NextSceneButton(iNextIndex);
+                    AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
+
+                    if (BGM.isPlaying == false)
+                    {
+                        SceneTransitionManager.instance.NextSceneButton(iNextIndex);
+
+                    }
                     timer = 0;
                 }
                 timer += Time.deltaTime;
