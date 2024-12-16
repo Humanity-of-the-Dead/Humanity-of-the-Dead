@@ -8,12 +8,17 @@ public class ButtonSceneChange : MonoBehaviour
 {
     [SerializeField] Button OptionReturnButton;
     // Update is called once per frame
-    void Update()
+
+    private void Start()
     {
         MultiAudio.ins.PlayBGM_ByName("BGM_credit");
+        MultiAudio.ins.bgmSource.loop = false;
+    }
+    void Update()
+    {
 
 
-        MultiAudio.ins.bgmSource.loop = false; if (Input.GetKeyDown(KeyCode.G))
+       if (Input.GetKeyDown(KeyCode.G))
         {
             OptionReturnButton.onClick.Invoke();
             //enGameState = GameState.ShowText;
