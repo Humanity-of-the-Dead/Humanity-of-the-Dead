@@ -516,7 +516,6 @@ public class PlayerMoveAnimation : MonoBehaviour
             isDirection = false;
             ChangeArmAnime();
             KeepWalk();
-            ;
         }
         else if (Input.GetKey(KeyCode.A))
         {
@@ -524,7 +523,10 @@ public class PlayerMoveAnimation : MonoBehaviour
             isDirection = true;
             ChangeArmAnime();
             KeepWalk();
-
+        }
+        else
+        {
+            isStop = true;
         }
     }
 
@@ -612,6 +614,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             walkIndex = 0;
             attackNumber = 0;
             isActive = false;
+            isStop = false;
             WalkStart();
         }
     }
