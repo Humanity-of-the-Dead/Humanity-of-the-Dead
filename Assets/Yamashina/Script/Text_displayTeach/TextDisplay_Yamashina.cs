@@ -152,15 +152,19 @@ public class TextDisplay_Yamashina : MonoBehaviour
 
                         BGM.loop = false;
 
+                        if (BGM.isPlaying)
+                        {
+
+                            GameClear.SetActive(true); // ゲームクリア表示を表示する
+                        }
+
                         GameMgr.ChangeState(GameState.Clear);    //GameStateがClearに変わる
 
-                        GameClear.SetActive(true); // ゲームクリア表示を表示する
+
                     }
                 }
-
                 break;
         }
-
     }
     public void UpdateText()
     {
