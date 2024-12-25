@@ -15,7 +15,6 @@ public class EnemySpooner : MonoBehaviour
 
     [Header("敵がスポーンする場所のランダムオフセット範囲")]
     [SerializeField] private float randomOffsetXRange = 2f;
-    [SerializeField] private float randomOffsetYRange = 2f;
 
     [SerializeField] GameObject goMarker;
     float fTimer;
@@ -94,8 +93,7 @@ public class EnemySpooner : MonoBehaviour
     {
         return new Vector3(
             Random.Range(-randomOffsetXRange, randomOffsetXRange),
-            Random.Range(-randomOffsetYRange, randomOffsetYRange),
-            0
+           this.transform.position.y, 0
         );
     }
     private void OnEnable()
@@ -114,7 +112,7 @@ public class EnemySpooner : MonoBehaviour
     {
         // シーン遷移後に参照を再取得
         InitializeReferences();
-        
+
         Debug.Log($"シーン {scene.name} がロードされました");
     }
 
