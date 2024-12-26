@@ -113,6 +113,7 @@ public class textdisplay: MonoBehaviour
                             //GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
                             LoadDataIndex++; //構造体の配列番号を進める
                             CloseTextArea(); // 全てのテキストを読み終えたら閉じる
+                            LoadText = 0;
                         }
                     }
                 }
@@ -174,7 +175,7 @@ public class textdisplay: MonoBehaviour
         }
 
         Debug.Log($"UpdateText: LoadText = {LoadText}");
-        if (textDataSet[LoadDataIndex]. textAsset.Length > LoadText)
+        if (textDataSet[LoadDataIndex]. textAsset.Length  > LoadText)
         {
             text.text = "";
             isTextFullyDisplayed = false;
