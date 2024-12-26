@@ -78,7 +78,7 @@ public class textdisplay: MonoBehaviour
         switch (GameMgr.GetState())
         {
             case GameState.Main:
-                for(int i = 0; i < Flag.Length; i++)
+                for (int i = 0; i < Flag.Length; i++)
                 {
                     if (Player.transform.position.x > Position[i] && Flag[i] == false)
                     {
@@ -93,7 +93,6 @@ public class textdisplay: MonoBehaviour
                 }
                 break;
             case GameState.ShowText:
-                if (Input.GetKeyDown(KeyCode.Return))
                 {
 
                     if (Input.GetKeyDown(KeyCode.Return))
@@ -118,6 +117,9 @@ public class textdisplay: MonoBehaviour
                     }
                 }
                 break;
+        
+        
+                
             case GameState.Clear:
                 if(timer > 1)
                 {
