@@ -34,29 +34,49 @@ public class EnemySpooner : MonoBehaviour
     {
         if (GameMgr.GetState() == GameState.Main)
         {
-            if (Vector2.Distance(this.transform.position, goTarget.transform.position) < 20
-                && this.transform.position.x - goTarget.transform.position.x > 0)
+            if (IsPlayerInRange() && CanSpawnEnemy())
             {
-                if (fTimer > fTimerMax && liEnemyList.Count < fEnemyMax && GlobalEnemyManager.Instance.GetEnemyCount() < GlobalEnemyManager.Instance.MaxGlobalEnemies)
+                Debug.Log(IsPlayerInRange());
+                Debug.Log(CanSpawnEnemy()); 
+                fTimer += Time.deltaTime;
+
+                if (fTimer > fTimerMax)
                 {
+
                     createEnemy();
                     fTimer = 0;
                 }
-                fTimer += Time.deltaTime;
             }
             else
             {
                 fTimer = 0;
             }
+            Debug.Log("fTimerは" + fTimer);
 
-            for (int i = 0; i < liEnemyList.Count; i++)
-            {
-                if (liEnemyList[i] == null)
-                {
-                    liEnemyList.RemoveAt(i);
-                }
-            }
+            // 敵リストから削除された敵をクリーンアップ
+            CleanupEnemyList();
         }
+    }
+
+    // プレイヤーが範囲内かつ右側にいるかを確認
+    private bool IsPlayerInRange()
+    {
+        float distance = Vector2.Distance(this.transform.position, goTarget.transform.position);
+        float positionDifference = this.transform.position.x - goTarget.transform.position.x;
+        return distance < 20 && positionDifference > 0;
+    }
+
+    // 敵がスポーン可能かを確認
+    private bool CanSpawnEnemy()
+    {
+        return liEnemyList.Count < fEnemyMax &&
+               GlobalEnemyManager.Instance.GetEnemyCount() < GlobalEnemyManager.Instance.MaxGlobalEnemies;
+    }
+
+    // 敵リストから null を削除
+    private void CleanupEnemyList()
+    {
+        liEnemyList.RemoveAll(enemy => enemy == null);
     }
 
     // エネミーの生成
