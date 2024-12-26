@@ -103,7 +103,7 @@ public class textdisplay: MonoBehaviour
                         }
                         else
                         {
-                            if (LoadText < textDataSet[LoadDataIndex].textAsset.Length)
+                            if (LoadText < textDataSet[LoadDataIndex].textAsset.Length -1)
                             {
                                 LoadNextText(); // 次のテキストを表示
                                 UpdateText();
