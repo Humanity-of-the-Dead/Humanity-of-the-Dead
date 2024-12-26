@@ -6,14 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class textdisplay: MonoBehaviour
 {
-    [SerializeField]
-    private TextAsset[] textAsset;   //メモ帳のファイル(.txt)　配列
+    [System.Serializable]　//2次元配列をインスペクター上で表示するため
 
+    struct TextDataSet
+    {
+        public TextAsset[] textAsset;   //メモ帳のファイル(.txt)　配列
+    }
+
+    [SerializeField]
+    private TextDataSet[] textDataSet; //構造体の配列
+    
     [SerializeField]
     private Text text;  //画面上の文字
 
     [SerializeField]
     private float TypingSpeed = 1.0f;  //文字の表示速度
+
+    private int LoadDataIndex = 0; //今何個目の構造体を読み込んでいるか
 
     private int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
 
@@ -55,7 +64,7 @@ public class textdisplay: MonoBehaviour
     void Start()
     {
         text.text = "";// 初期化
-        Debug.Log(textAsset[0].text);
+        //Debug.Log(textAsset[0].text);
         //StartCoroutine("TextCoroutine");
         //テキスト表示域を非表示
         TextArea.SetActive(false);
@@ -95,13 +104,15 @@ public class textdisplay: MonoBehaviour
                         }
                         else
                         {
-                            if (LoadText < textAsset.Length - 1)
+                            if (LoadText < textDataSet[LoadDataIndex].textAsset.Length)
                             {
                                 LoadNextText(); // 次のテキストを表示
+                                UpdateText();
+                                return;
                             }
-                            Debug.Log(textAsset.Length);
-                            GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
-
+                            //Debug.Log(textAsset.Length);
+                            //GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
+                            LoadDataIndex++; //構造体の配列番号を進める
                             CloseTextArea(); // 全てのテキストを読み終えたら閉じる
                         }
                     }
@@ -134,7 +145,7 @@ public class textdisplay: MonoBehaviour
                         //{
                         //    LoadNextText(); // 次のテキストを表示
                         //}
-                        Debug.Log(textAsset.Length);
+                        //Debug.Log(textAsset.Length);
 
                         CloseTextArea(); // 全てのテキストを読み終えたら閉じる
                         AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
@@ -161,11 +172,11 @@ public class textdisplay: MonoBehaviour
         }
 
         Debug.Log($"UpdateText: LoadText = {LoadText}");
-        if (textAsset.Length > LoadText)
+        if (textDataSet[LoadDataIndex]. textAsset.Length > LoadText)
         {
             text.text = "";
             isTextFullyDisplayed = false;
-            Debug.Log($"表示テキスト: {textAsset[LoadText].text}");
+            Debug.Log($"表示テキスト: {textDataSet[LoadDataIndex].textAsset[LoadText].text}");
             TypingCroutine = StartCoroutine(TextCoroutine());
         }
         else
@@ -175,7 +186,7 @@ public class textdisplay: MonoBehaviour
     }
     IEnumerator TextCoroutine()
     {
-        string currentText = textAsset[LoadText].text;
+        string currentText = textDataSet[LoadDataIndex].textAsset[LoadText].text;
 
         if (!string.IsNullOrEmpty(customNewline))
         {
@@ -208,7 +219,7 @@ public class textdisplay: MonoBehaviour
         {
             StopCoroutine(TypingCroutine); // コルーチンを停止
         }
-        string fullText = textAsset[LoadText].text;
+        string fullText = textDataSet[LoadDataIndex].textAsset[LoadText].text;
 
         if (!string.IsNullOrEmpty(customNewline))
         {
@@ -223,7 +234,7 @@ public class textdisplay: MonoBehaviour
     // 次のテキストを読み込む
     private void LoadNextText()
     {
-        if (LoadText < textAsset.Length - 1)
+        if (LoadText < textDataSet[LoadDataIndex].textAsset.Length - 1)
         {
             LoadText++;
             //UpdateText(); // 新しいテキストを表示
