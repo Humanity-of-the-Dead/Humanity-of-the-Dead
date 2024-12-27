@@ -355,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396109201988390841, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.92
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1396109201988390841, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4826,6 +4826,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1753298751221435324, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6489148027962693718, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: offset.y
       value: 1.7
@@ -5023,10 +5027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bcbd9866e119824bbf8563bf159eddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textAsset:
-  - {fileID: 4900000, guid: 620e72cf11360254cb6a9bf84b99b397, type: 3}
-  - {fileID: 4900000, guid: 789c19262b0a011478c726a70ccf21db, type: 3}
-  - {fileID: 4900000, guid: 3c237baea31567045ac6c9242ef4bc1f, type: 3}
+  textDataSet: []
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:

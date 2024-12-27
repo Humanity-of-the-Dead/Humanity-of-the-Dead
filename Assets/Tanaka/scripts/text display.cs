@@ -122,17 +122,24 @@ public class textdisplay: MonoBehaviour
         
                 
             case GameState.Clear:
-                if(timer > 1)
+                if (timer > 1)
                 {
                     int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
                     if (iNextIndex > 5)
                     {
                         iNextIndex = 5;
                     }
-                    SceneTransitionManager.instance.NextSceneButton(iNextIndex);
+                    AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
+
+                    if (BGM.isPlaying == false)
+                    {
+                        SceneTransitionManager.instance.NextSceneButton(iNextIndex);
+
+                    }
                     timer = 0;
                 }
                 timer += Time.deltaTime;
+
 
                 break;
             case GameState.AfterBOss:
@@ -157,12 +164,17 @@ public class textdisplay: MonoBehaviour
 
                         BGM.loop = false;
 
+                        if (BGM.isPlaying)
+                        {
+
+                            GameClear.SetActive(true); // ゲームクリア表示を表示する
+                        }
+
                         GameMgr.ChangeState(GameState.Clear);    //GameStateがClearに変わる
 
-                        GameClear.SetActive(true); // ゲームクリア表示を表示する
+
                     }
                 }
-
                 break;
         }
 

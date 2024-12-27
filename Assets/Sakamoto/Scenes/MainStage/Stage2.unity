@@ -2801,7 +2801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8252307482894879903, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6519083
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8252307482894879903, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3215,6 +3215,10 @@ PrefabInstance:
     - target: {fileID: 1150826654535052386, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753298751221435324, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6489148027962693718, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: offset.y
@@ -3845,7 +3849,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489469005}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -3863,7 +3867,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1489469009
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4147,7 +4151,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632990566}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -4165,7 +4169,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1632990569
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5023,7 +5027,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1897838876
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5848,10 +5852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bcbd9866e119824bbf8563bf159eddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textAsset:
-  - {fileID: 4900000, guid: 8e4e98a733277d445bad674e9d8fb981, type: 3}
-  - {fileID: 4900000, guid: 5145ebf4e2635284d870131a125d668b, type: 3}
-  - {fileID: 4900000, guid: d6ac7b13ab1b6024e858c92cbbad3865, type: 3}
+  textDataSet: []
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:
