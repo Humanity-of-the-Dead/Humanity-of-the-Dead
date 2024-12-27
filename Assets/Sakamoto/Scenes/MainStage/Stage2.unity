@@ -2340,9 +2340,9 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
-    m_LineSpacing: 0.6
+    m_LineSpacing: 0.9
   m_Text: New Text
 --- !u!222 &977587878
 CanvasRenderer:
@@ -5852,7 +5852,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bcbd9866e119824bbf8563bf159eddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textDataSet: []
+  textDataSet:
+  - textAsset:
+    - {fileID: 4900000, guid: 62743faecac566541a6a27dce7dfa021, type: 3}
+  - textAsset:
+    - {fileID: 4900000, guid: 7196afe69b0f60a45a964b5fe41d3fbb, type: 3}
+  - textAsset:
+    - {fileID: 4900000, guid: 9629a7125275625418cb07f506e478b2, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:

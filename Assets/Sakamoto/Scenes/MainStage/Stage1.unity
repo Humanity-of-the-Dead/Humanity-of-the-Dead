@@ -2596,9 +2596,9 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
-    m_LineSpacing: 0.55
+    m_LineSpacing: 0.9
   m_Text: New Text
 --- !u!222 &977587878
 CanvasRenderer:
@@ -4673,13 +4673,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDataSet:
   - textAsset:
-    - {fileID: 4900000, guid: b9fa64873ee6da445b1b46517b1140a4, type: 3}
-    - {fileID: 4900000, guid: b329413050f7e40469c324ef28c5b8f0, type: 3}
-    - {fileID: 4900000, guid: cee1f46d89f7f324f8a577910ed6514d, type: 3}
+    - {fileID: 4900000, guid: 65f9ec29e07e17f41b651473045bb438, type: 3}
   - textAsset:
-    - {fileID: 4900000, guid: 8e4e98a733277d445bad674e9d8fb981, type: 3}
-    - {fileID: 4900000, guid: 5145ebf4e2635284d870131a125d668b, type: 3}
-    - {fileID: 4900000, guid: d6ac7b13ab1b6024e858c92cbbad3865, type: 3}
+    - {fileID: 4900000, guid: cfcac7300126d6a42934ded60627eda5, type: 3}
+  - textAsset:
+    - {fileID: 4900000, guid: 47991bb4d79bc2440ab116edc7e80313, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:
