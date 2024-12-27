@@ -15,6 +15,8 @@ public class PlayerControl : MonoBehaviour
     [Header("ジャンプ力")]
     [SerializeField] float fJmpPower;
     bool bJump = false;
+    //連続ジャンプ
+    [SerializeField] int Jmpconsecutive;
 
 
     //カメラ関連
@@ -120,12 +122,14 @@ public class PlayerControl : MonoBehaviour
 
             //ジャンプ
 
-            if (Input.GetKey(KeyCode.W) && bJump == false)
+            if (Input.GetKey(KeyCode.W) && Jmpconsecutive < 2)
             {
                 this.rbody2D.AddForce(this.transform.up * fJmpPower);
                 MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
                 bJump = true;
+                Jmpconsecutive++;
             }
+
             //楽に次のシーン行きたいならこの下のコードをコメントアウト解除　確認後コメントアウトしておいて
 
             //if (Input.GetKeyDown(KeyCode.Escape))
@@ -273,6 +277,7 @@ public class PlayerControl : MonoBehaviour
         if (other.gameObject.CompareTag("Floor") || other.gameObject.CompareTag("Car"))
         {
             bJump = false;
+            Jmpconsecutive = 0;
         }
     }
 
