@@ -122,7 +122,7 @@ public class PlayerControl : MonoBehaviour
 
             //ƒWƒƒƒ“ƒv
 
-            if (Input.GetKey(KeyCode.W) && Jmpconsecutive < 2)
+            if (Input.GetKey(KeyCode.W) && Jmpconsecutive < 1)
             {
                 this.rbody2D.AddForce(this.transform.up * fJmpPower);
                 MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
