@@ -18,7 +18,11 @@ public class EnemySpooner : MonoBehaviour
 
     [SerializeField] GameObject goMarker;
     float fTimer;
+    [Header("何秒後に敵が出るか")]
+
     [SerializeField] float fTimerMax;
+    [Header("各スポナーから出る敵の最大数")]
+
     [SerializeField] float fEnemyMax;
 
     private void Start()

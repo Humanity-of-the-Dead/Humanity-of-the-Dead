@@ -4,7 +4,10 @@ using UnityEngine;
 public class GlobalEnemyManager : MonoBehaviour
 {
     public static GlobalEnemyManager Instance; // シングルトンとして利用
+    [Header("1ステージごとの敵の最大数")]
     public int MaxGlobalEnemies = 20; // 全体の敵の最大数
+    [Header("敵のオブジェクトのリスト、自動で格納")]
+
     public List<GameObject> allEnemies = new List<GameObject>(); // 全敵を管理
 
     private void Awake()
