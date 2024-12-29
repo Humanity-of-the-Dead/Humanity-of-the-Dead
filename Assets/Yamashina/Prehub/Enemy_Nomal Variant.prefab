@@ -258,7 +258,7 @@ MonoBehaviour:
   chaseSpeed: 2
   chaseRange: 5
   attackRange: 2
-  upperpart: {fileID: 11400000, guid: 0b7f654403b94564591a3e6db23d88f1, type: 2}
+  upperpart: {fileID: 11400000, guid: 1f44a247b0640614c8806fd0c1ddc7e1, type: 2}
   lowerpart: {fileID: 11400000, guid: e7e6579bcbac34e4190ebc1c174e3a77, type: 2}
   Juu: {fileID: 0}
   moveAnimation: {fileID: 1924099738880734706}
