@@ -2078,8 +2078,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327fa0d8abae87b43b3c73fe95d8d8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickSEName: UI_click
-  hoverSEName: UI_mouseover
+  clickSEName: SE_hero_attack_upper
+  hoverSEName: SE_hero_attack_upper
 --- !u!1001 &5985610858340386862
 PrefabInstance:
   m_ObjectHideFlags: 0

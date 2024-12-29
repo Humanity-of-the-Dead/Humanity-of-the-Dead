@@ -14,15 +14,18 @@ public class AudioButtonHandler : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-
-       
-            MultiAudio.ins.PlayUIByName(hoverSEName);
-       
+        //UIの場合再生
+        MultiAudio.ins.PlayUIByName(hoverSEName);
+        //SEの場合再生
+        MultiAudio.ins.PlaySEByName(hoverSEName);
     }
     // SEを再生する
     public void PlaySE()
     {
+        //UIの場合再生
         MultiAudio.ins.PlayUIByName(clickSEName);
+        //SEの場合再生
+        MultiAudio.ins.PlaySEByName(clickSEName);
     }
 
    
