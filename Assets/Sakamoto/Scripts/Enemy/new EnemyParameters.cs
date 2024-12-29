@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class newEnemyParameters : MonoBehaviour
@@ -57,7 +58,12 @@ public class newEnemyParameters : MonoBehaviour
     //ヒットエフェクト
     [SerializeField] GameObject hitGameObject;
     //エフェクトの出現範囲
-    [SerializeField]float effectXMin, effectXMax, effectYMin, effectYMax;
+    //上半身
+    [SerializeField]float upperEffectXMin, upperEffectXMax,upperEffectYMin,upperEffectYMax;
+
+    //下半身
+    [SerializeField]float lowerEffectXMin, lowerEffectXMax,lowerEffectYMin,lowerEffectYMax;
+    //\エフェクト・・・
     
     private void Start()
     {
@@ -101,6 +107,7 @@ public class newEnemyParameters : MonoBehaviour
         {
             //下半身のHPを減らす
             LowerHP -= damage;
+            ShowHitEffects(body);
         }
     }
 
@@ -112,27 +119,29 @@ public class newEnemyParameters : MonoBehaviour
 
         //エフェクト
         GameObject obj=null;
-        //オブジェクトを出すローカル座標
-        Vector2 effectVec2=new Vector2(
-            Random.Range(effectXMin,effectXMax),
-            Random.Range(effectYMin,effectYMax));
-        // Debug.Log("effectVec2:"+effectVec2);
         
         //上半身の場合
         if (body == 0)
         {
-            // effectVec2=new Vector2(0,1);
-            
+            //オブジェクトを出すローカル座標
+            Vector2 effectVec2=new Vector2(
+                Random.Range(upperEffectXMin,upperEffectXMax),
+                Random.Range(upperEffectYMin,upperEffectYMax));
+
             //オブジェクトを出す
             obj=Instantiate(hitGameObject,effectVec2+tihsVec2,Quaternion.identity);
-            // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2);
-            
+            // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
             // Debug.Log("hit effect");
         }
 
         if (body == 1)
         {
-            
+            //オブジェクトを出すローカル座標
+            Vector2 effectVec2=new Vector2(
+                Random.Range(lowerEffectXMin,lowerEffectXMax),
+                Random.Range(lowerEffectYMin,lowerEffectYMax));
+
+            obj=Instantiate(hitGameObject,effectVec2+tihsVec2,Quaternion.identity);
         }
     }
 
