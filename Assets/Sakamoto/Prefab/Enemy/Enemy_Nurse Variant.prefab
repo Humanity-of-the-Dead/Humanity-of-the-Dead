@@ -124,6 +124,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5066492829317263093, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+      propertyPath: m_UsedByComposite
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5211514210946013214, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -201,6 +205,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24e1091aa6b4ca4dbf1c364e0bc3451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5054770448404255795 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4556610405929632077, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+  m_PrefabInstance: {fileID: 8726414722864239998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6147598366193532570 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3191604973178940388, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+  m_PrefabInstance: {fileID: 8726414722864239998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7497457645813442898 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1231208887608212524, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+  m_PrefabInstance: {fileID: 8726414722864239998}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7895964506270535315 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1481237974272629741, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
@@ -281,6 +312,10 @@ MonoBehaviour:
   Boss: 0
   textBox: {fileID: 0}
   sceneTransitionManager: {fileID: 0}
+  UpperHPBar: {fileID: 6147598366193532570}
+  LowerHPBar: {fileID: 5054770448404255795}
+  HPBarContainer: {fileID: 7497457645813442898}
+  displayRange: 5
   hitGameObject: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
   upperEffectXMin: -1.5
   upperEffectXMax: 1.5

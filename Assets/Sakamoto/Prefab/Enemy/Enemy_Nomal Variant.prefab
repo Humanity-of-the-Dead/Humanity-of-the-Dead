@@ -170,6 +170,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -5728493241584073441}
   m_SourcePrefab: {fileID: 100100000, guid: 9c5b3b85ba82ed54f937494b1be1ac33, type: 3}
+--- !u!114 &1122405861428942335 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5097433407575104692, guid: 9c5b3b85ba82ed54f937494b1be1ac33, type: 3}
+  m_PrefabInstance: {fileID: 5273203351405775179}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1924099738880734706 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6025226992257383609, guid: 9c5b3b85ba82ed54f937494b1be1ac33, type: 3}
@@ -181,6 +192,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24e1091aa6b4ca4dbf1c364e0bc3451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2082097867579883350 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6182094805812819485, guid: 9c5b3b85ba82ed54f937494b1be1ac33, type: 3}
+  m_PrefabInstance: {fileID: 5273203351405775179}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3661263816035549751 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8926489091314977660, guid: 9c5b3b85ba82ed54f937494b1be1ac33, type: 3}
+  m_PrefabInstance: {fileID: 5273203351405775179}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6746467646807872166 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1481237974272629741, guid: 9c5b3b85ba82ed54f937494b1be1ac33, type: 3}
@@ -261,6 +288,10 @@ MonoBehaviour:
   Boss: 0
   textBox: {fileID: 0}
   sceneTransitionManager: {fileID: 0}
+  UpperHPBar: {fileID: 1122405861428942335}
+  LowerHPBar: {fileID: 2082097867579883350}
+  HPBarContainer: {fileID: 3661263816035549751}
+  displayRange: 5
   hitGameObject: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
   upperEffectXMin: -1.5
   upperEffectXMax: 1.5
