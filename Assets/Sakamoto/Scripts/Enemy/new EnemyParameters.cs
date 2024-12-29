@@ -53,6 +53,12 @@ public class newEnemyParameters : MonoBehaviour
     GameObject textBox;
 
     [SerializeField]SceneTransitionManager sceneTransitionManager;
+    
+    //ヒットエフェクト
+    [SerializeField] GameObject hitGameObject;
+    //エフェクトの出現範囲
+    [SerializeField]float effectXMin, effectXMax, effectYMin, effectYMax;
+    
     private void Start()
     {
         scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
@@ -86,14 +92,50 @@ public class newEnemyParameters : MonoBehaviour
         //damageはテスト用の関数
     if(body == 0)
         {
+            //上半身のHPを減らす
             UpperHP -= damage;
+            ShowHitEffects(body);
         }
 
     if(body == 1)
         {
+            //下半身のHPを減らす
             LowerHP -= damage;
         }
     }
+
+    //攻撃がヒットしたエフェクト(オブジェクト)を出す
+    void ShowHitEffects(int body)
+    {
+        //このオブジェクトの座標
+        Vector2 tihsVec2 = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
+
+        //エフェクト
+        GameObject obj=null;
+        //オブジェクトを出すローカル座標
+        Vector2 effectVec2=new Vector2(
+            Random.Range(effectXMin,effectXMax),
+            Random.Range(effectYMin,effectYMax));
+        // Debug.Log("effectVec2:"+effectVec2);
+        
+        //上半身の場合
+        if (body == 0)
+        {
+            // effectVec2=new Vector2(0,1);
+            
+            //オブジェクトを出す
+            obj=Instantiate(hitGameObject,effectVec2+tihsVec2,Quaternion.identity);
+            // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2);
+            
+            // Debug.Log("hit effect");
+        }
+
+        if (body == 1)
+        {
+            
+        }
+    }
+
     void ShowDeathImage()
     {
         ////多分ドロップ画像設定するとこ
