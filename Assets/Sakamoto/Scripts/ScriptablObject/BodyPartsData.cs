@@ -17,6 +17,11 @@ public class BodyPartsData : ScriptableObject
 {
     [Header("パーツの部位")]
     public PartsType enPartsType;
+    [Header("パーツの上半身攻撃")]
+    public UpperAttack upperAttack;
+    [Header("パーツの下半身攻撃")]
+    public LowerAttack lowerAttack;
+
     [Header("パーツの名前")]
     public string sPartsName;
     [Header("アタック範囲")]
@@ -27,14 +32,22 @@ public class BodyPartsData : ScriptableObject
     public int iPartAttack;
     [Header("パーツの体画像")]
     public Sprite spBody;
-    [Header("パーツの腕画像")]
-    public Sprite spArm;
-    [Header("パーツの手画像")]
-    public Sprite spHand;
+    [Header("パーツの右腕画像")]
+    public Sprite spRightArm;
+    [Header("パーツの右手画像")]
+    public Sprite spRightHand;
+    [Header("パーツの左腕画像")]
+    public Sprite spLeftArm;
+    [Header("パーツの左手画像")]
+    public Sprite spLeftHand;
     [Header("パーツの腰画像")]
     public Sprite spWaist;
-    [Header("パーツの脚画像")]
-    public Sprite spLeg;
-    [Header("パーツの足画像")]
-    public Sprite spFoot;
+    [Header("パーツの右脚画像")]
+    public Sprite spRightLeg;
+    [Header("パーツの右足画像")]
+    public Sprite spRightFoot;
+    [Header("パーツの左脚画像")]
+    public Sprite spLeftLeg;
+    [Header("パーツの左足画像")]
+    public Sprite spLeftFoot;
 }

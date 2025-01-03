@@ -6,6 +6,17 @@ TagManager:
   tags:
   - Floor
   - Car
+  - BGM
+  - SE
+  - Enemy
+  - Dorops
+  - GameOver
+  - GameManager
+  - Mosaic
+  - PlayerShoot
+  - EnemyShoot
+  - GameClear
+  - UI
   layers:
   - Default
   - TransparentFX
@@ -13,16 +24,16 @@ TagManager:
   - 
   - Water
   - UI
+  - HitObject
+  - BG
+  - NoHitObject
+  - Player
+  - Enemy
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerShoot
+  - EnemyShoot
+  - Fire
+  - Floor
   - 
   - 
   - 
@@ -42,4 +53,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Behind Player
+    uniqueID: 497661923
+    locked: 0
+  - name: Player
+    uniqueID: 2549852151
+    locked: 0
+  - name: Before Player
+    uniqueID: 1817916389
+    locked: 0
+  - name: GameOver
+    uniqueID: 2368994759
+    locked: 0
+  - name: All Before
+    uniqueID: 1705519285
     locked: 0

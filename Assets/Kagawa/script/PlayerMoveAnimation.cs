@@ -1,107 +1,160 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+
+public enum UpperAttack
+{
+    NORMAL,
+    POLICE,
+    NURSE,
+    BOSS,
+    NONE,
+}
+
+public enum LowerAttack
+{
+    NORMAL,
+    POLICE,
+    NURSE,
+    BOSS,
+    NONE,
+}
 
 public class PlayerMoveAnimation : MonoBehaviour
 {
-    [SerializeField, Header("“ª‚ÌImage")] SpriteRenderer[] headSR;    
-    [SerializeField, Header("˜r‚ÌImageAæ‚É‰Eè")] SpriteRenderer[] armSR;
-    [SerializeField, Header("‘«‚ÌImageAæ‚É‰E‘«")] SpriteRenderer[] legSR;
+    [SerializeField, Header("é ­ã®Image")] SpriteRenderer headSR;
+    [SerializeField, Header("ä½“ã®ã®Image")] SpriteRenderer bodySR;
+    [SerializeField, Header("å³è…•ã®Image")] SpriteRenderer armRightSR;
+    [SerializeField, Header("å·¦è…•ã®Image")] SpriteRenderer armLeftSR;
+    [SerializeField, Header("å³æ‰‹é¦–ã®Image")] SpriteRenderer handRightSR;
+    [SerializeField, Header("å·¦æ‰‹é¦–ã®Image")] SpriteRenderer handLeftSR;
+    [SerializeField, Header("è…°ã®Image")] SpriteRenderer waistSR;
+    [SerializeField, Header("å³å¤ªè…¿ã®Image")] SpriteRenderer legRightSR;
+    [SerializeField, Header("å·¦å¤ªè…¿ã®Image")] SpriteRenderer legLeftSR;
+    [SerializeField, Header("å³è¶³ã®Image")] SpriteRenderer footRightSR;
+    [SerializeField, Header("å·¦è¶³ã®Image")] SpriteRenderer footLeftSR;
 
-    [Header("‘Sg")] public GameObject playerRc;
-    [SerializeField, Header("˜r‚ÌŠp“xAæ‚É‰Eè")]  GameObject[] arm;
-    [SerializeField, Header("‘¾‘Ú‚ÌŠp“xAæ‚É‰E‘«")]  GameObject[] leg;
-    [SerializeField, Header("‚·‚Ë‚ÌŠp“xAæ‚É‰E‘«")]  GameObject[] foot;
+    [Header("å…¨èº«")] public GameObject playerRc;
+    [SerializeField, Header("è…•ã®è§’åº¦ã€å…ˆã«å³æ‰‹")]  GameObject[] arm;
+    [SerializeField, Header("å¤ªè…¿ã®è§’åº¦ã€å…ˆã«å³è¶³")]  GameObject[] leg;
+    [SerializeField, Header("ã™ã­ã®è§’åº¦ã€å…ˆã«å³è¶³")]  GameObject[] foot;
 
-    [Header("1ƒRƒ}‚ÌŠÔŠu‚ÌŠÔ")] public float timeMax;
+    [Header("1ã‚³ãƒã®é–“éš”ã®æ™‚é–“")] public float timeMax;
 
-    [Header("---•à‚«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
-    [Header("‘Sg‚ÌŠp“x")] public float[] playerWalkRotation;
-    [Header("˜r‚ÌŠp“x")] public float[] armWalkRotation;
-    [Header("‘¾‚à‚à‚Ì‘O•û‚ÌŠp“x")] public float[] legWalkForwardRotation;
-    [Header("‘«‚Ì‘O•û‚ÌŠp“x")] public float[] footWalkForwardRotation;
-    [Header("‘¾‚à‚à‚ÌŒã•û‚ÌŠp“x")] public float[] legWalkBackRotation;
-    [Header("‘«‚ÌŒã•û‚ÌŠp“x")] public float[] footWalkBackRotation;
-    [Header("•à‚«‚ÌŒp‘±ŠÔ")] public float timeWalk;
+    [Header("---æ­©ãã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
+    public AnimationData walk;
 
-    [Header("---ƒpƒ“ƒ`‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
-    [Header("‘Sg‚ÌŠp“x")] public float[] playerPatRotation;
-    [Header("˜r‚Ì‘O•ûŠp“x")] public float[] armPatForwardRotation;
-    [Header("˜r‚ÌŒã•ûŠp“x")] public float[] armPatBackRotation;
-    [Header("‘¾‚à‚à‚Ì‘O•û‚ÌŠp“x")] public float[] legPatForwardRotation;
-    [Header("‘«‚Ì‘O•û‚ÌŠp“x")] public float[] footPatForwardRotation;
-    [Header("‘¾‚à‚à‚ÌŒã•û‚ÌŠp“x")] public float[] legPatBackRotation;
-    [Header("‘«‚ÌŒã•û‚ÌŠp“x")] public float[] footPatBackRotation;
+    [Header("---ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ‘ãƒ³ãƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
+    public AnimationData playerUpper;
 
-    [Header("---ƒLƒbƒN‚ÌƒAƒjƒ[ƒVƒ‡ƒ“---")]
-    [Header("‘Sg‚ÌŠp“x")] public float[] playerKickRotation;
-    [Header("˜r‚Ì‘O•ûŠp“x")] public float[] armKickForwardRotation;
-    [Header("˜r‚ÌŒã•ûŠp“x")] public float[] armKickBackRotation;
-    [Header("‘¾‚à‚à‚Ì‘O•û‚ÌŠp“x")] public float[] legKickForwardRotation;
-    [Header("‘«‚Ì‘O•û‚ÌŠp“x")] public float[] footKickForwardRotation;
-    [Header("‘¾‚à‚à‚ÌŒã•û‚ÌŠp“x")] public float[] legKickBackRotation;
-    [Header("‘«‚ÌŒã•û‚ÌŠp“x")] public float[] footKickBackRotation;
+    [Header("---ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚­ãƒƒã‚¯ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
+    public AnimationData playerLower;
 
-    //”z—ñ‚Ì”Ô†
-    int indexNumber;
+    [Header("---è­¦å¯Ÿæ‹³éŠƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
+    public AnimationData policeUpper;
 
-    //‘Ì‚Ì²
+    [Header("---è­¦å¯Ÿä¸‹åŠèº«ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
+    public AnimationData policeLower;
+
+    [Header("---ãƒŠãƒ¼ã‚¹ãƒ‘ãƒ³ãƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
+    public AnimationData nurseUpper;
+
+    [Header("---ãƒŠãƒ¼ã‚¹ã‚­ãƒƒã‚¯ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³---")]
+    public AnimationData nurseLower;
+
+    UpperAttack upperAttack;
+
+    LowerAttack downAttack;
+
+    //æ­©ãã®é…åˆ—ã®ç•ªå·
+    int walkIndex;
+
+    //æ”»æ’ƒã®é…åˆ—ã®ç•ªå·
+    int attackNumber;
+
+    //ä½“ã®è»¸
     int shaft;
 
-    // ’l‚ğ”½“]‚É‚·‚éƒtƒ‰ƒO
-    bool isActive;
-
-    // Œü‚¢‚Ä‚¢‚é•ûŒü‚ª‰E‚ğŒü‚¢‚Ä‚¢‚é‚©
-    bool isMirror;
-
-    // •ûŒüƒtƒ‰ƒO(‰E = false)
+    //æ­©ã„ã¦ã„ã‚‹ã¨ãã«æ–¹å‘ã‚’å¤‰æ›´ã•ã‚ŒãŸã‹æ•°
     bool isWalk;
 
-    // ƒ^ƒCƒ}[
-    float time = 0;
+    // å€¤ã‚’åè»¢ã«ã™ã‚‹ãƒ•ãƒ©ã‚°
+    bool isActive;
 
+    // æ”»æ’ƒä¸­ã‹ã©ã†ã‹
+    bool isAttack;
+
+    // é™æ­¢ã—ã¦ã„ã‚‹ã‹
+    bool isStop;
+
+    // ã‚¿ã‚¤ãƒãƒ¼
+    float timeWalk;
+    
+    // æ”»æ’ƒã®ã‚¿ã‚¤ãƒãƒ¼
+    float timeAttack;
 
     private void Start()
     {
-        indexNumber = 0;
+        
+        walkIndex = 0;
+        attackNumber = 0;
         shaft = 0;
 
-        isMirror = true;
+        isAttack = false;
         isActive = false;
         isWalk = false;
+        isStop = true;
+        timeWalk = 0;
+        timeAttack = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        time -= Time.deltaTime;
+        timeWalk -= Time.deltaTime;
+        timeAttack -= Time.deltaTime;
 
-        // •à‚­“®ì‚ğ‚µ‚Ä‚¢‚éAŒÄ‚Î‚¹‚È‚¢
-        if (time < 0)
+
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            if (Input.GetKeyDown(KeyCode.D))
+            ////é™æ­¢çŠ¶æ…‹ã‹ã‚‰å·¦å‘ãã¨ã
+            //if (time < 0 && isWalk)
+            //{
+            //    isStop = true;
+            //    time = timeMax * 2;
+            //}
+            shaft = 0;
+
+            if (isStop)
             {
-                    // ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ª¶‚©‚ç‰E‚É•Ï‚í‚Á‚½‚Æ‚«
-                    isWalk = false;
-                    shaft = 0;
-
-                    isActive = false;
-                    ChangeArmAnime();
-                    WalkStart();
+                // æ­©ãå‹•ä½œã‚’ã—ã¦ã„ã‚‹æ™‚ã€å‘¼ã°ã›ãªã„
+                WalkInstance();
             }
-            else if (Input.GetKeyDown(KeyCode.A))
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            ////é™æ­¢çŠ¶æ…‹ã‹ã‚‰å·¦å‘ãã¨ã
+            //if (time < 0 && !isWalk)
+            //{
+            //    isStop = true;
+            //    time = timeMax * 2;
+            //}
+
+            shaft = 180;
+
+            if (isStop)
             {
-
-                // ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ª‰E‚©‚ç¶‚É•Ï‚í‚Á‚½‚Æ‚«
-                isWalk = true;
-                shaft = 180;
-
-                isActive = false;
-                ChangeArmAnime();
-                WalkStart();
+                // æ­©ãå‹•ä½œã‚’ã—ã¦ã„ã‚‹æ™‚ã€å‘¼ã°ã›ãªã„
+                WalkInstance();
             }
-            else if (Input.GetKeyDown(KeyCode.Space))
+        }
+        
+
+        if (timeAttack < 0)
+        {
+            if (Input.GetKeyDown(KeyCode.I))
             {
                 PantieStart();
             }
@@ -111,281 +164,515 @@ public class PlayerMoveAnimation : MonoBehaviour
             }
         }
 
+        //æ­©ãã®ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã®å‘ãã‚’å¤‰ãˆã‚‹
         if (Input.GetKey(KeyCode.D))
         {
-            if (!isWalk)
+            shaft = 0;
+
+            if(!isWalk)
             {
+                isWalk = true;
+                ChangeArmAnime();
                 KeepWalk();
+            }
+            else if (isWalk && !isAttack)
+            {
+                PlayerWalk();
             }
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            if (isWalk)
+            shaft = 180;
+            if (!isWalk)
             {
+                isWalk= true;
+                ChangeArmAnime();
                 KeepWalk();
+            }
+            else if (isWalk && !isAttack)
+            {
+                PlayerWalk();
             }
         }
     }
 
     /// <summary>
-    /// •à‚­ƒAƒjƒ[ƒVƒ‡ƒ“
+    /// æ­©ãã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
     void PlayerWalk()
     {
-        // Quaternion.Euler: ‰ñ“]²( x, y, z)
-        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerWalkRotation[indexNumber]);
+        
+        // Quaternion.Euler: å›è»¢è»¸( x, y, z)
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[walkIndex]);
 
-        // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-        if (arm == null || armWalkRotation == null)
+        // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+        if (arm == null || walk.armForwardRotation == null)
         {
-            Debug.LogWarning("arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
             return;
         }
         else
         {
-            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armWalkRotation[indexNumber]);
-            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armWalkRotation[indexNumber]);
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, walk.armForwardRotation[walkIndex]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, -walk.armForwardRotation[walkIndex]);
         }
 
-        // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-        if (leg == null || legWalkBackRotation == null || legWalkForwardRotation == null)
+        // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+        if (leg == null || walk.legForwardRotation == null || walk.legBackRotation == null)
         {
-            Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
             return;
         }
-        else if (foot == null || footWalkBackRotation == null || footWalkForwardRotation == null) 
+        else if (foot == null || walk.footForwardRotation == null || walk.footBackRotation == null) 
         {
-            Debug.LogWarning("foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
+            Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
             return;
         }
         else
         {
-            // •à‚«n‚ß‚Ìê‡
+            // æ­©ãå§‹ã‚ã®å ´åˆ
             if (!isActive)
             {
-                leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[indexNumber]);
-                leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[indexNumber]);
-                foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[indexNumber]);
-                foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[indexNumber]);
+                leg[0].transform.rotation = Quaternion.Euler(0, shaft, walk.legBackRotation[walkIndex]);
+                leg[1].transform.rotation = Quaternion.Euler(0, shaft, walk.legForwardRotation[walkIndex]);
+                foot[0].transform.rotation = Quaternion.Euler(0, shaft, walk.footBackRotation[walkIndex]);
+                foot[1].transform.rotation = Quaternion.Euler(0, shaft, walk.footForwardRotation[walkIndex]);
             }
-            //•à‚«‘±‚¯‚Ä‚¢‚éê‡
+            //æ­©ãç¶šã‘ã¦ã„ã‚‹å ´åˆ
             if (isActive)
             {
-                leg[0].transform.rotation = Quaternion.Euler(0, shaft, legWalkForwardRotation[indexNumber]);
-                leg[1].transform.rotation = Quaternion.Euler(0, shaft, legWalkBackRotation[indexNumber]);
-                foot[0].transform.rotation = Quaternion.Euler(0, shaft, footWalkForwardRotation[indexNumber]);
-                foot[1].transform.rotation = Quaternion.Euler(0, shaft, footWalkBackRotation[indexNumber]);
+                leg[0].transform.rotation = Quaternion.Euler(0, shaft, walk.legForwardRotation[walkIndex]);
+                leg[1].transform.rotation = Quaternion.Euler(0, shaft, walk.legBackRotation[walkIndex]);
+                foot[0].transform.rotation = Quaternion.Euler(0, shaft, walk.footForwardRotation[walkIndex]);
+                foot[1].transform.rotation = Quaternion.Euler(0, shaft, walk.footBackRotation[walkIndex]);
             }
         }
     }
 
     /// <summary>
-    /// ƒpƒ“ƒ`‚Ìƒ‚[ƒVƒ‡ƒ“
+    /// ä¸ŠåŠèº«ã®ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
     void PlayerPantie()
     {
-        // Quaternion.Euler: ‰ñ“]²( x, y, z)
-        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerPatRotation[indexNumber]);
+        switch(upperAttack)
+        {
+            case UpperAttack.NORMAL:
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerUpper.wholeRotation[attackNumber]);
 
-        // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-        if (arm == null || armPatForwardRotation == null || armPatBackRotation == null)
-        {
-            Debug.LogWarning("arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
-            return;
-        }
-        else
-        {
-            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armPatForwardRotation[indexNumber]);
-            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armPatBackRotation[indexNumber]);
-        }
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (playerUpper.armForwardRotation == null || playerUpper.armBackRotation == null)
+                {
+                    Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else
+                {
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.armForwardRotation[attackNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.armBackRotation[attackNumber]);
+                }
 
-        // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-        if (leg == null || legPatBackRotation == null || legPatForwardRotation == null)
-        {
-            Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
-            return;
-        }
-        else if (foot == null || footPatBackRotation == null || footPatForwardRotation == null)
-        {
-            Debug.LogWarning("foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
-            return;
-        }
-        else
-        {
-            leg[0].transform.rotation = Quaternion.Euler(0, shaft, legPatBackRotation[indexNumber]);
-            leg[1].transform.rotation = Quaternion.Euler(0, shaft, legPatForwardRotation[indexNumber]);
-            foot[0].transform.rotation = Quaternion.Euler(0, shaft, footPatBackRotation[indexNumber]);
-            foot[1].transform.rotation = Quaternion.Euler(0, shaft, footPatForwardRotation[indexNumber]);
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (playerUpper.legForwardRotation == null || playerUpper.legBackRotation == null)
+                {
+                    Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else if (playerUpper.footBackRotation == null || playerUpper.footForwardRotation == null)
+                {
+                    Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else
+                {
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.legBackRotation[attackNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.legForwardRotation[attackNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.footBackRotation[attackNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, playerUpper.footForwardRotation[attackNumber]);
+                }
+                break;
+            case UpperAttack.POLICE:
+
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, policeUpper.wholeRotation[attackNumber]);
+
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (policeUpper.armForwardRotation == null || policeUpper.armBackRotation == null)
+                {
+                    Debug.LogWarning("è­¦å¯ŸArmã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else
+                {
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.armForwardRotation[attackNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.armBackRotation[attackNumber]);
+                }
+
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (policeUpper.legForwardRotation == null || policeUpper.legBackRotation == null)
+                {
+                    Debug.LogWarning("è­¦å¯ŸLegã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else if (policeUpper.footBackRotation == null || policeUpper.footForwardRotation == null)
+                {
+                    Debug.LogWarning("è­¦å¯ŸFootã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else
+                {
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.legBackRotation[attackNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.legForwardRotation[attackNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.footBackRotation[attackNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, policeUpper.footForwardRotation[attackNumber]);
+                }
+                break;
+            case UpperAttack.NURSE:
+
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.wholeRotation[attackNumber]);
+
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (nurseUpper.armForwardRotation == null || nurseUpper.armBackRotation == null)
+                {
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");    
+                    return;
+                }
+                else
+                {
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.armForwardRotation[attackNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.armBackRotation[attackNumber]);
+                }
+
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (nurseUpper.legForwardRotation == null || nurseUpper.legBackRotation == null)
+                {
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else if (nurseUpper.footBackRotation == null || nurseUpper.footForwardRotation == null)
+                {
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else
+                {
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.legBackRotation[attackNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.legForwardRotation[attackNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.footBackRotation[attackNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.footForwardRotation[attackNumber]);
+                }
+                break;
         }
     }
 
     /// <summary>
-    /// ƒLƒbƒN‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+    /// ã‚­ãƒƒã‚¯ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
     void PlayerKick()
     {
-        // Quaternion.Euler: ‰ñ“]²( x, y, z)
-        playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerKickRotation[indexNumber]);
+        switch(downAttack)
+        {
+            case LowerAttack.NORMAL:
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerLower.wholeRotation[attackNumber]);
 
-        // ˜r‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-        if (arm == null || armKickForwardRotation == null || armKickBackRotation == null)
-        {
-            Debug.LogWarning("arm‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
-            return;
-        }
-        else
-        {
-            arm[0].transform.rotation = Quaternion.Euler(0, shaft, armKickForwardRotation[indexNumber]);
-            arm[1].transform.rotation = Quaternion.Euler(0, shaft + 180, armKickBackRotation[indexNumber]);
-        }
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (playerLower.armForwardRotation == null || playerLower.armBackRotation == null)
+                {
+                    Debug.LogWarning("Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else
+                {
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, playerLower.armForwardRotation[attackNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, playerLower.armBackRotation[attackNumber]);
+                }
 
-        // ‘«‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-        if (leg == null || legKickBackRotation == null || legKickForwardRotation == null)
-        {
-            Debug.LogWarning("Leg‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
-            return;
-        }
-        else if (foot == null || footKickBackRotation == null || footKickForwardRotation == null)
-        {
-            Debug.LogWarning("foot‚Ìƒf[ƒ^‚ª‰½‚©‚µ‚ç”²‚¯‚Ä‚é");
-            return;
-        }
-        else
-        {
-            leg[0].transform.rotation = Quaternion.Euler(0, shaft, legKickBackRotation[indexNumber]);
-            leg[1].transform.rotation = Quaternion.Euler(0, shaft, legKickForwardRotation[indexNumber]);
-            foot[0].transform.rotation = Quaternion.Euler(0, shaft, footKickBackRotation[indexNumber]);
-            foot[1].transform.rotation = Quaternion.Euler(0, shaft, footKickForwardRotation[indexNumber]);
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (playerLower.legBackRotation == null || playerLower.legForwardRotation == null)
+                {
+                    Debug.LogWarning("Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else if (playerLower.footBackRotation == null || playerLower.footForwardRotation == null)
+                {
+                    Debug.LogWarning("Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else
+                {
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, playerLower.legBackRotation[attackNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, playerLower.legForwardRotation[attackNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, playerLower.footBackRotation[attackNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, playerLower.footForwardRotation[attackNumber]);
+                }
+                break;
+            case LowerAttack.POLICE:
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, policeLower.wholeRotation[attackNumber]);
+
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (policeLower.armForwardRotation == null || policeLower.armBackRotation == null)
+                {
+                    Debug.LogWarning("è­¦å¯ŸArmã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else
+                {
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, policeLower.armForwardRotation[attackNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, policeLower.armBackRotation[attackNumber]);
+                }
+
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (policeLower.legForwardRotation == null || policeLower.legBackRotation == null)
+                {
+                    Debug.LogWarning("è­¦å¯ŸLegã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else if (policeLower.footBackRotation == null || policeLower.footForwardRotation == null)
+                {
+                    Debug.LogWarning("è­¦å¯ŸFootã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else
+                {   
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, policeLower.legBackRotation[attackNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, policeLower.legForwardRotation[attackNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, policeLower.footBackRotation[attackNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, policeLower.footForwardRotation[attackNumber]);
+                }
+                break;
+            case LowerAttack.NURSE:
+
+                // Quaternion.Euler: å›è»¢è»¸( x, y, z)
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, nurseLower.wholeRotation[attackNumber]);
+
+                // è…•ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (nurseLower.armForwardRotation == null || nurseLower.armBackRotation == null)
+                {
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Armã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else
+                {
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.armForwardRotation[attackNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.armBackRotation[attackNumber]);
+                }
+
+                // è¶³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+                if (nurseLower.legForwardRotation == null || nurseLower.legBackRotation == null)
+                {
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Legã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else if (nurseLower.footBackRotation == null || nurseLower.footForwardRotation == null)
+                {
+                    Debug.LogWarning("ãƒŠãƒ¼ã‚¹Footã®ãƒ‡ãƒ¼ã‚¿ãŒä½•ã‹ã—ã‚‰æŠœã‘ã¦ã‚‹");
+                    return;
+                }
+                else
+                {
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.legBackRotation[attackNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.legForwardRotation[attackNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.footBackRotation[attackNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, nurseLower.footForwardRotation[attackNumber]);
+                }
+                break;
         }
     }
 
     IEnumerator CallWalkWithDelay()
     {
-        for (int i = 0; i < armWalkRotation.Length; i++)
+        for (int i = 0; i < walk.armForwardRotation.Length; i++)
         {
-            PlayerWalk();
+            if (!isAttack)
+            {
+                // indexNumberã®å€¤ã‚’å¢—ã‚„ã™(é…åˆ—ç•ªå·ã‚’ä¸Šã’ã‚‹)
+                walkIndex = i;
+                PlayerWalk();
 
-            // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
-            indexNumber = (indexNumber + 1) % armWalkRotation.Length;
-            yield return new WaitForSeconds(timeMax);
+                yield return new WaitForSeconds(timeMax);
+            }
         }
+
+        isWalk = false;
+        isActive = !isActive;
     }
 
     IEnumerator CallPantieWithDelay()
     {
-        for (int i = 0; i < armPatForwardRotation.Length; i++)
+        for (int i = 0; i < playerUpper.armForwardRotation.Length - 1; i++)
         {
             PlayerPantie();
 
-            // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
-            indexNumber = (indexNumber + 1) % armPatForwardRotation.Length;
+            // indexNumberã®å€¤ã‚’å¢—ã‚„ã™(é…åˆ—ç•ªå·ã‚’ä¸Šã’ã‚‹)
+            attackNumber = (attackNumber + 1) % playerUpper.armForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
+
+        timeWalk = 0;
+        isAttack = false;
+        isWalk = false;
+        isStop = true;
     }
 
     IEnumerator CallKickWithDelay()
     {
-        for (int i = 0; i < armKickForwardRotation.Length; i++)
+        for (int i = 0; i < playerLower.armForwardRotation.Length - 1; i++)
         {
             PlayerKick();
 
-            // indexNumber‚Ì’l‚ğ‘‚â‚·(”z—ñ”Ô†‚ğã‚°‚é)
-            indexNumber = (indexNumber + 1) % armKickForwardRotation.Length;
+            // indexNumberã®å€¤ã‚’å¢—ã‚„ã™(é…åˆ—ç•ªå·ã‚’ä¸Šã’ã‚‹)
+            attackNumber = (attackNumber + 1) % playerLower.armForwardRotation.Length;
             yield return new WaitForSeconds(timeMax);
         }
+
+        timeWalk = 0;
+        isWalk = false;
+        isStop = true;
+        isAttack = false;
     }
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚ğŒp‘±‚µ‚½A˜r‚Ì”z—ñ‚Ì’†‚Ì’l‚ğ‹t‚É‚·‚é
+    /// æ­©ãã“ã¨ã‚’ç¶™ç¶šã—ãŸæ™‚ã€è…•ã®é…åˆ—ã®ä¸­ã®å€¤ã‚’é€†ã«ã™ã‚‹
     /// </summary>
     void ChangeArmAnime()
     {
-        //O€‰‰Zq(Še—v‘f‚É‘Î‚µ‚Ä•ÏŠ·‘€ì‚ğs‚¤)
+        //ä¸‰é …æ¼”ç®—å­(å„è¦ç´ ã«å¯¾ã—ã¦å¤‰æ›æ“ä½œã‚’è¡Œã†)
         if (isActive)
         {
-            armWalkRotation = armWalkRotation.Select(value => value > 0 ? -value : value).ToArray();
+            walk.armForwardRotation = walk.armForwardRotation.Select(value => value > 0 ? -value : value).ToArray();
         }
         else if (!isActive)
         {
-            armWalkRotation = armWalkRotation.Select(value => value < 0 ? -value : value).ToArray();
+            walk.armForwardRotation = walk.armForwardRotation.Select(value => value < 0 ? -value : value).ToArray();
         }
     }
 
     /// <summary>
-    /// •à‚«n‚ß‚ÌŠÖ”
+    /// æ­©ãã“ã¨ã‚’é–‹å§‹ã®é–¢æ•°
     /// </summary>
     void WalkStart()
     {
-        time = timeMax * armWalkRotation.Length;
+        timeWalk = timeMax * playerUpper.armForwardRotation.Length;
         StartCoroutine(CallWalkWithDelay());
+        MultiAudio.ins.PlaySEByName("SE_hero_action_run");
     }
 
     /// <summary>
-    /// ƒpƒ“ƒ`‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ŠJn‚·‚é‚Æ‚«‚ÌŠÖ”
+    /// ãƒ‘ãƒ³ãƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹ã™ã‚‹ã¨ãã®é–¢æ•°
     /// </summary>
     void PantieStart()
     {
-        time = timeMax * armPatForwardRotation.Length;
+        AttackWaite();
         StartCoroutine(CallPantieWithDelay());
     }
 
     /// <summary>
-    /// ƒLƒbƒN‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ŠJn‚·‚é‚Æ‚«‚ÌŠÖ”
+    /// ã‚­ãƒƒã‚¯ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹ã™ã‚‹ã¨ãã®é–¢æ•°
     /// </summary>
     void KickStart()
     {
-        time = timeMax * armKickForwardRotation.Length;
+        AttackWaite();
         StartCoroutine(CallKickWithDelay());
     }
 
     /// <summary>
-    /// •à‚­‚±‚Æ‚ğŒp‘±‚µ‚½‚Æ‚«
+    /// æ­©ãã“ã¨ã®åˆæœŸåŒ–
+    /// </summary>
+    void WalkInstance()
+    {
+        if (timeWalk < 0)
+        {
+            walkIndex = 0;
+            attackNumber = 0;
+            isActive = false;
+            isStop = false;
+            WalkStart();
+        }
+    }
+
+    /// <summary>
+    /// æ­©ãã“ã¨ã‚’ç¶™ç¶šã—ãŸã¨ã
     /// </summary>
     void KeepWalk()
     {
-        // ˜A‘±“ü—Í‚³‚ê‚Ä‚¢‚é‚©
-        if (time - 0.05 < 0)
+        // é€£ç¶šå…¥åŠ›ã•ã‚Œã¦ã„ã‚‹ã‹
+        if (timeWalk - 0.01 < 0)
         {
-            isActive = !isActive;
+            Debug.Log("Keep");
+            walkIndex = 0;
+            attackNumber = 0;
             ChangeArmAnime();
             WalkStart();
         }
     }
 
     /// <summary>
-    /// “ª‚ÌƒCƒ[ƒW
+    /// æ”»æ’ƒã®åˆæœŸåŒ–
     /// </summary>
-    /// <param name="head">‰æ‘œƒf[ƒ^</param>
-    public void ChangeHead(BodyPartsData head)
+    void AttackWaite()
     {
-        for (int j = 0; j < headSR.Length; j++) 
-        {
-            headSR[j].sprite = head.spBody;
-        }
+        timeWalk = timeMax * (playerUpper.armForwardRotation.Length - 1);
+        timeAttack = timeMax * (playerLower.armForwardRotation.Length - 1);
+        isAttack = true;
+        isWalk = false;
+        StopCoroutine(CallWalkWithDelay());
+        walkIndex = 0;
+        attackNumber = 1;
     }
 
     /// <summary>
-    /// ˜r‚ÌƒCƒ[ƒW
+    /// ä¸ŠåŠèº«ã®ã‚¤ãƒ¡ãƒ¼ã‚¸
     /// </summary>
-    /// <param name="arm">‰æ‘œƒf[ƒ^</param>
-    public void ChangeArm(BodyPartsData arm)
+    /// <param name="upperBody">ç”»åƒãƒ‡ãƒ¼ã‚¿é›†åˆä½“</param>
+    public void ChangeUpperBody(BodyPartsData upperBody)
     {
-        for (int j = 0; j < armSR.Length; j++)
-        {
-            armSR[j].sprite = arm.spArm;
-        }
+        bodySR.sprite = upperBody.spBody;
+        armRightSR.sprite = upperBody.spRightArm;
+        armLeftSR.sprite = upperBody.spLeftArm;
+        handRightSR.sprite = upperBody.spRightHand;
+        handLeftSR.sprite = upperBody.spLeftHand;
     }
 
     /// <summary>
-    /// ‘«‚ÌƒCƒ[ƒW
+    /// ä¸‹åŠèº«ã®ã‚¤ãƒ¡ãƒ¼ã‚¸
     /// </summary>
-    /// <param name="leg">‰æ‘œƒf[ƒ^</param>
-    public void ChangeLeg(BodyPartsData leg)
+    /// <param name="underBody">ç”»åƒãƒ‡ãƒ¼ã‚¿é›†åˆä½“</param>
+    public void ChangeUnderBody(BodyPartsData underBody)
     {
-        for (int j = 0; j < legSR.Length; j++)
-        {
-            legSR[j].sprite = leg.spLeg;
-        }
+        waistSR.sprite = underBody.spWaist;
+        footRightSR.sprite = underBody.spRightFoot;
+        footLeftSR.sprite = underBody.spLeftFoot;
+        legRightSR.sprite = underBody.spRightLeg;
+        legLeftSR.sprite = underBody.spLeftLeg;
+    }
+
+    /// <summary>
+    /// ä¸ŠåŠèº«ã®æ”»æ’ƒã®å¤‰åŒ–
+    /// </summary>
+    /// <param name="isName">ç§»æ¤ã™ã‚‹ç‰©ä½“</param>
+    public void ChangeUpperMove(UpperAttack isName)
+    {
+        upperAttack = isName;
+    }
+
+    /// <summary>
+    /// ä¸‹åŠèº«ã®æ”»æ’ƒã®å¤‰åŒ–
+    /// </summary>
+    /// <param name="isName">ç§»æ¤ã™ã‚‹ç‰©ä½“</param>
+    public void ChangeLowerMove(LowerAttack isName)
+    {
+        downAttack = isName;
+    }
+
+    /// <summary>
+    /// æ”»æ’ƒä¸­ã‹ã©ã†ã‹ã‚’æ¸¡ã™
+    /// </summary>
+    /// <returns></returns>
+    public bool SetAttack()
+    {
+        return isAttack;
     }
 }
 

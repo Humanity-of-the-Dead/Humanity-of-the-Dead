@@ -1,8 +1,15 @@
 fileFormatVersion: 2
-guid: 8acf0740df7f2384aa30521452f1b945
+<<<<<<<< HEAD:Assets/Matuoka/Study/NewAudioMixer.mixer.meta
+guid: 996736340159f8f4fabdd6fe3e6021a7
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 24100000
+  mainObjectFileID: 0
+========
+guid: 0b5928a42ee096440877acfb5a25e216
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+>>>>>>>> main:Assets/Matuoka/TextMesh Pro.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

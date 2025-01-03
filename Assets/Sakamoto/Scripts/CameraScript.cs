@@ -49,9 +49,26 @@ public class CameraScript : MonoBehaviour
                     vCamPos.x = fMoveLimit;
                     this.GetComponent<Transform>().position = vCamPos;
                     eState = STATE.BOSS;
+                }               
+                vCamPos.y = goTarget.transform.position.y;
+                if(vCamPos.y < 0)
+                {
+                    vCamPos.y = 0;
                 }
+                this.GetComponent<Transform>().position = vCamPos;
                 break;
             case STATE.BOSS:
+                Vector3 bossCamPos = this.transform.position;
+
+                // カメラのX座標を固定
+                bossCamPos.x = fMoveLimit;
+
+                // プレイヤーのジャンプを追従しつつ制約を追加
+                float targetY = goTarget.transform.position.y;
+                bossCamPos.y = Mathf.Clamp(targetY, 0, 2); 
+
+                this.GetComponent<Transform>().position = bossCamPos;
+
                 //カメラ追従なし
                 break;
         }

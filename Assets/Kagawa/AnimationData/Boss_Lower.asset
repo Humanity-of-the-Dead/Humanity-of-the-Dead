@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4baf05cd9d1c8074ba7e49a082233737, type: 3}
+  m_Name: Boss_Lower
+  m_EditorClassIdentifier: 
+  wholeRotation:
+  - 0
+  - 5
+  - 0
+  armForwardRotation:
+  - 0
+  - 5
+  - 0
+  armBackRotation:
+  - 0
+  - 5
+  - 0
+  handForwardRotation:
+  - 0
+  - 140
+  - 0
+  handBackRotation:
+  - 0
+  - 140
+  - 0
+  legForwardRotation:
+  - 0
+  - -10
+  - 0
+  footForwardRotation:
+  - 0
+  - -15
+  - 0
+  legBackRotation:
+  - 0
+  - 90
+  - 0
+  footBackRotation:
+  - 0
+  - 70
+  - 0
