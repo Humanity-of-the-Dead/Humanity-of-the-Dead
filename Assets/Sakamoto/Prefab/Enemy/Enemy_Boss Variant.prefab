@@ -289,13 +289,13 @@ MonoBehaviour:
   HPBarContainer: {fileID: 3650718983251325481}
   displayRange: 5
   hitGameObject: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
-  upperEffectXMin: -1.5
-  upperEffectXMax: 1.5
+  upperEffectXMin: 0.47
+  upperEffectXMax: 0.28
   upperEffectYMin: 1
-  upperEffectYMax: 5
-  lowerEffectXMin: -1.5
-  lowerEffectXMax: 1.5
-  lowerEffectYMin: -5
+  upperEffectYMax: 2.5
+  lowerEffectXMin: -0.33
+  lowerEffectXMax: 0.21
+  lowerEffectYMin: 2.8
   lowerEffectYMax: -1
 --- !u!1 &3650718983251325481 stripped
 GameObject:
