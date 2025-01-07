@@ -142,7 +142,7 @@ public class newEnemyParameters : MonoBehaviour
             Debug.Log("è„îºêgÇ™îjâÛÇ≥ÇÍÇΩ");
             //Drop(Upperbodypart, false);
             MultiAudio.ins.PlaySEByName("SE_common_breakbody");
-            StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Upperbodypart, false));
+            StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Upperbodypart, true));
         }
         if (LowerHP <= 0)
         {
@@ -150,7 +150,7 @@ public class newEnemyParameters : MonoBehaviour
             Debug.Log("â∫îºêgÇ™îjâÛÇ≥ÇÍÇΩ");
             //Drop(Lowerbodypart, true);
             MultiAudio.ins.PlaySEByName("SE_common_breakbody");
-            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Lowerbodypart, true))
+            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Lowerbodypart, false))
                 ;
         }
     }
