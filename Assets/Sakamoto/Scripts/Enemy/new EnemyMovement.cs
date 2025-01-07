@@ -130,9 +130,11 @@ public class newEnemyMovement : EnemyAttack
                                         Vector2 ShootMoveBector = new Vector2(0, 0);
                                         //子のplayerRCのローテーションYを持ってくる
                                         // y = 0のときは右向き、0 y = 180のときは左向き
-                                        Debug.Log(this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles
+                                        Debug.Log(this.gameObject.transform.GetChild(0).
+                                            gameObject.transform.eulerAngles
                                             .y);
-                                        if (this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y ==180)
+                                        if (this.gameObject.transform.GetChild(0).
+                                                gameObject.transform.eulerAngles.y ==180)
                                         {
                                             ShootMoveBector.x = -1;
                                         }
@@ -145,22 +147,35 @@ public class newEnemyMovement : EnemyAttack
                                         Juu.Shoot(ShootMoveBector, this.transform);
                                         //警察官の上半身で攻撃するSEを鳴らす
                                         MultiAudio.ins.PlaySEByName(
-                                            "SE_police_officer_attace_upper");
+                                            "SE_policeofficer_attack_upper");
                                         break;
                                     
                                     case "警察の下半身":
+                                        //警察官下半身の攻撃音のSEをならす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_policeofficer_attack_lower");
                                         break;
                                     
                                     case "ボスの上半身":
+                                        //ラスボス上半身の攻撃音のSEを鳴らす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_lastboss_attack_upper");
                                         break;
                                     
                                     case "ボスの下半身":
+                                        //ラスボス下半身の攻撃音のSEを鳴らす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_lastboss_attack_lower");
                                         break;
                                     
                                     case "雑魚敵の上半身":
+                                        //主人公上半身の攻撃音のSEを鳴らす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_hero_attack_upper");
                                         break;
                                     
                                     case "雑魚敵の下半身":
+                                        //主人公下半身の攻撃音のSEを鳴らす
                                         break;
                                     
                                     case "看護師の上半身":
