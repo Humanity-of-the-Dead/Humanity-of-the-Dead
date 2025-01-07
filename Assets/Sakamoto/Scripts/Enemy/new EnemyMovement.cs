@@ -124,28 +124,55 @@ public class newEnemyMovement : EnemyAttack
                             {
                                 //上半身攻撃
                                 moveAnimation.PantieStart();
-                                if(upperpart.sPartsName == "警察の上半身")
+                                switch (upperpart.sPartsName)
                                 {
-                                    Vector2 ShootMoveBector = new Vector2(0, 0);
-                                    //子のplayerRCのローテーションYを持ってくる
-                                    // y = 0のときは右向き、0 y = 180のときは左向き
-                                    Debug.Log(this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y);
-                                    if (this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y == 180)
-                                    {
-                                        ShootMoveBector.x = -1;
-                                    }
-                                    else
-                                    {
-                                        ShootMoveBector.x = 1;
-                                    }
+                                    case "警察の上半身":
+                                        Vector2 ShootMoveBector = new Vector2(0, 0);
+                                        //子のplayerRCのローテーションYを持ってくる
+                                        // y = 0のときは右向き、0 y = 180のときは左向き
+                                        Debug.Log(this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles
+                                            .y);
+                                        if (this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y ==180)
+                                        {
+                                            ShootMoveBector.x = -1;
+                                        }
+                                        else
+                                        {
+                                            ShootMoveBector.x = 1;
+                                        }
 
-                                    Debug.Log(ShootMoveBector);
-                                    Juu.Shoot(ShootMoveBector, this.transform);
-
-                                    return;
+                                        Debug.Log(ShootMoveBector);
+                                        Juu.Shoot(ShootMoveBector, this.transform);
+                                        //警察官の上半身で攻撃するSEを鳴らす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_police_officer_attace_upper");
+                                        break;
+                                    
+                                    case "警察の下半身":
+                                        break;
+                                    
+                                    case "ボスの上半身":
+                                        break;
+                                    
+                                    case "ボスの下半身":
+                                        break;
+                                    
+                                    case "雑魚敵の上半身":
+                                        break;
+                                    
+                                    case "雑魚敵の下半身":
+                                        break;
+                                    
+                                    case "看護師の上半身":
+                                        break;
+                                    
+                                    case "看護師の下半身":
+                                        break;
                                 }
+
                                 UpperEnemyAttack((float)upperpart.iPartAttack);
-                                MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+                                //攻撃が当たったときになるSEだから多分ここじゃない
+                                // MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                             }
                             if (num == 1)
                             {
