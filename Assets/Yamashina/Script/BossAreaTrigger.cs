@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossAreaTrigger : MonoBehaviour
+public class BossAreaTrigger:MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
