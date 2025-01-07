@@ -71,7 +71,10 @@ public class GameMgr : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             enemy.transform.Translate(Vector3.left * 5f); // ”CˆÓ‚Ì‘¬“x‚Å¶ˆÚ“®
+            EnemyMoveAnimation  moveAnimation =GameObject.FindAnyObjectByType<EnemyMoveAnimation>();
+            moveAnimation.LeftMove();
         }
+
     }
 }
 
