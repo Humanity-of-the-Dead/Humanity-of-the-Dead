@@ -79,6 +79,12 @@ public class newEnemyParameters : MonoBehaviour
              "値を大きくすると遠くからでもHPバーが表示されます。")]
     [SerializeField]
     private float displayRange = 5f;
+    [Header("HPバーを表示してから、")]
+    [Tooltip("プレイヤーと敵キャラクターの距離がこの値以下の場合にHPバーを表示します。\n" +
+            "値を小さくするとプレイヤーが近づかないとHPバーが表示されなくなり、\n" +
+            "値を大きくすると遠くからでもHPバーが表示されます。")]
+    [SerializeField]
+    private float hpBarDestory = 0.3f;
     private Transform player; // プレイヤーの位置
 
     //ヒットエフェクト
@@ -108,10 +114,12 @@ public class newEnemyParameters : MonoBehaviour
         scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
         sceneTransitionManager = GameObject.FindAnyObjectByType<SceneTransitionManager>();
     }
+
+
     void Update()
     {
         float DistanceToPlayer = Vector3.Distance(transform.position, player.position);
-        // 一定距離内ならHPバーを表示
+        // プレイヤーが一定距離以内にいる場合にHPバーを表示
         if (DistanceToPlayer < displayRange)
         {
             if (HPBarContainer != null)
@@ -126,22 +134,28 @@ public class newEnemyParameters : MonoBehaviour
                 HPBarContainer.SetActive(false);
             }
         }
-        //もし耐久値が0になったらドロップする
+
+        // 部位が破壊された際にHPバーを一瞬表示
         if (UpperHP <= 0)
         {
             PlayerControl.GetComponent<PlayerControl>().RemoveListItem(this.gameObject);
-            Debug.Log("下半身が落ちたよ");
-            Drop(Lowerbodypart, false);
+            Debug.Log("上半身が破壊された");
+            //Drop(Upperbodypart, false);
             MultiAudio.ins.PlaySEByName("SE_common_breakbody");
+            StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Upperbodypart, false));
         }
         if (LowerHP <= 0)
         {
             PlayerControl.GetComponent<PlayerControl>().RemoveListItem(this.gameObject);
-            Debug.Log("上半身が落ちたよ");
-            Drop(Upperbodypart, true);
+            Debug.Log("下半身が破壊された");
+            //Drop(Lowerbodypart, true);
             MultiAudio.ins.PlaySEByName("SE_common_breakbody");
+            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Lowerbodypart, true))
+                ;
         }
     }
+
+
     //bodyには0か1しか入れてはいけない　BA//GU/RU
     //body : 0->上半身にダメージ
     //body : 1->下半身にダメージ
@@ -222,7 +236,17 @@ public class newEnemyParameters : MonoBehaviour
         //    deathImage.enabled = true;
         //}
     }
+    private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
+    {
+        if (hpBar != null)
+        {
 
+            hpBar.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.3f); // 継続時間は調整可能
+            hpBar.gameObject.SetActive(false);
+        }
+        Drop(part, typ);
+    }
     //ドロップアイテムを生成する関数　
     //BodyPartsData part->生成した後に与えるパラメータデータ
     //int typ->trueなら上半身が落ちる:falseなら下半身が落ちる
