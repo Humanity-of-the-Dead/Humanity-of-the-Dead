@@ -78,11 +78,9 @@ public class newEnemyParameters : MonoBehaviour
              "値を小さくするとプレイヤーが近づかないとHPバーが表示されなくなり、\n" +
              "値を大きくすると遠くからでもHPバーが表示されます。")]
     [SerializeField]
-    private float displayRange = 5f;
-    [Header("HPバーを表示してから、")]
-    [Tooltip("プレイヤーと敵キャラクターの距離がこの値以下の場合にHPバーを表示します。\n" +
-            "値を小さくするとプレイヤーが近づかないとHPバーが表示されなくなり、\n" +
-            "値を大きくすると遠くからでもHPバーが表示されます。")]
+    private float displayRange = 0.3f;
+    [Header("敵を倒してからHPバーが消えるまでの秒数")]
+    [Tooltip("HPが0の状態のHPが表示されてからのカウントです。")]
     [SerializeField]
     private float hpBarDestory = 0.3f;
     private Transform player; // プレイヤーの位置
@@ -247,7 +245,7 @@ public class newEnemyParameters : MonoBehaviour
         {
 
             hpBar.gameObject.SetActive(true);
-            yield return new WaitForSeconds(0.3f); // 継続時間は調整可能
+            yield return new WaitForSeconds(displayRange); // 継続時間は調整可能
             hpBar.gameObject.SetActive(false);
         }
         Drop(part, typ);
