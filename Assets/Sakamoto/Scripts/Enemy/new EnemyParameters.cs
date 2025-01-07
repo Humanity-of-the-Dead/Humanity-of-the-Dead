@@ -153,10 +153,10 @@ public class newEnemyParameters : MonoBehaviour
             StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Lowerbodypart, true))
                 ;
         }
-        if (GameMgr.GetState() == GameState.ShowText&&!Boss)
-        {
-            Destroy(this.gameObject);   
-        }
+        //if (GameMgr.GetState() == GameState.ShowText&&!Boss)
+        //{
+        //    Destroy(this.gameObject);   
+        //}
 
     }
 
