@@ -142,7 +142,7 @@ public class newEnemyParameters : MonoBehaviour
             Debug.Log("è„îºêgÇ™îjâÛÇ≥ÇÍÇΩ");
             //Drop(Upperbodypart, false);
             MultiAudio.ins.PlaySEByName("SE_common_breakbody");
-            StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Upperbodypart, true));
+            StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Lowerbodypart, false));
         }
         if (LowerHP <= 0)
         {
@@ -150,9 +150,14 @@ public class newEnemyParameters : MonoBehaviour
             Debug.Log("â∫îºêgÇ™îjâÛÇ≥ÇÍÇΩ");
             //Drop(Lowerbodypart, true);
             MultiAudio.ins.PlaySEByName("SE_common_breakbody");
-            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Lowerbodypart, false))
+            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true))
                 ;
         }
+        //if (GameMgr.GetState() == GameState.ShowText&&!Boss)
+        //{
+        //    Destroy(this.gameObject);   
+        //}
+
     }
 
 
