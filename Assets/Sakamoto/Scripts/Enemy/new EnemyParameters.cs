@@ -245,7 +245,7 @@ public class newEnemyParameters : MonoBehaviour
         {
 
             hpBar.gameObject.SetActive(true);
-            yield return new WaitForSeconds(displayRange); // Œp‘±ŠÔ‚Í’²®‰Â”\
+            yield return new WaitForSeconds(hpBarDestory); // Œp‘±ŠÔ‚Í’²®‰Â”\
             hpBar.gameObject.SetActive(false);
         }
         Drop(part, typ);
