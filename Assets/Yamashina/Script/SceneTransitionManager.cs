@@ -217,6 +217,23 @@ public class SceneTransitionManager : MonoBehaviour
         StartCoroutine(FadeIn()); // フェードイン開始
     }
   
+    public IEnumerator FadeBoss()
+    {
+        fadeInstance.gameObject.SetActive(true);
+        Color fadeColor = fadeInstance.color; // 一時変数を使用
+        fadeColor.a = 0; // 最初は完全に透明
+        fadeInstance.color = fadeColor;
+        float speed = 1.0f / fadeSpeed; // インスペクターから設定された速度を使用
+
+        // 徐々に不透明にする処理
+        while (fadeInstance.color.a < 1)
+        {
+            fadeColor.a += Time.deltaTime * speed; // アルファ値を増加
+            fadeInstance.color = fadeColor; // 更新
+            yield return null;
+        }
+        StartCoroutine(FadeIn());
+    }
     
 
    

@@ -129,7 +129,7 @@ public class textdisplay: MonoBehaviour
                     {
                         iNextIndex = 5;
                     }
-                    AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
+                    AudioSource BGM = MultiAudio.ins.bgmSource;
 
                     if (BGM.isPlaying == false)
                     {
@@ -158,7 +158,7 @@ public class textdisplay: MonoBehaviour
                         //Debug.Log(textAsset.Length);
 
                         CloseTextArea(); // 全てのテキストを読み終えたら閉じる
-                        AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
+                        AudioSource BGM = MultiAudio.ins.bgmSource;
                         BGM.Stop();
                         MultiAudio.ins.PlayBGM_ByName("BGM_clear");
 

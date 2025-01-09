@@ -264,6 +264,7 @@ public class TitleAnimation : MonoBehaviour
         {
             panalView = PanalView.Option;
         }
+        MouseOverObject mouseOver = GameObject.FindAnyObjectByType<MouseOverObject>();
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.G))
         {
             switch (panalView)
@@ -275,13 +276,16 @@ public class TitleAnimation : MonoBehaviour
                     OptionPanel.transform.localPosition = OptionPaneEndPosition;
                     CreditPanel.SetActive(false);
                     mainPanel.SetActive(true);
-
-
+                  
+                    mouseOver.mouseover.SetActive(false) ;  
+                        
                     break;
                 case PanalView.Credit:
                     CreditPanel.SetActive(false);
                     mainPanel.SetActive(true);
                     OptionPanel.SetActive(false);
+                    mouseOver.mouseover.SetActive(false);
+
                     if (mainPanel.activeSelf)
                     {
                         MultiAudio.ins.PlayBGM_ByName("BGM_title");
@@ -293,6 +297,7 @@ public class TitleAnimation : MonoBehaviour
                     CreditPanel.SetActive(false);
                     mainPanel.SetActive(true);
                     OptionPanel.SetActive(false);
+                    mouseOver.mouseover.SetActive(false);
 
 
 

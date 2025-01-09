@@ -76,5 +76,11 @@ public class GameMgr : MonoBehaviour
         }
 
     }
+    private void OnGUI()
+    {
+        GUI.skin.label.fontSize = 30;  // ó·Ç¶ÇŒ30Ç…ê›íË
+
+        GUI.Label(new Rect(10.0f, 10.0f, Screen.width, Screen.height), enGameState.ToString());
+    }
 }
 
