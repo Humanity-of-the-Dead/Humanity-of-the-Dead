@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SceneTransitionManager : MonoBehaviour
 {
-    [SerializeField]  public  SceneInformation sceneInformation;
+    [SerializeField] public SceneInformation sceneInformation;
     [SerializeField] private GameObject fadePrefab; // フェード用プレハブ
     private Image fadeInstance; // 実際に使用するフェード用 Image
     [SerializeField] private SceneInformation.SCENE currentScene;  // 今のシーン                  // 今のシーン
@@ -17,7 +17,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void Start()
     {
-      
+
         SetCurrentScene(SceneManager.GetActiveScene().buildIndex);
         PlayBGMForScene();
 
@@ -25,14 +25,14 @@ public class SceneTransitionManager : MonoBehaviour
         StartCoroutine(FadeIn());
 
         // MultiAudio の初期化を確認
-       
-                 
 
-        
+
+
+
 
     }
 
-   
+
 
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class SceneTransitionManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject); // Managerオブジェクト全体を保持
-            
+
             SceneManager.sceneLoaded += OnSceneLoaded; // イベント登録
         }
         else
@@ -100,7 +100,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void PlayBGMForScene()
     {
-        
+
         string sceneName = SceneManager.GetActiveScene().name;
         string bgmName = "";
 
@@ -121,6 +121,11 @@ public class SceneTransitionManager : MonoBehaviour
             bgmName = "BGM_stage_03"; // ステージ2のBGM名
 
         }
+        //else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree_Five))
+        //{
+        //    bgmName = "BGM_stage_03"; // ステージ2のBGM名(後で変更）
+
+        //}
         else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour))
         {
             bgmName = "BGM_stage_04"; // ステージ2のBGM名
@@ -174,7 +179,7 @@ public class SceneTransitionManager : MonoBehaviour
         // 徐々に透明にする処理
         while (fadeInstance.color.a > 0)
         {
-            fadeColor.a -= Time.deltaTime*speed; // アルファ値を減少
+            fadeColor.a -= Time.deltaTime * speed; // アルファ値を減少
             fadeInstance.color = fadeColor; // 更新
             yield return null;
         }
@@ -200,7 +205,7 @@ public class SceneTransitionManager : MonoBehaviour
         // 徐々に不透明にする処理
         while (fadeInstance.color.a < 1)
         {
-            fadeColor.a += Time.deltaTime*speed; // アルファ値を増加
+            fadeColor.a += Time.deltaTime * speed; // アルファ値を増加
             fadeInstance.color = fadeColor; // 更新
             yield return null;
         }
@@ -216,7 +221,7 @@ public class SceneTransitionManager : MonoBehaviour
 
         StartCoroutine(FadeIn()); // フェードイン開始
     }
-  
+
     public IEnumerator FadeBoss()
     {
         fadeInstance.gameObject.SetActive(true);
@@ -234,22 +239,22 @@ public class SceneTransitionManager : MonoBehaviour
         }
         StartCoroutine(FadeIn());
     }
-    
 
-   
+
+
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    
-   
 
 
-  
-   
 
-    
-   
+
+
+
+
+
+
 }
 

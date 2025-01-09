@@ -52,7 +52,6 @@ public class newEnemyParameters : MonoBehaviour
     [SerializeField]
     GameObject textBox;
 
-    [SerializeField] SceneTransitionManager sceneTransitionManager;
 
     //ìGÇÃHPÉQÅ[ÉWä÷òA
     [SerializeField]
@@ -110,7 +109,6 @@ public class newEnemyParameters : MonoBehaviour
             Debug.LogWarning("HPBarContainerÇ™null");
         }
         scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
-        sceneTransitionManager = GameObject.FindAnyObjectByType<SceneTransitionManager>();
         Debug.Log(PlayerControl);
 
     }

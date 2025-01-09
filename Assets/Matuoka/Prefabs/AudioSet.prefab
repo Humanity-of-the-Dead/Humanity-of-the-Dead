@@ -202,7 +202,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c13a9cad70647f34f8d1b9e0047b6e9c, type: 3}
   - {fileID: 8300000, guid: c3835221e0d6d6b42a4e13fb7d593888, type: 3}
   - {fileID: 8300000, guid: d95e6898e64d6204bbcef0de2bbaeab0, type: 3}
-  audioClipsUI: []
+  audioClipsUI:
+  - {fileID: 8300000, guid: 4bcfb5dde5584f846bab4d8855cf8107, type: 3}
+  - {fileID: 8300000, guid: 0cff2a0e63292ca44b02a8dc7654bb0a, type: 3}
   bgmSource: {fileID: 0}
   seSource: {fileID: 0}
   uiSource: {fileID: 0}

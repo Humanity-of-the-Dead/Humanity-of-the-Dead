@@ -47,7 +47,6 @@ public class sEnemyParameters : MonoBehaviour
     [SerializeField]
     GameObject textBox;
 
-    [SerializeField] SceneTransitionManager sceneTransitionManager;
 
     //エネミーが銃を撃つかどうかを示すフラグ
     public bool canShoot = false;
@@ -57,7 +56,6 @@ public class sEnemyParameters : MonoBehaviour
 
     private void Start()
     {
-        sceneTransitionManager = GameObject.FindAnyObjectByType<SceneTransitionManager>();
 
         // canShoot が true の場合のみ FirePoint を探す
         if (canShoot)
@@ -131,7 +129,6 @@ public class sEnemyParameters : MonoBehaviour
 
         // データとシーン遷移マネージャーを渡す
         drop.GetComponent<newDropPart>().getPartsData(part);
-        drop.GetComponent<newDropPart>().getSceneTransition(sceneTransitionManager);
 
         // 自分のゲームオブジェクトを消す
         this.gameObject.SetActive(false);
