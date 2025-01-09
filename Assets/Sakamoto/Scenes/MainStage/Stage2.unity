@@ -2856,7 +2856,7 @@ PrefabInstance:
     - target: {fileID: 4938219355749494688, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: PlayerControl
       value: 
-      objectReference: {fileID: 1443765028}
+      objectReference: {fileID: 1443765029}
     - target: {fileID: 4938219355749494688, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: scPlayerParameter
       value: 

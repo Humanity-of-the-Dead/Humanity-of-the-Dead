@@ -130,6 +130,11 @@ public class PlayerMoveAnimation : MonoBehaviour
                 // 歩く動作をしている時、呼ばせない
                 WalkInstance();
             }
+            else
+            {
+                isStop = !isStop;
+
+            }
             //ここまでKeyDownで書いていたもの移動
             #endregion
             if (!isWalk)
@@ -154,6 +159,10 @@ public class PlayerMoveAnimation : MonoBehaviour
             {
                 // 歩く動作をしている時、呼ばせない
                 WalkInstance();
+            }
+            else
+            {
+                isStop = !isStop;             
             }
             //ここまでKeyDownで書いていたもの移動
 

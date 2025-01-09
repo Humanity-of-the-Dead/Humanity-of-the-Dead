@@ -83,7 +83,7 @@ public class PlayerParameter : MonoBehaviour
             {
                 case GameState.Main:
                     //パラメータの値をiDownTime秒で1減少させる
-                    iHumanity -= Time.deltaTime / iDownTime;
+                    iHumanity -= Time.deltaTime / iDownTime/* *dgbScale*/;
                     iUpperHP -= Time.deltaTime / iDownTime;
                     iLowerHP -= Time.deltaTime / iDownTime;
                     Debug.Log(iDownTime);

@@ -84,6 +84,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2105328742850887647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 351119346597337881}
+  - component: {fileID: 7090420348963897758}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &351119346597337881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105328742850887647}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.35790402, y: -0.64171624, z: 0}
+  m_LocalScale: {x: 6.666666, y: 6.666666, z: 6.666666}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1150826654535052386}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7090420348963897758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105328742850887647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df2cec9e8a9b0841b321a77d7bd7799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerControl: {fileID: 8174693859135747344}
+  moveDuration: 5
 --- !u!1 &2521172621623747769
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +628,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2696059808575154406, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1985282424472676853}
+    - targetCorrespondingSourceObject: {fileID: 2696059808575154406, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 351119346597337881}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6908733285454812978, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       insertIndex: -1
@@ -646,6 +695,7 @@ MonoBehaviour:
   scGameMgr: {fileID: 0}
   fSpeed: 7
   fJmpPower: 850
+  Jmpconsecutive: 0
   goCamera: {fileID: 0}
   liObj:
   - {fileID: 0}
