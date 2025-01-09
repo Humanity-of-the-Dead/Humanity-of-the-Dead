@@ -164,6 +164,10 @@ public class PlayerControl : MonoBehaviour
             {
                 scPlayerMoveAnimation.PantieStart();
 
+                #region éRïiïœçX
+
+                scPlayerMoveAnimation.PantieStart();
+                #endregion
                 switch (playerParameter.UpperData.upperAttack)
                 {
                     case UpperAttack.NORMAL:

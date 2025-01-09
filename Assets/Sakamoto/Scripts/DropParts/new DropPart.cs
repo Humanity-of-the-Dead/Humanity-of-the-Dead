@@ -19,7 +19,6 @@ public class newDropPart : MonoBehaviour
 
     //ボスフラグ
     bool bBoss;
-    SceneTransitionManager sceneTransitionManager;
 
     //ボタンオブジェクト
     [SerializeField] GameObject[] goButton;
@@ -119,11 +118,7 @@ public class newDropPart : MonoBehaviour
         scPlayerParameter.comfort(10);
         Destroy(this.gameObject);
     }
-    public void getSceneTransition(SceneTransitionManager sceneTransitionManager)
-    {
-        this.sceneTransitionManager = sceneTransitionManager;
-
-    }
+  
 
     //ゲームクリア処理
     private void GameClear()
