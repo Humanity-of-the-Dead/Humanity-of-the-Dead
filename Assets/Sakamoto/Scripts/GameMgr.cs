@@ -8,6 +8,8 @@ public enum GameState {
     ShowOption,
     ShowText,
     Clear, //クリア表示
+    BeforeBoss, // 新しく追加：ボス戦直前
+
     AfterBOss,//ボス後
     GameOver,
 }
@@ -27,7 +29,12 @@ public class GameMgr : MonoBehaviour
 
     private void Update()
     {
-        if(enGameState == GameState.Main && Input.GetKeyDown(KeyCode.G))
+        if (enGameState == GameState.BeforeBoss)
+        {
+            ForceEnemiesMoveLeft();  // 雑魚キャラを左移動させる
+            ChangeState(GameState.AfterBOss); // 移動後に AfterBoss に切り替える
+        }
+        if (enGameState == GameState.Main && Input.GetKeyDown(KeyCode.G))
         {
             OptionButton.onClick.Invoke();
             //enGameState = GameState.ShowText;
@@ -38,9 +45,9 @@ public class GameMgr : MonoBehaviour
             //enGameState = GameState.Main;
         }
 
-        if(enGameState == GameState.GameOver)
+        if (enGameState == GameState.GameOver)
         {
-            if(timer > 1)
+            if (timer > 1)
             {
                 SceneTransitionManager.instance.ReloadCurrentScene();
                 timer = 0;
@@ -57,6 +64,17 @@ public class GameMgr : MonoBehaviour
     public static GameState GetState()
     {
         return enGameState;
+    }
+    private void ForceEnemiesMoveLeft()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.transform.Translate(Vector3.left * 5f); // 任意の速度で左移動
+            EnemyMoveAnimation  moveAnimation =GameObject.FindAnyObjectByType<EnemyMoveAnimation>();
+            moveAnimation.LeftMove();
+        }
+
     }
 }
 
