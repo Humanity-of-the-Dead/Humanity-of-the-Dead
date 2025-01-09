@@ -116,60 +116,17 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeWalk -= Time.deltaTime;
         timeAttack -= Time.deltaTime;
 
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            ////静止状態から左向くとき
-            //if (time < 0 && isWalk)
-            //{
-            //    isStop = true;
-            //    time = timeMax * 2;
-            //}
-            shaft = 0;
-
-            if (isStop)
-            {
-                // 歩く動作をしている時、呼ばせない
-                WalkInstance();
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            ////静止状態から左向くとき
-            //if (time < 0 && !isWalk)
-            //{
-            //    isStop = true;
-            //    time = timeMax * 2;
-            //}
-
-            shaft = 180;
-
-            if (isStop)
-            {
-                // 歩く動作をしている時、呼ばせない
-                WalkInstance();
-            }
-        }
-        
-
-        if (timeAttack < 0)
-        {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                PantieStart();
-            }
-            else if (Input.GetKeyDown(KeyCode.K))
-            {
-                KickStart();
-            }
-        }
-
         //歩きのモーションの向きを変える
         if (Input.GetKey(KeyCode.D))
         {
             shaft = 0;
 
-            if(!isWalk)
+            if (isStop)
+            {
+                // 歩く動作をしている時、呼ばせない
+                WalkInstance();
+            }
+            if (!isWalk)
             {
                 isWalk = true;
                 ChangeArmAnime();
@@ -183,6 +140,11 @@ public class PlayerMoveAnimation : MonoBehaviour
         else if (Input.GetKey(KeyCode.A))
         {
             shaft = 180;
+            if (isStop)
+            {
+                // 歩く動作をしている時、呼ばせない
+                WalkInstance();
+            }
             if (!isWalk)
             {
                 isWalk= true;
@@ -562,7 +524,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// パンチのアニメーション開始するときの関数
     /// </summary>
-    void PantieStart()
+    public void PantieStart()
     {
         AttackWaite();
         StartCoroutine(CallPantieWithDelay());
@@ -571,7 +533,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// キックのアニメーション開始するときの関数
     /// </summary>
-    void KickStart()
+    public void KickStart()
     {
         AttackWaite();
         StartCoroutine(CallKickWithDelay());

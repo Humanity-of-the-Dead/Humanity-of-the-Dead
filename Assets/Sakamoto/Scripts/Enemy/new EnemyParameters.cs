@@ -42,7 +42,7 @@ public class newEnemyParameters : MonoBehaviour
     //プレイヤーパラメータ-
     public PlayerParameter scPlayerParameter;
     //プレイヤーコントローラ
-    public GameObject PlayerControl;
+    public PlayerControl PlayerControl;
 
     //ボスフラグ
     [SerializeField]
@@ -111,6 +111,8 @@ public class newEnemyParameters : MonoBehaviour
         }
         scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
         sceneTransitionManager = GameObject.FindAnyObjectByType<SceneTransitionManager>();
+        Debug.Log(PlayerControl);
+
     }
 
 
@@ -136,7 +138,7 @@ public class newEnemyParameters : MonoBehaviour
         // 部位が破壊された際にHPバーを一瞬表示
         if (UpperHP <= 0)
         {
-            PlayerControl.GetComponent<PlayerControl>().RemoveListItem(this.gameObject);
+            PlayerControl.RemoveListItem(this.gameObject);
             Debug.Log("上半身が破壊された");
             //Drop(Upperbodypart, false);
             MultiAudio.ins.PlaySEByName("SE_common_breakbody");
@@ -144,7 +146,7 @@ public class newEnemyParameters : MonoBehaviour
         }
         if (LowerHP <= 0)
         {
-            PlayerControl.GetComponent<PlayerControl>().RemoveListItem(this.gameObject);
+            PlayerControl.RemoveListItem(this.gameObject);
             Debug.Log("下半身が破壊された");
             //Drop(Lowerbodypart, true);
             MultiAudio.ins.PlaySEByName("SE_common_breakbody");

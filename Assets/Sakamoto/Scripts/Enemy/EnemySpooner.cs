@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.UIElements.ToolbarMenu;
 
 public class EnemySpooner : MonoBehaviour
 {
     [SerializeField] GameObject goEnemyObject;
     PlayerParameter scPlayerParameter;
-    [SerializeField] GameObject goPlayerControl;
+    [SerializeField] PlayerControl playerControl;
     [SerializeField] GameMgr gameMgr;
-    [SerializeField] GameObject goTarget;
 
     [SerializeField] List<GameObject> liEnemyList;
 
@@ -29,6 +29,7 @@ public class EnemySpooner : MonoBehaviour
     {
         scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
         Debug.Log(scPlayerParameter + "が代入されました");
+        Debug.Log(playerControl);
         createEnemy();
         fTimer = 0;
         goMarker.SetActive(false);
@@ -65,8 +66,8 @@ public class EnemySpooner : MonoBehaviour
     // プレイヤーが範囲内かつ右側にいるかを確認
     private bool IsPlayerInRange()
     {
-        float distance = Vector2.Distance(this.transform.position, goTarget.transform.position);
-        float positionDifference = this.transform.position.x - goTarget.transform.position.x;
+        float distance = Vector2.Distance(this.transform.position, playerControl.transform.position);
+        float positionDifference = this.transform.position.x - playerControl.transform.position.x;
         return distance < 20 && positionDifference > 0;
     }
 
@@ -96,10 +97,10 @@ public class EnemySpooner : MonoBehaviour
             liEnemyList.Add(newEnemy);
 
             newEnemy.GetComponent<newEnemyParameters>().scPlayerParameter = this.scPlayerParameter;
-            newEnemy.GetComponent<newEnemyParameters>().PlayerControl = goPlayerControl;
+            newEnemy.GetComponent<newEnemyParameters>().PlayerControl = playerControl;
             newEnemy.GetComponent<newEnemyMovement>().scPlayerParameter = this.scPlayerParameter;
             newEnemy.GetComponent<newEnemyMovement>().gamestate = gameMgr;
-            goTarget.GetComponent<PlayerControl>().AddListItem(newEnemy);
+            playerControl.AddListItem(newEnemy);
         }
         else
         {

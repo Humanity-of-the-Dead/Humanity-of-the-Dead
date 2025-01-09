@@ -549,4 +549,8 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         shaft = 180;
     }
+    public bool SetAttack()
+    {
+        return isAttack;
+    }
 }

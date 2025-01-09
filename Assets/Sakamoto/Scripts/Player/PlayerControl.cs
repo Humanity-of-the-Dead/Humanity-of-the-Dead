@@ -162,6 +162,7 @@ public class PlayerControl : MonoBehaviour
             //è„îºêgçUåÇ
             if (Input.GetKeyDown(KeyCode.I))
             {
+                scPlayerMoveAnimation.PantieStart();
 
                 switch (playerParameter.UpperData.upperAttack)
                 {
@@ -232,6 +233,7 @@ public class PlayerControl : MonoBehaviour
             //â∫îºêgçUåÇ
             if (Input.GetKeyDown(KeyCode.K))
             {
+                scPlayerMoveAnimation.KickStart();
                 switch (playerParameter.LowerData.lowerAttack)
                 {
                     case LowerAttack.NORMAL:
