@@ -549,8 +549,11 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         shaft = 180;
     }
+    #region 山品変更
+
     public bool SetAttack()
     {
         return isAttack;
     }
+    #endregion
 }

@@ -285,7 +285,6 @@ public class newEnemyParameters : MonoBehaviour
 
         //
         drop.GetComponent<newDropPart>().getPartsData(part);
-        drop.GetComponent<newDropPart>().getSceneTransition(sceneTransitionManager);
         //自分のゲームオブジェクトを消す
         GlobalEnemyManager.Instance.RemoveEnemy(this.gameObject);
         Destroy(this.gameObject);

@@ -157,7 +157,7 @@ public class PlayerControl : MonoBehaviour
         this.transform.position = vPosition;
 
         //çUåÇä÷òA
-        if (!scPlayerMoveAnimation.SetAttack())
+        if (!scPlayerMoveAnimation.SetAttack()&&scPlayerMoveAnimation.timeAttack<0)
         {
             //è„îºêgçUåÇ
             if (Input.GetKeyDown(KeyCode.I))

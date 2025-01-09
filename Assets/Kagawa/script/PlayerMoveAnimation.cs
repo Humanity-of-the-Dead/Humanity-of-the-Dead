@@ -37,9 +37,9 @@ public class PlayerMoveAnimation : MonoBehaviour
     [SerializeField, Header("左足のImage")] SpriteRenderer footLeftSR;
 
     [Header("全身")] public GameObject playerRc;
-    [SerializeField, Header("腕の角度、先に右手")]  GameObject[] arm;
-    [SerializeField, Header("太腿の角度、先に右足")]  GameObject[] leg;
-    [SerializeField, Header("すねの角度、先に右足")]  GameObject[] foot;
+    [SerializeField, Header("腕の角度、先に右手")] GameObject[] arm;
+    [SerializeField, Header("太腿の角度、先に右足")] GameObject[] leg;
+    [SerializeField, Header("すねの角度、先に右足")] GameObject[] foot;
 
     [Header("1コマの間隔の時間")] public float timeMax;
 
@@ -91,13 +91,13 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     // タイマー
     float timeWalk;
-    
+
     // 攻撃のタイマー
-    float timeAttack;
+    public float timeAttack;
 
     private void Start()
     {
-        
+
         walkIndex = 0;
         attackNumber = 0;
         shaft = 0;
@@ -116,7 +116,11 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeWalk -= Time.deltaTime;
         timeAttack -= Time.deltaTime;
 
+
+        //攻撃関連のモーション
         //歩きのモーションの向きを変える
+        #region 山品変更
+        //Keydownではないように（理由キーを押した瞬間しか動かないのおかしい。キーを押している間ずっと呼ばれるようにするからGetKeyで一気に処理をまとめちゃう）
         if (Input.GetKey(KeyCode.D))
         {
             shaft = 0;
@@ -126,6 +130,8 @@ public class PlayerMoveAnimation : MonoBehaviour
                 // 歩く動作をしている時、呼ばせない
                 WalkInstance();
             }
+            //ここまでKeyDownで書いていたもの移動
+            #endregion
             if (!isWalk)
             {
                 isWalk = true;
@@ -137,17 +143,25 @@ public class PlayerMoveAnimation : MonoBehaviour
                 PlayerWalk();
             }
         }
+        #region 山品変更
+
         else if (Input.GetKey(KeyCode.A))
         {
+            //Keydownではないように（理由キーを押した瞬間しか動かないのおかしい。キーを押している間ずっと呼ばれるようにするからGetKeyで一気に処理をまとめちゃう）
+
             shaft = 180;
             if (isStop)
             {
                 // 歩く動作をしている時、呼ばせない
                 WalkInstance();
             }
+            //ここまでKeyDownで書いていたもの移動
+
+            #endregion
+
             if (!isWalk)
             {
-                isWalk= true;
+                isWalk = true;
                 ChangeArmAnime();
                 KeepWalk();
             }
@@ -163,7 +177,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     void PlayerWalk()
     {
-        
+
         // Quaternion.Euler: 回転軸( x, y, z)
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[walkIndex]);
 
@@ -185,7 +199,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             Debug.LogWarning("Legのデータが何かしら抜けてる");
             return;
         }
-        else if (foot == null || walk.footForwardRotation == null || walk.footBackRotation == null) 
+        else if (foot == null || walk.footForwardRotation == null || walk.footBackRotation == null)
         {
             Debug.LogWarning("Footのデータが何かしら抜けてる");
             return;
@@ -216,7 +230,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     void PlayerPantie()
     {
-        switch(upperAttack)
+        switch (upperAttack)
         {
             case UpperAttack.NORMAL:
                 // Quaternion.Euler: 回転軸( x, y, z)
@@ -297,7 +311,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                 // 腕のアニメーション
                 if (nurseUpper.armForwardRotation == null || nurseUpper.armBackRotation == null)
                 {
-                    Debug.LogWarning("ナースArmのデータが何かしら抜けてる");    
+                    Debug.LogWarning("ナースArmのデータが何かしら抜けてる");
                     return;
                 }
                 else
@@ -333,7 +347,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     void PlayerKick()
     {
-        switch(downAttack)
+        switch (downAttack)
         {
             case LowerAttack.NORMAL:
                 // Quaternion.Euler: 回転軸( x, y, z)
@@ -397,7 +411,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                     return;
                 }
                 else
-                {   
+                {
                     leg[0].transform.rotation = Quaternion.Euler(0, shaft, policeLower.legBackRotation[attackNumber]);
                     leg[1].transform.rotation = Quaternion.Euler(0, shaft, policeLower.legForwardRotation[attackNumber]);
                     foot[0].transform.rotation = Quaternion.Euler(0, shaft, policeLower.footBackRotation[attackNumber]);
@@ -524,7 +538,10 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// パンチのアニメーション開始するときの関数
     /// </summary>
+    #region 山品変更
+    //public 追記
     public void PantieStart()
+    #endregion
     {
         AttackWaite();
         StartCoroutine(CallPantieWithDelay());
