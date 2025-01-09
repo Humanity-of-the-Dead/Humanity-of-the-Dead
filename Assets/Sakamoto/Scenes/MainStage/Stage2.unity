@@ -997,11 +997,11 @@ MonoBehaviour:
   scGameMgr: {fileID: 4664960667363613010}
   iDownTime: 1
   iHumanityMax: 100
-  iUpperHPMax: 30
-  iLowerHPMax: 30
+  iUpperHPMax: 100
+  iLowerHPMax: 100
   goPlayer: {fileID: 1443765028}
   UpperData: {fileID: 11400000, guid: fcc706bf8f9cb204382c81235b20a96a, type: 2}
-  LowerData: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
+  LowerData: {fileID: 11400000, guid: dfc091647e8e229438c5335ae549e2ac, type: 2}
 --- !u!4 &261565242
 Transform:
   m_ObjectHideFlags: 0
