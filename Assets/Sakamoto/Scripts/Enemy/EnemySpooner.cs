@@ -56,7 +56,7 @@ public class EnemySpooner : MonoBehaviour
             {
                 fTimer = 0;
             }
-            Debug.Log("fTimerは" + fTimer);
+            //Debug.Log("fTimerは" + fTimer);
 
             // 敵リストから削除された敵をクリーンアップ
             CleanupEnemyList();
