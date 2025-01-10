@@ -121,41 +121,113 @@ public class newEnemyMovement : EnemyAttack
                             //乱数を取得する
                             int num = UnityEngine.Random.Range(0, 2);
                             if (num == 0)
-                            {
+                            { 
                                 //上半身攻撃
                                 moveAnimation.PantieStart();
 
-                                if (upperpart.sPartsName == "警察の上半身")
+                                //攻撃者の上半身を確認
+                                switch (upperpart.sPartsName)
                                 {
-                                    Vector2 ShootMoveBector = new Vector2(0, 0);
-                                    //子のplayerRCのローテーションYを持ってくる
-                                    // y = 0のときは右向き、0 y = 180のときは左向き
-                                    Debug.Log(this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles
-                                        .y);
-                                    if (this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y == 180)
-                                    {
-                                        ShootMoveBector.x = -1;
-                                    }
-                                    else
-                                    {
-                                        ShootMoveBector.x = 1;
-                                    }
+                                    case "警察の上半身":
+                                        Vector2 ShootMoveBector = new Vector2(0, 0);
+                                        //子のplayerRCのローテーションYを持ってくる
+                                        // y = 0のときは右向き、0 y = 180のときは左向き
+                                        Debug.Log(this.gameObject.transform.GetChild(0).
+                                            gameObject.transform.eulerAngles.y);
+                                        if (this.gameObject.transform.GetChild(0).
+                                                gameObject.transform.eulerAngles.y ==180)
+                                        {
+                                            ShootMoveBector.x = -1;
+                                        }
+                                        else
+                                        {
+                                            ShootMoveBector.x = 1;
+                                        }
 
-                                    Debug.Log(ShootMoveBector);
-                                    Juu.Shoot(ShootMoveBector, this.transform);
-                                    //警察官の上半身で攻撃するSEを鳴らす
-                                    MultiAudio.ins.PlaySEByName(
-                                        "SE_policeofficer_attack_upper");
+                                        Debug.Log(ShootMoveBector);
+                                        Juu.Shoot(ShootMoveBector, this.transform);
+                                        //警察官の上半身で攻撃するSEを鳴らす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_policeofficer_attack_upper");
+                                        
+                                        Debug.Log("警官が上半身で攻撃");
+                                        
+                                        break;
+                                    
+                                    case "ボスの上半身":
+                                        //ラスボス上半身の攻撃音のSEを鳴らす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_lastboss_attack_upper");
+                                        
+                                        Debug.Log("ボスが上半身で攻撃");
+                                        
+                                        break;
+                                    
+                                    case "雑魚敵の上半身":
+                                        //主人公上半身の攻撃音のSEを鳴らす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_hero_attack_upper");
+                                        
+                                        Debug.Log("雑魚敵が上半身で攻撃");
+                                        
+                                        break;
+                                    
+                                    case "看護師の上半身":
+                                        //ナース上半身の攻撃音のSEを鳴らす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_nurse_attack_upper");
+                                        
+                                        Debug.Log("看護師が上半身で攻撃");
+                                        
+                                        break;
                                 }
 
                                 UpperEnemyAttack((float)upperpart.iPartAttack);
                                 MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
-                            }
+                                }
                             if (num == 1)
                             {
                                 //下半身攻撃
                                 moveAnimation.KickStart();
                                 
+                                //攻撃者の下半身を確認
+                                switch (lowerpart.sPartsName)
+                                {
+                                    case "警察の下半身":
+                                        //警察官下半身の攻撃音のSEをならす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_policeofficer_attack_lower");
+
+                                        Debug.Log("警官が下半身で攻撃");
+                                        break;
+
+                                    case "ボスの下半身":
+                                        //ラスボス下半身の攻撃音のSEを鳴らす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_lastboss_attack_lower");
+                                        
+                                        Debug.Log("ボスが下半身で攻撃");
+                                        
+                                        break;
+
+                                    case "雑魚敵の下半身":
+                                        //主人公下半身の攻撃音のSEを鳴らす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_hero_attack_lower");
+                                        
+                                        Debug.Log("雑魚が下半身で攻撃");
+                                        break;
+
+                                    case "看護師の下半身":
+                                        //ナース下半身の攻撃音のSEを鳴らす
+                                        MultiAudio.ins.PlaySEByName(
+                                            "SE_nurse_attack_lower");
+                                        
+                                        Debug.Log("看護師が下半身で攻撃");
+                                        
+                                        break;
+                                }
+
                                 LowerEnemyAttack((float)lowerpart.iPartAttack);
                                 MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                             }
