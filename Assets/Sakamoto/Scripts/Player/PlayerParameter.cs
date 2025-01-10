@@ -86,7 +86,7 @@ public class PlayerParameter : MonoBehaviour
                     iHumanity -= Time.deltaTime / iDownTime/* *dgbScale*/;
                     iUpperHP -= Time.deltaTime / iDownTime;
                     iLowerHP -= Time.deltaTime / iDownTime;
-                    Debug.Log(iDownTime);
+                    //Debug.Log(iDownTime);
                     if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
                     {
 

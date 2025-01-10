@@ -77,7 +77,7 @@ public class PlayerControl : MonoBehaviour
                 //bShootFlagをfalseにする
                 bShootFlag = false;
                 //攻撃アニメーション中でなければbShootFlagをtrueにする
-                Debug.Log(playerMoveAnimation.SetAttack());
+                //Debug.Log(playerMoveAnimation.SetAttack());
                 if (playerMoveAnimation.SetAttack() == false)
                 {
                     bShootFlag = true;

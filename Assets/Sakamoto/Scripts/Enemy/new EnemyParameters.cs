@@ -137,7 +137,7 @@ public class newEnemyParameters : MonoBehaviour
         if (UpperHP <= 0)
         {
             PlayerControl.RemoveListItem(this.gameObject);
-            Debug.Log("ã”¼g‚ª”j‰ó‚³‚ê‚½");
+            //Debug.Log("ã”¼g‚ª”j‰ó‚³‚ê‚½");
             //Drop(Upperbodypart, false);
             StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Lowerbodypart, false));
 
@@ -145,7 +145,7 @@ public class newEnemyParameters : MonoBehaviour
         if (LowerHP <= 0)
         {
             PlayerControl.RemoveListItem(this.gameObject);
-            Debug.Log("‰º”¼g‚ª”j‰ó‚³‚ê‚½");
+            //Debug.Log("‰º”¼g‚ª”j‰ó‚³‚ê‚½");
             //Drop(Lowerbodypart, true);
             StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true)) ;
 

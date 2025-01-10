@@ -41,8 +41,8 @@ public class EnemySpooner : MonoBehaviour
         {
             if (IsPlayerInRange() && CanSpawnEnemy())
             {
-                Debug.Log(IsPlayerInRange());
-                Debug.Log(CanSpawnEnemy()); 
+                //Debug.Log(IsPlayerInRange());
+                //Debug.Log(CanSpawnEnemy()); 
                 fTimer += Time.deltaTime;
 
                 if (fTimer > fTimerMax)

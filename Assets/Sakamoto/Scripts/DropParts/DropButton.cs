@@ -14,7 +14,7 @@ public class DropButton : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log($"OnTriggerStay2D‚ªŒÄ‚Ño‚³‚ê‚Ü‚µ‚½: {collision.gameObject.name}");
+        //Debug.Log($"OnTriggerStay2D‚ªŒÄ‚Ño‚³‚ê‚Ü‚µ‚½: {collision.gameObject.name}");
 
         if (collision.CompareTag("Player"))
         {
