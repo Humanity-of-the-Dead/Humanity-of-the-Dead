@@ -293,7 +293,6 @@ public class PlayerControl : MonoBehaviour
         {
 
             liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(iDamage, 0);
-            MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
             Debug.Log("ã”¼gUŒ‚¬Œ÷");
 
@@ -310,7 +309,6 @@ public class PlayerControl : MonoBehaviour
         if (fAttackReach < fReach)
         {
             liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(iDamage, 1);
-            MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
             Debug.Log("‰º”¼gUŒ‚¬Œ÷");
         }
