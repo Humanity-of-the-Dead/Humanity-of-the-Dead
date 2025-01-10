@@ -139,17 +139,16 @@ public class newEnemyParameters : MonoBehaviour
             PlayerControl.RemoveListItem(this.gameObject);
             Debug.Log("上半身が破壊された");
             //Drop(Upperbodypart, false);
-            MultiAudio.ins.PlaySEByName("SE_common_breakbody");
             StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Lowerbodypart, false));
+
         }
         if (LowerHP <= 0)
         {
             PlayerControl.RemoveListItem(this.gameObject);
             Debug.Log("下半身が破壊された");
             //Drop(Lowerbodypart, true);
-            MultiAudio.ins.PlaySEByName("SE_common_breakbody");
-            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true))
-                ;
+            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true)) ;
+
         }
         //if (GameMgr.GetState() == GameState.ShowText&&!Boss)
         //{
@@ -249,6 +248,8 @@ public class newEnemyParameters : MonoBehaviour
             hpBar.gameObject.SetActive(false);
         }
         Drop(part, typ);
+        MultiAudio.ins.PlaySEByName("SE_common_breakbody");
+
     }
     //ドロップアイテムを生成する関数　
     //BodyPartsData part->生成した後に与えるパラメータデータ
