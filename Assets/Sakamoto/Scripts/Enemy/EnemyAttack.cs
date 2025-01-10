@@ -10,11 +10,11 @@ public class EnemyAttack : MonoBehaviour
     protected void UpperEnemyAttack(float damage)
     {
         scPlayerParameter.UpperHP -= damage;
-        MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+        //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
     }
     protected void LowerEnemyAttack(float damage)
     {
         scPlayerParameter.LowerHP -= damage;
-        MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+        //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
     }
 }

@@ -183,7 +183,7 @@ public class newEnemyMovement : EnemyAttack
                                 }
 
                                 UpperEnemyAttack((float)upperpart.iPartAttack);
-                                MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+                                //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                                 }
                             if (num == 1)
                             {
@@ -229,20 +229,20 @@ public class newEnemyMovement : EnemyAttack
                                 }
 
                                 LowerEnemyAttack((float)lowerpart.iPartAttack);
-                                MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+                                //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                             }
                         }
                         if (distanceToPlayer < upperpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
                             moveAnimation.PantieStart();
                             UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
-                            MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+                            //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                         }
                         if (distanceToPlayer < lowerpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
                             moveAnimation.KickStart();
                             LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
-                            MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+                            //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                         }
                         enemystate = EnemyState.search;
                         //moveAnimation.PlayerPantie();
