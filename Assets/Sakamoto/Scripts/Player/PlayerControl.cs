@@ -156,13 +156,16 @@ public class PlayerControl : MonoBehaviour
         //移動後のポジションを代入
         this.transform.position = vPosition;
 
+        #region 山品変更
+        //アニメーションをここで呼ぶため、追記
         //攻撃関連
-        if (!scPlayerMoveAnimation.SetAttack())
+        if (!scPlayerMoveAnimation.SetAttack() && scPlayerMoveAnimation.timeAttack <0)
         {
             //上半身攻撃
             if (Input.GetKeyDown(KeyCode.I))
             {
-
+                scPlayerMoveAnimation.PantieStart();
+                #endregion
                 switch (playerParameter.UpperData.upperAttack)
                 {
                     case UpperAttack.NORMAL:
@@ -232,6 +235,9 @@ public class PlayerControl : MonoBehaviour
             //下半身攻撃
             if (Input.GetKeyDown(KeyCode.K))
             {
+                #region 山品変更
+                scPlayerMoveAnimation.KickStart();
+                #endregion
                 switch (playerParameter.LowerData.lowerAttack)
                 {
                     case LowerAttack.NORMAL:
@@ -265,9 +271,7 @@ public class PlayerControl : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-        }
+      
 
     }
 

@@ -92,8 +92,11 @@ public class PlayerMoveAnimation : MonoBehaviour
     // タイマー
     float timeWalk;
 
+    #region 山品変更　
+    //プレイヤーコントロールで呼ぶためパブリック追記
     // 攻撃のタイマー
     public float timeAttack;
+    #endregion
 
     private void Start()
     {
@@ -117,12 +120,14 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeAttack -= Time.deltaTime;
 
 
-        //攻撃関連のモーション
-        //歩きのモーションの向きを変える
-        #region 山品変更
-        //Keydownではないように（理由キーを押した瞬間しか動かないのおかしい。キーを押している間ずっと呼ばれるようにするからGetKeyで一気に処理をまとめちゃう）
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
+            ////静止状態から左向くとき
+            //if (time < 0 && isWalk)
+            //{
+            //    isStop = true;
+            //    time = timeMax * 2;
+            //}
             shaft = 0;
 
             if (isStop)
@@ -130,9 +135,44 @@ public class PlayerMoveAnimation : MonoBehaviour
                 // 歩く動作をしている時、呼ばせない
                 WalkInstance();
             }
-           
-            //ここまでKeyDownで書いていたもの移動
-            #endregion
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            ////静止状態から左向くとき
+            //if (time < 0 && !isWalk)
+            //{
+            //    isStop = true;
+            //    time = timeMax * 2;
+            //}
+
+            shaft = 180;
+
+            if (isStop)
+            {
+                // 歩く動作をしている時、呼ばせない
+                WalkInstance();
+            }
+        }
+        #region 山品変更
+        //プレイヤーコントロールで呼び出すためコメントアウト
+        //if (timeAttack < 0)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.I))
+        //    {
+        //        PantieStart();
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.K))
+        //    {
+        //        KickStart();
+        //    }
+        //}
+        #endregion
+
+        //歩きのモーションの向きを変える
+        if (Input.GetKey(KeyCode.D))
+        {
+            shaft = 0;
+
             if (!isWalk)
             {
                 isWalk = true;
@@ -144,23 +184,9 @@ public class PlayerMoveAnimation : MonoBehaviour
                 PlayerWalk();
             }
         }
-        #region 山品変更
-
         else if (Input.GetKey(KeyCode.A))
         {
-            //Keydownではないように（理由キーを押した瞬間しか動かないのおかしい。キーを押している間ずっと呼ばれるようにするからGetKeyで一気に処理をまとめちゃう）
-
             shaft = 180;
-            if (isStop)
-            {
-                // 歩く動作をしている時、呼ばせない
-                WalkInstance();
-            }
-          
-            //ここまでKeyDownで書いていたもの移動
-
-            #endregion
-
             if (!isWalk)
             {
                 isWalk = true;
@@ -540,10 +566,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// パンチのアニメーション開始するときの関数
     /// </summary>
-    #region 山品変更
-    //public 追記
-    public void PantieStart()
-    #endregion
+   public void PantieStart()
     {
         AttackWaite();
         StartCoroutine(CallPantieWithDelay());
@@ -656,4 +679,3 @@ public class PlayerMoveAnimation : MonoBehaviour
         return isAttack;
     }
 }
-
