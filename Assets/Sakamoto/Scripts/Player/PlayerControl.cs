@@ -4,45 +4,44 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     //モーションアニメスクリプト
-    [SerializeField] PlayerMoveAnimation scPlayerMoveAnimation;
+    [SerializeField]  private PlayerMoveAnimation playerMoveAnimation;
 
     //ゲームマネージャー
-    [SerializeField] GameMgr scGameMgr;
+    [SerializeField] private GameMgr scGameMgr;
 
     private Rigidbody2D rbody2D;
     [Header("移動スピード")]
-    [SerializeField] float fSpeed;
+    [SerializeField] private float fSpeed;
     [Header("ジャンプ力")]
-    [SerializeField] float fJmpPower;
-    bool bJump = false;
+    [SerializeField] private float fJmpPower;
+    private bool bJump = false;
     //連続ジャンプ
-    [SerializeField] int Jmpconsecutive;
+    [SerializeField] private int Jmpconsecutive;
 
 
     //カメラ関連
-    [SerializeField] Camera goCamera;
+    [SerializeField] private Camera goCamera;
     //高さ
-    float fCameraHeight;
+    private float fCameraHeight;
     //幅
-    float fCameraWidth;
+    private float fCameraWidth;
 
     //ターゲット
-    [SerializeField] List<GameObject> liObj;
+    [SerializeField] private List<GameObject> liObj;
     //[SerializeField] GameObject[] goObj;
 
     //プレイヤーパラメーターの取得
-    PlayerParameter playerParameter;
+    private PlayerParameter playerParameter;
 
 
-    [SerializeField] SceneTransitionManager sceneTransitionManager;
 
-    [SerializeField] Gun Juu;
+    [SerializeField] private Gun Gun;
 
     private UpperAttack upperAttack;
-    LowerAttack lowerAttack;
+   private LowerAttack lowerAttack;
 
     //拳銃のショットフラグ
-    bool bShootFlag;
+    private bool bShootFlag;
     void Start()
     {
 
@@ -51,7 +50,8 @@ public class PlayerControl : MonoBehaviour
         //playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
         //これいいやつ
         playerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
-
+        playerMoveAnimation = GetComponent<PlayerMoveAnimation>();  
+        Gun = GetComponent<Gun>();  
         rbody2D = GetComponent<Rigidbody2D>();
 
         // カメラの高さ（orthographicSize）はカメラの中央から上下の距離を表す
@@ -77,11 +77,11 @@ public class PlayerControl : MonoBehaviour
                 //bShootFlagをfalseにする
                 bShootFlag = false;
                 //攻撃アニメーション中でなければbShootFlagをtrueにする
-                Debug.Log(scPlayerMoveAnimation.SetAttack());
-                if (scPlayerMoveAnimation.SetAttack() == false)
+                Debug.Log(playerMoveAnimation.SetAttack());
+                if (playerMoveAnimation.SetAttack() == false)
                 {
                     bShootFlag = true;
-                    GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = true;
+                    MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay = true;
 
                 }
 
@@ -101,7 +101,7 @@ public class PlayerControl : MonoBehaviour
         //移動
         Vector3 vPosFromCame = this.transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
 
-        if (!scPlayerMoveAnimation.SetAttack())
+        if (!playerMoveAnimation.SetAttack())
         {
             //左移動
             if (Input.GetKey(KeyCode.A))
@@ -159,20 +159,20 @@ public class PlayerControl : MonoBehaviour
         #region 山品変更
         //アニメーションをここで呼ぶため、追記
         //攻撃関連
-        if (!scPlayerMoveAnimation.SetAttack() && scPlayerMoveAnimation.timeAttack <0)
-        {
+            if (!playerMoveAnimation.SetAttack() && playerMoveAnimation.timeAttack <0)
+            {
             //上半身攻撃
             if (Input.GetKeyDown(KeyCode.I))
             {
-                scPlayerMoveAnimation.PantieStart();
+                playerMoveAnimation.PantieStart();
                 #endregion
                 switch (playerParameter.UpperData.upperAttack)
                 {
                     case UpperAttack.NORMAL:
-                        if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                        if (MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay)
                         {
                             MultiAudio.ins.PlaySEByName("SE_hero_attack_upper");
-                            GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                            MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay = false;
                         }
                         break;
 
@@ -199,11 +199,11 @@ public class PlayerControl : MonoBehaviour
                         if (bShootFlag == true)
                         {
                             Debug.Log("弾発射");
-                            Juu.Shoot(ShootMoveBector, this.transform);
-                            if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                            Gun.Shoot(ShootMoveBector, this.transform);
+                            if (MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay)
                             {
                                 MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_upper");
-                                GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                                MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay = false;
 
                             }
                             //bShootFlag = false;
@@ -211,10 +211,10 @@ public class PlayerControl : MonoBehaviour
                         break;
 
                     case UpperAttack.NURSE:
-                        if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                        if (MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay)
                         {
                             MultiAudio.ins.PlaySEByName("SE_nurse_attack_upper");
-                            GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                            MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay = false;
                         }
                         break;
                 }
@@ -236,29 +236,29 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.K))
             {
                 #region 山品変更
-                scPlayerMoveAnimation.KickStart();
+                playerMoveAnimation.KickStart();
                 #endregion
                 switch (playerParameter.LowerData.lowerAttack)
                 {
                     case LowerAttack.NORMAL:
-                        if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                        if (MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay)
                         {
                             MultiAudio.ins.PlaySEByName("SE_hero_attack_lower");
-                            GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                            MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay = false;
                         }
 
                         break;
 
                     case LowerAttack.POLICE:
-                        if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                        if (MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay)
                         {
                             MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_lower");
-                            GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay = false;
+                            MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay = false;
                         }
                         break;
 
                     case LowerAttack.NURSE:
-                        if (GameObject.FindGameObjectWithTag("SE").GetComponent<SoundCoolTime>().canPlay)
+                        if (MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay)
                         {
                             MultiAudio.ins.PlaySEByName("SE_nurse_attack_lower");
                         }
