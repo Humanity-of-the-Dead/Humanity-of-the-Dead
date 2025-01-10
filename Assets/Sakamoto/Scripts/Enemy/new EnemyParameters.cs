@@ -172,6 +172,8 @@ public class newEnemyParameters : MonoBehaviour
             UpperHP -= damage;
             ShowHitEffects(body);
             UpdateHPBar(UpperHPBar, UpperHP, MaxUpperHP);
+            MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+
             Debug.Log(UpperHP);
             Debug.Log(MaxUpperHP);
 
@@ -183,6 +185,8 @@ public class newEnemyParameters : MonoBehaviour
             LowerHP -= damage;
             ShowHitEffects(body);
             UpdateHPBar(LowerHPBar, LowerHP, MaxLowerHP);
+            MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+
             Debug.Log(LowerHP);
             Debug.Log(MaxLowerHP);
         }
