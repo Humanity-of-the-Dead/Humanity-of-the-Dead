@@ -7,9 +7,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]  private PlayerMoveAnimation playerMoveAnimation;
 
     //ゲームマネージャー
-    [SerializeField] private GameMgr scGameMgr;
 
-    private Rigidbody2D rbody2D;
+
+    private Rigidbody2D rigidbody2D;
     [Header("移動スピード")]
     [SerializeField] private float fSpeed;
     [Header("ジャンプ力")]
@@ -37,8 +37,7 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] private Gun Gun;
 
-    private UpperAttack upperAttack;
-   private LowerAttack lowerAttack;
+
 
     //拳銃のショットフラグ
     private bool bShootFlag;
@@ -51,8 +50,8 @@ public class PlayerControl : MonoBehaviour
         //これいいやつ
         playerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
         playerMoveAnimation = GetComponent<PlayerMoveAnimation>();  
-        Gun = GetComponent<Gun>();  
-        rbody2D = GetComponent<Rigidbody2D>();
+        Gun = GetComponent<Gun>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
 
         // カメラの高さ（orthographicSize）はカメラの中央から上下の距離を表す
         fCameraHeight = 2f * goCamera.orthographicSize;
@@ -66,9 +65,9 @@ public class PlayerControl : MonoBehaviour
     {
         //プレイヤーのY座標の制限
         //プレイヤーのY座標が8.0を超えたらリジッドボディのフォースを0にする
-        if (8.0f < this.transform.position.y)
+        if (8.0f < transform.position.y)
         {
-            this.rbody2D.velocity = new Vector2(0.0f, -1);
+            rigidbody2D.velocity = new Vector2(0.0f, -1);
         }
 
         switch (GameMgr.GetState())
@@ -99,7 +98,7 @@ public class PlayerControl : MonoBehaviour
 
         //カメラとの距離の絶対値が一定以下ならプレイヤーが動く　画面外に出ないための処置
         //移動
-        Vector3 vPosFromCame = this.transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
+        Vector3 vPosFromCame = transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
 
         if (!playerMoveAnimation.SetAttack())
         {
@@ -124,7 +123,7 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W) && Jmpconsecutive < 1)
             {
-                this.rbody2D.AddForce(this.transform.up * fJmpPower);
+                rigidbody2D.AddForce(transform.up * fJmpPower);
                 MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
                 bJump = true;
                 Jmpconsecutive++;
@@ -182,8 +181,8 @@ public class PlayerControl : MonoBehaviour
                         Vector2 ShootMoveBector = new Vector2(0, 0);
                         //子のplayerRCのローテーションYを持ってくる
                         // y = 0のときは右向き、0 y = 180のときは左向き
-                        Debug.Log(this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y);
-                        if (this.gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y == 180)
+                        Debug.Log(gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y);
+                        if (gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y == 180)
                         {
                             ShootMoveBector.x = -1;
                         }
@@ -199,7 +198,7 @@ public class PlayerControl : MonoBehaviour
                         if (bShootFlag == true)
                         {
                             Debug.Log("弾発射");
-                            Gun.Shoot(ShootMoveBector, this.transform);
+                            Gun.Shoot(ShootMoveBector, transform);
                             if (MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay)
                             {
                                 MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_upper");
@@ -261,6 +260,8 @@ public class PlayerControl : MonoBehaviour
                         if (MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay)
                         {
                             MultiAudio.ins.PlaySEByName("SE_nurse_attack_lower");
+                            MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay = false;
+
                         }
                         break;
                 }
@@ -288,12 +289,11 @@ public class PlayerControl : MonoBehaviour
     //上半身攻撃
     public void UpperBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
-        float fAttackReach = Vector3.Distance(vTargetPos, this.transform.position);
+        float fAttackReach = Vector3.Distance(vTargetPos, transform.position);
         if (fAttackReach < fReach)
         {
 
             liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(iDamage, 0);
-            //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
             Debug.Log("上半身攻撃成功");
 
@@ -310,7 +310,6 @@ public class PlayerControl : MonoBehaviour
         if (fAttackReach < fReach)
         {
             liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(iDamage, 1);
-            //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
             Debug.Log("下半身攻撃成功");
         }
         else
@@ -334,7 +333,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyShoot"))
         {
-            if (0 > this.transform.position.y - collision.gameObject.transform.position.y)
+            if (0 > transform.position.y - collision.gameObject.transform.position.y)
             {
                 playerParameter.UpperHP -= 1;
             }
