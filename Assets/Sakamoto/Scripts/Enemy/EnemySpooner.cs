@@ -97,7 +97,7 @@ public class EnemySpooner : MonoBehaviour
             liEnemyList.Add(newEnemy);
 
             newEnemy.GetComponent<newEnemyParameters>().playerParameter= this.playerParameter;
-            newEnemy.GetComponent<newEnemyParameters>().PlayerControl = playerControl;
+            newEnemy.GetComponent<newEnemyParameters>().playerControl = playerControl;
             newEnemy.GetComponent<newEnemyMovement>().scPlayerParameter = this.playerParameter;
             newEnemy.GetComponent<newEnemyMovement>().gamestate = gameMgr;
             playerControl.AddListItem(newEnemy);

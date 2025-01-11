@@ -42,7 +42,7 @@ public class newEnemyParameters : MonoBehaviour
     //プレイヤーパラメータ-
     public PlayerParameter playerParameter;
     //プレイヤーコントローラ
-    public PlayerControl PlayerControl;
+    public PlayerControl playerControl; 
 
     //ボスフラグ
     [SerializeField]
@@ -108,15 +108,17 @@ public class newEnemyParameters : MonoBehaviour
             Debug.LogWarning("HPBarContainerがnull");
         }
         playerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
-        Debug.Log(PlayerControl);
+
+        playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();    
+        Debug.Log(playerControl);
 
     }
 
 
     void Update()
     {
-        float DistanceToPlayer = Vector3.Distance(transform.position,PlayerControl.transform.position); 
-        // プレイヤーが一定距離以内にいる場合にHPバーを表示
+        float DistanceToPlayer = Vector3.Distance(transform.position, playerControl.transform.position);
+        // プレイヤーが一定距離以内にいる場合にHPバーを表示playerControl
         if (DistanceToPlayer < displayRange)
         {
             if (HPBarContainer != null)
@@ -135,7 +137,7 @@ public class newEnemyParameters : MonoBehaviour
         // 部位が破壊された際にHPバーを一瞬表示
         if (UpperHP <= 0)
         {
-            PlayerControl.RemoveListItem(this.gameObject);
+            playerControl.RemoveListItem(this.gameObject);
             //Debug.Log("上半身が破壊された");
             //Drop(Upperbodypart, false);
             StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Lowerbodypart, false));
@@ -143,7 +145,7 @@ public class newEnemyParameters : MonoBehaviour
         }
         if (LowerHP <= 0)
         {
-            PlayerControl.RemoveListItem(this.gameObject);
+            playerControl.RemoveListItem(this.gameObject);
             //Debug.Log("下半身が破壊された");
             //Drop(Lowerbodypart, true);
             StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true)) ;
