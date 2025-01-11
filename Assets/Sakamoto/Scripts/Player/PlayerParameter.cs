@@ -7,20 +7,20 @@ using UnityEngine.UIElements;
 
 public class PlayerParameter : MonoBehaviour
 {
-    //ゲームマネージャー
-    [SerializeField]GameObject scGameMgr;
+    
+
 
     //移植時のモザイク
-    GameObject goMosaic;
+    private GameObject goMosaic;
 
     public static PlayerParameter Instance;
 
     [Header("1減少するのにかかる時間")]
-    [SerializeField] int iDownTime;
+    [SerializeField] private int iDownTime;
 
-    public  int iHumanityMax;     //人間性の最大値
-    public  int iUpperHPMax;      //上半身のHPの最大値
-    public  int iLowerHPMax;      //下半身のHPの最大値
+    public int iHumanityMax;     //人間性の最大値
+    public int iUpperHPMax;      //上半身のHPの最大値
+    public int iLowerHPMax;      //下半身のHPの最大値
 
     private float iHumanity;     //人間性
     private float iUpperHP;      //上半身のHP
@@ -28,14 +28,14 @@ public class PlayerParameter : MonoBehaviour
     // Start is called before the first frame update
 
     [Header("プレイヤーオブジェクト")]
-    [SerializeField] GameObject goPlayer;
+    [SerializeField] private PlayerControl playerControl;
 
     //上半身のパーツデータ
     public BodyPartsData UpperData;
     //下半身のパーツデータ
     public BodyPartsData LowerData;
     //キャラのイメージ取得用
-    PlayerMoveAnimation scPlayerMoveAnimation;
+    private PlayerMoveAnimation playerMoveAnimation;
     //上半身のパーツデータ(保存用)
     private BodyPartsData upperIndex;
     //下半身のパーツデータ(保存用)
@@ -48,8 +48,7 @@ public class PlayerParameter : MonoBehaviour
 
 
     //ゲームオーバーの標準
-    GameObject goPanel;
-    SceneTransitionManager sceneTransitionManager;
+   private GameObject goPanel;
 
 
     public void Awake()
@@ -63,21 +62,19 @@ public class PlayerParameter : MonoBehaviour
         upperPlayer = UpperData;
         lowerPlayer = LowerData;
         InitializeReferences();
-
         //コンポーネント取得
-        scPlayerMoveAnimation = goPlayer.GetComponent<PlayerMoveAnimation>();
+        playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
 
         //シーン遷移で破棄されない
         DontDestroyOnLoad(gameObject);
 
         // シーンがロードされた後に参照を再取得
         SceneManager.sceneLoaded += OnSceneLoaded;
-        sceneTransitionManager = GameObject.FindAnyObjectByType<SceneTransitionManager>();
     }
     private void Update()
     {
-       string SceneName = SceneManager.GetActiveScene().name;
-        if(!(SceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title)))
+        string SceneName = SceneManager.GetActiveScene().name;
+        if (!(SceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title)))
         {
             switch (GameMgr.GetState())
             {
@@ -92,8 +89,8 @@ public class PlayerParameter : MonoBehaviour
 
                         Debug.Log("リロードを開始します"); // デバッグログで確認
 
-                        GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>().Stop();
-                        
+                       MultiAudio.ins.bgmSource.Stop();
+
 
 
                         //GameOverのBGM鳴らす箇所
@@ -137,7 +134,7 @@ public class PlayerParameter : MonoBehaviour
         }
 
     }
-   
+
     //移植
     //パーツの画像とパラメータを入れ替える
     //BodyPartsData partsData : 入れ替えるパーツのスクリプタブルオブジェクト
@@ -165,9 +162,9 @@ public class PlayerParameter : MonoBehaviour
                 spriteRenderer.sprite = partsData.spBody;
                 */
                 //見た目変更関数待ち
-                scPlayerMoveAnimation.ChangeUpperBody(partsData);
+                playerMoveAnimation.ChangeUpperBody(partsData);
                 //攻撃モーションの変更
-                scPlayerMoveAnimation.ChangeUpperMove(partsData.upperAttack);
+                playerMoveAnimation.ChangeUpperMove(partsData.upperAttack);
                 break;
             case PartsType.Lower:
                 //パーツデータのHPをMax代入
@@ -180,9 +177,9 @@ public class PlayerParameter : MonoBehaviour
                 spriteRenderer.sprite = partsData.spWaist;
                 */
                 //見た目変更関数待ち
-                scPlayerMoveAnimation.ChangeUnderBody(partsData);
+                playerMoveAnimation.ChangeUnderBody(partsData);
                 //攻撃モーションの変更
-                scPlayerMoveAnimation.ChangeLowerMove(partsData.lowerAttack);
+                playerMoveAnimation.ChangeLowerMove(partsData.lowerAttack);
                 break;
         }
 
@@ -225,15 +222,13 @@ public class PlayerParameter : MonoBehaviour
     private void InitializeReferences()
     {
         // シーン遷移後に必要なオブジェクトを再取得
-        scGameMgr = GameObject.FindGameObjectWithTag("GameManager");
         goMosaic = GameObject.Find("Player Variant").gameObject;
         goMosaic = goMosaic.transform.Find("Mosaic").gameObject;
-        goPlayer = GameObject.Find("Player Variant").gameObject;
+        playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();    
         goPanel = GameObject.FindGameObjectWithTag("GameOver");
 
         //コンポーネント取得
-        scPlayerMoveAnimation = goPlayer.GetComponent<PlayerMoveAnimation>();
-
+        playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
         //最大値を設定
         iUpperHPMax = UpperData.iPartHp;
         iLowerHPMax = LowerData.iPartHp;
@@ -242,12 +237,12 @@ public class PlayerParameter : MonoBehaviour
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
 
-        scPlayerMoveAnimation.ChangeUpperBody(UpperData);
-        scPlayerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
-        scPlayerMoveAnimation.ChangeUnderBody(LowerData);
-        scPlayerMoveAnimation.ChangeLowerMove(LowerData.lowerAttack);
+        playerMoveAnimation.ChangeUpperBody(UpperData);
+        playerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
+        playerMoveAnimation.ChangeUnderBody(LowerData);
+        playerMoveAnimation.ChangeLowerMove(LowerData.lowerAttack);
 
-        if (scGameMgr == null || goMosaic == null || goPanel == null)
+        if ( goMosaic == null || goPanel == null)
         {
             Debug.LogWarning("必要なオブジェクトが見つかりません");
         }
