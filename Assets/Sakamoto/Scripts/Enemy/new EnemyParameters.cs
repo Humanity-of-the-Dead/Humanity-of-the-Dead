@@ -40,7 +40,7 @@ public class newEnemyParameters : MonoBehaviour
     GameObject drop;
 
     //プレイヤーパラメータ-
-    public PlayerParameter scPlayerParameter;
+    public PlayerParameter playerParameter;
     //プレイヤーコントローラ
     public PlayerControl PlayerControl;
 
@@ -82,7 +82,7 @@ public class newEnemyParameters : MonoBehaviour
     [Tooltip("HPが0の状態のHPが表示されてからのカウントです。")]
     [SerializeField]
     private float hpBarDestory = 0.3f;
-    private Transform player; // プレイヤーの位置
+    //private Transform player; // プレイヤーの位置
 
     //ヒットエフェクト
     [SerializeField] GameObject hitGameObject;
@@ -96,7 +96,6 @@ public class newEnemyParameters : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("Player Variant").gameObject.transform;
         MaxLowerHP = LowerHP;
         MaxUpperHP = UpperHP;
         // HPバーを非表示に設定
@@ -108,7 +107,7 @@ public class newEnemyParameters : MonoBehaviour
         {
             Debug.LogWarning("HPBarContainerがnull");
         }
-        scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
+        playerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
         Debug.Log(PlayerControl);
 
     }
@@ -116,7 +115,7 @@ public class newEnemyParameters : MonoBehaviour
 
     void Update()
     {
-        float DistanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float DistanceToPlayer = Vector3.Distance(transform.position,PlayerControl.transform.position); 
         // プレイヤーが一定距離以内にいる場合にHPバーを表示
         if (DistanceToPlayer < displayRange)
         {
@@ -276,7 +275,7 @@ public class newEnemyParameters : MonoBehaviour
         drop.transform.position = this.transform.position;
 
         //プレイヤーパラメーターを渡す
-        drop.GetComponent<newDropPart>().getPlayerManegerObjet(scPlayerParameter);
+        drop.GetComponent<newDropPart>().getPlayerManegerObjet(playerParameter);
 
         //テキストボックスを渡す
         drop.GetComponent<newDropPart>().getTextBox(textBox);

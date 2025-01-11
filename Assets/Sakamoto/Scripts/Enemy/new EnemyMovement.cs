@@ -16,7 +16,7 @@ public class newEnemyMovement : EnemyAttack
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private BodyPartsData upperpart;
     [SerializeField] private BodyPartsData lowerpart;
-    [SerializeField] private Gun Juu;
+    [SerializeField] private Gun Gun;
 
     
     [SerializeField] EnemyMoveAnimation moveAnimation;
@@ -46,6 +46,11 @@ public class newEnemyMovement : EnemyAttack
         scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
         pointA = this.transform.position.x + moveAbs;
         pointB = this.transform.position.x - moveAbs;
+
+        if(upperpart.sPartsName== "åxé@ÇÃè„îºêg")
+        {
+            Gun = GetComponent<Gun>();  
+        }
     }
 
     void Update()
@@ -116,7 +121,7 @@ public class newEnemyMovement : EnemyAttack
                         timer += Time.deltaTime;
                         break;
                     case EnemyState.attack:
-                        if (distanceToPlayer < upperpart.AttackArea && distanceToPlayer < lowerpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
+                        if (distanceToPlayer < upperpart.AttackArea || distanceToPlayer < lowerpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
                             //óêêîÇéÊìæÇ∑ÇÈ
                             int num = UnityEngine.Random.Range(0, 2);
@@ -145,7 +150,7 @@ public class newEnemyMovement : EnemyAttack
                                         }
 
                                         Debug.Log(ShootMoveBector);
-                                        Juu.Shoot(ShootMoveBector, this.transform);
+                                        Gun.Shoot(ShootMoveBector, this.transform);
                                         //åxé@äØÇÃè„îºêgÇ≈çUåÇÇ∑ÇÈSEÇñ¬ÇÁÇ∑
                                         MultiAudio.ins.PlaySEByName(
                                             "SE_policeofficer_attack_upper");
@@ -229,20 +234,17 @@ public class newEnemyMovement : EnemyAttack
                                 }
 
                                 LowerEnemyAttack((float)lowerpart.iPartAttack);
-                                //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                             }
                         }
                         if (distanceToPlayer < upperpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
                             moveAnimation.PantieStart();
                             UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
-                            //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                         }
                         if (distanceToPlayer < lowerpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
                             moveAnimation.KickStart();
                             LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
-                            //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                         }
                         enemystate = EnemyState.search;
                         //moveAnimation.PlayerPantie();

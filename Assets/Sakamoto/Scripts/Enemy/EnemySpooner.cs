@@ -7,7 +7,7 @@ using static UnityEditor.UIElements.ToolbarMenu;
 public class EnemySpooner : MonoBehaviour
 {
     [SerializeField] GameObject goEnemyObject;
-    PlayerParameter scPlayerParameter;
+    PlayerParameter playerParameter;
     [SerializeField] PlayerControl playerControl;
     [SerializeField] GameMgr gameMgr;
 
@@ -27,8 +27,8 @@ public class EnemySpooner : MonoBehaviour
 
     private void Start()
     {
-        scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
-        Debug.Log(scPlayerParameter + "‚ª‘ã“ü‚³‚ê‚Ü‚µ‚½");
+        playerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
+        Debug.Log(playerParameter + "‚ª‘ã“ü‚³‚ê‚Ü‚µ‚½");
         Debug.Log(playerControl);
         createEnemy();
         fTimer = 0;
@@ -96,9 +96,9 @@ public class EnemySpooner : MonoBehaviour
         {
             liEnemyList.Add(newEnemy);
 
-            newEnemy.GetComponent<newEnemyParameters>().scPlayerParameter = this.scPlayerParameter;
+            newEnemy.GetComponent<newEnemyParameters>().playerParameter= this.playerParameter;
             newEnemy.GetComponent<newEnemyParameters>().PlayerControl = playerControl;
-            newEnemy.GetComponent<newEnemyMovement>().scPlayerParameter = this.scPlayerParameter;
+            newEnemy.GetComponent<newEnemyMovement>().scPlayerParameter = this.playerParameter;
             newEnemy.GetComponent<newEnemyMovement>().gamestate = gameMgr;
             playerControl.AddListItem(newEnemy);
         }
