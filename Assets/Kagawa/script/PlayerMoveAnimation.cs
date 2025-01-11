@@ -26,12 +26,12 @@ public class PlayerMoveAnimation : MonoBehaviour
 {
    
 
-    [Header("全身")] private GameObject playerRc;
-    [SerializeField, Header("腕の角度、先に右手")] GameObject[] arm;
-    [SerializeField, Header("太腿の角度、先に右足")] GameObject[] leg;
-    [SerializeField, Header("すねの角度、先に右足")] GameObject[] foot;
+    //[Header("全身")] private GameObject playerRc;
+    [SerializeField, Header("腕の角度、先に右手")]  private GameObject[] arm;
+    [SerializeField, Header("太腿の角度、先に右足")] private GameObject[] leg;
+    [SerializeField, Header("すねの角度、先に右足")] private GameObject[] foot;
 
-    [Header("1コマの間隔の時間")] public float timeMax;
+    [Header("1コマの間隔の時間")] private float timeMax;
 
     [Header("---歩きのアニメーション---")]
     public AnimationData walk;
@@ -71,10 +71,12 @@ public class PlayerMoveAnimation : MonoBehaviour
     bool isWalk;
 
     // 値を反転にするフラグ
-    bool isActive;
+    bool isActive = false;
+
 
     // 攻撃中かどうか
-    bool isAttack;
+    bool isAttack = false;
+
 
     // 静止しているか
     bool isStop;
@@ -197,7 +199,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
 
         // Quaternion.Euler: 回転軸( x, y, z)
-        playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[walkIndex]);
+       transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[walkIndex]);
 
         // 腕のアニメーション
         if (arm == null || walk.armForwardRotation == null)
@@ -252,7 +254,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         {
             case UpperAttack.NORMAL:
                 // Quaternion.Euler: 回転軸( x, y, z)
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerUpper.wholeRotation[attackNumber]);
+                transform.rotation = Quaternion.Euler(0, shaft, playerUpper.wholeRotation[attackNumber]);
 
                 // 腕のアニメーション
                 if (playerUpper.armForwardRotation == null || playerUpper.armBackRotation == null)
@@ -288,7 +290,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             case UpperAttack.POLICE:
 
                 // Quaternion.Euler: 回転軸( x, y, z)
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, policeUpper.wholeRotation[attackNumber]);
+                transform.rotation = Quaternion.Euler(0, shaft, policeUpper.wholeRotation[attackNumber]);
 
                 // 腕のアニメーション
                 if (policeUpper.armForwardRotation == null || policeUpper.armBackRotation == null)
@@ -324,7 +326,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             case UpperAttack.NURSE:
 
                 // Quaternion.Euler: 回転軸( x, y, z)
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.wholeRotation[attackNumber]);
+                transform.rotation = Quaternion.Euler(0, shaft, nurseUpper.wholeRotation[attackNumber]);
 
                 // 腕のアニメーション
                 if (nurseUpper.armForwardRotation == null || nurseUpper.armBackRotation == null)
@@ -369,7 +371,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         {
             case LowerAttack.NORMAL:
                 // Quaternion.Euler: 回転軸( x, y, z)
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, playerLower.wholeRotation[attackNumber]);
+                transform.rotation = Quaternion.Euler(0, shaft, playerLower.wholeRotation[attackNumber]);
 
                 // 腕のアニメーション
                 if (playerLower.armForwardRotation == null || playerLower.armBackRotation == null)
@@ -403,7 +405,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                 }
                 break;
             case LowerAttack.POLICE:
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, policeLower.wholeRotation[attackNumber]);
+                transform.rotation = Quaternion.Euler(0, shaft, policeLower.wholeRotation[attackNumber]);
 
                 // 腕のアニメーション
                 if (policeLower.armForwardRotation == null || policeLower.armBackRotation == null)
@@ -439,7 +441,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             case LowerAttack.NURSE:
 
                 // Quaternion.Euler: 回転軸( x, y, z)
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, nurseLower.wholeRotation[attackNumber]);
+                transform.rotation = Quaternion.Euler(0, shaft, nurseLower.wholeRotation[attackNumber]);
 
                 // 腕のアニメーション
                 if (nurseLower.armForwardRotation == null || nurseLower.armBackRotation == null)

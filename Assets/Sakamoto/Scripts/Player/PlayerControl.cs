@@ -4,20 +4,12 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     //モーションアニメスクリプト
-    [SerializeField]  private PlayerMoveAnimation playerMoveAnimation;
-
+    [SerializeField] private PlayerMoveAnimation playerMoveAnimation;
+    // キャラクターパーツ (SpriteRenderer)
+    [Header("キャラクターパーツ")]
+    [SerializeField] private CharacterSprites characterSprites;
     //ゲームマネージャー
-    [SerializeField, Header("頭のImage")] private SpriteRenderer headSR;
-    [SerializeField, Header("体ののImage")] private SpriteRenderer bodySR;
-    [SerializeField, Header("右腕のImage")] private SpriteRenderer armRightSR;
-    [SerializeField, Header("左腕のImage")] private SpriteRenderer armLeftSR;
-    [SerializeField, Header("右手首のImage")] private SpriteRenderer handRightSR;
-    [SerializeField, Header("左手首のImage")] private SpriteRenderer handLeftSR;
-    [SerializeField, Header("腰のImage")] private SpriteRenderer waistSR;
-    [SerializeField, Header("右太腿のImage")] private SpriteRenderer legRightSR;
-    [SerializeField, Header("左太腿のImage")] private SpriteRenderer legLeftSR;
-    [SerializeField, Header("右足のImage")] private SpriteRenderer footRightSR;
-    [SerializeField, Header("左足のImage")] private SpriteRenderer footLeftSR;
+
 
     private Rigidbody2D rigidbody2D;
     [Header("移動スピード")]
@@ -46,9 +38,6 @@ public class PlayerControl : MonoBehaviour
 
 
     [SerializeField] private Gun Gun;
-
-
-
     //拳銃のショットフラグ
     private bool bShootFlag;
     void Start()
@@ -59,7 +48,7 @@ public class PlayerControl : MonoBehaviour
         //playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
         //これいいやつ
         playerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
-        playerMoveAnimation = GetComponent<PlayerMoveAnimation>();  
+        playerMoveAnimation = GetComponent<PlayerMoveAnimation>();
         Gun = GetComponent<Gun>();
         rigidbody2D = GetComponent<Rigidbody2D>();
 
@@ -104,11 +93,11 @@ public class PlayerControl : MonoBehaviour
     void MainExecution()
     {
         //現在のポジションを取得
-        Vector2 vPosition = this.transform.position;
+        Vector3 vPosition = transform.position;
 
         //カメラとの距離の絶対値が一定以下ならプレイヤーが動く　画面外に出ないための処置
         //移動
-        Vector3 vPosFromCame = transform.position - goCamera.transform.position; //カメラ基準のプレイヤーの位置
+        Vector3 vPosFromCame = vPosition - goCamera.transform.position; //カメラ基準のプレイヤーの位置
 
         if (!playerMoveAnimation.SetAttack())
         {
@@ -157,19 +146,17 @@ public class PlayerControl : MonoBehaviour
 
         //体が回転しないようにする
         //自分のtransformを取得
-        Quaternion quaternion = GetComponent<Transform>().rotation;
-        quaternion.z = 0.0f;
-        transform.rotation = quaternion;
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        transform.position = vPosition;
 
 
-        //移動後のポジションを代入
-        this.transform.position = vPosition;
+
 
         #region 山品変更
         //アニメーションをここで呼ぶため、追記
         //攻撃関連
-            if (!playerMoveAnimation.SetAttack() && playerMoveAnimation.timeAttack <0)
-            {
+        if (!playerMoveAnimation.SetAttack() && playerMoveAnimation.timeAttack < 0)
+        {
             //上半身攻撃
             if (Input.GetKeyDown(KeyCode.I))
             {
@@ -191,8 +178,8 @@ public class PlayerControl : MonoBehaviour
                         Vector2 ShootMoveBector = new Vector2(0, 0);
                         //子のplayerRCのローテーションYを持ってくる
                         // y = 0のときは右向き、0 y = 180のときは左向き
-                        Debug.Log(gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y);
-                        if (gameObject.transform.GetChild(0).gameObject.transform.eulerAngles.y == 180)
+                        Debug.Log(gameObject.transform.GetChild(0).transform.eulerAngles.y);
+                        if (gameObject.transform.GetChild(0).transform.eulerAngles.y == 180)
                         {
                             ShootMoveBector.x = -1;
                         }
@@ -238,7 +225,7 @@ public class PlayerControl : MonoBehaviour
                     //Debug.Log(liObj[i].gameObject.transform.position);
                     //Debug.Log(playerParameter.UpperData.AttackArea);
                     //仮引数
-                    UpperBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.UpperData.AttackArea, playerParameter.UpperData.iPartAttack);
+                    UpperBodyAttack(i, liObj[i].transform.position, playerParameter.UpperData.AttackArea, playerParameter.UpperData.iPartAttack);
                 }
             }
             //下半身攻撃
@@ -278,11 +265,11 @@ public class PlayerControl : MonoBehaviour
                 for (int i = 0; i < liObj.Count; i++)
                 {
                     //仮引数
-                    LowerBodyAttack(i, liObj[i].gameObject.transform.position, playerParameter.LowerData.AttackArea, playerParameter.LowerData.iPartAttack);
+                    LowerBodyAttack(i, liObj[i].transform.position, playerParameter.LowerData.AttackArea, playerParameter.LowerData.iPartAttack);
                 }
             }
         }
-      
+
 
     }
     /// <summary>
@@ -291,11 +278,11 @@ public class PlayerControl : MonoBehaviour
     /// <param name="upperBody">画像データ集合体</param>
     public void ChangeUpperBody(BodyPartsData upperBody)
     {
-        bodySR.sprite = upperBody.spBody;
-        armRightSR.sprite = upperBody.spRightArm;
-        armLeftSR.sprite = upperBody.spLeftArm;
-        handRightSR.sprite = upperBody.spRightHand;
-        handLeftSR.sprite = upperBody.spLeftHand;
+        characterSprites.body.sprite = upperBody.spBody;
+        characterSprites.armRight.sprite = upperBody.spRightArm;
+        characterSprites.armLeft.sprite = upperBody.spLeftArm;
+        characterSprites.handRight.sprite = upperBody.spRightHand;
+        characterSprites.handLeft.sprite = upperBody.spLeftHand;
     }
 
     /// <summary>
@@ -304,11 +291,11 @@ public class PlayerControl : MonoBehaviour
     /// <param name="underBody">画像データ集合体</param>
     public void ChangeUnderBody(BodyPartsData underBody)
     {
-        waistSR.sprite = underBody.spWaist;
-        footRightSR.sprite = underBody.spRightFoot;
-        footLeftSR.sprite = underBody.spLeftFoot;
-        legRightSR.sprite = underBody.spRightLeg;
-        legLeftSR.sprite = underBody.spLeftLeg;
+        characterSprites.waist.sprite = underBody.spWaist;
+        characterSprites.footRight.sprite = underBody.spRightFoot;
+        characterSprites.footLeft.sprite = underBody.spLeftFoot;
+        characterSprites.legRight.sprite = underBody.spRightLeg;
+        characterSprites.legLeft.sprite = underBody.spLeftLeg;
     }
 
     //床判定
@@ -341,7 +328,7 @@ public class PlayerControl : MonoBehaviour
     //下半身攻撃
     public void LowerBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
-        float fAttackReach = Vector3.Distance(vTargetPos, this.transform.position);
+        float fAttackReach = Vector3.Distance(vTargetPos, transform.position);
         if (fAttackReach < fReach)
         {
             liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(iDamage, 1);
@@ -353,14 +340,10 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void AddListItem(GameObject obj)
-    {
-        liObj.Add(obj);
-    }
-    public void RemoveListItem(GameObject obj)
-    {
-        liObj.Remove(obj);
-    }
+    public void AddListItem(GameObject obj) => liObj.Add(obj);
+    public void RemoveListItem(GameObject obj) => liObj.Remove(obj);
+
+
 
 
     //敵の弾都の当たり判定
@@ -368,7 +351,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyShoot"))
         {
-            if (0 > transform.position.y - collision.gameObject.transform.position.y)
+            if (0 > transform.position.y - collision.transform.position.y)
             {
                 playerParameter.UpperHP -= 1;
             }
@@ -378,5 +361,20 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
+    }
+    [System.Serializable]
+    public class CharacterSprites
+    {
+        public SpriteRenderer head;
+        public SpriteRenderer body;
+        public SpriteRenderer armRight;
+        public SpriteRenderer armLeft;
+        public SpriteRenderer handRight;
+        public SpriteRenderer handLeft;
+        public SpriteRenderer waist;
+        public SpriteRenderer legRight;
+        public SpriteRenderer legLeft;
+        public SpriteRenderer footRight;
+        public SpriteRenderer footLeft;
     }
 }
