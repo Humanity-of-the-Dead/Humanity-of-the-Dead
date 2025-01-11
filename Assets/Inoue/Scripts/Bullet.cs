@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
 
     //Gunスクリプトからの引用
     //Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();→GetComponentでbulletのオブジェクトのプレハブについているRigidbody2Dを取得する
-
+    #endregion
 
 
     //private Rigidbody2D rb;    // Rigidbody2Dでスプライトの向きを計算する
