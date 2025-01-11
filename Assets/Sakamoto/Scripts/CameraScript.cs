@@ -11,9 +11,9 @@ enum STATE {
 
 public class CameraScript : MonoBehaviour
 {
-    [SerializeField] GameObject goTarget;
-    [SerializeField] float fMoveStart;
-    [SerializeField] float fMoveLimit;
+    [SerializeField] private GameObject goTarget;
+    [SerializeField] private float fMoveStart;
+    [SerializeField] private float fMoveLimit;
 
     ////カメラから見たターゲットの位置
     //Vector2 fTrgPosFromCamera;
@@ -38,16 +38,16 @@ public class CameraScript : MonoBehaviour
         {
             case STATE.NOMAL:
                 //プレイヤーが画面中央に来たら追従する
-                Vector3 vCamPos = this.GetComponent<Transform>().position;
+                Vector3 vCamPos = transform.position;
                 if (goTarget.transform.position.x > fMoveStart)
                 {
                     vCamPos.x = goTarget.transform.position.x;
-                    this.GetComponent<Transform>().position = vCamPos; 
+                    transform.position = vCamPos; 
                 }
-                if(this.transform.position.x > fMoveLimit)
+                if(transform.position.x > fMoveLimit)
                 {
                     vCamPos.x = fMoveLimit;
-                    this.GetComponent<Transform>().position = vCamPos;
+                    transform.position = vCamPos;
                     eState = STATE.BOSS;
                 }               
                 vCamPos.y = goTarget.transform.position.y;
@@ -55,10 +55,10 @@ public class CameraScript : MonoBehaviour
                 {
                     vCamPos.y = 0;
                 }
-                this.GetComponent<Transform>().position = vCamPos;
+                transform.position = vCamPos;
                 break;
             case STATE.BOSS:
-                Vector3 bossCamPos = this.transform.position;
+                Vector3 bossCamPos = transform.position;
 
                 // カメラのX座標を固定
                 bossCamPos.x = fMoveLimit;
@@ -67,7 +67,7 @@ public class CameraScript : MonoBehaviour
                 float targetY = goTarget.transform.position.y;
                 bossCamPos.y = Mathf.Clamp(targetY, 0, 2); 
 
-                this.GetComponent<Transform>().position = bossCamPos;
+             transform.position = bossCamPos;
 
                 //カメラ追従なし
                 break;
