@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class PlayerParameter : MonoBehaviour
 {
-    
+
 
 
     //移植時のモザイク
@@ -25,9 +24,8 @@ public class PlayerParameter : MonoBehaviour
     private float iHumanity;     //人間性
     private float iUpperHP;      //上半身のHP
     private float iLowerHP;      //下半身のHP
-    // Start is called before the first frame update
 
-    [Header("プレイヤーオブジェクト")]
+    [Header("プレイヤーコントロールスクリプト")]
     [SerializeField] private PlayerControl playerControl;
 
     //上半身のパーツデータ
@@ -44,7 +42,7 @@ public class PlayerParameter : MonoBehaviour
     private BodyPartsData upperPlayer;
     //下半身のパーツデータ(ステージ4用)
     private BodyPartsData lowerPlayer;
-   
+
 
 
     //ゲームオーバーの標準
@@ -88,7 +86,7 @@ public class PlayerParameter : MonoBehaviour
 
                         Debug.Log("リロードを開始します"); // デバッグログで確認
 
-                       MultiAudio.ins.bgmSource.Stop();
+                        MultiAudio.ins.bgmSource.Stop();
 
 
 
@@ -221,7 +219,7 @@ public class PlayerParameter : MonoBehaviour
     private void InitializeReferences()
     {
         // シーン遷移後に必要なオブジェクトを再取得
-        goMosaic = GameObject.Find("Player Variant").gameObject;
+        goMosaic = GameObject.Find("Player Variant");
         goMosaic = goMosaic.transform.Find("Mosaic").gameObject;
         goPanel = GameObject.FindGameObjectWithTag("GameOver");
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
@@ -237,12 +235,12 @@ public class PlayerParameter : MonoBehaviour
 
 
 
-        playerControl. ChangeUpperBody(UpperData);
+        playerControl.ChangeUpperBody(UpperData);
         playerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
         playerControl.ChangeUnderBody(LowerData);
         playerMoveAnimation.ChangeLowerMove(LowerData.lowerAttack);
 
-        if ( goMosaic == null || goPanel == null)
+        if (goMosaic == null || goPanel == null)
         {
             Debug.LogWarning("必要なオブジェクトが見つかりません");
         }
@@ -281,7 +279,7 @@ public class PlayerParameter : MonoBehaviour
         // イベントの解除
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-   
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // シーン遷移後に参照を再取得

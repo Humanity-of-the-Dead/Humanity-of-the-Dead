@@ -144,8 +144,9 @@ public class PlayerControl : MonoBehaviour
 
         }
 
-        //体が回転しないようにする
+        //体が回転しないようにするのオイラーを０で設定すればできる
         //自分のtransformを取得
+       
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         transform.position = vPosition;
 
@@ -272,6 +273,8 @@ public class PlayerControl : MonoBehaviour
 
 
     }
+
+    //アニメーションが持っていた関数を移動（アニメーションそのものには関係ないため）
     /// <summary>
     /// 上半身のイメージ
     /// </summary>
@@ -284,6 +287,7 @@ public class PlayerControl : MonoBehaviour
         characterSprites.handRight.sprite = upperBody.spRightHand;
         characterSprites.handLeft.sprite = upperBody.spLeftHand;
     }
+    //アニメーションが持っていた関数を移動（アニメーションそのものには関係ないため）
 
     /// <summary>
     /// 下半身のイメージ
@@ -340,6 +344,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    
     public void AddListItem(GameObject obj) => liObj.Add(obj);
     public void RemoveListItem(GameObject obj) => liObj.Remove(obj);
 
@@ -363,7 +368,8 @@ public class PlayerControl : MonoBehaviour
 
     }
     [System.Serializable]
-    public class CharacterSprites
+    //スプライト関連を一つのクラスにまとめてしまって、そのデータを[System.Serializable]でインスペクタでも設定できる
+    private class CharacterSprites
     {
         public SpriteRenderer head;
         public SpriteRenderer body;
