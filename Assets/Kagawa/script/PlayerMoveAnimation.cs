@@ -24,19 +24,9 @@ public enum LowerAttack
 
 public class PlayerMoveAnimation : MonoBehaviour
 {
-    [SerializeField, Header("頭のImage")] SpriteRenderer headSR;
-    [SerializeField, Header("体ののImage")] SpriteRenderer bodySR;
-    [SerializeField, Header("右腕のImage")] SpriteRenderer armRightSR;
-    [SerializeField, Header("左腕のImage")] SpriteRenderer armLeftSR;
-    [SerializeField, Header("右手首のImage")] SpriteRenderer handRightSR;
-    [SerializeField, Header("左手首のImage")] SpriteRenderer handLeftSR;
-    [SerializeField, Header("腰のImage")] SpriteRenderer waistSR;
-    [SerializeField, Header("右太腿のImage")] SpriteRenderer legRightSR;
-    [SerializeField, Header("左太腿のImage")] SpriteRenderer legLeftSR;
-    [SerializeField, Header("右足のImage")] SpriteRenderer footRightSR;
-    [SerializeField, Header("左足のImage")] SpriteRenderer footLeftSR;
+   
 
-    [Header("全身")] public GameObject playerRc;
+    [Header("全身")] private GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")] GameObject[] arm;
     [SerializeField, Header("太腿の角度、先に右足")] GameObject[] leg;
     [SerializeField, Header("すねの角度、先に右足")] GameObject[] foot;
@@ -626,31 +616,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         attackNumber = 1;
     }
 
-    /// <summary>
-    /// 上半身のイメージ
-    /// </summary>
-    /// <param name="upperBody">画像データ集合体</param>
-    public void ChangeUpperBody(BodyPartsData upperBody)
-    {
-        bodySR.sprite = upperBody.spBody;
-        armRightSR.sprite = upperBody.spRightArm;
-        armLeftSR.sprite = upperBody.spLeftArm;
-        handRightSR.sprite = upperBody.spRightHand;
-        handLeftSR.sprite = upperBody.spLeftHand;
-    }
 
-    /// <summary>
-    /// 下半身のイメージ
-    /// </summary>
-    /// <param name="underBody">画像データ集合体</param>
-    public void ChangeUnderBody(BodyPartsData underBody)
-    {
-        waistSR.sprite = underBody.spWaist;
-        footRightSR.sprite = underBody.spRightFoot;
-        footLeftSR.sprite = underBody.spLeftFoot;
-        legRightSR.sprite = underBody.spRightLeg;
-        legLeftSR.sprite = underBody.spLeftLeg;
-    }
 
     /// <summary>
     /// 上半身の攻撃の変化

@@ -7,7 +7,17 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]  private PlayerMoveAnimation playerMoveAnimation;
 
     //ゲームマネージャー
-
+    [SerializeField, Header("頭のImage")] private SpriteRenderer headSR;
+    [SerializeField, Header("体ののImage")] private SpriteRenderer bodySR;
+    [SerializeField, Header("右腕のImage")] private SpriteRenderer armRightSR;
+    [SerializeField, Header("左腕のImage")] private SpriteRenderer armLeftSR;
+    [SerializeField, Header("右手首のImage")] private SpriteRenderer handRightSR;
+    [SerializeField, Header("左手首のImage")] private SpriteRenderer handLeftSR;
+    [SerializeField, Header("腰のImage")] private SpriteRenderer waistSR;
+    [SerializeField, Header("右太腿のImage")] private SpriteRenderer legRightSR;
+    [SerializeField, Header("左太腿のImage")] private SpriteRenderer legLeftSR;
+    [SerializeField, Header("右足のImage")] private SpriteRenderer footRightSR;
+    [SerializeField, Header("左足のImage")] private SpriteRenderer footLeftSR;
 
     private Rigidbody2D rigidbody2D;
     [Header("移動スピード")]
@@ -274,6 +284,31 @@ public class PlayerControl : MonoBehaviour
         }
       
 
+    }
+    /// <summary>
+    /// 上半身のイメージ
+    /// </summary>
+    /// <param name="upperBody">画像データ集合体</param>
+    public void ChangeUpperBody(BodyPartsData upperBody)
+    {
+        bodySR.sprite = upperBody.spBody;
+        armRightSR.sprite = upperBody.spRightArm;
+        armLeftSR.sprite = upperBody.spLeftArm;
+        handRightSR.sprite = upperBody.spRightHand;
+        handLeftSR.sprite = upperBody.spLeftHand;
+    }
+
+    /// <summary>
+    /// 下半身のイメージ
+    /// </summary>
+    /// <param name="underBody">画像データ集合体</param>
+    public void ChangeUnderBody(BodyPartsData underBody)
+    {
+        waistSR.sprite = underBody.spWaist;
+        footRightSR.sprite = underBody.spRightFoot;
+        footLeftSR.sprite = underBody.spLeftFoot;
+        legRightSR.sprite = underBody.spRightLeg;
+        legLeftSR.sprite = underBody.spLeftLeg;
     }
 
     //床判定

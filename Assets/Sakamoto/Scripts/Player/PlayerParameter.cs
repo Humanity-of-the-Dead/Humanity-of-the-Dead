@@ -44,11 +44,11 @@ public class PlayerParameter : MonoBehaviour
     private BodyPartsData upperPlayer;
     //下半身のパーツデータ(ステージ4用)
     private BodyPartsData lowerPlayer;
-
+   
 
 
     //ゲームオーバーの標準
-   private GameObject goPanel;
+    private GameObject goPanel;
 
 
     public void Awake()
@@ -63,7 +63,6 @@ public class PlayerParameter : MonoBehaviour
         lowerPlayer = LowerData;
         InitializeReferences();
         //コンポーネント取得
-        playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
 
         //シーン遷移で破棄されない
         DontDestroyOnLoad(gameObject);
@@ -162,7 +161,7 @@ public class PlayerParameter : MonoBehaviour
                 spriteRenderer.sprite = partsData.spBody;
                 */
                 //見た目変更関数待ち
-                playerMoveAnimation.ChangeUpperBody(partsData);
+                playerControl.ChangeUpperBody(partsData);
                 //攻撃モーションの変更
                 playerMoveAnimation.ChangeUpperMove(partsData.upperAttack);
                 break;
@@ -177,7 +176,7 @@ public class PlayerParameter : MonoBehaviour
                 spriteRenderer.sprite = partsData.spWaist;
                 */
                 //見た目変更関数待ち
-                playerMoveAnimation.ChangeUnderBody(partsData);
+                playerControl.ChangeUnderBody(partsData);
                 //攻撃モーションの変更
                 playerMoveAnimation.ChangeLowerMove(partsData.lowerAttack);
                 break;
@@ -224,9 +223,8 @@ public class PlayerParameter : MonoBehaviour
         // シーン遷移後に必要なオブジェクトを再取得
         goMosaic = GameObject.Find("Player Variant").gameObject;
         goMosaic = goMosaic.transform.Find("Mosaic").gameObject;
-        playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();    
         goPanel = GameObject.FindGameObjectWithTag("GameOver");
-
+        playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         //コンポーネント取得
         playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
         //最大値を設定
@@ -237,9 +235,11 @@ public class PlayerParameter : MonoBehaviour
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
 
-        playerMoveAnimation.ChangeUpperBody(UpperData);
+
+
+        playerControl. ChangeUpperBody(UpperData);
         playerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
-        playerMoveAnimation.ChangeUnderBody(LowerData);
+        playerControl.ChangeUnderBody(LowerData);
         playerMoveAnimation.ChangeLowerMove(LowerData.lowerAttack);
 
         if ( goMosaic == null || goPanel == null)
@@ -281,7 +281,7 @@ public class PlayerParameter : MonoBehaviour
         // イベントの解除
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
+   
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // シーン遷移後に参照を再取得
