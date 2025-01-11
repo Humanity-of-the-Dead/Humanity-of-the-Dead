@@ -3,7 +3,18 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 1f; // 銃弾の速度
-    public Rigidbody2D rb;    // Rigidbody2Dでスプライトの向きを計算する
+
+    #region 山品変更
+    /// <summary>
+    /// 変更理由：Gunスクリプトで弾のリジットボディーを取得しているためここで変数を宣言する必要なし+下のコードでも最終的に一度も使っていない
+    /// </summary>    
+
+    //Gunスクリプトからの引用
+    //Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();→GetComponentでbulletのオブジェクトのプレハブについているRigidbody2Dを取得する
+
+
+
+    //private Rigidbody2D rb;    // Rigidbody2Dでスプライトの向きを計算する
 
     void Start()
     {
