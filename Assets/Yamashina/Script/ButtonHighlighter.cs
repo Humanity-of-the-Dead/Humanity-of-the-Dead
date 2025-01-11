@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class ButtonHighlighter : MonoBehaviour
 {
-    public Button operationButton; // 操作説明ボタン
-    public Button volumeButton;    // 音量ボタン
-    public Color selectedColor = Color.white; // 選択状態の色
-    public Color unselectedColor = Color.gray; // 非選択状態の色
+  [SerializeField] private Button operationButton; // 操作説明ボタン
+    [SerializeField] private Button volumeButton;    // 音量ボタン
+    [SerializeField] private Color selectedColor = Color.white; // 選択状態の色
+    [SerializeField] private Color unselectedColor = Color.gray; // 非選択状態の色
 
     private void Start()
     {
