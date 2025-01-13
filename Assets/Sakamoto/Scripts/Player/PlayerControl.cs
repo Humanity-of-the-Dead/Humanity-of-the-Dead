@@ -68,7 +68,7 @@ public class PlayerControl : MonoBehaviour
         {
             rigidbody2D.velocity = new Vector2(0.0f, -1);
         }
-
+        UpdateTimers();
         switch (GameMgr.GetState())
         {
             case GameState.Main:
@@ -89,6 +89,11 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    private void UpdateTimers()
+    {
+        playerMoveAnimation.timeWalk -= Time.deltaTime;
+        playerMoveAnimation.timeAttack -= Time.deltaTime;
+    }
     //ゲームメインのエクスキュート
     void MainExecution()
     {
@@ -107,7 +112,9 @@ public class PlayerControl : MonoBehaviour
                 if (vPosFromCame.x > -fCameraWidth / 2)
                 {
                     vPosition.x -= Time.deltaTime * fSpeed;
+                  
                 }
+                playerMoveAnimation.HandleWalk(0);
             }
             //右移動
             if (Input.GetKey(KeyCode.D))
@@ -116,6 +123,8 @@ public class PlayerControl : MonoBehaviour
                 {
                     vPosition.x += Time.deltaTime * fSpeed;
                 }
+                playerMoveAnimation.HandleWalk(180);
+
             }
 
             //ジャンプ

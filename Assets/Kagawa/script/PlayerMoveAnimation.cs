@@ -36,7 +36,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     [SerializeField, Header("すねの角度、先に右足")] private GameObject[] foot;
     //アニメーションの間隔はアニメーションスクリプト内で完結したいのでプライベート化してシリアライズフィールドを付けることで設定できる
     [SerializeField, Header("1コマの間隔の時間")] private float timeMax;
-[SerializeField]    private AnimationDatas animationDatas;
+    [SerializeField] private AnimationDatas animationDatas;
     private UpperAttack upperAttack;
 
     private LowerAttack downAttack;
@@ -69,90 +69,50 @@ public class PlayerMoveAnimation : MonoBehaviour
 
 
     // タイマー
-    private float timeWalk = 0;
+    public float timeWalk = 0;
 
     //プレイヤーコントロールで呼ぶためパブリック追記
     // 攻撃のタイマー
     public float timeAttack = 0;
     #endregion
 
-
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        timeWalk -= Time.deltaTime;
-        timeAttack -= Time.deltaTime;
+
+        walkIndex = 0;
+        attackNumber = 0;
+        shaft = 0;
+
+        isAttack = false;
+        isActive = false;
+        isWalk = false;
+        isStop = true;
+        timeWalk = 0;
+        timeAttack = 0;
+    }
 
 
-        if (Input.GetKeyDown(KeyCode.D))
+   
+    public void HandleWalk(int direction)
+    {
+        shaft = direction;
+
+        if (isStop)
         {
-            shaft = 0;
-
-            if (isStop)
-            {
-                // 歩く動作をしている時、呼ばせない
-                WalkInstance();
-            }
+            WalkInstance();
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        if (!isWalk)
         {
-
-
-            shaft = 180;
-
-            if (isStop)
-            {
-                // 歩く動作をしている時、呼ばせない
-                WalkInstance();
-            }
+            isWalk = true;
+            ChangeArmAnime();
+            KeepWalk();
         }
-        #region 山品変更
-        //プレイヤーコントロールで呼び出すためコメントアウト
-        //if (timeAttack < 0)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.I))
-        //    {
-        //        PantieStart();
-        //    }
-        //    else if (Input.GetKeyDown(KeyCode.K))
-        //    {
-        //        KickStart();
-        //    }
-        //}
-        #endregion
-
-        //歩きのモーションの向きを変える
-        if (Input.GetKey(KeyCode.D))
+        else if (isWalk && !isAttack)
         {
-            shaft = 0;
-
-            if (!isWalk)
-            {
-                isWalk = true;
-                ChangeArmAnime();
-                KeepWalk();
-            }
-            else if (isWalk && !isAttack)
-            {
-                PlayerWalk();
-            }
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            shaft = 180;
-            if (!isWalk)
-            {
-                isWalk = true;
-                ChangeArmAnime();
-                KeepWalk();
-            }
-            else if (isWalk && !isAttack)
-            {
-                PlayerWalk();
-            }
+            PlayerWalk();
         }
     }
+
 
     /// <summary>
     /// 歩くアニメーション

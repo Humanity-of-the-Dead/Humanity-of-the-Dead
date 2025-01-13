@@ -2741,9 +2741,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ec962bc88a02d70429ef611b231b5e38, type: 2}
     - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDatas.nurseLower
+      value: 
+      objectReference: {fileID: 11400000, guid: ef21a595c3cba254db490f8dfd49a9c1, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDatas.nurseUpper
+      value: 
+      objectReference: {fileID: 11400000, guid: e7766c1a6f6fc414e9785188e74f2397, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: animationDatas.playerLower
       value: 
-      objectReference: {fileID: 11400000, guid: aa05b8f6075e3ab43b279f1352aa56c2, type: 2}
+      objectReference: {fileID: 11400000, guid: ecfa70eea4c6e214c83dc4f596887b28, type: 2}
     - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: animationDatas.playerUpper
       value: 
