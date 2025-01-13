@@ -114,7 +114,7 @@ public class PlayerControl : MonoBehaviour
                     vPosition.x -= Time.deltaTime * fSpeed;
                   
                 }
-                playerMoveAnimation.HandleWalk(0);
+                playerMoveAnimation.HandleWalk(180);
             }
             //‰EˆÚ“®
             if (Input.GetKey(KeyCode.D))
@@ -123,7 +123,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     vPosition.x += Time.deltaTime * fSpeed;
                 }
-                playerMoveAnimation.HandleWalk(180);
+                playerMoveAnimation.HandleWalk(0);
 
             }
 
