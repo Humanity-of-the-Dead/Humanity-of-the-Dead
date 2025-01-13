@@ -2736,6 +2736,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDatas.walk
+      value: 
+      objectReference: {fileID: 11400000, guid: ec962bc88a02d70429ef611b231b5e38, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDatas.playerLower
+      value: 
+      objectReference: {fileID: 11400000, guid: aa05b8f6075e3ab43b279f1352aa56c2, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDatas.playerUpper
+      value: 
+      objectReference: {fileID: 11400000, guid: f576e3c5f7acada4d9403d71bce716e3, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDatas.policeLower
+      value: 
+      objectReference: {fileID: 11400000, guid: aa05b8f6075e3ab43b279f1352aa56c2, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDatas.policeUpper
+      value: 
+      objectReference: {fileID: 11400000, guid: 3712727c393e03d4fa3bee2b8c8f1272, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
