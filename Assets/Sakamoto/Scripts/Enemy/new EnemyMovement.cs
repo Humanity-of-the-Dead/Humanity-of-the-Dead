@@ -32,9 +32,8 @@ public class newEnemyMovement : EnemyAttack
     EnemyState enemystate;
 
     private bool movingToPointB = false; // 進行方向
-    private Transform player; // プレイヤーの位置
+    private PlayerControl player; // プレイヤーの位置
 
-    public GameMgr gamestate;
 
     private float timer;
     [SerializeField] float waitTime; //攻撃後の後隙
@@ -42,10 +41,10 @@ public class newEnemyMovement : EnemyAttack
     void Start()
     {
         // プレイヤーを探すやつ
-        player = GameObject.Find("Player Variant").gameObject.transform;
+        player = GameObject.Find("Player Variant").gameObject.GetComponent<PlayerControl>();
         scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
-        pointA = this.transform.position.x + moveAbs;
-        pointB = this.transform.position.x - moveAbs;
+        pointA = transform.position.x + moveAbs;
+        pointB = transform.position.x - moveAbs;
 
         if(upperpart.sPartsName== "警察の上半身")
         {
@@ -56,7 +55,7 @@ public class newEnemyMovement : EnemyAttack
     void Update()
     {
         // プレイヤーとの距離を計算
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         switch (GameMgr.GetState())
         {
             case GameState.Main:
@@ -73,7 +72,7 @@ public class newEnemyMovement : EnemyAttack
                         {
                             // いつもの挙動
                             float Target = movingToPointB ? pointB : pointA;
-                            Vector3 target = new Vector3(Target, this.transform.position.y, this.transform.position.z);
+                            Vector3 target = new Vector3(Target, transform.position.y, transform.position.z);
                             MoveTowards(target, speed);
 
                             // 敵が折り返し地点に到達したかどうか判断
@@ -88,7 +87,7 @@ public class newEnemyMovement : EnemyAttack
                         break;
                     case EnemyState.walk:
                         // プレイヤーを追跡
-                        MoveTowards(player.position, chaseSpeed);
+                        MoveTowards(player.transform.position, chaseSpeed);
                         if(PlayerPositionFromEnemy() != movingToPointB)
                         {
                             if (movingToPointB == true) moveAnimation.RightMove();
@@ -137,9 +136,9 @@ public class newEnemyMovement : EnemyAttack
                                         Vector2 ShootMoveBector = new Vector2(0, 0);
                                         //子のplayerRCのローテーションYを持ってくる
                                         // y = 0のときは右向き、0 y = 180のときは左向き
-                                        Debug.Log(this.gameObject.transform.GetChild(0).
+                                        Debug.Log(gameObject.transform.GetChild(0).
                                             gameObject.transform.eulerAngles.y);
-                                        if (this.gameObject.transform.GetChild(0).
+                                        if (gameObject.transform.GetChild(0).
                                                 gameObject.transform.eulerAngles.y ==180)
                                         {
                                             ShootMoveBector.x = -1;
@@ -150,7 +149,7 @@ public class newEnemyMovement : EnemyAttack
                                         }
 
                                         Debug.Log(ShootMoveBector);
-                                        Gun.Shoot(ShootMoveBector, this.transform);
+                                        Gun.Shoot(ShootMoveBector, transform);
                                         //警察官の上半身で攻撃するSEを鳴らす
                                         MultiAudio.ins.PlaySEByName(
                                             "SE_policeofficer_attack_upper");
@@ -287,7 +286,7 @@ public class newEnemyMovement : EnemyAttack
     //PlayerPositionFromEnemy右向いてたら＋、左向いてたらー
     bool PlayerPositionFromEnemy() 
     {
-        float Direction = player.position.x - this.gameObject.transform.position.x;
+        float Direction = player.transform.position.x - gameObject.transform.position.x;
         if (Direction < 0)
         {
             return true;
