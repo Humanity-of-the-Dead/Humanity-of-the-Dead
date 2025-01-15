@@ -2,37 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.UIElements.ToolbarMenu;
 
 public class EnemySpooner : MonoBehaviour
 {
-    [SerializeField] GameObject goEnemyObject;
-    PlayerParameter playerParameter;
-    [SerializeField] PlayerControl playerControl;
-    [SerializeField] GameMgr gameMgr;
+    [SerializeField] private GameObject goEnemyObject;
+    [SerializeField] private PlayerControl playerControl;
 
-    [SerializeField] List<GameObject> liEnemyList;
+    [SerializeField] private List<GameObject> liEnemyList;
 
     [Header("敵がスポーンする場所のランダムオフセット範囲")]
     [SerializeField] private float randomOffsetXRange = 2f;
 
-    [SerializeField] GameObject goMarker;
-    float fTimer;
+    //[SerializeField] GameObject goMarker;
+    private float fTimer;
     [Header("何秒後に敵が出るか")]
 
-    [SerializeField] float fTimerMax;
+    [SerializeField] private float fTimerMax;
     [Header("各スポナーから出る敵の最大数")]
 
-    [SerializeField] float fEnemyMax;
+    [SerializeField] private float fEnemyMax;
 
     private void Start()
     {
-        playerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
-        Debug.Log(playerParameter + "が代入されました");
+
         Debug.Log(playerControl);
         createEnemy();
         fTimer = 0;
-        goMarker.SetActive(false);
     }
 
     void Update()
@@ -66,7 +61,7 @@ public class EnemySpooner : MonoBehaviour
     // プレイヤーが範囲内かつ右側にいるかを確認
     private bool IsPlayerInRange()
     {
-        float distance = Vector2.Distance(this.transform.position, playerControl.transform.position);
+        float distance = Vector2.Distance(transform.position, playerControl.transform.position);
         float positionDifference = this.transform.position.x - playerControl.transform.position.x;
         return distance < 20 && positionDifference > 0;
     }
@@ -85,21 +80,18 @@ public class EnemySpooner : MonoBehaviour
     }
 
     // エネミーの生成
-    void createEnemy()
+    private void createEnemy()
     {
         GameObject newEnemy = Instantiate(goEnemyObject);
         Vector3 randomOffset = GenerateRandomSpawnOffset();
-        newEnemy.transform.position = this.transform.position + randomOffset;
+        newEnemy.transform.position = transform.position + randomOffset;
 
         // グローバルに登録成功したらローカルリストにも追加
         if (GlobalEnemyManager.Instance.AddEnemy(newEnemy))
         {
             liEnemyList.Add(newEnemy);
 
-            newEnemy.GetComponent<newEnemyParameters>().playerParameter= this.playerParameter;
-            newEnemy.GetComponent<newEnemyParameters>().playerControl = playerControl;
-            newEnemy.GetComponent<newEnemyMovement>().scPlayerParameter = this.playerParameter;
-            newEnemy.GetComponent<newEnemyMovement>().gamestate = gameMgr;
+            newEnemy.GetComponent<newEnemyParameters>().playerControl = playerControl;//???
             playerControl.AddListItem(newEnemy);
         }
         else
@@ -114,7 +106,7 @@ public class EnemySpooner : MonoBehaviour
             GlobalEnemyManager.Instance.allEnemies.RemoveAll(GlobalEnemyManager.Instance.AddEnemy);
         }
     }
-    public Vector3 GenerateRandomSpawnOffset()
+    private Vector3 GenerateRandomSpawnOffset()
     {
         return new Vector3(
             Random.Range(-randomOffsetXRange, randomOffsetXRange),

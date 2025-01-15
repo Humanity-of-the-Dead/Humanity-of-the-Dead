@@ -4,14 +4,14 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     //モーションアニメスクリプト
-    [SerializeField] private PlayerMoveAnimation playerMoveAnimation;
+ private PlayerMoveAnimation playerMoveAnimation;
     // キャラクターパーツ (SpriteRenderer)
     [Header("キャラクターパーツ")]
     [SerializeField] private CharacterSprites characterSprites;
     //ゲームマネージャー
 
 
-    private Rigidbody2D rigidbody2D;
+    //private Rigidbody2D rigidbody2D;
     [Header("移動スピード")]
     [SerializeField] private float fSpeed;
     [Header("ジャンプ力")]
@@ -32,12 +32,10 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private List<GameObject> liObj;
     //[SerializeField] GameObject[] goObj;
 
-    //プレイヤーパラメーターの取得
-    private PlayerParameter playerParameter;
+   
 
 
-
-    [SerializeField] private Gun Gun;
+    private Gun Gun;
     //拳銃のショットフラグ
     private bool bShootFlag;
     void Start()
@@ -47,11 +45,9 @@ public class PlayerControl : MonoBehaviour
         //これダメな奴
         //playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
         //これいいやつ
-        playerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
         playerMoveAnimation = GetComponent<PlayerMoveAnimation>();
         Gun = GetComponent<Gun>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
-
+        
         // カメラの高さ（orthographicSize）はカメラの中央から上下の距離を表す
         fCameraHeight = 2f * goCamera.orthographicSize;
 
@@ -66,7 +62,7 @@ public class PlayerControl : MonoBehaviour
         //プレイヤーのY座標が8.0を超えたらリジッドボディのフォースを0にする
         if (8.0f < transform.position.y)
         {
-            rigidbody2D.velocity = new Vector2(0.0f, -1);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -1);
         }
         UpdateTimers();
         switch (GameMgr.GetState())
@@ -112,7 +108,7 @@ public class PlayerControl : MonoBehaviour
                 if (vPosFromCame.x > -fCameraWidth / 2)
                 {
                     vPosition.x -= Time.deltaTime * fSpeed;
-                  
+
                 }
                 playerMoveAnimation.HandleWalk(180);
             }
@@ -131,7 +127,7 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W) && Jmpconsecutive < 1)
             {
-                rigidbody2D.AddForce(transform.up * fJmpPower);
+                GetComponent <Rigidbody2D>().AddForce(transform.up * fJmpPower);
                 MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
                 bJump = true;
                 Jmpconsecutive++;
@@ -155,7 +151,7 @@ public class PlayerControl : MonoBehaviour
 
         //体が回転しないようにするのオイラーを０で設定すればできる
         //自分のtransformを取得
-       
+
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         transform.position = vPosition;
 
@@ -170,9 +166,10 @@ public class PlayerControl : MonoBehaviour
             //上半身攻撃
             if (Input.GetKeyDown(KeyCode.I))
             {
+                
                 playerMoveAnimation.PantieStart();
                 #endregion
-                switch (playerParameter.UpperData.upperAttack)
+                switch (PlayerParameter.Instance.UpperData.upperAttack)
                 {
                     case UpperAttack.NORMAL:
                         if (MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay)
@@ -225,7 +222,7 @@ public class PlayerControl : MonoBehaviour
                         break;
                 }
 
-                if (playerParameter.UpperData.sPartsName == "ボスの上半身")
+                if (PlayerParameter.Instance.UpperData.sPartsName == "ボスの上半身")
                 {
                     MultiAudio.ins.PlaySEByName("SE_lastboss_attack_upper");
                 }
@@ -235,7 +232,7 @@ public class PlayerControl : MonoBehaviour
                     //Debug.Log(liObj[i].gameObject.transform.position);
                     //Debug.Log(playerParameter.UpperData.AttackArea);
                     //仮引数
-                    UpperBodyAttack(i, liObj[i].transform.position, playerParameter.UpperData.AttackArea, playerParameter.UpperData.iPartAttack);
+                    UpperBodyAttack(i, liObj[i].transform.position, PlayerParameter.Instance.UpperData.AttackArea, PlayerParameter.Instance.UpperData.iPartAttack);
                 }
             }
             //下半身攻撃
@@ -244,7 +241,7 @@ public class PlayerControl : MonoBehaviour
                 #region 山品変更
                 playerMoveAnimation.KickStart();
                 #endregion
-                switch (playerParameter.LowerData.lowerAttack)
+                switch (PlayerParameter.Instance.LowerData.lowerAttack)
                 {
                     case LowerAttack.NORMAL:
                         if (MultiAudio.ins.seSource.GetComponent<SoundCoolTime>().canPlay)
@@ -275,7 +272,7 @@ public class PlayerControl : MonoBehaviour
                 for (int i = 0; i < liObj.Count; i++)
                 {
                     //仮引数
-                    LowerBodyAttack(i, liObj[i].transform.position, playerParameter.LowerData.AttackArea, playerParameter.LowerData.iPartAttack);
+                    LowerBodyAttack(i, liObj[i].transform.position, PlayerParameter.Instance.LowerData.AttackArea, PlayerParameter.Instance.LowerData.iPartAttack);
                 }
             }
         }
@@ -324,12 +321,19 @@ public class PlayerControl : MonoBehaviour
     //上半身攻撃
     public void UpperBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
+        IDamageable damageable = liObj[EnemyNum].GetComponent<IDamageable>();
+
         float fAttackReach = Vector3.Distance(vTargetPos, transform.position);
         if (fAttackReach < fReach)
         {
-
-            liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(iDamage, 0);
-
+            if (damageable != null)
+            {
+                damageable.TakeDamage(iDamage, 0);
+            }
+            else
+            {
+                Debug.LogError(damageable.ToString());
+            }
             Debug.Log("上半身攻撃成功");
 
         }
@@ -341,10 +345,19 @@ public class PlayerControl : MonoBehaviour
     //下半身攻撃
     public void LowerBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
+        IDamageable damageable = liObj[EnemyNum].GetComponent<IDamageable>();
+
         float fAttackReach = Vector3.Distance(vTargetPos, transform.position);
         if (fAttackReach < fReach)
         {
-            liObj[EnemyNum].GetComponent<newEnemyParameters>().TakeDamage(iDamage, 1);
+            if (damageable != null)
+            {
+                damageable.TakeDamage(iDamage, 1);
+            }
+            else
+            {
+                Debug.LogError(damageable.ToString());  
+            }
             Debug.Log("下半身攻撃成功");
         }
         else
@@ -353,7 +366,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    
+
     public void AddListItem(GameObject obj) => liObj.Add(obj);
     public void RemoveListItem(GameObject obj) => liObj.Remove(obj);
 
@@ -367,11 +380,11 @@ public class PlayerControl : MonoBehaviour
         {
             if (0 > transform.position.y - collision.transform.position.y)
             {
-                playerParameter.UpperHP -= 1;
+                PlayerParameter.Instance.UpperHP -= 1;
             }
             else
             {
-                playerParameter.LowerHP -= 1;
+                PlayerParameter.Instance.LowerHP -= 1;
             }
         }
 

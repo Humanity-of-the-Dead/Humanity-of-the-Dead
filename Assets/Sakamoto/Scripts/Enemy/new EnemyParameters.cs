@@ -1,11 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class newEnemyParameters : MonoBehaviour
+public class newEnemyParameters : CharacterStats
 {
     //部位の耐久値を設定できる
     [SerializeField]
@@ -37,20 +34,19 @@ public class newEnemyParameters : MonoBehaviour
     [SerializeField]
     private GameObject preLowerPart;
 
-    GameObject drop;
+    private GameObject drop;//???
 
-    //プレイヤーパラメータ-
-    public PlayerParameter playerParameter;
+   
     //プレイヤーコントローラ
-    public PlayerControl playerControl; 
+    public PlayerControl playerControl;
 
     //ボスフラグ
     [SerializeField]
-    bool Boss;
+   private bool Boss;
 
     //クリアテキスト
     [SerializeField]
-    GameObject textBox;
+  private  GameObject textBox;
 
 
     //敵のHPゲージ関連
@@ -84,15 +80,7 @@ public class newEnemyParameters : MonoBehaviour
     private float hpBarDestory = 0.3f;
     //private Transform player; // プレイヤーの位置
 
-    //ヒットエフェクト
-    [SerializeField] GameObject hitGameObject;
-    //エフェクトの出現範囲
-    //上半身
-    [SerializeField] float upperEffectXMin, upperEffectXMax, upperEffectYMin, upperEffectYMax;
-
-    //下半身
-    [SerializeField] float lowerEffectXMin, lowerEffectXMax, lowerEffectYMin, lowerEffectYMax;
-    //\エフェクト・・・
+  
 
     private void Start()
     {
@@ -107,9 +95,8 @@ public class newEnemyParameters : MonoBehaviour
         {
             Debug.LogWarning("HPBarContainerがnull");
         }
-        playerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
 
-        playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();    
+        playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         Debug.Log(playerControl);
 
     }
@@ -148,7 +135,7 @@ public class newEnemyParameters : MonoBehaviour
             playerControl.RemoveListItem(this.gameObject);
             //Debug.Log("下半身が破壊された");
             //Drop(Lowerbodypart, true);
-            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true)) ;
+            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true));
 
         }
         //if (GameMgr.GetState() == GameState.ShowText&&!Boss)
@@ -163,15 +150,17 @@ public class newEnemyParameters : MonoBehaviour
     //body : 0->上半身にダメージ
     //body : 1->下半身にダメージ
 
-    public void TakeDamage(int damage, int body = 0)
+    public override void TakeDamage(float damage, int body = 0)
     {
         //HPが減る仕組み
         //damageはテスト用の関数
         if (body == 0)
         {
             //上半身のHPを減らす
-            UpperHP -= damage;
+            UpperHP -= (int)damage;
             ShowHitEffects(body);
+            Debug.Log(hitGameObject);
+
             UpdateHPBar(UpperHPBar, UpperHP, MaxUpperHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
@@ -183,8 +172,9 @@ public class newEnemyParameters : MonoBehaviour
         if (body == 1)
         {
             //下半身のHPを減らす
-            LowerHP -= damage;
+            LowerHP -= (int)damage;
             ShowHitEffects(body);
+            Debug.Log(hitGameObject);
             UpdateHPBar(LowerHPBar, LowerHP, MaxLowerHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
@@ -193,16 +183,16 @@ public class newEnemyParameters : MonoBehaviour
         }
     }
     //敵のHPバーを変更
-    private void UpdateHPBar(Image hpBarMask, int currentHP, int maxHP)
+    private void UpdateHPBar(Image hpBarMask, float currentHP, float maxHP)
     {
         if (hpBarMask != null)
         {
             // Fill Amountを現在のHP比率に更新
-            hpBarMask.fillAmount = (float)currentHP / maxHP;
+            hpBarMask.fillAmount = currentHP / maxHP;
         }
     }
     //攻撃がヒットしたエフェクト(オブジェクト)を出す
-    void ShowHitEffects(int body)
+    public override void ShowHitEffects(int body)
     {
         //このオブジェクトの座標
         Vector2 tihsVec2 = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
@@ -235,14 +225,7 @@ public class newEnemyParameters : MonoBehaviour
         }
     }
 
-    void ShowDeathImage()
-    {
-        ////多分ドロップ画像設定するとこ
-        //if (deathImage != null)
-        //{
-        //    deathImage.enabled = true;
-        //}
-    }
+
     private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
     {
         if (hpBar != null)
@@ -276,9 +259,7 @@ public class newEnemyParameters : MonoBehaviour
         //生成したパーツを自身の場所に持ってくる
         drop.transform.position = this.transform.position;
 
-        //プレイヤーパラメーターを渡す
-        drop.GetComponent<newDropPart>().getPlayerManegerObjet(playerParameter);
-
+        
         //テキストボックスを渡す
         drop.GetComponent<newDropPart>().getTextBox(textBox);
 

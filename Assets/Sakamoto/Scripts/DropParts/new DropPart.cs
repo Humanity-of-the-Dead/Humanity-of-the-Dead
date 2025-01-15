@@ -4,15 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class newDropPart : MonoBehaviour
+public class newDropPart : MonoBehaviour//???
 {
     //パーツのデータ
     private BodyPartsData partsData;
     ////プレイヤーのmanager
     //PlayerParameter playerManager;
 
-    //プレイヤー情報
-    PlayerParameter scPlayerParameter;
+    
 
     //クリアテキスト
     GameObject goTextBox;
@@ -49,7 +48,7 @@ public class newDropPart : MonoBehaviour
         //Jキーを押したら慰霊する
         if (Input.GetKeyUp(KeyCode.J) && goButton[0].activeSelf == true)
         {
-            scPlayerParameter.comfort(10);
+            PlayerParameter.Instance.comfort(10);
             MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
             Debug.Log(this.transform.position);
             GameObject obj = Instantiate(goGrave);
@@ -65,7 +64,7 @@ public class newDropPart : MonoBehaviour
         //Lキーを押したら移植する
         if (Input.GetKeyDown(KeyCode.L) && goButton[1].activeSelf == true)
         {
-            scPlayerParameter.transplant(partsData);
+            PlayerParameter.Instance.transplant(partsData);
             MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
             if (bBoss)
             {
@@ -83,17 +82,8 @@ public class newDropPart : MonoBehaviour
         this.partsData = partsData;
     }
     //アイテムの画像になる
-    public void setImnage()
-    {
-        Image image = this.GetComponent<Image>();
-        image.sprite = partsData.spBody;
-    }
-
-    public void getPlayerManegerObjet(PlayerParameter scr)
-    {
-        scPlayerParameter = scr;
-    }
-
+   
+   
     //テキストボックスの取得
     public void getTextBox(GameObject obj)
     {
@@ -108,14 +98,14 @@ public class newDropPart : MonoBehaviour
     //移植
     public void getTransplant()
     {
-        scPlayerParameter.transplant(partsData);
+        PlayerParameter.Instance.transplant(partsData);
         Destroy(this.gameObject);
     }
 
     //慰霊
     public void getComfort()
     {
-        scPlayerParameter.comfort(10);
+        PlayerParameter.Instance.comfort(10);
         Destroy(this.gameObject);
     }
   
@@ -133,20 +123,20 @@ public class newDropPart : MonoBehaviour
         //SceneTransitionManager.instance.NextSceneButton(iNextIndex);
 
         //プレイヤーの状態を保持する
-        scPlayerParameter.KeepBodyData();
+        PlayerParameter.Instance        .KeepBodyData();
 
         //現在のシーンの一つ先のシーンのインデックスを取得
         int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
         //ステージが4の時
         if (iNextIndex == 4)
         {
-            scPlayerParameter.DefaultBodyData();
+            PlayerParameter.Instance.DefaultBodyData();
         }
         //インデックスが上限に行ったらタイトルのインデックスを代入
         if (iNextIndex > 4)
         {
             //DontDestroyOnLoadになっているPlayerParameterオブジェクトを削除
-            SceneManager.MoveGameObjectToScene(scPlayerParameter.gameObject, SceneManager.GetActiveScene());
+            SceneManager.MoveGameObjectToScene(PlayerParameter.Instance.gameObject, SceneManager.GetActiveScene());
             iNextIndex = 0;
         }
     }

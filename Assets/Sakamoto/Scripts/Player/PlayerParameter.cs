@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PlayerParameter : MonoBehaviour
+public class PlayerParameter : CharacterStats
 {
 
 
@@ -232,9 +232,9 @@ public class PlayerParameter : MonoBehaviour
         iHumanity = iHumanityMax;
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
+        Debug.Log(hitGameObject);
 
-
-
+       
         playerControl.ChangeUpperBody(UpperData);
         playerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
         playerControl.ChangeUnderBody(LowerData);
@@ -279,13 +279,70 @@ public class PlayerParameter : MonoBehaviour
         // イベントの解除
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public override void TakeDamage(float damage, int body = 0)
     {
-        // シーン遷移後に参照を再取得
-        InitializeReferences();
-        //upperIndex = UpperData;
-        //lowerIndex = LowerData;
-        Debug.Log($"シーン {scene.name} がロードされました");
+        //HPが減る仕組み
+        //damageはテスト用の関数
+        if (body == 0)
+        {
+            //上半身のHPを減らす
+            UpperHP -= damage;
+            ShowHitEffects(body);
+            Debug.Log(hitGameObject);
+            MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+
+            Debug.Log(UpperHP);
+
+        }
+
+        if (body == 1)
+        {
+            //下半身のHPを減らす
+            LowerHP -= damage;
+            ShowHitEffects(body);
+            MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+
+            Debug.Log(LowerHP);
+        }
     }
-}
+    public override void ShowHitEffects(int body)
+    {
+        //このオブジェクトの座標
+        Vector2 tihsVec2 = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
+
+        //エフェクト
+        GameObject obj = null;
+        Debug.Log(hitGameObject);
+        //上半身の場合
+        if (body == 0)
+        {
+            //オブジェクトを出すローカル座標
+            Vector2 effectVec2 = new Vector2(
+                Random.Range(upperEffectXMin, upperEffectXMax),
+                Random.Range(upperEffectYMin, upperEffectYMax));
+
+            //オブジェクトを出す
+            obj = Instantiate(hitGameObject, effectVec2 + tihsVec2, Quaternion.identity);
+            // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
+            // Debug.Log("hit effect");
+        }
+
+        if (body == 1)
+        {
+            //オブジェクトを出すローカル座標
+            Vector2 effectVec2 = new Vector2(
+                Random.Range(lowerEffectXMin, lowerEffectXMax),
+                Random.Range(lowerEffectYMin, lowerEffectYMax));
+
+            obj = Instantiate(hitGameObject, effectVec2 + tihsVec2, Quaternion.identity);
+        }
+    }
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            // シーン遷移後に参照を再取得
+            InitializeReferences();
+            //upperIndex = UpperData;
+            //lowerIndex = LowerData;
+            Debug.Log($"シーン {scene.name} がロードされました");
+        }
+    }

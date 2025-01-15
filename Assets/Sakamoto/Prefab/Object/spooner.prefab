@@ -46,10 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goEnemyObject: {fileID: 8095061270098347470, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-  goPlayerControl: {fileID: 0}
-  gameMgr: {fileID: 0}
-  goTarget: {fileID: 0}
+  playerControl: {fileID: 0}
   liEnemyList: []
+  randomOffsetXRange: 2
   goMarker: {fileID: 362473487132764225}
   fTimerMax: 10
   fEnemyMax: 3
@@ -69,7 +68,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4875571925281089564
 Transform:
   m_ObjectHideFlags: 0

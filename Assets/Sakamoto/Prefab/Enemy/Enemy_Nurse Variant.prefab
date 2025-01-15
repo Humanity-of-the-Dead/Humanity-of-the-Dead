@@ -194,17 +194,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -867265186688299090}
   m_SourcePrefab: {fileID: 100100000, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
---- !u!114 &3064589537072605639 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6025226992257383609, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
-  m_PrefabInstance: {fileID: 8726414722864239998}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7895964506270535315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f24e1091aa6b4ca4dbf1c364e0bc3451, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5054770448404255795 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4556610405929632077, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
@@ -276,18 +265,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b073c2f0de22f2d43b6addd0833e2ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scPlayerParameter: {fileID: 0}
-  moveAbs: 5
-  speed: 2
+  moveDistance: 5
+  normalSpeed: 2
   chaseSpeed: 2
   chaseRange: 5
   attackRange: 2
-  upperpart: {fileID: 11400000, guid: 568b91405d4f26741b8d29462335729e, type: 2}
-  lowerpart: {fileID: 11400000, guid: e5e8b65435755dd41a9ed6106cb2b6ac, type: 2}
-  Juu: {fileID: 0}
-  moveAnimation: {fileID: 3064589537072605639}
-  gamestate: {fileID: 0}
   waitTime: 1
+  upperPart: {fileID: 11400000, guid: 568b91405d4f26741b8d29462335729e, type: 2}
+  lowerPart: {fileID: 11400000, guid: e5e8b65435755dd41a9ed6106cb2b6ac, type: 2}
+  speed: 2
 --- !u!114 &-867265186688299090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,22 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fca371783d21544a6bd076acd24c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpperHP: 4
-  LowerHP: 3
-  damage: 1
-  Upperbodypart: {fileID: 11400000, guid: 568b91405d4f26741b8d29462335729e, type: 2}
-  Lowerbodypart: {fileID: 11400000, guid: e5e8b65435755dd41a9ed6106cb2b6ac, type: 2}
-  preUpperPart: {fileID: 1386206347217571068, guid: cdb3e0e1a208a88419518d5d8eb7bfff, type: 3}
-  preLowerPart: {fileID: 1386206347217571068, guid: 6c5350f547f41ba44b64ddc4087ebb83, type: 3}
-  scPlayerParameter: {fileID: 0}
-  PlayerControl: {fileID: 0}
-  Boss: 0
-  textBox: {fileID: 0}
-  sceneTransitionManager: {fileID: 0}
-  UpperHPBar: {fileID: 6147598366193532570}
-  LowerHPBar: {fileID: 5054770448404255795}
-  HPBarContainer: {fileID: 7497457645813442898}
-  displayRange: 5
   hitGameObject: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
   upperEffectXMin: -0.47
   upperEffectXMax: 0.28
@@ -325,3 +295,18 @@ MonoBehaviour:
   lowerEffectXMax: 0.21
   lowerEffectYMin: -2.8
   lowerEffectYMax: -1
+  UpperHP: 4
+  LowerHP: 3
+  damage: 1
+  Upperbodypart: {fileID: 11400000, guid: 568b91405d4f26741b8d29462335729e, type: 2}
+  Lowerbodypart: {fileID: 11400000, guid: e5e8b65435755dd41a9ed6106cb2b6ac, type: 2}
+  preUpperPart: {fileID: 1386206347217571068, guid: cdb3e0e1a208a88419518d5d8eb7bfff, type: 3}
+  preLowerPart: {fileID: 1386206347217571068, guid: 6c5350f547f41ba44b64ddc4087ebb83, type: 3}
+  playerControl: {fileID: 0}
+  Boss: 0
+  textBox: {fileID: 0}
+  UpperHPBar: {fileID: 6147598366193532570}
+  LowerHPBar: {fileID: 5054770448404255795}
+  HPBarContainer: {fileID: 7497457645813442898}
+  displayRange: 5
+  hpBarDestory: 0.3

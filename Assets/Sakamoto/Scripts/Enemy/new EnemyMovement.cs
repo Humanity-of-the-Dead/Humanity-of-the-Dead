@@ -1,54 +1,56 @@
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 
-public class newEnemyMovement : EnemyAttack
+public class newEnemyMovement : MonoBehaviour
 {
     // 移動を始める場所、終わりの場所、普段の移動速度、追跡中の移動速度、敵の索敵可能な範囲を設定
-    [Header("移動の絶対値")]
-    [SerializeField] float moveAbs;
-    private float pointA;
-    private float pointB;
-    [SerializeField] private float speed = 2f;
-    [SerializeField] private float chaseSpeed = 2f;
+
+    [Header("エネミーの移動関連の設定")]
+    [Tooltip("移動の絶対値")]
+    [SerializeField] private float moveDistance = 5f;
+    [Tooltip("普段の移動速度")]
+    [SerializeField] private float normalSpeed = 2f;
+    [Tooltip("追跡中の移動速度")]
+    [SerializeField] private float chaseSpeed = 4f;
+    [Tooltip("敵の索敵可能な範囲")]
     [SerializeField] private float chaseRange = 5f;
+    [Tooltip("敵の攻撃可能な範囲")]
     [SerializeField] private float attackRange = 2f;
-    [SerializeField] private BodyPartsData upperpart;
-    [SerializeField] private BodyPartsData lowerpart;
-    [SerializeField] private Gun Gun;
+    [Tooltip("敵の攻撃待機時間")]
+    [SerializeField] private float waitTime = 1f;
 
-    
-    [SerializeField] EnemyMoveAnimation moveAnimation;
+    [Header("エネミーの基本設定")]
+    [Tooltip("各キャラクターが持っている上半身パーツ")]
 
-    enum EnemyState
-    {
-        search,
-        walk,
-        attack,
-        wait,
-    }
+    [SerializeField] private BodyPartsData upperPart;
+    [Tooltip("各キャラクターが持っている下半身パーツ")]
 
-    EnemyState enemystate;
+    [SerializeField] private BodyPartsData lowerPart;
+    private Gun gun;
+
+    private EnemyMoveAnimation enemyMoveAnimation;
+
+    private float pointA, pointB;//開始位置と終了位置
+
+
+    private enum EnemyState { Search, Walk, Attack, Wait }
+
+    private EnemyState enemyState = EnemyState.Search;
 
     private bool movingToPointB = false; // 進行方向
     private PlayerControl player; // プレイヤーの位置
-
-
-    private float timer;
-    [SerializeField] float waitTime; //攻撃後の後隙
+    private float timer;//攻撃後の時間
 
     void Start()
     {
         // プレイヤーを探すやつ
         player = GameObject.Find("Player Variant").gameObject.GetComponent<PlayerControl>();
-        scPlayerParameter = GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
-        pointA = transform.position.x + moveAbs;
-        pointB = transform.position.x - moveAbs;
+        enemyMoveAnimation = GetComponent<EnemyMoveAnimation>();
+        pointA = transform.position.x + moveDistance;
+        pointB = transform.position.x - moveDistance;
 
-        if(upperpart.sPartsName== "警察の上半身")
+        if (upperPart.sPartsName == "警察の上半身")
         {
-            Gun = GetComponent<Gun>();  
+            gun = GetComponent<Gun>();
         }
     }
 
@@ -59,78 +61,78 @@ public class newEnemyMovement : EnemyAttack
         switch (GameMgr.GetState())
         {
             case GameState.Main:
-                switch (enemystate)
+                switch (enemyState)
                 {
-                    case EnemyState.search:
-                        moveAnimation.WalkInstance();
+                    case EnemyState.Search:
+                        enemyMoveAnimation.WalkInstance();
                         // プレイヤーが追跡範囲内に入っているかどうか判断
                         if (distanceToPlayer < chaseRange)
                         {
-                            enemystate = EnemyState.walk;
+                            enemyState = EnemyState.Walk;
                         }
                         else
                         {
                             // いつもの挙動
                             float Target = movingToPointB ? pointB : pointA;
                             Vector3 target = new Vector3(Target, transform.position.y, transform.position.z);
-                            MoveTowards(target, speed);
+                            MoveTowards(target, normalSpeed);
 
                             // 敵が折り返し地点に到達したかどうか判断
                             if (transform.position == target)
                             {
                                 // 到達したら回れ右
-                                if (movingToPointB == true) moveAnimation.RightMove();
-                                else moveAnimation.LeftMove();
+                                if (movingToPointB == true) enemyMoveAnimation.RightMove();
+                                else enemyMoveAnimation.LeftMove();
                                 movingToPointB = !movingToPointB;
                             }
                         }
                         break;
-                    case EnemyState.walk:
+                    case EnemyState.Walk:
                         // プレイヤーを追跡
                         MoveTowards(player.transform.position, chaseSpeed);
-                        if(PlayerPositionFromEnemy() != movingToPointB)
+                        if (PlayerPositionFromEnemy() != movingToPointB)
                         {
-                            if (movingToPointB == true) moveAnimation.RightMove();
-                            else moveAnimation.LeftMove();
+                            if (movingToPointB == true) enemyMoveAnimation.RightMove();
+                            else enemyMoveAnimation.LeftMove();
                             movingToPointB = !movingToPointB;
 
                         }
                         // プレイヤーが攻撃範囲内に入っているかどうか判断
-                        if ((distanceToPlayer < upperpart.AttackArea || distanceToPlayer < lowerpart.AttackArea)
+                        if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea)
                             && PlayerPositionFromEnemy() == movingToPointB)
                         {
-                            enemystate = EnemyState.wait;
+                            enemyState = EnemyState.Wait;
                         }
                         break;
-                    case EnemyState.wait:
+                    case EnemyState.Wait:
                         //moveAnimation.Upright();
                         if (timer > waitTime)
                         {
                             timer = 0;
-                            if((distanceToPlayer < upperpart.AttackArea || distanceToPlayer < lowerpart.AttackArea) && PlayerPositionFromEnemy() == movingToPointB)
+                            if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && PlayerPositionFromEnemy() == movingToPointB)
                             {
-                                enemystate = EnemyState.attack;
+                                enemyState = EnemyState.Attack;
                             }
                             else
                             {
-                                enemystate = EnemyState.search;
+                                enemyState = EnemyState.Search;
                             }
                             break;
                         }
                         timer += Time.deltaTime;
                         break;
-                    case EnemyState.attack:
-                        if (distanceToPlayer < upperpart.AttackArea || distanceToPlayer < lowerpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
+                    case EnemyState.Attack:
+                        if (distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
                             //乱数を取得する
                             int num = UnityEngine.Random.Range(0, 2);
                             if (num == 0)
-                            { 
+                            {
                                 //上半身攻撃
-                                moveAnimation.PantieStart();
+                                enemyMoveAnimation.PantieStart();
 
                                 //攻撃者の上半身を確認
-                                switch (upperpart.sPartsName)
+                                switch (upperPart.sPartsName)
                                 {
                                     case "警察の上半身":
                                         Vector2 ShootMoveBector = new Vector2(0, 0);
@@ -139,7 +141,7 @@ public class newEnemyMovement : EnemyAttack
                                         Debug.Log(gameObject.transform.GetChild(0).
                                             gameObject.transform.eulerAngles.y);
                                         if (gameObject.transform.GetChild(0).
-                                                gameObject.transform.eulerAngles.y ==180)
+                                                gameObject.transform.eulerAngles.y == 180)
                                         {
                                             ShootMoveBector.x = -1;
                                         }
@@ -149,53 +151,53 @@ public class newEnemyMovement : EnemyAttack
                                         }
 
                                         Debug.Log(ShootMoveBector);
-                                        Gun.Shoot(ShootMoveBector, transform);
+                                        gun.Shoot(ShootMoveBector, transform);
                                         //警察官の上半身で攻撃するSEを鳴らす
                                         MultiAudio.ins.PlaySEByName(
                                             "SE_policeofficer_attack_upper");
-                                        
+
                                         Debug.Log("警官が上半身で攻撃");
-                                        
+
                                         break;
-                                    
+
                                     case "ボスの上半身":
                                         //ラスボス上半身の攻撃音のSEを鳴らす
                                         MultiAudio.ins.PlaySEByName(
                                             "SE_lastboss_attack_upper");
-                                        
+
                                         Debug.Log("ボスが上半身で攻撃");
-                                        
+
                                         break;
-                                    
+
                                     case "雑魚敵の上半身":
                                         //主人公上半身の攻撃音のSEを鳴らす
                                         MultiAudio.ins.PlaySEByName(
                                             "SE_hero_attack_upper");
-                                        
+
                                         Debug.Log("雑魚敵が上半身で攻撃");
-                                        
+
                                         break;
-                                    
+
                                     case "看護師の上半身":
                                         //ナース上半身の攻撃音のSEを鳴らす
                                         MultiAudio.ins.PlaySEByName(
                                             "SE_nurse_attack_upper");
-                                        
+
                                         Debug.Log("看護師が上半身で攻撃");
-                                        
+
                                         break;
                                 }
 
-                                UpperEnemyAttack((float)upperpart.iPartAttack);
+                                UpperEnemyAttack((float)upperPart.iPartAttack);
                                 //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
-                                }
+                            }
                             if (num == 1)
                             {
                                 //下半身攻撃
-                                moveAnimation.KickStart();
-                                
+                                enemyMoveAnimation.KickStart();
+
                                 //攻撃者の下半身を確認
-                                switch (lowerpart.sPartsName)
+                                switch (lowerPart.sPartsName)
                                 {
                                     case "警察の下半身":
                                         //警察官下半身の攻撃音のSEをならす
@@ -209,16 +211,16 @@ public class newEnemyMovement : EnemyAttack
                                         //ラスボス下半身の攻撃音のSEを鳴らす
                                         MultiAudio.ins.PlaySEByName(
                                             "SE_lastboss_attack_lower");
-                                        
+
                                         Debug.Log("ボスが下半身で攻撃");
-                                        
+
                                         break;
 
                                     case "雑魚敵の下半身":
                                         //主人公下半身の攻撃音のSEを鳴らす
                                         MultiAudio.ins.PlaySEByName(
                                             "SE_hero_attack_lower");
-                                        
+
                                         Debug.Log("雑魚が下半身で攻撃");
                                         break;
 
@@ -226,26 +228,26 @@ public class newEnemyMovement : EnemyAttack
                                         //ナース下半身の攻撃音のSEを鳴らす
                                         MultiAudio.ins.PlaySEByName(
                                             "SE_nurse_attack_lower");
-                                        
+
                                         Debug.Log("看護師が下半身で攻撃");
-                                        
+
                                         break;
                                 }
 
-                                LowerEnemyAttack((float)lowerpart.iPartAttack);
+                                LowerEnemyAttack((float)lowerPart.iPartAttack);
                             }
                         }
-                        if (distanceToPlayer < upperpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
+                        if (distanceToPlayer < upperPart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
-                            moveAnimation.PantieStart();
-                            UpperEnemyAttack((float)upperpart.iPartAttack * 0.1f);
+                            enemyMoveAnimation.PantieStart();
+                            UpperEnemyAttack((float)upperPart.iPartAttack * 0.1f);
                         }
-                        if (distanceToPlayer < lowerpart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
+                        if (distanceToPlayer < lowerPart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
-                            moveAnimation.KickStart();
-                            LowerEnemyAttack((float)lowerpart.iPartAttack * 0.1f);
+                            enemyMoveAnimation.KickStart();
+                            LowerEnemyAttack((float)lowerPart.iPartAttack * 0.1f);
                         }
-                        enemystate = EnemyState.search;
+                        enemyState = EnemyState.Search;
                         //moveAnimation.PlayerPantie();
                         break;
 
@@ -273,18 +275,18 @@ public class newEnemyMovement : EnemyAttack
             Debug.Log("敵同士が衝突し、回れ右");
             if (movingToPointB)
             {
-                moveAnimation.RightMove();
+                enemyMoveAnimation.RightMove();
             }
             else
             {
-                moveAnimation.LeftMove();
+                enemyMoveAnimation.LeftMove();
             }
             movingToPointB = !movingToPointB;
         }
     }
 
     //PlayerPositionFromEnemy右向いてたら＋、左向いてたらー
-    bool PlayerPositionFromEnemy() 
+    bool PlayerPositionFromEnemy()
     {
         float Direction = player.transform.position.x - gameObject.transform.position.x;
         if (Direction < 0)
@@ -294,6 +296,38 @@ public class newEnemyMovement : EnemyAttack
         else
         {
             return false;
+        }
+    }
+
+    void UpperEnemyAttack(float damage)
+    {
+
+        IDamageable damageable = PlayerParameter.Instance.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(damage, 0);
+            Debug.Log(damage);
+
+        }
+        else
+        {
+            Debug.LogError(damageable);
+        }
+
+
+    }
+    void LowerEnemyAttack(float damage)
+    {
+        IDamageable damageable = PlayerParameter.Instance.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(damage, 1);
+            Debug.Log(damage);
+        }
+        else
+        {
+            Debug.LogError(damageable);
+
         }
     }
 }

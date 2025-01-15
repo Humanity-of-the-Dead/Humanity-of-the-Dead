@@ -1316,6 +1316,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f36aef9290bac749a33b7c6de7739be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitGameObject: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
+  upperEffectXMin: -0.47
+  upperEffectXMax: 0.28
+  upperEffectYMin: 1
+  upperEffectYMax: 2.5
+  lowerEffectXMin: -0.33
+  lowerEffectXMax: 0.21
+  lowerEffectYMin: -2.8
+  lowerEffectYMax: -1
   iDownTime: 3
   iHumanityMax: 10
   iUpperHPMax: 500
@@ -5161,8 +5170,7 @@ MonoBehaviour:
   Position:
   - -1
   - 195
-  Player: {fileID: 798675964}
-  GameManager: {fileID: 3111287980887441161}
+  Player: {fileID: 967675288}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
   TextSpeed: 0.1

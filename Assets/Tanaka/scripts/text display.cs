@@ -1,10 +1,8 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
-public class textdisplay: MonoBehaviour
+public class textdisplay : MonoBehaviour
 {
     [System.Serializable]　//2次元配列をインスペクター上で表示するため
 
@@ -15,7 +13,7 @@ public class textdisplay: MonoBehaviour
 
     [SerializeField]
     private TextDataSet[] textDataSet; //構造体の配列
-    
+
     [SerializeField]
     private Text text;  //画面上の文字
 
@@ -26,16 +24,13 @@ public class textdisplay: MonoBehaviour
 
     private int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
 
-    private int n = 0;
 
     [SerializeField]
     private float[] Position;
 
-    [SerializeField]
-    private GameObject Player;
+    private PlayerControl Player;
 
-    [SerializeField]
-    private GameMgr GameManager;
+
 
     [SerializeField]
     private GameObject TextArea; //テキスト表示域
@@ -43,26 +38,27 @@ public class textdisplay: MonoBehaviour
     [SerializeField]
     private string customNewline = "[BR]"; // 改行として扱う文字列を指定
 
-    bool[] Flag;
+    private bool[] Flag;
 
     [Header("次の文字が表示されるまでの時間")]
     [SerializeField]
-    float TextSpeed = 0.1f;
-    
-    GameObject TextImage;
+    private float TextSpeed = 0.1f;
+
 
     private bool isTextFullyDisplayed = false; // 現在のテキストが完全に表示されたか
 
     private Coroutine TypingCroutine;  //コルーチンの管理
 
-    float timer = 0;
+    private float timer = 0;
 
     //ゲームクリアパネル
-    [SerializeField] GameObject GameClear;
+    [SerializeField] private GameObject GameClear;
 
     // Start is called before the first frame update
     void Start()
     {
+        Player =  GameObject.Find("Player Variant").GetComponent<PlayerControl>();
+
         text.text = "";// 初期化
         //Debug.Log(textAsset[0].text);
         //StartCoroutine("TextCoroutine");
@@ -103,7 +99,7 @@ public class textdisplay: MonoBehaviour
                         }
                         else
                         {
-                            if (LoadText < textDataSet[LoadDataIndex].textAsset.Length -1)
+                            if (LoadText < textDataSet[LoadDataIndex].textAsset.Length - 1)
                             {
                                 LoadNextText(); // 次のテキストを表示
                                 UpdateText();
@@ -118,9 +114,9 @@ public class textdisplay: MonoBehaviour
                     }
                 }
                 break;
-        
-        
-                
+
+
+
             case GameState.Clear:
                 if (timer > 1)
                 {
@@ -187,7 +183,7 @@ public class textdisplay: MonoBehaviour
         }
 
         Debug.Log($"UpdateText: LoadText = {LoadText}");
-        if (textDataSet[LoadDataIndex]. textAsset.Length  > LoadText)
+        if (textDataSet[LoadDataIndex].textAsset.Length > LoadText)
         {
             text.text = "";
             isTextFullyDisplayed = false;
@@ -205,12 +201,12 @@ public class textdisplay: MonoBehaviour
 
         if (!string.IsNullOrEmpty(customNewline))
         {
-           currentText = currentText.Replace(customNewline, "\n");
+            currentText = currentText.Replace(customNewline, "\n");
         }
 
         for (int i = 0; i < currentText.Length; i++)   //テキストの中の文字を取得して、文字数を増やしていく
         {
-            string currentChra = currentText.Substring(0,i); //現在の文字を所得する
+            string currentChra = currentText.Substring(0, i); //現在の文字を所得する
             if (string.IsNullOrWhiteSpace(currentChra))
             {
                 text.text = currentChra; //空白部分をそのまま設定する
@@ -218,15 +214,15 @@ public class textdisplay: MonoBehaviour
                 continue;  //次のループへ
 
             }
-                //テキストが進むたびにコルーチンが呼び出される
+            //テキストが進むたびにコルーチンが呼び出される
             //textAsset[LoadText].text.Lengthによって中のテキストデータの文字数の所得
             yield return new WaitForSeconds(TextSpeed); //指定された時間待機する
 
             text.text = currentChra;  //iが増えるたびに文字を一文字ずつ表示していく
-           
+
         }
 
-            isTextFullyDisplayed = true; //全ての文字が表示されたかを示すフラグ
+        isTextFullyDisplayed = true; //全ての文字が表示されたかを示すフラグ
     }
     private void DisplayFullText()
     {

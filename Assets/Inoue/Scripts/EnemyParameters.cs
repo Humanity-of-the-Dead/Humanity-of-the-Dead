@@ -34,8 +34,8 @@ public class sEnemyParameters : MonoBehaviour
 
     GameObject drop;
 
-    //プレイヤーパラメータ-
-    public GameObject PlayerParameter;
+    ////プレイヤーパラメータ-
+    //public GameObject PlayerParameter;
     //プレイヤーコントローラ
     public GameObject PlayerControl;
 
