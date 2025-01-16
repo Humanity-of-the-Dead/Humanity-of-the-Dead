@@ -41,6 +41,10 @@ public class GlobalEnemyManager : MonoBehaviour
         {
             allEnemies.Remove(enemy);
         }
+        else
+        {
+            return;
+        }
     }
 
     // ‘S‘Ì‚Ì“G”‚ğæ“¾
