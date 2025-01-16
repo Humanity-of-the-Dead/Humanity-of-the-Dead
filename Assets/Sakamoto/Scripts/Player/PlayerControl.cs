@@ -26,7 +26,6 @@ public class PlayerControl : MonoBehaviour
     //モーションアニメスクリプト
     private PlayerMoveAnimation playerMoveAnimation;
 
-    //ゲームマネージャー
 
 
     //private Rigidbody2D rigidbody2D;
