@@ -115,7 +115,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くアニメーション
     /// </summary>
-    void PlayerWalk()
+  private void PlayerWalk()
     {
 
         // Quaternion.Euler: 回転軸( x, y, z)
@@ -168,7 +168,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 上半身のモーション
     /// </summary>
-    void PlayerPantie()
+    private void PlayerPantie()
     {
         switch (upperAttack)
         {
@@ -285,7 +285,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// キックのアニメーション
     /// </summary>
-    void PlayerKick()
+    private void PlayerKick()
     {
         switch (downAttack)
         {
@@ -397,7 +397,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-    IEnumerator CallWalkWithDelay()
+    private IEnumerator CallWalkWithDelay()
     {
         for (int i = 0; i < animationDataSet.walk.armForwardRotation.Length; i++)
         {
@@ -415,7 +415,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         isActive = !isActive;
     }
 
-    IEnumerator CallPantieWithDelay()
+    private IEnumerator CallPantieWithDelay()
     {
         for (int i = 0; i < animationDataSet.playerUpper.armForwardRotation.Length - 1; i++)
         {
@@ -432,7 +432,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         isStop = true;
     }
 
-    IEnumerator CallKickWithDelay()
+    private IEnumerator CallKickWithDelay()
     {
         for (int i = 0; i < animationDataSet.playerLower.armForwardRotation.Length - 1; i++)
         {
@@ -452,7 +452,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くことを継続した時、腕の配列の中の値を逆にする
     /// </summary>
-    void ChangeArmAnime()
+    private void ChangeArmAnime()
     {
         //三項演算子(各要素に対して変換操作を行う)
         if (isActive)
@@ -468,7 +468,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くことを開始の関数
     /// </summary>
-    void WalkStart()
+    private void WalkStart()
     {
         timeWalk = timeMax * animationDataSet.playerUpper.armForwardRotation.Length;
         StartCoroutine(CallWalkWithDelay());
@@ -480,7 +480,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     public void PantieStart()
     {
-        AttackWaite();
+        AttackWait();
         StartCoroutine(CallPantieWithDelay());
     }
 
@@ -489,14 +489,14 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     public void KickStart()
     {
-        AttackWaite();
+        AttackWait();
         StartCoroutine(CallKickWithDelay());
     }
 
     /// <summary>
     /// 歩くことの初期化
     /// </summary>
-    void WalkInstance()
+    private void WalkInstance()
     {
         if (timeWalk < 0)
         {
@@ -511,7 +511,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くことを継続したとき
     /// </summary>
-    void KeepWalk()
+    private void KeepWalk()
     {
         // 連続入力されているか
         #region 山品変更
@@ -530,7 +530,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 攻撃の初期化
     /// </summary>
-    void AttackWaite()
+    private void AttackWait()
     {
         timeWalk = timeMax * (animationDataSet.playerUpper.armForwardRotation.Length - 1);
         timeAttack = timeMax * (animationDataSet.playerLower.armForwardRotation.Length - 1);

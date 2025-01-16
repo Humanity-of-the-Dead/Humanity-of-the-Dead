@@ -65,7 +65,7 @@ public class PlayerControl : MonoBehaviour
         //これいいやつ
         playerMoveAnimation = GetComponent<PlayerMoveAnimation>();
         Gun = GetComponent<Gun>();
-
+        mainCamera = FindAnyObjectByType<Camera>();  
         // カメラの高さ（orthographicSize）はカメラの中央から上下の距離を表す
         mainCameraHeight = 2f * mainCamera.orthographicSize;
 

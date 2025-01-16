@@ -63,10 +63,10 @@ public class EnemyMoveAnimation : MonoBehaviour
     private bool isAttack;
 
     // 方向フラグ(右 = false)
-    private bool isDirection;
+    //private bool isDirection;
 
-    // 静止しているか
-    private bool isStop;
+    //// 静止しているか
+    //private bool isStop;
 
     // タイマー
     private float time;
@@ -83,8 +83,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         isMirror = true;
         isActive = false;
         isAttack = false;
-        isDirection = true;
-        isStop = false;
+
         walkLength = walk.armForwardRotation.Length - 1;
         time = 0;
         timeAttack = 0;
@@ -214,13 +213,13 @@ public class EnemyMoveAnimation : MonoBehaviour
                 }
                 break;
         }
-    
+
     }
 
     /// <summary>
     /// 上半身のモーション
     /// </summary>
-    public void PlayerPantie()
+    private void PlayerPantie()
     {
         switch (status)
         {
@@ -308,7 +307,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// <summary>
     /// 下半身のアニメーション
     /// </summary>
-    public void PlayerKick()
+    private void PlayerKick()
     {
         switch (status)
         {
@@ -392,7 +391,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
     }
 
-    IEnumerator CallWalkWithDelay()
+    private IEnumerator CallWalkWithDelay()
     {
         for (int i = 0; i < walk.wholeRotation.Length; i++)
         {
@@ -404,7 +403,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
     }
 
-    IEnumerator CallPantieWithDelay()
+    private IEnumerator CallPantieWithDelay()
     {
         for (int i = 0; i < upper.armForwardRotation.Length; i++)
         {
@@ -418,7 +417,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         isAttack = false;
     }
 
-    IEnumerator CallKickWithDelay()
+    private IEnumerator CallKickWithDelay()
     {
         for (int i = 0; i < lower.armForwardRotation.Length; i++)
         {
@@ -435,10 +434,10 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くことを継続した時、腕の配列の中の値を逆にする
     /// </summary>
-    void ChangeArmAnime()
+    private void ChangeArmAnime()
     {
         // ゾンビではない場合　
-        if (status !=Status.Zombie)
+        if (status != Status.Zombie)
         {
             //三項演算子(各要素に対して変換操作を行う)
             if (isActive)
@@ -455,7 +454,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くことを開始の関数
     /// </summary>
-    void WalkStart()
+    private void WalkStart()
     {
         time = timeMax * walk.armForwardRotation.Length;
         StartCoroutine(CallWalkWithDelay());
@@ -520,7 +519,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
     }
 
-   
+
 
     /// <summary>
     /// 右を向くとき

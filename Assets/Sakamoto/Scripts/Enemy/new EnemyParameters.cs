@@ -5,44 +5,37 @@ using UnityEngine.UI;
 public class newEnemyParameters : CharacterStats
 {
     //部位の耐久値を設定できる
-    [SerializeField]
+    [SerializeField, Header("敵の上半身HP")]
     private int UpperHP;
-
-    [SerializeField]
+    [SerializeField, Header("敵の下半身HP")]
     private int LowerHP;
 
-    //テスト用　敵に与えるダメージを設定できる
-    [SerializeField]
-    private int damage;
-
-    ////ドロップする画像を設定できる
-    //[SerializeField]
-    //private Image deathImage;
-
+  
+  
     //ボディパーツ
-    [SerializeField]
+    [SerializeField, Header("敵の上半身データ")]
     private BodyPartsData Upperbodypart;
 
-    [SerializeField]
+    [SerializeField, Header("敵の下半身データ")]
     private BodyPartsData Lowerbodypart;
 
     //上半身のドロップパーツ
-    [SerializeField]
+    [SerializeField, Header("敵の上半身ドロップパーツ")]
     private GameObject preUpperPart;
 
     //下半身のドロップパーツ
-    [SerializeField]
+    [SerializeField, Header("敵の下半身ドロップパーツ")]
     private GameObject preLowerPart;
 
-    private GameObject drop;//???
 
-   
+    [SerializeField, Header("プレイヤーコントロールのスクリプト代入\n自動で入るため何も入れない")]
+
     //プレイヤーコントローラ
     public PlayerControl playerControl;
 
     //ボスフラグ
-    [SerializeField]
-   private bool Boss;
+    [SerializeField, Header("ボスかどうか、チェックが入っているならボス")]
+    private bool Boss;
 
     //クリアテキスト
     [SerializeField]
@@ -245,6 +238,7 @@ public class newEnemyParameters : CharacterStats
     //デフォルト引数はtrue
     public void Drop(BodyPartsData part, bool typ = true)
     {
+        GameObject drop = null;
         if (typ == true)
         {
             //プレハブをインスタンス化
