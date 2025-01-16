@@ -11,13 +11,13 @@ public class TextDisplay : MonoBehaviour
         public TextAsset[] textAsset;   //メモ帳のファイル(.txt)　配列
     }
 
-    [SerializeField]
+    [SerializeField, Header("テキストデータを設定Element（テキストアセットではない方)が増えると次の場面に変更")]
     private TextDataSet[] textDataSet; //構造体の配列
 
-    [SerializeField]
+    [SerializeField, Header("TextCanvasの中にあるText (Legacy)が代入されていることを確認")]
     private Text text;  //画面上の文字
 
-    [SerializeField]
+    [SerializeField, Header("文字の表示速度")]
     private float TypingSpeed = 1.0f;  //文字の表示速度
 
     private int LoadDataIndex = 0; //今何個目の構造体を読み込んでいるか
@@ -25,14 +25,14 @@ public class TextDisplay : MonoBehaviour
     private int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
 
 
-    [SerializeField]
+    [SerializeField, Header("どこまで行ったらテキストが読めるようになるか")]
     private float[] Position;
 
     private PlayerControl Player;
 
 
 
-    [SerializeField]
+    [SerializeField, Header("TextCanvasの中にあるが読めるようになるか")]
     private GameObject TextArea; //テキスト表示域
 
     [SerializeField]

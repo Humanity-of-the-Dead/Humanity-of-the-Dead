@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class newDropPart : MonoBehaviour//???
+public class newDropPart : MonoBehaviour//
 {
     //パーツのデータ
     private BodyPartsData partsData;
@@ -52,13 +52,13 @@ public class newDropPart : MonoBehaviour//???
             MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
             Debug.Log(this.transform.position);
             GameObject obj = Instantiate(goGrave);
-            obj.transform.position = new Vector3(this.gameObject.transform.position.x,
-                                                        0.5f, this.gameObject.transform.position.z);
+            obj.transform.position = new Vector3(transform.position.x,
+                                                        0.5f, transform.position.z);
             if (bBoss)
             {
                 GameClear();
             }
-            Destroy(this.gameObject);
+            Destroy(gameObject);
 
         }
         //Lキーを押したら移植する
@@ -70,7 +70,7 @@ public class newDropPart : MonoBehaviour//???
             {
                 GameClear();
             }
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -99,14 +99,14 @@ public class newDropPart : MonoBehaviour//???
     public void getTransplant()
     {
         PlayerParameter.Instance.transplant(partsData);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     //慰霊
     public void getComfort()
     {
         PlayerParameter.Instance.comfort(10);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
   
 
@@ -123,7 +123,7 @@ public class newDropPart : MonoBehaviour//???
         //SceneTransitionManager.instance.NextSceneButton(iNextIndex);
 
         //プレイヤーの状態を保持する
-        PlayerParameter.Instance        .KeepBodyData();
+        PlayerParameter.Instance.KeepBodyData();
 
         //現在のシーンの一つ先のシーンのインデックスを取得
         int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
@@ -151,6 +151,7 @@ public class newDropPart : MonoBehaviour//???
         {
             rigidbody2.gravityScale = 0f;
             boxCollider2D.isTrigger = true;
+            
         }
     }
 }

@@ -19,7 +19,7 @@ public class CameraScript : MonoBehaviour
     //Vector2 fTrgPosFromCamera;
 
     //ゲームステート
-    STATE eState = STATE.NONE;
+   private STATE eState = STATE.NONE;
 
     //bool fMoveRight;
     //bool fMoveLeft;
@@ -27,8 +27,7 @@ public class CameraScript : MonoBehaviour
     void Start()
     {
         eState = STATE.NOMAL;
-        //fMoveRight = false;
-        //fMoveLeft = false;
+        goTarget = GameObject.Find("Player Variant");
     }
 
     // Update is called once per frame
