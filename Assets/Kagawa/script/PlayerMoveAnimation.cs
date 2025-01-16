@@ -29,7 +29,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// 変更理由：プレイヤーの最初のイラストのスプライトレンダラーはプレイヤーコントロールが持つべき
     /// </summary>    
 
-    //[Header("全身")] private GameObject playerRc;//プレイヤーのトランスフォームはプレイヤームーブアニメーションと同じオブジェクトのため、transform.position(transform.rotation)でとってこれる
+    [SerializeField, Header("全身")] private GameObject playerRc;
     //アニメーションの配列はアニメーションスクリプト内で完結したいのでプライベート化してシリアライズフィールドを付けることで各種設定できる
     [SerializeField, Header("腕の角度、先に右手")] private GameObject[] arm;
     [SerializeField, Header("太腿の角度、先に右足")] private GameObject[] leg;
@@ -92,7 +92,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     }
 
 
-   
+
     public void HandleWalk(int direction)
     {
         shaft = direction;
@@ -121,7 +121,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
 
         // Quaternion.Euler: 回転軸( x, y, z)
-        transform.rotation = Quaternion.Euler(0, shaft, animationDatas.walk.wholeRotation[walkIndex]);
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, animationDatas.walk.wholeRotation[walkIndex]);
 
         // 腕のアニメーション
         if (arm == null || animationDatas.walk.armForwardRotation == null)

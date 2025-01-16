@@ -122,7 +122,8 @@ public class newEnemyMovement : MonoBehaviour
                         timer += Time.deltaTime;
                         break;
                     case EnemyState.Attack:
-                        if (distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
+                        if (distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea &&
+                            PlayerPositionFromEnemy() == movingToPointB)
                         {
                             //—”‚ðŽæ“¾‚·‚é
                             int num = Random.Range(0, 2);
