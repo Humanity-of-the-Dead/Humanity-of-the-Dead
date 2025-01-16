@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SoundCoolTime : MonoBehaviour
 {
-    [SerializeField] float coolTime;
-    public bool canPlay = true;
-    [SerializeField] float realTime;
+    [SerializeField, Header("音源のクールタイム")] private float coolTime;
+    [SerializeField, Header("音源を流せるかどうか")] public bool canPlay = true;
+    private float realTime;
 
     void Update()
     {

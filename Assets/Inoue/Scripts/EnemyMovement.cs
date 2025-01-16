@@ -102,7 +102,6 @@ public class EnemyMovement : EnemyAttack
                         //moveAnimation.PlayerPantie();
                         break;
                     case EnemyState.wait:
-                        moveAnimation.Upright();
                         Debug.Log("’¼—§");
                         if (timer > waitTime)
                         {

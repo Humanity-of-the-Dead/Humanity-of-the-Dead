@@ -24,58 +24,55 @@ public enum DebugMove
 
 public class EnemyMoveAnimation : MonoBehaviour
 {
-    [Header("敵の種類")] public Status status;
+    [SerializeField, Header("敵の種類")]
+    private Status status;
 
-    [Header("デバッグ用(通常、None)")] public DebugMove debugMoves;
+    [SerializeField, Header("デバッグ用(通常、None)")] private DebugMove debugMoves;
 
-    [Header("全身")] public GameObject playerRc;
-    [SerializeField, Header("腕の角度、先に右手")] GameObject[] arm;
-    [SerializeField, Header("手首の角度、先に右手")] GameObject[] hand;
-    [SerializeField, Header("太腿の角度、先に右足")] GameObject[] leg;
-    [SerializeField, Header("すねの角度、先に右足")] GameObject[] foot;
+    [SerializeField, Header("全身")] private GameObject playerRc;
+    [SerializeField, Header("腕の角度、先に右手")] private GameObject[] arm;
+    [SerializeField, Header("手首の角度、先に右手")] private GameObject[] hand;
+    [SerializeField, Header("太腿の角度、先に右足")] private GameObject[] leg;
+    [SerializeField, Header("すねの角度、先に右足")] private GameObject[] foot;
 
-    [Header("1コマの間隔の時間(歩き)")] public float timeMax;
+    [SerializeField, Header("1コマの間隔の時間(歩き)")] private float timeMax;
 
-    [Header("1コマの間隔の時間(攻撃)")] public float timeAttackMax;
+    [SerializeField, Header("1コマの間隔の時間(攻撃)")] private float timeAttackMax;
 
-    [Header("---歩きのアニメーション---")]
-    public AnimationData walk;
+    [SerializeField, Header("---歩きのアニメーション---")] private AnimationData walk;
 
-    [Header("---上半身のアニメーション---")]
-    public AnimationData upper;
+    [SerializeField, Header("---上半身のアニメーション---")] private AnimationData upper;
 
-    [Header("---下半身のアニメーション---")]
-    public AnimationData lower;
+    [SerializeField, Header("---下半身のアニメーション---")] private AnimationData lower;
 
     //配列の番号
-    int indexNumber;
+    private int indexNumber;
 
     //体の軸
-    int shaft;
+    private int shaft;
 
     //歩くアニメーションの角度の数
-    int walkLength;
-
+    private int walkLength;
     // 値を反転にするフラグ
-    bool isActive;
+    private bool isActive;
 
     // 向いている方向が右を向いているか
-    bool isMirror;
+    private bool isMirror;
 
     // 攻撃中かどうか
-    bool isAttack;
+    private bool isAttack;
 
     // 方向フラグ(右 = false)
-    bool isDirection;
+    private bool isDirection;
 
     // 静止しているか
-    bool isStop;
+    private bool isStop;
 
     // タイマー
-    float time;
+    private float time;
 
     // 攻撃のタイマー
-    float timeAttack;
+    private float timeAttack;
 
 
     private void Start()
@@ -475,7 +472,6 @@ public class EnemyMoveAnimation : MonoBehaviour
             time = timeAttackMax * upper.armForwardRotation.Length * 2;
             timeAttack = timeAttackMax * upper.armForwardRotation.Length;
             StopCoroutine(CallWalkWithDelay());
-            Upright();
             indexNumber = 0;
             StartCoroutine(CallPantieWithDelay());
         }
@@ -492,7 +488,6 @@ public class EnemyMoveAnimation : MonoBehaviour
             time = timeAttackMax * lower.armForwardRotation.Length;
             timeAttack = timeAttackMax * lower.armForwardRotation.Length;
             StopCoroutine(CallWalkWithDelay());
-            Upright();
             indexNumber = 0;
             StartCoroutine(CallKickWithDelay());
         }
@@ -525,13 +520,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 直立する
-    /// </summary>
-    public void Upright()
-    {
-       
-    }
+   
 
     /// <summary>
     /// 右を向くとき
