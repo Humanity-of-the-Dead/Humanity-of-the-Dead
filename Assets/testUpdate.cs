@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class testUpdate : MonoBehaviour
 {
-    [SerializeField] textdisplay textdisplay;
+    [SerializeField] TextDisplay textDisplay;
 
     private void OnEnable()
     {
-        textdisplay.UpdateText();
+        textDisplay.UpdateText();
     }
 }

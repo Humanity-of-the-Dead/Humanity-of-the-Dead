@@ -1286,7 +1286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1658f8705190853438481964782ebc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textdisplay: {fileID: 5351848988657350866}
+  textDisplay: {fileID: 5351848988657350866}
 --- !u!1 &261565240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,6 +2686,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 651877747}
     - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 244809042}
+    - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: footRightSR
       value: 
       objectReference: {fileID: 41816199}
@@ -2750,6 +2754,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ec962bc88a02d70429ef611b231b5e38, type: 2}
     - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDataSet.walk
+      value: 
+      objectReference: {fileID: 11400000, guid: ec962bc88a02d70429ef611b231b5e38, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: animationDatas.nurseLower
       value: 
       objectReference: {fileID: 11400000, guid: ef21a595c3cba254db490f8dfd49a9c1, type: 2}
@@ -2771,6 +2779,30 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: aa05b8f6075e3ab43b279f1352aa56c2, type: 2}
     - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: animationDatas.policeUpper
+      value: 
+      objectReference: {fileID: 11400000, guid: 3712727c393e03d4fa3bee2b8c8f1272, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDataSet.nurseLower
+      value: 
+      objectReference: {fileID: 11400000, guid: ef21a595c3cba254db490f8dfd49a9c1, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDataSet.nurseUpper
+      value: 
+      objectReference: {fileID: 11400000, guid: e7766c1a6f6fc414e9785188e74f2397, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDataSet.playerLower
+      value: 
+      objectReference: {fileID: 11400000, guid: ecfa70eea4c6e214c83dc4f596887b28, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDataSet.playerUpper
+      value: 
+      objectReference: {fileID: 11400000, guid: f576e3c5f7acada4d9403d71bce716e3, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDataSet.policeLower
+      value: 
+      objectReference: {fileID: 11400000, guid: aa05b8f6075e3ab43b279f1352aa56c2, type: 2}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: animationDataSet.policeUpper
       value: 
       objectReference: {fileID: 11400000, guid: 3712727c393e03d4fa3bee2b8c8f1272, type: 2}
     m_RemovedComponents: []
@@ -5170,7 +5202,6 @@ MonoBehaviour:
   Position:
   - -1
   - 195
-  Player: {fileID: 967675288}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
   TextSpeed: 0.1

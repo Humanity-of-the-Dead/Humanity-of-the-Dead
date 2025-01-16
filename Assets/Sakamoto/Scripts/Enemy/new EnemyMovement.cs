@@ -39,11 +39,11 @@ public class newEnemyMovement : MonoBehaviour
     private bool movingToPointB = false; // 進行方向
     private PlayerControl player; // プレイヤーの位置
     private float timer;//攻撃後の時間
-
+    
     void Start()
     {
         // プレイヤーを探すやつ
-        player = GameObject.Find("Player Variant").gameObject.GetComponent<PlayerControl>();
+        player = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         enemyMoveAnimation = GetComponent<EnemyMoveAnimation>();
         pointA = transform.position.x + moveDistance;
         pointB = transform.position.x - moveDistance;
@@ -238,16 +238,7 @@ public class newEnemyMovement : MonoBehaviour
                                 LowerEnemyAttack((float)lowerPart.iPartAttack);
                             }
                         }
-                        if (distanceToPlayer < upperPart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
-                        {
-                            enemyMoveAnimation.PantieStart();
-                            UpperEnemyAttack((float)upperPart.iPartAttack * 0.1f);
-                        }
-                        if (distanceToPlayer < lowerPart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
-                        {
-                            enemyMoveAnimation.KickStart();
-                            LowerEnemyAttack((float)lowerPart.iPartAttack * 0.1f);
-                        }
+                     
                         enemyState = EnemyState.Search;
                         //moveAnimation.PlayerPantie();
                         break;
@@ -300,36 +291,18 @@ public class newEnemyMovement : MonoBehaviour
         }
     }
 
-    void UpperEnemyAttack(float damage)
+    void UpperEnemyAttack(float upperDamage)
     {
 
         IDamageable damageable = PlayerParameter.Instance.GetComponent<IDamageable>();
-        if (damageable != null)
-        {
-            damageable.TakeDamage(damage, 0);
-            Debug.Log(damage);
-
-        }
-        else
-        {
-            Debug.LogError(damageable);
-        }
+        damageable?.TakeDamage(upperDamage, 0);
 
 
     }
-    void LowerEnemyAttack(float damage)
+    void LowerEnemyAttack(float lowerDamage)
     {
         IDamageable damageable = PlayerParameter.Instance.GetComponent<IDamageable>();
-        if (damageable != null)
-        {
-            damageable.TakeDamage(damage, 1);
-            Debug.Log(damage);
-        }
-        else
-        {
-            Debug.LogError(damageable);
-
-        }
+        damageable?.TakeDamage(lowerDamage, 1);
     }
 }
 // プレイヤーに向かって移動

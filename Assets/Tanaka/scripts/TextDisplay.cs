@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class textdisplay : MonoBehaviour
+public class TextDisplay : MonoBehaviour
 {
     [System.Serializable]　//2次元配列をインスペクター上で表示するため
 

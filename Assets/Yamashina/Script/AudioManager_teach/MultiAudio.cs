@@ -1,5 +1,4 @@
-﻿#define DEBUG
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -22,6 +21,7 @@ public class MultiAudio : MonoBehaviour
     private Dictionary<string, AudioClip> BGMClipDictionary;
     private Dictionary<string, AudioClip> UIClipDictionary; // Dictionary for UI clips
 
+    private SoundCoolTime seCoolTime;
     // Singleton
     public static MultiAudio ins;
 
@@ -47,7 +47,11 @@ public class MultiAudio : MonoBehaviour
 
         // Assign mixer groups to the audio sources
         if (bgmSource != null) bgmSource.outputAudioMixerGroup = bgmMixerGroup;
-        if (seSource != null) seSource.outputAudioMixerGroup = seMixerGroup;
+        if (seSource != null)
+        {
+            seSource.outputAudioMixerGroup = seMixerGroup;
+            seCoolTime = seSource.GetComponent<SoundCoolTime>();
+        }
         if (uiSource != null) uiSource.outputAudioMixerGroup = uiMixerGroup; // Assign UI Mixer Group
 
         // Initialize dictionaries for easy access by name
@@ -124,10 +128,15 @@ public class MultiAudio : MonoBehaviour
 
     private void PlaySE(AudioClip clip)
     {
+        if (!seCoolTime.canPlay)
+        {
+            return;
+        }
         if (clip != null)
         {
             seSource.clip = clip;
             seSource.PlayOneShot(seSource.clip);
+            seCoolTime.canPlay = false;
             Debug.Log("Playing SE: " + clip.name);
         }
         else
