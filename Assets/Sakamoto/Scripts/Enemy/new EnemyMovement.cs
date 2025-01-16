@@ -125,7 +125,7 @@ public class newEnemyMovement : MonoBehaviour
                         if (distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea && PlayerPositionFromEnemy() == movingToPointB)
                         {
                             //乱数を取得する
-                            int num = UnityEngine.Random.Range(0, 2);
+                            int num = Random.Range(0, 2);
                             if (num == 0)
                             {
                                 //上半身攻撃
@@ -138,10 +138,10 @@ public class newEnemyMovement : MonoBehaviour
                                         Vector2 ShootMoveBector = new Vector2(0, 0);
                                         //子のplayerRCのローテーションYを持ってくる
                                         // y = 0のときは右向き、0 y = 180のときは左向き
-                                        Debug.Log(gameObject.transform.GetChild(0).
-                                            gameObject.transform.eulerAngles.y);
-                                        if (gameObject.transform.GetChild(0).
-                                                gameObject.transform.eulerAngles.y == 180)
+                                        Debug.Log(transform.GetChild(0).
+                                            transform.eulerAngles.y);
+                                        if (transform.GetChild(0).
+                                                transform.eulerAngles.y == 180)
                                         {
                                             ShootMoveBector.x = -1;
                                         }
