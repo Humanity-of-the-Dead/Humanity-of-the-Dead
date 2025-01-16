@@ -2602,28 +2602,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: enemyObject.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: enemyObject.Array.data[0]
       value: 
       objectReference: {fileID: 1655271198}
     - target: {fileID: 8462856283274023862, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: m_Name
       value: Player Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: timeMax
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: timeWalk
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
