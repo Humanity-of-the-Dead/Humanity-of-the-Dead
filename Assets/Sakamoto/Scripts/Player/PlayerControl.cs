@@ -47,7 +47,8 @@ public class PlayerControl : MonoBehaviour
     private float mainCameraWidth;
 
     //ターゲット
-    private List<GameObject> enemyObject = new List<GameObject>();
+    [SerializeField, Header("ボスのオブジェクトを入れる、ボス以外はスポナーが勝手に生成")]
+    private List<GameObject> enemyObject;
     //[SerializeField] GameObject[] goObj;
 
 
@@ -65,7 +66,7 @@ public class PlayerControl : MonoBehaviour
         //これいいやつ
         playerMoveAnimation = GetComponent<PlayerMoveAnimation>();
         Gun = GetComponent<Gun>();
-        mainCamera = FindAnyObjectByType<Camera>();  
+        mainCamera = FindAnyObjectByType<Camera>();
         // カメラの高さ（orthographicSize）はカメラの中央から上下の距離を表す
         mainCameraHeight = 2f * mainCamera.orthographicSize;
 

@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1658f8705190853438481964782ebc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textdisplay: {fileID: 5351848988657350866}
+  textDisplay: {fileID: 0}
 --- !u!1 &261565240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,12 +1140,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f36aef9290bac749a33b7c6de7739be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scGameMgr: {fileID: 4664960667363613010}
+  hitGameObject: {fileID: 0}
+  upperEffectXMin: 0
+  upperEffectXMax: 0
+  upperEffectYMin: 0
+  upperEffectYMax: 0
+  lowerEffectXMin: 0
+  lowerEffectXMax: 0
+  lowerEffectYMin: 0
+  lowerEffectYMax: 0
   iDownTime: 1
   iHumanityMax: 100
   iUpperHPMax: 30
   iLowerHPMax: 30
-  goPlayer: {fileID: 2023898247}
+  playerControl: {fileID: 0}
   UpperData: {fileID: 11400000, guid: fcc706bf8f9cb204382c81235b20a96a, type: 2}
   LowerData: {fileID: 11400000, guid: dfc091647e8e229438c5335ae549e2ac, type: 2}
 --- !u!4 &261565242
@@ -5063,6 +5071,14 @@ PrefabInstance:
       propertyPath: liObj.Array.data[0]
       value: 
       objectReference: {fileID: 148114103}
+    - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: enemyObject.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: enemyObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 148114103}
     - target: {fileID: 8462856283274023862, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: m_Name
       value: Player Variant
@@ -5267,8 +5283,6 @@ MonoBehaviour:
   Position:
   - -1
   - 213
-  Player: {fileID: 2023898247}
-  GameManager: {fileID: 3111287980887441161}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
   TextSpeed: 0.1
