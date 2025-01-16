@@ -14,7 +14,7 @@ public class newDropPart : MonoBehaviour//???
     
 
     //クリアテキスト
-    GameObject goTextBox;
+    //GameObject goTextBox;
 
     //ボスフラグ
     bool bBoss;
@@ -85,10 +85,10 @@ public class newDropPart : MonoBehaviour//???
    
    
     //テキストボックスの取得
-    public void getTextBox(GameObject obj)
-    {
-        goTextBox = obj;
-    }
+    //public void getTextBox(GameObject obj)
+    //{
+    //    goTextBox = obj;
+    //}
     //ボスフラグ
     public void getBossf(bool flag)
     {
@@ -117,7 +117,7 @@ public class newDropPart : MonoBehaviour//???
         //goPanel.SetActive(true);
         //goTextBox.GetComponent<GoalScript>().showText();
         //テキストボックスの表示
-        goTextBox.SetActive(true);
+        //goTextBox.SetActive(true);
         //GameStateをAfterBOssに切り替える
         GameMgr.ChangeState(GameState.AfterBOss);
         //SceneTransitionManager.instance.NextSceneButton(iNextIndex);

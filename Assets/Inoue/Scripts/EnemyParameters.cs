@@ -43,9 +43,9 @@ public class sEnemyParameters : MonoBehaviour
     [SerializeField]
     bool Boss;
 
-    //クリアテキスト
-    [SerializeField]
-    GameObject textBox;
+    ////クリアテキスト
+    //[SerializeField]
+    //GameObject textBox;
 
 
     //エネミーが銃を撃つかどうかを示すフラグ
@@ -122,7 +122,7 @@ public class sEnemyParameters : MonoBehaviour
         //drop.GetComponent<newDropPart>().getPlayerManegerObjet(PlayerParameter);
 
         // テキストボックスを渡す
-        drop.GetComponent<newDropPart>().getTextBox(textBox);
+        //drop.GetComponent<newDropPart>().getTextBox(textBox);
 
         // ボスフラグを渡す
         drop.GetComponent<newDropPart>().getBossf(Boss);

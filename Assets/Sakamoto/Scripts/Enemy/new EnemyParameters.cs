@@ -37,9 +37,9 @@ public class newEnemyParameters : CharacterStats
     [SerializeField, Header("ボスかどうか、チェックが入っているならボス")]
     private bool Boss;
 
-    //クリアテキスト
-    [SerializeField]
-  private  GameObject textBox;
+  //  //クリアテキスト
+  //  [SerializeField]
+  //private  GameObject textBox;
 
 
     //敵のHPゲージ関連
@@ -255,7 +255,7 @@ public class newEnemyParameters : CharacterStats
 
         
         //テキストボックスを渡す
-        drop.GetComponent<newDropPart>().getTextBox(textBox);
+        //drop.GetComponent<newDropPart>().getTextBox(textBox);
 
         //ボスフラグを渡す
         drop.GetComponent<newDropPart>().getBossf(Boss);

@@ -139,6 +139,7 @@ public class TextDisplay : MonoBehaviour
 
                 break;
             case GameState.AfterBOss:
+                TextArea.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     if (!isTextFullyDisplayed)

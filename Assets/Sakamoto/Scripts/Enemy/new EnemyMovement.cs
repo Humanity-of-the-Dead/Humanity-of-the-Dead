@@ -264,14 +264,16 @@ public class newEnemyMovement : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Floor"))
         {
+            Debug.Log($"Collided with: {collision.gameObject.name}, Tag: {collision.gameObject.tag}");
+
             Debug.Log("ìGìØémÇ™è’ìÀÇµÅAâÒÇÍâE");
             if (movingToPointB)
             {
-                enemyMoveAnimation.RightMove();
+                enemyMoveAnimation?.RightMove();
             }
             else
             {
-                enemyMoveAnimation.LeftMove();
+                enemyMoveAnimation?.LeftMove();
             }
             movingToPointB = !movingToPointB;
         }

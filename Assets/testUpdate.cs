@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class testUpdate : MonoBehaviour
 {
-    [SerializeField] TextDisplay textDisplay;
+    //[SerializeField] TextDisplay textDisplay;
 
-    private void OnEnable()
-    {
-        textDisplay.UpdateText();
-    }
+    //private void Start()
+    //{
+    //    textDisplay =FindAnyObjectByType<TextDisplay>();    
+    //}
+    //private void OnEnable()
+    //{
+    //    //textDisplay.UpdateText();
+    //}
 }
