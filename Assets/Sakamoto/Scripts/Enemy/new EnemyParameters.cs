@@ -10,8 +10,8 @@ public class newEnemyParameters : CharacterStats
     [SerializeField, Header("敵の下半身HP")]
     private int LowerHP;
 
-  
-  
+
+
     //ボディパーツ
     [SerializeField, Header("敵の上半身データ")]
     private BodyPartsData Upperbodypart;
@@ -37,43 +37,34 @@ public class newEnemyParameters : CharacterStats
     [SerializeField, Header("ボスかどうか、チェックが入っているならボス")]
     private bool Boss;
 
-  //  //クリアテキスト
-  //  [SerializeField]
-  //private  GameObject textBox;
+    [SerializeField,Header("敵が打ってくる一個の弾のダメージ量")] float bulletDamage ;    //  //クリアテキスト
+    //  [SerializeField]
+    //private  GameObject textBox;
 
 
     //敵のHPゲージ関連
-    [SerializeField]
+    [SerializeField, Header("敵の上半身ゲージのイメージコンポーネントを設定\n必ずUpperHP_Barが入っていることを確認")]
     private Image UpperHPBar;
 
-    [SerializeField]
+    [SerializeField, Header("敵の下半身ゲージのイメージコンポーネントを設定\n必ずLowerHP_Barが入っていることを確認")]
     private Image LowerHPBar;
     // HPバー全体のコンテナ 
-    [SerializeField]
+    [SerializeField, Header("敵のゲージのオブジェクトを設定\n必ずHPBar_Objectが入っていることを確認")]
     private GameObject HPBarContainer;
     //各敵キャラの最大HP
     private int MaxUpperHP;
     private int MaxLowerHP;
 
-    // HPバーを表示する距離
-    // この値は、敵キャラクターとプレイヤーの距離がこの範囲内に入ったときにHPバーを表示するためのものです。
-    // 具体的には、プレイヤーと敵キャラクターの位置間の距離が displayRange に設定された数値より小さい場合、HPバーが表示されます。
-    // 逆に、この距離を超えるとHPバーは非表示になります。
-    // ※この値を小さくすると、プレイヤーに近づかないとHPバーが表示されなくなり、
-    // 　大きくすると遠くからでもHPバーが表示されるようになります。
-    [Header("HPバーを表示する距離")]
+    [SerializeField, Header("HPバーを表示する距離")]
     [Tooltip("プレイヤーと敵キャラクターの距離がこの値以下の場合にHPバーを表示します。\n" +
              "値を小さくするとプレイヤーが近づかないとHPバーが表示されなくなり、\n" +
              "値を大きくすると遠くからでもHPバーが表示されます。")]
-    [SerializeField]
     private float displayRange = 0.3f;
-    [Header("敵を倒してからHPバーが消えるまでの秒数")]
+    [SerializeField, Header("敵を倒してからHPバーが消えるまでの秒数")]
     [Tooltip("HPが0の状態のHPが表示されてからのカウントです。")]
-    [SerializeField]
-    private float hpBarDestory = 0.3f;
+    private float hpBarDestroy = 0.3f;
     //private Transform player; // プレイヤーの位置
 
-  
 
     private void Start()
     {
@@ -188,21 +179,20 @@ public class newEnemyParameters : CharacterStats
     public override void ShowHitEffects(int body)
     {
         //このオブジェクトの座標
-        Vector2 tihsVec2 = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
+        Vector3 enemyVector3 = new Vector3(transform.position.x,transform.position.y);
 
-        //エフェクト
-        GameObject obj = null;
+        
 
         //上半身の場合
         if (body == 0)
         {
             //オブジェクトを出すローカル座標
-            Vector2 effectVec2 = new Vector2(
+            Vector3 effectVec2Upper = new Vector3(
                 Random.Range(upperEffectXMin, upperEffectXMax),
                 Random.Range(upperEffectYMin, upperEffectYMax));
 
             //オブジェクトを出す
-            obj = Instantiate(hitGameObject, effectVec2 + tihsVec2, Quaternion.identity);
+            Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
             // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
             // Debug.Log("hit effect");
         }
@@ -210,11 +200,11 @@ public class newEnemyParameters : CharacterStats
         if (body == 1)
         {
             //オブジェクトを出すローカル座標
-            Vector2 effectVec2 = new Vector2(
+            Vector3 effectVec3Lower = new Vector2(
                 Random.Range(lowerEffectXMin, lowerEffectXMax),
                 Random.Range(lowerEffectYMin, lowerEffectYMax));
 
-            obj = Instantiate(hitGameObject, effectVec2 + tihsVec2, Quaternion.identity);
+            Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
         }
     }
 
@@ -225,7 +215,7 @@ public class newEnemyParameters : CharacterStats
         {
 
             hpBar.gameObject.SetActive(true);
-            yield return new WaitForSeconds(hpBarDestory); // 継続時間は調整可能
+            yield return new WaitForSeconds(hpBarDestroy); // 継続時間は調整可能
             hpBar.gameObject.SetActive(false);
         }
         Drop(part, typ);
@@ -251,11 +241,10 @@ public class newEnemyParameters : CharacterStats
         }
 
         //生成したパーツを自身の場所に持ってくる
-        drop.transform.position = this.transform.position;
+        drop.transform.position = transform.position;
 
-        
-        //テキストボックスを渡す
-        //drop.GetComponent<newDropPart>().getTextBox(textBox);
+
+      
 
         //ボスフラグを渡す
         drop.GetComponent<newDropPart>().getBossf(Boss);
@@ -265,8 +254,8 @@ public class newEnemyParameters : CharacterStats
         //
         drop.GetComponent<newDropPart>().getPartsData(part);
         //自分のゲームオブジェクトを消す
-        GlobalEnemyManager.Instance.RemoveEnemy(this.gameObject);
-        Destroy(this.gameObject);
+        GlobalEnemyManager.Instance.RemoveEnemy(gameObject);
+        Destroy(gameObject);
     }
 
 
@@ -274,7 +263,7 @@ public class newEnemyParameters : CharacterStats
     {
         if (collision.gameObject.CompareTag("PlayerShoot"))
         {
-            TakeDamage(1, 0);
+            TakeDamage(bulletDamage, 0);
         }
     }
 

@@ -14,8 +14,8 @@ public class PlayerParameter : CharacterStats
 
     public static PlayerParameter Instance;
 
-    [Header("1減少するのにかかる時間")]
-    [SerializeField] private int iDownTime;
+    [SerializeField,Header("1減少するのにかかる時間")]
+    private int iDownTime;
 
     public int iHumanityMax;     //人間性の最大値
     public int iUpperHPMax;      //上半身のHPの最大値
@@ -308,21 +308,20 @@ public class PlayerParameter : CharacterStats
     public override void ShowHitEffects(int body)
     {
         //このオブジェクトの座標
-        Vector2 tihsVec2 = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
+        //このオブジェクトの座標
+        Vector3 playerVector3 = new Vector3(transform.position.x, transform.position.y);
 
-        //エフェクト
-        GameObject obj = null;
-        Debug.Log(hitGameObject);
+      ;
         //上半身の場合
         if (body == 0)
         {
             //オブジェクトを出すローカル座標
-            Vector2 effectVec2 = new Vector2(
+            Vector3 effectVec2Upper = new Vector3(
                 Random.Range(upperEffectXMin, upperEffectXMax),
                 Random.Range(upperEffectYMin, upperEffectYMax));
 
             //オブジェクトを出す
-            obj = Instantiate(hitGameObject, effectVec2 + tihsVec2, Quaternion.identity);
+           Instantiate(hitGameObject, effectVec2Upper + playerVector3, Quaternion.identity);
             // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
             // Debug.Log("hit effect");
         }
@@ -330,11 +329,11 @@ public class PlayerParameter : CharacterStats
         if (body == 1)
         {
             //オブジェクトを出すローカル座標
-            Vector2 effectVec2 = new Vector2(
+            Vector3 effectVec3Lower = new Vector2(
                 Random.Range(lowerEffectXMin, lowerEffectXMax),
                 Random.Range(lowerEffectYMin, lowerEffectYMax));
 
-            obj = Instantiate(hitGameObject, effectVec2 + tihsVec2, Quaternion.identity);
+            Instantiate(hitGameObject, effectVec3Lower + playerVector3, Quaternion.identity);
         }
     }
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

@@ -47,7 +47,7 @@ public class PlayerControl : MonoBehaviour
     private float mainCameraWidth;
 
     //ターゲット
-    [SerializeField, Header("ボスのオブジェクトを入れる、ボス以外はスポナーが勝手に生成")]
+    [SerializeField, Header("ボスのオブジェクトを入れる\nボス以外はスポナーが勝手に生成")]
     private List<GameObject> enemyObject;
     //[SerializeField] GameObject[] goObj;
 
