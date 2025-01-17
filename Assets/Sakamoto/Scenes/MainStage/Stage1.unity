@@ -2601,6 +2601,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1753298751221435324, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: enemyObject.Array.data[0]
       value: 
@@ -4528,13 +4532,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 186059271}
     m_Modifications:
+    - target: {fileID: 3152388766529970657, guid: 9d90cc3d59df0314890b6a762f89221d, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3152388766529970657, guid: 9d90cc3d59df0314890b6a762f89221d, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3152388766529970657, guid: 9d90cc3d59df0314890b6a762f89221d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4026511536368555378, guid: 9d90cc3d59df0314890b6a762f89221d, type: 3}
       propertyPath: m_Name
       value: BossAreaStart
       objectReference: {fileID: 0}
+    - target: {fileID: 4490595821895980234, guid: 9d90cc3d59df0314890b6a762f89221d, type: 3}
+      propertyPath: threshold
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7145654650400040661, guid: 9d90cc3d59df0314890b6a762f89221d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 184.9
+      value: 175.6
       objectReference: {fileID: 0}
     - target: {fileID: 7145654650400040661, guid: 9d90cc3d59df0314890b6a762f89221d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4975,6 +4995,7 @@ MonoBehaviour:
   Position:
   - -1
   - 195
+  Player: {fileID: 0}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
   TextSpeed: 0.1

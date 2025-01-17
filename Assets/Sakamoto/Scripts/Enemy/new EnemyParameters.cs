@@ -81,7 +81,7 @@ public class newEnemyParameters : CharacterStats
         }
 
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
-        Debug.Log(playerControl);
+        //Debug.Log(playerControl);
 
     }
 

@@ -264,9 +264,9 @@ public class newEnemyMovement : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Floor"))
         {
-            Debug.Log($"Collided with: {collision.gameObject.name}, Tag: {collision.gameObject.tag}");
+            //Debug.Log($"Collided with: {collision.gameObject.name}, Tag: {collision.gameObject.tag}");
 
-            Debug.Log("“G“¯m‚ªÕ“Ë‚µA‰ñ‚ê‰E");
+            //Debug.Log("“G“¯m‚ªÕ“Ë‚µA‰ñ‚ê‰E");
             if (movingToPointB)
             {
                 enemyMoveAnimation?.RightMove();

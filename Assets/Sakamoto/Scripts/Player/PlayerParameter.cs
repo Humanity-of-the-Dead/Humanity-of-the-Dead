@@ -236,7 +236,7 @@ public class PlayerParameter : CharacterStats
         iHumanity = iHumanityMax;
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
-        Debug.Log(hitGameObject);
+        //Debug.Log(hitGameObject);
 
        
         playerControl.ChangeUpperBody(UpperData);

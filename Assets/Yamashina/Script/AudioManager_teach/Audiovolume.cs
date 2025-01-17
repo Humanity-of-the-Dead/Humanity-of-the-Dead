@@ -89,7 +89,7 @@ public class Audiovolume : MonoBehaviour
 
         PlayerPrefs.SetFloat(UIVolumeKey, UIVolume);
         PlayerPrefs.Save();
-        Debug.Log($"UI Volume set to: {UIVolume}");
+        //Debug.Log($"UI Volume set to: {UIVolume}");
 
     }
 

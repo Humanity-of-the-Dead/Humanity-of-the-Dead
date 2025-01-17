@@ -119,9 +119,9 @@ public class newDropPart : MonoBehaviour//
         //テキストボックスの表示
         //goTextBox.SetActive(true);
         //GameStateをAfterBOssに切り替える
-        GameMgr.ChangeState(GameState.AfterBOss);
+        GameMgr.ChangeState(GameState.ShowText);
         //SceneTransitionManager.instance.NextSceneButton(iNextIndex);
-
+        
         //プレイヤーの状態を保持する
         PlayerParameter.Instance.KeepBodyData();
 
@@ -139,6 +139,8 @@ public class newDropPart : MonoBehaviour//
             SceneManager.MoveGameObjectToScene(PlayerParameter.Instance.gameObject, SceneManager.GetActiveScene());
             iNextIndex = 0;
         }
+        
+
     }
 
     /// <summary>

@@ -29,12 +29,13 @@ public class GameMgr : MonoBehaviour
 
     private void Update()
     {
+       
 
         switch (GetState())
         {
             case GameState.BeforeBoss:
                 ForceEnemiesMoveLeft();  // G‹›ƒLƒƒƒ‰‚ğ¶ˆÚ“®‚³‚¹‚é
-                ChangeState(GameState.AfterBOss); // ˆÚ“®Œã‚É AfterBoss ‚ÉØ‚è‘Ö‚¦‚é
+
                 break;
             case GameState.Main:
                 if (Input.GetKeyDown(KeyCode.G))
@@ -69,7 +70,8 @@ public class GameMgr : MonoBehaviour
         public static void ChangeState(GameState newState)
         {
             enGameState = newState;
-        }
+        Debug.Log(newState);
+    }
         public static GameState GetState()
         {
             return enGameState;

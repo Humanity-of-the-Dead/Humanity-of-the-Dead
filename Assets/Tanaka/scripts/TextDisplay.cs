@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TextDisplay : MonoBehaviour
 {
@@ -11,55 +13,59 @@ public class TextDisplay : MonoBehaviour
         public TextAsset[] textAsset;   //メモ帳のファイル(.txt)　配列
     }
 
-    [SerializeField, Header("テキストデータを設定Element（テキストアセットではない方)が増えると次の場面に変更")]
+    [SerializeField]
     private TextDataSet[] textDataSet; //構造体の配列
 
-    [SerializeField, Header("TextCanvasの中にあるText (Legacy)が代入されていることを確認")]
+    [SerializeField]
     private Text text;  //画面上の文字
 
-    [SerializeField, Header("文字の表示速度")]
+    [SerializeField]
     private float TypingSpeed = 1.0f;  //文字の表示速度
 
     private int LoadDataIndex = 0; //今何個目の構造体を読み込んでいるか
 
     private int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
 
+    private int n = 0;
 
-    [SerializeField, Header("どこまで行ったらテキストが読めるようになるか")]
+    [SerializeField]
     private float[] Position;
 
+    [SerializeField]
     private PlayerControl Player;
 
 
-
-    [SerializeField, Header("TextCanvasの中にあるが読めるようになるか")]
+    [SerializeField]
     private GameObject TextArea; //テキスト表示域
 
     [SerializeField]
     private string customNewline = "[BR]"; // 改行として扱う文字列を指定
 
-    private bool[] Flag;
+    bool[] Flag;
 
     [Header("次の文字が表示されるまでの時間")]
     [SerializeField]
-    private float TextSpeed = 0.1f;
+    float TextSpeed = 0.1f;
 
+    GameObject TextImage;
 
     private bool isTextFullyDisplayed = false; // 現在のテキストが完全に表示されたか
 
     private Coroutine TypingCroutine;  //コルーチンの管理
 
-    private float timer = 0;
-
+    float timer = 0;
+    public bool IsTextFullyDisplayed()
+    {
+        return isTextFullyDisplayed; // メソッドを通じて状態を取得
+    }
     //ゲームクリアパネル
-    [SerializeField] private GameObject GameClear;
+    [SerializeField] GameObject GameClear;
 
     // Start is called before the first frame update
     void Start()
     {
-        Player =  GameObject.Find("Player Variant").GetComponent<PlayerControl>();
-
         text.text = "";// 初期化
+        Player = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         //Debug.Log(textAsset[0].text);
         //StartCoroutine("TextCoroutine");
         //テキスト表示域を非表示
@@ -88,8 +94,22 @@ public class TextDisplay : MonoBehaviour
                     }
                 }
                 break;
-            case GameState.ShowText:
+            case GameState.BeforeBoss:
+                for (int i = 0; i < Flag.Length; i++)
                 {
+                    if (Player.transform.position.x > Position[i] && Flag[i] == true)
+                    {
+                        //this.gameObject.SetActive(true);    //オブジェクトを表示
+                        //GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+                        UpdateText();
+                        //テキスト表示域を表示域
+                        //TextArea.SetActive(true);
+
+                    }
+                }
+                break;
+            case GameState.ShowText:
+                
 
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
@@ -109,15 +129,20 @@ public class TextDisplay : MonoBehaviour
                             //GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
                             LoadDataIndex++; //構造体の配列番号を進める
                             CloseTextArea(); // 全てのテキストを読み終えたら閉じる
-                            LoadText = 0;
+                        LoadText = 0;
+
+
+                       
                         }
                     }
-                }
+
+                
                 break;
 
 
 
             case GameState.Clear:
+
                 if (timer > 1)
                 {
                     int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
@@ -125,9 +150,9 @@ public class TextDisplay : MonoBehaviour
                     {
                         iNextIndex = 5;
                     }
-                    AudioSource BGM = MultiAudio.ins.bgmSource;
+                   ;
 
-                    if (BGM.isPlaying == false)
+                    if ( MultiAudio.ins.bgmSource.isPlaying == false)
                     {
                         SceneTransitionManager.instance.NextSceneButton(iNextIndex);
 
@@ -139,39 +164,24 @@ public class TextDisplay : MonoBehaviour
 
                 break;
             case GameState.AfterBOss:
-                TextArea.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.Return))
+
+                AudioSource BGM = MultiAudio.ins.bgmSource;
+                BGM.Stop();
+                MultiAudio.ins.PlayBGM_ByName("BGM_clear");
+
+                BGM.loop = false;
+
+                if (BGM.isPlaying)
                 {
-                    if (!isTextFullyDisplayed)
-                    {
-                        DisplayFullText(); //テキスト全表示
-                    }
-                    else
-                    {
-                        //if (LoadText < textAsset.Length - 1)
-                        //{
-                        //    LoadNextText(); // 次のテキストを表示
-                        //}
-                        //Debug.Log(textAsset.Length);
 
-                        CloseTextArea(); // 全てのテキストを読み終えたら閉じる
-                        AudioSource BGM = MultiAudio.ins.bgmSource;
-                        BGM.Stop();
-                        MultiAudio.ins.PlayBGM_ByName("BGM_clear");
-
-                        BGM.loop = false;
-
-                        if (BGM.isPlaying)
-                        {
-
-                            GameClear.SetActive(true); // ゲームクリア表示を表示する
-                        }
-
-                        GameMgr.ChangeState(GameState.Clear);    //GameStateがClearに変わる
-
-
-                    }
+                    GameClear.SetActive(true); // ゲームクリア表示を表示する
                 }
+
+                GameMgr.ChangeState(GameState.Clear);    //GameStateがClearに変わる
+
+
+
+
                 break;
         }
 
@@ -183,17 +193,17 @@ public class TextDisplay : MonoBehaviour
             StopCoroutine(TypingCroutine);
         }
 
-        Debug.Log($"UpdateText: LoadText = {LoadText}");
+        //Debug.Log($"UpdateText: LoadText = {LoadText}");
         if (textDataSet[LoadDataIndex].textAsset.Length > LoadText)
         {
             text.text = "";
             isTextFullyDisplayed = false;
-            Debug.Log($"表示テキスト: {textDataSet[LoadDataIndex].textAsset[LoadText].text}");
+            //Debug.Log($"表示テキスト: {textDataSet[LoadDataIndex].textAsset[LoadText].text}");
             TypingCroutine = StartCoroutine(TextCoroutine());
         }
         else
         {
-            Debug.Log("全テキストが表示されました");
+            //Debug.Log("全テキストが表示されました");
         }
     }
     IEnumerator TextCoroutine()

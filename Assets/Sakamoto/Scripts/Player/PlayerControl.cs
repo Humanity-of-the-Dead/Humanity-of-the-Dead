@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -100,9 +102,62 @@ public class PlayerControl : MonoBehaviour
                 MainExecution();
 
                 break;
+            case GameState.BeforeBoss:
+
+                //左移動
+                BeforeBossExecution();
+                break;
         }
     }
 
+    void BeforeBossExecution()
+    {
+        //現在のポジションを取得
+        Vector3 vPosition = transform.position;
+
+        //カメラとの距離の絶対値が一定以下ならプレイヤーが動く　画面外に出ないための処置
+        //移動
+        Vector3 vPosFromCame = vPosition - mainCamera.transform.position; //カメラ基準のプレイヤーの位置
+
+        if (!playerMoveAnimation.SetAttack())
+        {
+            //左移動
+            if (Input.GetKey(KeyCode.A))
+            {
+                if (vPosFromCame.x > -mainCameraWidth / 2)
+                {
+                    vPosition.x -= Time.deltaTime * playerSpeed;
+
+                }
+                playerMoveAnimation.HandleWalk(180);
+            }
+            //右移動
+            if (Input.GetKey(KeyCode.D))
+            {
+                if (mainCameraWidth / 2 > vPosFromCame.x)
+                {
+                    vPosition.x += Time.deltaTime * playerSpeed;
+                }
+                playerMoveAnimation.HandleWalk(0);
+
+            }
+
+            //ジャンプ
+
+            if (Input.GetKey(KeyCode.W) && jumpCount < 1)
+            {
+                Rigidbody2D playerRigidBody2D=GetComponent<Rigidbody2D>();
+                playerRigidBody2D.AddForce(transform.up * playerJumpPower);
+                MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
+                isJump = true;
+                jumpCount++;
+                if (playerRigidBody2D.velocity.y > playerJumpPower / playerRigidBody2D.mass)
+                {
+                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, playerJumpPower / playerRigidBody2D.mass);
+                }
+            }
+        }
+    }
     private void UpdateTimers()
     {
         playerMoveAnimation.timeWalk -= Time.deltaTime;
