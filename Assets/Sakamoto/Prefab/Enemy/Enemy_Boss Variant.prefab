@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4027755600218765000, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4735063652811484835, guid: cdf94058954888c498d04b05f2685229, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -256,7 +260,6 @@ MonoBehaviour:
   waitTime: 1
   upperPart: {fileID: 11400000, guid: 52c75d8f30fdb5840bc98bdc62f54324, type: 2}
   lowerPart: {fileID: 11400000, guid: 9be24730dcd468c4593ce730030bff5f, type: 2}
-  speed: 2
 --- !u!114 &6868419856064601450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,19 +283,18 @@ MonoBehaviour:
   lowerEffectYMax: -1
   UpperHP: 10
   LowerHP: 10
-  damage: 0
   Upperbodypart: {fileID: 11400000, guid: 52c75d8f30fdb5840bc98bdc62f54324, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: 9be24730dcd468c4593ce730030bff5f, type: 2}
   preUpperPart: {fileID: 1386206347217571068, guid: 37654147b537c0d40b79ca38c22382bb, type: 3}
   preLowerPart: {fileID: 1386206347217571068, guid: 48a944faabba3dc4b9d759dd674bf257, type: 3}
   playerControl: {fileID: 0}
   Boss: 0
-  textBox: {fileID: 0}
+  bulletDamage: 0
   UpperHPBar: {fileID: 1149842560076473825}
   LowerHPBar: {fileID: 2054628116608864072}
   HPBarContainer: {fileID: 3650718983251325481}
   displayRange: 5
-  hpBarDestory: 0.3
+  hpBarDestroy: 0.3
 --- !u!1 &3650718983251325481 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 772803039431139584, guid: cdf94058954888c498d04b05f2685229, type: 3}

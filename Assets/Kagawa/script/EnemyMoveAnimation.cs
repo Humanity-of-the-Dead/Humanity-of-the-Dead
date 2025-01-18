@@ -527,6 +527,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     public void RightMove()
     {
         shaft = 0;
+        Debug.Log("右向き");
     }
 
     /// <summary>
@@ -535,6 +536,8 @@ public class EnemyMoveAnimation : MonoBehaviour
     public void LeftMove()
     {
         shaft = 180;
+        Debug.Log("左向き");
+
     }
     #region 山品変更
 

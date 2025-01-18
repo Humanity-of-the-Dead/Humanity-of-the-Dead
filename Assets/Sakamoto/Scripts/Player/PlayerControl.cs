@@ -51,7 +51,7 @@ public class PlayerControl : MonoBehaviour
     //ターゲット
     [SerializeField, Header("ボスのオブジェクトを入れる\nボス以外はスポナーが勝手に生成")]
     private List<GameObject> enemyObject;
-    private float originalGravityScale;
+    //private float originalGravityScale;
     Rigidbody2D playerRigidBody2D;
 
     //[SerializeField] GameObject[] goObj;
@@ -66,7 +66,6 @@ public class PlayerControl : MonoBehaviour
     {
         playerRigidBody2D = GetComponent<Rigidbody2D>();
 
-        originalGravityScale = playerRigidBody2D.gravityScale;
 
         //これダメな奴
         //playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
@@ -108,70 +107,20 @@ public class PlayerControl : MonoBehaviour
 
                 break;
             case GameState.BeforeBoss:
+                UpdateTimers();
 
                 //左移動
-                BeforeBossExecution();
+                MoveAndJump();
                 break;
         }
     }
 
-    void BeforeBossExecution()
-    {
-        //現在のポジションを取得
-        Vector3 vPosition = transform.position;
-
-        //カメラとの距離の絶対値が一定以下ならプレイヤーが動く　画面外に出ないための処置
-        //移動
-        Vector3 vPosFromCame = vPosition - mainCamera.transform.position; //カメラ基準のプレイヤーの位置
-
-        if (!playerMoveAnimation.SetAttack())
-        {
-            //左移動
-            if (Input.GetKey(KeyCode.A))
-            {
-                if (vPosFromCame.x > -mainCameraWidth / 2)
-                {
-                    vPosition.x -= Time.deltaTime * playerSpeed;
-
-                }
-                playerMoveAnimation.HandleWalk(180);
-            }
-            //右移動
-            if (Input.GetKey(KeyCode.D))
-            {
-                if (mainCameraWidth / 2 > vPosFromCame.x)
-                {
-                    vPosition.x += Time.deltaTime * playerSpeed;
-                }
-                playerMoveAnimation.HandleWalk(0);
-
-            }
-
-            //ジャンプ
-
-            if (Input.GetKey(KeyCode.W) && jumpCount < 1)
-            {
-
-                playerRigidBody2D.gravityScale = 3.0f;  // ジャンプ中の重力スケール
-                playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, playerJumpPower);
-                MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
-                isJump = true;
-                jumpCount++;
-            }
-            else if (playerRigidBody2D.velocity.y <= 0)  // ジャンプ終了時に重力スケールを元に戻す
-            {
-                playerRigidBody2D.gravityScale = originalGravityScale;
-            }
-        }
-
-    }
     private void UpdateTimers()
     {
         playerMoveAnimation.timeWalk -= Time.deltaTime;
         playerMoveAnimation.timeAttack -= Time.deltaTime;
     }
-    //ゲームメインのエクスキュート
-    void MainExecution()
+    void MoveAndJump()
     {
         //現在のポジションを取得
         Vector3 vPosition = transform.position;
@@ -207,40 +156,42 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W) && jumpCount < 1)
             {
-                Rigidbody2D rb = GetComponent<Rigidbody2D>();
-                rb.AddForce(transform.up * playerJumpPower);
+                Vector2 upVector = Vector2.up;
+                playerRigidBody2D.velocity = upVector;
+                playerRigidBody2D.AddForce(transform.up * playerJumpPower);
+
                 MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
                 isJump = true;
                 jumpCount++;
 
-                // 上方向の速度を制限する
-                if (rb.velocity.y > playerJumpPower / rb.mass)
-                {
-                    rb.velocity = new Vector2(rb.velocity.x, playerJumpPower / rb.mass);
-                }
-
-            } //楽に次のシーン行きたいならこの下のコードをコメントアウト解除　確認後コメントアウトしておいて
-
-                //if (Input.GetKeyDown(KeyCode.Escape))
-                //{
-                //    SceneTransitionManager.instance.NextSceneButton(SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1); 
-                //}
-                //ここまで
-                //楽にボス戦行きたいなら以下のコードをコメント解除
-                //if (Input.GetKeyDown(KeyCode.S))
-                //{
-                //    vPosition = new Vector2(190.0f, -1.536416f);
-                //}
-                //ここまで
-
             }
+            //楽に次のシーン行きたいならこの下のコードをコメントアウト解除　確認後コメントアウトしておいて
+
+            //if (Input.GetKeyDown(KeyCode.Escape))
+            //{
+            //    SceneTransitionManager.instance.NextSceneButton(SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1); 
+            //}
+            //ここまで
+            //楽にボス戦行きたいなら以下のコードをコメント解除
+            //if (Input.GetKeyDown(KeyCode.S))
+            //{
+            //    vPosition = new Vector2(190.0f, -1.536416f);
+            //}
+            //ここまで
+
+        }
 
         //体が回転しないようにするのオイラーを０で設定すればできる
         //自分のtransformを取得
 
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         transform.position = vPosition;
+    }
+    //ゲームメインのエクスキュート
+    void MainExecution()
+    {
 
+        MoveAndJump();
 
 
 

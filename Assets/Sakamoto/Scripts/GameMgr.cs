@@ -34,7 +34,8 @@ public class GameMgr : MonoBehaviour
         switch (GetState())
         {
             case GameState.BeforeBoss:
-                ForceEnemiesMoveLeft();  // G‹›ƒLƒƒƒ‰‚ğ¶ˆÚ“®‚³‚¹‚é
+
+                //ForceEnemiesMoveLeft();  // G‹›ƒLƒƒƒ‰‚ğ¶ˆÚ“®‚³‚¹‚é
 
                 break;
             case GameState.Main:

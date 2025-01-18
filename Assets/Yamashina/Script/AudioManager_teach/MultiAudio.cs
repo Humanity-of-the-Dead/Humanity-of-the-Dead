@@ -94,7 +94,7 @@ public class MultiAudio : MonoBehaviour
         if (BGMClipDictionary.TryGetValue(bgmName, out var clip))
         {
             PlayBGM(clip);
-            Debug.Log($"Playing BGM: {bgmName}");
+            //Debug.Log($"Playing BGM: {bgmName}");
         }
         else
         {
@@ -137,7 +137,7 @@ public class MultiAudio : MonoBehaviour
             seSource.clip = clip;
             seSource.PlayOneShot(seSource.clip);
             seCoolTime.canPlay = false;
-            Debug.Log("Playing SE: " + clip.name);
+            //Debug.Log("Playing SE: " + clip.name);
         }
         else
         {

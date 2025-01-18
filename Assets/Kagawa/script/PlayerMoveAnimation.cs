@@ -519,7 +519,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         if (timeWalk < 0.01f + Mathf.Epsilon)
         {
             #endregion
-            Debug.Log("Keep");
+            //Debug.Log("Keep");
             walkIndex = 0;
             attackNumber = 0;
             ChangeArmAnime();
