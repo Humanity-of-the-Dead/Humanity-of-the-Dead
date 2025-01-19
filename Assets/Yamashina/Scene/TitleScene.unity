@@ -1133,6 +1133,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioSet
       objectReference: {fileID: 0}
+    - target: {fileID: 4406120658172269113, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
+      propertyPath: coolTime
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5009803700500600058, guid: e99f32be08d9d844c892bd711bbd24b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

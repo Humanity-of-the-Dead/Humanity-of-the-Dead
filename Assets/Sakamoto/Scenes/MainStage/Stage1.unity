@@ -4987,14 +4987,15 @@ MonoBehaviour:
   - textAsset:
     - {fileID: 4900000, guid: 47991bb4d79bc2440ab116edc7e80313, type: 3}
   text: {fileID: 977587877}
-  typingSpeed: 1
-  textSpeed: 0.1
+  TypingSpeed: 1
+  Position:
+  - -1
+  - 190
+  Player: {fileID: 0}
+  TextArea: {fileID: 259418451}
   customNewline: '[BR]'
-  textArea: {fileID: 259418451}
-  gameClear: {fileID: 247270896}
-  player: {fileID: 0}
-  positionTriggers:
-  - 0
+  TextSpeed: 0.1
+  GameClear: {fileID: 247270896}
 --- !u!1001 &7404418859548090430
 PrefabInstance:
   m_ObjectHideFlags: 0
