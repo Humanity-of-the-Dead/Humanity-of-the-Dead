@@ -77,7 +77,7 @@ public class Audiovolume : MonoBehaviour
 
         PlayerPrefs.SetFloat(SE_PREF_KEY, seVolume);
         PlayerPrefs.Save();
-        Debug.Log($"SE Volume set to: {seVolume}");
+        //Debug.Log($"SE Volume set to: {seVolume}");
     }
     public static void SetUIVolume(float UIVolume)
     {

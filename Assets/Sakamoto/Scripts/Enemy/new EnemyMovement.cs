@@ -58,7 +58,7 @@ public class newEnemyMovement : MonoBehaviour
     {
         // プレイヤーとの距離を計算
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-        Debug.Log(distanceToPlayer.ToString());
+        //Debug.Log(distanceToPlayer.ToString());
         switch (GameMgr.GetState())
         {
             case GameState.Main:

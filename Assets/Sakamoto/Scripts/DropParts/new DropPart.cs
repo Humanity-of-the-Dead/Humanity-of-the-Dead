@@ -119,7 +119,7 @@ public class newDropPart : MonoBehaviour//
         //テキストボックスの表示
         //goTextBox.SetActive(true);
         //GameStateをAfterBOssに切り替える
-        GameMgr.ChangeState(GameState.ShowText);
+        GameMgr.ChangeState(GameState.AfterBOss);
         //SceneTransitionManager.instance.NextSceneButton(iNextIndex);
         
         //プレイヤーの状態を保持する
