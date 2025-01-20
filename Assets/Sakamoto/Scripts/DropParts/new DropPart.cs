@@ -160,6 +160,8 @@ public class newDropPart : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Car"))
         {
             rigidbody2.gravityScale = 0f;
+            boxCollider2D.isTrigger = true;
+
         }
         else if (collision.gameObject.CompareTag("Dorops")) // ‘¼‚Ìƒhƒƒbƒv‚Æ‚ÌÕ“Ë‚ğ”»•Ê
         {
