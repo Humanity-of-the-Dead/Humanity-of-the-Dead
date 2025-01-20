@@ -253,7 +253,7 @@ MonoBehaviour:
   attackRange: 2
   upperpart: {fileID: 11400000, guid: e14baf2f3f4c6df40a37ca9c3d576095, type: 2}
   lowerpart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
-  Juu: {fileID: 3530047645205038771}
+  Gun: {fileID: 0}
   moveAnimation: {fileID: 744358186740427958}
   gamestate: {fileID: 0}
   waitTime: 1
@@ -269,22 +269,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fca371783d21544a6bd076acd24c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpperHP: 2
-  LowerHP: 5
+  UpperHP: 3
+  LowerHP: 3
   damage: 2
   Upperbodypart: {fileID: 11400000, guid: e14baf2f3f4c6df40a37ca9c3d576095, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
   preUpperPart: {fileID: 1386206347217571068, guid: 9ef6486a8bc7b494c93dd6ae51d33677, type: 3}
   preLowerPart: {fileID: 1386206347217571068, guid: f6b212fa74ac2e345911fcdee1d5d9de, type: 3}
-  scPlayerParameter: {fileID: 0}
-  PlayerControl: {fileID: 0}
+  playerParameter: {fileID: 0}
+  playerControl: {fileID: 0}
   Boss: 0
   textBox: {fileID: 0}
-  sceneTransitionManager: {fileID: 0}
   UpperHPBar: {fileID: 8725230327467234196}
   LowerHPBar: {fileID: 7665320168630647101}
   HPBarContainer: {fileID: 4920962030072349788}
   displayRange: 5
+  hpBarDestory: 0.3
   hitGameObject: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
   upperEffectXMin: 0.47
   upperEffectXMax: 0.28

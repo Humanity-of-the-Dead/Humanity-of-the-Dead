@@ -276,8 +276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fca371783d21544a6bd076acd24c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpperHP: 40
-  LowerHP: 40
+  UpperHP: 4
+  LowerHP: 4
   damage: 1
   Upperbodypart: {fileID: 11400000, guid: 1f44a247b0640614c8806fd0c1ddc7e1, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: e7e6579bcbac34e4190ebc1c174e3a77, type: 2}
