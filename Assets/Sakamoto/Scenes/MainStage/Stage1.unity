@@ -1302,10 +1302,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scGameMgr: {fileID: 4664960667363613010}
-  iDownTime: 3
-  iHumanityMax: 10
-  iUpperHPMax: 500
-  iLowerHPMax: 500
+  iDownTime: 1
+  iHumanityMax: 40
+  iUpperHPMax: 40
+  iLowerHPMax: 40
   goPlayer: {fileID: 798675964}
   UpperData: {fileID: 11400000, guid: fcc706bf8f9cb204382c81235b20a96a, type: 2}
   LowerData: {fileID: 11400000, guid: dfc091647e8e229438c5335ae549e2ac, type: 2}
