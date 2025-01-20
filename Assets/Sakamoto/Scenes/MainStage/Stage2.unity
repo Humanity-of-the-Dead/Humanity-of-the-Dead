@@ -995,10 +995,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scGameMgr: {fileID: 4664960667363613010}
-  iDownTime: 1
-  iHumanityMax: 100
-  iUpperHPMax: 100
-  iLowerHPMax: 100
+  iDownTime: 2
+  iHumanityMax: 25
+  iUpperHPMax: 25
+  iLowerHPMax: 25
   goPlayer: {fileID: 1443765028}
   UpperData: {fileID: 11400000, guid: fcc706bf8f9cb204382c81235b20a96a, type: 2}
   LowerData: {fileID: 11400000, guid: dfc091647e8e229438c5335ae549e2ac, type: 2}
@@ -2843,11 +2843,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4938219355749494688, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: LowerHP
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4938219355749494688, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: UpperHP
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4938219355749494688, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: textBox
@@ -5789,7 +5789,7 @@ PrefabInstance:
       objectReference: {fileID: 261565240}
     - target: {fileID: 7604454603304143861, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.06
+      value: -14.29
       objectReference: {fileID: 0}
     - target: {fileID: 7604454603304143861, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5936,11 +5936,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDataSet:
   - textAsset:
-    - {fileID: 4900000, guid: 62743faecac566541a6a27dce7dfa021, type: 3}
+    - {fileID: 4900000, guid: 8e4e98a733277d445bad674e9d8fb981, type: 3}
   - textAsset:
-    - {fileID: 4900000, guid: 7196afe69b0f60a45a964b5fe41d3fbb, type: 3}
+    - {fileID: 4900000, guid: 5145ebf4e2635284d870131a125d668b, type: 3}
   - textAsset:
-    - {fileID: 4900000, guid: 9629a7125275625418cb07f506e478b2, type: 3}
+    - {fileID: 4900000, guid: d6ac7b13ab1b6024e858c92cbbad3865, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:
