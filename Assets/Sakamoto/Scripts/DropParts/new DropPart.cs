@@ -11,7 +11,7 @@ public class newDropPart : MonoBehaviour//
     ////プレイヤーのmanager
     //PlayerParameter playerManager;
 
-    
+
 
     //クリアテキスト
     //GameObject goTextBox;
@@ -25,48 +25,59 @@ public class newDropPart : MonoBehaviour//
     //お墓
     [SerializeField] GameObject goGrave;
 
-   
+
 
     //ゲームクリアの標準
     GameObject goPanel;
-   
+
 
     void Start()
     {
         //GameClearタグを持つゲームオブジェクトを取得
         goPanel = GameObject.Find("GameResult").gameObject;
         goPanel = goPanel.transform.Find("GameClear").gameObject;
-      
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Jキーを押したら慰霊する
-        if (Input.GetKeyUp(KeyCode.J) && goButton.Length > 0 && goButton[0] != null && goButton[0].activeSelf)
+        switch (GameMgr.GetState())
         {
-            PlayerParameter.Instance.comfort(10);
-            MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
-            Debug.Log(this.transform.position);
-            GameObject obj = Instantiate(goGrave);
-            obj.transform.position = new Vector3(this.gameObject.transform.position.x, 0.5f, this.gameObject.transform.position.z);
-            if (bBoss)
-            {
-                GameClear();
-            }
-            Destroy(this.gameObject);
-        }
+            case GameState.Main:
 
-        // Lキーを押したら移植する
-        if (Input.GetKeyDown(KeyCode.L) && goButton.Length > 1 && goButton[1] != null && goButton[1].activeSelf)
-        {
-            PlayerParameter.Instance.transplant(partsData);
-            MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
-            if (bBoss)
-            {
-                GameClear();
-            }
-            Destroy(this.gameObject);
+
+                // Jキーを押したら慰霊する
+                if (Input.GetKeyUp(KeyCode.J) && goButton.Length > 0 && goButton[0] != null && goButton[0].activeSelf)
+                {
+                    PlayerParameter.Instance.comfort(10);
+                    MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
+                    Debug.Log(this.transform.position);
+                    GameObject obj = Instantiate(goGrave);
+                    obj.transform.position = new Vector3(this.gameObject.transform.position.x, 0.5f, this.gameObject.transform.position.z);
+                    if (bBoss)
+                    {
+                        GameClear();
+                    }
+                    Destroy(this.gameObject);
+                }
+
+                // Lキーを押したら移植する
+                if (Input.GetKeyDown(KeyCode.L) && goButton.Length > 1 && goButton[1] != null && goButton[1].activeSelf)
+                {
+                    PlayerParameter.Instance.transplant(partsData);
+                    MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
+                    if (bBoss)
+                    {
+                        GameClear();
+                    }
+                    Destroy(this.gameObject);
+                }
+                break;
+
+            default:
+                Debug.Log("プレイヤーが動いていないこと確認");
+                break;
         }
     }
 
@@ -78,8 +89,8 @@ public class newDropPart : MonoBehaviour//
         this.partsData = partsData;
     }
     //アイテムの画像になる
-   
-   
+
+
     //テキストボックスの取得
     //public void getTextBox(GameObject obj)
     //{
@@ -104,7 +115,7 @@ public class newDropPart : MonoBehaviour//
         PlayerParameter.Instance.comfort(10);
         Destroy(gameObject);
     }
-  
+
 
     //ゲームクリア処理
     private void GameClear()
@@ -117,7 +128,7 @@ public class newDropPart : MonoBehaviour//
         //GameStateをAfterBOssに切り替える
         GameMgr.ChangeState(GameState.AfterBOss);
         //SceneTransitionManager.instance.NextSceneButton(iNextIndex);
-        
+
         //プレイヤーの状態を保持する
         PlayerParameter.Instance.KeepBodyData();
 
@@ -135,7 +146,7 @@ public class newDropPart : MonoBehaviour//
             SceneManager.MoveGameObjectToScene(PlayerParameter.Instance.gameObject, SceneManager.GetActiveScene());
             iNextIndex = 0;
         }
-        
+
 
     }
 
@@ -147,9 +158,9 @@ public class newDropPart : MonoBehaviour//
     {
         if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Car"))
         {
-            Rigidbody2D dropRigidbody =GetComponent<Rigidbody2D>();
-            //dropRigidbody.bodyType = RigidbodyType2D.Kinematic; 
-           
+            Rigidbody2D dropRigidbody = GetComponent<Rigidbody2D>();
+            dropRigidbody.bodyType = RigidbodyType2D.Kinematic;
+
         }
     }
 }

@@ -106,11 +106,12 @@ public class PlayerControl : MonoBehaviour
                 MainExecution();
 
                 break;
-            case GameState.BeforeBoss:
-                UpdateTimers();
+            case GameState.ShowOption:
+                Debug.Log("プレイヤーが動いていないこと確認");
 
-                //左移動
-                MoveAndJump();
+                break;
+            default:
+                Debug.Log("プレイヤーが動いていないこと確認");
                 break;
         }
     }
@@ -158,8 +159,8 @@ public class PlayerControl : MonoBehaviour
             {
                 Vector2 upVector = Vector2.up;
                 playerRigidBody2D.velocity = upVector;
-                playerRigidBody2D.AddForce(transform.up * playerJumpPower);
-
+                playerRigidBody2D.AddForce(transform.up * playerJumpPower, ForceMode2D.Force);
+                Debug.Log(transform.position);
                 MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
                 isJump = true;
                 jumpCount++;
