@@ -18,10 +18,10 @@ public class PlayerParameter : CharacterStats
     private int iDownTime;
     [SerializeField, Header("人間性の最大値")]
     public int iHumanityMax;     //人間性の最大値
-    [SerializeField, Header("上半身のHPの最大値,パーツが変わる度に数値が変わるため設定はそのままでOK")]
+    [SerializeField, Header("上半身のHPの最大値,パーツが変わる度に\n数値が変わるため設定はそのままでOK")]
 
     public int iUpperHPMax;      //上半身のHPの最大値
-    [SerializeField, Header("下半身のHPの最大値,パーツが変わる度に数値が変わるため設定はそのままでOK")]
+    [SerializeField, Header("下半身のHPの最大値,パーツが変わる度に\n数値が変わるため設定はそのままでOK")]
 
     public int iLowerHPMax;      //下半身のHPの最大値
 
@@ -90,12 +90,13 @@ public class PlayerParameter : CharacterStats
 
                         Debug.Log("リロードを開始します"); // デバッグログで確認
 
-                        MultiAudio.ins.bgmSource.Stop();
-
-
-
-                        //GameOverのBGM鳴らす箇所
+                        AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
+                        BGM.Stop();
                         MultiAudio.ins.PlayBGM_ByName("BGM_defeated");
+
+                        BGM.loop = false;
+
+                       
                         #region 山品変更
                         ////パラメータの全回復
                         //iHumanity = iHumanityMax;

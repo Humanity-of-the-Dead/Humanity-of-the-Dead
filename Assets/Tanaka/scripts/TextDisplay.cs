@@ -286,16 +286,16 @@ public class TextDisplay : MonoBehaviour
         GameMgr.ChangeState(GameState.Main);
         TextArea.SetActive(false); // テキストエリアを非表示
     }
-    private void OnGUI()
-    {
-        GUI.skin.label.fontSize = 30;  // 例えば30に設定
+    //private void OnGUI()
+    //{
+    //    GUI.skin.label.fontSize = 30;  // 例えば30に設定
 
-        GUI.Label(new Rect(1000.0f, 500.0f, Screen.width, Screen.height), isTextFullyDisplayed.ToString());
-        //GUI.Label(new Rect(1000.0f, 1000.0f, Screen.width, Screen.height), TypingCroutine.ToString());
-        if (TypingCroutine == null)
-        {
+    //    GUI.Label(new Rect(1000.0f, 500.0f, Screen.width, Screen.height), isTextFullyDisplayed.ToString());
+    //    //GUI.Label(new Rect(1000.0f, 1000.0f, Screen.width, Screen.height), TypingCroutine.ToString());
+    //    if (TypingCroutine == null)
+    //    {
 
-        }
+    //    }
 
-    }
+    //}
 }
