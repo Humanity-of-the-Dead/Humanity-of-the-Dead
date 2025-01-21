@@ -375,15 +375,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6868419856064601450, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: damage
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6868419856064601450, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: LowerHP
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6868419856064601450, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: UpperHP
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6868419856064601450, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: textBox
@@ -1098,20 +1098,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f36aef9290bac749a33b7c6de7739be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitGameObject: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
-  upperEffectXMin: 0
-  upperEffectXMax: 0
-  upperEffectYMin: 0
-  upperEffectYMax: 0
-  lowerEffectXMin: 0
-  lowerEffectXMax: 0
-  lowerEffectYMin: 0
-  lowerEffectYMax: 0
-  iDownTime: 1
-  iHumanityMax: 100
-  iUpperHPMax: 30
-  iLowerHPMax: 30
-  playerControl: {fileID: 0}
+  scGameMgr: {fileID: 4664960667363613010}
+  iDownTime: 2
+  iHumanityMax: 25
+  iUpperHPMax: 25
+  iLowerHPMax: 25
+  goPlayer: {fileID: 1168358407}
   UpperData: {fileID: 11400000, guid: fcc706bf8f9cb204382c81235b20a96a, type: 2}
   LowerData: {fileID: 11400000, guid: dfc091647e8e229438c5335ae549e2ac, type: 2}
 --- !u!4 &261565242

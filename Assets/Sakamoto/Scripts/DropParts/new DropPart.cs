@@ -45,24 +45,23 @@ public class newDropPart : MonoBehaviour//
     // Update is called once per frame
     void Update()
     {
-        //Jキーを押したら慰霊する
-        if (Input.GetKeyUp(KeyCode.J) && goButton[0].activeSelf == true)
+        // Jキーを押したら慰霊する
+        if (Input.GetKeyUp(KeyCode.J) && goButton.Length > 0 && goButton[0] != null && goButton[0].activeSelf)
         {
             PlayerParameter.Instance.comfort(10);
             MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
             Debug.Log(this.transform.position);
             GameObject obj = Instantiate(goGrave);
-            obj.transform.position = new Vector3(transform.position.x,
-                                                        0.5f, transform.position.z);
+            obj.transform.position = new Vector3(this.gameObject.transform.position.x, 0.5f, this.gameObject.transform.position.z);
             if (bBoss)
             {
                 GameClear();
             }
-            Destroy(gameObject);
-
+            Destroy(this.gameObject);
         }
-        //Lキーを押したら移植する
-        if (Input.GetKeyDown(KeyCode.L) && goButton[1].activeSelf == true)
+
+        // Lキーを押したら移植する
+        if (Input.GetKeyDown(KeyCode.L) && goButton.Length > 1 && goButton[1] != null && goButton[1].activeSelf)
         {
             PlayerParameter.Instance.transplant(partsData);
             MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
@@ -70,7 +69,7 @@ public class newDropPart : MonoBehaviour//
             {
                 GameClear();
             }
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 

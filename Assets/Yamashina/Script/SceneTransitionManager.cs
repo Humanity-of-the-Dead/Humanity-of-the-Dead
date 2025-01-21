@@ -100,47 +100,41 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void PlayBGMForScene()
     {
-
         string sceneName = SceneManager.GetActiveScene().name;
         string bgmName = "";
 
-        if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.Title))
+        // シーン名による分岐処理を switch 文で記述
+        switch (sceneName)
         {
-            bgmName = "BGM_title"; // タイトル画面のBGM名
-        }
-        else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne))
-        {
-            bgmName = "BGM_stage_01"; // ステージ1のBGM名
-        }
-        else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo))
-        {
-            bgmName = "BGM_stage_02"; // ステージ2のBGM名
-        }
-        else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree))
-        {
-            bgmName = "BGM_stage_03"; // ステージ2のBGM名
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.Title):
+                bgmName = "BGM_title"; // タイトル画面のBGM名
+                break;
 
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne):
+                bgmName = "BGM_stage_01"; // ステージ1のBGM名
+                break;
+
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo):
+                bgmName = "BGM_stage_02"; // ステージ2のBGM名
+                break;
+
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree):
+                bgmName = "BGM_stage_03"; // ステージ3のBGM名
+                break;
+
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree_Five):
+                bgmName = "BGM_stage_04"; // ステージ3.5のBGM名
+                break;
+
+            default:
+                Debug.LogWarning($"No BGM assigned for the scene '{sceneName}'.");
+                return; // BGMが指定されていない場合は終了
         }
-        //else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree_Five))
-        //{
-        //    bgmName = "BGM_stage_03"; // ステージ2のBGM名(後で変更）
-
-        //}
-        else if (sceneName == sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour))
-        {
-            bgmName = "BGM_stage_04"; // ステージ2のBGM名
-
-        }
-
 
         if (!string.IsNullOrEmpty(bgmName))
         {
             MultiAudio.ins.PlayBGM_ByName(bgmName); // BGMを再生
             Debug.Log(bgmName);
-        }
-        else
-        {
-            Debug.LogWarning($"No BGM assigned for the scene '{sceneName}'.");
         }
     }
 
