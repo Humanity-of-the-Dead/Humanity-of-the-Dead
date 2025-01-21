@@ -29,7 +29,7 @@ TagManager:
   - NoHitObject
   - Player
   - Enemy
-  - 
+  - Car
   - PlayerShoot
   - EnemyShoot
   - Fire

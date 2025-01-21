@@ -2799,6 +2799,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenCar
       objectReference: {fileID: 0}
+    - target: {fileID: 8731165380163950067, guid: 0930cbf92e8231a40a9dc7d8a38f1e0a, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4699,6 +4703,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8731165380163950067, guid: 0930cbf92e8231a40a9dc7d8a38f1e0a, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5030,6 +5038,10 @@ PrefabInstance:
     - target: {fileID: 1177094192752400855, guid: 8841aa12f9d9c6d47ae98c09141b8530, type: 3}
       propertyPath: m_Name
       value: Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177094192752400855, guid: 8841aa12f9d9c6d47ae98c09141b8530, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5608150274711315656, guid: 8841aa12f9d9c6d47ae98c09141b8530, type: 3}
       propertyPath: m_LocalPosition.x
