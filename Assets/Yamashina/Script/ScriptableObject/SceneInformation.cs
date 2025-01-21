@@ -13,7 +13,9 @@ public class SceneInformation : ScriptableObject
     {
         Title,      // タイトル
         StageOne,   // ステージ１
+        StageOne_BOSS,
         StageTwo,   // ステージ２
+        StageTwo_BOSS,
         StageThree, // ステージ３
         StageThree_Five,//ステージ３.5　本当はステージ４がStageThree_Fiveでステージ5がStageFour（ボス）の役割を果たすが、色々と修正箇所が増えるためとりあえずで記載
         StageFour,//ボス戦
