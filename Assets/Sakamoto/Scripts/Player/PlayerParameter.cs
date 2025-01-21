@@ -91,7 +91,6 @@ public class PlayerParameter : CharacterStats
                         Debug.Log("リロードを開始します"); // デバッグログで確認
 
                         AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
-                        BGM.Stop();
                         MultiAudio.ins.PlayBGM_ByName("BGM_defeated");
 
                         BGM.loop = false;

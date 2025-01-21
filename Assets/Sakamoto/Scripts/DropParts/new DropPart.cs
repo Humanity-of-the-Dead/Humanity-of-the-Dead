@@ -25,21 +25,18 @@ public class newDropPart : MonoBehaviour//
     //お墓
     [SerializeField] GameObject goGrave;
 
-    //Rigidbody2D
-    [SerializeField] Rigidbody2D rigidbody2;
-
-    //BoxCollider2D
-    [SerializeField] BoxCollider2D boxCollider2D;
+   
 
     //ゲームクリアの標準
     GameObject goPanel;
-
+   
 
     void Start()
     {
         //GameClearタグを持つゲームオブジェクトを取得
         goPanel = GameObject.Find("GameResult").gameObject;
         goPanel = goPanel.transform.Find("GameClear").gameObject;
+      
     }
 
     // Update is called once per frame
@@ -150,9 +147,9 @@ public class newDropPart : MonoBehaviour//
     {
         if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Car"))
         {
-            rigidbody2.gravityScale = 0f;
-            boxCollider2D.isTrigger = true;
-            
+            Rigidbody2D dropRigidbody =GetComponent<Rigidbody2D>();
+            dropRigidbody.bodyType = RigidbodyType2D.Kinematic; 
+           
         }
     }
 }

@@ -40,7 +40,6 @@ public class Gun : MonoBehaviour
     public void Shoot(Vector2 direction, Transform firePoint)
     {
 
-        //e’e‚ğ¶¬‚·‚éˆÊ’u‚ğ’²®
         Vector2 adjustedPosition = (Vector2)firePoint.position + offset;
 
         // e’e‚ğ¶¬
@@ -51,9 +50,13 @@ public class Gun : MonoBehaviour
         rb.velocity = direction * bullet.GetComponent<Bullet>().speed;
         if (rb.velocity.x > 0)
         {
-            Quaternion rotate = rb.transform.rotation;
-            rotate.y = 180;
-            rb.transform.rotation = rotate;
+            // ‰EŒü‚«‚Ìê‡
+            rb.rotation = 180; // ³–Ê‚ÉŒü‚¯‚é
+        }
+        else if (rb.velocity.x < 0)
+        {
+            // ¶Œü‚«‚Ìê‡
+            rb.rotation = 0; // ”½“]‚³‚¹‚é
         }
     }
 }

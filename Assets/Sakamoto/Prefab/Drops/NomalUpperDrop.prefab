@@ -177,8 +177,6 @@ MonoBehaviour:
   - {fileID: 2182874680941712295}
   - {fileID: 6055618513447132620}
   goGrave: {fileID: 2839263780191614865, guid: fd771b76aae9c0641833c8c5eff54c82, type: 3}
-  rigidbody2: {fileID: 1960726576125117671}
-  boxCollider2D: {fileID: 8518237200061102869}
 --- !u!1 &1919319660750788736
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +585,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4296511423400201671}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
