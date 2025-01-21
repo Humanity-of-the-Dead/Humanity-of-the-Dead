@@ -39,24 +39,27 @@ public class Gun : MonoBehaviour
 
     public void Shoot(Vector2 direction, Transform firePoint)
     {
-
+        // e’e‚ÌˆÊ’u‚ğ’²®
         Vector2 adjustedPosition = (Vector2)firePoint.position + offset;
 
         // e’e‚ğ¶¬
         GameObject bullet = Instantiate(bulletPrefab, (Vector3)adjustedPosition, firePoint.rotation); // Vector3‚ÉƒLƒƒƒXƒg‚µ‚Ä¶¬
 
-        // e’e‚ÌŒü‚«‚ğİ’è
+        // e’e‚ÌRigidbody2D‚ğæ“¾
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+
+        // ”­Ë•ûŒü‚ÉŠî‚Ã‚¢‚Ävelocity‚ğİ’è
         rb.velocity = direction * bullet.GetComponent<Bullet>().speed;
+
+        // ’e‚ª‰E‚É”ò‚Ôê‡
         if (rb.velocity.x > 0)
         {
-            // ‰EŒü‚«‚Ìê‡
-            rb.rotation = 180; // ³–Ê‚ÉŒü‚¯‚é
+            rb.rotation = 0; // ³–ÊŒü‚«i‰E•ûŒüj
         }
+        // ’e‚ª¶‚É”ò‚Ôê‡
         else if (rb.velocity.x < 0)
         {
-            // ¶Œü‚«‚Ìê‡
-            rb.rotation = 0; // ”½“]‚³‚¹‚é
+            rb.rotation = 180; // ”½“]i¶•ûŒüj
         }
     }
 }

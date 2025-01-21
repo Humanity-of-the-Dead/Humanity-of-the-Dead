@@ -148,7 +148,7 @@ public class newDropPart : MonoBehaviour//
         if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Car"))
         {
             Rigidbody2D dropRigidbody =GetComponent<Rigidbody2D>();
-            dropRigidbody.bodyType = RigidbodyType2D.Kinematic; 
+            //dropRigidbody.bodyType = RigidbodyType2D.Kinematic; 
            
         }
     }

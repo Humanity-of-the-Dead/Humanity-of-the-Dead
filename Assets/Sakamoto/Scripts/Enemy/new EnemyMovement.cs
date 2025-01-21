@@ -137,23 +137,22 @@ public class newEnemyMovement : MonoBehaviour
                                 switch (upperPart.sPartsName)
                                 {
                                     case "警察の上半身":
-                                        Vector2 ShootMoveBector = new Vector2(0, 0);
-                                        //子のplayerRCのローテーションYを持ってくる
-                                        // y = 0のときは右向き、0 y = 180のときは左向き
-                                        Debug.Log(transform.GetChild(0).
-                                            transform.eulerAngles.y);
-                                        if (transform.GetChild(0).
-                                                transform.eulerAngles.y == 180)
+                                        Vector2 ShootMoveVector = (player.transform.position - transform.position).normalized;
+                                        float enemyRotationY = transform.GetChild(0).transform.eulerAngles.y;
+
+                                        if (enemyRotationY == 180)
                                         {
-                                            ShootMoveBector.x = -1;
+                                            // 左向きの場合、方向ベクトルのxを反転
+                                            ShootMoveVector.x = -Mathf.Abs(ShootMoveVector.x);
                                         }
                                         else
                                         {
-                                            ShootMoveBector.x = 1;
+                                            // 右向きの場合、方向ベクトルのxはそのまま
+                                            ShootMoveVector.x = Mathf.Abs(ShootMoveVector.x);
                                         }
 
-                                        Debug.Log(ShootMoveBector);
-                                        gun.Shoot(ShootMoveBector, transform);
+                                        // 銃を使って弾を発射
+                                        gun.Shoot(ShootMoveVector, transform);
                                         //警察官の上半身で攻撃するSEを鳴らす
                                         MultiAudio.ins.PlaySEByName(
                                             "SE_policeofficer_attack_upper");
