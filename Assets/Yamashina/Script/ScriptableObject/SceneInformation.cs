@@ -17,22 +17,23 @@ public class SceneInformation : ScriptableObject
         StageTwo,   // ステージ２
         StageTwo_BOSS,
         StageThree, // ステージ３
-        StageThree_Five,//ステージ３.5　本当はステージ４がStageThree_Fiveでステージ5がStageFour（ボス）の役割を果たすが、色々と修正箇所が増えるためとりあえずで記載
-        StageFour,//ボス戦
+        StageThree_BOSS,
+        StageFour,//親友戦闘
+        StageFive,//ボス
         End,
         
 
 
     }
     // ステージのシーン
-    [System.Serializable]
-    public enum STAGE
-    {
-        One,      // ステージ１
-        Two,      // ステージ２
-        Three,    // ステージ３
-        Four,
-    }
+    //[System.Serializable]
+    //public enum STAGE
+    //{
+    //    One,      // ステージ１
+    //    Two,      // ステージ２
+    //    Three,    // ステージ３
+    //    Four,
+    //}
 
     [SerializeField] public SceneObject[] sceneObject;
     [SerializeField] public string[] sceneNames;// シーンの名前

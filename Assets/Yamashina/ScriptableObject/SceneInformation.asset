@@ -15,17 +15,25 @@ MonoBehaviour:
   sceneObject:
   - m_SceneName: TitleScene
   - m_SceneName: Stage1
+  - m_SceneName: Stage1_boss
   - m_SceneName: Stage2
+  - m_SceneName: Stage2_boss
   - m_SceneName: Stage3
+  - m_SceneName: Stage3_boss
+  - m_SceneName: Stage3.5
   - m_SceneName: Stage4
   - m_SceneName: Stage5
   sceneNames:
   - TitleScene
   - Stage1
+  - Stage1_boss
   - Stage2
+  - Stage2_boss
   - Stage3
+  - Stage3_boss
+  - Stage3.5
   - Stage4
   - Stage5
-  previousScene: 0
+  previousScene: 7
   currentScene: 0
-  sceneCount: 
+  sceneCount: 000000000100000002000000030000000400000005000000060000000700000008000000

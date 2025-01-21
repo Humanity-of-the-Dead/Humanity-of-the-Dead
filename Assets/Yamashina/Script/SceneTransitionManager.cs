@@ -103,7 +103,6 @@ public class SceneTransitionManager : MonoBehaviour
         string sceneName = SceneManager.GetActiveScene().name;
         string bgmName = "";
 
-        // シーン名による分岐処理を switch 文で記述
         switch (sceneName)
         {
             case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.Title):
@@ -113,17 +112,29 @@ public class SceneTransitionManager : MonoBehaviour
             case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne):
                 bgmName = "BGM_stage_01"; // ステージ1のBGM名
                 break;
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne_BOSS):
+                bgmName = "BGM_stage_01"; // ステージ1のBGM名
+                break;
 
             case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo):
+                bgmName = "BGM_stage_02"; // ステージ2のBGM名
+                break;
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo_BOSS):
                 bgmName = "BGM_stage_02"; // ステージ2のBGM名
                 break;
 
             case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree):
                 bgmName = "BGM_stage_03"; // ステージ3のBGM名
                 break;
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree_BOSS):
+                bgmName = "BGM_stage_03"; // ステージ3のBGM名
+                break;
 
-            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree_Five):
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour)://親友予定
                 bgmName = "BGM_stage_04"; // ステージ3.5のBGM名
+                break;
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageFive):
+                bgmName = "BGM_stage_04"; // ステージ4のBGM名 ラスボス
                 break;
 
             default:
