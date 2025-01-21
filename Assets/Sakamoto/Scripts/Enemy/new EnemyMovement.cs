@@ -137,9 +137,9 @@ public class newEnemyMovement : MonoBehaviour
                                 switch (upperPart.sPartsName)
                                 {
                                     case "警察の上半身":
-                                        Vector2 ShootMoveVector = (player.transform.position - transform.position).normalized;
-                                        float enemyRotationY = transform.GetChild(0).transform.eulerAngles.y;
-
+                                        Vector2 ShootMoveVector = (player.transform.position - enemyMoveAnimation.playerRc.transform.position).normalized;
+                                        float enemyRotationY = enemyMoveAnimation.playerRc.transform.eulerAngles.y;
+                                        Debug.Log(enemyRotationY);
                                         if (enemyRotationY == 180)
                                         {
                                             // 左向きの場合、方向ベクトルのxを反転

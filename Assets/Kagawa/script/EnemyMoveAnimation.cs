@@ -29,7 +29,7 @@ public class EnemyMoveAnimation : MonoBehaviour
 
     [SerializeField, Header("デバッグ用(通常、None)")] private DebugMove debugMoves;
 
-    [SerializeField, Header("全身")] private GameObject playerRc;
+    [SerializeField, Header("全身")] public GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")] private GameObject[] arm;
     [SerializeField, Header("手首の角度、先に右手")] private GameObject[] hand;
     [SerializeField, Header("太腿の角度、先に右足")] private GameObject[] leg;
