@@ -8,17 +8,11 @@ public class newDropPart : MonoBehaviour//
 {
     //パーツのデータ
     private BodyPartsData partsData;
-    ////プレイヤーのmanager
-    //PlayerParameter playerManager;
 
+    private bool bBoss;
 
-
-    //クリアテキスト
-    //GameObject goTextBox;
-
-    //ボスフラグ
-    bool bBoss;
-
+    [SerializeField, Header("人間性の回復量")]
+    private int humanityRecoveryAmount = 10;
     //ボタンオブジェクト
     [SerializeField] GameObject[] goButton;
 
@@ -64,7 +58,7 @@ public class newDropPart : MonoBehaviour//
                 // Jキーを押したら慰霊する
                 if (Input.GetKeyUp(KeyCode.J) && goButton.Length > 0 && goButton[0] != null && goButton[0].activeSelf)
                 {
-                    PlayerParameter.Instance.comfort(10);
+                    PlayerParameter.Instance.comfort(humanityRecoveryAmount);
                     MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
                     Debug.Log(this.transform.position);
                     GameObject obj = Instantiate(goGrave);
@@ -126,7 +120,7 @@ public class newDropPart : MonoBehaviour//
     //慰霊
     public void getComfort()
     {
-        PlayerParameter.Instance.comfort(10);
+        PlayerParameter.Instance.comfort(humanityRecoveryAmount);
         Destroy(gameObject);
     }
 
