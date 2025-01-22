@@ -25,7 +25,7 @@ public class newDropPart : MonoBehaviour//
     //お墓
     [SerializeField] GameObject goGrave;
 
-
+    private PlayerControl playerControl;
 
     //ゲームクリアの標準
     GameObject goPanel;
@@ -36,6 +36,20 @@ public class newDropPart : MonoBehaviour//
         //GameClearタグを持つゲームオブジェクトを取得
         goPanel = GameObject.Find("GameResult").gameObject;
         goPanel = goPanel.transform.Find("GameClear").gameObject;
+        playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
+        if (playerControl != null)
+        {
+            Collider2D playerCollider = playerControl.GetComponent<Collider2D>();
+            Collider2D thisCollider = GetComponent<Collider2D>();
+            if (playerCollider != null && thisCollider != null)
+            {
+                Physics2D.IgnoreCollision(playerCollider, thisCollider);
+            }
+        }
+        else
+        {
+            Debug.LogError(playerControl);
+        }
 
     }
 
@@ -158,9 +172,10 @@ public class newDropPart : MonoBehaviour//
     {
         if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Car"))
         {
-            Rigidbody2D dropRigidbody = GetComponent<Rigidbody2D>();
-            dropRigidbody.bodyType = RigidbodyType2D.Kinematic;
-
+            var rigidbody2D = GetComponent<Rigidbody2D>();
+            rigidbody2D.velocity = Vector2.zero; // 速度をリセット
+            rigidbody2D.angularVelocity = 0f; // 回転速度をリセット
+            rigidbody2D.gravityScale = 0f; // 重力を無効化
         }
     }
 }
