@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1960726576125117671}
   - component: {fileID: 9201402167512030773}
   m_Layer: 6
-  m_Name: BossLowerDrop
+  m_Name: BestFriendDrop
   m_TagString: Dorops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0da1b16529f8593448052ca64ad46433, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 30e11db639ba5984f8ebefd5cde54b34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,7 +125,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 18.93, y: 18.92}
+    oldSize: {x: 21.599998, y: 38.399998}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -173,7 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31420de0bf591e459c6add79c2ededf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  humanityRecoveryAmount: 10
   goButton:
   - {fileID: 2182874680941712295}
   goGrave: {fileID: 2839263780191614865, guid: fd771b76aae9c0641833c8c5eff54c82, type: 3}
@@ -292,15 +291,15 @@ GameObject:
   - component: {fileID: 5221732014799308699}
   - component: {fileID: 3149063996674686189}
   - component: {fileID: 3624648889174595128}
-  - component: {fileID: 8179793562423747912}
-  - component: {fileID: 8246827288547028697}
+  - component: {fileID: 1267588200076918105}
+  - component: {fileID: 17955398747419924}
   m_Layer: 6
-  m_Name: IreiButton (Legacy)
+  m_Name: IreiButton(Legacy)
   m_TagString: Dorops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4761116454277647362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -402,7 +401,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8179793562423747912}
+      - m_Target: {fileID: 1267588200076918105}
         m_TargetAssemblyTypeName: AudioButtonHandler, Assembly-CSharp
         m_MethodName: PlaySE
         m_Mode: 1
@@ -414,7 +413,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8179793562423747912
+--- !u!114 &1267588200076918105
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -428,7 +427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickSEName: UI_click
   hoverSEName: UI_mouseover
---- !u!114 &8246827288547028697
+--- !u!114 &17955398747419924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -630,15 +629,15 @@ GameObject:
   - component: {fileID: 3768222486081512666}
   - component: {fileID: 8986021473806046105}
   - component: {fileID: 5605474958882896209}
-  - component: {fileID: 5176474489442788651}
-  - component: {fileID: 543924641547830364}
+  - component: {fileID: 872392920878528454}
+  - component: {fileID: 2004220573232135485}
   m_Layer: 6
-  m_Name: IsyokuButton(Legacy)
+  m_Name: IsyokuButton (Legacy)
   m_TagString: Dorops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7920036717445132605
 RectTransform:
   m_ObjectHideFlags: 0
@@ -740,7 +739,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 543924641547830364}
+      - m_Target: {fileID: 2004220573232135485}
         m_TargetAssemblyTypeName: AudioButtonHandler, Assembly-CSharp
         m_MethodName: PlaySE
         m_Mode: 1
@@ -752,7 +751,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5176474489442788651
+--- !u!114 &872392920878528454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -769,7 +768,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &543924641547830364
+--- !u!114 &2004220573232135485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
