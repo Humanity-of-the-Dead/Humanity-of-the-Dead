@@ -20,16 +20,19 @@ public class GameMgr : MonoBehaviour
     [SerializeField] Button OptionReturnButton;
 
     static GameState enGameState;
+    static GameState previousGameState; // 前回のゲームステートを保存
 
     float timer = 0;
     private void Start()
     {
         enGameState = GameState.Main;
+        previousGameState = enGameState; // 初期化
+
     }
 
     private void Update()
     {
-       
+
 
         switch (GetState())
         {
@@ -67,27 +70,35 @@ public class GameMgr : MonoBehaviour
         }
     }
 
-        //ステートチェンジ
-        public static void ChangeState(GameState newState)
-        {
-            enGameState = newState;
+    //ステートチェンジ
+    public static void ChangeState(GameState newState)
+    {
+        previousGameState = enGameState; // 現在のステートを前回のステートとして保存
+
+        enGameState = newState;
         Debug.Log(newState);
     }
-        public static GameState GetState()
-        {
-            return enGameState;
-        }
-        private void ForceEnemiesMoveLeft()
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject enemy in enemies)
-            {
-                enemy.transform.Translate(Vector3.left * 5f); // 任意の速度で左移動
-                EnemyMoveAnimation moveAnimation = GameObject.FindAnyObjectByType<EnemyMoveAnimation>();
-                moveAnimation.LeftMove();
-            }
+    // ステートが変わったかを確認する関数
+    public static bool HasStateChanged()
+    {
+        return enGameState != previousGameState;
+    }
 
+    public static GameState GetState()
+    {
+        return enGameState;
+    }
+    private void ForceEnemiesMoveLeft()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.transform.Translate(Vector3.left * 5f); // 任意の速度で左移動
+            EnemyMoveAnimation moveAnimation = GameObject.FindAnyObjectByType<EnemyMoveAnimation>();
+            moveAnimation.LeftMove();
         }
+
+    }
     private void OnGUI()
     {
         GUI.skin.label.fontSize = 30;  // 例えば30に設定

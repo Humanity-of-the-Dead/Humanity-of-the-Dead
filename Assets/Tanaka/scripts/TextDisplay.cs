@@ -80,6 +80,8 @@ public class TextDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         Debug.Log($"isTextFullyDisplayedは{isTextFullyDisplayed}");
         switch (GameMgr.GetState())
         {
@@ -93,19 +95,19 @@ public class TextDisplay : MonoBehaviour
                 }
                 for (int i = 0; i < Position.Length; i++)
                 {
-                    if(Player.transform.position.x > Position[i] && Flag[i]==false)
+                    if (Player.transform.position.x > Position[i] && Flag[i] == false)
                     {
-                        Flag[i]=true;
+                        Flag[i] = true;
 
                         GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
                         UpdateText();
                         //テキスト表示域を表示域
                         TextArea.SetActive(true);
                     }
-                   
-                  
+
+
                 }
-               
+
                 break;
 
             case GameState.ShowText:
@@ -145,15 +147,15 @@ public class TextDisplay : MonoBehaviour
                 if (timer > 1)
                 {
                     int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
-                    if (iNextIndex > SceneTransitionManager.instance.sceneInformation.sceneCount.Length)               
+                    if (iNextIndex > SceneTransitionManager.instance.sceneInformation.sceneCount.Length)
                     {
                         iNextIndex = SceneTransitionManager.instance.sceneInformation.sceneCount.Length;
                     }
 
 
-                        SceneTransitionManager.instance.NextSceneButton(iNextIndex);
+                    SceneTransitionManager.instance.NextSceneButton(iNextIndex);
 
-                    
+
                     timer = 0;
                 }
                 timer += Time.deltaTime;
@@ -161,55 +163,79 @@ public class TextDisplay : MonoBehaviour
 
                 break;
             case GameState.AfterBOss:
-                //UpdateText();
 
-                //TextArea.SetActive(true);
-                //if (Input.GetKeyDown(KeyCode.Return))
-                //{
-                //    //UpdateText();
-
-                //    if (!isTextFullyDisplayed)
-                //    {
-                //        DisplayFullText(); //テキスト全表示
-                //    }
-                //    else
-                //    {
-                //        if (LoadText < textDataSet[LoadDataIndex].textAsset.Length - 1)
-                //        {
-                //            LoadNextText(); // 次のテキストを表示
-                //            UpdateText();
-                //            return;
-                //        }
-                //        //Debug.Log(textAsset.Length);
-                //        //GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
-                //        LoadDataIndex++; //構造体の配列番号を進める
-                //        CloseTextArea(); // 全てのテキストを読み終えたら閉じる
-                //        LoadText = 0;
+                TextArea.SetActive(true);
 
 
-
-                //    }
-
-                //}
-                AudioSource BGM = MultiAudio.ins.bgmSource;
-                MultiAudio.ins.PlayBGM_ByName("BGM_clear");
-
-
-                if (BGM.isPlaying)
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
+                    if (!TextArea.activeSelf)
+                    {
+                        return;
+                    }
+                    if (!isTextFullyDisplayed)
+                    {
+                        DisplayFullText(); //テキスト全表示
+                    }
+                    else
+                    {
+                        if (LoadText < textDataSet[LoadDataIndex].textAsset.Length - 1)
+                        {
+                            LoadNextText(); // 次のテキストを表示
+                            UpdateText();
+                            return;
+                        }
+                        //Debug.Log(textAsset.Length);
+                        //GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
 
-                    GameClear.SetActive(true); // ゲームクリア表示を表示する
-                    BGM.loop = false;
+
+                    }
+                }
+                TextArea.SetActive(false);
+
+                //Debug.Log(textDataSet[LoadDataIndex].textAsset.Length > LoadText);
+
+                AudioSource BGM = MultiAudio.ins.bgmSource;
+                if (!TextArea.activeSelf) // テキストエリアが非表示の間
+                {
+                    // BGMが再生されていない場合、新しいBGMを再生
+                    if (BGM.isPlaying && BGM.clip.name != "BGM_clear")
+                    {
+                        BGM.Stop(); 
+                        MultiAudio.ins.PlayBGM_ByName("BGM_clear");
+                        BGM.loop = false; // BGMをループしない
+                    }
+                    else
+                    {
+
+                    }
+
+                    // ゲームクリアオブジェクトを表示し続ける
+                    GameClear.SetActive(true);
+
+                    // BGMが最後まで流れたことを確認
+                    if (BGM.time >= BGM.clip.length - 0.1f) // 0.1秒のマージンを持たせる
+                    {
+                        // クリア状態に遷移
+                        GameMgr.ChangeState(GameState.Clear);
+                    }
+
 
                 }
-                //else if(GameClear.activeSelf&&!BGM.isPlaying) { }
-                //{
-                //    GameMgr.ChangeState(GameState.Clear);    //GameStateがClearに変わる
+
+
+
+
+                //    }
 
                 //}
+
+
+
+
+
                 break;
         }
-
     }
     public void UpdateText()
     {
@@ -222,7 +248,7 @@ public class TextDisplay : MonoBehaviour
         //Debug.Log($"UpdateText: LoadText = {LoadText}");
         if (textDataSet[LoadDataIndex].textAsset.Length > LoadText)
         {
-            text.text = "";
+            //text.text = "";
             isTextFullyDisplayed = false;
             //Debug.Log($"表示テキスト: {textDataSet[LoadDataIndex].textAsset[LoadText].text}");
             TypingCroutine = StartCoroutine(TextCoroutine());

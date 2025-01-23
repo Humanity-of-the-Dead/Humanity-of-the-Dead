@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum STATE { 
+enum STATE
+{
     NONE,
     NOMAL,//ノーマルステージ
     BOSS,//ボスステージ
@@ -20,7 +22,7 @@ public class CameraScript : MonoBehaviour
     //Vector2 fTrgPosFromCamera;
 
     //ゲームステート
-   private STATE eState = STATE.NONE;
+    private STATE eState = STATE.NONE;
 
     //bool fMoveRight;
     //bool fMoveLeft;
@@ -42,34 +44,27 @@ public class CameraScript : MonoBehaviour
                 if (goTarget.transform.position.x > fMoveStart)
                 {
                     vCamPos.x = goTarget.transform.position.x;
-                    transform.position = vCamPos; 
+                    transform.position = vCamPos;
                 }
-                if(transform.position.x > fMoveLimit)
+                if (transform.position.x > fMoveLimit)
                 {
                     vCamPos.x = fMoveLimit;
                     transform.position = vCamPos;
-                }               
+                }
                 vCamPos.y = goTarget.transform.position.y;
                 string sceneName = SceneManager.GetActiveScene().name;
-                switch (sceneName)
+                var bossScenes = new[]
                 {
-                    case string name when name == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne_BOSS):
-                        eState = STATE.BOSS;
-                        break;
-                    case string name when name == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo_BOSS):
-                        eState = STATE.BOSS;
+                  SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne_BOSS),
+                  SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo_BOSS),
+                  SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree_BOSS),
+                  SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour),
+                  SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFive)
+                };
 
-                        break;
-                    case string name when name == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree_BOSS):
-                        eState = STATE.BOSS;
-                        break;
-                    case string name when name == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour):
-                        eState = STATE.BOSS;
-                        break;
-                    case string name when name == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFive):
-                        eState = STATE.BOSS;
-                        break;
-
+                if (bossScenes.Contains(sceneName))
+                {
+                    eState = STATE.BOSS;
                 }
 
                 if (vCamPos.y < 0)
@@ -86,9 +81,9 @@ public class CameraScript : MonoBehaviour
 
                 // プレイヤーのジャンプを追従しつつ制約を追加
                 float targetY = goTarget.transform.position.y;
-                bossCamPos.y = Mathf.Clamp(targetY, 0, 2); 
+                bossCamPos.y = Mathf.Clamp(targetY, 0, 2);
 
-             transform.position = bossCamPos;
+                transform.position = bossCamPos;
 
                 //カメラ追従なし
                 break;
