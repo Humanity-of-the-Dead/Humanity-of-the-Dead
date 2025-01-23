@@ -11,7 +11,7 @@ public class Fire_Floor : MonoBehaviour
 
 #endif
     //プレイヤーパラメーター
-    private PlayerParameter scPlayerParameter;
+    //private PlayerParameter scPlayerParameter;
     
     [SerializeField] private float damage = 0.01f;
 
@@ -20,17 +20,16 @@ public class Fire_Floor : MonoBehaviour
     private void Start()
     {
         time = 0;
-        scPlayerParameter= GameObject.Find("PlParameter").GetComponent<PlayerParameter>();
     }
 
     protected void UpperEnemyAttack(float damage)
     {
-        scPlayerParameter.UpperHP -= damage;
+        PlayerParameter.Instance.UpperHP -= damage;
 
     }
     protected void LowerEnemyAttack(float damage)
     {
-        scPlayerParameter.LowerHP -= damage;
+        PlayerParameter.Instance.LowerHP -= damage;
 
     }
     private void OnTriggerStay2D(Collider2D collision)

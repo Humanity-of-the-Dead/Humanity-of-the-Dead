@@ -5885,11 +5885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDataSet:
   - textAsset:
-    - {fileID: 4900000, guid: 8e4e98a733277d445bad674e9d8fb981, type: 3}
-  - textAsset:
-    - {fileID: 4900000, guid: 5145ebf4e2635284d870131a125d668b, type: 3}
-  - textAsset:
-    - {fileID: 4900000, guid: d6ac7b13ab1b6024e858c92cbbad3865, type: 3}
+    - {fileID: 4900000, guid: 8f180d17639700249826a4820565f6ca, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:

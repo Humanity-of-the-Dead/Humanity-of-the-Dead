@@ -72,7 +72,7 @@ public class TextDisplay : MonoBehaviour
         //テキスト表示域を非表示
         Flag = new bool[Position.Length];
 
-        TextArea.SetActive(true);
+        //TextArea.SetActive(true);
 
         //UpdateText();
     }
