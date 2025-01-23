@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 enum STATE { 
     NONE,
@@ -47,10 +48,31 @@ public class CameraScript : MonoBehaviour
                 {
                     vCamPos.x = fMoveLimit;
                     transform.position = vCamPos;
-                    eState = STATE.BOSS;
                 }               
                 vCamPos.y = goTarget.transform.position.y;
-                if(vCamPos.y < 0)
+                string sceneName = SceneManager.GetActiveScene().name;
+                switch (sceneName)
+                {
+                    case string name when name == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne_BOSS):
+                        eState = STATE.BOSS;
+                        break;
+                    case string name when name == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo_BOSS):
+                        eState = STATE.BOSS;
+
+                        break;
+                    case string name when name == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree_BOSS):
+                        eState = STATE.BOSS;
+                        break;
+                    case string name when name == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour):
+                        eState = STATE.BOSS;
+                        break;
+                    case string name when name == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFive):
+                        eState = STATE.BOSS;
+                        break;
+
+                }
+
+                if (vCamPos.y < 0)
                 {
                     vCamPos.y = 0;
                 }

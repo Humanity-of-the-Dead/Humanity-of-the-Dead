@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class TextDisplay : MonoBehaviour
 {
@@ -69,8 +70,10 @@ public class TextDisplay : MonoBehaviour
         //Debug.Log(textAsset[0].text);
         //StartCoroutine("TextCoroutine");
         //テキスト表示域を非表示
-        TextArea.SetActive(true);
         Flag = new bool[Position.Length];
+
+        TextArea.SetActive(true);
+
         //UpdateText();
     }
 
@@ -81,19 +84,28 @@ public class TextDisplay : MonoBehaviour
         switch (GameMgr.GetState())
         {
             case GameState.Main:
-                for (int i = 0; i < Flag.Length; i++)
+                if (Player.transform.position.x > Position[Position.Length - 1])
                 {
-                    if (Player.transform.position.x > Position[i] && Flag[i] == false)
+                    //this.gameObject.SetActive(true);    //オブジェクトを表示
+                    GameMgr.ChangeState(GameState.Clear);    //GameStateがShowTextに変わる
+                    Flag[Position.Length - 1] = true;
+
+                }
+                for (int i = 0; i < Position.Length; i++)
+                {
+                    if(Player.transform.position.x > Position[i] && Flag[i]==false)
                     {
-                        //this.gameObject.SetActive(true);    //オブジェクトを表示
-                        Flag[i] = true;     //Flag[i]を通った
+                        Flag[i]=true;
+
                         GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
                         UpdateText();
                         //テキスト表示域を表示域
                         TextArea.SetActive(true);
-
                     }
+                   
+                  
                 }
+               
                 break;
 
             case GameState.ShowText:
@@ -130,7 +142,6 @@ public class TextDisplay : MonoBehaviour
 
             case GameState.Clear:
 
-
                 if (timer > 1)
                 {
                     int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
@@ -140,11 +151,9 @@ public class TextDisplay : MonoBehaviour
                     }
 
 
-                    if (MultiAudio.ins.bgmSource.isPlaying == false)
-                    {
                         SceneTransitionManager.instance.NextSceneButton(iNextIndex);
 
-                    }
+                    
                     timer = 0;
                 }
                 timer += Time.deltaTime;
@@ -183,17 +192,21 @@ public class TextDisplay : MonoBehaviour
 
                 //}
                 AudioSource BGM = MultiAudio.ins.bgmSource;
-                BGM.Stop();
                 MultiAudio.ins.PlayBGM_ByName("BGM_clear");
 
-                BGM.loop = false;
 
                 if (BGM.isPlaying)
                 {
 
                     GameClear.SetActive(true); // ゲームクリア表示を表示する
+                    BGM.loop = false;
+
                 }
-                GameMgr.ChangeState(GameState.Clear);    //GameStateがClearに変わる
+                //else if(GameClear.activeSelf&&!BGM.isPlaying) { }
+                //{
+                //    GameMgr.ChangeState(GameState.Clear);    //GameStateがClearに変わる
+
+                //}
                 break;
         }
 
