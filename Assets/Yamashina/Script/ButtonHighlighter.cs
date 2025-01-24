@@ -6,6 +6,7 @@ public class ButtonHighlighter : MonoBehaviour
 {
   [SerializeField] private Button operationButton; // 操作説明ボタン
     [SerializeField] private Button volumeButton;    // 音量ボタン
+    [SerializeField] private Button TitleButton;
     [SerializeField] private Color selectedColor = Color.white; // 選択状態の色
     [SerializeField] private Color unselectedColor = Color.gray; // 非選択状態の色
 

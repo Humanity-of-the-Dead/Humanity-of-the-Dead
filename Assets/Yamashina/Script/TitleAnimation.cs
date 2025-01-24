@@ -67,7 +67,8 @@ public class TitleAnimation : MonoBehaviour
     [Header("オプション画面の終了位置")]
     [SerializeField] Vector3 OptionPaneEndPosition;
 
-
+    [SerializeField, Header("オプション画面のタイトルボタン")]
+    private Button TitleButton;
 
     enum PanalView
     {
@@ -85,7 +86,7 @@ public class TitleAnimation : MonoBehaviour
         start.onClick.AddListener(() =>
             SceneTransitionManager.instance.NextSceneButton(1));
 
-
+        TitleButton.interactable = false;    
         //MultiAudio.ins.bgmSource.volume = BGMVolume;
         //MultiAudio.ins.seSource.volume = UIVolume;
 
