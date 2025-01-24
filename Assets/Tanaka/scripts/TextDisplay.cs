@@ -48,7 +48,9 @@ public class TextDisplay : MonoBehaviour
     [SerializeField]
     float TextSpeed = 0.1f;
 
-    GameObject TextImage;
+    [SerializeField, Header("クリアのイメージが出てからシーン遷移するまでの時間")]
+
+    private float clearToTransitionTime = 0.1f;
 
     private bool isTextFullyDisplayed = false; // 現在のテキストが完全に表示されたか
 
@@ -165,10 +167,10 @@ public class TextDisplay : MonoBehaviour
                 break;
             case GameState.AfterBOss:
 
-               
+
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    
+
                     if (!isTextFullyDisplayed)
                     {
                         DisplayFullText(); //テキスト全表示
@@ -182,7 +184,7 @@ public class TextDisplay : MonoBehaviour
 
                             return;
                         }
-                       else 
+                        else
 
                         {
                             TextArea.SetActive(false);
@@ -205,14 +207,14 @@ public class TextDisplay : MonoBehaviour
                     // BGMが再生されていない場合、新しいBGMを再生
                     if (BGM.isPlaying && BGM.clip.name != "BGM_clear")
                     {
-                        BGM.Stop(); 
+                        BGM.Stop();
                         MultiAudio.ins.PlayBGM_ByName("BGM_clear");
                         BGM.loop = false; // BGMをループしない
                     }
-                   
+
 
                     // BGMが最後まで流れたことを確認
-                    if (BGM.time >= BGM.clip.length - 0.1f) // 0.1秒のマージンを持たせる
+                    if (BGM.time >= BGM.clip.length - clearToTransitionTime) // 0.1秒のマージンを持たせる
                     {
                         // クリア状態に遷移
                         GameMgr.ChangeState(GameState.Clear);

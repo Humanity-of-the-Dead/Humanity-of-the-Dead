@@ -4406,6 +4406,7 @@ MonoBehaviour:
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
   TextSpeed: 0.1
+  clearToTransitionTime: 0.05
   GameClear: {fileID: 247270896}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
