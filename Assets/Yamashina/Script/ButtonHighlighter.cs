@@ -35,11 +35,20 @@ public class ButtonHighlighter : MonoBehaviour
         {
             SetButtonColor(operationButton, selectedColor);
             SetButtonColor(volumeButton, unselectedColor);
+            SetButtonColor(TitleButton, unselectedColor);
         }
         else if (selectedButton == volumeButton)
         {
             SetButtonColor(operationButton, unselectedColor);
             SetButtonColor(volumeButton, selectedColor);
+            SetButtonColor(TitleButton, unselectedColor);
+
+        }
+        else if (selectedButton == TitleButton)
+        {
+            SetButtonColor(operationButton, unselectedColor);
+            SetButtonColor(volumeButton, unselectedColor);
+            SetButtonColor(TitleButton,selectedColor );
         }
 
         // 選択したボタンを明示的に選択状態にする
@@ -51,5 +60,6 @@ public class ButtonHighlighter : MonoBehaviour
         // 両方のボタンをリセット（灰色に設定）
         SetButtonColor(operationButton, selectedColor);
         SetButtonColor(volumeButton, unselectedColor);
+        SetButtonColor(TitleButton, unselectedColor);
     }
 }

@@ -18,7 +18,7 @@ public class GameMgr : MonoBehaviour
 {
     [SerializeField] Button OptionButton;
     [SerializeField] Button OptionReturnButton;
-
+    [SerializeField] Button TitleButton;
     static GameState enGameState;
     static GameState previousGameState; // 前回のゲームステートを保存
 
@@ -49,10 +49,12 @@ public class GameMgr : MonoBehaviour
                 }
                 break;
             case GameState.ShowOption:
+                TitleButton.onClick.AddListener(() =>
+           SceneTransitionManager.instance.NextSceneButton(0));
                 if (Input.GetKeyDown(KeyCode.G))
                 {
                     OptionReturnButton.onClick.Invoke();
-
+                   
                 }
 
                 break;
