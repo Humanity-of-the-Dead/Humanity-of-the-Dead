@@ -135,6 +135,10 @@ public class newDropPart : MonoBehaviour//
         //goTextBox.SetActive(true);
         //GameState‚ğAfterBOss‚ÉØ‚è‘Ö‚¦‚é
         GameMgr.ChangeState(GameState.AfterBOss);
+        TextDisplay textDisplay = FindAnyObjectByType<TextDisplay>();
+        textDisplay. TextArea.SetActive(true);
+
+        textDisplay.UpdateText();
         //SceneTransitionManager.instance.NextSceneButton(iNextIndex);
 
         //ƒvƒŒƒCƒ„[‚Ìó‘Ô‚ğ•Û‚·‚é

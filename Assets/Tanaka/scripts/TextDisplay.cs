@@ -37,7 +37,7 @@ public class TextDisplay : MonoBehaviour
 
 
     [SerializeField]
-    private GameObject TextArea; //テキスト表示域
+    public GameObject TextArea; //テキスト表示域
 
     [SerializeField]
     private string customNewline = "[BR]"; // 改行として扱う文字列を指定
@@ -71,6 +71,7 @@ public class TextDisplay : MonoBehaviour
         //StartCoroutine("TextCoroutine");
         //テキスト表示域を非表示
         Flag = new bool[Position.Length];
+        GameClear.SetActive(false);
 
         //TextArea.SetActive(true);
 
@@ -164,15 +165,10 @@ public class TextDisplay : MonoBehaviour
                 break;
             case GameState.AfterBOss:
 
-                TextArea.SetActive(true);
-
-
+               
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    if (!TextArea.activeSelf)
-                    {
-                        return;
-                    }
+                    
                     if (!isTextFullyDisplayed)
                     {
                         DisplayFullText(); //テキスト全表示
@@ -183,20 +179,28 @@ public class TextDisplay : MonoBehaviour
                         {
                             LoadNextText(); // 次のテキストを表示
                             UpdateText();
+
                             return;
                         }
-                        //Debug.Log(textAsset.Length);
-                        //GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
+                       else 
 
+                        {
+                            TextArea.SetActive(false);
+
+                        }
 
                     }
-                }
-                TextArea.SetActive(false);
 
+                }
+                if (!TextArea.activeSelf)
+                {
+                    GameClear.SetActive(true);
+
+                }
                 //Debug.Log(textDataSet[LoadDataIndex].textAsset.Length > LoadText);
 
                 AudioSource BGM = MultiAudio.ins.bgmSource;
-                if (!TextArea.activeSelf) // テキストエリアが非表示の間
+                if (GameClear.activeSelf) // テキストエリアが非表示の間
                 {
                     // BGMが再生されていない場合、新しいBGMを再生
                     if (BGM.isPlaying && BGM.clip.name != "BGM_clear")
@@ -205,13 +209,7 @@ public class TextDisplay : MonoBehaviour
                         MultiAudio.ins.PlayBGM_ByName("BGM_clear");
                         BGM.loop = false; // BGMをループしない
                     }
-                    else
-                    {
-
-                    }
-
-                    // ゲームクリアオブジェクトを表示し続ける
-                    GameClear.SetActive(true);
+                   
 
                     // BGMが最後まで流れたことを確認
                     if (BGM.time >= BGM.clip.length - 0.1f) // 0.1秒のマージンを持たせる
@@ -241,16 +239,22 @@ public class TextDisplay : MonoBehaviour
     {
         if (TypingCroutine != null)
         {
+
+            Debug.Log("Stopping previous TypingCoroutine");
+
             StopCoroutine(TypingCroutine);
         }
+
         Debug.Log($"TypingCroutineは{TypingCroutine}");
 
         //Debug.Log($"UpdateText: LoadText = {LoadText}");
         if (textDataSet[LoadDataIndex].textAsset.Length > LoadText)
         {
-            //text.text = "";
+            text.text = "";
             isTextFullyDisplayed = false;
-            //Debug.Log($"表示テキスト: {textDataSet[LoadDataIndex].textAsset[LoadText].text}");
+            Debug.Log($"Displaying text: {textDataSet[LoadDataIndex].textAsset[LoadText].text}");
+            Debug.Log("Starting new TypingCoroutine");
+
             TypingCroutine = StartCoroutine(TextCoroutine());
         }
         else
@@ -260,6 +264,8 @@ public class TextDisplay : MonoBehaviour
     }
     IEnumerator TextCoroutine()
     {
+        Debug.Log("TextCoroutine started");
+
         string currentText = textDataSet[LoadDataIndex].textAsset[LoadText].text;
 
         if (!string.IsNullOrEmpty(customNewline))
@@ -270,9 +276,13 @@ public class TextDisplay : MonoBehaviour
         for (int i = 0; i < currentText.Length; i++)   //テキストの中の文字を取得して、文字数を増やしていく
         {
             string currentChra = currentText.Substring(0, i); //現在の文字を所得する
+            Debug.Log($"Setting Text.text: {currentChra}");
+
             if (string.IsNullOrWhiteSpace(currentChra))
             {
                 text.text = currentChra; //空白部分をそのまま設定する
+                Debug.Log($"Text.text is now: {text.text}");
+
                 yield return new WaitForSeconds(TextSpeed);
                 continue;  //次のループへ
 
@@ -286,6 +296,8 @@ public class TextDisplay : MonoBehaviour
         }
 
         isTextFullyDisplayed = true; //全ての文字が表示されたかを示すフラグ
+        Debug.Log("TextCoroutine completed");
+
     }
     private void DisplayFullText()
     {
@@ -300,8 +312,11 @@ public class TextDisplay : MonoBehaviour
 
             fullText = fullText.Replace(customNewline, "\n");
         }
+        Debug.Log($"Setting full text: {fullText}");
+
         // 現在のテキストをすべて表示
         text.text = fullText;
+        Debug.Log($"Text.text after full display: {text.text}");
 
         isTextFullyDisplayed = true; // 完全表示状態にする
     }
