@@ -2838,7 +2838,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4938219355749494688, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: Boss
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4938219355749494688, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: damage
