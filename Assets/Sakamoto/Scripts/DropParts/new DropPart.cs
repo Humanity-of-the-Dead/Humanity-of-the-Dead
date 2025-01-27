@@ -136,7 +136,7 @@ public class newDropPart : MonoBehaviour//
         //GameStateをAfterBOssに切り替える
         GameMgr.ChangeState(GameState.AfterBOss);
         TextDisplay textDisplay = FindAnyObjectByType<TextDisplay>();
-        textDisplay. TextArea.SetActive(true);
+        textDisplay.TextArea.SetActive(true);
 
         textDisplay.UpdateText();
         //SceneTransitionManager.instance.NextSceneButton(iNextIndex);
@@ -145,18 +145,19 @@ public class newDropPart : MonoBehaviour//
         PlayerParameter.Instance.KeepBodyData();
 
         //現在のシーンの一つ先のシーンのインデックスを取得
-        int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
+        string sceneName = SceneManager.GetActiveScene().name;
+
         //ステージが4の時
-        if (iNextIndex == 4)
+        if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour))
         {
             PlayerParameter.Instance.DefaultBodyData();
         }
         //インデックスが上限に行ったらタイトルのインデックスを代入
-        if (iNextIndex > 4)
+        if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFive))
         {
-            //DontDestroyOnLoadになっているPlayerParameterオブジェクトを削除
+
             SceneManager.MoveGameObjectToScene(PlayerParameter.Instance.gameObject, SceneManager.GetActiveScene());
-            iNextIndex = 0;
+
         }
 
 
