@@ -142,7 +142,7 @@ public class TextDisplay : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    SkipText();
+                    SkipTextShowText();
                 }
 
 
@@ -199,10 +199,10 @@ public class TextDisplay : MonoBehaviour
                     }
 
                 }
-                
+
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    SkipText();
+                    SkipTextAfterBoss();
                 }
 
                 if (!TextArea.activeSelf)
@@ -276,11 +276,15 @@ public class TextDisplay : MonoBehaviour
         }
     }
 
-    private void SkipText()
+    private void SkipTextShowText()
     {
         LoadDataIndex++;
         CloseTextArea();
         LoadText = 0;
+    }
+    private void SkipTextAfterBoss()
+    {
+        TextArea.SetActive(false);
     }
     IEnumerator TextCoroutine()
     {
