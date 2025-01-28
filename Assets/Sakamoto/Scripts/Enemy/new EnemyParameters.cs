@@ -35,7 +35,7 @@ public class newEnemyParameters : CharacterStats
 
     //ボスフラグ
     [SerializeField, Header("ボスかどうか、チェックが入っているならボス")]
-    private bool Boss;
+    public bool Boss;
 
     [SerializeField,Header("敵が打ってくる一個の弾のダメージ量")] float bulletDamage ;    //  //クリアテキスト
     //  [SerializeField]
