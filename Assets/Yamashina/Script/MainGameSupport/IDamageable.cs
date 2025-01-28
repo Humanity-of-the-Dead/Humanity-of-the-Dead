@@ -5,6 +5,6 @@ using UnityEngine;
 public interface IDamageable
 {
     void TakeDamage(float damage, int body = 0);
-    void ShowHitEffects(int body);
+    //void ShowHitEffects(int body);
 }
 

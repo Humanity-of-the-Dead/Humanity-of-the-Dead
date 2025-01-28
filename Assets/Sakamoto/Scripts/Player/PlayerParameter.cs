@@ -309,7 +309,7 @@ public class PlayerParameter : CharacterStats
             Debug.Log(LowerHP);
         }
     }
-    public override void ShowHitEffects(int body)
+    public  void ShowHitEffects(int body)
     {
         //このオブジェクトの座標
         //このオブジェクトの座標

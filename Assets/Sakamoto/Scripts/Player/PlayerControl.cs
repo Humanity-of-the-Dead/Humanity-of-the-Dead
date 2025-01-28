@@ -50,7 +50,7 @@ public class PlayerControl : MonoBehaviour
 
     //ターゲット
     [SerializeField, Header("ボスのオブジェクトを入れる\nボス以外はスポナーが勝手に生成")]
-    private List<GameObject> enemyObject;
+    public List<GameObject> enemyObject;
     //private float originalGravityScale;
     Rigidbody2D playerRigidBody2D;
 
