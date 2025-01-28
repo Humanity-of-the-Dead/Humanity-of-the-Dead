@@ -85,7 +85,7 @@ public class TextDisplay : MonoBehaviour
     {
 
 
-        Debug.Log($"isTextFullyDisplayedは{isTextFullyDisplayed}");
+
         switch (GameMgr.GetState())
         {
             case GameState.Main:
@@ -278,12 +278,12 @@ public class TextDisplay : MonoBehaviour
         for (int i = 0; i < currentText.Length; i++)   //テキストの中の文字を取得して、文字数を増やしていく
         {
             string currentChra = currentText.Substring(0, i); //現在の文字を所得する
-            Debug.Log($"Setting Text.text: {currentChra}");
+            //Debug.Log($"Setting Text.text: {currentChra}");
 
             if (string.IsNullOrWhiteSpace(currentChra))
             {
                 text.text = currentChra; //空白部分をそのまま設定する
-                Debug.Log($"Text.text is now: {text.text}");
+                //Debug.Log($"Text.text is now: {text.text}");
 
                 yield return new WaitForSeconds(TextSpeed);
                 continue;  //次のループへ
@@ -298,7 +298,7 @@ public class TextDisplay : MonoBehaviour
         }
 
         isTextFullyDisplayed = true; //全ての文字が表示されたかを示すフラグ
-        Debug.Log("TextCoroutine completed");
+        //Debug.Log("TextCoroutine completed");
 
     }
     private void DisplayFullText()
