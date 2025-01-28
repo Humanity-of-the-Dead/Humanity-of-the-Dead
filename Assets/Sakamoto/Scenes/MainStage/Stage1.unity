@@ -4749,7 +4749,7 @@ MonoBehaviour:
   TypingSpeed: 1
   Position:
   - -1
-  - 200.57
+  - 184.6349
   Player: {fileID: 0}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
