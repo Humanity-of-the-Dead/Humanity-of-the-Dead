@@ -170,7 +170,7 @@ public class TextDisplay : MonoBehaviour
 
 
                 break;
-            case GameState.AfterBOss:
+            case GameState.AfterBoss:
 
 
                 if (Input.GetKeyDown(KeyCode.Return))
