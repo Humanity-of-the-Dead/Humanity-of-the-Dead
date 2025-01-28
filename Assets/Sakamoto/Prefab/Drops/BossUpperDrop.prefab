@@ -173,8 +173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31420de0bf591e459c6add79c2ededf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  humanityRecoveryAmount: 10
   goButton:
   - {fileID: 2182874680941712295}
+  - {fileID: 6055618513447132620}
   goGrave: {fileID: 2839263780191614865, guid: fd771b76aae9c0641833c8c5eff54c82, type: 3}
 --- !u!1 &1919319660750788736
 GameObject:
@@ -617,6 +619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goButton:
   - {fileID: 2182874680941712295}
+  - {fileID: 6055618513447132620}
 --- !u!1 &6055618513447132620
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,7 +640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7920036717445132605
 RectTransform:
   m_ObjectHideFlags: 0
