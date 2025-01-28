@@ -140,6 +140,11 @@ public class TextDisplay : MonoBehaviour
                     }
                 }
 
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    SkipText();
+                }
+
 
                 break;
 
@@ -194,6 +199,12 @@ public class TextDisplay : MonoBehaviour
                     }
 
                 }
+                
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    SkipText();
+                }
+
                 if (!TextArea.activeSelf)
                 {
                     GameClear.SetActive(true);
@@ -264,6 +275,13 @@ public class TextDisplay : MonoBehaviour
             //Debug.Log("全テキストが表示されました");
         }
     }
+
+    private void SkipText()
+    {
+        LoadDataIndex++;
+        CloseTextArea();
+        LoadText = 0;
+    }
     IEnumerator TextCoroutine()
     {
         Debug.Log("TextCoroutine started");
@@ -275,7 +293,9 @@ public class TextDisplay : MonoBehaviour
             currentText = currentText.Replace(customNewline, "\n");
         }
 
-        for (int i = 0; i < currentText.Length; i++)   //テキストの中の文字を取得して、文字数を増やしていく
+        // テキストの中の文字を取得して、文字数を増やしていく
+        // Substringで1文字目から取得していくため、i=1でスタート
+        for (int i = 1; i <= currentText.Length; i++)
         {
             string currentChra = currentText.Substring(0, i); //現在の文字を所得する
             //Debug.Log($"Setting Text.text: {currentChra}");
