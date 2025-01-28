@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -74,7 +75,17 @@ public class EnemyMoveAnimation : MonoBehaviour
     // 攻撃のタイマー
     private float timeAttack;
 
+    //攻撃のアニメーションが終わったかどうか
+    private bool isAttackAnimationFinished = false;
+    public bool IsAttackAnimationFinished()
+    {
+        return isAttackAnimationFinished;
+    }
+    // 上半身攻撃アニメーション終了を通知するイベント
+    public event Action OnUpperAttackAnimationFinished;
 
+    // 下半身攻撃アニメーション終了を通知するイベント
+    public event Action OnLowerAttackAnimationFinished;
     private void Start()
     {
         indexNumber = 0;
@@ -393,6 +404,7 @@ public class EnemyMoveAnimation : MonoBehaviour
 
     private IEnumerator CallWalkWithDelay()
     {
+
         for (int i = 0; i < walk.wholeRotation.Length; i++)
         {
             PlayerWalk();
@@ -405,6 +417,8 @@ public class EnemyMoveAnimation : MonoBehaviour
 
     private IEnumerator CallPantieWithDelay()
     {
+        isAttackAnimationFinished = false; // アニメーション開始時にフラグをリセット
+
         for (int i = 0; i < upper.armForwardRotation.Length; i++)
         {
             PlayerPantie();
@@ -415,10 +429,18 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
         time = timeMax;
         isAttack = false;
+        // 攻撃アニメーション終了を通知
+        isAttackAnimationFinished = true; // アニメーション終了時にフラグを設定
+        Debug.Log("上半身攻撃アニメーション終了");
+
+        // 上半身攻撃アニメーション終了を通知
+        OnUpperAttackAnimationFinished?.Invoke();
     }
 
     private IEnumerator CallKickWithDelay()
     {
+        isAttackAnimationFinished = false; // アニメーション開始時にフラグをリセット
+
         for (int i = 0; i < lower.armForwardRotation.Length; i++)
         {
             PlayerKick();
@@ -429,6 +451,10 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
         time = timeMax;
         isAttack = false;
+        isAttackAnimationFinished = true; // アニメーション終了時にフラグを設定
+        Debug.Log("アニメーション終了");
+        // 下半身攻撃アニメーション終了を通知
+        OnLowerAttackAnimationFinished?.Invoke();
     }
 
     /// <summary>
