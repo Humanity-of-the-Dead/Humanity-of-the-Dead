@@ -410,6 +410,8 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     private IEnumerator CallWalkWithDelay()
     {
+        isWalk = true;
+
         for (int i = 0; i < animationDataSet.walk.armForwardRotation.Length; i++)
         {
             if (!isAttack)
