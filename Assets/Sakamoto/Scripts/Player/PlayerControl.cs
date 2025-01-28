@@ -78,6 +78,12 @@ public class PlayerControl : MonoBehaviour
 
         // カメラの幅はアスペクト比に基づいて計算する
         mainCameraWidth = mainCameraHeight * mainCamera.aspect;
+        // 攻撃アニメーション終了時のコールバックを設定
+        // 上半身攻撃アニメーション終了時のコールバックを設定
+        playerMoveAnimation.OnUpperAttackAnimationFinished += OnUpperAttackAnimationFinished;
+
+        // 下半身攻撃アニメーション終了時のコールバックを設定
+        playerMoveAnimation.OnLowerAttackAnimationFinished += OnLowerAttackAnimationFinished;
     }
 
     // Update is called once per frame
@@ -107,11 +113,11 @@ public class PlayerControl : MonoBehaviour
 
                 break;
             case GameState.ShowOption:
-                Debug.Log("プレイヤーが動いていないこと確認");
+                //Debug.Log("プレイヤーが動いていないこと確認");
 
                 break;
             default:
-                Debug.Log("プレイヤーが動いていないこと確認");
+                //Debug.Log("プレイヤーが動いていないこと確認");
                 break;
         }
     }
@@ -254,13 +260,8 @@ public class PlayerControl : MonoBehaviour
                     MultiAudio.ins.PlaySEByName("SE_lastboss_attack_upper");
                 }
 
-                for (int i = 0; i < enemyObject.Count; i++)
-                {
-                    //Debug.Log(liObj[i].gameObject.transform.position);
-                    //Debug.Log(playerParameter.UpperData.AttackArea);
-                    //仮引数
-                    UpperBodyAttack(i, enemyObject[i].transform.position, PlayerParameter.Instance.UpperData.AttackArea, PlayerParameter.Instance.UpperData.iPartAttack);
-                }
+               
+
             }
             //下半身攻撃
             if (Input.GetKeyDown(KeyCode.K))
@@ -283,11 +284,9 @@ public class PlayerControl : MonoBehaviour
                         MultiAudio.ins.PlaySEByName("SE_nurse_attack_lower");
                         break;
                 }
-                for (int i = 0; i < enemyObject.Count; i++)
-                {
-                    //仮引数
-                    LowerBodyAttack(i, enemyObject[i].transform.position, PlayerParameter.Instance.LowerData.AttackArea, PlayerParameter.Instance.LowerData.iPartAttack);
-                }
+
+                
+
             }
         }
 
@@ -322,7 +321,33 @@ public class PlayerControl : MonoBehaviour
         characterSprites.legLeft.sprite = underBody.spLeftLeg;
     }
 
+    private void OnDestroy()
+    {
+        // コールバックの解除
+        if (playerMoveAnimation != null)
+        {
+            playerMoveAnimation.OnUpperAttackAnimationFinished -= OnUpperAttackAnimationFinished;
+            playerMoveAnimation.OnLowerAttackAnimationFinished -= OnLowerAttackAnimationFinished;
+        }
+    }
 
+    private void OnUpperAttackAnimationFinished()
+    {
+        // 上半身攻撃判定
+        for (int i = 0; i < enemyObject.Count; i++)
+        {
+            UpperBodyAttack(i, enemyObject[i].transform.position, PlayerParameter.Instance.UpperData.AttackArea, PlayerParameter.Instance.UpperData.iPartAttack);
+        }
+    }
+
+    private void OnLowerAttackAnimationFinished()
+    {
+        // 下半身攻撃判定
+        for (int i = 0; i < enemyObject.Count; i++)
+        {
+            LowerBodyAttack(i, enemyObject[i].transform.position, PlayerParameter.Instance.LowerData.AttackArea, PlayerParameter.Instance.LowerData.iPartAttack);
+        }
+    }
 
     //上半身攻撃
     public void UpperBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
@@ -334,6 +359,7 @@ public class PlayerControl : MonoBehaviour
         }
         IDamageable damageable = enemyObject[EnemyNum].GetComponent<IDamageable>();
         damageable?.TakeDamage(iDamage, 0);
+        Debug.Log("上半身攻撃ダメージ判断");
 
     }
     //下半身攻撃
@@ -346,6 +372,8 @@ public class PlayerControl : MonoBehaviour
         }
         IDamageable damageable = enemyObject[EnemyNum].GetComponent<IDamageable>();
         damageable?.TakeDamage(iDamage, 1);
+        Debug.Log("下半身攻撃ダメージ判断");
+
     }
 
 

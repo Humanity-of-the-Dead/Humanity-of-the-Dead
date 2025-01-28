@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -36,7 +37,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     [SerializeField, Header("1コマの間隔の時間")] private float timeMax;
     [SerializeField] private AnimationDataSet animationDataSet;
     private UpperAttack upperAttack;
-    
+
     private LowerAttack downAttack;
 
     //歩きの配列の番号
@@ -60,7 +61,17 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     // 攻撃中かどうか
     private bool isAttack = false;
+    //攻撃のアニメーションが終わったかどうか
+    private bool isAttackAnimationFinished = false;
+    public bool IsAttackAnimationFinished()
+    {
+        return isAttackAnimationFinished;
+    }
+    // 上半身攻撃アニメーション終了を通知するイベント
+    public event Action OnUpperAttackAnimationFinished;
 
+    // 下半身攻撃アニメーション終了を通知するイベント
+    public event Action OnLowerAttackAnimationFinished;
 
     // 静止しているか
     private bool isStop = true;
@@ -115,7 +126,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くアニメーション
     /// </summary>
-  private void PlayerWalk()
+    private void PlayerWalk()
     {
 
         // Quaternion.Euler: 回転軸( x, y, z)
@@ -325,7 +336,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                 }
                 break;
             case LowerAttack.POLICE:
-              playerRc.transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.policeLower.wholeRotation[attackNumber]);
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.policeLower.wholeRotation[attackNumber]);
 
                 // 腕のアニメーション
                 if (animationDataSet.policeLower.armForwardRotation == null || animationDataSet.policeLower.armBackRotation == null)
@@ -399,6 +410,8 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     private IEnumerator CallWalkWithDelay()
     {
+        isWalk = true;
+
         for (int i = 0; i < animationDataSet.walk.armForwardRotation.Length; i++)
         {
             if (!isAttack)
@@ -417,6 +430,8 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     private IEnumerator CallPantieWithDelay()
     {
+        isAttackAnimationFinished = false; // アニメーション開始時にフラグをリセット
+
         for (int i = 0; i < animationDataSet.playerUpper.armForwardRotation.Length - 1; i++)
         {
             PlayerPantie();
@@ -430,10 +445,19 @@ public class PlayerMoveAnimation : MonoBehaviour
         isAttack = false;
         isWalk = false;
         isStop = true;
+        // 攻撃アニメーション終了を通知
+        isAttackAnimationFinished = true; // アニメーション終了時にフラグを設定
+        Debug.Log("上半身攻撃アニメーション終了");
+
+        // 上半身攻撃アニメーション終了を通知
+        OnUpperAttackAnimationFinished?.Invoke();
+
     }
 
     private IEnumerator CallKickWithDelay()
     {
+        isAttackAnimationFinished = false; // アニメーション開始時にフラグをリセット
+
         for (int i = 0; i < animationDataSet.playerLower.armForwardRotation.Length - 1; i++)
         {
             PlayerKick();
@@ -447,6 +471,10 @@ public class PlayerMoveAnimation : MonoBehaviour
         isWalk = false;
         isStop = true;
         isAttack = false;
+        isAttackAnimationFinished = true; // アニメーション終了時にフラグを設定
+        Debug.Log("アニメーション終了");
+       // 下半身攻撃アニメーション終了を通知
+        OnLowerAttackAnimationFinished?.Invoke();
     }
 
     /// <summary>

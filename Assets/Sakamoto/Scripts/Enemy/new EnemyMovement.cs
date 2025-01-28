@@ -51,11 +51,16 @@ public class newEnemyMovement : MonoBehaviour
         enemyMoveAnimation = GetComponent<EnemyMoveAnimation>();
         pointA = transform.position.x + moveDistance;
         pointB = transform.position.x - moveDistance;
-        newEnemyParameters=GetComponent<newEnemyParameters>();  
+        newEnemyParameters = GetComponent<newEnemyParameters>();
         if (upperPart.sPartsName == "警察の上半身")
         {
             gun = GetComponent<Gun>();
         }
+        enemyMoveAnimation.OnUpperAttackAnimationFinished += OnUpperAttackAnimationFinished;
+
+        // 下半身攻撃アニメーション終了時のコールバックを設定
+        enemyMoveAnimation.OnLowerAttackAnimationFinished += OnLowerAttackAnimationFinished;
+
     }
 
     void Update()
@@ -198,7 +203,6 @@ public class newEnemyMovement : MonoBehaviour
                                         break;
                                 }
 
-                                UpperEnemyAttack((float)upperPart.iPartAttack);
                                 //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
                             }
                             if (num == 1)
@@ -244,10 +248,9 @@ public class newEnemyMovement : MonoBehaviour
                                         break;
                                 }
 
-                                LowerEnemyAttack((float)lowerPart.iPartAttack);
                             }
                         }
-                     
+
                         enemyState = EnemyState.Search;
                         //moveAnimation.PlayerPantie();
                         break;
@@ -306,12 +309,32 @@ public class newEnemyMovement : MonoBehaviour
             return false;
         }
     }
+    private void OnDestroy()
+    {
+        // コールバックの解除
+        if (enemyMoveAnimation != null)
+        {
+            enemyMoveAnimation.OnUpperAttackAnimationFinished -= OnUpperAttackAnimationFinished;
+            enemyMoveAnimation.OnLowerAttackAnimationFinished -= OnLowerAttackAnimationFinished;
+        }
+    }
+    private void OnUpperAttackAnimationFinished()
+    {
+        // 上半身攻撃判定
+        UpperEnemyAttack((float)lowerPart.iPartAttack);
 
+    }
+
+    private void OnLowerAttackAnimationFinished()
+    {
+        LowerEnemyAttack((float)lowerPart.iPartAttack);
+    }
     void UpperEnemyAttack(float upperDamage)
     {
 
         IDamageable damageable = PlayerParameter.Instance.GetComponent<IDamageable>();
         damageable?.TakeDamage(upperDamage, 0);
+        Debug.Log("上半身攻撃ダメージ判断");
 
 
     }
@@ -319,6 +342,8 @@ public class newEnemyMovement : MonoBehaviour
     {
         IDamageable damageable = PlayerParameter.Instance.GetComponent<IDamageable>();
         damageable?.TakeDamage(lowerDamage, 1);
+        Debug.Log("下半身攻撃ダメージ判断");
+
     }
 }
 // プレイヤーに向かって移動
