@@ -54,12 +54,12 @@ public class Gun : MonoBehaviour
         // 弾が右に飛ぶ場合
         if (rb.velocity.x > 0)
         {
-            rb.rotation = 0; // 正面向き（右方向）
+            rb.rotation = 180; // 正面向き（右方向）
         }
         // 弾が左に飛ぶ場合
         else if (rb.velocity.x < 0)
         {
-            rb.rotation = 180; // 反転（左方向）
+            rb.rotation = 0; // 反転（左方向）
         }
     }
 }

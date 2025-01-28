@@ -27,6 +27,7 @@ public class newEnemyMovement : MonoBehaviour
     [SerializeField] private BodyPartsData lowerPart;
     private Gun gun;
 
+    private newEnemyParameters newEnemyParameters;
     private EnemyMoveAnimation enemyMoveAnimation;
 
     private float pointA, pointB;//開始位置と終了位置
@@ -39,7 +40,10 @@ public class newEnemyMovement : MonoBehaviour
     private bool movingToPointB = false; // 進行方向
     private PlayerControl player; // プレイヤーの位置
     private float timer;//攻撃後の時間
-    
+    [Tooltip("ボスの移動可能な最小X座標")]
+    [SerializeField] private float bossMinX = -8f;
+    [Tooltip("ボスの移動可能な最大X座標")]
+    [SerializeField] private float bossMaxX = 8f;
     void Start()
     {
         // プレイヤーを探すやつ
@@ -47,7 +51,7 @@ public class newEnemyMovement : MonoBehaviour
         enemyMoveAnimation = GetComponent<EnemyMoveAnimation>();
         pointA = transform.position.x + moveDistance;
         pointB = transform.position.x - moveDistance;
-
+        newEnemyParameters=GetComponent<newEnemyParameters>();  
         if (upperPart.sPartsName == "警察の上半身")
         {
             gun = GetComponent<Gun>();
@@ -76,6 +80,11 @@ public class newEnemyMovement : MonoBehaviour
                             // いつもの挙動
                             float Target = movingToPointB ? pointB : pointA;
                             Vector3 target = new Vector3(Target, transform.position.y, transform.position.z);
+                            // ボスの場合、移動範囲を制限
+                            if (newEnemyParameters.Boss)
+                            {
+                                target.x = Mathf.Clamp(target.x, bossMinX, bossMaxX);
+                            }
                             MoveTowards(target, normalSpeed);
 
                             // 敵が折り返し地点に到達したかどうか判断
@@ -256,6 +265,11 @@ public class newEnemyMovement : MonoBehaviour
     }
     private void MoveTowards(Vector3 target, float moveSpeed)
     {
+        // ボスの移動範囲を制限
+        if (newEnemyParameters.Boss)
+        {
+            target.x = Mathf.Clamp(target.x, bossMinX, bossMaxX);
+        }
         transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
     }
 

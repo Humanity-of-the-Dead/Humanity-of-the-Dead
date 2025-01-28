@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0da1b16529f8593448052ca64ad46433, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6c733c6ce47dd374a86f75f3e084f22f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,7 +125,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 18.93, y: 18.92}
+    oldSize: {x: 21.599998, y: 38.399998}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -176,6 +176,7 @@ MonoBehaviour:
   humanityRecoveryAmount: 10
   goButton:
   - {fileID: 2182874680941712295}
+  - {fileID: 6055618513447132620}
   goGrave: {fileID: 2839263780191614865, guid: fd771b76aae9c0641833c8c5eff54c82, type: 3}
 --- !u!1 &1919319660750788736
 GameObject:
@@ -300,7 +301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4761116454277647362
 RectTransform:
   m_ObjectHideFlags: 0
