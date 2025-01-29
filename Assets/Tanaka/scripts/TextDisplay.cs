@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using System.Collections.Generic;
+using UnityEditor.VersionControl;
 
 public class TextDisplay : MonoBehaviour
 {
@@ -56,11 +58,19 @@ public class TextDisplay : MonoBehaviour
 
     private Coroutine TypingCroutine;  //コルーチンの管理
 
+    private Vector3? lastCharPosistion;  // 現在のテキストの末尾の文字の座標。完全に表示されてなければnull
+
     float timer = 0;
     public bool IsTextFullyDisplayed()
     {
         return isTextFullyDisplayed; // メソッドを通じて状態を取得
     }
+
+    public Vector3? LastCharPosition()
+    {
+        return lastCharPosistion;
+    }
+
     //ゲームクリアパネル
     [SerializeField] GameObject GameClear;
 
@@ -74,6 +84,7 @@ public class TextDisplay : MonoBehaviour
         //テキスト表示域を非表示
         Flag = new bool[Position.Length];
         GameClear.SetActive(false);
+        lastCharPosistion = null;
 
         //TextArea.SetActive(true);
 
@@ -114,7 +125,7 @@ public class TextDisplay : MonoBehaviour
                 break;
 
             case GameState.ShowText:
-
+                
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     if (!isTextFullyDisplayed)
@@ -134,9 +145,13 @@ public class TextDisplay : MonoBehaviour
                         LoadDataIndex++; //構造体の配列番号を進める
                         CloseTextArea(); // 全てのテキストを読み終えたら閉じる
                         LoadText = 0;
-
-
-
+                    }
+                }
+                else
+                {
+                    if (isTextFullyDisplayed && lastCharPosistion == null)
+                    {
+                        CalcLastCharPosition();
                     }
                 }
 
@@ -144,7 +159,6 @@ public class TextDisplay : MonoBehaviour
                 {
                     SkipTextShowText();
                 }
-
 
                 break;
 
@@ -198,6 +212,13 @@ public class TextDisplay : MonoBehaviour
 
                     }
 
+                }
+                else
+                {
+                    if (isTextFullyDisplayed && lastCharPosistion == null)
+                    {
+                        CalcLastCharPosition();
+                    }
                 }
 
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -265,6 +286,7 @@ public class TextDisplay : MonoBehaviour
         {
             text.text = "";
             isTextFullyDisplayed = false;
+            lastCharPosistion = null;
             Debug.Log($"Displaying text: {textDataSet[LoadDataIndex].textAsset[LoadText].text}");
             Debug.Log("Starting new TypingCoroutine");
 
@@ -366,6 +388,35 @@ public class TextDisplay : MonoBehaviour
         GameMgr.ChangeState(GameState.Main);
         TextArea.SetActive(false); // テキストエリアを非表示
     }
+
+    // 表示テキストの末尾の文字の中央座標を算出してセットする
+    public void CalcLastCharPosition()
+    {
+        string textStr = text.text;
+        int lastCharIndex = textStr.Length - 1;
+        // 改行コードの数
+        int newLineCodeCount = textStr.Length - textStr.Replace("\n", "").Length;
+
+        // 表示中の各文字(を囲む四角形)の4頂点の座標を取得
+        IList<UIVertex> vertexs = text.cachedTextGenerator.verts;
+
+        // 末尾文字の左上頂点のインデックス
+        // 表示されていない文字には座標が無いので、改行コード数を引く
+        int vIdx = (lastCharIndex - newLineCodeCount) * 4;
+
+        UIVertex topLeft = vertexs[vIdx];
+        UIVertex bottomRight = vertexs[vIdx + 2];
+
+        // 各頂点座標をピクセル単位からユニット単位に変換
+        topLeft.position /= text.pixelsPerUnit;
+        bottomRight.position /= text.pixelsPerUnit;
+
+        // 2頂点の中央 = 文字の中央座標をlastCharPosistionにセット
+        lastCharPosistion = (topLeft.position + bottomRight.position) / 2f;
+
+        //Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
+    }
+
     //private void OnGUI()
     //{
     //    GUI.skin.label.fontSize = 30;  // 例えば30に設定
