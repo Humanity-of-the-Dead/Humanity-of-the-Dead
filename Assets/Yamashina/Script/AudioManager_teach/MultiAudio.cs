@@ -151,7 +151,7 @@ public class MultiAudio : MonoBehaviour
         {
             uiSource.clip = clip;
             uiSource.PlayOneShot(uiSource.clip);
-            Debug.Log("Playing UI: " + clip.name);
+            //Debug.Log("Playing UI: " + clip.name);
         }
         else
         {
