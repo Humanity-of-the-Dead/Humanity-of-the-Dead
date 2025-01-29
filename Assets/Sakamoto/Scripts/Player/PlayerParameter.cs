@@ -14,7 +14,7 @@ public class PlayerParameter : CharacterStats
 
     public static PlayerParameter Instance;
 
-    [SerializeField,Header("1減少するのにかかる時間")]
+    [SerializeField, Header("1減少するのにかかる時間")]
     private int iDownTime;
     [SerializeField, Header("人間性の最大値")]
     public int iHumanityMax;     //人間性の最大値
@@ -95,7 +95,7 @@ public class PlayerParameter : CharacterStats
 
                         BGM.loop = false;
 
-                       
+
                         #region 山品変更
                         ////パラメータの全回復
                         //iHumanity = iHumanityMax;
@@ -104,8 +104,7 @@ public class PlayerParameter : CharacterStats
 
                         #endregion
                         //プレイヤーを初期化
-                        UpperData = upperIndex;
-                        LowerData = lowerIndex;
+                        KeepBodyData(); 
 
                         //ゲームオーバーの標準
                         goPanel.SetActive(true);
@@ -237,8 +236,9 @@ public class PlayerParameter : CharacterStats
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
         //Debug.Log(hitGameObject);
+        Debug.Log($"upperIndexは{upperIndex}");
+        Debug.Log($"lowerIndexは{lowerIndex}");
 
-       
         playerControl.ChangeUpperBody(UpperData);
         playerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
         playerControl.ChangeUnderBody(LowerData);
@@ -309,13 +309,13 @@ public class PlayerParameter : CharacterStats
             Debug.Log(LowerHP);
         }
     }
-    public  void ShowHitEffects(int body)
+    public void ShowHitEffects(int body)
     {
         //このオブジェクトの座標
         //このオブジェクトの座標
         Vector3 playerVector3 = new Vector3(transform.position.x, transform.position.y);
 
-      ;
+        ;
         //上半身の場合
         if (body == 0)
         {
@@ -325,7 +325,7 @@ public class PlayerParameter : CharacterStats
                 Random.Range(upperEffectYMin, upperEffectYMax));
 
             //オブジェクトを出す
-           Instantiate(hitGameObject, effectVec2Upper + playerVector3, Quaternion.identity);
+            Instantiate(hitGameObject, effectVec2Upper + playerVector3, Quaternion.identity);
             // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
             // Debug.Log("hit effect");
         }
@@ -340,12 +340,13 @@ public class PlayerParameter : CharacterStats
             Instantiate(hitGameObject, effectVec3Lower + playerVector3, Quaternion.identity);
         }
     }
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            // シーン遷移後に参照を再取得
-            InitializeReferences();
-            //upperIndex = UpperData;
-            //lowerIndex = LowerData;
-            Debug.Log($"シーン {scene.name} がロードされました");
-        }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // シーン遷移後に参照を再取得
+        InitializeReferences();
+         
+        //upperIndex = UpperData;
+        //lowerIndex = LowerData;
+        Debug.Log($"シーン {scene.name} がロードされました");
     }
+}
