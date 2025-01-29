@@ -291,7 +291,7 @@ public class PlayerParameter : CharacterStats
         {
             //è„îºêgÇÃHPÇå∏ÇÁÇ∑
             UpperHP -= damage;
-            ShowHitEffects(body);
+            //ShowHitEffects(body);
             Debug.Log(hitGameObject);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
@@ -303,7 +303,7 @@ public class PlayerParameter : CharacterStats
         {
             //â∫îºêgÇÃHPÇå∏ÇÁÇ∑
             LowerHP -= damage;
-            ShowHitEffects(body);
+            //ShowHitEffects(body);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
             Debug.Log(LowerHP);

@@ -77,16 +77,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     // 攻撃中かどうか
     private bool isAttack = false;
     //攻撃のアニメーションが終わったかどうか
-    private bool isAttackAnimationFinished = false;
-    public bool IsAttackAnimationFinished()
-    {
-        return isAttackAnimationFinished;
-    }
-    // 上半身攻撃アニメーション終了を通知するイベント
-    public event System.Action OnUpperAttackAnimationFinished;
-
-    // 下半身攻撃アニメーション終了を通知するイベント
-    public event System.Action OnLowerAttackAnimationFinished;
+    
 
     // 静止しているか
     private bool isStop = true;
@@ -481,7 +472,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     private IEnumerator CallPantieWithDelay()
     {
-        isAttackAnimationFinished = false; // アニメーション開始時にフラグをリセット
+      
 
         for (int i = 0; i < animationDataSet.playerUpper.armForwardRotation.Length - 1; i++)
         {
@@ -499,17 +490,12 @@ public class PlayerMoveAnimation : MonoBehaviour
         isWalk = false;
         isStop = true;
         // 攻撃アニメーション終了を通知
-        isAttackAnimationFinished = true; // アニメーション終了時にフラグを設定
-        Debug.Log("上半身攻撃アニメーション終了");
-
-        // 上半身攻撃アニメーション終了を通知
-        OnUpperAttackAnimationFinished?.Invoke();
+       
 
     }
 
     private IEnumerator CallKickWithDelay()
     {
-        isAttackAnimationFinished = false; // アニメーション開始時にフラグをリセット
 
         for (int i = 0; i < animationDataSet.playerLower.armForwardRotation.Length - 1; i++)
         {
@@ -525,10 +511,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         isWalk = false;
         isStop = true;
         isAttack = false;
-        isAttackAnimationFinished = true; // アニメーション終了時にフラグを設定
-        Debug.Log("アニメーション終了");
-       // 下半身攻撃アニメーション終了を通知
-        OnLowerAttackAnimationFinished?.Invoke();
+       
     }
 
     /// <summary>
