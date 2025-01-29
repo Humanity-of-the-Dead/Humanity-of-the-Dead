@@ -60,14 +60,15 @@ public class newDropPart : MonoBehaviour//
                 {
                     PlayerParameter.Instance.comfort(humanityRecoveryAmount);
                     MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
-                    Debug.Log(this.transform.position);
+                    Destroy(gameObject);
+
+                    Debug.Log(transform.position);
                     GameObject obj = Instantiate(goGrave);
                     obj.transform.position = new Vector3(this.gameObject.transform.position.x, 0.5f, this.gameObject.transform.position.z);
                     if (bBoss)
                     {
                         GameClear();
                     }
-                    Destroy(this.gameObject);
                 }
 
                 // LÉLÅ[ÇâüÇµÇΩÇÁà⁄êAÇ∑ÇÈ
@@ -75,11 +76,12 @@ public class newDropPart : MonoBehaviour//
                 {
                     PlayerParameter.Instance.transplant(partsData);
                     MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
+                    Destroy(gameObject);
+
                     if (bBoss)
                     {
                         GameClear();
                     }
-                    Destroy(this.gameObject);
                 }
                 break;
 
