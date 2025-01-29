@@ -34,9 +34,14 @@ public class SceneInformation : ScriptableObject
     //    Three,    // ステージ３
     //    Four,
     //}
-
+    public void UpdateScene(SCENE newScene)
+    {
+        previousScene = currentScene; // 直前のシーンを保存
+        currentScene = newScene; // 新しいシーンを設定
+    }
     [SerializeField] public SceneObject[] sceneObject;
     [SerializeField] public string[] sceneNames;// シーンの名前
+
     [SerializeField] private SCENE previousScene;
     [SerializeField] private SCENE currentScene;
     [SerializeField] public int[] sceneCount;
@@ -61,7 +66,10 @@ public class SceneInformation : ScriptableObject
         return sceneCount[(int)scene];
     }
     public SCENE GetPreviousScene() { return previousScene; }
-
+    public string GetPreviousSceneName()
+    {
+        return sceneNames[(int)previousScene]; // previousScene の名前を取得
+    }
     public void SetPreviousScene(SCENE scene) { previousScene = scene; }
     public void SetCurrentScene(SCENE scene) { currentScene = scene; }
 
