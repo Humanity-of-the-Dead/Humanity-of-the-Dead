@@ -142,7 +142,7 @@ public class PlayerControl : MonoBehaviour
                     vPosition.x -= Time.deltaTime * playerSpeed;
 
                 }
-                playerMoveAnimation.HandleWalk(180);
+                playerMoveAnimation.HandleWalk(PlayerMoveAnimation.SHAFT_DIRECTION_LEFT);
             }
             //âEà⁄ìÆ
             if (Input.GetKey(KeyCode.D))
@@ -151,7 +151,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     vPosition.x += Time.deltaTime * playerSpeed;
                 }
-                playerMoveAnimation.HandleWalk(0);
+                playerMoveAnimation.HandleWalk(PlayerMoveAnimation.SHAFT_DIRECTION_RIGHT);
 
             }
 
@@ -351,8 +351,10 @@ public class PlayerControl : MonoBehaviour
     //è„îºêgçUåÇ
     public void UpperBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
+        bool isAttackingToEnemy = IsFacingToTarget(transform.position.x, vTargetPos.x, playerMoveAnimation.isFacingToRight());
+
         float fAttackReach = Vector3.Distance(vTargetPos, transform.position);
-        if (fAttackReach >= fReach)
+        if (!isAttackingToEnemy || fAttackReach >= fReach)
         {
             return;
         }
@@ -364,8 +366,10 @@ public class PlayerControl : MonoBehaviour
     //â∫îºêgçUåÇ
     public void LowerBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
+        bool isAttackingToEnemy = IsFacingToTarget(transform.position.x, vTargetPos.x, playerMoveAnimation.isFacingToRight());
+
         float fAttackReach = Vector3.Distance(vTargetPos, transform.position);
-        if (fAttackReach >= fReach)
+        if (!isAttackingToEnemy || fAttackReach >= fReach)
         {
             return;
         }
@@ -373,6 +377,13 @@ public class PlayerControl : MonoBehaviour
         damageable?.TakeDamage(iDamage, 1);
         Debug.Log("â∫îºêgçUåÇÉ_ÉÅÅ[ÉWîªíf");
 
+    }
+
+    private bool IsFacingToTarget(float playerPosX, float targetPosX, bool isFacingToRight)
+    {
+        bool isFacingToRightTarget = playerPosX <= targetPosX && isFacingToRight;
+        bool isFacingToLeftTarget = playerPosX >= targetPosX && !isFacingToRight;
+        return isFacingToRightTarget || isFacingToLeftTarget;
     }
 
 
