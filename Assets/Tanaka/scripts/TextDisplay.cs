@@ -151,7 +151,7 @@ public class TextDisplay : MonoBehaviour
                 else
                 {
                     // 正常に末尾の文字の位置を取得するため、テキスト描画系処理と同時実行を避ける必要がある
-                    if (isTextFullyDisplayed && !displaysEnterKey)
+                    if (isTextFullyDisplayed && !displaysEnterKey && TextArea.activeSelf)
                     {
                         DisplayEnterKeyOnLastChar();
                     }
@@ -217,7 +217,7 @@ public class TextDisplay : MonoBehaviour
                 }
                 else
                 {
-                    if (isTextFullyDisplayed && !displaysEnterKey)
+                    if (isTextFullyDisplayed && !displaysEnterKey && TextArea.activeSelf)
                     {
                         DisplayEnterKeyOnLastChar();
                     }
