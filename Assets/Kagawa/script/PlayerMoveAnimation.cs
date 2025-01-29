@@ -137,7 +137,6 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     public  void ShowHitEffects(int body)
     {
-        Debug.Log("ShowHitEffects");
         PlayerControl playerControl=GetComponent<PlayerControl>();
         //このオブジェクトの座標
         for (int i = 0; i < playerControl.enemyObject.Count; i++)
@@ -164,7 +163,6 @@ public class PlayerMoveAnimation : MonoBehaviour
                     Random.Range(lowerEffectYMin, lowerEffectYMax));
 
                 Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
-                Debug.Log($"effectVec3Lower= {effectVec3Lower}");
             }
 
         }
