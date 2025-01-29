@@ -160,11 +160,13 @@ public class SceneTransitionManager : MonoBehaviour
         if (isReloading) return; // シーン変更中なら処理をスキップ
         isReloading = true; // シーン変更中に設定
         StartCoroutine(FadeOut(sceneInformation.GetSceneObject(scene)));
+
     }
     //ボタンでシーン遷移する場合
     public void NextSceneButton(int index)
     {
         SceneChange((SceneInformation.SCENE)index);
+
     }
 
 

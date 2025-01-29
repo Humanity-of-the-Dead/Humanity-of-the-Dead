@@ -170,7 +170,7 @@ public class TextDisplay : MonoBehaviour
 
                 if (timer > 1)
                 {
-                    int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
+                    int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentSceneInt() + 1;
                     if (iNextIndex > SceneTransitionManager.instance.sceneInformation.sceneCount.Length)
                     {
                         iNextIndex = SceneTransitionManager.instance.sceneInformation.sceneCount.Length;
@@ -178,6 +178,7 @@ public class TextDisplay : MonoBehaviour
 
 
                     SceneTransitionManager.instance.NextSceneButton(iNextIndex);
+                    SceneTransitionManager.instance.sceneInformation.UpdateScene(SceneTransitionManager.instance.sceneInformation.GetCurrentScene());
 
 
                     timer = 0;

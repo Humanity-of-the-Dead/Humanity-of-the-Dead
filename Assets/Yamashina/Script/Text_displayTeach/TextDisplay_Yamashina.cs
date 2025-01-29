@@ -113,7 +113,7 @@ public class TextDisplay_Yamashina : MonoBehaviour
             case GameState.Clear:
                 if (timer > 1)
                 {
-                    int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
+                    int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentSceneInt() + 1;
                     if (iNextIndex > 5)
                     {
                         iNextIndex = 5;
