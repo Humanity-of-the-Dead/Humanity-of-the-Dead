@@ -37,7 +37,7 @@ public class newEnemyParameters : CharacterStats
     [SerializeField, Header("ボスかどうか、チェックが入っているならボス")]
     public bool Boss;
 
-    [SerializeField,Header("敵が打ってくる一個の弾のダメージ量")] float bulletDamage ;    //  //クリアテキスト
+    [SerializeField, Header("敵が打ってくる一個の弾のダメージ量")] float bulletDamage;    //  //クリアテキスト
     //  [SerializeField]
     //private  GameObject textBox;
 
@@ -65,7 +65,7 @@ public class newEnemyParameters : CharacterStats
     private float hpBarDestroy = 0.3f;
     //private Transform player; // プレイヤーの位置
 
-
+    //public bool isDropInstantiated = false;
     private void Start()
     {
         MaxLowerHP = LowerHP;
@@ -142,7 +142,7 @@ public class newEnemyParameters : CharacterStats
         {
             //上半身のHPを減らす
             UpperHP -= (int)damage;
-            ShowHitEffects(body);
+            //ShowHitEffects(body);
             Debug.Log(hitGameObject);
 
             UpdateHPBar(UpperHPBar, UpperHP, MaxUpperHP);
@@ -157,7 +157,7 @@ public class newEnemyParameters : CharacterStats
         {
             //下半身のHPを減らす
             LowerHP -= (int)damage;
-            ShowHitEffects(body);
+            //ShowHitEffects(body);
             Debug.Log(hitGameObject);
             UpdateHPBar(LowerHPBar, LowerHP, MaxLowerHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
@@ -176,37 +176,37 @@ public class newEnemyParameters : CharacterStats
         }
     }
     //攻撃がヒットしたエフェクト(オブジェクト)を出す
-    public override void ShowHitEffects(int body)
-    {
-        //このオブジェクトの座標
-        Vector3 enemyVector3 = new Vector3(transform.position.x,transform.position.y);
+    //public override void ShowHitEffects(int body)
+    //{
+    //    //このオブジェクトの座標
+    //    Vector3 enemyVector3 = new Vector3(transform.position.x,transform.position.y);
 
-        
 
-        //上半身の場合
-        if (body == 0)
-        {
-            //オブジェクトを出すローカル座標
-            Vector3 effectVec2Upper = new Vector3(
-                Random.Range(upperEffectXMin, upperEffectXMax),
-                Random.Range(upperEffectYMin, upperEffectYMax));
 
-            //オブジェクトを出す
-            Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
-            // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
-            // Debug.Log("hit effect");
-        }
+    //    //上半身の場合
+    //    if (body == 0)
+    //    {
+    //        //オブジェクトを出すローカル座標
+    //        Vector3 effectVec2Upper = new Vector3(
+    //            Random.Range(upperEffectXMin, upperEffectXMax),
+    //            Random.Range(upperEffectYMin, upperEffectYMax));
 
-        if (body == 1)
-        {
-            //オブジェクトを出すローカル座標
-            Vector3 effectVec3Lower = new Vector2(
-                Random.Range(lowerEffectXMin, lowerEffectXMax),
-                Random.Range(lowerEffectYMin, lowerEffectYMax));
+    //        //オブジェクトを出す
+    //        Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
+    //        // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
+    //        // Debug.Log("hit effect");
+    //    }
 
-            Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
-        }
-    }
+    //    if (body == 1)
+    //    {
+    //        //オブジェクトを出すローカル座標
+    //        Vector3 effectVec3Lower = new Vector2(
+    //            Random.Range(lowerEffectXMin, lowerEffectXMax),
+    //            Random.Range(lowerEffectYMin, lowerEffectYMax));
+
+    //        Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
+    //    }
+    //}
 
 
     private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
@@ -233,18 +233,22 @@ public class newEnemyParameters : CharacterStats
         {
             //プレハブをインスタンス化
             drop = Instantiate(preUpperPart);
+            //isDropInstantiated = true;
+
         }
         else
         {
             //プレハブをインスタンス化
             drop = Instantiate(preLowerPart);
+            //isDropInstantiated = true;
+
         }
 
         //生成したパーツを自身の場所に持ってくる
         drop.transform.position = transform.position;
 
 
-      
+
 
         //ボスフラグを渡す
         drop.GetComponent<newDropPart>().getBossf(Boss);

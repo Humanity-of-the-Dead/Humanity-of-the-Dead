@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum UpperAttack
@@ -42,6 +42,21 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     //歩きの配列の番号
     private int walkIndex = 0;
+    [SerializeField, Header("エフェクト関連")]
+    [Tooltip("エフェクトのプレハブを代入")]
+    public GameObject hitGameObject;
+    [Tooltip("エフェクトが上半身に出る範囲（X座標),最大と最小")]
+
+    public float upperEffectXMin, upperEffectXMax;
+    [Tooltip("エフェクトが上半身に出る範囲（Y座標),最大と最小")]
+
+    public float upperEffectYMin, upperEffectYMax;
+    [Tooltip("エフェクトが下半身に出る範囲（X座標),最大と最小")]
+
+    public float lowerEffectXMin, lowerEffectXMax;
+    [Tooltip("エフェクトが下半身に出る範囲（Y座標),最大と最小")]
+
+    public float lowerEffectYMin, lowerEffectYMax;
 
 
     //攻撃の配列の番号
@@ -68,10 +83,10 @@ public class PlayerMoveAnimation : MonoBehaviour
         return isAttackAnimationFinished;
     }
     // 上半身攻撃アニメーション終了を通知するイベント
-    public event Action OnUpperAttackAnimationFinished;
+    public event System.Action OnUpperAttackAnimationFinished;
 
     // 下半身攻撃アニメーション終了を通知するイベント
-    public event Action OnLowerAttackAnimationFinished;
+    public event System.Action OnLowerAttackAnimationFinished;
 
     // 静止しているか
     private bool isStop = true;
@@ -122,7 +137,42 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
+    public  void ShowHitEffects(int body)
+    {
+        PlayerControl playerControl=GetComponent<PlayerControl>();
+        //このオブジェクトの座標
+        for (int i = 0; i < playerControl.enemyObject.Count; i++)
+        {
+            Vector3 enemyVector3 = new Vector3(playerControl.enemyObject[i].transform.position.x, playerControl.enemyObject[i].transform.position.y);
+            //上半身の場合
+            if (body == 0)
+            {
+                //オブジェクトを出すローカル座標
+                Vector3 effectVec2Upper = new Vector3(
+                    Random.Range(upperEffectXMin, upperEffectXMax),
+                    Random.Range(upperEffectYMin, upperEffectYMax));
 
+                //オブジェクトを出す
+                Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
+                // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
+                // Debug.Log("hit effect");
+            }
+            if (body == 1)
+            {
+                //オブジェクトを出すローカル座標
+                Vector3 effectVec3Lower = new Vector2(
+                    Random.Range(lowerEffectXMin, lowerEffectXMax),
+                    Random.Range(lowerEffectYMin, lowerEffectYMax));
+
+                Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
+            }
+
+        }
+
+       
+
+       
+    }
     /// <summary>
     /// 歩くアニメーション
     /// </summary>
@@ -291,6 +341,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                 }
                 break;
         }
+
     }
 
     /// <summary>
@@ -435,6 +486,8 @@ public class PlayerMoveAnimation : MonoBehaviour
         for (int i = 0; i < animationDataSet.playerUpper.armForwardRotation.Length - 1; i++)
         {
             PlayerPantie();
+            ShowHitEffects(0);
+
 
             // indexNumberの値を増やす(配列番号を上げる)
             attackNumber = (attackNumber + 1) % animationDataSet.playerUpper.armForwardRotation.Length;
@@ -461,6 +514,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         for (int i = 0; i < animationDataSet.playerLower.armForwardRotation.Length - 1; i++)
         {
             PlayerKick();
+            ShowHitEffects(1);
 
             // indexNumberの値を増やす(配列番号を上げる)
             attackNumber = (attackNumber + 1) % animationDataSet.playerLower.armForwardRotation.Length;
