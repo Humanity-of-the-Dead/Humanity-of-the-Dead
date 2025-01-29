@@ -5,7 +5,6 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using System.Collections.Generic;
-using UnityEditor.VersionControl;
 
 public class TextDisplay : MonoBehaviour
 {
