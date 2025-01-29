@@ -2654,7 +2654,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19.01, y: -17}
+  m_AnchoredPosition: {x: 0, y: -17}
   m_SizeDelta: {x: 1500, y: 391.4702}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977587877
@@ -2783,11 +2783,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1094525340 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7043547610445248962, guid: 1fc7a90ff78f0564680efeef03c2b455, type: 3}
-  m_PrefabInstance: {fileID: 3069625219489952148}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1143282939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4917,7 +4912,6 @@ MonoBehaviour:
   customNewline: '[BR]'
   TextSpeed: 0.1
   clearToTransitionTime: 0.1
-  enterKeyCanvas: {fileID: 1094525340}
   enterKeyPrefab: {fileID: 5479822308329242555, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
   GameClear: {fileID: 247270896}
 --- !u!1001 &6629502204534203187
