@@ -80,11 +80,7 @@ public class PlayerControl : MonoBehaviour
         mainCameraWidth = mainCameraHeight * mainCamera.aspect;
         // 攻撃アニメーション終了時のコールバックを設定
         // 上半身攻撃アニメーション終了時のコールバックを設定
-        playerMoveAnimation.OnUpperAttackAnimationFinished += OnUpperAttackAnimationFinished;
-
-        // 下半身攻撃アニメーション終了時のコールバックを設定
-        playerMoveAnimation.OnLowerAttackAnimationFinished += OnLowerAttackAnimationFinished;
-    }
+         }
 
     // Update is called once per frame
     void Update()
@@ -212,6 +208,7 @@ public class PlayerControl : MonoBehaviour
             {
 
                 playerMoveAnimation.PantieStart();
+                OnUpperAttackAnimationFinished();
                 #endregion
                 switch (PlayerParameter.Instance.UpperData.upperAttack)
                 {
@@ -268,6 +265,8 @@ public class PlayerControl : MonoBehaviour
             {
                 #region 山品変更
                 playerMoveAnimation.KickStart();
+                OnLowerAttackAnimationFinished();   
+
                 #endregion
                 switch (PlayerParameter.Instance.LowerData.lowerAttack)
                 {
@@ -321,15 +320,15 @@ public class PlayerControl : MonoBehaviour
         characterSprites.legLeft.sprite = underBody.spLeftLeg;
     }
 
-    private void OnDestroy()
-    {
-        // コールバックの解除
-        if (playerMoveAnimation != null)
-        {
-            playerMoveAnimation.OnUpperAttackAnimationFinished -= OnUpperAttackAnimationFinished;
-            playerMoveAnimation.OnLowerAttackAnimationFinished -= OnLowerAttackAnimationFinished;
-        }
-    }
+    //private void OnDestroy()
+    //{
+    //    // コールバックの解除
+    //    if (playerMoveAnimation != null)
+    //    {
+    //        playerMoveAnimation.OnUpperAttackAnimationFinished -= OnUpperAttackAnimationFinished;
+    //        playerMoveAnimation.OnLowerAttackAnimationFinished -= OnLowerAttackAnimationFinished;
+    //    }
+    //}
 
     private void OnUpperAttackAnimationFinished()
     {
