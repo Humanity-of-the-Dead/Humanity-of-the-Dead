@@ -150,6 +150,7 @@ public class TextDisplay : MonoBehaviour
                 }
                 else
                 {
+                    // 正常に末尾の文字の位置を取得するため、テキスト描画系処理と同時実行を避ける必要がある
                     if (isTextFullyDisplayed && !displaysEnterKey)
                     {
                         DisplayEnterKeyOnLastChar();
@@ -411,26 +412,46 @@ public class TextDisplay : MonoBehaviour
 
         // 末尾文字の左上頂点のインデックス
         // 表示されていない文字には座標が無いので、その分差し引く
-        int vIdx = (lastCharIndex - invisibleCharCount) * 4;
+        int vertexCountPerChar = 4; // 1文字につき4頂点
+        int vIdx = (lastCharIndex - invisibleCharCount) * vertexCountPerChar;
 
-        UIVertex topLeft = vertexs[vIdx];
-        UIVertex bottomRight = vertexs[vIdx + 2];
+        Vector3 enterKeyPosition = Vector3.zero; 
+        // vIdxが末尾文字のものとして正しいかチェック
+        if (vIdx == vertexs.Count - vertexCountPerChar)
+        {
+            UIVertex topLeft = vertexs[vIdx];
+            UIVertex bottomRight = vertexs[vIdx + 2];
 
-        // 各頂点座標をピクセル単位からユニット単位に変換
-        topLeft.position /= text.pixelsPerUnit;
-        bottomRight.position /= text.pixelsPerUnit;
+            // 各頂点座標をピクセル単位からユニット単位に変換
+            topLeft.position /= text.pixelsPerUnit;
+            bottomRight.position /= text.pixelsPerUnit;
 
-        // 2頂点の中央 = 文字の中央座標
-        Vector3 centerPosistion = (topLeft.position + bottomRight.position) / 2f;
+            // 2頂点の中央 = 文字の中央座標
+            Vector3 lastCharPosistion = (topLeft.position + bottomRight.position) / 2f;
 
-        // テキスト表示域の座標分調整
-        Vector3 lastCharPosistion = centerPosistion + text.transform.localPosition;
-        //Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
+            // テキスト表示域の座標分調整
+            enterKeyPosition = lastCharPosistion + text.transform.localPosition;
+            //Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
+        }
+        else
+        {
+            // テキストボックス右下辺り
+            Vector3 defaultPosition =new Vector3(545f, 117f, 0f);
+            enterKeyPosition = defaultPosition;
+
+            Debug.Log("failed to get last character position of text.");
+            Debug.Log($"vIdx= {vIdx}, vertexs.Count= {vertexs.Count}");
+        }
+
+     
 
         // 末尾の文字の位置に新しい enterKeyInstance を生成して置換
         enterKeyInstance = Instantiate(enterKeyPrefab);
-        text.text = textStr.Remove(textStr.Length - 1);
-        enterKeyInstance.transform.localPosition = lastCharPosistion;
+        if (textStr.Length > 0)
+        {
+            text.text = textStr.Remove(textStr.Length - 1);
+        }
+        enterKeyInstance.transform.localPosition = enterKeyPosition;
         enterKeyInstance.transform.SetParent(TextArea.transform.GetChild(0).transform.GetChild(0).transform, false);
         //Debug.Log($"新しい enterKeyInstance を生成: {enterKeyInstance.transform.localPosition}");
 
