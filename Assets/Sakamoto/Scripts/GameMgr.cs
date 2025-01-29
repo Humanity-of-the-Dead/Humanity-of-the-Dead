@@ -10,7 +10,7 @@ public enum GameState
     Clear, //クリア表示
     BeforeBoss, // 新しく追加：ボス戦直前
 
-    AfterBOss,//ボス後
+    AfterBoss,//ボス後
     GameOver,
 }
 

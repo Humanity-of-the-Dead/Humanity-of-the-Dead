@@ -133,8 +133,8 @@ public class newDropPart : MonoBehaviour//
         //goTextBox.GetComponent<GoalScript>().showText();
         //テキストボックスの表示
         //goTextBox.SetActive(true);
-        //GameStateをAfterBOssに切り替える
-        GameMgr.ChangeState(GameState.AfterBOss);
+        //GameStateをAfterBossに切り替える
+        GameMgr.ChangeState(GameState.AfterBoss);
         TextDisplay textDisplay = FindAnyObjectByType<TextDisplay>();
         textDisplay.TextArea.SetActive(true);
 

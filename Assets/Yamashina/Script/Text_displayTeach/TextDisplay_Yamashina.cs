@@ -130,7 +130,7 @@ public class TextDisplay_Yamashina : MonoBehaviour
                 timer += Time.deltaTime;
 
                 break;
-            case GameState.AfterBOss:
+            case GameState.AfterBoss:
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     if (!isTextFullyDisplayed)
