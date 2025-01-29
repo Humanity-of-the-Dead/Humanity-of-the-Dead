@@ -35,7 +35,7 @@ public class TextDisplay : MonoBehaviour
 
     [SerializeField]
     private PlayerControl Player;
-   
+
 
     [SerializeField]
     public GameObject TextArea; //テキスト表示域
@@ -60,9 +60,6 @@ public class TextDisplay : MonoBehaviour
     private Vector3? lastCharPosistion;  // 現在のテキストの末尾の文字の座標。完全に表示されてなければnull
 
     float timer = 0;
-    [SerializeField, Header("EnterKeyのキャンバス")]
-    private GameObject enterKeyCanvas;
-    private GameObject canvasObject;  // 生成したキャンバスのインスタンスを保持する変数
     [SerializeField, Header("EnterKeyのプレハブ")]
     private GameObject enterKeyPrefab;
 
@@ -132,7 +129,7 @@ public class TextDisplay : MonoBehaviour
                 break;
 
             case GameState.ShowText:
-                
+
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     if (!isTextFullyDisplayed)
@@ -293,6 +290,10 @@ public class TextDisplay : MonoBehaviour
         {
             text.text = "";
             isTextFullyDisplayed = false;
+            if (enterKeyInstance != null)
+            {
+                Destroy(enterKeyInstance);
+            }
             lastCharPosistion = null;
             Debug.Log($"Displaying text: {textDataSet[LoadDataIndex].textAsset[LoadText].text}");
             Debug.Log("Starting new TypingCoroutine");
@@ -419,18 +420,19 @@ public class TextDisplay : MonoBehaviour
         bottomRight.position /= text.pixelsPerUnit;
 
         // 2頂点の中央 = 文字の中央座標をlastCharPosistionにセット
-        lastCharPosistion = (topLeft.position + bottomRight.position) / 2f;        //Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
+        lastCharPosistion = (topLeft.position + bottomRight.position) / 2f;
+        //Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
         Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
 
         // すでに存在する enterKeyInstance を削除
-        if (enterKeyInstance != null)
-        {
-            Destroy(enterKeyInstance);
-        }
+
         // 新しい enterKeyInstance を生成
-        enterKeyInstance = Instantiate(enterKeyPrefab, enterKeyCanvas.transform);
+        enterKeyInstance = Instantiate(enterKeyPrefab);
+        //Vector2 oneCharacter_X = new Vector2(bottomRight.position.x - topLeft.position.x, 0);
+        //textStr.Replace("*", "");
         enterKeyInstance.transform.localPosition = lastCharPosistion ?? Vector3.zero;
 
+        enterKeyInstance.transform.SetParent(TextArea.transform.GetChild(0).transform.GetChild(0).transform, false);
         Debug.Log($"新しい enterKeyInstance を生成: {enterKeyInstance.transform.localPosition}");
 
         //Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
