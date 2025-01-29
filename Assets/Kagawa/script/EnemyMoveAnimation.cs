@@ -431,7 +431,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         isAttack = false;
         // 攻撃アニメーション終了を通知
         isAttackAnimationFinished = true; // アニメーション終了時にフラグを設定
-        Debug.Log("上半身攻撃アニメーション終了");
+        //Debug.Log("上半身攻撃アニメーション終了");
 
         // 上半身攻撃アニメーション終了を通知
         OnUpperAttackAnimationFinished?.Invoke();

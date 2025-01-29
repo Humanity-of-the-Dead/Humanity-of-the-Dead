@@ -35,7 +35,7 @@ public class TextDisplay : MonoBehaviour
 
     [SerializeField]
     private PlayerControl Player;
-
+   
 
     [SerializeField]
     public GameObject TextArea; //テキスト表示域
@@ -60,6 +60,14 @@ public class TextDisplay : MonoBehaviour
     private Vector3? lastCharPosistion;  // 現在のテキストの末尾の文字の座標。完全に表示されてなければnull
 
     float timer = 0;
+    [SerializeField, Header("EnterKeyのキャンバス")]
+    private GameObject enterKeyCanvas;
+    private GameObject canvasObject;  // 生成したキャンバスのインスタンスを保持する変数
+    [SerializeField, Header("EnterKeyのプレハブ")]
+    private GameObject enterKeyPrefab;
+
+    private GameObject enterKeyInstance; // 既存の enterKeyInstance を保持する変数
+
     public bool IsTextFullyDisplayed()
     {
         return isTextFullyDisplayed; // メソッドを通じて状態を取得
@@ -411,7 +419,19 @@ public class TextDisplay : MonoBehaviour
         bottomRight.position /= text.pixelsPerUnit;
 
         // 2頂点の中央 = 文字の中央座標をlastCharPosistionにセット
-        lastCharPosistion = (topLeft.position + bottomRight.position) / 2f;
+        lastCharPosistion = (topLeft.position + bottomRight.position) / 2f;        //Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
+        Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
+
+        // すでに存在する enterKeyInstance を削除
+        if (enterKeyInstance != null)
+        {
+            Destroy(enterKeyInstance);
+        }
+        // 新しい enterKeyInstance を生成
+        enterKeyInstance = Instantiate(enterKeyPrefab, enterKeyCanvas.transform);
+        enterKeyInstance.transform.localPosition = lastCharPosistion ?? Vector3.zero;
+
+        Debug.Log($"新しい enterKeyInstance を生成: {enterKeyInstance.transform.localPosition}");
 
         //Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
     }

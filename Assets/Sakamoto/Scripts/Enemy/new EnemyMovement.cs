@@ -342,7 +342,7 @@ public class newEnemyMovement : MonoBehaviour
     {
         IDamageable damageable = PlayerParameter.Instance.GetComponent<IDamageable>();
         damageable?.TakeDamage(lowerDamage, 1);
-        Debug.Log("下半身攻撃ダメージ判断");
+        //Debug.Log("下半身攻撃ダメージ判断");
 
     }
 }

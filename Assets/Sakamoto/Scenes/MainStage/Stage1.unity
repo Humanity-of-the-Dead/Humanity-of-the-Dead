@@ -2783,6 +2783,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1094525340 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7043547610445248962, guid: 1fc7a90ff78f0564680efeef03c2b455, type: 3}
+  m_PrefabInstance: {fileID: 3069625219489952148}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1143282939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4565,6 +4570,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1014370418393098575, guid: 1fc7a90ff78f0564680efeef03c2b455, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1014370418393098575, guid: 1fc7a90ff78f0564680efeef03c2b455, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1014370418393098575, guid: 1fc7a90ff78f0564680efeef03c2b455, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1980
+      objectReference: {fileID: 0}
+    - target: {fileID: 1014370418393098575, guid: 1fc7a90ff78f0564680efeef03c2b455, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1020
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412699428392755987, guid: 1fc7a90ff78f0564680efeef03c2b455, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412699428392755987, guid: 1fc7a90ff78f0564680efeef03c2b455, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6783844349180645375, guid: 1fc7a90ff78f0564680efeef03c2b455, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4888,6 +4917,8 @@ MonoBehaviour:
   customNewline: '[BR]'
   TextSpeed: 0.1
   clearToTransitionTime: 0.1
+  enterKeyCanvas: {fileID: 1094525340}
+  enterKeyPrefab: {fileID: 5479822308329242555, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
   GameClear: {fileID: 247270896}
 --- !u!1001 &6629502204534203187
 PrefabInstance:

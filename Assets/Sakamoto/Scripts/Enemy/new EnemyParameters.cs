@@ -148,8 +148,8 @@ public class newEnemyParameters : CharacterStats
             UpdateHPBar(UpperHPBar, UpperHP, MaxUpperHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
-            Debug.Log(UpperHP);
-            Debug.Log(MaxUpperHP);
+            //Debug.Log(UpperHP);
+            //Debug.Log(MaxUpperHP);
 
         }
 
