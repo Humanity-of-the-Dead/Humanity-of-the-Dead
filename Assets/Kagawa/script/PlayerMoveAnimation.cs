@@ -484,7 +484,6 @@ public class PlayerMoveAnimation : MonoBehaviour
         for (int i = 0; i < animationDataSet.playerUpper.armForwardRotation.Length - 1; i++)
         {
             PlayerPantie();
-            //ShowHitEffects(0);
 
 
             // indexNumberの値を増やす(配列番号を上げる)
@@ -507,7 +506,6 @@ public class PlayerMoveAnimation : MonoBehaviour
         for (int i = 0; i < animationDataSet.playerLower.armForwardRotation.Length - 1; i++)
         {
             PlayerKick();
-            //ShowHitEffects(1);
 
             // indexNumberの値を増やす(配列番号を上げる)
             attackNumber = (attackNumber + 1) % animationDataSet.playerLower.armForwardRotation.Length;
