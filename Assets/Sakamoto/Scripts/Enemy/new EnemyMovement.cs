@@ -56,11 +56,7 @@ public class newEnemyMovement : MonoBehaviour
         {
             gun = GetComponent<Gun>();
         }
-        enemyMoveAnimation.OnUpperAttackAnimationFinished += OnUpperAttackAnimationFinished;
-
-        // 下半身攻撃アニメーション終了時のコールバックを設定
-        enemyMoveAnimation.OnLowerAttackAnimationFinished += OnLowerAttackAnimationFinished;
-
+       
     }
 
     void Update()
@@ -146,6 +142,7 @@ public class newEnemyMovement : MonoBehaviour
                             {
                                 //上半身攻撃
                                 enemyMoveAnimation.PantieStart();
+                                OnUpperAttackAnimationFinished();
 
                                 //攻撃者の上半身を確認
                                 switch (upperPart.sPartsName)
@@ -209,7 +206,7 @@ public class newEnemyMovement : MonoBehaviour
                             {
                                 //下半身攻撃
                                 enemyMoveAnimation.KickStart();
-
+                                OnLowerAttackAnimationFinished();
                                 //攻撃者の下半身を確認
                                 switch (lowerPart.sPartsName)
                                 {
@@ -309,15 +306,7 @@ public class newEnemyMovement : MonoBehaviour
             return false;
         }
     }
-    private void OnDestroy()
-    {
-        // コールバックの解除
-        if (enemyMoveAnimation != null)
-        {
-            enemyMoveAnimation.OnUpperAttackAnimationFinished -= OnUpperAttackAnimationFinished;
-            enemyMoveAnimation.OnLowerAttackAnimationFinished -= OnLowerAttackAnimationFinished;
-        }
-    }
+   
     private void OnUpperAttackAnimationFinished()
     {
         // 上半身攻撃判定
@@ -342,7 +331,7 @@ public class newEnemyMovement : MonoBehaviour
     {
         IDamageable damageable = PlayerParameter.Instance.GetComponent<IDamageable>();
         damageable?.TakeDamage(lowerDamage, 1);
-        Debug.Log("下半身攻撃ダメージ判断");
+        //Debug.Log("下半身攻撃ダメージ判断");
 
     }
 }

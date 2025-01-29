@@ -44,7 +44,7 @@ public class DropButton : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !isTriggeredByPlayer)
         {
-            Debug.Log("プレイヤーがトリガー範囲内にいます。");
+            //Debug.Log("プレイヤーがトリガー範囲内にいます。");
             isTriggeredByPlayer = true; // プレイヤーとの接触状態を記録
             foreach (var button in goButton)
             {
@@ -57,7 +57,7 @@ public class DropButton : MonoBehaviour
     {
         if (collision.CompareTag("Player") && isTriggeredByPlayer)
         {
-            Debug.Log("プレイヤーがトリガー範囲外に出ました。");
+            //Debug.Log("プレイヤーがトリガー範囲外に出ました。");
             isTriggeredByPlayer = false; // プレイヤーとの接触状態を解除
             foreach (var button in goButton)
             {

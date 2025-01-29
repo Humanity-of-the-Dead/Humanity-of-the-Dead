@@ -4151,6 +4151,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: hitGameObject
+      value: 
+      objectReference: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4386,6 +4390,7 @@ MonoBehaviour:
   customNewline: '[BR]'
   TextSpeed: 0.1
   clearToTransitionTime: 0.1
+  enterKeyPrefab: {fileID: 5479822308329242555, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
   GameClear: {fileID: 247270896}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
