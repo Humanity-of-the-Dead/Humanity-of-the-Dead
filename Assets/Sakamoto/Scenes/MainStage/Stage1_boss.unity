@@ -4391,6 +4391,7 @@ MonoBehaviour:
   customNewline: '[BR]'
   TextSpeed: 0.1
   clearToTransitionTime: 0.1
+  enterKeyPrefab: {fileID: 5479822308329242555, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
   GameClear: {fileID: 247270896}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
