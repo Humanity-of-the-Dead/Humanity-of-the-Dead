@@ -104,7 +104,7 @@ public class PlayerParameter : CharacterStats
 
                         #endregion
                         //プレイヤーを初期化
-                        KeepBodyData(); 
+                        KeepBodyData();
 
                         //ゲームオーバーの標準
                         goPanel.SetActive(true);
@@ -342,11 +342,14 @@ public class PlayerParameter : CharacterStats
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // シーン遷移後に参照を再取得
-        InitializeReferences();
-         
-        //upperIndex = UpperData;
-        //lowerIndex = LowerData;
-        Debug.Log($"シーン {scene.name} がロードされました");
+        string sceneName = SceneTransitionManager.instance.sceneInformation.GetPreviousSceneName();
+
+        if (sceneName != SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFive))
+        {
+            InitializeReferences(); 
+        }
+            //upperIndex = UpperData;
+            //lowerIndex = LowerData;
+            Debug.Log($"シーン {scene.name} がロードされました");
     }
 }
