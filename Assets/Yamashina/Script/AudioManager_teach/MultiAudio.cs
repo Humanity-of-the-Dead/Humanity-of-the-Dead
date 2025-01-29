@@ -37,15 +37,23 @@ public class MultiAudio : MonoBehaviour
             ins = this;
             DontDestroyOnLoad(gameObject);
         }
-    }
-
-    private void Start()
-    {
+        if (audioClipsBGM == null || audioClipsBGM.Length == 0)
+        {
+            Debug.LogWarning("audioClipsBGM is null or empty!");
+        }
+        // Initialize dictionaries for easy access by name
+        InitializeDictionaries();
         bgmSource = GameObject.FindWithTag("BGM").GetComponent<AudioSource>();
         seSource = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
         uiSource = GameObject.FindWithTag("UI").GetComponent<AudioSource>(); // New UI AudioSource
 
-        // Assign mixer groups to the audio sources
+
+    }
+
+    private void Start()
+    {
+       
+         // Assign mixer groups to the audio sources
         if (bgmSource != null) bgmSource.outputAudioMixerGroup = bgmMixerGroup;
         if (seSource != null)
         {
@@ -54,8 +62,7 @@ public class MultiAudio : MonoBehaviour
         }
         if (uiSource != null) uiSource.outputAudioMixerGroup = uiMixerGroup; // Assign UI Mixer Group
 
-        // Initialize dictionaries for easy access by name
-        InitializeDictionaries();
+      
     }
 
     private void InitializeDictionaries()
