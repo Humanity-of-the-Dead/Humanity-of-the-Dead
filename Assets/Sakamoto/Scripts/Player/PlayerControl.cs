@@ -250,12 +250,13 @@ public class PlayerControl : MonoBehaviour
                     case UpperAttack.NURSE:
                         MultiAudio.ins.PlaySEByName("SE_nurse_attack_upper");
                         break;
+                    case UpperAttack.BOSS:
+                        MultiAudio.ins.PlaySEByName("SE_lastboss_attack_upper");
+
+                        break;
                 }
 
-                if (PlayerParameter.Instance.UpperData.sPartsName == "É{ÉXÇÃè„îºêg")
-                {
-                    MultiAudio.ins.PlaySEByName("SE_lastboss_attack_upper");
-                }
+               
 
                
 
@@ -281,6 +282,10 @@ public class PlayerControl : MonoBehaviour
 
                     case LowerAttack.NURSE:
                         MultiAudio.ins.PlaySEByName("SE_nurse_attack_lower");
+                        break;
+
+                        case LowerAttack.BOSS:
+                        MultiAudio.ins.PlaySEByName("SE_lastboss_attack_lower");
                         break;
                 }
 
