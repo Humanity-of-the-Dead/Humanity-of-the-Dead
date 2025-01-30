@@ -33,6 +33,8 @@ public class newEnemyParameters : CharacterStats
     //プレイヤーコントローラ
     public PlayerControl playerControl;
 
+    private PlayerMoveAnimation playerMoveAnimation;
+
     //ボスフラグ
     [SerializeField, Header("ボスかどうか、チェックが入っているならボス")]
     public bool Boss;
@@ -81,6 +83,7 @@ public class newEnemyParameters : CharacterStats
         }
 
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
+        playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
         //Debug.Log(playerControl);
 
     }
@@ -143,6 +146,7 @@ public class newEnemyParameters : CharacterStats
             //上半身のHPを減らす
             UpperHP -= (int)damage;
             //ShowHitEffects(body);
+            playerMoveAnimation.ShowHitEffects(body);
             Debug.Log(hitGameObject);
 
             UpdateHPBar(UpperHPBar, UpperHP, MaxUpperHP);
@@ -158,6 +162,7 @@ public class newEnemyParameters : CharacterStats
             //下半身のHPを減らす
             LowerHP -= (int)damage;
             //ShowHitEffects(body);
+            playerMoveAnimation.ShowHitEffects(body);
             Debug.Log(hitGameObject);
             UpdateHPBar(LowerHPBar, LowerHP, MaxLowerHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
