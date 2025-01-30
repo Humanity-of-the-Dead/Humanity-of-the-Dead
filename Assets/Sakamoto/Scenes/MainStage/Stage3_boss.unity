@@ -859,7 +859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &259418452
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2820,11 +2820,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4660452671516772856, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 78
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4660452671516772856, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 61
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4660452671516772856, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2856,11 +2856,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4660452671516772856, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 670
+      value: 661.4
       objectReference: {fileID: 0}
     - target: {fileID: 4660452671516772856, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 117
+      value: 139.18
       objectReference: {fileID: 0}
     - target: {fileID: 4660452671516772856, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2876,7 +2876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5479822308329242555, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
       propertyPath: m_Name
-      value: EnterUI
+      value: SkipUI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4390,7 +4390,7 @@ MonoBehaviour:
   customNewline: '[BR]'
   TextSpeed: 0.1
   clearToTransitionTime: 0.1
-  enterKeyPrefab: {fileID: 5479822308329242555, guid: 7b182524c7096c6498e33924da2e283a, type: 3}
+  enterKeyPrefab: {fileID: 5479822308329242555, guid: 3ec0f355a36f42446be87c8c039b6ede, type: 3}
   GameClear: {fileID: 247270896}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
