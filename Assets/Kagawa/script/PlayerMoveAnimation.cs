@@ -91,6 +91,9 @@ public class PlayerMoveAnimation : MonoBehaviour
     public float timeAttack = 0;
     #endregion
 
+    public const int SHAFT_DIRECTION_RIGHT = 0;
+    public const int SHAFT_DIRECTION_LEFT = 180;
+
     private void Start()
     {
 
@@ -106,7 +109,11 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeAttack = 0;
     }
 
-
+    // 右を向いているか
+    public bool isFacingToRight()
+    {
+        return shaft == SHAFT_DIRECTION_RIGHT;
+    }
 
     public void HandleWalk(int direction)
     {
@@ -331,6 +338,41 @@ public class PlayerMoveAnimation : MonoBehaviour
                     foot[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.nurseUpper.footForwardRotation[attackNumber]);
                 }
                 break;
+            case UpperAttack.BOSS:
+                // Quaternion.Euler: 回転軸( x, y, z)
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossUpper.wholeRotation[attackNumber]);
+
+                // 腕のアニメーション
+                if (animationDataSet.bossUpper.armForwardRotation == null || animationDataSet.bossUpper.armBackRotation == null)
+                {
+                    Debug.LogWarning("ナースArmのデータが何かしら抜けてる");
+                    return;
+                }
+                else
+                {
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossUpper.armForwardRotation[attackNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossUpper.armBackRotation[attackNumber]);
+                }
+
+                // 足のアニメーション
+                if (animationDataSet.bossUpper.legForwardRotation == null || animationDataSet.bossUpper.legBackRotation == null)
+                {
+                    Debug.LogWarning("ナースLegのデータが何かしら抜けてる");
+                    return;
+                }
+                else if (animationDataSet.bossUpper.footBackRotation == null || animationDataSet.bossUpper.footForwardRotation == null)
+                {
+                    Debug.LogWarning("ナースFootのデータが何かしら抜けてる");
+                    return;
+                }
+                else
+                {
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossUpper.legBackRotation[attackNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossUpper.legForwardRotation[attackNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossUpper.footBackRotation[attackNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossUpper.footForwardRotation[attackNumber]);
+                }
+                break;
         }
 
     }
@@ -447,6 +489,43 @@ public class PlayerMoveAnimation : MonoBehaviour
                     foot[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.nurseLower.footForwardRotation[attackNumber]);
                 }
                 break;
+
+            case LowerAttack.BOSS:
+                // Quaternion.Euler: 回転軸( x, y, z)
+                playerRc.transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossLower.wholeRotation[attackNumber]);
+
+                // 腕のアニメーション
+                if (animationDataSet.bossLower.armForwardRotation == null || animationDataSet.bossLower.armBackRotation == null)
+                {
+                    Debug.LogWarning("ナースArmのデータが何かしら抜けてる");
+                    return;
+                }
+                else
+                {
+                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossLower.armForwardRotation[attackNumber]);
+                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossLower.armBackRotation[attackNumber]);
+                }
+
+                // 足のアニメーション
+                if (animationDataSet.bossLower.legForwardRotation == null || animationDataSet.bossLower.legBackRotation == null)
+                {
+                    Debug.LogWarning("ナースLegのデータが何かしら抜けてる");
+                    return;
+                }
+                else if (animationDataSet.bossLower.footBackRotation == null || animationDataSet.bossLower.footForwardRotation == null)
+                {
+                    Debug.LogWarning("ナースFootのデータが何かしら抜けてる");
+                    return;
+                }
+                else
+                {
+                    leg[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossLower.legBackRotation[attackNumber]);
+                    leg[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossLower.legForwardRotation[attackNumber]);
+                    foot[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossLower.footBackRotation[attackNumber]);
+                    foot[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossLower.footForwardRotation[attackNumber]);
+                }
+
+                break;
         }
     }
 
@@ -477,7 +556,6 @@ public class PlayerMoveAnimation : MonoBehaviour
         for (int i = 0; i < animationDataSet.playerUpper.armForwardRotation.Length - 1; i++)
         {
             PlayerPantie();
-            ShowHitEffects(0);
 
 
             // indexNumberの値を増やす(配列番号を上げる)
@@ -500,7 +578,6 @@ public class PlayerMoveAnimation : MonoBehaviour
         for (int i = 0; i < animationDataSet.playerLower.armForwardRotation.Length - 1; i++)
         {
             PlayerKick();
-            ShowHitEffects(1);
 
             // indexNumberの値を増やす(配列番号を上げる)
             attackNumber = (attackNumber + 1) % animationDataSet.playerLower.armForwardRotation.Length;
@@ -650,6 +727,14 @@ public class PlayerMoveAnimation : MonoBehaviour
         [SerializeField, Header("---ナースパンチのアニメーション---")] public AnimationData nurseUpper;
 
         [SerializeField, Header("---ナースキックのアニメーション---")] public AnimationData nurseLower;
+
+        [SerializeField, Header("---ボスパンチのアニメーション---")] public AnimationData bossUpper;
+
+        [SerializeField, Header("---ボスキックのアニメーション---")] public AnimationData　bossLower;
+        //[SerializeField, Header("---攻撃待機アニメーション---")] public AnimationData　attackIdle ;//まだ制作完了していないのでコメントアウト化
+
+
+
 
     }
 

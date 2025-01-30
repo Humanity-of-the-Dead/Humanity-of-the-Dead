@@ -530,6 +530,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ec962bc88a02d70429ef611b231b5e38, type: 2}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: animationDataSet.bossLower
+      value: 
+      objectReference: {fileID: 11400000, guid: ef21a595c3cba254db490f8dfd49a9c1, type: 2}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: animationDataSet.bossUpper
+      value: 
+      objectReference: {fileID: 11400000, guid: e7766c1a6f6fc414e9785188e74f2397, type: 2}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: animationDataSet.nurseLower
       value: 
       objectReference: {fileID: 11400000, guid: ef21a595c3cba254db490f8dfd49a9c1, type: 2}

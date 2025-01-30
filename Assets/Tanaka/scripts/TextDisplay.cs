@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class TextDisplay : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class TextDisplay : MonoBehaviour
 
     [SerializeField]
     private string customNewline = "[BR]"; // 改行として扱う文字列を指定
+    private string newline = "\n";
 
     bool[] Flag;
 
@@ -57,7 +59,8 @@ public class TextDisplay : MonoBehaviour
 
     private Coroutine TypingCroutine;  //コルーチンの管理
 
-    private Vector3? lastCharPosistion;  // 現在のテキストの末尾の文字の座標。完全に表示されてなければnull
+    private bool displaysEnterKey = false;  // enterKeyを表示しているかどうか
+    private string enterKeyAlternativeChar = "・";   // enterKeyの位置を決めるための代替文字
 
     float timer = 0;
     [SerializeField, Header("EnterKeyのプレハブ")]
@@ -68,11 +71,6 @@ public class TextDisplay : MonoBehaviour
     public bool IsTextFullyDisplayed()
     {
         return isTextFullyDisplayed; // メソッドを通じて状態を取得
-    }
-
-    public Vector3? LastCharPosition()
-    {
-        return lastCharPosistion;
     }
 
     //ゲームクリアパネル
@@ -88,7 +86,6 @@ public class TextDisplay : MonoBehaviour
         //テキスト表示域を非表示
         Flag = new bool[Position.Length];
         GameClear.SetActive(false);
-        lastCharPosistion = null;
 
         //TextArea.SetActive(true);
 
@@ -153,9 +150,10 @@ public class TextDisplay : MonoBehaviour
                 }
                 else
                 {
-                    if (isTextFullyDisplayed && lastCharPosistion == null)
+                    // 正常に末尾の文字の位置を取得するため、テキスト描画系処理と同時実行を避ける必要がある
+                    if (isTextFullyDisplayed && !displaysEnterKey && TextArea.activeSelf)
                     {
-                        CalcLastCharPosition();
+                        DisplayEnterKeyOnLastChar();
                     }
                 }
 
@@ -172,7 +170,7 @@ public class TextDisplay : MonoBehaviour
 
                 if (timer > 1)
                 {
-                    int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1;
+                    int iNextIndex = SceneTransitionManager.instance.sceneInformation.GetCurrentSceneInt() + 1;
                     if (iNextIndex > SceneTransitionManager.instance.sceneInformation.sceneCount.Length)
                     {
                         iNextIndex = SceneTransitionManager.instance.sceneInformation.sceneCount.Length;
@@ -219,9 +217,9 @@ public class TextDisplay : MonoBehaviour
                 }
                 else
                 {
-                    if (isTextFullyDisplayed && lastCharPosistion == null)
+                    if (isTextFullyDisplayed && !displaysEnterKey && TextArea.activeSelf)
                     {
-                        CalcLastCharPosition();
+                        DisplayEnterKeyOnLastChar();
                     }
                 }
 
@@ -290,11 +288,7 @@ public class TextDisplay : MonoBehaviour
         {
             text.text = "";
             isTextFullyDisplayed = false;
-            if (enterKeyInstance != null)
-            {
-                Destroy(enterKeyInstance);
-            }
-            lastCharPosistion = null;
+            RemoveEnterKey();
             Debug.Log($"Displaying text: {textDataSet[LoadDataIndex].textAsset[LoadText].text}");
             Debug.Log("Starting new TypingCoroutine");
 
@@ -320,12 +314,7 @@ public class TextDisplay : MonoBehaviour
     {
         Debug.Log("TextCoroutine started");
 
-        string currentText = textDataSet[LoadDataIndex].textAsset[LoadText].text;
-
-        if (!string.IsNullOrEmpty(customNewline))
-        {
-            currentText = currentText.Replace(customNewline, "\n");
-        }
+        string currentText = GetTextStrFormatted();
 
         // テキストの中の文字を取得して、文字数を増やしていく
         // Substringで1文字目から取得していくため、i=1でスタート
@@ -352,7 +341,7 @@ public class TextDisplay : MonoBehaviour
         }
 
         isTextFullyDisplayed = true; //全ての文字が表示されたかを示すフラグ
-        //Debug.Log("TextCoroutine completed");
+        Debug.Log("TextCoroutine completed");
 
     }
     private void DisplayFullText()
@@ -361,13 +350,8 @@ public class TextDisplay : MonoBehaviour
         {
             StopCoroutine(TypingCroutine); // コルーチンを停止
         }
-        string fullText = textDataSet[LoadDataIndex].textAsset[LoadText].text;
+        string fullText = GetTextStrFormatted();
 
-        if (!string.IsNullOrEmpty(customNewline))
-        {
-
-            fullText = fullText.Replace(customNewline, "\n");
-        }
         Debug.Log($"Setting full text: {fullText}");
 
         // 現在のテキストをすべて表示
@@ -397,45 +381,99 @@ public class TextDisplay : MonoBehaviour
         TextArea.SetActive(false); // テキストエリアを非表示
     }
 
-    // 表示テキストの末尾の文字の中央座標を算出してセットする
-    public void CalcLastCharPosition()
+    // 表示するテキストの内容を整形して渡す
+    private string GetTextStrFormatted()
+    {
+        string str = textDataSet[LoadDataIndex].textAsset[LoadText].text;
+        // 改行コード統一
+        if (!string.IsNullOrEmpty(customNewline))
+        {
+            str = str.Replace(customNewline, newline).Replace("\r\n", newline).Replace("\r", newline);
+        }
+
+        // enterKey用代替文字を末尾に追加
+        str += enterKeyAlternativeChar;
+
+        return str;
+    }
+
+    // 表示テキストの末尾の文字をenterKeyに置き換える。事前にenterKeyAlternativeCharをテキスト末尾に付与して使用
+    private void DisplayEnterKeyOnLastChar()
     {
         string textStr = text.text;
         int lastCharIndex = textStr.Length - 1;
-        // 改行コードの数
-        int newLineCodeCount = textStr.Length - textStr.Replace("\n", "").Length;
+
+        // 表示されない文字の数
+        string[] invisibleStrs = {"\n", "\x20", "□"};
+        int invisibleCharCount = textStr.Length - RemoveByChars(textStr, invisibleStrs).Length;
 
         // 表示中の各文字(を囲む四角形)の4頂点の座標を取得
         IList<UIVertex> vertexs = text.cachedTextGenerator.verts;
 
         // 末尾文字の左上頂点のインデックス
-        // 表示されていない文字には座標が無いので、改行コード数を引く
-        int vIdx = (lastCharIndex - newLineCodeCount) * 4;
+        // 表示されていない文字には座標が無いので、その分差し引く
+        int vertexCountPerChar = 4; // 1文字につき4頂点
+        int vIdx = (lastCharIndex - invisibleCharCount) * vertexCountPerChar;
 
-        UIVertex topLeft = vertexs[vIdx];
-        UIVertex bottomRight = vertexs[vIdx + 2];
+        Vector3 enterKeyPosition = Vector3.zero; 
+        // vIdxが末尾文字のものとして正しいかチェック
+        if (vIdx == vertexs.Count - vertexCountPerChar)
+        {
+            UIVertex topLeft = vertexs[vIdx];
+            UIVertex bottomRight = vertexs[vIdx + 2];
 
-        // 各頂点座標をピクセル単位からユニット単位に変換
-        topLeft.position /= text.pixelsPerUnit;
-        bottomRight.position /= text.pixelsPerUnit;
+            // 各頂点座標をピクセル単位からユニット単位に変換
+            topLeft.position /= text.pixelsPerUnit;
+            bottomRight.position /= text.pixelsPerUnit;
 
-        // 2頂点の中央 = 文字の中央座標をlastCharPosistionにセット
-        lastCharPosistion = (topLeft.position + bottomRight.position) / 2f;
-        //Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
-        Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
+            // 2頂点の中央 = 文字の中央座標
+            Vector3 lastCharPosistion = (topLeft.position + bottomRight.position) / 2f;
 
-        // すでに存在する enterKeyInstance を削除
+            // テキスト表示域の座標分調整
+            enterKeyPosition = lastCharPosistion + text.transform.localPosition;
+            //Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
+        }
+        else
+        {
+            // テキストボックス右下辺り
+            Vector3 defaultPosition =new Vector3(545f, 117f, 0f);
+            enterKeyPosition = defaultPosition;
 
-        // 新しい enterKeyInstance を生成
+            Debug.Log("failed to get last character position of text.");
+            Debug.Log($"vIdx= {vIdx}, vertexs.Count= {vertexs.Count}");
+        }
+
+     
+
+        // 末尾の文字の位置に新しい enterKeyInstance を生成して置換
         enterKeyInstance = Instantiate(enterKeyPrefab);
-        //Vector2 oneCharacter_X = new Vector2(bottomRight.position.x - topLeft.position.x, 0);
-        //textStr.Replace("*", "");
-        enterKeyInstance.transform.localPosition = lastCharPosistion ?? Vector3.zero;
-
+        if (textStr.Length > 0)
+        {
+            text.text = textStr.Remove(textStr.Length - 1);
+        }
+        enterKeyInstance.transform.localPosition = enterKeyPosition;
         enterKeyInstance.transform.SetParent(TextArea.transform.GetChild(0).transform.GetChild(0).transform, false);
-        Debug.Log($"新しい enterKeyInstance を生成: {enterKeyInstance.transform.localPosition}");
+        //Debug.Log($"新しい enterKeyInstance を生成: {enterKeyInstance.transform.localPosition}");
 
-        //Debug.Log($"末尾文字の中心座標lastCharPosistion: {lastCharPosistion}");
+        displaysEnterKey = true;
+    }
+
+    private void RemoveEnterKey()
+    {
+        if (enterKeyInstance != null)
+        {
+            Destroy(enterKeyInstance);
+        }
+        displaysEnterKey = false;
+    }
+
+    // targetStrからremoveStrsの文字を取り除いて返す
+    private string RemoveByChars(string targetStr,  string[] removeStrs)
+    {
+        //削除する文字にマッチするパターンを作成する
+        string removePattern = "[" + string.Join("", removeStrs) + "]";
+        //削除する文字を""に置換する
+        return Regex.Replace(targetStr, removePattern, "");
     }
 
     //private void OnGUI()

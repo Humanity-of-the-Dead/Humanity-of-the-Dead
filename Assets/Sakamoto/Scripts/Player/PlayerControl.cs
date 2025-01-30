@@ -142,7 +142,7 @@ public class PlayerControl : MonoBehaviour
                     vPosition.x -= Time.deltaTime * playerSpeed;
 
                 }
-                playerMoveAnimation.HandleWalk(180);
+                playerMoveAnimation.HandleWalk(PlayerMoveAnimation.SHAFT_DIRECTION_LEFT);
             }
             //右移動
             if (Input.GetKey(KeyCode.D))
@@ -151,7 +151,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     vPosition.x += Time.deltaTime * playerSpeed;
                 }
-                playerMoveAnimation.HandleWalk(0);
+                playerMoveAnimation.HandleWalk(PlayerMoveAnimation.SHAFT_DIRECTION_RIGHT);
 
             }
 
@@ -250,12 +250,13 @@ public class PlayerControl : MonoBehaviour
                     case UpperAttack.NURSE:
                         MultiAudio.ins.PlaySEByName("SE_nurse_attack_upper");
                         break;
+                    case UpperAttack.BOSS:
+                        MultiAudio.ins.PlaySEByName("SE_lastboss_attack_upper");
+
+                        break;
                 }
 
-                if (PlayerParameter.Instance.UpperData.sPartsName == "ボスの上半身")
-                {
-                    MultiAudio.ins.PlaySEByName("SE_lastboss_attack_upper");
-                }
+               
 
                
 
@@ -281,6 +282,10 @@ public class PlayerControl : MonoBehaviour
 
                     case LowerAttack.NURSE:
                         MultiAudio.ins.PlaySEByName("SE_nurse_attack_lower");
+                        break;
+
+                        case LowerAttack.BOSS:
+                        MultiAudio.ins.PlaySEByName("SE_lastboss_attack_lower");
                         break;
                 }
 
@@ -351,8 +356,10 @@ public class PlayerControl : MonoBehaviour
     //上半身攻撃
     public void UpperBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
+        bool isAttackingToEnemy = IsFacingToTarget(transform.position.x, vTargetPos.x, playerMoveAnimation.isFacingToRight());
+
         float fAttackReach = Vector3.Distance(vTargetPos, transform.position);
-        if (fAttackReach >= fReach)
+        if (!isAttackingToEnemy || fAttackReach >= fReach)
         {
             return;
         }
@@ -364,8 +371,10 @@ public class PlayerControl : MonoBehaviour
     //下半身攻撃
     public void LowerBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
+        bool isAttackingToEnemy = IsFacingToTarget(transform.position.x, vTargetPos.x, playerMoveAnimation.isFacingToRight());
+
         float fAttackReach = Vector3.Distance(vTargetPos, transform.position);
-        if (fAttackReach >= fReach)
+        if (!isAttackingToEnemy || fAttackReach >= fReach)
         {
             return;
         }
@@ -373,6 +382,13 @@ public class PlayerControl : MonoBehaviour
         damageable?.TakeDamage(iDamage, 1);
         Debug.Log("下半身攻撃ダメージ判断");
 
+    }
+
+    private bool IsFacingToTarget(float playerPosX, float targetPosX, bool isFacingToRight)
+    {
+        bool isFacingToRightTarget = playerPosX <= targetPosX && isFacingToRight;
+        bool isFacingToLeftTarget = playerPosX >= targetPosX && !isFacingToRight;
+        return isFacingToRightTarget || isFacingToLeftTarget;
     }
 
 
