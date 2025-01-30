@@ -467,7 +467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2696059808575154406, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.61
       objectReference: {fileID: 0}
     - target: {fileID: 2696059808575154406, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -525,6 +525,54 @@ PrefabInstance:
       propertyPath: timeMax
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: hitGameObject
+      value: 
+      objectReference: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: hand.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: lowerEffectXMax
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: lowerEffectXMin
+      value: -0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: lowerEffectYMax
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: lowerEffectYMin
+      value: -2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: upperEffectXMax
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: upperEffectXMin
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: upperEffectYMax
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: upperEffectYMin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: hand.Array.data[0]
+      value: 
+      objectReference: {fileID: 1870005972219146301}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: hand.Array.data[1]
+      value: 
+      objectReference: {fileID: 5064296117231121923}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: animationDataSet.walk
       value: 
@@ -638,6 +686,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2696059808575154406, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
   m_PrefabInstance: {fileID: 3067754686498505860}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1870005972219146301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3702313091584996537, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+  m_PrefabInstance: {fileID: 3067754686498505860}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &2163172073584536342 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3789773760685780882, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
@@ -656,6 +709,11 @@ SpriteRenderer:
 --- !u!212 &3239759654013349135 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 461384352401664395, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+  m_PrefabInstance: {fileID: 3067754686498505860}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5064296117231121923 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7842214864624546439, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
   m_PrefabInstance: {fileID: 3067754686498505860}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &5359479527002487621 stripped
@@ -747,8 +805,7 @@ MonoBehaviour:
   playerSpeed: 7
   playerJumpPower: 850
   mainCamera: {fileID: 0}
-  enemyObject:
-  - {fileID: 0}
+  enemyObject: []
 --- !u!114 &6489148027962693718
 MonoBehaviour:
   m_ObjectHideFlags: 0

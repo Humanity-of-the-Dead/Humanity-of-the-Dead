@@ -33,6 +33,8 @@ public class PlayerMoveAnimation : MonoBehaviour
     [SerializeField, Header("腕の角度、先に右手")] private GameObject[] arm;
     [SerializeField, Header("太腿の角度、先に右足")] private GameObject[] leg;
     [SerializeField, Header("すねの角度、先に右足")] private GameObject[] foot;
+    [SerializeField, Header("手首の角度、先に右手")] private GameObject[] hand;
+
     //アニメーションの間隔はアニメーションスクリプト内で完結したいのでプライベート化してシリアライズフィールドを付けることで設定できる
     [SerializeField, Header("1コマの間隔の時間")] private float timeMax;
     [SerializeField] private AnimationDataSet animationDataSet;
@@ -77,7 +79,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     // 攻撃中かどうか
     private bool isAttack = false;
     //攻撃のアニメーションが終わったかどうか
-    
+
 
     // 静止しているか
     private bool isStop = true;
@@ -135,9 +137,9 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-    public  void ShowHitEffects(int body)
+    public void ShowHitEffects(int body)
     {
-        PlayerControl playerControl=GetComponent<PlayerControl>();
+        PlayerControl playerControl = GetComponent<PlayerControl>();
         //このオブジェクトの座標
         for (int i = 0; i < playerControl.enemyObject.Count; i++)
         {
@@ -167,9 +169,9 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         }
 
-       
 
-       
+
+
     }
     /// <summary>
     /// 歩くアニメーション
@@ -245,6 +247,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                 {
                     arm[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.playerUpper.armForwardRotation[attackNumber]);
                     arm[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.playerUpper.armBackRotation[attackNumber]);
+
                 }
 
                 // 足のアニメーション
@@ -282,6 +285,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                     arm[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.policeUpper.armForwardRotation[attackNumber]);
                     arm[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.policeUpper.armBackRotation[attackNumber]);
                 }
+
 
                 // 足のアニメーション
                 if (animationDataSet.policeUpper.legForwardRotation == null || animationDataSet.policeUpper.legBackRotation == null)
@@ -352,6 +356,9 @@ public class PlayerMoveAnimation : MonoBehaviour
                 {
                     arm[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossUpper.armForwardRotation[attackNumber]);
                     arm[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossUpper.armBackRotation[attackNumber]);
+                    hand[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossUpper.handForwardRotation[attackNumber]);
+                    hand[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossUpper.handBackRotation[attackNumber]);
+
                 }
 
                 // 足のアニメーション
@@ -504,6 +511,9 @@ public class PlayerMoveAnimation : MonoBehaviour
                 {
                     arm[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossLower.armForwardRotation[attackNumber]);
                     arm[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossLower.armBackRotation[attackNumber]);
+                    hand[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossLower.handForwardRotation[attackNumber]);
+                    hand[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.bossLower.handBackRotation[attackNumber]);
+
                 }
 
                 // 足のアニメーション
@@ -551,7 +561,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     private IEnumerator CallPantieWithDelay()
     {
-      
+
 
         for (int i = 0; i < animationDataSet.playerUpper.armForwardRotation.Length - 1; i++)
         {
@@ -568,7 +578,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         isWalk = false;
         isStop = true;
         // 攻撃アニメーション終了を通知
-       
+
 
     }
 
@@ -588,7 +598,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         isWalk = false;
         isStop = true;
         isAttack = false;
-       
+
     }
 
     /// <summary>
@@ -730,7 +740,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         [SerializeField, Header("---ボスパンチのアニメーション---")] public AnimationData bossUpper;
 
-        [SerializeField, Header("---ボスキックのアニメーション---")] public AnimationData　bossLower;
+        [SerializeField, Header("---ボスキックのアニメーション---")] public AnimationData bossLower;
         //[SerializeField, Header("---攻撃待機アニメーション---")] public AnimationData　attackIdle ;//まだ制作完了していないのでコメントアウト化
 
 
