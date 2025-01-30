@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1660716718289173555}
   - component: {fileID: 6386753173971305481}
   m_Layer: 10
-  m_Name: EnterUI
+  m_Name: SkipUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b9fcc1ccb87c2c244a966cd33fa50f99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6e57c4cce6a74346af30810ab3509bd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
