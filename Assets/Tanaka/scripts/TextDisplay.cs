@@ -178,7 +178,6 @@ public class TextDisplay : MonoBehaviour
 
 
                     SceneTransitionManager.instance.NextSceneButton(iNextIndex);
-                    SceneTransitionManager.instance.sceneInformation.UpdateScene(SceneTransitionManager.instance.sceneInformation.GetCurrentScene());
 
 
                     timer = 0;

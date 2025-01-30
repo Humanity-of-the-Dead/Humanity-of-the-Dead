@@ -342,12 +342,15 @@ public class PlayerParameter : CharacterStats
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        string sceneName = SceneTransitionManager.instance.sceneInformation.GetPreviousSceneName();
+        string sceneName =SceneTransitionManager.instance.sceneInformation.GetCurrentSceneName();
 
-        if (sceneName != SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFive))
+        // シーンが Title または End でない場合に InitializeReferences を実行
+        if (sceneName != SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title) &&
+            sceneName != SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.End))
         {
-            InitializeReferences(); 
+            InitializeReferences();
         }
+        
             //upperIndex = UpperData;
             //lowerIndex = LowerData;
             Debug.Log($"シーン {scene.name} がロードされました");

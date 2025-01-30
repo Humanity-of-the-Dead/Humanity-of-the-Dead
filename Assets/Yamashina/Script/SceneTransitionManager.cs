@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,22 +16,7 @@ public class SceneTransitionManager : MonoBehaviour
     [SerializeField] private float fadeSpeed = 2.0f; // フェード速度
     public static SceneTransitionManager instance;
 
-    private void Start()
-    {
 
-        SetCurrentScene(SceneManager.GetActiveScene().buildIndex);
-        PlayBGMForScene();
-
-
-        StartCoroutine(FadeIn());
-
-        // MultiAudio の初期化を確認
-
-
-
-
-
-    }
 
 
 
@@ -41,18 +27,33 @@ public class SceneTransitionManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject); // Managerオブジェクト全体を保持
+                                           // 現在のシーンを取得して初期化
+            SceneInformation.SCENE initialScene = (SceneInformation.SCENE)SceneManager.GetActiveScene().buildIndex;
+            sceneInformation.SetCurrentScene(initialScene);
 
             SceneManager.sceneLoaded += OnSceneLoaded; // イベント登録
+
         }
         else
         {
             Destroy(gameObject); // 二重生成防止
         }
+
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        InitializeReferences(); // シーンロード後に再取得
+        Debug.Log($"Scene Loaded: {scene.name}");
+
+        // シーン名から `SCENE` Enum を取得して `currentScene` に設定
+        if (Enum.TryParse(scene.name, out SceneInformation.SCENE loadedScene))
+        {
+            sceneInformation.SetCurrentScene(loadedScene);
+        }
+        InitializeReferences();
         PlayBGMForScene();
+
+
+        isReloading = false; // シーン変更が完了したのでリセット
 
     }
     public void ReloadCurrentScene()
@@ -137,6 +138,10 @@ public class SceneTransitionManager : MonoBehaviour
                 bgmName = "BGM_stage_04"; // ステージ4のBGM名 ラスボス
                 break;
 
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.End):
+                bgmName = "BGM_credit";
+                MultiAudio.ins.bgmSource.loop = false;
+                break;
             default:
                 Debug.LogWarning($"No BGM assigned for the scene '{sceneName}'.");
                 return; // BGMが指定されていない場合は終了
@@ -159,9 +164,16 @@ public class SceneTransitionManager : MonoBehaviour
     {
         if (isReloading) return; // シーン変更中なら処理をスキップ
         isReloading = true; // シーン変更中に設定
-        StartCoroutine(FadeOut(sceneInformation.GetSceneObject(scene)));
+
+        Debug.Log($"SceneChange called: newScene = {scene}, currentScene = {sceneInformation.currentScene}");
+
+        // 先に `UpdateScene` を呼び出して `previousScene` を適切に設定
+        sceneInformation.UpdateScene(scene);
+
+        StartCoroutine(FadeOut(sceneInformation.GetSceneName(scene))); // シーン遷移
 
     }
+
     //ボタンでシーン遷移する場合
     public void NextSceneButton(int index)
     {
@@ -194,6 +206,7 @@ public class SceneTransitionManager : MonoBehaviour
         // 完全に透明になったら非アクティブ化
         fadeInstance.gameObject.SetActive(false);
         isReloading = false; // リロードが完了したのでフラグをリセット
+        sceneInformation.UpdateScene((SceneInformation.SCENE)SceneManager.GetActiveScene().buildIndex);
 
     }
 
@@ -217,7 +230,6 @@ public class SceneTransitionManager : MonoBehaviour
             yield return null;
         }
 
-        sceneInformation.SetPreviousScene((SceneInformation.SCENE)SceneManager.GetActiveScene().buildIndex);
 
         // シーンの非同期読み込み
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(stageName);
@@ -227,25 +239,10 @@ public class SceneTransitionManager : MonoBehaviour
         }
 
         StartCoroutine(FadeIn()); // フェードイン開始
+        PlayBGMForScene();
+
     }
 
-    public IEnumerator FadeBoss()
-    {
-        fadeInstance.gameObject.SetActive(true);
-        Color fadeColor = fadeInstance.color; // 一時変数を使用
-        fadeColor.a = 0; // 最初は完全に透明
-        fadeInstance.color = fadeColor;
-        float speed = 1.0f / fadeSpeed; // インスペクターから設定された速度を使用
-
-        // 徐々に不透明にする処理
-        while (fadeInstance.color.a < 1)
-        {
-            fadeColor.a += Time.deltaTime * speed; // アルファ値を増加
-            fadeInstance.color = fadeColor; // 更新
-            yield return null;
-        }
-        StartCoroutine(FadeIn());
-    }
 
 
 

@@ -11,8 +11,7 @@ public class ButtonSceneChange : MonoBehaviour
 
     private void Start()
     {
-        MultiAudio.ins.PlayBGM_ByName("BGM_credit");
-        MultiAudio.ins.bgmSource.loop = false;
+      
     }
     void Update()
     {
