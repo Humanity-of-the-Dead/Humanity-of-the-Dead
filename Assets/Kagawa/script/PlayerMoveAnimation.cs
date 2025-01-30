@@ -91,6 +91,9 @@ public class PlayerMoveAnimation : MonoBehaviour
     public float timeAttack = 0;
     #endregion
 
+    public const int SHAFT_DIRECTION_RIGHT = 0;
+    public const int SHAFT_DIRECTION_LEFT = 180;
+
     private void Start()
     {
 
@@ -106,7 +109,11 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeAttack = 0;
     }
 
-
+    // 右を向いているか
+    public bool isFacingToRight()
+    {
+        return shaft == SHAFT_DIRECTION_RIGHT;
+    }
 
     public void HandleWalk(int direction)
     {
@@ -477,7 +484,6 @@ public class PlayerMoveAnimation : MonoBehaviour
         for (int i = 0; i < animationDataSet.playerUpper.armForwardRotation.Length - 1; i++)
         {
             PlayerPantie();
-            ShowHitEffects(0);
 
 
             // indexNumberの値を増やす(配列番号を上げる)
@@ -500,7 +506,6 @@ public class PlayerMoveAnimation : MonoBehaviour
         for (int i = 0; i < animationDataSet.playerLower.armForwardRotation.Length - 1; i++)
         {
             PlayerKick();
-            ShowHitEffects(1);
 
             // indexNumberの値を増やす(配列番号を上げる)
             attackNumber = (attackNumber + 1) % animationDataSet.playerLower.armForwardRotation.Length;
