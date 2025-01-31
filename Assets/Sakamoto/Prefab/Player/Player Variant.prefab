@@ -586,6 +586,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e7766c1a6f6fc414e9785188e74f2397, type: 2}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: animationDataSet.attackIdle
+      value: 
+      objectReference: {fileID: 11400000, guid: 0df453d8a05d7d4429c799d2c2a7b0ef, type: 2}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: animationDataSet.nurseLower
       value: 
       objectReference: {fileID: 11400000, guid: ef21a595c3cba254db490f8dfd49a9c1, type: 2}
