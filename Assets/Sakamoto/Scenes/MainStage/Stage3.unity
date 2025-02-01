@@ -148,7 +148,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92859003}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
   m_LocalScale: {x: 0.009259259, y: 0.009259259, z: 0.009259259}
   m_ConstrainProportionsScale: 0
@@ -636,7 +636,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 214.3
   field of view: 60
   orthographic: 1
   orthographic size: 5
@@ -812,7 +812,7 @@ GameObject:
   - component: {fileID: 252931443}
   - component: {fileID: 252931445}
   - component: {fileID: 252931444}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Humanity_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -895,7 +895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &259418452
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1002,7 +1002,7 @@ GameObject:
   - component: {fileID: 278691175}
   - component: {fileID: 278691177}
   - component: {fileID: 278691176}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1082,7 +1082,7 @@ GameObject:
   - component: {fileID: 377555330}
   - component: {fileID: 377555329}
   - component: {fileID: 377555328}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: UICanvas
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1473,7 +1473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 519077329}
   - component: {fileID: 519077330}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: main_hpbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1986,9 +1986,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1303133505177797733, guid: 30c0124c102e88140a55432e3ded1312, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054088113673826201, guid: 30c0124c102e88140a55432e3ded1312, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4340838722434831479, guid: 30c0124c102e88140a55432e3ded1312, type: 3}
       propertyPath: m_Name
       value: OpitonButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4340838722434831479, guid: 30c0124c102e88140a55432e3ded1312, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4340838722434831479, guid: 30c0124c102e88140a55432e3ded1312, type: 3}
       propertyPath: m_IsActive
@@ -2347,7 +2359,7 @@ GameObject:
   - component: {fileID: 964455195}
   - component: {fileID: 964455194}
   - component: {fileID: 964455196}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: UI_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2950,7 +2962,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1264259634}
   - component: {fileID: 1264259635}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: main_hpbar (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3614,7 +3626,7 @@ GameObject:
   - component: {fileID: 1440257035}
   - component: {fileID: 1440257037}
   - component: {fileID: 1440257036}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: UpperHP_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3705,14 +3717,14 @@ RectTransform:
   m_GameObject: {fileID: 1444707583}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 92859004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11540, y: 168.34}
+  m_AnchoredPosition: {x: 8687.25, y: 88.7}
   m_SizeDelta: {x: 25000, y: 1400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1444707585
@@ -4056,7 +4068,7 @@ GameObject:
   - component: {fileID: 1647872236}
   - component: {fileID: 1647872235}
   - component: {fileID: 1647872234}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: DegugButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4416,7 +4428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1933492212}
   - component: {fileID: 1933492213}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: main_hpbar (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4627,7 +4639,7 @@ GameObject:
   - component: {fileID: 2076811910}
   - component: {fileID: 2076811912}
   - component: {fileID: 2076811911}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LowerHP_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5116,10 +5128,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 244809043}
   - {fileID: 3183673208756527799}
+  - {fileID: 92859004}
   - {fileID: 2118250933476055593}
   - {fileID: 186059271}
   - {fileID: 761310441}
-  - {fileID: 92859004}
   - {fileID: 613798102}
   - {fileID: 492203196}
   - {fileID: 403251193}
