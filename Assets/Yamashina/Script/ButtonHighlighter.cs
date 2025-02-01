@@ -6,6 +6,7 @@ public class ButtonHighlighter : MonoBehaviour
 {
   [SerializeField] private Button operationButton; // 操作説明ボタン
     [SerializeField] private Button volumeButton;    // 音量ボタン
+    [SerializeField] private Button TitleButton;
     [SerializeField] private Color selectedColor = Color.white; // 選択状態の色
     [SerializeField] private Color unselectedColor = Color.gray; // 非選択状態の色
 
@@ -34,11 +35,20 @@ public class ButtonHighlighter : MonoBehaviour
         {
             SetButtonColor(operationButton, selectedColor);
             SetButtonColor(volumeButton, unselectedColor);
+            SetButtonColor(TitleButton, unselectedColor);
         }
         else if (selectedButton == volumeButton)
         {
             SetButtonColor(operationButton, unselectedColor);
             SetButtonColor(volumeButton, selectedColor);
+            SetButtonColor(TitleButton, unselectedColor);
+
+        }
+        else if (selectedButton == TitleButton)
+        {
+            SetButtonColor(operationButton, unselectedColor);
+            SetButtonColor(volumeButton, unselectedColor);
+            SetButtonColor(TitleButton,selectedColor );
         }
 
         // 選択したボタンを明示的に選択状態にする
@@ -50,5 +60,6 @@ public class ButtonHighlighter : MonoBehaviour
         // 両方のボタンをリセット（灰色に設定）
         SetButtonColor(operationButton, selectedColor);
         SetButtonColor(volumeButton, unselectedColor);
+        SetButtonColor(TitleButton, unselectedColor);
     }
 }
