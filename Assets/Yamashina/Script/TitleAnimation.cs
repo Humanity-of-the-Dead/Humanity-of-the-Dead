@@ -329,9 +329,8 @@ public class TitleAnimation : MonoBehaviour
             {
 
                 case PanalView.None:
-
-                    CreditPanel.SetActive(true);
-                    mainPanel.SetActive(false);
+                    CreditView();
+                 
                     panalView = PanalView.Credit;
 
                     break;
