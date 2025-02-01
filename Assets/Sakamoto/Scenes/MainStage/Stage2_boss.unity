@@ -1275,6 +1275,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 2357531127260703785, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3199576685649658611, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
