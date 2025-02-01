@@ -86,7 +86,7 @@ public class TitleAnimation : MonoBehaviour
         start.onClick.AddListener(() =>
             SceneTransitionManager.instance.NextSceneButton(1));
 
-        TitleButton.interactable = false;    
+        TitleButton.interactable = false;
         //MultiAudio.ins.bgmSource.volume = BGMVolume;
         //MultiAudio.ins.seSource.volume = UIVolume;
 
@@ -277,9 +277,9 @@ public class TitleAnimation : MonoBehaviour
                     OptionPanel.transform.localPosition = OptionPaneEndPosition;
                     CreditPanel.SetActive(false);
                     mainPanel.SetActive(true);
-                  
-                    mouseOver.mouseover.SetActive(false) ;  
-                        
+
+                    mouseOver.mouseover.SetActive(false);
+
                     break;
                 case PanalView.Credit:
                     CreditPanel.SetActive(false);
@@ -309,9 +309,39 @@ public class TitleAnimation : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.X))
+
+        {
+            switch (panalView)
+            {
+
+                case PanalView.None:
+
+                    start.onClick.Invoke();
+                    break;
+            }
+
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+
+        {
+            switch (panalView)
+            {
+
+                case PanalView.None:
+
+                    CreditPanel.SetActive(true);
+                    mainPanel.SetActive(false);
+                    panalView = PanalView.Credit;
+
+                    break;
+            }
+
+        }
+        //デバッグ用仮
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit(); 
+            Application.Quit();
         }
 
 
