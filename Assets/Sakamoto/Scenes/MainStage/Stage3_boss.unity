@@ -4374,17 +4374,6 @@ MonoBehaviour:
     - {fileID: 4900000, guid: 3ca093efef00e2a48b8b60801c80292d, type: 3}
     - {fileID: 4900000, guid: f01f44e2bde3a044581c325a6f99c291, type: 3}
     - {fileID: 4900000, guid: 9728cd9ef2872e2469754e9c62bed020, type: 3}
-    - {fileID: 4900000, guid: 9b5399dcf5718e448b054777006c3c89, type: 3}
-    - {fileID: 4900000, guid: 9a5d221e31b9dad48b9785fc1afcf1a3, type: 3}
-    - {fileID: 4900000, guid: 08c52a03b1c6d244189f2e9e1873f43e, type: 3}
-    - {fileID: 4900000, guid: 531fbe4486b51b747810fbb98e0e9e10, type: 3}
-    - {fileID: 4900000, guid: c25608ea402616f48b8d184e0a7277ba, type: 3}
-    - {fileID: 4900000, guid: da1ebdc5d54244f4fb348ceccc960222, type: 3}
-    - {fileID: 4900000, guid: eb4651348cf39704d926da3ad5e09d3f, type: 3}
-    - {fileID: 4900000, guid: 638ff35e9834f1842b48ee12079ed173, type: 3}
-    - {fileID: 4900000, guid: 2fecb6501fda03046a9c2f7cb1f38436, type: 3}
-    - {fileID: 4900000, guid: fafe4ad1d2523b94e822fb33b3215b22, type: 3}
-    - {fileID: 4900000, guid: 7d5990d50f6a5b046a9c0d208341318f, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:

@@ -4406,6 +4406,8 @@ MonoBehaviour:
     - {fileID: 4900000, guid: 0e966878f60f43e40b6e50b835fbf291, type: 3}
     - {fileID: 4900000, guid: 6ad3f5b5e37e65b4f87bdb14a045bcdd, type: 3}
     - {fileID: 4900000, guid: 2b8a1442ae12cfc44a822c9fbb8023bd, type: 3}
+    - {fileID: 4900000, guid: a24fb1c36451cd94184b9ede975c192a, type: 3}
+    - {fileID: 4900000, guid: cb73fbd3b2cc17944a5d28eaf43eecc1, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:

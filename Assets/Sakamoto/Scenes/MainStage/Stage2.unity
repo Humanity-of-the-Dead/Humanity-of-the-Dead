@@ -5793,6 +5793,8 @@ MonoBehaviour:
   textDataSet:
   - textAsset:
     - {fileID: 4900000, guid: 8f180d17639700249826a4820565f6ca, type: 3}
+    - {fileID: 4900000, guid: 4b6233c4c378cf746b5402749bab62c8, type: 3}
+    - {fileID: 4900000, guid: 400be37b8c2b5dc4e90d0abf5d248831, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:
