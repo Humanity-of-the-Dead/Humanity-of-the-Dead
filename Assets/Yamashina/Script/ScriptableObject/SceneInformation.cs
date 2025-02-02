@@ -18,8 +18,8 @@ public class SceneInformation : ScriptableObject
         StageTwo_BOSS,
         StageThree, // ステージ３
         StageThree_BOSS,
-        StageFour,//親友戦闘
-        StageFive,//ボス
+        StageThreeDotFive,//親友戦闘
+        StageFour,//ボス
         End,
 
 
@@ -120,12 +120,12 @@ public class SceneInformation : ScriptableObject
                 nextScene = SCENE.StageThree_BOSS;
                 break;
             case SCENE.StageThree_BOSS:
+                nextScene = SCENE.StageThreeDotFive;
+                break;
+            case SCENE.StageThreeDotFive:
                 nextScene = SCENE.StageFour;
                 break;
             case SCENE.StageFour:
-                nextScene = SCENE.StageFive;
-                break;
-            case SCENE.StageFive:
                 nextScene = SCENE.End;
                 break;
             default:

@@ -1560,7 +1560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 519077329}
   - component: {fileID: 519077330}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: main_hpbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2990,7 +2990,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1264259634}
   - component: {fileID: 1264259635}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: main_hpbar (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3362,11 +3362,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8252307482894879903, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.6
+      value: 5.6
       objectReference: {fileID: 0}
     - target: {fileID: 8252307482894879903, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4
+      value: -1.39
       objectReference: {fileID: 0}
     - target: {fileID: 8252307482894879903, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3708,7 +3708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1933492212}
   - component: {fileID: 1933492213}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: main_hpbar (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4096,11 +4096,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1150826654535052386, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.7
       objectReference: {fileID: 0}
     - target: {fileID: 1150826654535052386, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.02
+      value: -1.62
       objectReference: {fileID: 0}
     - target: {fileID: 1150826654535052386, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: m_LocalPosition.z

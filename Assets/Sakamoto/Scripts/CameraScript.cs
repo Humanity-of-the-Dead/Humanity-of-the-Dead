@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 enum STATE
 {
     NONE,
-    NOMAL,//ノーマルステージ
+    NORMAL,//ノーマルステージ
+    STAGE3,
+    BOSSLAB,
     BOSS,//ボスステージ
+
 }
 
 
@@ -20,7 +25,7 @@ public class CameraScript : MonoBehaviour
 
     ////カメラから見たターゲットの位置
     //Vector2 fTrgPosFromCamera;
-
+    private Vector3 cameraPos;
     //ゲームステート
     private STATE eState = STATE.NONE;
 
@@ -29,8 +34,9 @@ public class CameraScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        eState = STATE.NOMAL;
+        eState = STATE.NORMAL;
         goTarget = GameObject.Find("Player Variant");
+        cameraPos = transform.position;
     }
 
     // Update is called once per frame
@@ -38,28 +44,16 @@ public class CameraScript : MonoBehaviour
     {
         switch (eState)
         {
-            case STATE.NOMAL:
-                //プレイヤーが画面中央に来たら追従する
-                Vector3 vCamPos = transform.position;
-                if (goTarget.transform.position.x > fMoveStart)
-                {
-                    vCamPos.x = goTarget.transform.position.x;
-                    transform.position = vCamPos;
-                }
-                if (transform.position.x > fMoveLimit)
-                {
-                    vCamPos.x = fMoveLimit;
-                    transform.position = vCamPos;
-                }
-                vCamPos.y = goTarget.transform.position.y;
+            case STATE.NORMAL:
+
+                CameraXTracking();
+                cameraPos.y = goTarget.transform.position.y;
                 string sceneName = SceneManager.GetActiveScene().name;
                 var bossScenes = new[]
                 {
                   SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne_BOSS),
                   SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageTwo_BOSS),
-                  SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree_BOSS),
-                  SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour),
-                  SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFive)
+
                 };
 
                 if (bossScenes.Contains(sceneName))
@@ -67,26 +61,83 @@ public class CameraScript : MonoBehaviour
                     eState = STATE.BOSS;
                 }
 
-                if (vCamPos.y < 0)
+                if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree))
                 {
-                    vCamPos.y = 0;
+                    eState = STATE.STAGE3;
                 }
-                transform.position = vCamPos;
+
+                var bossLabScenes = new[]
+                {
+                SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageThree_BOSS),
+                  SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageThreeDotFive),
+                  SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour)
+                };
+                if (bossLabScenes.Contains(sceneName))
+                {
+                    eState = STATE.BOSSLAB;
+
+                }
+
+                if (cameraPos.y < 0)
+                {
+                    cameraPos.y = 0;
+                }
+                transform.position = cameraPos;
                 break;
             case STATE.BOSS:
-                Vector3 bossCamPos = transform.position;
 
                 // カメラのX座標を固定
-                bossCamPos.x = fMoveLimit;
+                cameraPos.x = fMoveLimit;
 
                 // プレイヤーのジャンプを追従しつつ制約を追加
                 float targetY = goTarget.transform.position.y;
-                bossCamPos.y = Mathf.Clamp(targetY, 0, 2);
+                cameraPos.y = Mathf.Clamp(targetY, 0, 2);
 
-                transform.position = bossCamPos;
+                transform.position = cameraPos;
 
                 //カメラ追従なし
                 break;
+            case STATE.STAGE3:
+                CameraXTracking();
+                //Debug.Log($"transform.position.y01: {transform.position.y}");
+                // プレイヤーのジャンプを追従しつつ制約を追加
+                cameraPos.y = Mathf.Clamp(goTarget.transform.position.y, 0, 1.5f);
+                transform.position = cameraPos;
+
+                //Debug.Log($"transform.position.y02: {transform.position.y}");
+
+                break;
+            case STATE.BOSSLAB:
+                cameraPos.x = fMoveLimit;
+                cameraPos.y = Mathf.Clamp(goTarget.transform.position.y, 0, 1.5f);
+                transform.position = cameraPos;
+
+
+                break;
+        }
+
+
+    }
+    private void CameraXTracking()
+    {
+        //プレイヤーが画面中央に来たら追従する
+        if (goTarget.transform.position.x > fMoveStart)
+        {
+            cameraPos.x = goTarget.transform.position.x;
+            //Debug.Log($"transform.position.y03: {transform.position.y}");
+
+            transform.position = cameraPos;
+            //Debug.Log($"transform.position.y04: {transform.position.y}");
+
+        }
+        if (transform.position.x > fMoveLimit)
+        {
+            cameraPos.x = fMoveLimit;
+            //Debug.Log($"transform.position.y05: {transform.position.y}");
+
+            transform.position = cameraPos;
+            //Debug.Log($"transform.position.y06: {transform.position.y}");
+
         }
     }
 }

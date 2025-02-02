@@ -1616,7 +1616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 519077329}
   - component: {fileID: 519077330}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: main_hpbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2949,7 +2949,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1264259634}
   - component: {fileID: 1264259635}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: main_hpbar (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3703,7 +3703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1933492212}
   - component: {fileID: 1933492213}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: main_hpbar (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
