@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
+  m_Name: Police_Stg01_Lower
+  m_EditorClassIdentifier: 
+  enPartsType: 1
+  upperAttack: 4
+  lowerAttack: 1
+  sPartsName: "\u8B66\u5BDF\u306E\u4E0B\u534A\u8EAB"
+  AttackArea: 2.7
+  iPartHp: 20
+  iPartAttack: 2
+  spBody: {fileID: 0}
+  spRightArm: {fileID: 0}
+  spRightHand: {fileID: 0}
+  spLeftArm: {fileID: 0}
+  spLeftHand: {fileID: 0}
+  spWaist: {fileID: 21300000, guid: 50b507ef943611945abb6aa2546199ef, type: 3}
+  spRightLeg: {fileID: 21300000, guid: e833f93e462c940489c2ab569e1da348, type: 3}
+  spRightFoot: {fileID: 21300000, guid: 1d9596dce1433dc4ab6ab6f3c3ddd960, type: 3}
+  spLeftLeg: {fileID: 21300000, guid: c18c12d625c39d4458b9549657a3665b, type: 3}
+  spLeftFoot: {fileID: 21300000, guid: b47c4da54c1891f4fb82cd6b005c6f09, type: 3}

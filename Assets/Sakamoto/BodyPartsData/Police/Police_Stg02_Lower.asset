@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
-  m_Name: Nurse_Stg01_Boss_Lower
+  m_Name: Police_Stg02_Lower
   m_EditorClassIdentifier: 
   enPartsType: 1
   upperAttack: 4
-  lowerAttack: 2
-  sPartsName: "\u770B\u8B77\u5E2B\u306E\u4E0B\u534A\u8EAB"
-  AttackArea: 3.5
-  iPartHp: 30
+  lowerAttack: 1
+  sPartsName: "\u8B66\u5BDF\u306E\u4E0B\u534A\u8EAB"
+  AttackArea: 2.7
+  iPartHp: 20
   iPartAttack: 3
   spBody: {fileID: 0}
   spRightArm: {fileID: 0}
   spRightHand: {fileID: 0}
   spLeftArm: {fileID: 0}
   spLeftHand: {fileID: 0}
-  spWaist: {fileID: 21300000, guid: 4770f25082a60064cbd1db334e06ff0b, type: 3}
-  spRightLeg: {fileID: 21300000, guid: b06d29679927dc646a2536732cf3bcac, type: 3}
-  spRightFoot: {fileID: 21300000, guid: 48a2fef415631944ca5512908e3fea18, type: 3}
-  spLeftLeg: {fileID: 21300000, guid: bab559d8dbcefa94b85671512d503fc8, type: 3}
-  spLeftFoot: {fileID: 21300000, guid: e62c591612957734782be0b0dfb0673d, type: 3}
+  spWaist: {fileID: 21300000, guid: 50b507ef943611945abb6aa2546199ef, type: 3}
+  spRightLeg: {fileID: 21300000, guid: e833f93e462c940489c2ab569e1da348, type: 3}
+  spRightFoot: {fileID: 21300000, guid: 1d9596dce1433dc4ab6ab6f3c3ddd960, type: 3}
+  spLeftLeg: {fileID: 21300000, guid: c18c12d625c39d4458b9549657a3665b, type: 3}
+  spLeftFoot: {fileID: 21300000, guid: b47c4da54c1891f4fb82cd6b005c6f09, type: 3}

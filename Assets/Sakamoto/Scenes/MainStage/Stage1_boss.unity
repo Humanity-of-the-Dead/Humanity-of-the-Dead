@@ -331,20 +331,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: LowerHP
-      value: 30
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: UpperHP
-      value: 30
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: Lowerbodypart
       value: 
-      objectReference: {fileID: 11400000, guid: a6cc4347334d7b1428dba790218ccfe0, type: 2}
+      objectReference: {fileID: 11400000, guid: e5e8b65435755dd41a9ed6106cb2b6ac, type: 2}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: Upperbodypart
       value: 
-      objectReference: {fileID: 11400000, guid: 53820a2b51ab44c4d82c11d0f0fd5205, type: 2}
+      objectReference: {fileID: 11400000, guid: 568b91405d4f26741b8d29462335729e, type: 2}
     - target: {fileID: 5932916154899696110, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.6
@@ -2238,6 +2238,10 @@ PrefabInstance:
     - target: {fileID: 5108573532959348955, guid: 06fbbe3a6bfe05d4f85b2bd6e1853ff6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702745298637968536, guid: 06fbbe3a6bfe05d4f85b2bd6e1853ff6, type: 3}
+      propertyPath: iHumanityMax
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

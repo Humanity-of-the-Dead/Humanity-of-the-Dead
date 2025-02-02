@@ -19,10 +19,10 @@ public class newEnemyMovement : MonoBehaviour
     [SerializeField] private float waitTime = 1f;
 
     [Header("エネミーの基本設定")]
-    [Tooltip("各キャラクターが持っている上半身パーツ")]
+    [Tooltip("上半身パーツの攻撃力と攻撃範囲を反映")]
 
     [SerializeField] private BodyPartsData upperPart;
-    [Tooltip("各キャラクターが持っている下半身パーツ")]
+    [Tooltip("下半身パーツの攻撃力と攻撃範囲を反映")]
 
     [SerializeField] private BodyPartsData lowerPart;
     private Gun gun;
