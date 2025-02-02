@@ -2244,6 +2244,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5702745298637968536, guid: 06fbbe3a6bfe05d4f85b2bd6e1853ff6, type: 3}
+      propertyPath: iDownTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702745298637968536, guid: 06fbbe3a6bfe05d4f85b2bd6e1853ff6, type: 3}
       propertyPath: iHumanityMax
       value: 30
       objectReference: {fileID: 0}
