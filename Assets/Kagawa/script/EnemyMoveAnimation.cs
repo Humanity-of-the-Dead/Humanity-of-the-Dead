@@ -75,12 +75,13 @@ public class EnemyMoveAnimation : MonoBehaviour
     // 攻撃のタイマー
     private float timeAttack;
 
+    private newEnemyMovement newEnemyMovement;
    
     private void Start()
     {
         indexNumber = 0;
         shaft = 0;
-
+        newEnemyMovement=GetComponent<newEnemyMovement>(); 
         isMirror = true;
         isActive = false;
         isAttack = false;
@@ -476,6 +477,7 @@ public class EnemyMoveAnimation : MonoBehaviour
             isAttack = true;
             time = timeAttackMax * upper.armForwardRotation.Length * 2;
             timeAttack = timeAttackMax * upper.armForwardRotation.Length;
+            newEnemyMovement.OnUpperAttackAnimationFinished();
             StopCoroutine(CallWalkWithDelay());
             indexNumber = 0;
             StartCoroutine(CallPantieWithDelay());
@@ -492,6 +494,8 @@ public class EnemyMoveAnimation : MonoBehaviour
             isAttack = true;
             time = timeAttackMax * lower.armForwardRotation.Length;
             timeAttack = timeAttackMax * lower.armForwardRotation.Length;
+            newEnemyMovement.OnLowerAttackAnimationFinished();
+
             StopCoroutine(CallWalkWithDelay());
             indexNumber = 0;
             StartCoroutine(CallKickWithDelay());

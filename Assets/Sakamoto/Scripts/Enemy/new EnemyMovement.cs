@@ -307,14 +307,14 @@ public class newEnemyMovement : MonoBehaviour
         }
     }
    
-    private void OnUpperAttackAnimationFinished()
+    public void OnUpperAttackAnimationFinished()
     {
         // è„îºêgçUåÇîªíË
         UpperEnemyAttack((float)lowerPart.iPartAttack);
 
     }
 
-    private void OnLowerAttackAnimationFinished()
+    public void OnLowerAttackAnimationFinished()
     {
         LowerEnemyAttack((float)lowerPart.iPartAttack);
     }
