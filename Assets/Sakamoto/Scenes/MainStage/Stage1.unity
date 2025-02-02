@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fTimerMax
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
@@ -2108,7 +2108,7 @@ PrefabInstance:
       objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fTimerMax
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
@@ -3178,7 +3178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fTimerMax
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
@@ -4183,11 +4183,11 @@ PrefabInstance:
       objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fEnemyMax
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fTimerMax
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
