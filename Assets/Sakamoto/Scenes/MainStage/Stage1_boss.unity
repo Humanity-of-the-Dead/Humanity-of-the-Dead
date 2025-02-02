@@ -303,11 +303,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7373263027973009250, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: waitTime
-      value: 0.5
+      value: 0.45
       objectReference: {fileID: 0}
+    - target: {fileID: -7373263027973009250, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
+      propertyPath: lowerPart
+      value: 
+      objectReference: {fileID: 11400000, guid: a6cc4347334d7b1428dba790218ccfe0, type: 2}
+    - target: {fileID: -7373263027973009250, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
+      propertyPath: upperPart
+      value: 
+      objectReference: {fileID: 11400000, guid: 53820a2b51ab44c4d82c11d0f0fd5205, type: 2}
     - target: {fileID: -7373263027973009250, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: chaseRange
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -7373263027973009250, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
+      propertyPath: chaseSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7373263027973009250, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
+      propertyPath: normalSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: Boss
@@ -315,12 +331,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: LowerHP
-      value: 15
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: UpperHP
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
+      propertyPath: Lowerbodypart
+      value: 
+      objectReference: {fileID: 11400000, guid: a6cc4347334d7b1428dba790218ccfe0, type: 2}
+    - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
+      propertyPath: Upperbodypart
+      value: 
+      objectReference: {fileID: 11400000, guid: 53820a2b51ab44c4d82c11d0f0fd5205, type: 2}
     - target: {fileID: 5932916154899696110, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.6
