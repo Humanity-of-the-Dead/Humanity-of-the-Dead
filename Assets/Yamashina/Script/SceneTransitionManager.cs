@@ -131,10 +131,10 @@ public class SceneTransitionManager : MonoBehaviour
                 bgmName = "BGM_stage_03"; // ステージ3のBGM名
                 break;
 
-            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour)://親友予定
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageThreeDotFive)://親友予定
                 bgmName = "BGM_stage_03_5"; // ステージ3.5のBGM名
                 break;
-            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageFive):
+            case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour):
                 bgmName = "BGM_stage_04"; // ステージ4のBGM名 ラスボス
                 break;
 

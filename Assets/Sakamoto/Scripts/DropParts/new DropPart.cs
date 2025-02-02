@@ -150,12 +150,12 @@ public class newDropPart : MonoBehaviour//
         string sceneName = SceneManager.GetActiveScene().name;
 
         //ステージが4の時
-        if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour))
+        if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageThreeDotFive))
         {
             PlayerParameter.Instance.DefaultBodyData();
         }
         //インデックスが上限に行ったらタイトルのインデックスを代入
-        if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFive))
+        if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour))
         {
 
             SceneManager.MoveGameObjectToScene(PlayerParameter.Instance.gameObject, SceneManager.GetActiveScene());
