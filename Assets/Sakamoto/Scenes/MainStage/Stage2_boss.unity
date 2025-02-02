@@ -3368,6 +3368,10 @@ PrefabInstance:
       propertyPath: UpperHP
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 4938219355749494688, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
+      propertyPath: bulletDamage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5568700679576308706, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: m_Name
       value: Enemy_Police Variant
@@ -3382,7 +3386,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: fd040dc1d6ff3114cabbde2a1c9d08a0, type: 2}
     - target: {fileID: 7118450785217948117, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: chaseRange
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7118450785217948117, guid: 7b3a6d0e36ab26146a1b33b9cdfd0c37, type: 3}
       propertyPath: chaseSpeed

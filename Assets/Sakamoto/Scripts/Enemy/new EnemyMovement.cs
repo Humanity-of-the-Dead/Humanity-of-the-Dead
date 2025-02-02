@@ -228,7 +228,7 @@ public class newEnemyMovement : MonoBehaviour
     private void OnUpperAttackAnimationFinished()
     {
         // ã”¼gUŒ‚”»’è
-        UpperEnemyAttack((float)lowerPart.iPartAttack);
+        UpperEnemyAttack((float)upperPart.iPartAttack);
 
     }
 
@@ -259,7 +259,11 @@ public class newEnemyMovement : MonoBehaviour
         Debug.Log("AttackWithSeUpper");
         //ã”¼gUŒ‚
         enemyMoveAnimation.PantieStart();
-        OnUpperAttackAnimationFinished();
+
+        if (upperPart.sPartsName != "Œx@‚Ìã”¼g")
+        {
+            OnUpperAttackAnimationFinished();
+        }
 
         //UŒ‚Ò‚Ìã”¼g‚ğŠm”F
         switch (upperPart.sPartsName)
@@ -280,7 +284,7 @@ public class newEnemyMovement : MonoBehaviour
                 }
 
                 // e‚ğg‚Á‚Ä’e‚ğ”­Ë
-                gun.Shoot(ShootMoveVector, transform);
+                gun.Shoot(ShootMoveVector, transform, upperPart.iPartAttack);
                 //Œx@Š¯‚Ìã”¼g‚ÅUŒ‚‚·‚éSE‚ğ–Â‚ç‚·
                 MultiAudio.ins.PlaySEByName(
                     "SE_policeofficer_attack_upper");
