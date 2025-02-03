@@ -149,7 +149,6 @@ public class newEnemyParameters : CharacterStats
         if (body == 0)
         {
             //上半身のHPを減らす
-            Debug.Log($"damage: {damage}");
             UpperHP -= (int)damage;
             //ShowHitEffects(body);
             playerMoveAnimation.ShowHitEffects(body);
@@ -279,9 +278,6 @@ public class newEnemyParameters : CharacterStats
         if (collision.gameObject.CompareTag("PlayerShoot"))
         {
             bulletDamage = (float)collision.gameObject.GetComponent<Bullet>().attack;
-            // こことは別のところでプレイヤーの弾によるエネミーへのダメージを計算しているよう
-            // bulletDamageは0になっているが、正常にプレイヤーの警察上半身攻撃力が反映されている
-            Debug.Log($"bulletDamage: {bulletDamage}");
             TakeDamage(bulletDamage, 0);
         }
     }
