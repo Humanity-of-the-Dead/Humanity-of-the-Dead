@@ -71,8 +71,8 @@ public class EnemyMovement : EnemyAttack
                             if (transform.position == target)
                             {
                                 // 到達したら回れ右
-                                if (movingToPointB == true) moveAnimation.RightMove();
-                                else moveAnimation.LeftMove();
+                                if (movingToPointB == true) moveAnimation.TurnToRight();
+                                else moveAnimation.TurnToLeft();
                                 movingToPointB = !movingToPointB;
                             }
                         }
@@ -138,11 +138,11 @@ public class EnemyMovement : EnemyAttack
             Debug.Log("敵同士が衝突し、回れ右");
             if (movingToPointB)
             {
-                moveAnimation.RightMove();
+                moveAnimation.TurnToRight();
             }
             else
             {
-                moveAnimation.LeftMove();
+                moveAnimation.TurnToLeft();
             }
             movingToPointB = !movingToPointB;
         }

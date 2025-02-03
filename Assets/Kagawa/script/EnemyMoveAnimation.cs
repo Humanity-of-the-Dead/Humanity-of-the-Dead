@@ -534,7 +534,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// <summary>
     /// 右を向くとき
     /// </summary>
-    public void RightMove()
+    public void TurnToRight()
     {
         shaft = SHAFT_DIRECTION_RIGHT;
         Debug.Log("右向き");
@@ -543,7 +543,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// <summary>
     /// 左を向くとき
     /// </summary>
-    public void LeftMove()
+    public void TurnToLeft()
     {
         shaft = SHAFT_DIRECTION_LEFT;
         Debug.Log("左向き");

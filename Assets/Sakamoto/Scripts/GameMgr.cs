@@ -97,7 +97,7 @@ public class GameMgr : MonoBehaviour
         {
             enemy.transform.Translate(Vector3.left * 5f); // ”CˆÓ‚Ì‘¬“x‚Å¶ˆÚ“®
             EnemyMoveAnimation moveAnimation = GameObject.FindAnyObjectByType<EnemyMoveAnimation>();
-            moveAnimation.LeftMove();
+            moveAnimation.TurnToLeft();
         }
 
     }
