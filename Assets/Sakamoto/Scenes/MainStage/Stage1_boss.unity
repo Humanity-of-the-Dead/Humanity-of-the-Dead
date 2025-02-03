@@ -2251,6 +2251,14 @@ PrefabInstance:
       propertyPath: iHumanityMax
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 5702745298637968536, guid: 06fbbe3a6bfe05d4f85b2bd6e1853ff6, type: 3}
+      propertyPath: LowerDataForStageFour
+      value: 
+      objectReference: {fileID: 11400000, guid: ec2d854efa589b3498f4e85671677160, type: 2}
+    - target: {fileID: 5702745298637968536, guid: 06fbbe3a6bfe05d4f85b2bd6e1853ff6, type: 3}
+      propertyPath: UpperDataForStageFour
+      value: 
+      objectReference: {fileID: 11400000, guid: 304625b32bd712d4bad788f0c7bb7feb, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
