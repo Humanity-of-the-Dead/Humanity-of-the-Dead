@@ -74,12 +74,16 @@ public class EnemyMoveAnimation : MonoBehaviour
 
     // 攻撃のタイマー
     private float timeAttack;
+    public const int SHAFT_DIRECTION_RIGHT = 0;
+    public const int SHAFT_DIRECTION_LEFT = 180;
 
-   
+
     private void Start()
     {
         indexNumber = 0;
-        shaft = 0;
+        shaft = SHAFT_DIRECTION_LEFT;
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[indexNumber]);
+
 
         isMirror = true;
         isActive = false;
@@ -532,7 +536,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     public void RightMove()
     {
-        shaft = 0;
+        shaft = SHAFT_DIRECTION_RIGHT;
         Debug.Log("右向き");
     }
 
@@ -541,7 +545,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     public void LeftMove()
     {
-        shaft = 180;
+        shaft = SHAFT_DIRECTION_LEFT;
         Debug.Log("左向き");
 
     }
