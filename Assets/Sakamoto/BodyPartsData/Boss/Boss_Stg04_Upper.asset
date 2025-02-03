@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
-  m_Name: Boss_Stg03_Upper
+  m_Name: Boss_Stg04_Upper
   m_EditorClassIdentifier: 
   enPartsType: 0
   upperAttack: 3
   lowerAttack: 4
   sPartsName: "\u30DC\u30B9\u306E\u4E0A\u534A\u8EAB"
-  AttackArea: 2
+  AttackArea: 3
   iPartHp: 30
-  iPartAttack: 15
+  iPartAttack: 2
   spBody: {fileID: 21300000, guid: f5f82792a81b9b742a0d0e4617825a3b, type: 3}
   spRightArm: {fileID: 21300000, guid: f9112b41300f90b4c8f54dafaaddae86, type: 3}
   spRightHand: {fileID: 21300000, guid: b9d5fbb758e203946903bb50e4c69e3d, type: 3}
