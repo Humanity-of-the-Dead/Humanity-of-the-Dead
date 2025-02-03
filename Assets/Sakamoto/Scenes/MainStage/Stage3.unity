@@ -899,7 +899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &259418452
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4967,11 +4967,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1150826654535052386, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.7
       objectReference: {fileID: 0}
     - target: {fileID: 1150826654535052386, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.07
+      value: -1.62
       objectReference: {fileID: 0}
     - target: {fileID: 1150826654535052386, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5238,8 +5238,8 @@ MonoBehaviour:
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:
-  - -1
-  - 202.1
+  - -3.8
+  - 187.39
   Player: {fileID: 0}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
