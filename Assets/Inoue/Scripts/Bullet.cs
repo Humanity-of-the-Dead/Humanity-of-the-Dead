@@ -3,6 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 1f; // e’e‚Ì‘¬“x
+    public int attack = 1; // e’e‚ÌUŒ‚—Í
 
     #region R•i•ÏX
     /// <summary>

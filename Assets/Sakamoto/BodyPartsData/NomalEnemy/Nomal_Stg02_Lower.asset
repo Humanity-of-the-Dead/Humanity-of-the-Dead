@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
-  m_Name: Nomal_Lower
+  m_Name: Nomal_Stg02_Lower
   m_EditorClassIdentifier: 
   enPartsType: 1
   upperAttack: 4
   lowerAttack: 0
-  sPartsName: "\u96D1\u9B5A\u6575\u306E\u4E0B\u534A\u8EAB"
+  sPartsName: "\u30AD\u30CE\u30B3\u306E\u4E0B\u534A\u8EAB"
   AttackArea: 2.5
-  iPartHp: 30
-  iPartAttack: 5
+  iPartHp: 25
+  iPartAttack: 3
   spBody: {fileID: 0}
   spRightArm: {fileID: 0}
   spRightHand: {fileID: 0}

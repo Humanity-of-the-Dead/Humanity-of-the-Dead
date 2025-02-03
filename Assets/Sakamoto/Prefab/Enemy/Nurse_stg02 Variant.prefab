@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1481237974272629741, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
       propertyPath: m_Name
-      value: Enemy_Nurse Variant lv02
+      value: Nurse_stg02 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1481237974272629741, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
       propertyPath: m_Layer
@@ -271,8 +271,8 @@ MonoBehaviour:
   chaseRange: 5
   attackRange: 2
   waitTime: 1
-  upperPart: {fileID: 11400000, guid: 568b91405d4f26741b8d29462335729e, type: 2}
-  lowerPart: {fileID: 11400000, guid: e5e8b65435755dd41a9ed6106cb2b6ac, type: 2}
+  upperPart: {fileID: 11400000, guid: b3c738c686f207e43ab6d2f69e448405, type: 2}
+  lowerPart: {fileID: 11400000, guid: 590fb0006d0e45543af6ae97c8f66a7e, type: 2}
   bossMinX: -8
   bossMaxX: 8
 --- !u!114 &-867265186688299090
@@ -296,8 +296,8 @@ MonoBehaviour:
   lowerEffectXMax: 0.21
   lowerEffectYMin: -2.8
   lowerEffectYMax: -1
-  UpperHP: 5
-  LowerHP: 4
+  UpperHP: 7
+  LowerHP: 7
   Upperbodypart: {fileID: 11400000, guid: 568b91405d4f26741b8d29462335729e, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: e5e8b65435755dd41a9ed6106cb2b6ac, type: 2}
   preUpperPart: {fileID: 1386206347217571068, guid: cdb3e0e1a208a88419518d5d8eb7bfff, type: 3}

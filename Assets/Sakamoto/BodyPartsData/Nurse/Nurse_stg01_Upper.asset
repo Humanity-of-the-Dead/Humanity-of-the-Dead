@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
-  m_Name: Nurse_stg01_Upper
+  m_Name: Nurse_Stg01_Upper
   m_EditorClassIdentifier: 
   enPartsType: 0
   upperAttack: 2
   lowerAttack: 4
   sPartsName: "\u770B\u8B77\u5E2B\u306E\u4E0A\u534A\u8EAB"
   AttackArea: 2.3
-  iPartHp: 40
-  iPartAttack: 4
+  iPartHp: 35
+  iPartAttack: 1
   spBody: {fileID: 21300000, guid: d2cde9a9f776d6b4790c9a3f6edbaad9, type: 3}
   spRightArm: {fileID: 21300000, guid: 90a53e9c2464a724a99555106ed48140, type: 3}
   spRightHand: {fileID: 21300000, guid: f52f1433352f02644adfaffd2469b684, type: 3}

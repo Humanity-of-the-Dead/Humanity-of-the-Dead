@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
+  m_Name: Nurse_Stg02_Upper
+  m_EditorClassIdentifier: 
+  enPartsType: 0
+  upperAttack: 2
+  lowerAttack: 4
+  sPartsName: "\u770B\u8B77\u5E2B\u306E\u4E0A\u534A\u8EAB"
+  AttackArea: 2.3
+  iPartHp: 35
+  iPartAttack: 2
+  spBody: {fileID: 21300000, guid: d2cde9a9f776d6b4790c9a3f6edbaad9, type: 3}
+  spRightArm: {fileID: 21300000, guid: 90a53e9c2464a724a99555106ed48140, type: 3}
+  spRightHand: {fileID: 21300000, guid: f52f1433352f02644adfaffd2469b684, type: 3}
+  spLeftArm: {fileID: 21300000, guid: eb34ac4f4ae10d447b201443855f14ac, type: 3}
+  spLeftHand: {fileID: 21300000, guid: 9d28a62b7fa71354cb3f30bafe6150f1, type: 3}
+  spWaist: {fileID: 21300000, guid: 4770f25082a60064cbd1db334e06ff0b, type: 3}
+  spRightLeg: {fileID: 21300000, guid: b06d29679927dc646a2536732cf3bcac, type: 3}
+  spRightFoot: {fileID: 21300000, guid: 48a2fef415631944ca5512908e3fea18, type: 3}
+  spLeftLeg: {fileID: 21300000, guid: b6e23226ef5d7d14dbd5691a4360dada, type: 3}
+  spLeftFoot: {fileID: 21300000, guid: 9d28a62b7fa71354cb3f30bafe6150f1, type: 3}

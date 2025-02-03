@@ -36,6 +36,10 @@ public class PlayerParameter : CharacterStats
     public BodyPartsData UpperData;
     //下半身のパーツデータ
     public BodyPartsData LowerData;
+    //上半身のパーツデータ(ステージ4用)
+    public BodyPartsData UpperDataForStageFour;
+    //下半身のパーツデータ(ステージ4用)
+    public BodyPartsData LowerDataForStageFour;
     //キャラのイメージ取得用
     private PlayerMoveAnimation playerMoveAnimation;
     //上半身のパーツデータ(保存用)
@@ -61,8 +65,8 @@ public class PlayerParameter : CharacterStats
     {
         upperIndex = UpperData;
         lowerIndex = LowerData;
-        upperPlayer = UpperData;
-        lowerPlayer = LowerData;
+        upperPlayer = UpperDataForStageFour;
+        lowerPlayer = LowerDataForStageFour;
         InitializeReferences();
         //コンポーネント取得
 

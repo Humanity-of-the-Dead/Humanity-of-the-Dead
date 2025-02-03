@@ -207,10 +207,16 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.I))
             {
 
+                UpperAttack upperattack = PlayerParameter.Instance.UpperData.upperAttack;
                 playerMoveAnimation.PantieStart();
-                OnUpperAttackAnimationFinished();
+                // åxé@è„îºêgÇÕèeíeÇ…ìñÇΩÇËîªíËÇéùÇ¬
+                if (upperattack != UpperAttack.POLICE)
+                {
+                    OnUpperAttackAnimationFinished();
+                }
+                
                 #endregion
-                switch (PlayerParameter.Instance.UpperData.upperAttack)
+                switch (upperattack)
                 {
                     case UpperAttack.NORMAL:
 
@@ -239,7 +245,7 @@ public class PlayerControl : MonoBehaviour
                         if (isShot == true)
                         {
                             Debug.Log("íeî≠éÀ");
-                            Gun.Shoot(ShootMoveBector, transform);
+                            Gun.Shoot(ShootMoveBector, transform, PlayerParameter.Instance.UpperData.iPartAttack);
 
                             MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_upper");
 
@@ -406,18 +412,19 @@ public class PlayerControl : MonoBehaviour
     }
 
 
-    //ìGÇÃíeìsÇÃìñÇΩÇËîªíË
+    //ìGÇÃíeÇ∆ÇÃìñÇΩÇËîªíË
     private void OnTriggerEnter2D(Collider2D playerCollision)
     {
         if (playerCollision.gameObject.CompareTag("EnemyShoot"))
         {
+            int attack = playerCollision.gameObject.GetComponent<Bullet>().attack;
             if (0 > transform.position.y - playerCollision.transform.position.y)
             {
-                PlayerParameter.Instance.UpperHP -= 1;
+                PlayerParameter.Instance.UpperHP -= attack;
             }
             else
             {
-                PlayerParameter.Instance.LowerHP -= 1;
+                PlayerParameter.Instance.LowerHP -= attack;
             }
         }
 

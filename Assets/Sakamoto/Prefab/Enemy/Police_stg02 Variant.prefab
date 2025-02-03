@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1481237974272629741, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
       propertyPath: m_Name
-      value: Enemy_Police Variant lv02
+      value: Police_stg02 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1481237974272629741, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
       propertyPath: m_Layer
@@ -240,8 +240,8 @@ MonoBehaviour:
   chaseRange: 5
   attackRange: 2
   waitTime: 1
-  upperPart: {fileID: 11400000, guid: e14baf2f3f4c6df40a37ca9c3d576095, type: 2}
-  lowerPart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
+  upperPart: {fileID: 11400000, guid: f0fc5e8b4128a1945a29e20ac4e0d6f6, type: 2}
+  lowerPart: {fileID: 11400000, guid: 335379ec0cc10714fa91fa2acd582886, type: 2}
   bossMinX: -8
   bossMaxX: 8
 --- !u!114 &4938219355749494688
@@ -265,8 +265,8 @@ MonoBehaviour:
   lowerEffectXMax: 0.21
   lowerEffectYMin: 2.8
   lowerEffectYMax: -1
-  UpperHP: 3
-  LowerHP: 6
+  UpperHP: 4
+  LowerHP: 4
   Upperbodypart: {fileID: 11400000, guid: e14baf2f3f4c6df40a37ca9c3d576095, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: 8ca14064a04be5749bea778dc859a051, type: 2}
   preUpperPart: {fileID: 1386206347217571068, guid: 9ef6486a8bc7b494c93dd6ae51d33677, type: 3}

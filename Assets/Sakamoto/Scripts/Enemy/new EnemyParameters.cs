@@ -39,6 +39,9 @@ public class newEnemyParameters : CharacterStats
     [SerializeField, Header("ボスかどうか、チェックが入っているならボス")]
     public bool Boss;
 
+    [SerializeField, Header("両部位への攻撃が必要か？チェックが入っているなら必要")]
+    public bool needsAttackingBothParts;
+
     [SerializeField, Header("敵が打ってくる一個の弾のダメージ量")] float bulletDamage;    //  //クリアテキスト
     //  [SerializeField]
     //private  GameObject textBox;
@@ -107,6 +110,8 @@ public class newEnemyParameters : CharacterStats
                 HPBarContainer.SetActive(false);
             }
         }
+
+        AdjustHpIfNeededAttackingBothParts();
 
         // 部位が破壊された際にHPバーを一瞬表示
         if (UpperHP <= 0)
@@ -272,7 +277,29 @@ public class newEnemyParameters : CharacterStats
     {
         if (collision.gameObject.CompareTag("PlayerShoot"))
         {
+            bulletDamage = (float)collision.gameObject.GetComponent<Bullet>().attack;
             TakeDamage(bulletDamage, 0);
+        }
+    }
+
+    // 両部位への攻撃が必要な場合はHPの調整を行なう
+    private void AdjustHpIfNeededAttackingBothParts()
+    {
+        if (needsAttackingBothParts)
+        {
+            // 部位HPが1の時、その部位のHPを削り切ったものとする
+            // 上半身HPが0になった時、かつ下半身HPを削り切っていないとき
+            if (UpperHP <= 0 && LowerHP > 1)
+            {
+                // HPを破壊手前で止める
+                UpperHP = 1;
+            }
+            // 下半身
+            else if (LowerHP <= 0 && UpperHP > 1)
+            {
+                // HPを破壊手前で止める
+                LowerHP = 1;
+            }
         }
     }
 

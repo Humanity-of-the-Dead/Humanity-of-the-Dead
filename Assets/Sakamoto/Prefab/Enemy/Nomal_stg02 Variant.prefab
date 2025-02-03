@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1481237974272629741, guid: 9c5b3b85ba82ed54f937494b1be1ac33, type: 3}
       propertyPath: m_Name
-      value: Enemy_Nomal_lv02 Variant
+      value: Nomal_stg02 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1481237974272629741, guid: 9c5b3b85ba82ed54f937494b1be1ac33, type: 3}
       propertyPath: m_Layer
@@ -247,8 +247,8 @@ MonoBehaviour:
   chaseRange: 5
   attackRange: 2
   waitTime: 1
-  upperPart: {fileID: 11400000, guid: 1f44a247b0640614c8806fd0c1ddc7e1, type: 2}
-  lowerPart: {fileID: 11400000, guid: e7e6579bcbac34e4190ebc1c174e3a77, type: 2}
+  upperPart: {fileID: 11400000, guid: fef1cacc5400b3e419aec442b7224074, type: 2}
+  lowerPart: {fileID: 11400000, guid: 1040172fb9a86f94195f348456923259, type: 2}
   bossMinX: -8
   bossMaxX: 8
 --- !u!114 &-5728493241584073441
@@ -272,8 +272,8 @@ MonoBehaviour:
   lowerEffectXMax: 0.21
   lowerEffectYMin: -2.8
   lowerEffectYMax: -1
-  UpperHP: 4
-  LowerHP: 6
+  UpperHP: 5
+  LowerHP: 5
   Upperbodypart: {fileID: 11400000, guid: 1f44a247b0640614c8806fd0c1ddc7e1, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: e7e6579bcbac34e4190ebc1c174e3a77, type: 2}
   preUpperPart: {fileID: 1386206347217571068, guid: d7ba048aa67839d4c9d43f365b2308b9, type: 3}

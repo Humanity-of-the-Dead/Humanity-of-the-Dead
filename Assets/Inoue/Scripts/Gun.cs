@@ -37,19 +37,20 @@ public class Gun : MonoBehaviour
     [SerializeField]
     public Vector2 offset = new Vector2(0, 0.1f); //e’e‚ªo‚éˆÊ’u(Y²)‚ğ’²®
 
-    public void Shoot(Vector2 direction, Transform firePoint)
+    public void Shoot(Vector2 direction, Transform firePoint, int attack)
     {
         // e’e‚ÌˆÊ’u‚ğ’²®
         Vector2 adjustedPosition = (Vector2)firePoint.position + offset;
 
         // e’e‚ğ¶¬
         GameObject bullet = Instantiate(bulletPrefab, (Vector3)adjustedPosition, firePoint.rotation); // Vector3‚ÉƒLƒƒƒXƒg‚µ‚Ä¶¬
+        bullet.GetComponent<Bullet>().attack = attack;
 
         // e’e‚ÌRigidbody2D‚ğæ“¾
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
         // ”­Ë•ûŒü‚ÉŠî‚Ã‚¢‚Ävelocity‚ğİ’è
-        rb.velocity = direction * bullet.GetComponent<Bullet>().speed;
+        rb.velocity = new Vector2(direction.x * bullet.GetComponent<Bullet>().speed, 0);
 
         // ’e‚ª‰E‚É”ò‚Ôê‡
         if (rb.velocity.x > 0)
