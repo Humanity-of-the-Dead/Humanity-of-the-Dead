@@ -30,14 +30,14 @@ public class newEnemyMovement : MonoBehaviour
     private newEnemyParameters newEnemyParameters;
     private EnemyMoveAnimation enemyMoveAnimation;
 
-    private float pointA, pointB;//開始位置と終了位置
+    private float pointA, pointB;   // 開始位置と終了位置(A: 移動可能範囲の右端/ B: 左端)
 
 
     private enum EnemyState { Search, Walk, Attack, Wait }
 
     private EnemyState enemyState = EnemyState.Search;
 
-    private bool movingToPointB = false; // 進行方向
+    private bool movingToPointB = true; // 進行方向
     private PlayerControl player; // プレイヤーの位置
     private float timer;//攻撃後の時間
     [Tooltip("ボスの移動可能な最小X座標")]
@@ -101,7 +101,7 @@ public class newEnemyMovement : MonoBehaviour
                     case EnemyState.Walk:
                         // プレイヤーを追跡
                         MoveTowards(player.transform.position, chaseSpeed);
-                        if (PlayerPositionFromEnemy() != movingToPointB)
+                        if (IsLeftFromPlayer() != movingToPointB)
                         {
                             if (movingToPointB == true) enemyMoveAnimation.RightMove();
                             else enemyMoveAnimation.LeftMove();
@@ -110,7 +110,7 @@ public class newEnemyMovement : MonoBehaviour
                         }
                         // プレイヤーが攻撃範囲内に入っているかどうか判断
                         if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea)
-                            && PlayerPositionFromEnemy() == movingToPointB)
+                            && IsLeftFromPlayer() == movingToPointB)
                         {
                             enemyState = EnemyState.Wait;
                         }
@@ -120,7 +120,7 @@ public class newEnemyMovement : MonoBehaviour
                         if (timer > waitTime)
                         {
                             timer = 0;
-                            if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && PlayerPositionFromEnemy() == movingToPointB)
+                            if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && IsLeftFromPlayer() == movingToPointB)
                             {
                                 enemyState = EnemyState.Attack;
                             }
@@ -133,7 +133,7 @@ public class newEnemyMovement : MonoBehaviour
                         timer += Time.deltaTime;
                         break;
                     case EnemyState.Attack:
-                        if (PlayerPositionFromEnemy() != movingToPointB)
+                        if (IsLeftFromPlayer() != movingToPointB)
                         {
                             // エネミーがプレイヤーを向いていなければ攻撃中止(何もしない)
                         }
@@ -211,8 +211,8 @@ public class newEnemyMovement : MonoBehaviour
         }
     }
 
-    //PlayerPositionFromEnemy右向いてたら＋、左向いてたらー
-    bool PlayerPositionFromEnemy()
+    // 
+    bool IsLeftFromPlayer()
     {
         float Direction = player.transform.position.x - gameObject.transform.position.x;
         if (Direction < 0)
