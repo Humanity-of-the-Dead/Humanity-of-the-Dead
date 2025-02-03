@@ -345,6 +345,18 @@ PrefabInstance:
       propertyPath: Upperbodypart
       value: 
       objectReference: {fileID: 11400000, guid: 568b91405d4f26741b8d29462335729e, type: 2}
+    - target: {fileID: 1920648245941252183, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920648245941252183, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920648245941252183, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
     - target: {fileID: 3064589537072605639, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: timeMax
       value: 0.1
@@ -355,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5932916154899696110, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.39
+      value: -2.04
       objectReference: {fileID: 0}
     - target: {fileID: 5932916154899696110, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: m_LocalPosition.z
@@ -881,7 +893,7 @@ GameObject:
   - component: {fileID: 252931443}
   - component: {fileID: 252931445}
   - component: {fileID: 252931444}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Humanity_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -896,7 +908,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252931442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1240,7 +1252,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -1745115145
+  m_SortingLayerID: 1817916389
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &456657988
@@ -1660,7 +1672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 519077329}
   - component: {fileID: 519077330}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: main_hpbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1676,7 +1688,7 @@ Transform:
   m_GameObject: {fileID: 519077328}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.53, y: 84.01416, z: -9720}
+  m_LocalPosition: {x: -1.53, y: 84.01416, z: 1}
   m_LocalScale: {x: 100.333725, y: 108, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1720,8 +1732,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1817916389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 67a56f4b323d67643a8667305ce8ed9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1804,8 +1816,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1817916389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fecee693fd29e6645b4cfcb5a9b9e2ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2589,8 +2601,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1817916389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ee27dd21bc1c07540894740409fd2b7e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2910,8 +2922,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1817916389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 926f74136f4d1594785272420c4fc0e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3009,7 +3021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1264259634}
   - component: {fileID: 1264259635}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: main_hpbar (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3025,7 +3037,7 @@ Transform:
   m_GameObject: {fileID: 1264259633}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.53, y: -8.799984, z: -9720}
+  m_LocalPosition: {x: -1.53, y: -8.799984, z: 1}
   m_LocalScale: {x: 100.333725, y: 108, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3069,8 +3081,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1817916389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 67a56f4b323d67643a8667305ce8ed9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3196,7 +3208,7 @@ GameObject:
   - component: {fileID: 1440257035}
   - component: {fileID: 1440257037}
   - component: {fileID: 1440257036}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: UpperHP_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3211,7 +3223,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1440257034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3763,7 +3775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1933492212}
   - component: {fileID: 1933492213}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: main_hpbar (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3779,7 +3791,7 @@ Transform:
   m_GameObject: {fileID: 1933492211}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.53, y: -105.19998, z: -9720}
+  m_LocalPosition: {x: -1.53, y: -105.19998, z: 1}
   m_LocalScale: {x: 100.333725, y: 108, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3823,8 +3835,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1817916389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 67a56f4b323d67643a8667305ce8ed9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4038,7 +4050,7 @@ GameObject:
   - component: {fileID: 2076811910}
   - component: {fileID: 2076811912}
   - component: {fileID: 2076811911}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LowerHP_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4053,7 +4065,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076811909}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
