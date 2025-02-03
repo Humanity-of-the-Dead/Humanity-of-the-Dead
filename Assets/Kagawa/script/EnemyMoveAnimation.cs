@@ -226,6 +226,11 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     private void PlayerPantie()
     {
+        if (indexNumber >= upper.wholeRotation.Length)
+        {
+            Debug.LogWarning("IndexNumber is out of range for wholeRotation array.");
+            return;
+        }
         switch (status)
         {
             case Status.Zombie:
@@ -314,6 +319,12 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     private void PlayerKick()
     {
+        if (indexNumber >= lower.wholeRotation.Length)
+        {
+            Debug.LogWarning("IndexNumber is out of range for wholeRotation array.");
+            return;
+        }
+
         switch (status)
         {
             case Status.Zombie:
