@@ -37,6 +37,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     //アニメーションの間隔はアニメーションスクリプト内で完結したいのでプライベート化してシリアライズフィールドを付けることで設定できる
     [SerializeField, Header("1コマの間隔の時間")] private float timeMax;
+    [SerializeField, Header("攻撃の1コマの間隔の時間")] private float attackTimeMax;
     [SerializeField] private AnimationDataSet animationDataSet;
     private UpperAttack upperAttack;
 
@@ -570,7 +571,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
             // indexNumberの値を増やす(配列番号を上げる)
             attackNumber = (attackNumber + 1) % animationDataSet.playerUpper.armForwardRotation.Length;
-            yield return new WaitForSeconds(timeMax);
+            yield return new WaitForSeconds(attackTimeMax);
         }
 
         timeWalk = 0;
@@ -591,7 +592,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
             // indexNumberの値を増やす(配列番号を上げる)
             attackNumber = (attackNumber + 1) % animationDataSet.playerLower.armForwardRotation.Length;
-            yield return new WaitForSeconds(timeMax);
+            yield return new WaitForSeconds(attackTimeMax);
         }
 
         timeWalk = 0;
@@ -685,7 +686,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     private void AttackWait()
     {
         timeWalk = timeMax * (animationDataSet.playerUpper.armForwardRotation.Length - 1);
-        timeAttack = timeMax * (animationDataSet.playerLower.armForwardRotation.Length - 1);
+        timeAttack = attackTimeMax * (animationDataSet.playerLower.armForwardRotation.Length - 1);
         isAttack = true;
         isWalk = false;
         StopCoroutine(CallWalkWithDelay());
