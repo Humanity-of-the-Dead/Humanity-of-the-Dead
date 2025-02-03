@@ -30,14 +30,12 @@ public class newEnemyMovement : MonoBehaviour
     private newEnemyParameters newEnemyParameters;
     private EnemyMoveAnimation enemyMoveAnimation;
 
-    private float pointA, pointB;   // 開始位置と終了位置(A: 移動可能範囲の右端/ B: 左端)
-
-
     private enum EnemyState { Search, Walk, Attack, Wait }
 
     private EnemyState enemyState = EnemyState.Search;
 
-    private bool movingToPointB = true; // 進行方向
+    private float pointA, pointB;   // 開始位置と終了位置(A: 移動可能範囲の右端/ B: 左端)
+    private bool isMovingToPointB = true; // 進行方向
     private PlayerControl player; // プレイヤーの位置
     private float timer;//攻撃後の時間
     [Tooltip("ボスの移動可能な最小X座標")]
@@ -79,7 +77,7 @@ public class newEnemyMovement : MonoBehaviour
                         else
                         {
                             // いつもの挙動
-                            float Target = movingToPointB ? pointB : pointA;
+                            float Target = isMovingToPointB ? pointB : pointA;
                             Vector3 target = new Vector3(Target, transform.position.y, transform.position.z);
                             // ボスの場合、移動範囲を制限
                             if (newEnemyParameters.Boss)
@@ -92,25 +90,26 @@ public class newEnemyMovement : MonoBehaviour
                             if (transform.position == target)
                             {
                                 // 到達したら回れ右
-                                if (movingToPointB == true) enemyMoveAnimation.RightMove();
-                                else enemyMoveAnimation.LeftMove();
-                                movingToPointB = !movingToPointB;
+                                if (isMovingToPointB == true) enemyMoveAnimation.TurnToRight();
+                                else enemyMoveAnimation.TurnToLeft();
+                                isMovingToPointB = !isMovingToPointB;
                             }
                         }
                         break;
                     case EnemyState.Walk:
                         // プレイヤーを追跡
+                        enemyMoveAnimation.WalkInstance();
                         MoveTowards(player.transform.position, chaseSpeed);
-                        if (IsLeftFromPlayer() != movingToPointB)
+                        if (IsLeftFromPlayer() != isMovingToPointB)
                         {
-                            if (movingToPointB == true) enemyMoveAnimation.RightMove();
-                            else enemyMoveAnimation.LeftMove();
-                            movingToPointB = !movingToPointB;
+                            if (isMovingToPointB == true) enemyMoveAnimation.TurnToRight();
+                            else enemyMoveAnimation.TurnToLeft();
+                            isMovingToPointB = !isMovingToPointB;
 
                         }
                         // プレイヤーが攻撃範囲内に入っているかどうか判断
                         if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea)
-                            && IsLeftFromPlayer() == movingToPointB)
+                            && IsLeftFromPlayer() == isMovingToPointB)
                         {
                             enemyState = EnemyState.Wait;
                         }
@@ -120,7 +119,7 @@ public class newEnemyMovement : MonoBehaviour
                         if (timer > waitTime)
                         {
                             timer = 0;
-                            if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && IsLeftFromPlayer() == movingToPointB)
+                            if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && IsLeftFromPlayer() == isMovingToPointB)
                             {
                                 enemyState = EnemyState.Attack;
                             }
@@ -133,7 +132,7 @@ public class newEnemyMovement : MonoBehaviour
                         timer += Time.deltaTime;
                         break;
                     case EnemyState.Attack:
-                        if (IsLeftFromPlayer() != movingToPointB)
+                        if (IsLeftFromPlayer() != isMovingToPointB)
                         {
                             // エネミーがプレイヤーを向いていなければ攻撃中止(何もしない)
                         }
@@ -199,15 +198,15 @@ public class newEnemyMovement : MonoBehaviour
             //Debug.Log($"Collided with: {collision.gameObject.name}, Tag: {collision.gameObject.tag}");
 
             //Debug.Log("敵同士が衝突し、回れ右");
-            if (movingToPointB)
+            if (isMovingToPointB)
             {
-                enemyMoveAnimation?.RightMove();
+                enemyMoveAnimation?.TurnToRight();
             }
             else
             {
-                enemyMoveAnimation?.LeftMove();
+                enemyMoveAnimation?.TurnToLeft();
             }
-            movingToPointB = !movingToPointB;
+            isMovingToPointB = !isMovingToPointB;
         }
     }
 
