@@ -2735,6 +2735,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3137860054857002523, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: waitTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -3137860054857002523, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: lowerPart
+      value: 
+      objectReference: {fileID: 11400000, guid: 868fa4f4cd13c664a993a019637bb4ed, type: 2}
+    - target: {fileID: -3137860054857002523, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: upperPart
+      value: 
+      objectReference: {fileID: 11400000, guid: 6880607cb43d76e46aff8234e41f6938, type: 2}
+    - target: {fileID: -3137860054857002523, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: chaseRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -3137860054857002523, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: chaseSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3137860054857002523, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: normalSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1396109201988390841, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.592111
@@ -2782,6 +2806,22 @@ PrefabInstance:
     - target: {fileID: 6868419856064601450, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: Boss
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6868419856064601450, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: LowerHP
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6868419856064601450, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: UpperHP
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750010862643081104, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: timeMax
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750010862643081104, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: timeAttackMax
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
