@@ -690,7 +690,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         isWalk = false;
         StopCoroutine(CallWalkWithDelay());
         walkIndex = 0;
-        attackNumber = 1;
+        attackNumber = 0;
     }
 
 
