@@ -38,6 +38,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     //アニメーションの間隔はアニメーションスクリプト内で完結したいのでプライベート化してシリアライズフィールドを付けることで設定できる
     [SerializeField, Header("1コマの間隔の時間")] private float timeMax;
     [SerializeField, Header("攻撃の1コマの間隔の時間")] private float attackTimeMax;
+    [SerializeField, Header("攻撃終了後の硬直時間")] private float afterAttackFreezeTime;
     [SerializeField] private AnimationDataSet animationDataSet;
     private UpperAttack upperAttack;
 
@@ -601,13 +602,21 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     private IEnumerator CallPantieWithDelay()
     {
-        for (int i = 0; i < animationDataSet.playerUpper.armForwardRotation.Length; i++)
+        int animationLength = animationDataSet.playerUpper.armForwardRotation.Length;
+        for (int i = 0; i < animationLength; i++)
         {
             PlayerPantie();
 
-            // indexNumberの値を増やす(配列番号を上げる)
-            attackNumber++;
-            yield return new WaitForSeconds(attackTimeMax);
+            if (i < animationLength - 1)
+            {
+                // indexNumberの値を増やす(配列番号を上げる)
+                attackNumber++;
+                yield return new WaitForSeconds(attackTimeMax);
+            }
+            else
+            {
+                yield return new WaitForSeconds(attackTimeMax + afterAttackFreezeTime);
+            }
         }
 
         // 攻撃が終わったら
@@ -623,14 +632,21 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     private IEnumerator CallKickWithDelay()
     {
-
-        for (int i = 0; i < animationDataSet.playerLower.armForwardRotation.Length; i++)
+        int animationLength = animationDataSet.playerUpper.armForwardRotation.Length;
+        for (int i = 0; i < animationLength; i++)
         {
             PlayerKick();
 
-            // indexNumberの値を増やす(配列番号を上げる)
-            attackNumber++;
-            yield return new WaitForSeconds(attackTimeMax);
+            if (i < animationLength - 1)
+            {
+                // indexNumberの値を増やす(配列番号を上げる)
+                attackNumber++;
+                yield return new WaitForSeconds(attackTimeMax);
+            }
+            else
+            {
+                yield return new WaitForSeconds(attackTimeMax + afterAttackFreezeTime);
+            }
         }
 
         // 攻撃が終わったら

@@ -40,6 +40,8 @@ public class EnemyMoveAnimation : MonoBehaviour
 
     [SerializeField, Header("1コマの間隔の時間(攻撃)")] private float timeAttackMax;
 
+    [SerializeField, Header("攻撃終了後の硬直時間")] private float afterAttackFreezeTime;
+
     [SerializeField, Header("---歩きのアニメーション---")] private AnimationData walk;
 
     [SerializeField, Header("---上半身のアニメーション---")] private AnimationData upper;
@@ -371,13 +373,21 @@ public class EnemyMoveAnimation : MonoBehaviour
     private IEnumerator CallPantieWithDelay()
     {
 
-        for (int i = 0; i < upper.armForwardRotation.Length; i++)
+        int animationLength = upper.armForwardRotation.Length;
+        for (int i = 0; i < animationLength; i++)
         {
             PlayerPantie();
 
-            // indexNumberの値を増やす(配列番号を上げる)
-            indexNumber = indexNumber++;
-            yield return new WaitForSeconds(timeMax);
+            if (i < animationLength - 1)
+            {
+                // indexNumberの値を増やす(配列番号を上げる)
+                indexNumber++;
+                yield return new WaitForSeconds(indexNumber);
+            }
+            else
+            {
+                yield return new WaitForSeconds(indexNumber + afterAttackFreezeTime);
+            }
         }
 
         // 攻撃が終わったら
@@ -389,14 +399,21 @@ public class EnemyMoveAnimation : MonoBehaviour
 
     private IEnumerator CallKickWithDelay()
     {
-
-        for (int i = 0; i < lower.armForwardRotation.Length; i++)
+        int animationLength = upper.armForwardRotation.Length;
+        for (int i = 0; i < animationLength; i++)
         {
             PlayerKick();
 
-            // indexNumberの値を増やす(配列番号を上げる)
-            indexNumber = indexNumber++;
-            yield return new WaitForSeconds(timeMax);
+            if (i < animationLength - 1)
+            {
+                // indexNumberの値を増やす(配列番号を上げる)
+                indexNumber++;
+                yield return new WaitForSeconds(indexNumber);
+            }
+            else
+            {
+                yield return new WaitForSeconds(indexNumber + afterAttackFreezeTime);
+            }
         }
 
         // 攻撃が終わったら

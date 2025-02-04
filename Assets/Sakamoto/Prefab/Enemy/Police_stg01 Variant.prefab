@@ -160,6 +160,10 @@ PrefabInstance:
       propertyPath: upperEffectYMin
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
+      propertyPath: afterAttackFreezeTime
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6042060343829840776, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
       propertyPath: m_Layer
       value: 10

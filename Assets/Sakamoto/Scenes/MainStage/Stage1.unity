@@ -2471,6 +2471,10 @@ PrefabInstance:
       propertyPath: upperEffectYMin
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: afterAttackFreezeTime
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
