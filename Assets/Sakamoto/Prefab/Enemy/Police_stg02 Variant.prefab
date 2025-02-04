@@ -124,6 +124,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
+      propertyPath: hitGameObject
+      value: 
+      objectReference: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
     - target: {fileID: 6042060343829840776, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -242,6 +246,7 @@ MonoBehaviour:
   waitTime: 1
   upperPart: {fileID: 11400000, guid: f0fc5e8b4128a1945a29e20ac4e0d6f6, type: 2}
   lowerPart: {fileID: 11400000, guid: 335379ec0cc10714fa91fa2acd582886, type: 2}
+  player: {fileID: 0}
   bossMinX: -8
   bossMaxX: 8
 --- !u!114 &4938219355749494688
@@ -273,6 +278,7 @@ MonoBehaviour:
   preLowerPart: {fileID: 1386206347217571068, guid: f6b212fa74ac2e345911fcdee1d5d9de, type: 3}
   playerControl: {fileID: 0}
   Boss: 0
+  needsAttackingBothParts: 0
   bulletDamage: 0
   UpperHPBar: {fileID: 8725230327467234196}
   LowerHPBar: {fileID: 7665320168630647101}

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -77,7 +76,23 @@ public class EnemyMoveAnimation : MonoBehaviour
     private float timeAttack;
     public const int SHAFT_DIRECTION_RIGHT = 0;
     public const int SHAFT_DIRECTION_LEFT = 180;
+    [SerializeField, Header("エフェクト関連")]
+    [Tooltip("エフェクトのプレハブを代入")]
+    public GameObject hitGameObject;
+    private GameObject hitGameObjectInstantiated;
+    [Tooltip("エフェクトが上半身に出る範囲（X座標),最大と最小")]
 
+    public float upperEffectXMin, upperEffectXMax;
+    [Tooltip("エフェクトが上半身に出る範囲（Y座標),最大と最小")]
+
+    public float upperEffectYMin, upperEffectYMax;
+    [Tooltip("エフェクトが下半身に出る範囲（X座標),最大と最小")]
+
+    public float lowerEffectXMin, lowerEffectXMax;
+    [Tooltip("エフェクトが下半身に出る範囲（Y座標),最大と最小")]
+
+    public float lowerEffectYMin, lowerEffectYMax;
+    private newEnemyMovement newEnemyMovement;
 
     private void Start()
     {
@@ -85,7 +100,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         shaft = SHAFT_DIRECTION_LEFT;
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[indexNumber]);
 
-
+        newEnemyMovement=GetComponent<newEnemyMovement>();  
         isMirror = true;
         isActive = false;
         isAttack = false;
@@ -102,6 +117,46 @@ public class EnemyMoveAnimation : MonoBehaviour
         timeAttack -= Time.deltaTime;
 
         SetDebugmodeIfDebugMove();
+    }
+    public void ShowHitEffects(int body)
+    {
+        // プレイヤーオブジェクトが存在するかどうかを確認
+        if (newEnemyMovement.player == null)
+        {
+            Debug.LogWarning("PlayerControl object has been destroyed or is null.");
+            return;
+        }
+        if (hitGameObjectInstantiated !=null)
+        {
+            Destroy(hitGameObjectInstantiated);      
+        }
+
+        //このオブジェクトの座標
+        Vector3 playerVector3 = new Vector3(newEnemyMovement.player.transform.position.x, newEnemyMovement.player.transform.position.y);
+        ;
+        //上半身の場合
+        if (body == 0)
+        {
+            //オブジェクトを出すローカル座標
+            Vector3 effectVec2Upper = new Vector3(
+                Random.Range(upperEffectXMin, upperEffectXMax),
+                Random.Range(upperEffectYMin, upperEffectYMax));
+
+            //オブジェクトを出す
+            hitGameObjectInstantiated= Instantiate(hitGameObject, effectVec2Upper + playerVector3, Quaternion.identity);
+            // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
+            // Debug.Log("hit effect");
+        }
+
+        if (body == 1)
+        {
+            //オブジェクトを出すローカル座標
+            Vector3 effectVec3Lower = new Vector2(
+                Random.Range(lowerEffectXMin, lowerEffectXMax),
+                Random.Range(lowerEffectYMin, lowerEffectYMax));
+
+            hitGameObjectInstantiated= Instantiate(hitGameObject, effectVec3Lower + playerVector3, Quaternion.identity);
+        }
     }
     /// <summary>
     /// 歩くアニメーション
@@ -377,7 +432,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
         time = timeMax;
         isAttack = false;
-       
+
     }
 
     private IEnumerator CallKickWithDelay()
@@ -393,7 +448,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
         time = timeMax;
         isAttack = false;
-       
+
     }
 
     /// <summary>

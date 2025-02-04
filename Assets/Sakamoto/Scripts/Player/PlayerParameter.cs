@@ -51,6 +51,7 @@ public class PlayerParameter : CharacterStats
     //下半身のパーツデータ(ステージ4用)
     private BodyPartsData lowerPlayer;
 
+    private EnemyMoveAnimation enemyMoveAnimation;
 
 
     //ゲームオーバーの標準
@@ -232,8 +233,13 @@ public class PlayerParameter : CharacterStats
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         //コンポーネント取得
         playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
-        //最大値を設定
-        iUpperHPMax = UpperData.iPartHp;
+        for (int i = 0; i < playerControl.enemyObject.Count; i++)
+        {
+            enemyMoveAnimation = playerControl.enemyObject[i].GetComponent<EnemyMoveAnimation>();   
+        }
+
+            //最大値を設定
+            iUpperHPMax = UpperData.iPartHp;
         iLowerHPMax = LowerData.iPartHp;
         //パラメータの初期化
         iHumanity = iHumanityMax;
@@ -295,7 +301,7 @@ public class PlayerParameter : CharacterStats
         {
             //上半身のHPを減らす
             UpperHP -= damage;
-            //ShowHitEffects(body);
+            enemyMoveAnimation.ShowHitEffects(body);
             Debug.Log(hitGameObject);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
@@ -307,43 +313,13 @@ public class PlayerParameter : CharacterStats
         {
             //下半身のHPを減らす
             LowerHP -= damage;
-            //ShowHitEffects(body);
+            enemyMoveAnimation. ShowHitEffects(body);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
             Debug.Log(LowerHP);
         }
     }
-    public void ShowHitEffects(int body)
-    {
-        //このオブジェクトの座標
-        //このオブジェクトの座標
-        Vector3 playerVector3 = new Vector3(transform.position.x, transform.position.y);
-
-        ;
-        //上半身の場合
-        if (body == 0)
-        {
-            //オブジェクトを出すローカル座標
-            Vector3 effectVec2Upper = new Vector3(
-                Random.Range(upperEffectXMin, upperEffectXMax),
-                Random.Range(upperEffectYMin, upperEffectYMax));
-
-            //オブジェクトを出す
-            Instantiate(hitGameObject, effectVec2Upper + playerVector3, Quaternion.identity);
-            // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
-            // Debug.Log("hit effect");
-        }
-
-        if (body == 1)
-        {
-            //オブジェクトを出すローカル座標
-            Vector3 effectVec3Lower = new Vector2(
-                Random.Range(lowerEffectXMin, lowerEffectXMax),
-                Random.Range(lowerEffectYMin, lowerEffectYMax));
-
-            Instantiate(hitGameObject, effectVec3Lower + playerVector3, Quaternion.identity);
-        }
-    }
+  
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         string sceneName =SceneTransitionManager.instance.sceneInformation.GetCurrentSceneName();

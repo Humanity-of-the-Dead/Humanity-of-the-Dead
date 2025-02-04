@@ -151,7 +151,7 @@ public class newEnemyParameters : CharacterStats
             //è„îºêgÇÃHPÇå∏ÇÁÇ∑
             UpperHP -= (int)damage;
             //ShowHitEffects(body);
-            playerMoveAnimation.ShowHitEffects(body);
+            playerMoveAnimation.ShowHitEffects(body,transform.position);
             Debug.Log(hitGameObject);
 
             UpdateHPBar(UpperHPBar, UpperHP, MaxUpperHP);
@@ -167,7 +167,7 @@ public class newEnemyParameters : CharacterStats
             //â∫îºêgÇÃHPÇå∏ÇÁÇ∑
             LowerHP -= (int)damage;
             //ShowHitEffects(body);
-            playerMoveAnimation.ShowHitEffects(body);
+            playerMoveAnimation.ShowHitEffects(body,transform.position);
             Debug.Log(hitGameObject);
             UpdateHPBar(LowerHPBar, LowerHP, MaxLowerHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
