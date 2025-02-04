@@ -14,7 +14,7 @@ public class Fire_Floor : MonoBehaviour
     //private PlayerParameter scPlayerParameter;
     
     [SerializeField] private float damage = 0.01f;
-
+    [SerializeField] private float timeSinceLastDamage;
     float time;
 
     private void Start()
@@ -34,8 +34,8 @@ public class Fire_Floor : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log($"time01: {time}");
-        if(time > 0.5)
+
+        if(time > timeSinceLastDamage)
         {
             Debug.Log($"time02: {time}");
             if (collision.gameObject.tag == "Player")
