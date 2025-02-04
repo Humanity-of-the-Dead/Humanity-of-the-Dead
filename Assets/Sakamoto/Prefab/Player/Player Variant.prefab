@@ -523,6 +523,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: timeMax
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: attackTimeMax
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
@@ -566,6 +570,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: multiEffectNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: hand.Array.data[0]
       value: 
       objectReference: {fileID: 1870005972219146301}
@@ -573,6 +581,10 @@ PrefabInstance:
       propertyPath: hand.Array.data[1]
       value: 
       objectReference: {fileID: 5064296117231121923}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: hitGameObject_Boss
+      value: 
+      objectReference: {fileID: 2915290875536770607, guid: f69287834e92bec42ba436b56f5c3755, type: 3}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: animationDataSet.walk
       value: 
