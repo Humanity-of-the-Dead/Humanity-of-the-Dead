@@ -3656,6 +3656,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5728493241584073441, guid: bff141109eec02945aaf975460d83215, type: 3}
+      propertyPath: preLowerPart
+      value: 
+      objectReference: {fileID: 1386206347217571068, guid: ea8f238c7e6393c49b5abf7494dc7e4e, type: 3}
+    - target: {fileID: -5728493241584073441, guid: bff141109eec02945aaf975460d83215, type: 3}
+      propertyPath: preUpperPart
+      value: 
+      objectReference: {fileID: 1386206347217571068, guid: ea8f238c7e6393c49b5abf7494dc7e4e, type: 3}
     - target: {fileID: 1108416438910330814, guid: bff141109eec02945aaf975460d83215, type: 3}
       propertyPath: m_Size.x
       value: 8.049938
@@ -4014,6 +4022,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31721dc79c3487e4d888fbebe6165a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2019583433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6746467646807872166, guid: bff141109eec02945aaf975460d83215, type: 3}
+  m_PrefabInstance: {fileID: 1818020409}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2076811909
 GameObject:
   m_ObjectHideFlags: 0
@@ -4197,7 +4210,7 @@ PrefabInstance:
     - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: enemyObject.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2019583433}
     - target: {fileID: 8462856283274023862, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: m_Name
       value: Player Variant
