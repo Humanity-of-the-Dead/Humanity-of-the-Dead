@@ -129,7 +129,7 @@ public class newEnemyParameters : CharacterStats
         if (UpperHP <= 0)
         {
             playerControl.RemoveListItem(this.gameObject);
-            playerMoveAnimation.ShowHitEffects(0, transform.position, true);
+            //playerMoveAnimation.ShowHitEffects(0, transform.position);
             FlashObject();
 
             //Debug.Log("ã”¼g‚ª”j‰ó‚³‚ê‚½");
@@ -142,7 +142,7 @@ public class newEnemyParameters : CharacterStats
         if (LowerHP <= 0)
         {
             playerControl.RemoveListItem(this.gameObject);
-            playerMoveAnimation.ShowHitEffects(1, transform.position, true);
+            //playerMoveAnimation.ShowHitEffects(1, transform.position, true);
 
             //Debug.Log("‰º”¼g‚ª”j‰ó‚³‚ê‚½");
             //Drop(Lowerbodypart, true);

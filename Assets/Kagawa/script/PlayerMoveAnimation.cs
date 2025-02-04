@@ -63,13 +63,9 @@ public class PlayerMoveAnimation : MonoBehaviour
     [Tooltip("エフェクトが下半身に出る範囲（Y座標),最大と最小")]
 
     public float lowerEffectYMin, lowerEffectYMax;
-    [SerializeField, Header("ボスエフェクト関連")]
 
-    [Tooltip("ボスエフェクトのプレハブを代入")]
-    private GameObject hitGameObject_Boss;
-    private GameObject hitGameObjectInstantiated_Boss;
+    
 
-   
 
     [SerializeField] private int multiEffectNumber;
     //攻撃の配列の番号
@@ -148,43 +144,25 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-    public void ShowHitEffects(int body, Vector3 enemyVector3, bool multipled = false)
+    public void ShowHitEffects(int body, Vector3 enemyVector3)
     {
         if (hitGameObjectInstantiated != null)
         {
-            Destroy(hitGameObjectInstantiated);     
+            Destroy(hitGameObjectInstantiated);
         }
-        if(hitGameObjectInstantiated_Boss != null)
-        {
-            DestroyImmediate(hitGameObjectInstantiated_Boss);       
-        }
+        
         //上半身の場合
         if (body == 0)
         {
-            if (!multipled)
-            {
-                //オブジェクトを出すローカル座標
-                Vector3 effectVec2Upper = new Vector3(
-                    Random.Range(upperEffectXMin, upperEffectXMax),
-                    Random.Range(upperEffectYMin, upperEffectYMax));
-                    hitGameObjectInstantiated= Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
 
-            }
-            else
-            {
-                enemyPositions = new List<Vector3>
-            {
-        enemyVector3,
-        new Vector3(enemyVector3.x + 1, enemyVector3.y, enemyVector3.z),
-        new Vector3(enemyVector3.x - 1, enemyVector3.y, enemyVector3.z)
-    };
+            //オブジェクトを出すローカル座標
+            Vector3 effectVec2Upper = new Vector3(
+                Random.Range(upperEffectXMin, upperEffectXMax),
+                Random.Range(upperEffectYMin, upperEffectYMax));
+            hitGameObjectInstantiated = Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
 
-                for (int i = 0; i < multiEffectNumber; i++)
-                {
-                        hitGameObjectInstantiated_Boss= Instantiate(hitGameObject_Boss, enemyPositions[i], Quaternion.identity);
-                }
 
-            }
+
 
 
 
@@ -194,29 +172,15 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
         if (body == 1)
         {
-            if (!multipled)
-            {
-                //オブジェクトを出すローカル座標
-                Vector3 effectVec3Lower = new Vector3(
-                    Random.Range(lowerEffectXMin, lowerEffectXMax),
-                    Random.Range(lowerEffectYMin, lowerEffectYMax));
-                hitGameObjectInstantiated = Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
 
-            }
-            else
-            {
-                enemyPositions = new List<Vector3>
-            {
-        enemyVector3,
-        new Vector3(enemyVector3.x + 1, enemyVector3.y, enemyVector3.z),
-        new Vector3(enemyVector3.x - 1, enemyVector3.y, enemyVector3.z)
-    };
+            //オブジェクトを出すローカル座標
+            Vector3 effectVec3Lower = new Vector3(
+                Random.Range(lowerEffectXMin, lowerEffectXMax),
+                Random.Range(lowerEffectYMin, lowerEffectYMax));
+            hitGameObjectInstantiated = Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
 
-                for (int i = 0; i < multiEffectNumber; i++)
-                {
-                     hitGameObjectInstantiated_Boss = Instantiate(hitGameObject_Boss, enemyPositions[i], Quaternion.identity);
-                }
-            }
+
+
 
         }
 
@@ -546,7 +510,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                 break;
         }
     }
-    
+
     // 待機ポーズ
     private void PoseWaiting()
     {
