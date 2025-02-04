@@ -327,8 +327,8 @@ MonoBehaviour:
   chaseRange: 5
   attackRange: 2
   waitTime: 1
-  upperPart: {fileID: 11400000, guid: 6078b0f2a6410914186f83b4c364707d, type: 2}
-  lowerPart: {fileID: 11400000, guid: eed03dd12602b7044bb34128e4a03a2f, type: 2}
+  upperPart: {fileID: 11400000, guid: f733af2a45055614aa02cb7d784fd72f, type: 2}
+  lowerPart: {fileID: 11400000, guid: 86b4236b2c890b9489402b37aff440aa, type: 2}
   player: {fileID: 0}
   bossMinX: -8
   bossMaxX: 8
@@ -346,12 +346,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpperHP: 2
   LowerHP: 3
-  Upperbodypart: {fileID: 11400000, guid: 6078b0f2a6410914186f83b4c364707d, type: 2}
-  Lowerbodypart: {fileID: 11400000, guid: eed03dd12602b7044bb34128e4a03a2f, type: 2}
+  Upperbodypart: {fileID: 11400000, guid: f733af2a45055614aa02cb7d784fd72f, type: 2}
+  Lowerbodypart: {fileID: 11400000, guid: 86b4236b2c890b9489402b37aff440aa, type: 2}
   preUpperPart: {fileID: 1386206347217571068, guid: d7ba048aa67839d4c9d43f365b2308b9, type: 3}
   preLowerPart: {fileID: 1386206347217571068, guid: 479cb03f901e91b4e83bd9d347a528ff, type: 3}
   playerControl: {fileID: 0}
-  Boss: 0
+  Boss: 1
   needsAttackingBothParts: 0
   bulletDamage: 0
   UpperHPBar: {fileID: 1122405861428942335}
