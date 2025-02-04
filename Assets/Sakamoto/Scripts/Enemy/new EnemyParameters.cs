@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class newEnemyParameters : CharacterStats
 {
@@ -43,8 +44,9 @@ public class newEnemyParameters : CharacterStats
     public bool needsAttackingBothParts;
 
     [SerializeField, Header("敵が打ってくる一個の弾のダメージ量")] float bulletDamage;    //  //クリアテキスト
-    //  [SerializeField]
-    //private  GameObject textBox;
+                                                                         //  [SerializeField]
+                                                                         //private  GameObject textBox;
+
 
 
     //敵のHPゲージ関連
@@ -69,7 +71,14 @@ public class newEnemyParameters : CharacterStats
     [Tooltip("HPが0の状態のHPが表示されてからのカウントです。")]
     private float hpBarDestroy = 0.3f;
     //private Transform player; // プレイヤーの位置
+    //点滅エフェクト
+    private Renderer[] enemyRenderer;
+    // 点滅周期[s]
+    [SerializeField] private float enemyCycle = 1;
+    // 明滅のデューティ比(1で完全にON、0で完全にOFF)
+    [SerializeField, Range(0, 1)] private float _dutyRate = 0.5f;
 
+    private double _time;
     //public bool isDropInstantiated = false;
     private void Start()
     {
@@ -84,7 +93,7 @@ public class newEnemyParameters : CharacterStats
         {
             Debug.LogWarning("HPBarContainerがnull");
         }
-
+        enemyRenderer = transform.GetComponentsInChildren<Renderer>();
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
         //Debug.Log(playerControl);
@@ -116,18 +125,31 @@ public class newEnemyParameters : CharacterStats
         // 部位が破壊された際にHPバーを一瞬表示
         if (UpperHP <= 0)
         {
+
             playerControl.RemoveListItem(this.gameObject);
+            playerMoveAnimation.ShowHitEffects(0, transform.position, true);
+
             //Debug.Log("上半身が破壊された");
             //Drop(Upperbodypart, false);
             StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Lowerbodypart, false));
 
+
+
         }
         if (LowerHP <= 0)
         {
+
             playerControl.RemoveListItem(this.gameObject);
+            playerMoveAnimation.ShowHitEffects(1, transform.position, true);
+
             //Debug.Log("下半身が破壊された");
             //Drop(Lowerbodypart, true);
+            FlashObject();
+
             StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true));
+
+
+
 
         }
         //if (GameMgr.GetState() == GameState.ShowText&&!Boss)
@@ -151,7 +173,7 @@ public class newEnemyParameters : CharacterStats
             //上半身のHPを減らす
             UpperHP -= (int)damage;
             //ShowHitEffects(body);
-            playerMoveAnimation.ShowHitEffects(body,transform.position);
+            playerMoveAnimation.ShowHitEffects(body, transform.position);
 
             UpdateHPBar(UpperHPBar, UpperHP, MaxUpperHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
@@ -166,7 +188,7 @@ public class newEnemyParameters : CharacterStats
             //下半身のHPを減らす
             LowerHP -= (int)damage;
             //ShowHitEffects(body);
-            playerMoveAnimation.ShowHitEffects(body,transform.position);
+            playerMoveAnimation.ShowHitEffects(body, transform.position);
             UpdateHPBar(LowerHPBar, LowerHP, MaxLowerHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
@@ -183,7 +205,23 @@ public class newEnemyParameters : CharacterStats
             hpBarMask.fillAmount = currentHP / maxHP;
         }
     }
-    
+
+    private void FlashObject()
+    {
+        _time += Time.deltaTime;
+
+        // 周期cycleで繰り返す値の取得
+        // 0～cycleの範囲の値が得られる
+        var repeatValue = Mathf.Repeat((float)_time, enemyCycle);
+        bool currentState = enemyRenderer.Length > 0 && enemyRenderer[0].enabled; // 最初のRendererの状態を基準に
+        foreach (Renderer r in enemyRenderer)
+        {
+
+            // 内部時刻timeにおける明滅状態を反映
+            // デューティ比でON/OFFの割合を変更している
+            r.enabled = !currentState; // すべてのRendererの表示状態を反転
+        }
+    }
 
     private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
     {
