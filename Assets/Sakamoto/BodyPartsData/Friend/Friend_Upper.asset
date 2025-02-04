@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
+  m_Name: Friend_Upper
+  m_EditorClassIdentifier: 
+  enPartsType: 0
+  upperAttack: 0
+  lowerAttack: 4
+  sPartsName: "\u89AA\u53CB\u306E\u4E0A\u534A\u8EAB"
+  AttackArea: 2.3
+  iPartHp: 25
+  iPartAttack: 5
+  spBody: {fileID: 21300000, guid: 30821f980bbd68443afb13919be404e0, type: 3}
+  spRightArm: {fileID: 21300000, guid: 97c0718bfe3774041875a12f2a5ef543, type: 3}
+  spRightHand: {fileID: 21300000, guid: 038e302814b1bdb4db2aab1d2a422200, type: 3}
+  spLeftArm: {fileID: 21300000, guid: dea91fd902ba1b54f9f66af0f58cdca0, type: 3}
+  spLeftHand: {fileID: 21300000, guid: ec68a326080b4ee45b2d7f12ec2b3047, type: 3}
+  spWaist: {fileID: 21300000, guid: 9da2e8394c2fa474790a94603c425d83, type: 3}
+  spRightLeg: {fileID: 21300000, guid: dca129703da76924a9acb021b745e6c3, type: 3}
+  spRightFoot: {fileID: 21300000, guid: 6f4546b56babd774c915b113f4b492c0, type: 3}
+  spLeftLeg: {fileID: 21300000, guid: 57c23821f0d70a1468b11ce6899c1d55, type: 3}
+  spLeftFoot: {fileID: 21300000, guid: 74d188add41e93344a50d5425b9071fa, type: 3}
