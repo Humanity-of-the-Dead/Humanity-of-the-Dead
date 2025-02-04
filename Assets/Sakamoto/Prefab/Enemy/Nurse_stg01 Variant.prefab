@@ -136,6 +136,38 @@ PrefabInstance:
       propertyPath: hitGameObject
       value: 
       objectReference: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
+    - target: {fileID: 6025226992257383609, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+      propertyPath: lowerEffectXMax
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+      propertyPath: lowerEffectXMin
+      value: -0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+      propertyPath: lowerEffectYMax
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+      propertyPath: lowerEffectYMin
+      value: -2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+      propertyPath: upperEffectXMax
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+      propertyPath: upperEffectXMin
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+      propertyPath: upperEffectYMax
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+      propertyPath: upperEffectYMin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6042060343829840776, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -292,15 +324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fca371783d21544a6bd076acd24c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitGameObject: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
-  upperEffectXMin: -0.47
-  upperEffectXMax: 0.28
-  upperEffectYMin: 1
-  upperEffectYMax: 2.5
-  lowerEffectXMin: -0.33
-  lowerEffectXMax: 0.21
-  lowerEffectYMin: -2.8
-  lowerEffectYMax: -1
   UpperHP: 1
   LowerHP: 1
   Upperbodypart: {fileID: 11400000, guid: 568b91405d4f26741b8d29462335729e, type: 2}

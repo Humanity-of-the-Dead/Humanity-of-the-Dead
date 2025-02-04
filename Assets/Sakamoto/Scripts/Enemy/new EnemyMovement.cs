@@ -44,16 +44,15 @@ public class newEnemyMovement : MonoBehaviour
     [SerializeField] private float bossMaxX = 8f;
     void Start()
     {
-        if(player == null)
-        {
-            // プレイヤーを探すやつ
-            player = FindFirstObjectByType<PlayerControl>();
+
+        // プレイヤーを探すやつ
+        player = FindFirstObjectByType<PlayerControl>();
 
 
-        }
+
 
         enemyMoveAnimation = GetComponent<EnemyMoveAnimation>();
-        
+
         pointA = transform.position.x + moveDistance;
         pointB = transform.position.x - moveDistance;
         newEnemyParameters = GetComponent<newEnemyParameters>();
@@ -61,7 +60,7 @@ public class newEnemyMovement : MonoBehaviour
         {
             gun = GetComponent<Gun>();
         }
-       
+
     }
 
     void Update()
@@ -150,12 +149,12 @@ public class newEnemyMovement : MonoBehaviour
                         else if (distanceToPlayer <= upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
                         {
                             AttackWithSeUpper();
-                            
+
                         }
                         else if (distanceToPlayer > upperPart.AttackArea && distanceToPlayer <= lowerPart.AttackArea)
                         {
                             AttackWithSeLower();
-                            
+
                         }
                         else
                         {
@@ -230,7 +229,7 @@ public class newEnemyMovement : MonoBehaviour
             return false;
         }
     }
-   
+
     private void OnUpperAttackAnimationFinished()
     {
         // 上半身攻撃判定

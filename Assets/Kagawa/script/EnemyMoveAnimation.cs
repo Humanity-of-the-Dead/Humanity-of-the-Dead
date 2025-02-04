@@ -118,22 +118,15 @@ public class EnemyMoveAnimation : MonoBehaviour
 
         SetDebugmodeIfDebugMove();
     }
-    public void ShowHitEffects(int body)
+    public void ShowHitEffects(int body, Vector3 playerVector3 )
     {
-        // プレイヤーオブジェクトが存在するかどうかを確認
-        if (newEnemyMovement.player == null)
-        {
-            Debug.LogWarning("PlayerControl object has been destroyed or is null.");
-            return;
-        }
+    
         if (hitGameObjectInstantiated !=null)
         {
             Destroy(hitGameObjectInstantiated);      
         }
 
-        //このオブジェクトの座標
-        Vector3 playerVector3 = new Vector3(newEnemyMovement.player.transform.position.x, newEnemyMovement.player.transform.position.y);
-        ;
+       
         //上半身の場合
         if (body == 0)
         {
