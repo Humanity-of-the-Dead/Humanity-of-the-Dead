@@ -60,11 +60,10 @@ public class newDropPart : MonoBehaviour//
                 {
                     PlayerParameter.Instance.comfort(humanityRecoveryAmount);
                     MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
-                    Destroy(gameObject);
-
-                    Debug.Log(transform.position);
                     GameObject obj = Instantiate(goGrave);
                     obj.transform.position = new Vector3(this.gameObject.transform.position.x, 0.5f, this.gameObject.transform.position.z);
+                    DestroyImmediate(gameObject);
+
                     if (bBoss)
                     {
                         GameClear();
@@ -76,7 +75,7 @@ public class newDropPart : MonoBehaviour//
                 {
                     PlayerParameter.Instance.transplant(partsData);
                     MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
-                    Destroy(gameObject);
+                    DestroyImmediate(gameObject);
 
                     if (bBoss)
                     {
