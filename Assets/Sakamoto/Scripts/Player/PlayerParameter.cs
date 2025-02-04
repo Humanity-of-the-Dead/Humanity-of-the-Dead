@@ -15,7 +15,7 @@ public class PlayerParameter : CharacterStats
     public static PlayerParameter Instance;
 
     [SerializeField, Header("1減少するのにかかる時間")]
-    private int iDownTime;
+    private float iDownTime;
     [SerializeField, Header("人間性の最大値")]
     public int iHumanityMax;     //人間性の最大値
     [SerializeField, Header("上半身のHPの最大値,パーツが変わる度に\n数値が変わるため設定はそのままでOK")]
