@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -29,6 +28,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     private Status status;
 
     [SerializeField, Header("デバッグ用(通常、None)")] private DebugMove debugMoves;
+    [SerializeField, Header("デバッグ用: index指定でアニメーションの1コマ分だけ表示\n(アニメーション閲覧時は-1)")] private int indexNumberForDebug = -1;
 
     [SerializeField, Header("全身")] public GameObject playerRc;
     [SerializeField, Header("腕の角度、先に右手")] private GameObject[] arm;
@@ -76,7 +76,23 @@ public class EnemyMoveAnimation : MonoBehaviour
     private float timeAttack;
     public const int SHAFT_DIRECTION_RIGHT = 0;
     public const int SHAFT_DIRECTION_LEFT = 180;
+    [SerializeField, Header("エフェクト関連")]
+    [Tooltip("エフェクトのプレハブを代入")]
+    public GameObject hitGameObject;
+    private GameObject hitGameObjectInstantiated;
+    [Tooltip("エフェクトが上半身に出る範囲（X座標),最大と最小")]
 
+    public float upperEffectXMin, upperEffectXMax;
+    [Tooltip("エフェクトが上半身に出る範囲（Y座標),最大と最小")]
+
+    public float upperEffectYMin, upperEffectYMax;
+    [Tooltip("エフェクトが下半身に出る範囲（X座標),最大と最小")]
+
+    public float lowerEffectXMin, lowerEffectXMax;
+    [Tooltip("エフェクトが下半身に出る範囲（Y座標),最大と最小")]
+
+    public float lowerEffectYMin, lowerEffectYMax;
+    private newEnemyMovement newEnemyMovement;
 
     private void Start()
     {
@@ -84,7 +100,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         shaft = SHAFT_DIRECTION_LEFT;
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[indexNumber]);
 
-
+        newEnemyMovement=GetComponent<newEnemyMovement>();  
         isMirror = true;
         isActive = false;
         isAttack = false;
@@ -100,20 +116,39 @@ public class EnemyMoveAnimation : MonoBehaviour
         time -= Time.deltaTime;
         timeAttack -= Time.deltaTime;
 
-        if (debugMoves != DebugMove.None)
+        SetDebugmodeIfDebugMove();
+    }
+    public void ShowHitEffects(int body, Vector3 playerVector3 )
+    {
+    
+        if (hitGameObjectInstantiated !=null)
         {
-            switch (debugMoves)
-            {
-                case DebugMove.Walk:
-                    WalkInstance();
-                    break;
-                case DebugMove.Pantie:
-                    PantieStart();
-                    break;
-                case DebugMove.Kick:
-                    KickStart();
-                    break;
-            }
+            Destroy(hitGameObjectInstantiated);      
+        }
+
+       
+        //上半身の場合
+        if (body == 0)
+        {
+            //オブジェクトを出すローカル座標
+            Vector3 effectVec2Upper = new Vector3(
+                Random.Range(upperEffectXMin, upperEffectXMax),
+                Random.Range(upperEffectYMin, upperEffectYMax));
+
+            //オブジェクトを出す
+            hitGameObjectInstantiated= Instantiate(hitGameObject, effectVec2Upper + playerVector3, Quaternion.identity);
+            // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
+            // Debug.Log("hit effect");
+        }
+
+        if (body == 1)
+        {
+            //オブジェクトを出すローカル座標
+            Vector3 effectVec3Lower = new Vector2(
+                Random.Range(lowerEffectXMin, lowerEffectXMax),
+                Random.Range(lowerEffectYMin, lowerEffectYMax));
+
+            hitGameObjectInstantiated= Instantiate(hitGameObject, effectVec3Lower + playerVector3, Quaternion.identity);
         }
     }
     /// <summary>
@@ -172,50 +207,7 @@ public class EnemyMoveAnimation : MonoBehaviour
                 break;
 
             case Status.Boss:
-                playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[indexNumber]);
-
-                // 腕のアニメーション
-                if (walk.armForwardRotation == null)
-                {
-                    Debug.LogWarning("Armのデータが何かしら抜けてる");
-                    return;
-                }
-                else
-                {
-                    arm[0].transform.rotation = Quaternion.Euler(0, shaft, walk.armForwardRotation[indexNumber]);
-                    arm[1].transform.rotation = Quaternion.Euler(0, shaft, -walk.armForwardRotation[indexNumber]);
-                    hand[0].transform.rotation = Quaternion.Euler(0, shaft, walk.armForwardRotation[indexNumber]);
-                    hand[1].transform.rotation = Quaternion.Euler(0, shaft, -walk.armForwardRotation[indexNumber]);
-                }
-                // 足のアニメーション
-                if (walk.legForwardRotation == null || walk.legBackRotation == null)
-                {
-                    Debug.LogWarning("Legのデータが何かしら抜けてる");
-                    return;
-                }
-                else if (walk.footBackRotation == null || walk.footForwardRotation == null)
-                {
-                    Debug.LogWarning("Footのデータが何かしら抜けてる");
-                    return;
-                }
-                else
-                {
-                    if (isActive)
-                    {
-                        leg[0].transform.rotation = Quaternion.Euler(0, shaft, walk.legBackRotation[indexNumber]);
-                        leg[1].transform.rotation = Quaternion.Euler(0, shaft, walk.legForwardRotation[indexNumber]);
-                        foot[0].transform.rotation = Quaternion.Euler(0, shaft, walk.footBackRotation[indexNumber]);
-                        foot[1].transform.rotation = Quaternion.Euler(0, shaft, walk.footForwardRotation[indexNumber]);
-                    }
-                    else
-                    {
-                        leg[0].transform.rotation = Quaternion.Euler(0, shaft, walk.legForwardRotation[indexNumber]);
-                        leg[1].transform.rotation = Quaternion.Euler(0, shaft, walk.legBackRotation[indexNumber]);
-                        foot[0].transform.rotation = Quaternion.Euler(0, shaft, walk.footForwardRotation[indexNumber]);
-                        foot[1].transform.rotation = Quaternion.Euler(0, shaft, walk.footBackRotation[indexNumber]);
-                    }
-
-                }
+                WalkPoseByIndex(walk, indexNumber);
                 break;
         }
 
@@ -226,6 +218,11 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     private void PlayerPantie()
     {
+        if (indexNumber >= upper.wholeRotation.Length)
+        {
+            Debug.LogWarning("IndexNumber is out of range for wholeRotation array.");
+            return;
+        }
         switch (status)
         {
             case Status.Zombie:
@@ -314,6 +311,12 @@ public class EnemyMoveAnimation : MonoBehaviour
     /// </summary>
     private void PlayerKick()
     {
+        if (indexNumber >= lower.wholeRotation.Length)
+        {
+            Debug.LogWarning("IndexNumber is out of range for wholeRotation array.");
+            return;
+        }
+
         switch (status)
         {
             case Status.Zombie:
@@ -422,7 +425,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
         time = timeMax;
         isAttack = false;
-       
+
     }
 
     private IEnumerator CallKickWithDelay()
@@ -438,7 +441,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
         time = timeMax;
         isAttack = false;
-       
+
     }
 
     /// <summary>
@@ -556,4 +559,101 @@ public class EnemyMoveAnimation : MonoBehaviour
         return isAttack;
     }
     #endregion
+
+    
+    private void WalkPoseByIndex(AnimationData animation, int index)
+    {
+        ValidateAnimationData(animation, index);
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[index]);
+
+        arm[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+        arm[1].transform.rotation = Quaternion.Euler(0, shaft, -animation.armForwardRotation[index]);
+        hand[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+        hand[1].transform.rotation = Quaternion.Euler(0, shaft, -animation.armForwardRotation[index]);
+
+        if (isActive)
+        {
+            leg[0].transform.rotation = Quaternion.Euler(0, shaft, animation.legBackRotation[index]);
+            leg[1].transform.rotation = Quaternion.Euler(0, shaft, animation.legForwardRotation[index]);
+            foot[0].transform.rotation = Quaternion.Euler(0, shaft, animation.footBackRotation[index]);
+            foot[1].transform.rotation = Quaternion.Euler(0, shaft, animation.footForwardRotation[index]);
+        }
+        else
+        {
+            leg[0].transform.rotation = Quaternion.Euler(0, shaft, animation.legForwardRotation[index]);
+            leg[1].transform.rotation = Quaternion.Euler(0, shaft, animation.legBackRotation[index]);
+            foot[0].transform.rotation = Quaternion.Euler(0, shaft, animation.footForwardRotation[index]);
+            foot[1].transform.rotation = Quaternion.Euler(0, shaft, animation.footBackRotation[index]);
+        }
+    }
+
+    // アニメーションデータのバリデーション(問題が無ければ真)
+    private bool ValidateAnimationData(AnimationData ad, int index)
+    {
+        float[][] rotationsArray = {
+            ad.wholeRotation,
+            ad.armForwardRotation,
+            ad.armBackRotation,
+            ad.handForwardRotation,
+            ad.handBackRotation,
+            ad.legForwardRotation,
+            ad.legBackRotation,
+            ad.footForwardRotation,
+            ad.footBackRotation
+        };
+
+        if (rotationsArray.Contains(null))
+        {
+            Debug.LogWarning("ValidateAnimationIndex: Rotation data is null");
+            return false;
+        }
+
+        int[] lengthArray = rotationsArray.Select(x => x.Length).ToArray();
+        if (lengthArray.Min() <= index)
+        {
+            Debug.LogWarning("ValidateAnimationIndex: Index was outside the bounds of the array");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void SetDebugmodeIfDebugMove()
+    {
+        if (debugMoves != DebugMove.None)
+        {
+            if (indexNumberForDebug > -1)
+            {
+                indexNumber = indexNumberForDebug;
+                switch (debugMoves)
+                {
+                    case DebugMove.Walk:
+                        PlayerWalk();
+                        break;
+                    case DebugMove.Pantie:
+                        PlayerPantie();
+                        break;
+                    case DebugMove.Kick:
+                        PlayerKick();
+                        break;
+                }
+
+            }
+            else
+            {
+                switch (debugMoves)
+                {
+                    case DebugMove.Walk:
+                        WalkInstance();
+                        break;
+                    case DebugMove.Pantie:
+                        PantieStart();
+                        break;
+                    case DebugMove.Kick:
+                        KickStart();
+                        break;
+                }
+            }
+        }
+    }
 }

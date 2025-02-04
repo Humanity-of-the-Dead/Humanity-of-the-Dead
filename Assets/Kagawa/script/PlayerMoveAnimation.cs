@@ -37,6 +37,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     //アニメーションの間隔はアニメーションスクリプト内で完結したいのでプライベート化してシリアライズフィールドを付けることで設定できる
     [SerializeField, Header("1コマの間隔の時間")] private float timeMax;
+    [SerializeField, Header("攻撃の1コマの間隔の時間")] private float attackTimeMax;
     [SerializeField] private AnimationDataSet animationDataSet;
     private UpperAttack upperAttack;
 
@@ -137,37 +138,33 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-    public void ShowHitEffects(int body)
+    public void ShowHitEffects(int body, Vector3 enemyVector3)
     {
-        PlayerControl playerControl = GetComponent<PlayerControl>();
-        //このオブジェクトの座標
-        for (int i = 0; i < playerControl.enemyObject.Count; i++)
+
+        //上半身の場合
+        if (body == 0)
         {
-            Vector3 enemyVector3 = new Vector3(playerControl.enemyObject[i].transform.position.x, playerControl.enemyObject[i].transform.position.y);
-            //上半身の場合
-            if (body == 0)
-            {
-                //オブジェクトを出すローカル座標
-                Vector3 effectVec2Upper = new Vector3(
-                    Random.Range(upperEffectXMin, upperEffectXMax),
-                    Random.Range(upperEffectYMin, upperEffectYMax));
+            //オブジェクトを出すローカル座標
+            Vector3 effectVec2Upper = new Vector3(
+                Random.Range(upperEffectXMin, upperEffectXMax),
+                Random.Range(upperEffectYMin, upperEffectYMax));
 
-                //オブジェクトを出す
-                Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
-                // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
-                // Debug.Log("hit effect");
-            }
-            if (body == 1)
-            {
-                //オブジェクトを出すローカル座標
-                Vector3 effectVec3Lower = new Vector2(
-                    Random.Range(lowerEffectXMin, lowerEffectXMax),
-                    Random.Range(lowerEffectYMin, lowerEffectYMax));
-
-                Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
-            }
-
+            //オブジェクトを出す
+            Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
+            // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
+            // Debug.Log("hit effect");
         }
+        if (body == 1)
+        {
+            //オブジェクトを出すローカル座標
+            Vector3 effectVec3Lower = new Vector3(
+                Random.Range(lowerEffectXMin, lowerEffectXMax),
+                Random.Range(lowerEffectYMin, lowerEffectYMax));
+
+            Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
+        }
+
+
 
 
 
@@ -570,7 +567,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
             // indexNumberの値を増やす(配列番号を上げる)
             attackNumber = (attackNumber + 1) % animationDataSet.playerUpper.armForwardRotation.Length;
-            yield return new WaitForSeconds(timeMax);
+            yield return new WaitForSeconds(attackTimeMax);
         }
 
         timeWalk = 0;
@@ -591,7 +588,7 @@ public class PlayerMoveAnimation : MonoBehaviour
 
             // indexNumberの値を増やす(配列番号を上げる)
             attackNumber = (attackNumber + 1) % animationDataSet.playerLower.armForwardRotation.Length;
-            yield return new WaitForSeconds(timeMax);
+            yield return new WaitForSeconds(attackTimeMax);
         }
 
         timeWalk = 0;
@@ -685,7 +682,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     private void AttackWait()
     {
         timeWalk = timeMax * (animationDataSet.playerUpper.armForwardRotation.Length - 1);
-        timeAttack = timeMax * (animationDataSet.playerLower.armForwardRotation.Length - 1);
+        timeAttack = attackTimeMax * (animationDataSet.playerLower.armForwardRotation.Length - 1);
         isAttack = true;
         isWalk = false;
         StopCoroutine(CallWalkWithDelay());

@@ -27,6 +27,8 @@ MonoBehaviour:
   - 90
   - 90
   - 90
+  handForwardRotation: []
+  handBackRotation: []
   legForwardRotation:
   - 10
   - 15

@@ -36,7 +36,7 @@ public class newEnemyMovement : MonoBehaviour
 
     private float pointA, pointB;   // 開始位置と終了位置(A: 移動可能範囲の右端/ B: 左端)
     private bool isMovingToPointB = true; // 進行方向
-    private PlayerControl player; // プレイヤーの位置
+    public PlayerControl player; // プレイヤーの位置
     private float timer;//攻撃後の時間
     [Tooltip("ボスの移動可能な最小X座標")]
     [SerializeField] private float bossMinX = -8f;
@@ -44,9 +44,15 @@ public class newEnemyMovement : MonoBehaviour
     [SerializeField] private float bossMaxX = 8f;
     void Start()
     {
+
         // プレイヤーを探すやつ
-        player = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
+        player = FindFirstObjectByType<PlayerControl>();
+
+
+
+
         enemyMoveAnimation = GetComponent<EnemyMoveAnimation>();
+
         pointA = transform.position.x + moveDistance;
         pointB = transform.position.x - moveDistance;
         newEnemyParameters = GetComponent<newEnemyParameters>();
@@ -54,7 +60,7 @@ public class newEnemyMovement : MonoBehaviour
         {
             gun = GetComponent<Gun>();
         }
-       
+
     }
 
     void Update()
@@ -143,12 +149,12 @@ public class newEnemyMovement : MonoBehaviour
                         else if (distanceToPlayer <= upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
                         {
                             AttackWithSeUpper();
-                            
+
                         }
                         else if (distanceToPlayer > upperPart.AttackArea && distanceToPlayer <= lowerPart.AttackArea)
                         {
                             AttackWithSeLower();
-                            
+
                         }
                         else
                         {
@@ -223,7 +229,7 @@ public class newEnemyMovement : MonoBehaviour
             return false;
         }
     }
-   
+
     private void OnUpperAttackAnimationFinished()
     {
         // 上半身攻撃判定

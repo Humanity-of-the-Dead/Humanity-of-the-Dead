@@ -151,8 +151,7 @@ public class newEnemyParameters : CharacterStats
             //上半身のHPを減らす
             UpperHP -= (int)damage;
             //ShowHitEffects(body);
-            playerMoveAnimation.ShowHitEffects(body);
-            Debug.Log(hitGameObject);
+            playerMoveAnimation.ShowHitEffects(body,transform.position);
 
             UpdateHPBar(UpperHPBar, UpperHP, MaxUpperHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
@@ -167,8 +166,7 @@ public class newEnemyParameters : CharacterStats
             //下半身のHPを減らす
             LowerHP -= (int)damage;
             //ShowHitEffects(body);
-            playerMoveAnimation.ShowHitEffects(body);
-            Debug.Log(hitGameObject);
+            playerMoveAnimation.ShowHitEffects(body,transform.position);
             UpdateHPBar(LowerHPBar, LowerHP, MaxLowerHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
@@ -185,39 +183,7 @@ public class newEnemyParameters : CharacterStats
             hpBarMask.fillAmount = currentHP / maxHP;
         }
     }
-    //攻撃がヒットしたエフェクト(オブジェクト)を出す
-    //public override void ShowHitEffects(int body)
-    //{
-    //    //このオブジェクトの座標
-    //    Vector3 enemyVector3 = new Vector3(transform.position.x,transform.position.y);
-
-
-
-    //    //上半身の場合
-    //    if (body == 0)
-    //    {
-    //        //オブジェクトを出すローカル座標
-    //        Vector3 effectVec2Upper = new Vector3(
-    //            Random.Range(upperEffectXMin, upperEffectXMax),
-    //            Random.Range(upperEffectYMin, upperEffectYMax));
-
-    //        //オブジェクトを出す
-    //        Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
-    //        // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
-    //        // Debug.Log("hit effect");
-    //    }
-
-    //    if (body == 1)
-    //    {
-    //        //オブジェクトを出すローカル座標
-    //        Vector3 effectVec3Lower = new Vector2(
-    //            Random.Range(lowerEffectXMin, lowerEffectXMax),
-    //            Random.Range(lowerEffectYMin, lowerEffectYMax));
-
-    //        Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
-    //    }
-    //}
-
+    
 
     private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
     {
