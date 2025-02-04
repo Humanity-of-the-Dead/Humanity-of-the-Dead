@@ -128,6 +128,7 @@ public class newEnemyParameters : CharacterStats
 
             playerControl.RemoveListItem(this.gameObject);
             playerMoveAnimation.ShowHitEffects(0, transform.position, true);
+            FlashObject();
 
             //Debug.Log("è„îºêgÇ™îjâÛÇ≥ÇÍÇΩ");
             //Drop(Upperbodypart, false);
