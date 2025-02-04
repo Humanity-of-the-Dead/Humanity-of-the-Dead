@@ -79,6 +79,9 @@ public class newEnemyParameters : CharacterStats
     [SerializeField, Range(0, 1)] private float _dutyRate = 0.5f;
 
     private double _time;
+
+    private bool hasDroped = false;
+
     //public bool isDropInstantiated = false;
     private void Start()
     {
@@ -125,7 +128,6 @@ public class newEnemyParameters : CharacterStats
         // 部位が破壊された際にHPバーを一瞬表示
         if (UpperHP <= 0)
         {
-
             playerControl.RemoveListItem(this.gameObject);
             playerMoveAnimation.ShowHitEffects(0, transform.position, true);
             FlashObject();
@@ -139,7 +141,6 @@ public class newEnemyParameters : CharacterStats
         }
         if (LowerHP <= 0)
         {
-
             playerControl.RemoveListItem(this.gameObject);
             playerMoveAnimation.ShowHitEffects(1, transform.position, true);
 
@@ -233,9 +234,12 @@ public class newEnemyParameters : CharacterStats
             yield return new WaitForSeconds(hpBarDestroy); // 継続時間は調整可能
             hpBar.gameObject.SetActive(false);
         }
-        Drop(part, typ);
-        MultiAudio.ins.PlaySEByName("SE_common_breakbody");
-
+        if (!hasDroped)
+        {
+            hasDroped = true;
+            Drop(part, typ);
+            MultiAudio.ins.PlaySEByName("SE_common_breakbody");
+        }
     }
     //ドロップアイテムを生成する関数　
     //BodyPartsData part->生成した後に与えるパラメータデータ
