@@ -14,28 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wholeRotation:
   - -10
-  - 0
   armForwardRotation:
   - -15
-  - 0
   armBackRotation:
   - 100
-  - 0
   handForwardRotation:
   - 140
-  - 0
   handBackRotation:
   - 100
-  - 0
   legForwardRotation:
   - -15
-  - 0
   footForwardRotation:
   - -15
-  - 0
   legBackRotation:
   - 30
-  - 0
   footBackRotation:
-  - 0
   - 0

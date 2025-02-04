@@ -34,10 +34,13 @@ public class Fire_Floor : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+        Debug.Log($"time01: {time}");
         if(time > 0.5)
         {
+            Debug.Log($"time02: {time}");
             if (collision.gameObject.tag == "Player")
             {
+                Debug.Log($"time03: {time}");
 
                 UpperEnemyAttack(damage);
                 LowerEnemyAttack(damage);
@@ -45,6 +48,7 @@ public class Fire_Floor : MonoBehaviour
                 time = 0;
             }
         }
+        Debug.Log($"time04: {time}");
         time += Time.deltaTime;
     }
 
