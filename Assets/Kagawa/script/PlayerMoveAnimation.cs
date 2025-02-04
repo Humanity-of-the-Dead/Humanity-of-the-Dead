@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -47,7 +48,8 @@ public class PlayerMoveAnimation : MonoBehaviour
     private int walkIndex = 0;
     [SerializeField, Header("エフェクト関連")]
     [Tooltip("エフェクトのプレハブを代入")]
-    public GameObject hitGameObject;
+    private GameObject hitGameObject;
+    private GameObject hitGameObjectInstantiated;
     [Tooltip("エフェクトが上半身に出る範囲（X座標),最大と最小")]
 
     public float upperEffectXMin, upperEffectXMax;
@@ -60,8 +62,15 @@ public class PlayerMoveAnimation : MonoBehaviour
     [Tooltip("エフェクトが下半身に出る範囲（Y座標),最大と最小")]
 
     public float lowerEffectYMin, lowerEffectYMax;
+    [SerializeField, Header("ボスエフェクト関連")]
 
+    [Tooltip("ボスエフェクトのプレハブを代入")]
+    private GameObject hitGameObject_Boss;
+    private GameObject hitGameObjectInstantiated_Boss;
 
+   
+
+    [SerializeField] private int multiEffectNumber;
     //攻撃の配列の番号
     private int attackNumber = 0;
 
@@ -96,14 +105,14 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     public const int SHAFT_DIRECTION_RIGHT = 0;
     public const int SHAFT_DIRECTION_LEFT = 180;
+    private List<Vector3> enemyPositions;
 
     private void Start()
     {
-
+        enemyPositions = new List<Vector3>();
         walkIndex = 0;
         attackNumber = 0;
         shaft = 0;
-
         isAttack = false;
         isActive = false;
         isWalk = false;
@@ -138,30 +147,76 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-    public void ShowHitEffects(int body, Vector3 enemyVector3)
+    public void ShowHitEffects(int body, Vector3 enemyVector3, bool multipled = false)
     {
-
+        if (hitGameObjectInstantiated != null)
+        {
+            Destroy(hitGameObjectInstantiated);     
+        }
+        if(hitGameObjectInstantiated_Boss != null)
+        {
+            DestroyImmediate(hitGameObjectInstantiated_Boss);       
+        }
         //上半身の場合
         if (body == 0)
         {
-            //オブジェクトを出すローカル座標
-            Vector3 effectVec2Upper = new Vector3(
-                Random.Range(upperEffectXMin, upperEffectXMax),
-                Random.Range(upperEffectYMin, upperEffectYMax));
+            if (!multipled)
+            {
+                //オブジェクトを出すローカル座標
+                Vector3 effectVec2Upper = new Vector3(
+                    Random.Range(upperEffectXMin, upperEffectXMax),
+                    Random.Range(upperEffectYMin, upperEffectYMax));
+                    hitGameObjectInstantiated= Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
+
+            }
+            else
+            {
+                enemyPositions = new List<Vector3>
+            {
+        enemyVector3,
+        new Vector3(enemyVector3.x + 1, enemyVector3.y, enemyVector3.z),
+        new Vector3(enemyVector3.x - 1, enemyVector3.y, enemyVector3.z)
+    };
+
+                for (int i = 0; i < multiEffectNumber; i++)
+                {
+                        hitGameObjectInstantiated_Boss= Instantiate(hitGameObject_Boss, enemyPositions[i], Quaternion.identity);
+                }
+
+            }
+
+
 
             //オブジェクトを出す
-            Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
             // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
             // Debug.Log("hit effect");
         }
         if (body == 1)
         {
-            //オブジェクトを出すローカル座標
-            Vector3 effectVec3Lower = new Vector3(
-                Random.Range(lowerEffectXMin, lowerEffectXMax),
-                Random.Range(lowerEffectYMin, lowerEffectYMax));
+            if (!multipled)
+            {
+                //オブジェクトを出すローカル座標
+                Vector3 effectVec3Lower = new Vector3(
+                    Random.Range(lowerEffectXMin, lowerEffectXMax),
+                    Random.Range(lowerEffectYMin, lowerEffectYMax));
+                hitGameObjectInstantiated = Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
 
-            Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
+            }
+            else
+            {
+                enemyPositions = new List<Vector3>
+            {
+        enemyVector3,
+        new Vector3(enemyVector3.x + 1, enemyVector3.y, enemyVector3.z),
+        new Vector3(enemyVector3.x - 1, enemyVector3.y, enemyVector3.z)
+    };
+
+                for (int i = 0; i < multiEffectNumber; i++)
+                {
+                     hitGameObjectInstantiated_Boss = Instantiate(hitGameObject_Boss, enemyPositions[i], Quaternion.identity);
+                }
+            }
+
         }
 
 
