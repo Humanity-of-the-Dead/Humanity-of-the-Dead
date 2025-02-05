@@ -3657,6 +3657,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5728493241584073441, guid: bff141109eec02945aaf975460d83215, type: 3}
+      propertyPath: LowerHP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5728493241584073441, guid: bff141109eec02945aaf975460d83215, type: 3}
+      propertyPath: UpperHP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5728493241584073441, guid: bff141109eec02945aaf975460d83215, type: 3}
       propertyPath: preLowerPart
       value: 
       objectReference: {fileID: 1386206347217571068, guid: ea8f238c7e6393c49b5abf7494dc7e4e, type: 3}
@@ -3664,6 +3672,22 @@ PrefabInstance:
       propertyPath: preUpperPart
       value: 
       objectReference: {fileID: 1386206347217571068, guid: ea8f238c7e6393c49b5abf7494dc7e4e, type: 3}
+    - target: {fileID: -1073221882835409268, guid: bff141109eec02945aaf975460d83215, type: 3}
+      propertyPath: waitTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1073221882835409268, guid: bff141109eec02945aaf975460d83215, type: 3}
+      propertyPath: chaseRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -1073221882835409268, guid: bff141109eec02945aaf975460d83215, type: 3}
+      propertyPath: chaseSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1073221882835409268, guid: bff141109eec02945aaf975460d83215, type: 3}
+      propertyPath: normalSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1108416438910330814, guid: bff141109eec02945aaf975460d83215, type: 3}
       propertyPath: m_Size.x
       value: 8.049938
@@ -3679,6 +3703,10 @@ PrefabInstance:
     - target: {fileID: 1108416438910330814, guid: bff141109eec02945aaf975460d83215, type: 3}
       propertyPath: m_Offset.y
       value: -0.608819
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924099738880734706, guid: bff141109eec02945aaf975460d83215, type: 3}
+      propertyPath: timeMax
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1924099738880734706, guid: bff141109eec02945aaf975460d83215, type: 3}
       propertyPath: afterAttackFreezeTime
