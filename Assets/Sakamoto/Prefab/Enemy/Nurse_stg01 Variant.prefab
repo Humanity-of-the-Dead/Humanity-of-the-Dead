@@ -343,3 +343,6 @@ MonoBehaviour:
   HPBarContainer: {fileID: 7497457645813442898}
   displayRange: 5
   hpBarDestroy: 0.3
+  flashDuration: 1
+  flashInterval: 0.1
+  EffectBurstCount: 5
