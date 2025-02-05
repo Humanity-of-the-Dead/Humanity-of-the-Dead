@@ -198,7 +198,7 @@ public class SceneTransitionManager : MonoBehaviour
         // 徐々に透明にする処理
         while (fadeInstance.color.a > 0)
         {
-            fadeColor.a -= Time.deltaTime * speed; // アルファ値を減少
+            fadeColor.a -= Time.unscaledDeltaTime * speed; // アルファ値を減少
             fadeInstance.color = fadeColor; // 更新
             yield return null;
         }
@@ -225,7 +225,7 @@ public class SceneTransitionManager : MonoBehaviour
         // 徐々に不透明にする処理
         while (fadeInstance.color.a < 1)
         {
-            fadeColor.a += Time.deltaTime * speed; // アルファ値を増加
+            fadeColor.a += Time.unscaledDeltaTime * speed; // アルファ値を増加
             fadeInstance.color = fadeColor; // 更新
             yield return null;
         }
