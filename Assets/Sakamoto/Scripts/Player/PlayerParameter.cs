@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayerParameter : CharacterStats
 {
-
-
-
     //移植時のモザイク
     private GameObject goMosaic;
 
@@ -56,6 +54,9 @@ public class PlayerParameter : CharacterStats
 
     //ゲームオーバーの標準
     private GameObject goPanel;
+
+    private const float GAMEOVER_ZOMBIEWALK_TIMEMAX = 0.3f;
+    private const float GAMEOVER_ZOMBIEWALK_SPEED = 0.2f;
 
 
     public void Awake()
@@ -122,6 +123,20 @@ public class PlayerParameter : CharacterStats
                     //{
                     //    SceneManager.LoadScene("Stage2");
                     //}
+                    break;
+                case GameState.GameOver:
+                    if (iHumanity < 0)
+                    {
+                        // 左方向へ移動
+                        // ゾンビ歩きアニメーション
+                        playerMoveAnimation.SetTimeMax(GAMEOVER_ZOMBIEWALK_TIMEMAX);
+                        playerMoveAnimation.HandleWalk(PlayerMoveAnimation.SHAFT_DIRECTION_LEFT, true);
+                        // 移動
+                        Vector3 vPosition = playerControl.transform.position;
+                        vPosition.x -= Time.deltaTime * GAMEOVER_ZOMBIEWALK_SPEED;
+                        playerControl.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                        playerControl.transform.position = vPosition;
+                    }
                     break;
             }
         }
