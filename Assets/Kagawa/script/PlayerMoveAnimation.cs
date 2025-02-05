@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -41,6 +40,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     [SerializeField, Header("攻撃の1コマの間隔の時間")] private float attackTimeMax;
     [SerializeField, Header("攻撃終了後の硬直時間")] private float afterAttackFreezeTime;
     [SerializeField] private AnimationDataSet animationDataSet;
+    private bool hasDefeatedBoss = false;
     private UpperAttack upperAttack;
 
     private LowerAttack downAttack;
@@ -151,7 +151,10 @@ public class PlayerMoveAnimation : MonoBehaviour
     public IEnumerator ShowHitEffectsBoss( Vector3 enemyVector3 )
     {
         int body = Random.Range(0, 2);
-
+        if (hasDefeatedBoss)
+        {
+           yield break;
+        }
 
         for (int i = 1; i <= effectBurstCount; i++)
         {
@@ -162,7 +165,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
             yield return new WaitForSeconds(bossEffectInterval);
 
-
+            hasDefeatedBoss=true;
         }
 
         Debug.Log("ボスエフェクトコルーチン関数呼び出し終了");
