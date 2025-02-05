@@ -286,7 +286,7 @@ MonoBehaviour:
   chaseSpeed: 2
   chaseRange: 5
   attackRange: 2
-  waitTime: 1
+  waitTime: 1.5
   upperPart: {fileID: 11400000, guid: bf007733aa9c0d04693e3b6b83f4a2a4, type: 2}
   lowerPart: {fileID: 11400000, guid: 7d9d52264658ff545900ef75ac8fdcd6, type: 2}
   player: {fileID: 0}
@@ -319,3 +319,5 @@ MonoBehaviour:
   HPBarContainer: {fileID: 3661263816035549751}
   displayRange: 5
   hpBarDestroy: 0.3
+  flashDuration: 1
+  flashInterval: 0.1
