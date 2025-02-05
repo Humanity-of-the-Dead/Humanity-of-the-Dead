@@ -331,7 +331,7 @@ public class PlayerParameter : CharacterStats
             enemyMoveAnimation.ShowHitEffects(body, playerControl.transform.position);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
-            Debug.Log(UpperHP);
+            //Debug.Log(UpperHP);
 
         }
 
@@ -342,7 +342,7 @@ public class PlayerParameter : CharacterStats
             enemyMoveAnimation. ShowHitEffects(body,playerControl.transform.position);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
-            Debug.Log(LowerHP);
+            //Debug.Log(LowerHP);
         }
     }
   

@@ -73,12 +73,12 @@ public class newEnemyParameters : CharacterStats
     //private Transform player; // プレイヤーの位置
     //点滅エフェクト
     private Renderer[] enemyRenderer;
-    // 点滅周期[s]
-    [SerializeField] private float enemyCycle = 1;
-    // 明滅のデューティ比(1で完全にON、0で完全にOFF)
-    [SerializeField, Range(0, 1)] private float _dutyRate = 0.5f;
 
-    private double _time;
+
+    [SerializeField, Header("点滅の継続時間")] private float flashDuration = 1.0f;
+    [SerializeField, Header("点滅の間隔 (秒)")] private float flashInterval = 0.1f;
+
+    private bool isFlashing = false;
 
     private bool hasDroped = false;
 
@@ -129,8 +129,13 @@ public class newEnemyParameters : CharacterStats
         if (UpperHP <= 0)
         {
             playerControl.RemoveListItem(this.gameObject);
-            //playerMoveAnimation.ShowHitEffects(0, transform.position);
-            FlashObject();
+            StartCoroutine(FlashObject());
+
+            if (Boss == true)
+            {
+                StartCoroutine(playerMoveAnimation.ShowHitEffectsBoss(transform.position));
+
+            }
 
             //Debug.Log("上半身が破壊された");
             //Drop(Upperbodypart, false);
@@ -142,11 +147,16 @@ public class newEnemyParameters : CharacterStats
         if (LowerHP <= 0)
         {
             playerControl.RemoveListItem(this.gameObject);
-            //playerMoveAnimation.ShowHitEffects(1, transform.position, true);
+            StartCoroutine(FlashObject());
+
+            if (Boss)
+            {
+                StartCoroutine( playerMoveAnimation.ShowHitEffectsBoss(transform.position));
+
+            }
 
             //Debug.Log("下半身が破壊された");
             //Drop(Lowerbodypart, true);
-            FlashObject();
 
             StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true));
 
@@ -194,8 +204,8 @@ public class newEnemyParameters : CharacterStats
             UpdateHPBar(LowerHPBar, LowerHP, MaxLowerHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
-            Debug.Log(LowerHP);
-            Debug.Log(MaxLowerHP);
+            //Debug.Log(LowerHP);
+            //Debug.Log(MaxLowerHP);
         }
     }
     //敵のHPバーを変更
@@ -208,21 +218,25 @@ public class newEnemyParameters : CharacterStats
         }
     }
 
-    private void FlashObject()
+    private IEnumerator FlashObject()
     {
-        _time += Time.deltaTime;
+        isFlashing = true;
+        float elapsedTime = 0;
+        while (elapsedTime < flashDuration)
+        {
+            foreach (Renderer r in enemyRenderer)
+            {
+                r.enabled = !r.enabled;
+            }
+            yield return new WaitForSeconds(flashInterval);
+            elapsedTime += flashInterval;
+        }
 
-        // 周期cycleで繰り返す値の取得
-        // 0～cycleの範囲の値が得られる
-        var repeatValue = Mathf.Repeat((float)_time, enemyCycle);
-        bool currentState = enemyRenderer.Length > 0 && enemyRenderer[0].enabled; // 最初のRendererの状態を基準に
         foreach (Renderer r in enemyRenderer)
         {
-
-            // 内部時刻timeにおける明滅状態を反映
-            // デューティ比でON/OFFの割合を変更している
-            r.enabled = !currentState; // すべてのRendererの表示状態を反転
+            r.enabled = true;
         }
+        isFlashing = false;
     }
 
     private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
