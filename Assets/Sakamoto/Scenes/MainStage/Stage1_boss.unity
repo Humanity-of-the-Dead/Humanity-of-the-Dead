@@ -2452,6 +2452,11 @@ MonoBehaviour:
   goHumanity_Bar: {fileID: 252931442}
   goUpperHP_Bar: {fileID: 1440257034}
   goLowerHP_Bar: {fileID: 2076811909}
+  dangerThreshold: 0.3
+  normalColor: {r: 0.4117647, g: 1, b: 0, a: 1}
+  dangerColor1: {r: 1, g: 0.2, b: 0.2, a: 1}
+  dangerColor2: {r: 0.6, g: 0, b: 0, a: 1}
+  flickerSpeed: 2
 --- !u!1 &977587875
 GameObject:
   m_ObjectHideFlags: 0
