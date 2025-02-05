@@ -85,7 +85,7 @@ public class newDropPart : MonoBehaviour//
                 break;
 
             default:
-                Debug.Log("プレイヤーが動いていないこと確認");
+                //Debug.Log("プレイヤーが動いていないこと確認");
                 break;
         }
     }

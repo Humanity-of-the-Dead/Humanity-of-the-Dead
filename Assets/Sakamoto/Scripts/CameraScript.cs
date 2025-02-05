@@ -13,7 +13,7 @@ enum STATE
     STAGE3,
     BOSSLAB,
     BOSS,//ボスステージ
-
+    GAMEOVER,
 }
 
 
@@ -77,6 +77,10 @@ public class CameraScript : MonoBehaviour
                     eState = STATE.BOSSLAB;
 
                 }
+                if (GameMgr.GetState() == GameState.GameOver)
+                {
+                    eState = STATE.GAMEOVER;
+                }
 
                 if (cameraPos.y < 0)
                 {
@@ -113,6 +117,9 @@ public class CameraScript : MonoBehaviour
                 transform.position = cameraPos;
 
 
+                break;
+            case STATE.GAMEOVER:
+                // 追従しない
                 break;
         }
 

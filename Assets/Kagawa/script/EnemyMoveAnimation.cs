@@ -554,7 +554,7 @@ public class EnemyMoveAnimation : MonoBehaviour
         playerMoveAnimation.ValidateAnimationData(animation, index);
 
         // 胴体
-        playerRc.transform.rotation = Quaternion.Euler(0, shaft, walk.wholeRotation[index]);
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, animation.wholeRotation[index]);
 
         // 腕
         // ChangeArmAnime()にてisActiveを使用して左右の動きをスイッチしているので注意

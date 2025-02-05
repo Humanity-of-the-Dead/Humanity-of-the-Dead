@@ -430,4 +430,13 @@ public class PlayerControl : MonoBehaviour
 
     }
 
+    public void SetEnabledPlayerRenderer(bool enabled)
+    {
+        var renderers = transform.GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.enabled = enabled;
+        }
+    }
+
 }

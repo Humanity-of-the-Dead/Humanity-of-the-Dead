@@ -118,29 +118,34 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeAttack = 0;
     }
 
+    public void SetTimeMax(float time)
+    {
+        timeMax = time;
+    }
+
     // 右を向いているか
     public bool isFacingToRight()
     {
         return shaft == SHAFT_DIRECTION_RIGHT;
     }
 
-    public void HandleWalk(int direction)
+    public void HandleWalk(int direction, bool walksLikeZombie = false)
     {
         shaft = direction;
 
         if (isStop)
         {
-            WalkInstance();
+            WalkInit(walksLikeZombie);
         }
         if (!isWalk)
         {
             isWalk = true;
             ChangeArmAnime();
-            KeepWalk();
+            KeepWalk(walksLikeZombie);
         }
         else if (isWalk && !isAttack)
         {
-            PlayerWalk();
+            PlayerWalk(walksLikeZombie);
         }
     }
 
@@ -193,9 +198,10 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くアニメーション
     /// </summary>
-    private void PlayerWalk()
+    private void PlayerWalk(bool walksLikeZombie = false)
     {
-        WalkPoseByIndex(animationDataSet.walk, walkIndex);
+        AnimationData walkAnimation = walksLikeZombie ? animationDataSet.zombieWalk : animationDataSet.walk;
+        WalkPoseByIndex(walkAnimation, walkIndex, walksLikeZombie);
     }
 
     /// <summary>
@@ -520,7 +526,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         WalkPoseByIndex(animation, index);
     }
 
-    private void WalkPoseByIndex(AnimationData animation, int index)
+    private void WalkPoseByIndex(AnimationData animation, int index, bool walksLikeZombie = false)
     {
         if (!ValidateAnimationData(animation, index))
         {
@@ -532,11 +538,20 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         // 腕
         // ChangeArmAnime()にてisActiveを使用して左右の動きをスイッチしているので注意
-        arm[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
-        arm[1].transform.rotation = Quaternion.Euler(0, shaft, -animation.armForwardRotation[index]);
-        hand[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
-        hand[1].transform.rotation = Quaternion.Euler(0, shaft, -animation.armForwardRotation[index]);
-
+        if (walksLikeZombie)
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+            hand[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+            hand[1].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+        }
+        else
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, -animation.armForwardRotation[index]);
+            hand[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+            hand[1].transform.rotation = Quaternion.Euler(0, shaft, -animation.armForwardRotation[index]);
+        }
 
         // 脚
         if (isActive)
@@ -599,18 +614,18 @@ public class PlayerMoveAnimation : MonoBehaviour
         return rotationsArray;
     }
 
-    private IEnumerator CallWalkWithDelay()
+    private IEnumerator CallWalkWithDelay(bool walksLikeZombie = false)
     {
         isWalk = true;
 
-        for (int i = 0; i < animationDataSet.walk.armForwardRotation.Length; i++)
+        AnimationData walkAnimation = walksLikeZombie ? animationDataSet.zombieWalk : animationDataSet.walk;
+        for (int i = 0; i < walkAnimation.armForwardRotation.Length; i++)
         {
             if (!isAttack)
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 walkIndex = i;
-                PlayerWalk();
-
+                PlayerWalk(walksLikeZombie);
                 yield return new WaitForSeconds(timeMax);
             }
         }
@@ -696,11 +711,19 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くことを開始の関数
     /// </summary>
-    private void WalkStart()
+    private void WalkStart(bool walksLikeZombie = false)
     {
-        timeWalk = timeMax * animationDataSet.playerUpper.armForwardRotation.Length;
-        StartCoroutine(CallWalkWithDelay());
-        MultiAudio.ins.PlaySEByName("SE_hero_action_run");
+        AnimationData walkAnimation = walksLikeZombie ? animationDataSet.zombieWalk : animationDataSet.walk;
+        timeWalk = timeMax * walkAnimation.armForwardRotation.Length;
+        if (walksLikeZombie)
+        {
+            StartCoroutine(CallWalkWithDelay(true));
+        }
+        else
+        {
+            StartCoroutine(CallWalkWithDelay());
+            MultiAudio.ins.PlaySEByName("SE_hero_action_run");
+        }
     }
 
     /// <summary>
@@ -725,7 +748,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くことの初期化
     /// </summary>
-    private void WalkInstance()
+    private void WalkInit(bool walksLikeZombie = false)
     {
         if (timeWalk < 0)
         {
@@ -733,14 +756,14 @@ public class PlayerMoveAnimation : MonoBehaviour
             attackNumber = 0;
             isActive = false;
             isStop = false;
-            WalkStart();
+            WalkStart(walksLikeZombie);
         }
     }
 
     /// <summary>
     /// 歩くことを継続したとき
     /// </summary>
-    private void KeepWalk()
+    private void KeepWalk(bool walksLikeZombie = false)
     {
         // 連続入力されているか
         #region 山品変更
@@ -752,7 +775,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             walkIndex = 0;
             attackNumber = 0;
             ChangeArmAnime();
-            WalkStart();
+            WalkStart(walksLikeZombie);
         }
     }
 
@@ -802,6 +825,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     private class AnimationDataSet
     {
         [SerializeField, Header("---歩きのアニメーション---")] public AnimationData walk;
+        [SerializeField, Header("---ゾンビ歩きのアニメーション---")] public AnimationData zombieWalk;
 
         [SerializeField, Header("---デフォルトパンチのアニメーション---")] public AnimationData playerUpper;
 
@@ -819,8 +843,6 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         [SerializeField, Header("---ボスキックのアニメーション---")] public AnimationData bossLower;
         //[SerializeField, Header("---攻撃待機アニメーション---")] public AnimationData　attackIdle ;//まだ制作完了していないのでコメントアウト化
-
-
 
 
     }

@@ -29,3 +29,5 @@ MonoBehaviour:
   spRightFoot: {fileID: 21300000, guid: 48a2fef415631944ca5512908e3fea18, type: 3}
   spLeftLeg: {fileID: 21300000, guid: b6e23226ef5d7d14dbd5691a4360dada, type: 3}
   spLeftFoot: {fileID: 21300000, guid: 9d28a62b7fa71354cb3f30bafe6150f1, type: 3}
+  dropPartUpper: {fileID: 1386206347217571068, guid: cdb3e0e1a208a88419518d5d8eb7bfff, type: 3}
+  dropPartLower: {fileID: 0}

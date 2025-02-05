@@ -606,6 +606,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e7766c1a6f6fc414e9785188e74f2397, type: 2}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: animationDataSet.zombieWalk
+      value: 
+      objectReference: {fileID: 11400000, guid: 932175a6bee7c6145a43026e23c6e9ab, type: 2}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: animationDataSet.playerLower
       value: 
       objectReference: {fileID: 11400000, guid: ecfa70eea4c6e214c83dc4f596887b28, type: 2}
