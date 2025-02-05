@@ -50,4 +50,25 @@ public class BodyPartsData : ScriptableObject
     public Sprite spLeftLeg;
     [Header("パーツの左足画像")]
     public Sprite spLeftFoot;
+
+    //上半身のドロップパーツ
+    // 現状、プレイヤーの敗北演出としてのドロップにのみ使用
+    [SerializeField, Header("上半身ドロップパーツ")]
+    private GameObject dropPartUpper;
+
+    //下半身のドロップパーツ
+    // 現状、プレイヤーの敗北演出としてのドロップにのみ使用
+    [SerializeField, Header("下半身ドロップパーツ")]
+    private GameObject dropPartLower;
+
+    public GameObject DropPartUpper
+    {
+        get { return dropPartUpper; }
+        set { dropPartUpper = value; }
+    }
+    public GameObject DropPartLower
+    {
+        get { return dropPartLower; }
+        set { dropPartLower = value; }
+    }
 }

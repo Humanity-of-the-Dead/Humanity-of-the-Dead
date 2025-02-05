@@ -5,6 +5,10 @@ public class DropButton : MonoBehaviour
     [SerializeField] private GameObject[] goButton;
     private bool isTriggeredByPlayer = false; // プレイヤーと接触中かどうか
     private Rigidbody2D Rigidbody2D;
+    private bool showsButton = true;
+
+    public bool ShowsButton {  get { return showsButton; } set { showsButton = value; } }
+
     void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -42,6 +46,8 @@ public class DropButton : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (!showsButton) return;
+
         if (collision.CompareTag("Player") && !isTriggeredByPlayer)
         {
             //Debug.Log("プレイヤーがトリガー範囲内にいます。");

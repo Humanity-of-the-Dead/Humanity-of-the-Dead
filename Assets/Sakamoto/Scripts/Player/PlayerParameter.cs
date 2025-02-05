@@ -55,6 +55,8 @@ public class PlayerParameter : CharacterStats
     //ゲームオーバーの標準
     private GameObject goPanel;
 
+    private bool hasDroped = false;
+
     private const float GAMEOVER_ZOMBIEWALK_TIMEMAX = 0.3f;
     private const float GAMEOVER_ZOMBIEWALK_SPEED = 0.2f;
 
@@ -136,6 +138,14 @@ public class PlayerParameter : CharacterStats
                         vPosition.x -= Time.deltaTime * GAMEOVER_ZOMBIEWALK_SPEED;
                         playerControl.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                         playerControl.transform.position = vPosition;
+                    }
+                    else if (iUpperHP < 0)
+                    {
+                        DropAndRemovePlayerOnce(false);
+                    }
+                    else if (iLowerHP < 0)
+                    {
+                        DropAndRemovePlayerOnce(true);
                     }
                     break;
             }
@@ -264,6 +274,8 @@ public class PlayerParameter : CharacterStats
         Debug.Log($"upperIndexは{upperIndex}");
         Debug.Log($"lowerIndexは{lowerIndex}");
 
+        hasDroped = false;
+
         playerControl.ChangeUpperBody(UpperData);
         playerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
         playerControl.ChangeUnderBody(LowerData);
@@ -348,5 +360,24 @@ public class PlayerParameter : CharacterStats
             //upperIndex = UpperData;
             //lowerIndex = LowerData;
             Debug.Log($"シーン {scene.name} がロードされました");
+    }
+
+    private void DropAndRemovePlayerOnce(bool dropsUpper)
+    {
+        if (!hasDroped)
+        {
+            hasDroped = true;
+
+            GameObject bodyPart = dropsUpper ? UpperData.DropPartUpper : LowerData.DropPartLower;
+            GameObject drop = Instantiate(bodyPart);
+            drop.transform.position = playerControl.transform.position;
+            // イショクイレイボタン非表示
+            drop.GetComponentInChildren<DropButton>().ShowsButton = false;
+
+            // プレイヤーを非表示
+            playerControl.SetEnabledPlayerRenderer(false);
+
+            MultiAudio.ins.PlaySEByName("SE_common_breakbody");
+        }
     }
 }
