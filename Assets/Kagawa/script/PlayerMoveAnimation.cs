@@ -160,9 +160,10 @@ public class PlayerMoveAnimation : MonoBehaviour
             ShowHitEffects(body, enemyVector3);
             Debug.Log($"effectCountは {i}");
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+            yield return new WaitForSeconds(bossEffectInterval);
+
 
         }
-        yield return new WaitForSeconds(bossEffectInterval);
 
         Debug.Log("ボスエフェクトコルーチン関数呼び出し終了");
 
