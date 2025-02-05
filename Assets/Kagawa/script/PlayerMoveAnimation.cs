@@ -64,10 +64,11 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     public float lowerEffectYMin, lowerEffectYMax;
 
-    
+
+    [SerializeField, Header("ボスエフェクトが出る間隔")] private float bossEffectInterval;
+    [SerializeField, Header("ボスエフェクトが出る回数")] private float EffectBurstCount;
 
 
-    [SerializeField] private int multiEffectNumber;
     //攻撃の配列の番号
     private int attackNumber = 0;
 
@@ -102,11 +103,9 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     public const int SHAFT_DIRECTION_RIGHT = 0;
     public const int SHAFT_DIRECTION_LEFT = 180;
-    private List<Vector3> enemyPositions;
 
     private void Start()
     {
-        enemyPositions = new List<Vector3>();
         walkIndex = 0;
         attackNumber = 0;
         shaft = 0;
@@ -144,13 +143,24 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
+    public IEnumerator ShowHitEffectsBoss(int body, Vector3 enemyVector3)
+    {
+        for (int i = 1; i < EffectBurstCount; i++)
+        {
+            ShowHitEffects(body, enemyVector3);
+            Debug.Log($"effectcoundは {i}");
+
+        }
+        yield return new WaitForSeconds(bossEffectInterval);
+
+    }
     public void ShowHitEffects(int body, Vector3 enemyVector3)
     {
         if (hitGameObjectInstantiated != null)
         {
             Destroy(hitGameObjectInstantiated);
         }
-        
+
         //上半身の場合
         if (body == 0)
         {

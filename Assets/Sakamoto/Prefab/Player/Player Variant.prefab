@@ -463,11 +463,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2696059808575154406, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.7
       objectReference: {fileID: 0}
     - target: {fileID: 2696059808575154406, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.61
+      value: -1.62
       objectReference: {fileID: 0}
     - target: {fileID: 2696059808575154406, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -570,8 +570,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: EffectBurstCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: multiEffectNumber
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: bossEffectInterval
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: hand.Array.data[0]
@@ -585,6 +593,10 @@ PrefabInstance:
       propertyPath: hitGameObject_Boss
       value: 
       objectReference: {fileID: 2915290875536770607, guid: f69287834e92bec42ba436b56f5c3755, type: 3}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: afterAttackFreezeTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: animationDataSet.walk
       value: 
@@ -817,7 +829,8 @@ MonoBehaviour:
   playerSpeed: 7
   playerJumpPower: 850
   mainCamera: {fileID: 0}
-  enemyObject: []
+  enemyObject:
+  - {fileID: 0}
 --- !u!114 &6489148027962693718
 MonoBehaviour:
   m_ObjectHideFlags: 0
