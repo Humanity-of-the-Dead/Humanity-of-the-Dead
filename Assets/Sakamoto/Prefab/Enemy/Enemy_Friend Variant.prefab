@@ -346,10 +346,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpperHP: 2
   LowerHP: 3
-  Upperbodypart: {fileID: 11400000, guid: f733af2a45055614aa02cb7d784fd72f, type: 2}
-  Lowerbodypart: {fileID: 11400000, guid: 86b4236b2c890b9489402b37aff440aa, type: 2}
-  preUpperPart: {fileID: 1386206347217571068, guid: d7ba048aa67839d4c9d43f365b2308b9, type: 3}
-  preLowerPart: {fileID: 1386206347217571068, guid: 479cb03f901e91b4e83bd9d347a528ff, type: 3}
+  Upperbodypart: {fileID: 11400000, guid: 304625b32bd712d4bad788f0c7bb7feb, type: 2}
+  Lowerbodypart: {fileID: 11400000, guid: ec2d854efa589b3498f4e85671677160, type: 2}
+  preUpperPart: {fileID: 1386206347217571068, guid: ea8f238c7e6393c49b5abf7494dc7e4e, type: 3}
+  preLowerPart: {fileID: 1386206347217571068, guid: ea8f238c7e6393c49b5abf7494dc7e4e, type: 3}
   playerControl: {fileID: 0}
   Boss: 1
   needsAttackingBothParts: 0
@@ -359,3 +359,5 @@ MonoBehaviour:
   HPBarContainer: {fileID: 3661263816035549751}
   displayRange: 5
   hpBarDestroy: 0.3
+  enemyCycle: 1
+  _dutyRate: 0.5

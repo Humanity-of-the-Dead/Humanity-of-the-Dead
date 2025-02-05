@@ -178,6 +178,7 @@ MonoBehaviour:
   - {fileID: 2182874680941712295}
   - {fileID: 6055618513447132620}
   goGrave: {fileID: 2839263780191614865, guid: fd771b76aae9c0641833c8c5eff54c82, type: 3}
+  isFriendBothParts: 1
 --- !u!1 &1919319660750788736
 GameObject:
   m_ObjectHideFlags: 0

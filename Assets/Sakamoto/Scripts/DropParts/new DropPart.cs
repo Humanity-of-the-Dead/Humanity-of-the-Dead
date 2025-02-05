@@ -19,6 +19,9 @@ public class newDropPart : MonoBehaviour//
     //お墓
     [SerializeField] GameObject goGrave;
 
+    [SerializeField, Header("親友の身体か")]
+    private bool isFriendBothParts = false;
+
     private PlayerControl playerControl;
 
     //ゲームクリアの標準
@@ -73,7 +76,14 @@ public class newDropPart : MonoBehaviour//
                 // Lキーを押したら移植する
                 if (Input.GetKeyDown(KeyCode.L) && goButton.Length > 1 && goButton[1] != null && goButton[1].activeSelf)
                 {
-                    PlayerParameter.Instance.transplant(partsData);
+                    if (isFriendBothParts)
+                    {
+                        PlayerParameter.Instance.transplantFriendBoth();
+                    }
+                    else
+                    {
+                        PlayerParameter.Instance.transplant(partsData);
+                    }
                     MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
                     DestroyImmediate(gameObject);
 
@@ -151,7 +161,7 @@ public class newDropPart : MonoBehaviour//
         //ステージが4の時
         if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageThreeDotFive))
         {
-            PlayerParameter.Instance.DefaultBodyData();
+            PlayerParameter.Instance.SetBadyForStageFour();
         }
         //インデックスが上限に行ったらタイトルのインデックスを代入
         if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageFour))
