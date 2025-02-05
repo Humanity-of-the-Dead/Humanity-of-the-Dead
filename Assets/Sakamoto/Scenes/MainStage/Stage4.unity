@@ -503,10 +503,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 247270897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 0, y: -795.69}
+  m_SizeDelta: {x: 1920, y: 304}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &170547552
 MonoBehaviour:
@@ -2518,6 +2518,11 @@ MonoBehaviour:
   goHumanity_Bar: {fileID: 252931442}
   goUpperHP_Bar: {fileID: 1440257034}
   goLowerHP_Bar: {fileID: 2076811909}
+  alertLevel: 0.3
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  warningFlashColor1: {r: 1, g: 0.2, b: 0.2, a: 1}
+  warningFlashColor2: {r: 0.6, g: 0, b: 0, a: 1}
+  warningFlashSpeed: 2
 --- !u!1 &977587875
 GameObject:
   m_ObjectHideFlags: 0
@@ -3570,10 +3575,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1971099302}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 0, y: -795.69}
+  m_SizeDelta: {x: 1045, y: 189}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1628926201
 MonoBehaviour:
@@ -4170,6 +4175,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076811909}
   m_CullTransparentMesh: 1
+--- !u!114 &2077340020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5427543091523026462, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
+  m_PrefabInstance: {fileID: 494904561}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2113700889 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5712834787507670375, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
@@ -4403,7 +4419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OptionButton: {fileID: 752691868}
   OptionReturnButton: {fileID: 594764492}
-  TitleButton: {fileID: 0}
+  TitleButton: {fileID: 2077340020}
 --- !u!4 &3183673208756527799
 Transform:
   m_ObjectHideFlags: 0

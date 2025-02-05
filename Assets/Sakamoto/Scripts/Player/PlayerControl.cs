@@ -87,16 +87,17 @@ public class PlayerControl : MonoBehaviour
     {
         //プレイヤーのY座標の制限
         //プレイヤーのY座標が8.0を超えたらリジッドボディのフォースを0にする
-        if (8.0f < transform.position.y)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -1);
-        }
-        UpdateTimers();
+     
         switch (GameMgr.GetState())
         {
             case GameState.Main:
                 //bShootFlagをfalseにする
                 isShot = false;
+                if (8.0f < transform.position.y)
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -1);
+                }
+                UpdateTimers();
                 //攻撃アニメーション中でなければbShootFlagをtrueにする
                 //Debug.Log(playerMoveAnimation.SetAttack());
                 if (playerMoveAnimation.SetAttack() == false)
@@ -109,6 +110,7 @@ public class PlayerControl : MonoBehaviour
 
                 break;
             case GameState.ShowOption:
+                Time.timeScale = 0.0f;
                 //Debug.Log("プレイヤーが動いていないこと確認");
 
                 break;
@@ -122,6 +124,8 @@ public class PlayerControl : MonoBehaviour
     {
         playerMoveAnimation.timeWalk -= Time.deltaTime;
         playerMoveAnimation.timeAttack -= Time.deltaTime;
+        Time.timeScale = 1.0f;
+
     }
     void MoveAndJump()
     {
