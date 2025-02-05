@@ -53,6 +53,18 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3120854060399778960, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120854060399778960, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120854060399778960, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120854060399778960, guid: cdf94058954888c498d04b05f2685229, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.592111
       objectReference: {fileID: 0}
@@ -326,6 +338,8 @@ MonoBehaviour:
   HPBarContainer: {fileID: 3650718983251325481}
   displayRange: 5
   hpBarDestroy: 0.3
+  enemyCycle: 1
+  _dutyRate: 0.5
 --- !u!1 &3650718983251325481 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 772803039431139584, guid: cdf94058954888c498d04b05f2685229, type: 3}

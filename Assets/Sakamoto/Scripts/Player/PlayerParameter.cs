@@ -44,10 +44,10 @@ public class PlayerParameter : CharacterStats
     private BodyPartsData upperIndex;
     //下半身のパーツデータ(保存用)
     private BodyPartsData lowerIndex;
-    //上半身のパーツデータ(ステージ4用)
-    private BodyPartsData upperPlayer;
-    //下半身のパーツデータ(ステージ4用)
-    private BodyPartsData lowerPlayer;
+    ////上半身のパーツデータ(ステージ4用)
+    //private BodyPartsData upperPlayer;
+    ////下半身のパーツデータ(ステージ4用)
+    //private BodyPartsData lowerPlayer;
 
     private EnemyMoveAnimation enemyMoveAnimation;
 
@@ -69,8 +69,8 @@ public class PlayerParameter : CharacterStats
     {
         upperIndex = UpperData;
         lowerIndex = LowerData;
-        upperPlayer = UpperDataForStageFour;
-        lowerPlayer = LowerDataForStageFour;
+        //upperPlayer = UpperDataForStageFour;
+        //lowerPlayer = LowerDataForStageFour;
         InitializeReferences();
         //コンポーネント取得
 
@@ -215,6 +215,37 @@ public class PlayerParameter : CharacterStats
 
     }
 
+    /// <summary>
+    /// 上下両方を一括移植
+    /// </summary>
+    public void transplantBoth(BodyPartsData upperPart, BodyPartsData lowerPart)
+    {
+        // モザイクを表示させる
+        goMosaic.SetActive(true);
+
+        // パーツデータのHPをMaxに代入
+        iUpperHPMax = upperPart.iPartHp;
+        iUpperHP = iUpperHPMax;
+        iLowerHPMax = lowerPart.iPartHp;
+        iLowerHP = iLowerHPMax;
+        // 部位データの上書き
+        UpperData = upperPart;
+        LowerData = lowerPart;
+        // 見た目変更関数待ち
+        playerControl.ChangeUpperBody(upperPart);
+        playerControl.ChangeUnderBody(lowerPart);
+        // 攻撃モーションの変更
+        playerMoveAnimation.ChangeUpperMove(upperPart.upperAttack);
+        playerMoveAnimation.ChangeLowerMove(lowerPart.lowerAttack);
+    }
+
+    /// <summary>
+    /// 親友の身体を上下とも移植
+    /// </summary>
+    public void transplantFriendBoth()
+    {
+        transplantBoth(UpperDataForStageFour, LowerDataForStageFour);
+    }
 
     //人間性の取得
     public float Humanity
@@ -302,13 +333,14 @@ public class PlayerParameter : CharacterStats
     /// ステージクリア4の時デフォルトの状態にする
     /// DropPartに呼んでもらう
     /// </summary>
-    public void DefaultBodyData()
+    public void SetBadyForStageFour()
     {
-        UpperData = upperPlayer;
-        LowerData = lowerPlayer;
-        upperIndex = upperPlayer;
-        lowerIndex = lowerPlayer;
+        UpperData = UpperDataForStageFour;
+        LowerData = LowerDataForStageFour;
+        upperIndex = UpperDataForStageFour;
+        lowerIndex = LowerDataForStageFour;
     }
+
     private void OnEnable()
     {
         // シーンがロードされた後に参照を再取得
