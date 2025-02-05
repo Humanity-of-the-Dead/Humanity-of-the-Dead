@@ -131,11 +131,9 @@ public class newEnemyParameters : CharacterStats
             playerControl.RemoveListItem(this.gameObject);
             StartCoroutine(FlashObject());
 
-            if (Boss==true)
+            if (Boss == true)
             {
-                Debug.Log("ボスエフェクト開始");
-                playerMoveAnimation.ShowHitEffectsBoss(0, transform.position);
-                Debug.Log("ボスエフェクトコルーチン関数呼び出し終了");
+                StartCoroutine(playerMoveAnimation.ShowHitEffectsBoss(transform.position));
 
             }
 
@@ -153,7 +151,7 @@ public class newEnemyParameters : CharacterStats
 
             if (Boss)
             {
-                playerMoveAnimation.ShowHitEffectsBoss(1, transform.position);
+                StartCoroutine( playerMoveAnimation.ShowHitEffectsBoss(transform.position));
 
             }
 

@@ -65,9 +65,9 @@ public class PlayerMoveAnimation : MonoBehaviour
     public float lowerEffectYMin, lowerEffectYMax;
 
 
-    [SerializeField, Header("ボスエフェクトが出る間隔")] private float bossEffectInterval;
-    [SerializeField, Header("ボスエフェクトが出る回数")] private float EffectBurstCount;
+    [SerializeField, Header("ボスエフェクトが出る間隔")] public float bossEffectInterval;
 
+    [SerializeField, Header("エフェクトが出る回数")] private int effectBurstCount;
 
     //攻撃の配列の番号
     private int attackNumber = 0;
@@ -143,15 +143,23 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-    public IEnumerator ShowHitEffectsBoss(int body, Vector3 enemyVector3)
+    public IEnumerator ShowHitEffectsBoss( Vector3 enemyVector3 )
     {
-        for (int i = 1; i < EffectBurstCount; i++)
+        int body = Random.Range(0, 2);
+
+
+        for (int i = 1; i <= effectBurstCount; i++)
         {
+            Debug.Log("ボスエフェクト開始");
+
             ShowHitEffects(body, enemyVector3);
-            Debug.Log($"effectcoundは {i}");
+            Debug.Log($"effectCountは {i}");
 
         }
         yield return new WaitForSeconds(bossEffectInterval);
+
+        Debug.Log("ボスエフェクトコルーチン関数呼び出し終了");
+
 
     }
     public void ShowHitEffects(int body, Vector3 enemyVector3)

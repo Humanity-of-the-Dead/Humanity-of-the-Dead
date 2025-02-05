@@ -543,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: lowerEffectXMin
-      value: -0.33
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: lowerEffectYMax
@@ -555,7 +555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: upperEffectXMax
-      value: 0.28
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: upperEffectXMin
@@ -563,7 +563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: upperEffectYMax
-      value: 2.5
+      value: 4.66
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: upperEffectYMin
@@ -574,12 +574,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: effectBurstCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: multiEffectNumber
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: bossEffectInterval
-      value: 0.2
+      value: 0.0015
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: hand.Array.data[0]
