@@ -310,7 +310,7 @@ MonoBehaviour:
   chaseSpeed: 2
   chaseRange: 5
   attackRange: 2
-  waitTime: 1
+  waitTime: 1.5
   upperPart: {fileID: 11400000, guid: 32bb9438ce0f4774d89ad3978268bc1c, type: 2}
   lowerPart: {fileID: 11400000, guid: 8de0bbebef5c1df43a3bf446bb49e38f, type: 2}
   player: {fileID: 0}
@@ -345,4 +345,3 @@ MonoBehaviour:
   hpBarDestroy: 0.3
   flashDuration: 1
   flashInterval: 0.1
-  EffectBurstCount: 5
