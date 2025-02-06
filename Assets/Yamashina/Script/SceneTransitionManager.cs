@@ -166,6 +166,7 @@ public class SceneTransitionManager : MonoBehaviour
         isReloading = true; // シーン変更中に設定
 
         Debug.Log($"SceneChange called: newScene = {scene}, currentScene = {sceneInformation.currentScene}");
+        InitMainGameIfTitleToStgOne(sceneInformation.currentScene, scene);
 
         // 先に `UpdateScene` を呼び出して `previousScene` を適切に設定
         sceneInformation.UpdateScene(scene);
@@ -174,11 +175,23 @@ public class SceneTransitionManager : MonoBehaviour
 
     }
 
+    private void InitMainGameIfTitleToStgOne(SceneInformation.SCENE currentScene, SceneInformation.SCENE newScene)
+    {
+        if (currentScene == SceneInformation.SCENE.Title && newScene == SceneInformation.SCENE.StageOne)
+        {
+            PlayerParameter.Instance?.InitBodyIndex();
+        }
+    }
+
     //ボタンでシーン遷移する場合
     public void NextSceneButton(int index)
     {
-        SceneChange((SceneInformation.SCENE)index);
+        GoToNextScene(index);
+    }
 
+    public void GoToNextScene(int index)
+    {
+        SceneChange((SceneInformation.SCENE)index);
     }
 
 

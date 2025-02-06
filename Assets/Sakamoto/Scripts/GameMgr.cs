@@ -68,7 +68,6 @@ public class GameMgr : MonoBehaviour
                 if (timer > 1)
                 {
                     SceneTransitionManager.instance.ReloadCurrentScene();
-                    PlayerParameter.Instance.ResetPlayerData();
                     timer = 0;
                 }
                 timer += Time.deltaTime;

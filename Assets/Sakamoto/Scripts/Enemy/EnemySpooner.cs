@@ -25,8 +25,6 @@ public class EnemySpooner : MonoBehaviour
 
     private void Start()
     {
-
-        Debug.Log(playerControl);
         createEnemy();
         fTimer = 0;
     }
