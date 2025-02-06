@@ -34,6 +34,10 @@ public class PlayerParameter : CharacterStats
     public BodyPartsData UpperData;
     //下半身のパーツデータ
     public BodyPartsData LowerData;
+    //上半身のパーツデータ
+    public BodyPartsData upperDataDefault;
+    //下半身のパーツデータ
+    public BodyPartsData lowerDataDefault;
     //上半身のパーツデータ(ステージ4用)
     public BodyPartsData UpperDataForStageFour;
     //下半身のパーツデータ(ステージ4用)
@@ -77,23 +81,7 @@ public class PlayerParameter : CharacterStats
         DontDestroyOnLoad(gameObject);
       
     }
-    public void ResetPlayerData()
-    {
-        // 初期のパーツデータを設定（ゲーム開始時のデフォルトのパーツ）
-        UpperData = upperIndex;
-        LowerData = lowerIndex;
 
-        // HPと人間性の初期化
-        iHumanity = iHumanityMax;
-        iUpperHP = iUpperHPMax;
-        iLowerHP = iLowerHPMax;
-
-        // 見た目をリセット
-        playerControl.ChangeUpperBody(UpperData);
-        playerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
-        playerControl.ChangeUnderBody(LowerData);
-        playerMoveAnimation.ChangeLowerMove(LowerData.lowerAttack);
-    }
     private void Update()
     {
         string SceneName = SceneManager.GetActiveScene().name;
@@ -293,15 +281,18 @@ public class PlayerParameter : CharacterStats
     }
 
     /// <summary>
-    /// upperIndexとlowerIndexを初期化。Awakeで一度だけ呼ぶ
+    /// upperIndexとlowerIndexを初期化
     /// </summary>
-    void InitBodyIndex()
+    public void InitBodyIndex()
     {
-        upperIndex = UpperData;
-        lowerIndex = LowerData;
+        upperIndex = upperDataDefault;
+        lowerIndex = lowerDataDefault;
     }
 
-
+    /// <summary>
+    /// シーン読み込み時の初期化処理
+    /// upperIndex/upperIndexは初期化されない
+    /// </summary>
     private void InitializeReferences()
     {
         // シーン遷移後に必要なオブジェクトを再取得
@@ -348,7 +339,6 @@ public class PlayerParameter : CharacterStats
     /// </summary>
     public void KeepBodyData()
     {
-        Debug.Log("kanzaki KeepBodyData");
         upperIndex = UpperData;
         lowerIndex = LowerData;
     }
