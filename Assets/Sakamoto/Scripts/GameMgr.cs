@@ -21,7 +21,6 @@ public class GameMgr : MonoBehaviour
     [SerializeField] Button TitleButton;
     static GameState enGameState;
     static GameState previousGameState; // 前回のゲームステートを保存
-    [SerializeField] private Button hintButton;
     float timer = 0;
     private void Start()
     {
