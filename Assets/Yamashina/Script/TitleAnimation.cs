@@ -69,6 +69,10 @@ public class TitleAnimation : MonoBehaviour
 
     [SerializeField, Header("オプション画面のタイトルボタン")]
     private Button TitleButton;
+    [SerializeField, Header("クレジット画面の戻るボタン")]
+    private Button creditReturn;
+    [SerializeField, Header("オプション画面の戻るボタン")]
+    private Button optionReturn;
 
     enum PanalView
     {
@@ -85,6 +89,7 @@ public class TitleAnimation : MonoBehaviour
 
         start.onClick.AddListener(() =>
             SceneTransitionManager.instance.NextSceneButton(1));
+
 
         TitleButton.interactable = false;
         //MultiAudio.ins.bgmSource.volume = BGMVolume;
@@ -274,20 +279,17 @@ public class TitleAnimation : MonoBehaviour
                 case PanalView.None:
 
                     option.onClick.Invoke();
-                    OptionPanel.SetActive(true);
-                    OptionPanel.transform.localPosition = OptionPaneEndPosition;
-                    CreditPanel.SetActive(false);
-                    mainPanel.SetActive(true);
+                  
 
                     mouseOver.mouseover.SetActive(false);
 
                     break;
                 case PanalView.Credit:
-                    CreditPanel.SetActive(false);
-                    mainPanel.SetActive(true);
-                    OptionPanel.SetActive(false);
+                    //CreditPanel.SetActive(false);
+                    //mainPanel.SetActive(true);
+                    //OptionPanel.SetActive(false);
                     mouseOver.mouseover.SetActive(false);
-
+                    creditReturn.onClick.Invoke();
                     if (mainPanel.activeSelf)
                     {
                         MultiAudio.ins.PlayBGM_ByName("BGM_title");
@@ -296,9 +298,8 @@ public class TitleAnimation : MonoBehaviour
 
                     break;
                 case PanalView.Option:
-                    CreditPanel.SetActive(false);
-                    mainPanel.SetActive(true);
-                    OptionPanel.SetActive(false);
+
+                    optionReturn.onClick.Invoke();  
                     mouseOver.mouseover.SetActive(false);
 
 
@@ -331,8 +332,8 @@ public class TitleAnimation : MonoBehaviour
 
                 case PanalView.None:
                     CreditView();
-                    Credit.onClick.Invoke();    
-                 
+                    Credit.onClick.Invoke();
+
                     panalView = PanalView.Credit;
 
                     break;
