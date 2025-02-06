@@ -216,6 +216,10 @@ public class SceneTransitionManager : MonoBehaviour
     // <returns></returns>
     private IEnumerator FadeOut(string stageName)
     {
+        if(fadeInstance == null)
+        {
+            Debug.LogError("fadeInstance=null");
+        }
         fadeInstance.gameObject.SetActive(true);
         Color fadeColor = fadeInstance.color; // 一時変数を使用
         fadeColor.a = 0; // 最初は完全に透明

@@ -64,6 +64,8 @@ public class PlayerParameter : CharacterStats
     public void Awake()
     {
         CheckInstance();
+        //コンポーネント取得
+        InitializeReferences();
     }
     private void Start()
     {
@@ -71,17 +73,33 @@ public class PlayerParameter : CharacterStats
         lowerIndex = LowerData;
         //upperPlayer = UpperDataForStageFour;
         //lowerPlayer = LowerDataForStageFour;
-        InitializeReferences();
-        //コンポーネント取得
+        enemyMoveAnimation = GameObject.FindObjectOfType<EnemyMoveAnimation>();
+
 
         //シーン遷移で破棄されない
         DontDestroyOnLoad(gameObject);
+      
+    }
+    public void ResetPlayerData()
+    {
+        // 初期のパーツデータを設定（ゲーム開始時のデフォルトのパーツ）
+        UpperData = upperIndex;
+        LowerData = lowerIndex;
 
-        // シーンがロードされた後に参照を再取得
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        // HPと人間性の初期化
+        iHumanity = iHumanityMax;
+        iUpperHP = iUpperHPMax;
+        iLowerHP = iLowerHPMax;
+
+        // 見た目をリセット
+        playerControl.ChangeUpperBody(UpperData);
+        playerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
+        playerControl.ChangeUnderBody(LowerData);
+        playerMoveAnimation.ChangeLowerMove(LowerData.lowerAttack);
     }
     private void Update()
     {
+        Debug.Log($"ゲームオーバーパネル：{ goPanel}");
         string SceneName = SceneManager.GetActiveScene().name;
         if (!(SceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title)))
         {
@@ -112,8 +130,6 @@ public class PlayerParameter : CharacterStats
 
                         #endregion
                         //プレイヤーを初期化
-                        KeepBodyData();
-
                         //ゲームオーバーの標準
                         goPanel.SetActive(true);
                         GameMgr.ChangeState(GameState.GameOver);
@@ -150,6 +166,7 @@ public class PlayerParameter : CharacterStats
                     break;
             }
         }
+       
     }
 
     //慰霊
@@ -285,17 +302,18 @@ public class PlayerParameter : CharacterStats
         // シーン遷移後に必要なオブジェクトを再取得
         goMosaic = GameObject.Find("Player Variant");
         goMosaic = goMosaic.transform.Find("Mosaic").gameObject;
-        goPanel = GameObject.FindGameObjectWithTag("GameOver");
+        goPanel = GameObject.Find("GameResult");
+        goPanel= goPanel.transform.Find("GameOver").gameObject;
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         //コンポーネント取得
         playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
-        for (int i = 0; i < playerControl.enemyObject.Count; i++)
-        {
-            enemyMoveAnimation = playerControl.enemyObject[i].GetComponent<EnemyMoveAnimation>();   
-        }
+       
+      
 
-            //最大値を設定
-            iUpperHPMax = UpperData.iPartHp;
+        
+
+        //最大値を設定
+        iUpperHPMax = UpperData.iPartHp;
         iLowerHPMax = LowerData.iPartHp;
         //パラメータの初期化
         iHumanity = iHumanityMax;
