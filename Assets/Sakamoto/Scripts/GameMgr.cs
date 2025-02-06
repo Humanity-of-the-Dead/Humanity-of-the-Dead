@@ -9,7 +9,7 @@ public enum GameState
     ShowText,
     Clear, //クリア表示
     BeforeBoss, // 新しく追加：ボス戦直前
-
+    Hint,
     AfterBoss,//ボス後
     GameOver,
 }
@@ -21,7 +21,7 @@ public class GameMgr : MonoBehaviour
     [SerializeField] Button TitleButton;
     static GameState enGameState;
     static GameState previousGameState; // 前回のゲームステートを保存
-
+    [SerializeField] private Button hintButton;
     float timer = 0;
     private void Start()
     {
@@ -47,6 +47,10 @@ public class GameMgr : MonoBehaviour
                     OptionButton.onClick.Invoke();
 
                 }
+                if (Input.GetKeyDown(KeyCode.H))
+                {
+                    hintButton.onClick.Invoke();
+                }
                 break;
             case GameState.ShowOption:
                 TitleButton.onClick.AddListener(() =>
@@ -67,6 +71,9 @@ public class GameMgr : MonoBehaviour
                 }
                 timer += Time.deltaTime;
 
+                break;
+
+            case GameState.Hint:
 
                 break;
         }
@@ -90,17 +97,7 @@ public class GameMgr : MonoBehaviour
     {
         return enGameState;
     }
-    private void ForceEnemiesMoveLeft()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies)
-        {
-            enemy.transform.Translate(Vector3.left * 5f); // 任意の速度で左移動
-            EnemyMoveAnimation moveAnimation = GameObject.FindAnyObjectByType<EnemyMoveAnimation>();
-            moveAnimation.TurnToLeft();
-        }
-
-    }
+   
     private void OnGUI()
     {
         GUI.skin.label.fontSize = 30;  // 例えば30に設定
