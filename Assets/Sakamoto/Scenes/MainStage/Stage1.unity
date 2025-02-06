@@ -447,9 +447,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8268178398881552053, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1492275847}
+    - target: {fileID: 8268178398881552053, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1492275845}
+    - target: {fileID: 8268178398881552053, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySE
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268178398881552053, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: ChangeStateMain
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268178398881552053, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: ButtonStateChange, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8319576132799550002, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2869,6 +2885,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130220d88c04f994ba3da9c7e733cbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1492275847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5129337977809408555, guid: 8d78d0afffe1ef94387570bd5a8bdfc6, type: 3}
+  m_PrefabInstance: {fileID: 94509220}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94509222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327fa0d8abae87b43b3c73fe95d8d8e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1538924960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3836,7 +3863,6 @@ MonoBehaviour:
   OptionButton: {fileID: 752691868}
   OptionReturnButton: {fileID: 1492275844}
   TitleButton: {fileID: 1574095260}
-  hintButton: {fileID: 0}
 --- !u!4 &3183673208756527799
 Transform:
   m_ObjectHideFlags: 0
