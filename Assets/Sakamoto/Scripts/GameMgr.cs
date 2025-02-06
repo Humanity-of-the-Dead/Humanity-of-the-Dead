@@ -47,18 +47,20 @@ public class GameMgr : MonoBehaviour
                     OptionButton.onClick.Invoke();
 
                 }
-                if (Input.GetKeyDown(KeyCode.H))
-                {
-                    hintButton.onClick.Invoke();
-                }
+                //if (Input.GetKeyDown(KeyCode.H))
+                //{
+                //    //hintButton.onClick.Invoke();
+                //}
                 break;
             case GameState.ShowOption:
                 TitleButton.onClick.AddListener(() =>
            SceneTransitionManager.instance.NextSceneButton(0));
+                ////TitleButton.onClick.AddListener(() => PlayerParameter.Instance.ResetPlayerData()
+                //);
                 if (Input.GetKeyDown(KeyCode.G))
                 {
                     OptionReturnButton.onClick.Invoke();
-                   
+
                 }
 
                 break;
@@ -67,6 +69,7 @@ public class GameMgr : MonoBehaviour
                 if (timer > 1)
                 {
                     SceneTransitionManager.instance.ReloadCurrentScene();
+                    PlayerParameter.Instance.ResetPlayerData();
                     timer = 0;
                 }
                 timer += Time.deltaTime;
@@ -97,12 +100,12 @@ public class GameMgr : MonoBehaviour
     {
         return enGameState;
     }
-   
-    private void OnGUI()
-    {
-        GUI.skin.label.fontSize = 30;  // ó·Ç¶ÇŒ30Ç…ê›íË
 
-        GUI.Label(new Rect(10.0f, 10.0f, Screen.width, Screen.height), enGameState.ToString());
-    }
+    //private void OnGUI()
+    //{
+    //    GUI.skin.label.fontSize = 30;  // ó·Ç¶ÇŒ30Ç…ê›íË
+
+    //    GUI.Label(new Rect(10.0f, 10.0f, Screen.width, Screen.height), enGameState.ToString());
+    //}
 }
 

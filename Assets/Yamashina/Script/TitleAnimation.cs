@@ -273,6 +273,7 @@ public class TitleAnimation : MonoBehaviour
 
                 case PanalView.None:
 
+                    option.onClick.Invoke();
                     OptionPanel.SetActive(true);
                     OptionPanel.transform.localPosition = OptionPaneEndPosition;
                     CreditPanel.SetActive(false);
@@ -330,6 +331,7 @@ public class TitleAnimation : MonoBehaviour
 
                 case PanalView.None:
                     CreditView();
+                    Credit.onClick.Invoke();    
                  
                     panalView = PanalView.Credit;
 
