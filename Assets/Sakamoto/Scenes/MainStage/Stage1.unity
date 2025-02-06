@@ -691,6 +691,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HIntButton
       objectReference: {fileID: 0}
+    - target: {fileID: 8958030382214015986, guid: 33afb1aabe36154469d8929f8802d011, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
