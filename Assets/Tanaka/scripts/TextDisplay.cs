@@ -176,8 +176,8 @@ public class TextDisplay : MonoBehaviour
                         iNextIndex = SceneTransitionManager.instance.sceneInformation.sceneCount.Length;
                     }
 
-
-                    SceneTransitionManager.instance.NextSceneButton(iNextIndex);
+                    PlayerParameter.Instance.KeepBodyData();
+                    SceneTransitionManager.instance.GoToNextScene(iNextIndex);
 
 
                     timer = 0;

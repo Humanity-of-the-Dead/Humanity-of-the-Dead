@@ -64,15 +64,12 @@ public class PlayerParameter : CharacterStats
     public void Awake()
     {
         CheckInstance();
+        InitBodyIndex();
         //コンポーネント取得
         InitializeReferences();
     }
     private void Start()
     {
-        upperIndex = UpperData;
-        lowerIndex = LowerData;
-        //upperPlayer = UpperDataForStageFour;
-        //lowerPlayer = LowerDataForStageFour;
         enemyMoveAnimation = GameObject.FindObjectOfType<EnemyMoveAnimation>();
 
 
@@ -99,7 +96,6 @@ public class PlayerParameter : CharacterStats
     }
     private void Update()
     {
-        Debug.Log($"ゲームオーバーパネル：{ goPanel}");
         string SceneName = SceneManager.GetActiveScene().name;
         if (!(SceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title)))
         {
@@ -296,6 +292,15 @@ public class PlayerParameter : CharacterStats
         }
     }
 
+    /// <summary>
+    /// upperIndexとlowerIndexを初期化。Awakeで一度だけ呼ぶ
+    /// </summary>
+    void InitBodyIndex()
+    {
+        upperIndex = UpperData;
+        lowerIndex = LowerData;
+    }
+
 
     private void InitializeReferences()
     {
@@ -307,10 +312,6 @@ public class PlayerParameter : CharacterStats
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         //コンポーネント取得
         playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
-       
-      
-
-        
 
         //最大値を設定
         iUpperHPMax = UpperData.iPartHp;
@@ -320,6 +321,9 @@ public class PlayerParameter : CharacterStats
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
         //Debug.Log(hitGameObject);
+
+        UpperData = upperIndex;
+        LowerData = lowerIndex;
         Debug.Log($"upperIndexは{upperIndex}");
         Debug.Log($"lowerIndexは{lowerIndex}");
 
@@ -338,11 +342,13 @@ public class PlayerParameter : CharacterStats
     }
 
     /// <summary>
-    /// ステージクリア時プレイヤーの状態を保持する
-    /// DropPartに呼んでもらう
+    /// ステージ遷移時プレイヤーの状態を保持する
+    /// 雑魚ステージ時はTextDisplayに呼んでもらう
+    /// ボスステージ時はDropPartに呼んでもらう
     /// </summary>
     public void KeepBodyData()
     {
+        Debug.Log("kanzaki KeepBodyData");
         upperIndex = UpperData;
         lowerIndex = LowerData;
     }
@@ -407,8 +413,6 @@ public class PlayerParameter : CharacterStats
             InitializeReferences();
         }
         
-            //upperIndex = UpperData;
-            //lowerIndex = LowerData;
             Debug.Log($"シーン {scene.name} がロードされました");
     }
 

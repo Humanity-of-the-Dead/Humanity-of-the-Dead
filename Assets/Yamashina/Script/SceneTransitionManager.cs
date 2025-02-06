@@ -177,8 +177,12 @@ public class SceneTransitionManager : MonoBehaviour
     //ボタンでシーン遷移する場合
     public void NextSceneButton(int index)
     {
-        SceneChange((SceneInformation.SCENE)index);
+        GoToNextScene(index);
+    }
 
+    public void GoToNextScene(int index)
+    {
+        SceneChange((SceneInformation.SCENE)index);
     }
 
 
