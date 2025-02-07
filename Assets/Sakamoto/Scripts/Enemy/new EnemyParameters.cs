@@ -152,7 +152,7 @@ public class newEnemyParameters : CharacterStats
             if (Boss)
             {
                 StartCoroutine( playerMoveAnimation.ShowHitEffectsBoss(transform.position));
-
+                Debug.Log("エフェクトかいし");
             }
 
             //Debug.Log("下半身が破壊された");
