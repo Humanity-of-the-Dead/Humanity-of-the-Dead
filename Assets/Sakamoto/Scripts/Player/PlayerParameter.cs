@@ -34,6 +34,10 @@ public class PlayerParameter : CharacterStats
     public BodyPartsData UpperData;
     //下半身のパーツデータ
     public BodyPartsData LowerData;
+    //上半身のパーツデータ
+    public BodyPartsData upperDataDefault;
+    //下半身のパーツデータ
+    public BodyPartsData lowerDataDefault;
     //上半身のパーツデータ(ステージ4用)
     public BodyPartsData UpperDataForStageFour;
     //下半身のパーツデータ(ステージ4用)
@@ -64,15 +68,12 @@ public class PlayerParameter : CharacterStats
     public void Awake()
     {
         CheckInstance();
+        InitBodyIndex();
         //コンポーネント取得
         InitializeReferences();
     }
     private void Start()
     {
-        upperIndex = UpperData;
-        lowerIndex = LowerData;
-        //upperPlayer = UpperDataForStageFour;
-        //lowerPlayer = LowerDataForStageFour;
         enemyMoveAnimation = GameObject.FindObjectOfType<EnemyMoveAnimation>();
 
 
@@ -80,26 +81,9 @@ public class PlayerParameter : CharacterStats
         DontDestroyOnLoad(gameObject);
       
     }
-    public void ResetPlayerData()
-    {
-        // 初期のパーツデータを設定（ゲーム開始時のデフォルトのパーツ）
-        UpperData = upperIndex;
-        LowerData = lowerIndex;
 
-        // HPと人間性の初期化
-        iHumanity = iHumanityMax;
-        iUpperHP = iUpperHPMax;
-        iLowerHP = iLowerHPMax;
-
-        // 見た目をリセット
-        playerControl.ChangeUpperBody(UpperData);
-        playerMoveAnimation.ChangeUpperMove(UpperData.upperAttack);
-        playerControl.ChangeUnderBody(LowerData);
-        playerMoveAnimation.ChangeLowerMove(LowerData.lowerAttack);
-    }
     private void Update()
     {
-        Debug.Log($"ゲームオーバーパネル：{ goPanel}");
         string SceneName = SceneManager.GetActiveScene().name;
         if (!(SceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title)))
         {
@@ -296,7 +280,19 @@ public class PlayerParameter : CharacterStats
         }
     }
 
+    /// <summary>
+    /// upperIndexとlowerIndexを初期化
+    /// </summary>
+    public void InitBodyIndex()
+    {
+        upperIndex = upperDataDefault;
+        lowerIndex = lowerDataDefault;
+    }
 
+    /// <summary>
+    /// シーン読み込み時の初期化処理
+    /// upperIndex/upperIndexは初期化されない
+    /// </summary>
     private void InitializeReferences()
     {
         // シーン遷移後に必要なオブジェクトを再取得
@@ -307,10 +303,6 @@ public class PlayerParameter : CharacterStats
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         //コンポーネント取得
         playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
-       
-      
-
-        
 
         //最大値を設定
         iUpperHPMax = UpperData.iPartHp;
@@ -320,6 +312,9 @@ public class PlayerParameter : CharacterStats
         iUpperHP = iUpperHPMax;
         iLowerHP = iLowerHPMax;
         //Debug.Log(hitGameObject);
+
+        UpperData = upperIndex;
+        LowerData = lowerIndex;
         Debug.Log($"upperIndexは{upperIndex}");
         Debug.Log($"lowerIndexは{lowerIndex}");
 
@@ -338,8 +333,9 @@ public class PlayerParameter : CharacterStats
     }
 
     /// <summary>
-    /// ステージクリア時プレイヤーの状態を保持する
-    /// DropPartに呼んでもらう
+    /// ステージ遷移時プレイヤーの状態を保持する
+    /// 雑魚ステージ時はTextDisplayに呼んでもらう
+    /// ボスステージ時はDropPartに呼んでもらう
     /// </summary>
     public void KeepBodyData()
     {
@@ -407,8 +403,6 @@ public class PlayerParameter : CharacterStats
             InitializeReferences();
         }
         
-            //upperIndex = UpperData;
-            //lowerIndex = LowerData;
             Debug.Log($"シーン {scene.name} がロードされました");
     }
 

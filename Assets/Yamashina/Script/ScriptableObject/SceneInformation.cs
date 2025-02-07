@@ -136,7 +136,7 @@ public class SceneInformation : ScriptableObject
         Debug.Log($"After UpdateScene: previousScene = {previousScene}, currentScene = {currentScene}, nextScene = {nextScene}");
     }
 
-
+    
 }
 
 
