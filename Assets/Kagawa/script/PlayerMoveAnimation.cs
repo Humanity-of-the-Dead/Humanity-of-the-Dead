@@ -117,6 +117,11 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeAttack = 0;
     }
 
+    public void StartBossEffect(Vector3 enemyVector3)
+    {
+        StartCoroutine(ShowHitEffectsBoss(enemyVector3));
+    }
+
     public void SetTimeMax(float time)
     {
         timeMax = time;
@@ -148,7 +153,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-    public IEnumerator ShowHitEffectsBoss( Vector3 enemyVector3 )
+    public   IEnumerator ShowHitEffectsBoss( Vector3 enemyVector3 )
     {
         int body = Random.Range(0, 2);
         if (hasDefeatedBoss)

@@ -62,6 +62,7 @@ public class newEnemyParameters : CharacterStats
     private int MaxUpperHP;
     private int MaxLowerHP;
 
+
     [SerializeField, Header("HPバーを表示する距離")]
     [Tooltip("プレイヤーと敵キャラクターの距離がこの値以下の場合にHPバーを表示します。\n" +
              "値を小さくするとプレイヤーが近づかないとHPバーが表示されなくなり、\n" +
@@ -74,6 +75,7 @@ public class newEnemyParameters : CharacterStats
     //点滅エフェクト
     private Renderer[] enemyRenderer;
 
+    
 
     [SerializeField, Header("点滅の継続時間")] private float flashDuration = 1.0f;
     [SerializeField, Header("点滅の間隔 (秒)")] private float flashInterval = 0.1f;
@@ -126,40 +128,41 @@ public class newEnemyParameters : CharacterStats
         AdjustHpIfNeededAttackingBothParts();
 
         // 部位が破壊された際にHPバーを一瞬表示
-        if (UpperHP <= 0)
+        if (UpperHP <= 0&&-100<UpperHP)
         {
+
             playerControl.RemoveListItem(this.gameObject);
             StartCoroutine(FlashObject());
 
             if (Boss == true)
             {
-                StartCoroutine(playerMoveAnimation.ShowHitEffectsBoss(transform.position));
-
+                playerMoveAnimation.StartBossEffect(transform.position);
+                Boss = false;
             }
 
             //Debug.Log("上半身が破壊された");
             //Drop(Upperbodypart, false);
-            StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Lowerbodypart, false));
 
-
+            UpperHP = -10000;
 
         }
-        if (LowerHP <= 0)
+        if (LowerHP <= 0 && -100 < LowerHP)
         {
             playerControl.RemoveListItem(this.gameObject);
             StartCoroutine(FlashObject());
 
             if (Boss)
             {
-                StartCoroutine( playerMoveAnimation.ShowHitEffectsBoss(transform.position));
+                playerMoveAnimation.StartBossEffect(transform.position);
+                Boss = false;
                 Debug.Log("エフェクト開始");
             }
 
             //Debug.Log("下半身が破壊された");
             //Drop(Lowerbodypart, true);
 
-            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true));
 
+            LowerHP = -10000;
 
 
 
@@ -218,7 +221,7 @@ public class newEnemyParameters : CharacterStats
         }
     }
 
-    private IEnumerator FlashObject()
+    private IEnumerator FlashObject(int body = 0)
     {
         isFlashing = true;
         float elapsedTime = 0;
@@ -237,9 +240,19 @@ public class newEnemyParameters : CharacterStats
             r.enabled = true;
         }
         isFlashing = false;
+        if (body == 0)
+        {
+            StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Lowerbodypart, false));
+
+        }
+        if (body == 1)
+        {
+            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true));
+
+        }
     }
 
-    private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
+        private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
     {
         if (hpBar != null)
         {
