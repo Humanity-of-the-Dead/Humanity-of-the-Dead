@@ -110,6 +110,7 @@ public class PlayerControl : MonoBehaviour
 
                 break;
             case GameState.ShowOption:
+            case GameState.Hint:
                 Time.timeScale = 0.0f;
                 //Debug.Log("プレイヤーが動いていないこと確認");
 

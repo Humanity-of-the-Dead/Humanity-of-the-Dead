@@ -46,10 +46,12 @@ public class GameMgr : MonoBehaviour
                     OptionButton.onClick.Invoke();
 
                 }
-                //if (Input.GetKeyDown(KeyCode.H))
-                //{
-                //    //hintButton.onClick.Invoke();
-                //}
+                if (Input.GetKeyDown(KeyCode.H))
+                {
+                    //hintButton.onClick.Invoke();
+                    TextDisplay textDisplay = FindAnyObjectByType<TextDisplay>();
+                    textDisplay.ShowHintText();
+                }
                 break;
             case GameState.ShowOption:
                 TitleButton.onClick.AddListener(() =>

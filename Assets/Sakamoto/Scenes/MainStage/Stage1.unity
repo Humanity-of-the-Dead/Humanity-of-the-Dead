@@ -4008,6 +4008,8 @@ MonoBehaviour:
     - {fileID: 4900000, guid: b329413050f7e40469c324ef28c5b8f0, type: 3}
   - textAsset:
     - {fileID: 4900000, guid: cee1f46d89f7f324f8a577910ed6514d, type: 3}
+  hintTextAssetArray:
+  - {fileID: 4900000, guid: 47bc2a3c906231546ad6a2593814acbd, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 1
   Position:

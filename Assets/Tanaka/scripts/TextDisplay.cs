@@ -18,6 +18,9 @@ public class TextDisplay : MonoBehaviour
     [SerializeField]
     private TextDataSet[] textDataSet; //構造体の配列
 
+    [SerializeField, Header("ヒント(.txt) 配列")]
+    private TextAsset[] hintTextAssetArray;
+
     [SerializeField]
     private Text text;  //画面上の文字
 
@@ -130,7 +133,7 @@ public class TextDisplay : MonoBehaviour
                 {
                     if (!isTextFullyDisplayed)
                     {
-                        DisplayFullText(); //テキスト全表示
+                        DisplayFullText(textDataSet[LoadDataIndex].textAsset[LoadText].text); //テキスト全表示
                     }
                     else
                     {
@@ -141,29 +144,37 @@ public class TextDisplay : MonoBehaviour
                             return;
                         }
                         //Debug.Log(textAsset.Length);
-                        //GameMgr.ChangeState(GameState.Main);    //GameStateがMainに変わる
-                        LoadDataIndex++; //構造体の配列番号を進める
-                        CloseTextArea(); // 全てのテキストを読み終えたら閉じる
-                        LoadText = 0;
+                        FinishTextShowText(); // 全てのテキストを読み終えたら閉じる
                     }
                 }
                 else
                 {
                     // 正常に末尾の文字の位置を取得するため、テキスト描画系処理と同時実行を避ける必要がある
-                    if (isTextFullyDisplayed && !displaysEnterKey && TextArea.activeSelf)
-                    {
-                        DisplayEnterKeyOnLastChar();
-                    }
+                    DisplayEnterKeyOnLastCharIfNeeded();
                 }
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    SkipTextShowText();
+                    FinishTextShowText();
                 }
 
                 break;
 
+            case GameState.Hint:
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    UpdateHintText();
+                }
+                else
+                {
+                    DisplayEnterKeyOnLastCharIfNeeded();
+                }
 
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    FinishTextHint();
+                }
+                break;
 
             case GameState.Clear:
 
@@ -193,7 +204,7 @@ public class TextDisplay : MonoBehaviour
 
                     if (!isTextFullyDisplayed)
                     {
-                        DisplayFullText(); //テキスト全表示
+                        DisplayFullText(textDataSet[LoadDataIndex].textAsset[LoadText].text); //テキスト全表示
                     }
                     else
                     {
@@ -207,8 +218,7 @@ public class TextDisplay : MonoBehaviour
                         else
 
                         {
-                            TextArea.SetActive(false);
-
+                            FinishTextAfterBoss();
                         }
 
                     }
@@ -216,15 +226,12 @@ public class TextDisplay : MonoBehaviour
                 }
                 else
                 {
-                    if (isTextFullyDisplayed && !displaysEnterKey && TextArea.activeSelf)
-                    {
-                        DisplayEnterKeyOnLastChar();
-                    }
+                    DisplayEnterKeyOnLastCharIfNeeded();
                 }
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    SkipTextAfterBoss();
+                    FinishTextAfterBoss();
                 }
 
                 if (!TextArea.activeSelf)
@@ -255,18 +262,6 @@ public class TextDisplay : MonoBehaviour
 
 
                 }
-
-
-
-
-                //    }
-
-                //}
-
-
-
-
-
                 break;
         }
     }
@@ -274,7 +269,6 @@ public class TextDisplay : MonoBehaviour
     {
         if (TypingCroutine != null)
         {
-
             Debug.Log("Stopping previous TypingCoroutine");
 
             StopCoroutine(TypingCroutine);
@@ -291,7 +285,7 @@ public class TextDisplay : MonoBehaviour
             Debug.Log($"Displaying text: {textDataSet[LoadDataIndex].textAsset[LoadText].text}");
             Debug.Log("Starting new TypingCoroutine");
 
-            TypingCroutine = StartCoroutine(TextCoroutine());
+            TypingCroutine = StartCoroutine(TextCoroutine(textDataSet[LoadDataIndex].textAsset[LoadText].text));
         }
         else
         {
@@ -299,21 +293,68 @@ public class TextDisplay : MonoBehaviour
         }
     }
 
-    private void SkipTextShowText()
+    public void ShowHintText()
+    {
+        GameMgr.ChangeState(GameState.Hint);
+        TextArea.SetActive(true);
+        LoadText = 0;
+        initCurrentTextDisplay();
+        TypingCroutine = StartCoroutine(TextCoroutine(hintTextAssetArray[LoadText].text));
+    }
+
+    private void UpdateHintText()
+    {
+        if (isTextFullyDisplayed)
+        {
+            initCurrentTextDisplay();
+            if (LoadText < hintTextAssetArray.Length - 1)
+            {
+                LoadText++;
+                TypingCroutine = StartCoroutine(TextCoroutine(hintTextAssetArray[LoadText].text));
+            }
+            else
+            {
+                FinishTextHint();
+            }
+        }
+        else
+        {
+            DisplayFullText(hintTextAssetArray[LoadText].text);
+        }
+    }
+
+    private void initCurrentTextDisplay()
+    {
+        text.text = "";
+        isTextFullyDisplayed = false;
+        RemoveEnterKey();
+
+        if (TypingCroutine != null)
+        {
+            StopCoroutine(TypingCroutine);
+        }
+    }
+
+    private void FinishTextShowText()
     {
         LoadDataIndex++;
         CloseTextArea();
         LoadText = 0;
     }
-    private void SkipTextAfterBoss()
+    private void FinishTextAfterBoss()
     {
         TextArea.SetActive(false);
     }
-    IEnumerator TextCoroutine()
+    private void FinishTextHint()
+    {
+        CloseTextArea();
+        LoadText = 0;
+    }
+    IEnumerator TextCoroutine(string textStr)
     {
         Debug.Log("TextCoroutine started");
 
-        string currentText = GetTextStrFormatted();
+        string currentText = GetTextStrFormatted(textStr);
 
         // テキストの中の文字を取得して、文字数を増やしていく
         // Substringで1文字目から取得していくため、i=1でスタート
@@ -343,13 +384,13 @@ public class TextDisplay : MonoBehaviour
         Debug.Log("TextCoroutine completed");
 
     }
-    private void DisplayFullText()
+    private void DisplayFullText(string textStr)
     {
         if (TypingCroutine != null)
         {
             StopCoroutine(TypingCroutine); // コルーチンを停止
         }
-        string fullText = GetTextStrFormatted();
+        string fullText = GetTextStrFormatted(textStr);
 
         Debug.Log($"Setting full text: {fullText}");
 
@@ -380,10 +421,9 @@ public class TextDisplay : MonoBehaviour
         TextArea.SetActive(false); // テキストエリアを非表示
     }
 
-    // 表示するテキストの内容を整形して渡す
-    private string GetTextStrFormatted()
+    // 受け取ったテキストの内容を整形して渡す
+    private string GetTextStrFormatted(string str)
     {
-        string str = textDataSet[LoadDataIndex].textAsset[LoadText].text;
         // 改行コード統一
         if (!string.IsNullOrEmpty(customNewline))
         {
@@ -394,6 +434,14 @@ public class TextDisplay : MonoBehaviour
         str += enterKeyAlternativeChar;
 
         return str;
+    }
+
+    private void DisplayEnterKeyOnLastCharIfNeeded()
+    {
+        if (isTextFullyDisplayed && !displaysEnterKey && TextArea.activeSelf)
+        {
+            DisplayEnterKeyOnLastChar();
+        }
     }
 
     // 表示テキストの末尾の文字をenterKeyに置き換える。事前にenterKeyAlternativeCharをテキスト末尾に付与して使用
@@ -441,8 +489,6 @@ public class TextDisplay : MonoBehaviour
             Debug.Log("failed to get last character position of text.");
             Debug.Log($"vIdx= {vIdx}, vertexs.Count= {vertexs.Count}");
         }
-
-     
 
         // 末尾の文字の位置に新しい enterKeyInstance を生成して置換
         enterKeyInstance = Instantiate(enterKeyPrefab);

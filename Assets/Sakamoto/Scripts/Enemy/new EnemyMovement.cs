@@ -181,6 +181,7 @@ public class newEnemyMovement : MonoBehaviour
 
                 break;
             case GameState.ShowText:
+            case GameState.Hint:
                 break;
 
 
