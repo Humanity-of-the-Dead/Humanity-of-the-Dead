@@ -366,7 +366,7 @@ public class EnemyMoveAnimation : MonoBehaviour
 
             // indexNumberの値を増やす(配列番号を上げる)
             indexNumber = (indexNumber + 1) % walk.wholeRotation.Length;
-            yield return new WaitForSecondsRealtime(timeMax);
+            yield return new WaitForSeconds(timeMax);
         }
     }
 
@@ -382,11 +382,11 @@ public class EnemyMoveAnimation : MonoBehaviour
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 indexNumber++;
-                yield return new WaitForSecondsRealtime(indexNumber);
+                yield return new WaitForSeconds(indexNumber);
             }
             else
             {
-                yield return new WaitForSecondsRealtime(indexNumber + afterAttackFreezeTime);
+                yield return new WaitForSeconds(indexNumber + afterAttackFreezeTime);
             }
         }
 
@@ -408,11 +408,11 @@ public class EnemyMoveAnimation : MonoBehaviour
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 indexNumber++;
-                yield return new WaitForSecondsRealtime(indexNumber);
+                yield return new WaitForSeconds(indexNumber);
             }
             else
             {
-                yield return new WaitForSecondsRealtime(indexNumber + afterAttackFreezeTime);
+                yield return new WaitForSeconds(indexNumber + afterAttackFreezeTime);
             }
         }
 

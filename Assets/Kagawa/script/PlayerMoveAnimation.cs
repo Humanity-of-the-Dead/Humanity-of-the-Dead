@@ -168,7 +168,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             ShowHitEffects(body, enemyVector3);
             Debug.Log($"effectCountは {i}");
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
-            yield return new WaitForSecondsRealtime(bossEffectInterval);
+            yield return new WaitForSeconds(bossEffectInterval);
 
             hasDefeatedBoss=true;
         }
@@ -673,11 +673,11 @@ public class PlayerMoveAnimation : MonoBehaviour
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 attackNumber++;
-                yield return new WaitForSecondsRealtime(attackTimeMax);
+                yield return new WaitForSeconds(attackTimeMax);
             }
             else
             {
-                yield return new WaitForSecondsRealtime(attackTimeMax + afterAttackFreezeTime);
+                yield return new WaitForSeconds(attackTimeMax + afterAttackFreezeTime);
             }
         }
 
@@ -703,11 +703,11 @@ public class PlayerMoveAnimation : MonoBehaviour
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 attackNumber++;
-                yield return new WaitForSecondsRealtime(attackTimeMax);
+                yield return new WaitForSeconds(attackTimeMax);
             }
             else
             {
-                yield return new WaitForSecondsRealtime(attackTimeMax + afterAttackFreezeTime);
+                yield return new WaitForSeconds(attackTimeMax + afterAttackFreezeTime);
             }
         }
 
