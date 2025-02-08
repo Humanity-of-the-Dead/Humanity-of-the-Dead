@@ -3679,6 +3679,8 @@ MonoBehaviour:
   - textAsset:
     - {fileID: 4900000, guid: 70f4f7033c4a49a4da251c70252b20c0, type: 3}
     - {fileID: 4900000, guid: a3c00f8bc215e034e8509b9db2a5e3bf, type: 3}
+  hintTextAssetArray:
+  - {fileID: 4900000, guid: 46e965849ab58ec4cb680639559f3e55, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
   Position:
