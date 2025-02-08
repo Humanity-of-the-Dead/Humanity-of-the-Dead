@@ -30,7 +30,7 @@ public class newEnemyMovement : MonoBehaviour
     private newEnemyParameters newEnemyParameters;
     private EnemyMoveAnimation enemyMoveAnimation;
 
-    private enum EnemyState { Search, Walk, Attack, Wait }
+    private enum EnemyState { Search, Walk, Attack, Wait, IsDead }
 
     private EnemyState enemyState = EnemyState.Search;
 
@@ -174,7 +174,8 @@ public class newEnemyMovement : MonoBehaviour
                         enemyState = EnemyState.Search;
                         //moveAnimation.PlayerPantie();
                         break;
-
+                    case EnemyState.IsDead:
+                        break;
                 }
 
 

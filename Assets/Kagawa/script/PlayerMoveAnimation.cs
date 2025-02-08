@@ -117,6 +117,11 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeAttack = 0;
     }
 
+    public void StartBossEffect(Vector3 enemyVector3)
+    {
+        StartCoroutine(ShowHitEffectsBoss(enemyVector3));
+    }
+
     public void SetTimeMax(float time)
     {
         timeMax = time;
@@ -148,7 +153,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-    public IEnumerator ShowHitEffectsBoss( Vector3 enemyVector3 )
+    public   IEnumerator ShowHitEffectsBoss( Vector3 enemyVector3 )
     {
         int body = Random.Range(0, 2);
         if (hasDefeatedBoss)
@@ -163,7 +168,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             ShowHitEffects(body, enemyVector3);
             Debug.Log($"effectCountは {i}");
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
-            yield return new WaitForSeconds(bossEffectInterval);
+            yield return new WaitForSecondsRealtime(bossEffectInterval);
 
             hasDefeatedBoss=true;
         }
@@ -668,11 +673,11 @@ public class PlayerMoveAnimation : MonoBehaviour
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 attackNumber++;
-                yield return new WaitForSeconds(attackTimeMax);
+                yield return new WaitForSecondsRealtime(attackTimeMax);
             }
             else
             {
-                yield return new WaitForSeconds(attackTimeMax + afterAttackFreezeTime);
+                yield return new WaitForSecondsRealtime(attackTimeMax + afterAttackFreezeTime);
             }
         }
 
@@ -698,11 +703,11 @@ public class PlayerMoveAnimation : MonoBehaviour
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 attackNumber++;
-                yield return new WaitForSeconds(attackTimeMax);
+                yield return new WaitForSecondsRealtime(attackTimeMax);
             }
             else
             {
-                yield return new WaitForSeconds(attackTimeMax + afterAttackFreezeTime);
+                yield return new WaitForSecondsRealtime(attackTimeMax + afterAttackFreezeTime);
             }
         }
 

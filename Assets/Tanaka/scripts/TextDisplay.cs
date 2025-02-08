@@ -368,13 +368,13 @@ public class TextDisplay : MonoBehaviour
                 text.text = currentChra; //空白部分をそのまま設定する
                 //Debug.Log($"Text.text is now: {text.text}");
 
-                yield return new WaitForSeconds(TextSpeed);
+                yield return new WaitForSecondsRealtime(TextSpeed);
                 continue;  //次のループへ
 
             }
             //テキストが進むたびにコルーチンが呼び出される
             //textAsset[LoadText].text.Lengthによって中のテキストデータの文字数の所得
-            yield return new WaitForSeconds(TextSpeed); //指定された時間待機する
+            yield return new WaitForSecondsRealtime(TextSpeed); //指定された時間待機する
 
             text.text = currentChra;  //iが増えるたびに文字を一文字ずつ表示していく
 

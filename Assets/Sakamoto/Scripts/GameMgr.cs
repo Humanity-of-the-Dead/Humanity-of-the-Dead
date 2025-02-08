@@ -56,6 +56,7 @@ public class GameMgr : MonoBehaviour
             case GameState.ShowOption:
                 TitleButton.onClick.AddListener(() =>
            SceneTransitionManager.instance.NextSceneButton(0));
+                TitleButton.onClick.AddListener(() => ResetTime());
                 ////TitleButton.onClick.AddListener(() => PlayerParameter.Instance.ResetPlayerData()
                 //);
                 if (Input.GetKeyDown(KeyCode.G))
@@ -99,6 +100,11 @@ public class GameMgr : MonoBehaviour
     public static GameState GetState()
     {
         return enGameState;
+    }
+    public void ResetTime()
+    {
+        Time.timeScale = 1.0f;
+
     }
 
     //private void OnGUI()
