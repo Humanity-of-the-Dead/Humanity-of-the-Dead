@@ -84,6 +84,7 @@ public class newEnemyParameters : CharacterStats
 
     private bool hasDroped = false;
 
+    private bool hasBossEffect=false;
     //public bool isDropInstantiated = false;
     private void Start()
     {
@@ -134,10 +135,10 @@ public class newEnemyParameters : CharacterStats
             playerControl.RemoveListItem(this.gameObject);
             StartCoroutine(FlashObject());
 
-            if (Boss == true)
+            if (Boss&& !hasBossEffect)
             {
                 playerMoveAnimation.StartBossEffect(transform.position);
-                Boss = false;
+                hasBossEffect = true;
             }
 
             //Debug.Log("上半身が破壊された");
@@ -151,10 +152,10 @@ public class newEnemyParameters : CharacterStats
             playerControl.RemoveListItem(this.gameObject);
             StartCoroutine(FlashObject());
 
-            if (Boss)
+            if (Boss&&!hasBossEffect)
             {
                 playerMoveAnimation.StartBossEffect(transform.position);
-                Boss = false;
+                hasBossEffect = true;
                 Debug.Log("エフェクト開始");
             }
 
