@@ -510,7 +510,7 @@ public class TextDisplay : MonoBehaviour
         return Regex.Replace(targetStr, removePattern, "");
     }
 
-    protected void ShowTextChange()
+    public void ShowTextChange()
     {
         for (int i = 0; i < Position.Length; i++)
         {

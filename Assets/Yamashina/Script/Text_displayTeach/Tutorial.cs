@@ -26,7 +26,7 @@ public class Tutorial : TextDisplay
                 {
                     GameMgr.ChangeState(GameState.Tutorial);
                     tutorial_Spawn.SpawnTutorial();
-                   
+                    
 
 
                 }

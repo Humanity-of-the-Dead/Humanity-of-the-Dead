@@ -51,18 +51,16 @@ public class Tutorial_spown : MonoBehaviour
         }
 
 
+        
 
-      
-        Button destroyButton = canvasObject.transform.GetChild(0).Find("DestroyButton")?.GetComponent<Button>();
-        Debug.Log(destroyButton);
-        if (destroyButton != null)
-        {
-            destroyButton.onClick.RemoveAllListeners();
-            destroyButton.onClick.AddListener(() => DestroyCanvasWithImage());
-        }
+
 
 
         newImageObject.transform.SetAsLastSibling();
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            DestroyCanvasWithImage();
+        }
     }
 
 

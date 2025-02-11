@@ -65,14 +65,14 @@ public class PlayerParameter : CharacterStats
     private const float GAMEOVER_ZOMBIEWALK_SPEED = 0.2f;
 
 
-    public void Awake()
+    protected virtual void Awake()
     {
         CheckInstance();
         InitBodyIndex();
         //コンポーネント取得
         InitializeReferences();
     }
-    private void Start()
+    protected virtual void Start()
     {
         enemyMoveAnimation = GameObject.FindObjectOfType<EnemyMoveAnimation>();
 
@@ -82,7 +82,7 @@ public class PlayerParameter : CharacterStats
       
     }
 
-    private void Update()
+   protected virtual void Update()
     {
         string SceneName = SceneManager.GetActiveScene().name;
         if (!(SceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title)))
@@ -300,7 +300,7 @@ public class PlayerParameter : CharacterStats
     /// シーン読み込み時の初期化処理
     /// upperIndex/upperIndexは初期化されない
     /// </summary>
-    private void InitializeReferences()
+    protected virtual void InitializeReferences()
     {
         // シーン遷移後に必要なオブジェクトを再取得
         goMosaic = GameObject.Find("Player Variant");
@@ -373,7 +373,7 @@ public class PlayerParameter : CharacterStats
         // イベントの解除
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    public override void TakeDamage(float damage, int body = 0)
+    public override  void TakeDamage(float damage, int body = 0)
     {
         //HPが減る仕組み
         //damageはテスト用の関数
