@@ -133,7 +133,7 @@ public class newEnemyParameters : CharacterStats
         {
 
             playerControl.RemoveListItem(this.gameObject);
-            StartCoroutine(FlashObject());
+            StartCoroutine(FlashObject(0));
 
             if (Boss&& !hasBossEffect)
             {
@@ -150,7 +150,7 @@ public class newEnemyParameters : CharacterStats
         if (LowerHP <= 0 && -100 < LowerHP)
         {
             playerControl.RemoveListItem(this.gameObject);
-            StartCoroutine(FlashObject());
+            StartCoroutine(FlashObject(1));
 
             if (Boss&&!hasBossEffect)
             {
@@ -276,6 +276,7 @@ public class newEnemyParameters : CharacterStats
     public void Drop(BodyPartsData part, bool typ = true)
     {
         GameObject drop = null;
+        Debug.Log(typ);
         if (typ == true)
         {
             //プレハブをインスタンス化
