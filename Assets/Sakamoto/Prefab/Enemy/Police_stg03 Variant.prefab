@@ -312,6 +312,8 @@ MonoBehaviour:
   HPBarContainer: {fileID: 4920962030072349788}
   displayRange: 5
   hpBarDestroy: 0.3
+  flashDuration: 0.25
+  flashInterval: 0.05
 --- !u!114 &3530047645205038771
 MonoBehaviour:
   m_ObjectHideFlags: 0
