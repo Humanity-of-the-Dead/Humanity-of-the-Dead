@@ -31,11 +31,8 @@ public class Tutorial : TextDisplay
 
                 }
                 break;
-            case GameState.AfterTutorialImage_Walk_andJump:
-                base.Update();
-                tutorial_Spawn.ShowNextTutorialImage(); 
+       
 
-                break;
 
 
         }

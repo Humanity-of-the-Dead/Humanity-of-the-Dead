@@ -251,9 +251,7 @@ public class TextDisplay : MonoBehaviour
 
                 }
                 break;
-            case GameState.AfterTutorialImage_Walk_andJump:
-                ShowTextChange();
-                break;  
+        
         }
     }
     public void UpdateText()

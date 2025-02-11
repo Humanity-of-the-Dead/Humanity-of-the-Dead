@@ -90,7 +90,7 @@ public class Tutorial_spown : MonoBehaviour
         if (canvasObject != null)
         {
             Destroy(canvasObject);
-            GameMgr.ChangeState(GameState.AfterTutorialImage_Walk_andJump);
+            GameMgr.ChangeState(GameState.Main);
             ShowNextTutorialImage();
 
         }

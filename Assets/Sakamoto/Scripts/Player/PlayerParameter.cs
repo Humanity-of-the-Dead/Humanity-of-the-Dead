@@ -95,7 +95,13 @@ public class PlayerParameter : CharacterStats
                     //Debug.Log(iDownTime);
                     if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
                     {
+                        string sceneName = SceneManager.GetActiveScene().name;
 
+                        if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Tutorial)){
+                            iHumanity = 1;
+                            iUpperHP = 1;
+                            iLowerHP = 1;
+                        }
                         Debug.Log("リロードを開始します"); // デバッグログで確認
 
                         AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
@@ -117,23 +123,16 @@ public class PlayerParameter : CharacterStats
                         GameMgr.ChangeState(GameState.GameOver);
 
                     }
+                    break;
+               
+
 
                     ////シーン移動
                     //if (Input.GetKeyDown(KeyCode.M))
                     //{
                     //    SceneManager.LoadScene("Stage2");
                     //}
-                    break;
-                case GameState.AfterTutorialImage_Walk_andJump:
-                    DecreasingHP();
-                    if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
-                    {
-                        iHumanity = 1;
-                        iUpperHP = 1;
-                        iLowerHP = 1;
-                        
-                    }
-                        break;
+               
                 case GameState.GameOver:
                     if (iHumanity < 0)
                     {

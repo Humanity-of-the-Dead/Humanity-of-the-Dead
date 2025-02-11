@@ -8,8 +8,8 @@ public enum GameState
     ShowOption,
     ShowText,
     Tutorial,
-    AfterTutorialImage_Walk_andJump,
-    AfterTutorialImage_Attack,
+    
+    
 
     Clear, //クリア表示
     BeforeBoss, // 新しく追加：ボス戦直前
