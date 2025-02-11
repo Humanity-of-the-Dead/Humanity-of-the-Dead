@@ -269,7 +269,8 @@ MonoBehaviour:
   goUpperHP_Bar: {fileID: 4435821177711632443}
   goLowerHP_Bar: {fileID: 8205988531193627736}
   alertLevel: 0.3
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  normalColor: {r: 0.9529412, g: 0.26666668, b: 0.7882353, a: 1}
+  normalColor_Isyoku: {r: 0.28627452, g: 0.9529412, b: 0.26666668, a: 1}
   warningFlashColor1: {r: 1, g: 0.2, b: 0.2, a: 1}
   warningFlashColor2: {r: 0.6, g: 0, b: 0, a: 1}
   warningFlashSpeed: 2
@@ -499,7 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41176474, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.28627452, g: 0.9529412, b: 0.26666668, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -574,7 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41186726, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.9529412, g: 0.26666668, b: 0.7882353, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -733,7 +734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41176474, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.28627452, g: 0.9529412, b: 0.26666668, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
