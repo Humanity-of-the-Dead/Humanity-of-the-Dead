@@ -110,6 +110,17 @@ public class PlayerControl : MonoBehaviour
 
                 break;
             case GameState.ShowOption:
+
+            case GameState.AfterTutorialImage_Walk_andJump:
+                Move();
+                Jump();
+                UpdateTimers();
+
+                break;
+            case GameState.AfterTutorialImage_Attack:
+                MainExecution();
+
+                break;
             case GameState.Hint:
                 Time.timeScale = 0.0f;
                 //Debug.Log("プレイヤーが動いていないこと確認");
@@ -128,7 +139,7 @@ public class PlayerControl : MonoBehaviour
         Time.timeScale = 1.0f;
 
     }
-    void MoveAndJump()
+    void Move()
     {
         //現在のポジションを取得
         Vector3 vPosition = transform.position;
@@ -160,19 +171,7 @@ public class PlayerControl : MonoBehaviour
 
             }
 
-            //ジャンプ
-
-            if (Input.GetKey(KeyCode.W) && jumpCount < 1)
-            {
-                Vector2 upVector = Vector2.up;
-                playerRigidBody2D.velocity = upVector;
-                playerRigidBody2D.AddForce(transform.up * playerJumpPower, ForceMode2D.Force);
-                Debug.Log(transform.position);
-                MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
-                isJump = true;
-                jumpCount++;
-
-            }
+           
             //楽に次のシーン行きたいならこの下のコードをコメントアウト解除　確認後コメントアウトしておいて
 
             //if (Input.GetKeyDown(KeyCode.Escape))
@@ -195,12 +194,28 @@ public class PlayerControl : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         transform.position = vPosition;
     }
+    void Jump()
+    {
+        //ジャンプ
+
+        if (Input.GetKey(KeyCode.W) && jumpCount < 1)
+        {
+            Vector2 upVector = Vector2.up;
+            playerRigidBody2D.velocity = upVector;
+            playerRigidBody2D.AddForce(transform.up * playerJumpPower, ForceMode2D.Force);
+            Debug.Log(transform.position);
+            MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
+            isJump = true;
+            jumpCount++;
+
+        }
+    }
     //ゲームメインのエクスキュート
     void MainExecution()
     {
 
-        MoveAndJump();
-
+        Move();
+        Jump();
 
 
         #region 山品変更

@@ -91,9 +91,7 @@ public class PlayerParameter : CharacterStats
             {
                 case GameState.Main:
                     //パラメータの値をiDownTime秒で1減少させる
-                    iHumanity -= Time.deltaTime / iDownTime/* *dgbScale*/;
-                    iUpperHP -= Time.deltaTime / iDownTime;
-                    iLowerHP -= Time.deltaTime / iDownTime;
+                    DecreasingHP();
                     //Debug.Log(iDownTime);
                     if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
                     {
@@ -126,6 +124,16 @@ public class PlayerParameter : CharacterStats
                     //    SceneManager.LoadScene("Stage2");
                     //}
                     break;
+                case GameState.AfterTutorialImage_Walk_andJump:
+                    DecreasingHP();
+                    if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
+                    {
+                        iHumanity = 1;
+                        iUpperHP = 1;
+                        iLowerHP = 1;
+                        
+                    }
+                        break;
                 case GameState.GameOver:
                     if (iHumanity < 0)
                     {
@@ -423,5 +431,12 @@ public class PlayerParameter : CharacterStats
 
             MultiAudio.ins.PlaySEByName("SE_common_breakbody");
         }
+    }
+
+    private void DecreasingHP()
+    {
+        iHumanity -= Time.deltaTime / iDownTime/* *dgbScale*/;
+        iUpperHP -= Time.deltaTime / iDownTime;
+        iLowerHP -= Time.deltaTime / iDownTime;
     }
 }

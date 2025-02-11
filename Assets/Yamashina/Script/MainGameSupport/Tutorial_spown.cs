@@ -13,7 +13,7 @@ public class Tutorial_spown : MonoBehaviour
     private GameObject imagePrefab;   // 生成するImageのプレハブ
 
     [SerializeField, Header("チュートリアル画像のリスト\n上(Element0）から順番に表示")]
-    private Sprite[] tutorialImages;  // チュートリアル画像の配列
+    public Sprite[] tutorialImages;  // チュートリアル画像の配列
 
 
 
@@ -25,6 +25,12 @@ public class Tutorial_spown : MonoBehaviour
     void Start()
     {
         //SpawnCanvasWithImage(tutorialImages[0]);
+      
+    }
+
+    public void SpawnTutorial()
+    {
+        SpawnCanvasWithImage(tutorialImages[currentImageIndex]);
     }
     /// <summary>
     /// キャンバスを生成し、その上にImageを追加して、スプライトを設定
@@ -46,26 +52,15 @@ public class Tutorial_spown : MonoBehaviour
 
 
 
-        Button nextButton = canvasObject.transform.Find("ChangeImage")?.GetComponent<Button>();
-        if (nextButton != null)
-        {
-            nextButton.onClick.RemoveAllListeners();
-            nextButton.onClick.AddListener(() => ShowNextTutorialImage());
-        }
-
-        Button prevButton = canvasObject.transform.Find("ChangeImage_Return")?.GetComponent<Button>();
-        if (prevButton != null)
-        {
-            prevButton.onClick.RemoveAllListeners();
-            prevButton.onClick.AddListener(() => ShowPreviousTutorialImage());
-        }
-
-        Button destroyButton = canvasObject.transform.Find("Destroy")?.GetComponent<Button>();
+      
+        Button destroyButton = canvasObject.transform.GetChild(0).Find("DestroyButton")?.GetComponent<Button>();
+        Debug.Log(destroyButton);
         if (destroyButton != null)
         {
             destroyButton.onClick.RemoveAllListeners();
             destroyButton.onClick.AddListener(() => DestroyCanvasWithImage());
         }
+
 
         newImageObject.transform.SetAsLastSibling();
     }
@@ -95,6 +90,9 @@ public class Tutorial_spown : MonoBehaviour
         if (canvasObject != null)
         {
             Destroy(canvasObject);
+            GameMgr.ChangeState(GameState.AfterTutorialImage_Walk_andJump);
+            ShowNextTutorialImage();
+
         }
     }
 

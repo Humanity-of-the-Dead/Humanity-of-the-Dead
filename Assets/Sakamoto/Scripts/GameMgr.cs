@@ -7,6 +7,10 @@ public enum GameState
     Main,
     ShowOption,
     ShowText,
+    Tutorial,
+    AfterTutorialImage_Walk_andJump,
+    AfterTutorialImage_Attack,
+
     Clear, //クリア表示
     BeforeBoss, // 新しく追加：ボス戦直前
     Hint,
@@ -107,11 +111,11 @@ public class GameMgr : MonoBehaviour
 
     }
 
-    //private void OnGUI()
-    //{
-    //    GUI.skin.label.fontSize = 30;  // 例えば30に設定
+    private void OnGUI()
+    {
+        GUI.skin.label.fontSize = 30;  // 例えば30に設定
 
-    //    GUI.Label(new Rect(10.0f, 10.0f, Screen.width, Screen.height), enGameState.ToString());
-    //}
+        GUI.Label(new Rect(10.0f, 10.0f, Screen.width, Screen.height), enGameState.ToString());
+    }
 }
 
