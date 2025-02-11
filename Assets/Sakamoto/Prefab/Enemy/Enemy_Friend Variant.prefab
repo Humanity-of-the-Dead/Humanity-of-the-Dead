@@ -359,5 +359,5 @@ MonoBehaviour:
   HPBarContainer: {fileID: 3661263816035549751}
   displayRange: 5
   hpBarDestroy: 0.3
-  enemyCycle: 1
-  _dutyRate: 0.5
+  flashDuration: 0.25
+  flashInterval: 0.05
