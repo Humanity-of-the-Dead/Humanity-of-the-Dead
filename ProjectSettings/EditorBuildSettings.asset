@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Yamashina/Scene/TitleScene.unity
     guid: a9d9b43eefaa3a545bff97db7bc54b27
   - enabled: 1
+    path: Assets/Sakamoto/Scenes/MainStage/TutorialScene.unity
+    guid: 405e3ea75f09ddf47b9816869c37ba27
+  - enabled: 1
     path: Assets/Sakamoto/Scenes/MainStage/Stage1.unity
     guid: dcadeada3c09d43479c96f67fc693a70
   - enabled: 1

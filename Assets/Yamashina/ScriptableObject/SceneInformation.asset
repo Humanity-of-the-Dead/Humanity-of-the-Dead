@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneObject:
   - m_SceneName: TitleScene
+  - m_SceneName: TutorialScene
   - m_SceneName: Stage1
   - m_SceneName: Stage1_boss
   - m_SceneName: Stage2
@@ -25,6 +26,7 @@ MonoBehaviour:
   - m_SceneName: Stage5
   sceneNames:
   - TitleScene
+  - TutorialScene
   - Stage1
   - Stage1_boss
   - Stage2
