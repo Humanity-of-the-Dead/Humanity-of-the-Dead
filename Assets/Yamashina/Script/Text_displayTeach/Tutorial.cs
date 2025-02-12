@@ -13,7 +13,22 @@ public class Tutorial : TextDisplay
         PlayerComfort,
         Option
     }
-    static Tutorial_State enGameState;
+    public static void NextState()
+    {
+        int nextIndex = (int)enGameState + 1; // 次のインデックス
+        if (nextIndex < System.Enum.GetValues(typeof(Tutorial_State)).Length)
+        {
+            enGameState = (Tutorial_State)nextIndex;
+        }
+        else
+        {
+            Debug.Log("Tutorial finished!");
+        }
+
+        Debug.Log("Next State: " + enGameState);
+    }
+
+    static Tutorial_State enGameState = Tutorial_State.PlayerMove;
     static Tutorial_State previousGameState; // 前回のゲームステートを保存
     protected override void Start()
     {
@@ -52,7 +67,6 @@ public class Tutorial : TextDisplay
                 {
                     GameMgr.ChangeState(GameState.Tutorial);
                     tutorial_Spawn.SpawnTutorial();
-                    ChangeState(Tutorial_State.PlayerMove);
 
 
                 }

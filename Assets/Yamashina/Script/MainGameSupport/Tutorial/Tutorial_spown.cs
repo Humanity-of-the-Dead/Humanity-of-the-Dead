@@ -23,11 +23,7 @@ public class Tutorial_spown : MonoBehaviour
 
     private int currentImageIndex = 0;  // 現在表示している画像のインデックス
 
-    void Start()
-    {
-        //SpawnCanvasWithImage(tutorialImages[0]);
-      
-    }
+   
 
     public void SpawnTutorial()
     {
@@ -51,9 +47,10 @@ public class Tutorial_spown : MonoBehaviour
             imageComponent.sprite = sprite;
         }
 
-        
 
 
+
+        Tutorial.NextState();
 
 
 
@@ -69,6 +66,7 @@ public class Tutorial_spown : MonoBehaviour
         {
             currentImageIndex++;
             ChangeImage(tutorialImages[currentImageIndex]);
+
         }
     }
 
@@ -88,7 +86,6 @@ public class Tutorial_spown : MonoBehaviour
             Destroy(canvasObject);
             GameMgr.ChangeState(GameState.Main);
             ShowNextTutorialImage();
-
         }
     }
 
