@@ -459,10 +459,6 @@ public class EnemyMoveAnimation : MonoBehaviour
         {
             PlayerPantie();
 
-            // indexNumberの値を増やす(配列番号を上げる)
-            indexNumber = (indexNumber + 1) % upper.armForwardRotation.Length;
-            yield return new WaitForSeconds(timeMax);
-
             if (i < animationLength - 1)
             {
                 // indexNumberの値を増やす(配列番号を上げる)
@@ -507,7 +503,6 @@ public class EnemyMoveAnimation : MonoBehaviour
         // 攻撃が終わったら
         PoseWaiting(status == Status.Zombie);
         time = timeMax;
-
         isAttack = false;
     }
 
