@@ -24,7 +24,8 @@ public class Tutorial_PlayerParameter : PlayerParameter
     public override void TakeDamage(float damage, int body = 0)
     {
         base.TakeDamage(damage, body);
-        GameMgr.ChangeState(GameState.ShowText);    //GameState‚ªShowText‚É•Ï‚í‚é
         tutorial.ShowTextChange();
+
+        GameMgr.ChangeState(GameState.ShowText);    //GameState‚ªShowText‚É•Ï‚í‚é
     }
 }

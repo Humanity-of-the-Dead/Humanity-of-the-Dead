@@ -80,14 +80,14 @@ public class PlayerControl : MonoBehaviour
         mainCameraWidth = mainCameraHeight * mainCamera.aspect;
         // 攻撃アニメーション終了時のコールバックを設定
         // 上半身攻撃アニメーション終了時のコールバックを設定
-         }
+    }
 
     // Update is called once per frame
     void Update()
     {
         //プレイヤーのY座標の制限
         //プレイヤーのY座標が8.0を超えたらリジッドボディのフォースを0にする
-     
+
         switch (GameMgr.GetState())
         {
             case GameState.Main:
@@ -111,6 +111,10 @@ public class PlayerControl : MonoBehaviour
                 break;
             case GameState.ShowOption:
 
+                break;
+
+            case GameState.Tutorial:
+                UpdateTimers();
                 break;
             case GameState.Hint:
                 Time.timeScale = 0.0f;
@@ -195,7 +199,7 @@ public class PlayerControl : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         transform.position = vPosition;
     }
-   
+
     //ゲームメインのエクスキュート
     void MainExecution()
     {
@@ -219,7 +223,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     OnUpperAttackAnimationFinished();
                 }
-                
+
                 #endregion
                 switch (upperattack)
                 {
@@ -267,9 +271,9 @@ public class PlayerControl : MonoBehaviour
                         break;
                 }
 
-               
 
-               
+
+
 
             }
             //下半身攻撃
@@ -277,7 +281,7 @@ public class PlayerControl : MonoBehaviour
             {
                 #region 山品変更
                 playerMoveAnimation.KickStart();
-                OnLowerAttackAnimationFinished();   
+                OnLowerAttackAnimationFinished();
 
                 #endregion
                 switch (PlayerParameter.Instance.LowerData.lowerAttack)
@@ -295,12 +299,12 @@ public class PlayerControl : MonoBehaviour
                         MultiAudio.ins.PlaySEByName("SE_nurse_attack_lower");
                         break;
 
-                        case LowerAttack.BOSS:
+                    case LowerAttack.BOSS:
                         MultiAudio.ins.PlaySEByName("SE_lastboss_attack_lower");
                         break;
                 }
 
-                
+
 
             }
         }
@@ -415,7 +419,7 @@ public class PlayerControl : MonoBehaviour
             isJump = false;
             jumpCount = 0;
         }
-        
+
 
     }
     //private void OnCollisionExit2D(Collision2D other)

@@ -869,10 +869,13 @@ MonoBehaviour:
   canvasPrefab: {fileID: 5323403301324271791, guid: 5ecac01ec73f1804ca6b74e6c876c59a, type: 3}
   imagePrefab: {fileID: 5277984861903467287, guid: d1abe63f9c7bace42b4b91aa4a8e55d5, type: 3}
   tutorialImages:
-  - {fileID: 21300000, guid: 7a732d6dd849b1e42b6d8f4b9d330d2d, type: 3}
-  - {fileID: 21300000, guid: 30ad0d5cefa0a304aad3c35be64ba970, type: 3}
-  - {fileID: 21300000, guid: cbf286e50c8149b40ac0aa0660c94f46, type: 3}
-  - {fileID: 21300000, guid: 095e44fa927ab2649ba0b41d42d9913d, type: 3}
+  - {fileID: 21300000, guid: 9bcb44f175a1ab54487e576173f5d138, type: 3}
+  - {fileID: 21300000, guid: 5f94c19c60df16b40a178eacdf484a5d, type: 3}
+  - {fileID: 21300000, guid: a72907c4f1567554eb2ffbd129ca56e7, type: 3}
+  - {fileID: 21300000, guid: c0f5989595b407b4ab95558a475667a6, type: 3}
+  - {fileID: 21300000, guid: 93b7695e67fa91b45ba5b69bdfda29de, type: 3}
+  - {fileID: 21300000, guid: 06600acb8bfe3e44789b4df65b10bcbd, type: 3}
+  - {fileID: 21300000, guid: cfd7525b1c692164d9819321baeee7eb, type: 3}
 --- !u!1 &247270896
 GameObject:
   m_ObjectHideFlags: 0
@@ -3519,6 +3522,7 @@ MonoBehaviour:
   Position:
   - -3.8
   - 16.92462
+  - 32.89637
   - 38
   Player: {fileID: 967675288}
   TextArea: {fileID: 259418451}

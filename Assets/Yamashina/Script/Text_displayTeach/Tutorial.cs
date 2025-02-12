@@ -26,12 +26,21 @@ public class Tutorial : TextDisplay
                 {
                     GameMgr.ChangeState(GameState.Tutorial);
                     tutorial_Spawn.SpawnTutorial();
-                    
+
 
 
                 }
                 break;
-       
+            case GameState.Tutorial:
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    tutorial_Spawn.DestroyCanvasWithImage();
+                }
+                break;
+            case GameState.Clear:
+                base.Update();  
+                break;
+
 
 
 

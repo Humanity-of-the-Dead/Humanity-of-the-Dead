@@ -17,6 +17,7 @@ public class Tutorial_spown : MonoBehaviour
 
 
 
+
     private GameObject canvasObject;  // 生成したキャンバスのインスタンスを保持する変数
     private GameObject newImageObject;  // 現在のImageのオブジェクト
 
@@ -50,17 +51,14 @@ public class Tutorial_spown : MonoBehaviour
             imageComponent.sprite = sprite;
         }
 
-
         
 
 
 
 
+
         newImageObject.transform.SetAsLastSibling();
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            DestroyCanvasWithImage();
-        }
+       
     }
 
 
