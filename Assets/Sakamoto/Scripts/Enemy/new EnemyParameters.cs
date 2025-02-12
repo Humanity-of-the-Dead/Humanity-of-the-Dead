@@ -86,7 +86,7 @@ public class newEnemyParameters : CharacterStats
 
     private bool hasBossEffect=false;
     //public bool isDropInstantiated = false;
-    private void Start()
+    protected virtual void Start()
     {
         MaxLowerHP = LowerHP;
         MaxUpperHP = UpperHP;
@@ -107,7 +107,7 @@ public class newEnemyParameters : CharacterStats
     }
 
 
-    void Update()
+    protected virtual void Update()
     {
         float DistanceToPlayer = Vector3.Distance(transform.position, playerControl.transform.position);
         // プレイヤーが一定距離以内にいる場合にHPバーを表示playerControl
@@ -253,7 +253,7 @@ public class newEnemyParameters : CharacterStats
         }
     }
 
-        private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
+    protected virtual IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
     {
         if (hpBar != null)
         {
@@ -273,7 +273,7 @@ public class newEnemyParameters : CharacterStats
     //BodyPartsData part->生成した後に与えるパラメータデータ
     //int typ->trueなら上半身が落ちる:falseなら下半身が落ちる
     //デフォルト引数はtrue
-    public void Drop(BodyPartsData part, bool typ = true)
+    public virtual void Drop(BodyPartsData part, bool typ = true)
     {
         GameObject drop = null;
         Debug.Log(typ);

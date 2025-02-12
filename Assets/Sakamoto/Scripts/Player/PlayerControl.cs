@@ -109,6 +109,10 @@ public class PlayerControl : MonoBehaviour
                 MainExecution();
 
                 break;
+            case GameState.ShowText:
+                UpdateTimers();
+
+                break;
             case GameState.ShowOption:
 
                 break;

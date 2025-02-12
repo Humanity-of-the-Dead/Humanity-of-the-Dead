@@ -1,36 +1,31 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tutorial_PlayerParameter : PlayerParameter
+public class TutorialEnemyParameter : newEnemyParameters
 {
-    // Start is called before the first frame update
     private Tutorial tutorial;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+    // Start is called before the first frame update
     protected override void Start()
     {
+        base.Start();
         tutorial = GameObject.FindFirstObjectByType<Tutorial>();
 
-        base.Start();
     }
+
+    // Update is called once per frame
     protected override void Update()
     {
-        base.Update();
+        base.Update();  
     }
-    public override void TakeDamage(float damage, int body = 0)
+
+    public override void Drop(BodyPartsData part, bool typ = true)
     {
-        base.TakeDamage(damage, body);
+        base.Drop(part, typ);
         GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
         tutorial.UpdateText();
         //テキスト表示域を表示域
         tutorial.TextArea.SetActive(true);
-
-
-        //GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
     }
 }

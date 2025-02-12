@@ -3522,7 +3522,7 @@ MonoBehaviour:
   Position:
   - -3.8
   - 16.92462
-  - 32.89637
+  - 35
   - 38
   Player: {fileID: 967675288}
   TextArea: {fileID: 259418451}
