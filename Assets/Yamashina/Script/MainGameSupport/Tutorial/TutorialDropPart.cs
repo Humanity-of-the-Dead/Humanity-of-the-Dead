@@ -36,7 +36,7 @@ public class TutorialDropPart : newDropPart
     protected override void DoTransplant()
     {
         base.DoTransplant();
-        if(!isTransplant&&tutorial.IsTextFullyDisplayed())
+        if(!isTransplant)
         {
             TutorialShowText();
             isTransplant = true;    
