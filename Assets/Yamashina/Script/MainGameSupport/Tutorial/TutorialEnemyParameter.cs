@@ -31,10 +31,7 @@ public class TutorialEnemyParameter : newEnemyParameters
     {
         if (!hasDroped)
         {
-            GameMgr.ChangeState(GameState.ShowText);    //GameState��ShowText�ɕς��
-            tutorial.UpdateText();
-            //�e�L�X�g�\�����\����
-            tutorial.TextArea.SetActive(true);
+            GameMgr.ChangeState(GameState.Main);
         }
         return base.FlashObject(body);
     }

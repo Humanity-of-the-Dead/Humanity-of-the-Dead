@@ -28,11 +28,11 @@ public class TutorialDropPart : newDropPart
         {
 
             TutorialShowText();
-            Tutorial.NextState();
 
             isComforted = true; 
 
         }
+        Tutorial.NextState();
 
 
     }
