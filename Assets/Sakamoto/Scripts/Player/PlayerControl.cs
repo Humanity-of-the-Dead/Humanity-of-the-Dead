@@ -103,7 +103,6 @@ public class PlayerControl : MonoBehaviour
                 if (playerMoveAnimation.SetAttack() == false)
                 {
                     isShot = true;
-
                 }
 
                 MainExecution();
@@ -144,8 +143,11 @@ public class PlayerControl : MonoBehaviour
             {
                 if (vPosFromCame.x > -mainCameraWidth / 2)
                 {
-                    vPosition.x -= Time.deltaTime * playerSpeed;
-
+                    if (isEnemyHit() == false)
+                    {
+                        Debug.Log("左に移動します");
+                        vPosition.x -= Time.deltaTime * playerSpeed;
+                    }
                 }
                 playerMoveAnimation.HandleWalk(PlayerMoveAnimation.SHAFT_DIRECTION_LEFT);
             }
@@ -154,10 +156,12 @@ public class PlayerControl : MonoBehaviour
             {
                 if (mainCameraWidth / 2 > vPosFromCame.x)
                 {
-                    vPosition.x += Time.deltaTime * playerSpeed;
+                    if (isEnemyHit() == false)
+                    {
+                        vPosition.x += Time.deltaTime * playerSpeed;
+                    }
                 }
                 playerMoveAnimation.HandleWalk(PlayerMoveAnimation.SHAFT_DIRECTION_RIGHT);
-
             }
 
             //ジャンプ
@@ -444,4 +448,38 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    //enemyと当たっているかどうか
+    //return :: true->当たっている    false->当っていない
+    bool isEnemyHit()
+    {
+        for(int i = 0; i < enemyObject.Count; i++)
+        {
+            //敵とのX距離
+            float distanceX =Mathf.Abs(enemyObject[i].transform.position.x - this.transform.position.x);
+            //敵とのY距離
+            float distanceY =Mathf.Abs(enemyObject[i].transform.position.y - this.transform.position.y);
+            //X距離がplayerとenemyのコライダーのXサイズの半分の和より小さく
+            //Y距離がplayerとenemyのコライダーのYサイズの半分の和より小さいならif文に入る
+            //Scaleの半分だと見た目との誤差でうまく働かないため半分よりも少し大きい値を取りたいため1.5とする
+            if((distanceX < this.GetComponent<BoxCollider2D>().size.x * this.transform.localScale.x / 1.5  
+                + enemyObject[i].GetComponent<BoxCollider2D>().size.x * enemyObject[i].transform.localScale.x / 1.5) &&
+                (distanceY < this.GetComponent<BoxCollider2D>().size.y * this.transform.localScale.y / 2
+                + enemyObject[i].GetComponent<BoxCollider2D>().size.y * enemyObject[i].transform.localScale.y / 2))
+            {
+                //playerが右を向いているかつenemyがplayerの右側にいるか
+                //playerが左を向いているかつenemyがplayerの左側にいるなら当たっている
+                if((playerMoveAnimation.isFacingToRight() == true &&
+                    0 < enemyObject[i].transform.position.x - this.transform.position.x) ||
+                    (playerMoveAnimation.isFacingToRight() == false &&
+                    enemyObject[i].transform.position.x - this.transform.position.x < 0))
+                {
+                    Debug.Log("当たってる");
+                    //当たっている
+                    return true;
+                }
+            }
+        }
+        //当っていない
+        return false;
+    }
 }
