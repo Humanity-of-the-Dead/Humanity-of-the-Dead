@@ -27,17 +27,17 @@ public class TextDisplay : MonoBehaviour
     [SerializeField]
     private float TypingSpeed = 1.0f;  //文字の表示速度
 
-    private int LoadDataIndex = 0; //今何個目の構造体を読み込んでいるか
+    public int LoadDataIndex = 0; //今何個目の構造体を読み込んでいるか
 
-    private int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
+    public int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
 
     private int n = 0;
 
     [SerializeField]
-    private float[] Position;
+    protected float[] Position;
 
     [SerializeField]
-    private PlayerControl Player;
+    protected PlayerControl Player;
 
 
     [SerializeField]
@@ -47,7 +47,7 @@ public class TextDisplay : MonoBehaviour
     private string customNewline = "[BR]"; // 改行として扱う文字列を指定
     private string newline = "\n";
 
-    bool[] Flag;
+    protected bool[] Flag;
 
     [Header("次の文字が表示されるまでの時間")]
     [SerializeField]
@@ -161,7 +161,7 @@ public class TextDisplay : MonoBehaviour
                 {
                     FinishTextHint();
                 }
-               
+
                 break;
 
             case GameState.Clear:
@@ -251,7 +251,7 @@ public class TextDisplay : MonoBehaviour
 
                 }
                 break;
-        
+
         }
     }
     public void UpdateText()
@@ -510,7 +510,7 @@ public class TextDisplay : MonoBehaviour
         return Regex.Replace(targetStr, removePattern, "");
     }
 
-    public void ShowTextChange()
+    public virtual void ShowTextChange()
     {
         for (int i = 0; i < Position.Length; i++)
         {
@@ -522,6 +522,7 @@ public class TextDisplay : MonoBehaviour
                 UpdateText();
                 //テキスト表示域を表示域
                 TextArea.SetActive(true);
+
             }
 
 

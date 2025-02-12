@@ -39,4 +39,15 @@ public class TutorialEnemyParameter : newEnemyParameters
         return base.FlashObject(body);
     }
 
+    public override void TakeDamage(float damage, int body = 0)
+    {
+        base.TakeDamage(damage, body);
+        if(Tutorial.GetState()==Tutorial.Tutorial_State.EnemyDrop)
+        {
+            Tutorial.NextState();
+
+        }
+
+    }
+
 }

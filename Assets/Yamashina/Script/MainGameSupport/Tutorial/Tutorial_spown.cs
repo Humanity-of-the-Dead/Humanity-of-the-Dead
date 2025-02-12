@@ -50,7 +50,6 @@ public class Tutorial_spown : MonoBehaviour
 
 
 
-        Tutorial.NextState();
 
 
 

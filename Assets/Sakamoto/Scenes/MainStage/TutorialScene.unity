@@ -3587,10 +3587,20 @@ MonoBehaviour:
     - {fileID: 4900000, guid: cee1f46d89f7f324f8a577910ed6514d, type: 3}
   - textAsset:
     - {fileID: 4900000, guid: 8e4e98a733277d445bad674e9d8fb981, type: 3}
+  - textAsset:
+    - {fileID: 4900000, guid: 5145ebf4e2635284d870131a125d668b, type: 3}
+  - textAsset:
+    - {fileID: 4900000, guid: d6ac7b13ab1b6024e858c92cbbad3865, type: 3}
+  - textAsset:
+    - {fileID: 4900000, guid: 620e72cf11360254cb6a9bf84b99b397, type: 3}
+  - textAsset:
+    - {fileID: 4900000, guid: 789c19262b0a011478c726a70ccf21db, type: 3}
   hintTextAssetArray:
   - {fileID: 4900000, guid: f9130cb67fcc95d4f86370b60fab03c8, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 1
+  LoadDataIndex: 0
+  LoadText: 0
   Position:
   - -3.8
   - 16.92462

@@ -1,16 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+
 public class Tutorial : TextDisplay
 {
     private Tutorial_spown tutorial_Spawn;
+
+    private const float POSITION_DONOT_MOVE = 30;
     public enum Tutorial_State
     {
         PlayerMove,
         PlayerGauge,
+        PlayerDoNotMove,
         PlayerAttack,
-        PlayerTransplant,
-        EnemyDrop,
         PlayerComfort,
+        EnemyDrop,
+        PlayerTransplant,
         Option
     }
     public static void NextState()
@@ -51,6 +56,13 @@ public class Tutorial : TextDisplay
     {
         return enGameState;
     }
+    private void ChangeStateToDoNotMoveIfNeeded()
+    {
+        if( enGameState == Tutorial_State.PlayerGauge && Player.transform.position.x> POSITION_DONOT_MOVE)
+        {
+            ChangeState(Tutorial_State.PlayerDoNotMove);
+        }
+    }
     protected override void Update()
     {
 
@@ -59,6 +71,7 @@ public class Tutorial : TextDisplay
 
             case GameState.Main:
                 base.Update();
+                ChangeStateToDoNotMoveIfNeeded();
 
                 break;
             case GameState.ShowText:
@@ -67,7 +80,7 @@ public class Tutorial : TextDisplay
                 {
                     GameMgr.ChangeState(GameState.Tutorial);
                     tutorial_Spawn.SpawnTutorial();
-
+                    Debug.Log(GameMgr.GetState().ToString());   
 
                 }
                 break;
@@ -110,6 +123,28 @@ public class Tutorial : TextDisplay
     protected override void UpdateHintText()
     {
         base.UpdateHintText();
+    }
+    public override void ShowTextChange()
+    {
+
+        for (int i = 0; i < Position.Length; i++)
+        {
+            if (Player.transform.position.x > Position[i] && Flag[i] == false)
+            {
+                Flag[i] = true;
+
+                GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+                UpdateText();
+                //テキスト表示域を表示域
+                TextArea.SetActive(true);
+                if(i != 0)
+                {
+                    NextState();
+                }
+            }
+
+
+        }
     }
     private void OnGUI()
     {

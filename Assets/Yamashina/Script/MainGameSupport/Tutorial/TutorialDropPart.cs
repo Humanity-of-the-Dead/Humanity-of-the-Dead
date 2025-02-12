@@ -26,7 +26,10 @@ public class TutorialDropPart : newDropPart
         base.DoComfort();
         if (!isComforted)
         {
+
             TutorialShowText();
+            Tutorial.NextState();
+
             isComforted = true; 
 
         }
@@ -39,6 +42,8 @@ public class TutorialDropPart : newDropPart
         if(!isTransplant)
         {
             TutorialShowText();
+            Tutorial.NextState();
+
             isTransplant = true;    
         }
     }
@@ -48,6 +53,7 @@ public class TutorialDropPart : newDropPart
 
         GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
         tutorial.UpdateText();
+      
         //テキスト表示域を表示域
         tutorial.TextArea.SetActive(true);
     }

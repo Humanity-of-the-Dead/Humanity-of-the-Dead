@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static Tutorial;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -207,7 +208,10 @@ public class PlayerControl : MonoBehaviour
     //ゲームメインのエクスキュート
     void MainExecution()
     {
-
+        if(Tutorial.GetState()== Tutorial_State.PlayerDoNotMove)
+        {
+            return;
+        }
         Move();
 
 
@@ -219,7 +223,7 @@ public class PlayerControl : MonoBehaviour
             //上半身攻撃
             if (Input.GetKeyDown(KeyCode.I))
             {
-
+                Tutorial.NextState();       
                 UpperAttack upperattack = PlayerParameter.Instance.UpperData.upperAttack;
                 playerMoveAnimation.PantieStart();
                 // 警察上半身は銃弾に当たり判定を持つ
@@ -283,6 +287,8 @@ public class PlayerControl : MonoBehaviour
             //下半身攻撃
             if (Input.GetKeyDown(KeyCode.K))
             {
+                Tutorial.NextState();
+
                 #region 山品変更
                 playerMoveAnimation.KickStart();
                 OnLowerAttackAnimationFinished();

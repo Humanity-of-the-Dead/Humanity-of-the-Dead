@@ -28,6 +28,7 @@ public class Tutorial_PlayerParameter : PlayerParameter
         if(!isDamage) {
             GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
             tutorial.UpdateText();
+            Tutorial.NextState();   
             //テキスト表示域を表示域
             tutorial.TextArea.SetActive(true);
         }
