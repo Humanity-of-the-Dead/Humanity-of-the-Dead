@@ -338,8 +338,8 @@ MonoBehaviour:
   HPBarContainer: {fileID: 3650718983251325481}
   displayRange: 5
   hpBarDestroy: 0.3
-  enemyCycle: 1
-  _dutyRate: 0.5
+  flashDuration: 0.25
+  flashInterval: 0.05
 --- !u!1 &3650718983251325481 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 772803039431139584, guid: cdf94058954888c498d04b05f2685229, type: 3}

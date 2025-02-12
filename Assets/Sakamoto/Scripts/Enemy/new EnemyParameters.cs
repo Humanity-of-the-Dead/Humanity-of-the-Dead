@@ -84,6 +84,7 @@ public class newEnemyParameters : CharacterStats
 
     private bool hasDroped = false;
 
+    private bool hasBossEffect=false;
     //public bool isDropInstantiated = false;
     private void Start()
     {
@@ -132,12 +133,12 @@ public class newEnemyParameters : CharacterStats
         {
 
             playerControl.RemoveListItem(this.gameObject);
-            StartCoroutine(FlashObject());
+            StartCoroutine(FlashObject(0));
 
-            if (Boss == true)
+            if (Boss&& !hasBossEffect)
             {
                 playerMoveAnimation.StartBossEffect(transform.position);
-                Boss = false;
+                hasBossEffect = true;
             }
 
             //Debug.Log("上半身が破壊された");
@@ -149,12 +150,12 @@ public class newEnemyParameters : CharacterStats
         if (LowerHP <= 0 && -100 < LowerHP)
         {
             playerControl.RemoveListItem(this.gameObject);
-            StartCoroutine(FlashObject());
+            StartCoroutine(FlashObject(1));
 
-            if (Boss)
+            if (Boss&&!hasBossEffect)
             {
                 playerMoveAnimation.StartBossEffect(transform.position);
-                Boss = false;
+                hasBossEffect = true;
                 Debug.Log("エフェクト開始");
             }
 
@@ -275,6 +276,7 @@ public class newEnemyParameters : CharacterStats
     public void Drop(BodyPartsData part, bool typ = true)
     {
         GameObject drop = null;
+        Debug.Log(typ);
         if (typ == true)
         {
             //プレハブをインスタンス化
