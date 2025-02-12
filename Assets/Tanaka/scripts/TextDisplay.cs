@@ -282,7 +282,7 @@ public class TextDisplay : MonoBehaviour
         }
     }
 
-    public void ShowHintText()
+    public virtual void ShowHintText()
     {
         GameMgr.ChangeState(GameState.Hint);
         TextArea.SetActive(true);
@@ -291,7 +291,7 @@ public class TextDisplay : MonoBehaviour
         TypingCroutine = StartCoroutine(TextCoroutine(hintTextAssetArray[LoadText].text));
     }
 
-    private void UpdateHintText()
+    protected virtual void UpdateHintText()
     {
         if (isTextFullyDisplayed)
         {
@@ -312,7 +312,7 @@ public class TextDisplay : MonoBehaviour
         }
     }
 
-    private void initCurrentTextDisplay()
+    protected virtual void initCurrentTextDisplay()
     {
         text.text = "";
         isTextFullyDisplayed = false;
@@ -334,7 +334,7 @@ public class TextDisplay : MonoBehaviour
     {
         TextArea.SetActive(false);
     }
-    private void FinishTextHint()
+    protected virtual void FinishTextHint()
     {
         CloseTextArea();
         LoadText = 0;
