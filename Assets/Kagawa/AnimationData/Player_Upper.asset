@@ -13,30 +13,18 @@ MonoBehaviour:
   m_Name: Player_Upper
   m_EditorClassIdentifier: 
   wholeRotation:
-  - 0
   - -10
-  - 0
   armForwardRotation:
-  - 0
   - 90
-  - 0
   armBackRotation:
-  - 0
   - -30
-  - 0
+  handForwardRotation: []
+  handBackRotation: []
   legForwardRotation:
-  - 0
   - -15
-  - 0
   footForwardRotation:
-  - 0
   - -15
-  - 0
   legBackRotation:
-  - 0
   - 30
-  - 0
   footBackRotation:
-  - 0
   - -20
-  - 0

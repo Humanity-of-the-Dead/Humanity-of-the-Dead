@@ -9,7 +9,7 @@ public enum GameState
     ShowText,
     Clear, //クリア表示
     BeforeBoss, // 新しく追加：ボス戦直前
-
+    Hint,
     AfterBoss,//ボス後
     GameOver,
 }
@@ -21,7 +21,6 @@ public class GameMgr : MonoBehaviour
     [SerializeField] Button TitleButton;
     static GameState enGameState;
     static GameState previousGameState; // 前回のゲームステートを保存
-
     float timer = 0;
     private void Start()
     {
@@ -47,14 +46,23 @@ public class GameMgr : MonoBehaviour
                     OptionButton.onClick.Invoke();
 
                 }
+                if (Input.GetKeyDown(KeyCode.H))
+                {
+                    //hintButton.onClick.Invoke();
+                    TextDisplay textDisplay = FindAnyObjectByType<TextDisplay>();
+                    textDisplay.ShowHintText();
+                }
                 break;
             case GameState.ShowOption:
                 TitleButton.onClick.AddListener(() =>
            SceneTransitionManager.instance.NextSceneButton(0));
+                TitleButton.onClick.AddListener(() => ResetTime());
+                ////TitleButton.onClick.AddListener(() => PlayerParameter.Instance.ResetPlayerData()
+                //);
                 if (Input.GetKeyDown(KeyCode.G))
                 {
                     OptionReturnButton.onClick.Invoke();
-                   
+
                 }
 
                 break;
@@ -67,6 +75,9 @@ public class GameMgr : MonoBehaviour
                 }
                 timer += Time.deltaTime;
 
+                break;
+
+            case GameState.Hint:
 
                 break;
         }
@@ -90,22 +101,17 @@ public class GameMgr : MonoBehaviour
     {
         return enGameState;
     }
-    private void ForceEnemiesMoveLeft()
+    public void ResetTime()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies)
-        {
-            enemy.transform.Translate(Vector3.left * 5f); // 任意の速度で左移動
-            EnemyMoveAnimation moveAnimation = GameObject.FindAnyObjectByType<EnemyMoveAnimation>();
-            moveAnimation.LeftMove();
-        }
+        Time.timeScale = 1.0f;
 
     }
-    private void OnGUI()
-    {
-        GUI.skin.label.fontSize = 30;  // 例えば30に設定
 
-        GUI.Label(new Rect(10.0f, 10.0f, Screen.width, Screen.height), enGameState.ToString());
-    }
+    //private void OnGUI()
+    //{
+    //    GUI.skin.label.fontSize = 30;  // 例えば30に設定
+
+    //    GUI.Label(new Rect(10.0f, 10.0f, Screen.width, Screen.height), enGameState.ToString());
+    //}
 }
 

@@ -87,16 +87,17 @@ public class PlayerControl : MonoBehaviour
     {
         //プレイヤーのY座標の制限
         //プレイヤーのY座標が8.0を超えたらリジッドボディのフォースを0にする
-        if (8.0f < transform.position.y)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -1);
-        }
-        UpdateTimers();
+     
         switch (GameMgr.GetState())
         {
             case GameState.Main:
                 //bShootFlagをfalseにする
                 isShot = false;
+                if (8.0f < transform.position.y)
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -1);
+                }
+                UpdateTimers();
                 //攻撃アニメーション中でなければbShootFlagをtrueにする
                 //Debug.Log(playerMoveAnimation.SetAttack());
                 if (playerMoveAnimation.SetAttack() == false)
@@ -109,6 +110,8 @@ public class PlayerControl : MonoBehaviour
 
                 break;
             case GameState.ShowOption:
+            case GameState.Hint:
+                Time.timeScale = 0.0f;
                 //Debug.Log("プレイヤーが動いていないこと確認");
 
                 break;
@@ -122,6 +125,8 @@ public class PlayerControl : MonoBehaviour
     {
         playerMoveAnimation.timeWalk -= Time.deltaTime;
         playerMoveAnimation.timeAttack -= Time.deltaTime;
+        Time.timeScale = 1.0f;
+
     }
     void MoveAndJump()
     {
@@ -207,10 +212,16 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.I))
             {
 
+                UpperAttack upperattack = PlayerParameter.Instance.UpperData.upperAttack;
                 playerMoveAnimation.PantieStart();
-                OnUpperAttackAnimationFinished();
+                // 警察上半身は銃弾に当たり判定を持つ
+                if (upperattack != UpperAttack.POLICE)
+                {
+                    OnUpperAttackAnimationFinished();
+                }
+                
                 #endregion
-                switch (PlayerParameter.Instance.UpperData.upperAttack)
+                switch (upperattack)
                 {
                     case UpperAttack.NORMAL:
 
@@ -239,7 +250,7 @@ public class PlayerControl : MonoBehaviour
                         if (isShot == true)
                         {
                             Debug.Log("弾発射");
-                            Gun.Shoot(ShootMoveBector, transform);
+                            Gun.Shoot(ShootMoveBector, transform, PlayerParameter.Instance.UpperData.iPartAttack);
 
                             MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_upper");
 
@@ -406,21 +417,31 @@ public class PlayerControl : MonoBehaviour
     }
 
 
-    //敵の弾都の当たり判定
+    //敵の弾との当たり判定
     private void OnTriggerEnter2D(Collider2D playerCollision)
     {
         if (playerCollision.gameObject.CompareTag("EnemyShoot"))
         {
+            int attack = playerCollision.gameObject.GetComponent<Bullet>().attack;
             if (0 > transform.position.y - playerCollision.transform.position.y)
             {
-                PlayerParameter.Instance.UpperHP -= 1;
+                PlayerParameter.Instance.UpperHP -= attack;
             }
             else
             {
-                PlayerParameter.Instance.LowerHP -= 1;
+                PlayerParameter.Instance.LowerHP -= attack;
             }
         }
 
+    }
+
+    public void SetEnabledPlayerRenderer(bool enabled)
+    {
+        var renderers = transform.GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.enabled = enabled;
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class newEnemyParameters : CharacterStats
 {
@@ -39,9 +40,13 @@ public class newEnemyParameters : CharacterStats
     [SerializeField, Header("ボスかどうか、チェックが入っているならボス")]
     public bool Boss;
 
+    [SerializeField, Header("両部位への攻撃が必要か？チェックが入っているなら必要")]
+    public bool needsAttackingBothParts;
+
     [SerializeField, Header("敵が打ってくる一個の弾のダメージ量")] float bulletDamage;    //  //クリアテキスト
-    //  [SerializeField]
-    //private  GameObject textBox;
+                                                                         //  [SerializeField]
+                                                                         //private  GameObject textBox;
+
 
 
     //敵のHPゲージ関連
@@ -57,6 +62,7 @@ public class newEnemyParameters : CharacterStats
     private int MaxUpperHP;
     private int MaxLowerHP;
 
+
     [SerializeField, Header("HPバーを表示する距離")]
     [Tooltip("プレイヤーと敵キャラクターの距離がこの値以下の場合にHPバーを表示します。\n" +
              "値を小さくするとプレイヤーが近づかないとHPバーが表示されなくなり、\n" +
@@ -66,7 +72,19 @@ public class newEnemyParameters : CharacterStats
     [Tooltip("HPが0の状態のHPが表示されてからのカウントです。")]
     private float hpBarDestroy = 0.3f;
     //private Transform player; // プレイヤーの位置
+    //点滅エフェクト
+    private Renderer[] enemyRenderer;
 
+    
+
+    [SerializeField, Header("点滅の継続時間")] private float flashDuration = 1.0f;
+    [SerializeField, Header("点滅の間隔 (秒)")] private float flashInterval = 0.1f;
+
+    private bool isFlashing = false;
+
+    private bool hasDroped = false;
+
+    private bool hasBossEffect=false;
     //public bool isDropInstantiated = false;
     private void Start()
     {
@@ -81,7 +99,7 @@ public class newEnemyParameters : CharacterStats
         {
             Debug.LogWarning("HPBarContainerがnull");
         }
-
+        enemyRenderer = transform.GetComponentsInChildren<Renderer>();
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
         //Debug.Log(playerControl);
@@ -108,21 +126,46 @@ public class newEnemyParameters : CharacterStats
             }
         }
 
+        AdjustHpIfNeededAttackingBothParts();
+
         // 部位が破壊された際にHPバーを一瞬表示
-        if (UpperHP <= 0)
+        if (UpperHP <= 0&&-100<UpperHP)
         {
+
             playerControl.RemoveListItem(this.gameObject);
+            StartCoroutine(FlashObject(0));
+
+            if (Boss&& !hasBossEffect)
+            {
+                playerMoveAnimation.StartBossEffect(transform.position);
+                hasBossEffect = true;
+            }
+
             //Debug.Log("上半身が破壊された");
             //Drop(Upperbodypart, false);
-            StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Lowerbodypart, false));
+
+            UpperHP = -10000;
 
         }
-        if (LowerHP <= 0)
+        if (LowerHP <= 0 && -100 < LowerHP)
         {
             playerControl.RemoveListItem(this.gameObject);
+            StartCoroutine(FlashObject(1));
+
+            if (Boss&&!hasBossEffect)
+            {
+                playerMoveAnimation.StartBossEffect(transform.position);
+                hasBossEffect = true;
+                Debug.Log("エフェクト開始");
+            }
+
             //Debug.Log("下半身が破壊された");
             //Drop(Lowerbodypart, true);
-            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true));
+
+
+            LowerHP = -10000;
+
+
 
         }
         //if (GameMgr.GetState() == GameState.ShowText&&!Boss)
@@ -146,8 +189,7 @@ public class newEnemyParameters : CharacterStats
             //上半身のHPを減らす
             UpperHP -= (int)damage;
             //ShowHitEffects(body);
-            playerMoveAnimation.ShowHitEffects(body);
-            Debug.Log(hitGameObject);
+            playerMoveAnimation.ShowHitEffects(body, transform.position);
 
             UpdateHPBar(UpperHPBar, UpperHP, MaxUpperHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
@@ -162,13 +204,12 @@ public class newEnemyParameters : CharacterStats
             //下半身のHPを減らす
             LowerHP -= (int)damage;
             //ShowHitEffects(body);
-            playerMoveAnimation.ShowHitEffects(body);
-            Debug.Log(hitGameObject);
+            playerMoveAnimation.ShowHitEffects(body, transform.position);
             UpdateHPBar(LowerHPBar, LowerHP, MaxLowerHP);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
-            Debug.Log(LowerHP);
-            Debug.Log(MaxLowerHP);
+            //Debug.Log(LowerHP);
+            //Debug.Log(MaxLowerHP);
         }
     }
     //敵のHPバーを変更
@@ -180,41 +221,39 @@ public class newEnemyParameters : CharacterStats
             hpBarMask.fillAmount = currentHP / maxHP;
         }
     }
-    //攻撃がヒットしたエフェクト(オブジェクト)を出す
-    //public override void ShowHitEffects(int body)
-    //{
-    //    //このオブジェクトの座標
-    //    Vector3 enemyVector3 = new Vector3(transform.position.x,transform.position.y);
 
+    private IEnumerator FlashObject(int body = 0)
+    {
+        isFlashing = true;
+        float elapsedTime = 0;
+        while (elapsedTime < flashDuration)
+        {
+            foreach (Renderer r in enemyRenderer)
+            {
+                r.enabled = !r.enabled;
+            }
+            yield return new WaitForSeconds(flashInterval);
+            elapsedTime += flashInterval;
+        }
 
+        foreach (Renderer r in enemyRenderer)
+        {
+            r.enabled = true;
+        }
+        isFlashing = false;
+        if (body == 0)
+        {
+            StartCoroutine(ShowHPBarAndDestroy(UpperHPBar, Lowerbodypart, false));
 
-    //    //上半身の場合
-    //    if (body == 0)
-    //    {
-    //        //オブジェクトを出すローカル座標
-    //        Vector3 effectVec2Upper = new Vector3(
-    //            Random.Range(upperEffectXMin, upperEffectXMax),
-    //            Random.Range(upperEffectYMin, upperEffectYMax));
+        }
+        if (body == 1)
+        {
+            StartCoroutine(ShowHPBarAndDestroy(LowerHPBar, Upperbodypart, true));
 
-    //        //オブジェクトを出す
-    //        Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
-    //        // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
-    //        // Debug.Log("hit effect");
-    //    }
+        }
+    }
 
-    //    if (body == 1)
-    //    {
-    //        //オブジェクトを出すローカル座標
-    //        Vector3 effectVec3Lower = new Vector2(
-    //            Random.Range(lowerEffectXMin, lowerEffectXMax),
-    //            Random.Range(lowerEffectYMin, lowerEffectYMax));
-
-    //        Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
-    //    }
-    //}
-
-
-    private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
+        private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
     {
         if (hpBar != null)
         {
@@ -223,9 +262,12 @@ public class newEnemyParameters : CharacterStats
             yield return new WaitForSeconds(hpBarDestroy); // 継続時間は調整可能
             hpBar.gameObject.SetActive(false);
         }
-        Drop(part, typ);
-        MultiAudio.ins.PlaySEByName("SE_common_breakbody");
-
+        if (!hasDroped)
+        {
+            hasDroped = true;
+            Drop(part, typ);
+            MultiAudio.ins.PlaySEByName("SE_common_breakbody");
+        }
     }
     //ドロップアイテムを生成する関数　
     //BodyPartsData part->生成した後に与えるパラメータデータ
@@ -234,6 +276,7 @@ public class newEnemyParameters : CharacterStats
     public void Drop(BodyPartsData part, bool typ = true)
     {
         GameObject drop = null;
+        Debug.Log(typ);
         if (typ == true)
         {
             //プレハブをインスタンス化
@@ -272,7 +315,29 @@ public class newEnemyParameters : CharacterStats
     {
         if (collision.gameObject.CompareTag("PlayerShoot"))
         {
+            bulletDamage = (float)collision.gameObject.GetComponent<Bullet>().attack;
             TakeDamage(bulletDamage, 0);
+        }
+    }
+
+    // 両部位への攻撃が必要な場合はHPの調整を行なう
+    private void AdjustHpIfNeededAttackingBothParts()
+    {
+        if (needsAttackingBothParts)
+        {
+            // 部位HPが1の時、その部位のHPを削り切ったものとする
+            // 上半身HPが0になった時、かつ下半身HPを削り切っていないとき
+            if (UpperHP <= 0 && LowerHP > 1)
+            {
+                // HPを破壊手前で止める
+                UpperHP = 1;
+            }
+            // 下半身
+            else if (LowerHP <= 0 && UpperHP > 1)
+            {
+                // HPを破壊手前で止める
+                LowerHP = 1;
+            }
         }
     }
 

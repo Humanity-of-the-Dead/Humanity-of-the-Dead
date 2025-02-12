@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
+  m_Name: Boss_Stg04_Lower
+  m_EditorClassIdentifier: 
+  enPartsType: 1
+  upperAttack: 4
+  lowerAttack: 3
+  sPartsName: "\u30DC\u30B9\u306E\u4E0B\u534A\u8EAB"
+  AttackArea: 3.5
+  iPartHp: 30
+  iPartAttack: 2
+  spBody: {fileID: 0}
+  spRightArm: {fileID: 0}
+  spRightHand: {fileID: 0}
+  spLeftArm: {fileID: 0}
+  spLeftHand: {fileID: 0}
+  spWaist: {fileID: 21300000, guid: ad7edeff05e729e458b6dd71d93a5d12, type: 3}
+  spRightLeg: {fileID: 21300000, guid: f8557662008e26f408261fcceb551906, type: 3}
+  spRightFoot: {fileID: 21300000, guid: afc4dd248fe616a46af1859ec67f1a7f, type: 3}
+  spLeftLeg: {fileID: 21300000, guid: 666f7fe1def477a42ada75f473bd4474, type: 3}
+  spLeftFoot: {fileID: 21300000, guid: 79b2f41d96a2b2746820e7ae3cd1954a, type: 3}

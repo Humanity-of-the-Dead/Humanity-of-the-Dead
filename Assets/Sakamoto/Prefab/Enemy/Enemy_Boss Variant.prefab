@@ -53,6 +53,18 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3120854060399778960, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120854060399778960, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120854060399778960, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120854060399778960, guid: cdf94058954888c498d04b05f2685229, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.592111
       objectReference: {fileID: 0}
@@ -137,9 +149,41 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6025226992257383609, guid: cdf94058954888c498d04b05f2685229, type: 3}
-      propertyPath: attackIdleData
+      propertyPath: hitGameObject
       value: 
-      objectReference: {fileID: 11400000, guid: 0df453d8a05d7d4429c799d2c2a7b0ef, type: 2}
+      objectReference: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
+    - target: {fileID: 6025226992257383609, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: lowerEffectXMax
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: lowerEffectXMin
+      value: -0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: lowerEffectYMax
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: lowerEffectYMin
+      value: -2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: upperEffectXMax
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: upperEffectXMin
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: upperEffectYMax
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: cdf94058954888c498d04b05f2685229, type: 3}
+      propertyPath: upperEffectYMin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6042060343829840776, guid: cdf94058954888c498d04b05f2685229, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -264,6 +308,7 @@ MonoBehaviour:
   waitTime: 1
   upperPart: {fileID: 11400000, guid: 52c75d8f30fdb5840bc98bdc62f54324, type: 2}
   lowerPart: {fileID: 11400000, guid: 9be24730dcd468c4593ce730030bff5f, type: 2}
+  player: {fileID: 0}
   bossMinX: -8
   bossMaxX: 8
 --- !u!114 &6868419856064601450
@@ -278,15 +323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fca371783d21544a6bd076acd24c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitGameObject: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
-  upperEffectXMin: 0.47
-  upperEffectXMax: 0.28
-  upperEffectYMin: 1
-  upperEffectYMax: 2.5
-  lowerEffectXMin: -0.33
-  lowerEffectXMax: 0.21
-  lowerEffectYMin: 2.8
-  lowerEffectYMax: -1
   UpperHP: 10
   LowerHP: 10
   Upperbodypart: {fileID: 11400000, guid: 52c75d8f30fdb5840bc98bdc62f54324, type: 2}
@@ -295,12 +331,15 @@ MonoBehaviour:
   preLowerPart: {fileID: 1386206347217571068, guid: 48a944faabba3dc4b9d759dd674bf257, type: 3}
   playerControl: {fileID: 0}
   Boss: 0
+  needsAttackingBothParts: 0
   bulletDamage: 0
   UpperHPBar: {fileID: 1149842560076473825}
   LowerHPBar: {fileID: 2054628116608864072}
   HPBarContainer: {fileID: 3650718983251325481}
   displayRange: 5
   hpBarDestroy: 0.3
+  flashDuration: 0.25
+  flashInterval: 0.05
 --- !u!1 &3650718983251325481 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 772803039431139584, guid: cdf94058954888c498d04b05f2685229, type: 3}

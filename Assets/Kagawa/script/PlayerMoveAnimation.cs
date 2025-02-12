@@ -37,7 +37,10 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     //アニメーションの間隔はアニメーションスクリプト内で完結したいのでプライベート化してシリアライズフィールドを付けることで設定できる
     [SerializeField, Header("1コマの間隔の時間")] private float timeMax;
+    [SerializeField, Header("攻撃の1コマの間隔の時間")] private float attackTimeMax;
+    [SerializeField, Header("攻撃終了後の硬直時間")] private float afterAttackFreezeTime;
     [SerializeField] private AnimationDataSet animationDataSet;
+    private bool hasDefeatedBoss = false;
     private UpperAttack upperAttack;
 
     private LowerAttack downAttack;
@@ -46,7 +49,8 @@ public class PlayerMoveAnimation : MonoBehaviour
     private int walkIndex = 0;
     [SerializeField, Header("エフェクト関連")]
     [Tooltip("エフェクトのプレハブを代入")]
-    public GameObject hitGameObject;
+    private GameObject hitGameObject;
+    private GameObject hitGameObjectInstantiated;
     [Tooltip("エフェクトが上半身に出る範囲（X座標),最大と最小")]
 
     public float upperEffectXMin, upperEffectXMax;
@@ -60,6 +64,10 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     public float lowerEffectYMin, lowerEffectYMax;
 
+
+    [SerializeField, Header("ボスエフェクトが出る間隔")] public float bossEffectInterval;
+
+    [SerializeField, Header("エフェクトが出る回数")] private int effectBurstCount;
 
     //攻撃の配列の番号
     private int attackNumber = 0;
@@ -100,11 +108,9 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     private void Start()
     {
-
         walkIndex = 0;
         attackNumber = 0;
         shaft = 0;
-
         isAttack = false;
         isActive = false;
         isWalk = false;
@@ -113,63 +119,107 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeAttack = 0;
     }
 
+    public void StartBossEffect(Vector3 enemyVector3)
+    {
+        StartCoroutine(ShowHitEffectsBoss(enemyVector3));
+    }
+
+    public void SetTimeMax(float time)
+    {
+        timeMax = time;
+    }
+
     // 右を向いているか
     public bool isFacingToRight()
     {
         return shaft == SHAFT_DIRECTION_RIGHT;
     }
 
-    public void HandleWalk(int direction)
+    public void HandleWalk(int direction, bool walksLikeZombie = false)
     {
         shaft = direction;
 
         if (isStop)
         {
-            WalkInstance();
+            WalkInit(walksLikeZombie);
         }
         if (!isWalk)
         {
             isWalk = true;
             ChangeArmAnime();
-            KeepWalk();
+            KeepWalk(walksLikeZombie);
         }
         else if (isWalk && !isAttack)
         {
-            PlayerWalk();
+            PlayerWalk(walksLikeZombie);
         }
     }
 
-    public void ShowHitEffects(int body)
+    public   IEnumerator ShowHitEffectsBoss( Vector3 enemyVector3 )
     {
-        PlayerControl playerControl = GetComponent<PlayerControl>();
-        //このオブジェクトの座標
-        for (int i = 0; i < playerControl.enemyObject.Count; i++)
+        int body = Random.Range(0, 2);
+        if (hasDefeatedBoss)
         {
-            Vector3 enemyVector3 = new Vector3(playerControl.enemyObject[i].transform.position.x, playerControl.enemyObject[i].transform.position.y);
-            //上半身の場合
-            if (body == 0)
-            {
-                //オブジェクトを出すローカル座標
-                Vector3 effectVec2Upper = new Vector3(
-                    Random.Range(upperEffectXMin, upperEffectXMax),
-                    Random.Range(upperEffectYMin, upperEffectYMax));
+           yield break;
+        }
 
-                //オブジェクトを出す
-                Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
-                // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
-                // Debug.Log("hit effect");
-            }
-            if (body == 1)
-            {
-                //オブジェクトを出すローカル座標
-                Vector3 effectVec3Lower = new Vector2(
-                    Random.Range(lowerEffectXMin, lowerEffectXMax),
-                    Random.Range(lowerEffectYMin, lowerEffectYMax));
+        for (int i = 1; i <= effectBurstCount; i++)
+        {
+            Debug.Log("ボスエフェクト開始");
 
-                Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
-            }
+            ShowHitEffects(body, enemyVector3);
+            Debug.Log($"effectCountは {i}");
+            MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+            yield return new WaitForSeconds(bossEffectInterval);
+
+            hasDefeatedBoss=true;
+        }
+
+        Debug.Log("ボスエフェクトコルーチン関数呼び出し終了");
+
+
+    }
+    public void ShowHitEffects(int body, Vector3 enemyVector3)
+    {
+        if (hitGameObjectInstantiated != null)
+        {
+            Destroy(hitGameObjectInstantiated);
+        }
+
+        //上半身の場合
+        if (body == 0)
+        {
+
+            //オブジェクトを出すローカル座標
+            Vector3 effectVec2Upper = new Vector3(
+                Random.Range(upperEffectXMin, upperEffectXMax),
+                Random.Range(upperEffectYMin, upperEffectYMax));
+            hitGameObjectInstantiated = Instantiate(hitGameObject, effectVec2Upper + enemyVector3, Quaternion.identity);
+
+
+
+
+
+
+            //オブジェクトを出す
+            // Debug.Log("effectVec2+thisVec2="+effectVec2+tihsVec2)
+            // Debug.Log("hit effect");
+        }
+        if (body == 1)
+        {
+
+            //オブジェクトを出すローカル座標
+            Vector3 effectVec3Lower = new Vector3(
+                Random.Range(lowerEffectXMin, lowerEffectXMax),
+                Random.Range(lowerEffectYMin, lowerEffectYMax));
+            hitGameObjectInstantiated = Instantiate(hitGameObject, effectVec3Lower + enemyVector3, Quaternion.identity);
+
+
+
 
         }
+
+
 
 
 
@@ -237,54 +287,10 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くアニメーション
     /// </summary>
-    private void PlayerWalk()
+    private void PlayerWalk(bool walksLikeZombie = false)
     {
-
-        // Quaternion.Euler: 回転軸( x, y, z)
-        playerRc.transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.walk.wholeRotation[walkIndex]);
-
-        // 腕のアニメーション
-        if (arm == null || animationDataSet.walk.armForwardRotation == null)
-        {
-            Debug.LogWarning("Armのデータが何かしら抜けてる");
-            return;
-        }
-        else
-        {
-            arm[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.walk.armForwardRotation[walkIndex]);
-            arm[1].transform.rotation = Quaternion.Euler(0, shaft, -animationDataSet.walk.armForwardRotation[walkIndex]);
-        }
-
-        // 足のアニメーション
-        if (leg == null || animationDataSet.walk.legForwardRotation == null || animationDataSet.walk.legBackRotation == null)
-        {
-            Debug.LogWarning("Legのデータが何かしら抜けてる");
-            return;
-        }
-        else if (foot == null || animationDataSet.walk.footForwardRotation == null || animationDataSet.walk.footBackRotation == null)
-        {
-            Debug.LogWarning("Footのデータが何かしら抜けてる");
-            return;
-        }
-        else
-        {
-            // 歩き始めの場合
-            if (!isActive)
-            {
-                leg[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.walk.legBackRotation[walkIndex]);
-                leg[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.walk.legForwardRotation[walkIndex]);
-                foot[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.walk.footBackRotation[walkIndex]);
-                foot[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.walk.footForwardRotation[walkIndex]);
-            }
-            //歩き続けている場合
-            if (isActive)
-            {
-                leg[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.walk.legForwardRotation[walkIndex]);
-                leg[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.walk.legBackRotation[walkIndex]);
-                foot[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.walk.footForwardRotation[walkIndex]);
-                foot[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.walk.footBackRotation[walkIndex]);
-            }
-        }
+        AnimationData walkAnimation = walksLikeZombie ? animationDataSet.zombieWalk : animationDataSet.walk;
+        WalkPoseByIndex(walkAnimation, walkIndex, walksLikeZombie);
     }
 
     /// <summary>
@@ -600,18 +606,115 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-    private IEnumerator CallWalkWithDelay()
+    // 待機ポーズ
+    private void PoseWaiting()
+    {
+        // 歩行モーションの最後のポーズを待機ポーズ扱いする
+        AnimationData animation = animationDataSet.walk;
+        int index = animation.armForwardRotation.Length - 1;
+        WalkPoseByIndex(animation, index);
+    }
+
+    private void WalkPoseByIndex(AnimationData animation, int index, bool walksLikeZombie = false)
+    {
+        if (!ValidateAnimationData(animation, index))
+        {
+            return;
+        }
+
+        // 胴体
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, animation.wholeRotation[index]);
+
+        // 腕
+        // ChangeArmAnime()にてisActiveを使用して左右の動きをスイッチしているので注意
+        if (walksLikeZombie)
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+            hand[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+            hand[1].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+        }
+        else
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, -animation.armForwardRotation[index]);
+            hand[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
+            hand[1].transform.rotation = Quaternion.Euler(0, shaft, -animation.armForwardRotation[index]);
+        }
+
+        // 脚
+        if (isActive)
+        {
+            leg[0].transform.rotation = Quaternion.Euler(0, shaft, animation.legBackRotation[index]);
+            leg[1].transform.rotation = Quaternion.Euler(0, shaft, animation.legForwardRotation[index]);
+            foot[0].transform.rotation = Quaternion.Euler(0, shaft, animation.footBackRotation[index]);
+            foot[1].transform.rotation = Quaternion.Euler(0, shaft, animation.footForwardRotation[index]);
+        }
+        else
+        {
+            leg[0].transform.rotation = Quaternion.Euler(0, shaft, animation.legForwardRotation[index]);
+            leg[1].transform.rotation = Quaternion.Euler(0, shaft, animation.legBackRotation[index]);
+            foot[0].transform.rotation = Quaternion.Euler(0, shaft, animation.footForwardRotation[index]);
+            foot[1].transform.rotation = Quaternion.Euler(0, shaft, animation.footBackRotation[index]);
+        }
+    }
+
+    // アニメーションデータのバリデーション(問題が無ければ真)
+    public bool ValidateAnimationData(AnimationData animation, int index)
+    {
+        if (!animation)
+        {
+            Debug.LogWarning("ValidateAnimationIndex: animation is null");
+            return false;
+        }
+
+        float[][] rotationsArray = AnimationDataToRotationsArray(animation);
+
+        if (rotationsArray.Contains(null))
+        {
+            Debug.LogWarning("ValidateAnimationIndex: Rotation data is null");
+            return false;
+        }
+
+        int[] lengthArray = rotationsArray.Select(x => x.Length).ToArray();
+        if (lengthArray.Min() <= index)
+        {
+            Debug.LogWarning("ValidateAnimationIndex: Index was outside the bounds of the array");
+            return false;
+        }
+
+        return true;
+    }
+
+    private float[][] AnimationDataToRotationsArray(AnimationData ad)
+    {
+        float[][] rotationsArray = {
+            ad.wholeRotation,
+            ad.armForwardRotation,
+            ad.armBackRotation,
+            ad.handForwardRotation,
+            ad.handBackRotation,
+            ad.legForwardRotation,
+            ad.legBackRotation,
+            ad.footForwardRotation,
+            ad.footBackRotation
+        };
+
+        return rotationsArray;
+    }
+
+    private IEnumerator CallWalkWithDelay(bool walksLikeZombie = false)
     {
         isWalk = true;
 
-        for (int i = 0; i < animationDataSet.walk.armForwardRotation.Length; i++)
+        AnimationData walkAnimation = walksLikeZombie ? animationDataSet.zombieWalk : animationDataSet.walk;
+        for (int i = 0; i < walkAnimation.armForwardRotation.Length; i++)
         {
             if (!isAttack)
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 walkIndex = i;
-                PlayerWalk();
-
+                PlayerWalk(walksLikeZombie);
                 yield return new WaitForSeconds(timeMax);
             }
         }
@@ -623,18 +726,25 @@ public class PlayerMoveAnimation : MonoBehaviour
     private IEnumerator CallPantieWithDelay()
     {
         yield return StartCoroutine(CallAttackIdleWithDelay());
-
-
-        for (int i = 0; i < animationDataSet.playerUpper.armForwardRotation.Length - 1; i++)
+        int animationLength = animationDataSet.playerUpper.armForwardRotation.Length;
+        for (int i = 0; i < animationLength; i++)
         {
             PlayerPantie();
 
-
-            // indexNumberの値を増やす(配列番号を上げる)
-            attackNumber = (attackNumber + 1) % animationDataSet.playerUpper.armForwardRotation.Length;
-            yield return new WaitForSeconds(timeMax);
+            if (i < animationLength - 1)
+            {
+                // indexNumberの値を増やす(配列番号を上げる)
+                attackNumber++;
+                yield return new WaitForSeconds(attackTimeMax);
+            }
+            else
+            {
+                yield return new WaitForSeconds(attackTimeMax + afterAttackFreezeTime);
+            }
         }
 
+        // 攻撃が終わったら
+        PoseWaiting();
         timeWalk = 0;
         isAttack = false;
         isWalk = false;
@@ -647,16 +757,25 @@ public class PlayerMoveAnimation : MonoBehaviour
     private IEnumerator CallKickWithDelay()
     {
         yield return StartCoroutine(CallAttackIdleWithDelay());
-
-        for (int i = 0; i < animationDataSet.playerLower.armForwardRotation.Length - 1; i++)
+        int animationLength = animationDataSet.playerUpper.armForwardRotation.Length;
+        for (int i = 0; i < animationLength; i++)
         {
             PlayerKick();
 
-            // indexNumberの値を増やす(配列番号を上げる)
-            attackNumber = (attackNumber + 1) % animationDataSet.playerLower.armForwardRotation.Length;
-            yield return new WaitForSeconds(timeMax);
+            if (i < animationLength - 1)
+            {
+                // indexNumberの値を増やす(配列番号を上げる)
+                attackNumber++;
+                yield return new WaitForSeconds(attackTimeMax);
+            }
+            else
+            {
+                yield return new WaitForSeconds(attackTimeMax + afterAttackFreezeTime);
+            }
         }
 
+        // 攻撃が終わったら
+        PoseWaiting();
         timeWalk = 0;
         isWalk = false;
         isStop = true;
@@ -683,11 +802,19 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// <summary>
     /// 歩くことを開始の関数
     /// </summary>
-    private void WalkStart()
+    private void WalkStart(bool walksLikeZombie = false)
     {
-        timeWalk = timeMax * animationDataSet.playerUpper.armForwardRotation.Length;
-        StartCoroutine(CallWalkWithDelay());
-        MultiAudio.ins.PlaySEByName("SE_hero_action_run");
+        AnimationData walkAnimation = walksLikeZombie ? animationDataSet.zombieWalk : animationDataSet.walk;
+        timeWalk = timeMax * walkAnimation.armForwardRotation.Length;
+        if (walksLikeZombie)
+        {
+            StartCoroutine(CallWalkWithDelay(true));
+        }
+        else
+        {
+            StartCoroutine(CallWalkWithDelay());
+            MultiAudio.ins.PlaySEByName("SE_hero_action_run");
+        }
     }
 
     /// <summary>
@@ -695,8 +822,9 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     public void PantieStart()
     {
-        AttackWait();
+        AttackInit();
         StartCoroutine(CallPantieWithDelay());
+        Debug.Log("PantieStart: test03");
     }
 
     /// <summary>
@@ -704,14 +832,14 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     public void KickStart()
     {
-        AttackWait();
+        AttackInit();
         StartCoroutine(CallKickWithDelay());
     }
 
     /// <summary>
     /// 歩くことの初期化
     /// </summary>
-    private void WalkInstance()
+    private void WalkInit(bool walksLikeZombie = false)
     {
         if (timeWalk < 0)
         {
@@ -719,14 +847,14 @@ public class PlayerMoveAnimation : MonoBehaviour
             attackNumber = 0;
             isActive = false;
             isStop = false;
-            WalkStart();
+            WalkStart(walksLikeZombie);
         }
     }
 
     /// <summary>
     /// 歩くことを継続したとき
     /// </summary>
-    private void KeepWalk()
+    private void KeepWalk(bool walksLikeZombie = false)
     {
         // 連続入力されているか
         #region 山品変更
@@ -738,22 +866,22 @@ public class PlayerMoveAnimation : MonoBehaviour
             walkIndex = 0;
             attackNumber = 0;
             ChangeArmAnime();
-            WalkStart();
+            WalkStart(walksLikeZombie);
         }
     }
 
     /// <summary>
     /// 攻撃の初期化
     /// </summary>
-    private void AttackWait()
+    private void AttackInit()
     {
         timeWalk = timeMax * (animationDataSet.playerUpper.armForwardRotation.Length - 1);
-        timeAttack = timeMax * (animationDataSet.playerLower.armForwardRotation.Length - 1);
+        timeAttack = attackTimeMax * (animationDataSet.playerLower.armForwardRotation.Length - 1);
         isAttack = true;
         isWalk = false;
         StopCoroutine(CallWalkWithDelay());
         walkIndex = 0;
-        attackNumber = 1;
+        attackNumber = 0;
     }
 
 
@@ -788,6 +916,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     private class AnimationDataSet
     {
         [SerializeField, Header("---歩きのアニメーション---")] public AnimationData walk;
+        [SerializeField, Header("---ゾンビ歩きのアニメーション---")] public AnimationData zombieWalk;
 
         [SerializeField, Header("---デフォルトパンチのアニメーション---")] public AnimationData playerUpper;
 
@@ -805,8 +934,6 @@ public class PlayerMoveAnimation : MonoBehaviour
 
         [SerializeField, Header("---ボスキックのアニメーション---")] public AnimationData bossLower;
         [SerializeField, Header("---攻撃待機アニメーション---")] public AnimationData attackIdle;//まだ制作完了していないのでコメントアウト化
-
-
 
 
     }

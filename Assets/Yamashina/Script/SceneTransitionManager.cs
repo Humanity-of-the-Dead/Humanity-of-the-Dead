@@ -166,6 +166,7 @@ public class SceneTransitionManager : MonoBehaviour
         isReloading = true; // シーン変更中に設定
 
         Debug.Log($"SceneChange called: newScene = {scene}, currentScene = {sceneInformation.currentScene}");
+        InitMainGameIfTitleToStgOne(sceneInformation.currentScene, scene);
 
         // 先に `UpdateScene` を呼び出して `previousScene` を適切に設定
         sceneInformation.UpdateScene(scene);
@@ -174,11 +175,23 @@ public class SceneTransitionManager : MonoBehaviour
 
     }
 
+    private void InitMainGameIfTitleToStgOne(SceneInformation.SCENE currentScene, SceneInformation.SCENE newScene)
+    {
+        if (currentScene == SceneInformation.SCENE.Title && newScene == SceneInformation.SCENE.StageOne)
+        {
+            PlayerParameter.Instance?.InitBodyIndex();
+        }
+    }
+
     //ボタンでシーン遷移する場合
     public void NextSceneButton(int index)
     {
-        SceneChange((SceneInformation.SCENE)index);
+        GoToNextScene(index);
+    }
 
+    public void GoToNextScene(int index)
+    {
+        SceneChange((SceneInformation.SCENE)index);
     }
 
 
@@ -198,7 +211,7 @@ public class SceneTransitionManager : MonoBehaviour
         // 徐々に透明にする処理
         while (fadeInstance.color.a > 0)
         {
-            fadeColor.a -= Time.deltaTime * speed; // アルファ値を減少
+            fadeColor.a -= Time.unscaledDeltaTime * speed; // アルファ値を減少
             fadeInstance.color = fadeColor; // 更新
             yield return null;
         }
@@ -216,6 +229,10 @@ public class SceneTransitionManager : MonoBehaviour
     // <returns></returns>
     private IEnumerator FadeOut(string stageName)
     {
+        if(fadeInstance == null)
+        {
+            Debug.LogError("fadeInstance=null");
+        }
         fadeInstance.gameObject.SetActive(true);
         Color fadeColor = fadeInstance.color; // 一時変数を使用
         fadeColor.a = 0; // 最初は完全に透明
@@ -225,7 +242,7 @@ public class SceneTransitionManager : MonoBehaviour
         // 徐々に不透明にする処理
         while (fadeInstance.color.a < 1)
         {
-            fadeColor.a += Time.deltaTime * speed; // アルファ値を増加
+            fadeColor.a += Time.unscaledDeltaTime * speed; // アルファ値を増加
             fadeInstance.color = fadeColor; // 更新
             yield return null;
         }

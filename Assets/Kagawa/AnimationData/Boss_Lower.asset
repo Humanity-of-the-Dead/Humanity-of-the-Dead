@@ -13,38 +13,20 @@ MonoBehaviour:
   m_Name: Boss_Lower
   m_EditorClassIdentifier: 
   wholeRotation:
-  - 0
   - 5
-  - 0
   armForwardRotation:
-  - 0
   - 5
-  - 0
   armBackRotation:
-  - 0
   - 5
-  - 0
   handForwardRotation:
-  - 0
   - 140
-  - 0
   handBackRotation:
-  - 0
   - 140
-  - 0
   legForwardRotation:
-  - 0
   - -10
-  - 0
   footForwardRotation:
-  - 0
   - -15
-  - 0
   legBackRotation:
-  - 0
   - 90
-  - 0
   footBackRotation:
-  - 0
   - 70
-  - 0

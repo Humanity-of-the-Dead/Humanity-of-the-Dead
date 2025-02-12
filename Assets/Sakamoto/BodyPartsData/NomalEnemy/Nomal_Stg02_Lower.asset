@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d652b26c26a3a48bb05972b5385af3, type: 3}
+  m_Name: Nomal_Stg02_Lower
+  m_EditorClassIdentifier: 
+  enPartsType: 1
+  upperAttack: 4
+  lowerAttack: 0
+  sPartsName: "\u30AD\u30CE\u30B3\u306E\u4E0B\u534A\u8EAB"
+  AttackArea: 2.5
+  iPartHp: 25
+  iPartAttack: 3
+  spBody: {fileID: 0}
+  spRightArm: {fileID: 0}
+  spRightHand: {fileID: 0}
+  spLeftArm: {fileID: 0}
+  spLeftHand: {fileID: 0}
+  spWaist: {fileID: 21300000, guid: 2abc0f7a139687e40bb174a86df9cc81, type: 3}
+  spRightLeg: {fileID: 21300000, guid: c4eeacd6d421810408fb7a330893e926, type: 3}
+  spRightFoot: {fileID: 21300000, guid: ee775bd217aee414f8bf694add737fc5, type: 3}
+  spLeftLeg: {fileID: 21300000, guid: 939d9883904d1dd47a5e55ed999a01df, type: 3}
+  spLeftFoot: {fileID: 21300000, guid: 4f06518881e11864e95dc2566e01d6b8, type: 3}

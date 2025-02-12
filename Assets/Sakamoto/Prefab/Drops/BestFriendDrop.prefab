@@ -125,7 +125,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 18.93, y: 18.92}
+    oldSize: {x: 18.931446, y: 24.4}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -175,8 +175,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   humanityRecoveryAmount: 10
   goButton:
+  - {fileID: 2182874680941712295}
   - {fileID: 6055618513447132620}
   goGrave: {fileID: 2839263780191614865, guid: fd771b76aae9c0641833c8c5eff54c82, type: 3}
+  isFriendBothParts: 1
 --- !u!1 &1919319660750788736
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,7 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goButton:
-  - {fileID: 2182874680941712295}
+  - {fileID: 6055618513447132620}
 --- !u!1 &6055618513447132620
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +657,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12.702, y: 8.03}
+  m_AnchoredPosition: {x: 9.34, y: 8.03}
   m_SizeDelta: {x: 3.614, y: 1.691}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3768222486081512666

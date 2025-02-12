@@ -19,10 +19,10 @@ public class newEnemyMovement : MonoBehaviour
     [SerializeField] private float waitTime = 1f;
 
     [Header("エネミーの基本設定")]
-    [Tooltip("各キャラクターが持っている上半身パーツ")]
+    [Tooltip("上半身パーツの攻撃力と攻撃範囲を反映")]
 
     [SerializeField] private BodyPartsData upperPart;
-    [Tooltip("各キャラクターが持っている下半身パーツ")]
+    [Tooltip("下半身パーツの攻撃力と攻撃範囲を反映")]
 
     [SerializeField] private BodyPartsData lowerPart;
     private Gun gun;
@@ -30,15 +30,13 @@ public class newEnemyMovement : MonoBehaviour
     private newEnemyParameters newEnemyParameters;
     private EnemyMoveAnimation enemyMoveAnimation;
 
-    private float pointA, pointB;//開始位置と終了位置
-
-
-    private enum EnemyState { Search, Walk, Attack, Wait }
+    private enum EnemyState { Search, Walk, Attack, Wait, IsDead }
 
     private EnemyState enemyState = EnemyState.Search;
 
-    private bool movingToPointB = false; // 進行方向
-    private PlayerControl player; // プレイヤーの位置
+    private float pointA, pointB;   // 開始位置と終了位置(A: 移動可能範囲の右端/ B: 左端)
+    private bool isMovingToPointB = true; // 進行方向
+    public PlayerControl player; // プレイヤーの位置
     private float timer;//攻撃後の時間
     [Tooltip("ボスの移動可能な最小X座標")]
     [SerializeField] private float bossMinX = -8f;
@@ -46,9 +44,15 @@ public class newEnemyMovement : MonoBehaviour
     [SerializeField] private float bossMaxX = 8f;
     void Start()
     {
+
         // プレイヤーを探すやつ
-        player = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
+        player = FindFirstObjectByType<PlayerControl>();
+
+
+
+
         enemyMoveAnimation = GetComponent<EnemyMoveAnimation>();
+
         pointA = transform.position.x + moveDistance;
         pointB = transform.position.x - moveDistance;
         newEnemyParameters = GetComponent<newEnemyParameters>();
@@ -56,7 +60,7 @@ public class newEnemyMovement : MonoBehaviour
         {
             gun = GetComponent<Gun>();
         }
-       
+
     }
 
     void Update()
@@ -79,7 +83,7 @@ public class newEnemyMovement : MonoBehaviour
                         else
                         {
                             // いつもの挙動
-                            float Target = movingToPointB ? pointB : pointA;
+                            float Target = isMovingToPointB ? pointB : pointA;
                             Vector3 target = new Vector3(Target, transform.position.y, transform.position.z);
                             // ボスの場合、移動範囲を制限
                             if (newEnemyParameters.Boss)
@@ -92,25 +96,26 @@ public class newEnemyMovement : MonoBehaviour
                             if (transform.position == target)
                             {
                                 // 到達したら回れ右
-                                if (movingToPointB == true) enemyMoveAnimation.RightMove();
-                                else enemyMoveAnimation.LeftMove();
-                                movingToPointB = !movingToPointB;
+                                if (isMovingToPointB == true) enemyMoveAnimation.TurnToRight();
+                                else enemyMoveAnimation.TurnToLeft();
+                                isMovingToPointB = !isMovingToPointB;
                             }
                         }
                         break;
                     case EnemyState.Walk:
                         // プレイヤーを追跡
+                        enemyMoveAnimation.WalkInstance();
                         MoveTowards(player.transform.position, chaseSpeed);
-                        if (PlayerPositionFromEnemy() != movingToPointB)
+                        if (IsLeftFromPlayer() != isMovingToPointB)
                         {
-                            if (movingToPointB == true) enemyMoveAnimation.RightMove();
-                            else enemyMoveAnimation.LeftMove();
-                            movingToPointB = !movingToPointB;
+                            if (isMovingToPointB == true) enemyMoveAnimation.TurnToRight();
+                            else enemyMoveAnimation.TurnToLeft();
+                            isMovingToPointB = !isMovingToPointB;
 
                         }
                         // プレイヤーが攻撃範囲内に入っているかどうか判断
                         if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea)
-                            && PlayerPositionFromEnemy() == movingToPointB)
+                            && IsLeftFromPlayer() == isMovingToPointB)
                         {
                             enemyState = EnemyState.Wait;
                         }
@@ -120,7 +125,7 @@ public class newEnemyMovement : MonoBehaviour
                         if (timer > waitTime)
                         {
                             timer = 0;
-                            if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && PlayerPositionFromEnemy() == movingToPointB)
+                            if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && IsLeftFromPlayer() == isMovingToPointB)
                             {
                                 enemyState = EnemyState.Attack;
                             }
@@ -133,131 +138,51 @@ public class newEnemyMovement : MonoBehaviour
                         timer += Time.deltaTime;
                         break;
                     case EnemyState.Attack:
-                        if (distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea &&
-                            PlayerPositionFromEnemy() == movingToPointB)
+                        if (IsLeftFromPlayer() != isMovingToPointB)
                         {
-                            //乱数を取得する
+                            // エネミーがプレイヤーを向いていなければ攻撃中止(何もしない)
+                        }
+                        else if (distanceToPlayer > upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
+                        {
+                            // 両半身とも攻撃範囲外なら攻撃中止
+                        }
+                        else if (distanceToPlayer <= upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
+                        {
+                            AttackWithSeUpper();
+
+                        }
+                        else if (distanceToPlayer > upperPart.AttackArea && distanceToPlayer <= lowerPart.AttackArea)
+                        {
+                            AttackWithSeLower();
+
+                        }
+                        else
+                        {
+                            // 両半身とも攻撃範囲内の場合
+                            // 乱数を取得する
                             int num = Random.Range(0, 2);
                             if (num == 0)
                             {
-                                //上半身攻撃
-                                enemyMoveAnimation.PantieStart();
-                                OnUpperAttackAnimationFinished();
-
-                                //攻撃者の上半身を確認
-                                switch (upperPart.sPartsName)
-                                {
-                                    case "警察の上半身":
-                                        Vector2 ShootMoveVector = (player.transform.position - enemyMoveAnimation.playerRc.transform.position).normalized;
-                                        float enemyRotationY = enemyMoveAnimation.playerRc.transform.eulerAngles.y;
-                                        Debug.Log(enemyRotationY);
-                                        if (enemyRotationY == 180)
-                                        {
-                                            // 左向きの場合、方向ベクトルのxを反転
-                                            ShootMoveVector.x = -Mathf.Abs(ShootMoveVector.x);
-                                        }
-                                        else
-                                        {
-                                            // 右向きの場合、方向ベクトルのxはそのまま
-                                            ShootMoveVector.x = Mathf.Abs(ShootMoveVector.x);
-                                        }
-
-                                        // 銃を使って弾を発射
-                                        gun.Shoot(ShootMoveVector, transform);
-                                        //警察官の上半身で攻撃するSEを鳴らす
-                                        MultiAudio.ins.PlaySEByName(
-                                            "SE_policeofficer_attack_upper");
-
-                                        Debug.Log("警官が上半身で攻撃");
-
-                                        break;
-
-                                    case "ボスの上半身":
-                                        //ラスボス上半身の攻撃音のSEを鳴らす
-                                        MultiAudio.ins.PlaySEByName(
-                                            "SE_lastboss_attack_upper");
-
-                                        Debug.Log("ボスが上半身で攻撃");
-
-                                        break;
-
-                                    case "雑魚敵の上半身":
-                                        //主人公上半身の攻撃音のSEを鳴らす
-                                        MultiAudio.ins.PlaySEByName(
-                                            "SE_hero_attack_upper");
-
-                                        Debug.Log("雑魚敵が上半身で攻撃");
-
-                                        break;
-
-                                    case "看護師の上半身":
-                                        //ナース上半身の攻撃音のSEを鳴らす
-                                        MultiAudio.ins.PlaySEByName(
-                                            "SE_nurse_attack_upper");
-
-                                        Debug.Log("看護師が上半身で攻撃");
-
-                                        break;
-                                }
-
-                                //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+                                AttackWithSeUpper();
                             }
-                            if (num == 1)
+                            else
                             {
-                                //下半身攻撃
-                                enemyMoveAnimation.KickStart();
-                                OnLowerAttackAnimationFinished();
-                                //攻撃者の下半身を確認
-                                switch (lowerPart.sPartsName)
-                                {
-                                    case "警察の下半身":
-                                        //警察官下半身の攻撃音のSEをならす
-                                        MultiAudio.ins.PlaySEByName(
-                                            "SE_policeofficer_attack_lower");
-
-                                        Debug.Log("警官が下半身で攻撃");
-                                        break;
-
-                                    case "ボスの下半身":
-                                        //ラスボス下半身の攻撃音のSEを鳴らす
-                                        MultiAudio.ins.PlaySEByName(
-                                            "SE_lastboss_attack_lower");
-
-                                        Debug.Log("ボスが下半身で攻撃");
-
-                                        break;
-
-                                    case "雑魚敵の下半身":
-                                        //主人公下半身の攻撃音のSEを鳴らす
-                                        MultiAudio.ins.PlaySEByName(
-                                            "SE_hero_attack_lower");
-
-                                        Debug.Log("雑魚が下半身で攻撃");
-                                        break;
-
-                                    case "看護師の下半身":
-                                        //ナース下半身の攻撃音のSEを鳴らす
-                                        MultiAudio.ins.PlaySEByName(
-                                            "SE_nurse_attack_lower");
-
-                                        Debug.Log("看護師が下半身で攻撃");
-
-                                        break;
-                                }
-
+                                AttackWithSeLower();
                             }
                         }
 
                         enemyState = EnemyState.Search;
                         //moveAnimation.PlayerPantie();
                         break;
-
+                    case EnemyState.IsDead:
+                        break;
                 }
 
 
 
                 break;
             case GameState.ShowText:
+            case GameState.Hint:
                 break;
 
 
@@ -281,20 +206,20 @@ public class newEnemyMovement : MonoBehaviour
             //Debug.Log($"Collided with: {collision.gameObject.name}, Tag: {collision.gameObject.tag}");
 
             //Debug.Log("敵同士が衝突し、回れ右");
-            if (movingToPointB)
+            if (isMovingToPointB)
             {
-                enemyMoveAnimation?.RightMove();
+                enemyMoveAnimation?.TurnToRight();
             }
             else
             {
-                enemyMoveAnimation?.LeftMove();
+                enemyMoveAnimation?.TurnToLeft();
             }
-            movingToPointB = !movingToPointB;
+            isMovingToPointB = !isMovingToPointB;
         }
     }
 
-    //PlayerPositionFromEnemy右向いてたら＋、左向いてたらー
-    bool PlayerPositionFromEnemy()
+    // 
+    bool IsLeftFromPlayer()
     {
         float Direction = player.transform.position.x - gameObject.transform.position.x;
         if (Direction < 0)
@@ -306,11 +231,11 @@ public class newEnemyMovement : MonoBehaviour
             return false;
         }
     }
-   
+
     private void OnUpperAttackAnimationFinished()
     {
         // 上半身攻撃判定
-        UpperEnemyAttack((float)lowerPart.iPartAttack);
+        UpperEnemyAttack((float)upperPart.iPartAttack);
 
     }
 
@@ -333,6 +258,123 @@ public class newEnemyMovement : MonoBehaviour
         damageable?.TakeDamage(lowerDamage, 1);
         //Debug.Log("下半身攻撃ダメージ判断");
 
+    }
+
+    // 上半身での攻撃とSE判定
+    private void AttackWithSeUpper()
+    {
+        Debug.Log("AttackWithSeUpper");
+        //上半身攻撃
+        enemyMoveAnimation.PantieStart();
+
+        if (upperPart.sPartsName != "警察の上半身")
+        {
+            OnUpperAttackAnimationFinished();
+        }
+
+        //攻撃者の上半身を確認
+        switch (upperPart.sPartsName)
+        {
+            case "警察の上半身":
+                Vector2 ShootMoveVector = (player.transform.position - enemyMoveAnimation.playerRc.transform.position).normalized;
+                float enemyRotationY = enemyMoveAnimation.playerRc.transform.eulerAngles.y;
+                Debug.Log(enemyRotationY);
+                if (enemyRotationY == 180)
+                {
+                    // 左向きの場合、方向ベクトルのxを反転
+                    ShootMoveVector.x = -Mathf.Abs(ShootMoveVector.x);
+                }
+                else
+                {
+                    // 右向きの場合、方向ベクトルのxはそのまま
+                    ShootMoveVector.x = Mathf.Abs(ShootMoveVector.x);
+                }
+
+                // 銃を使って弾を発射
+                gun.Shoot(ShootMoveVector, transform, upperPart.iPartAttack);
+                //警察官の上半身で攻撃するSEを鳴らす
+                MultiAudio.ins.PlaySEByName(
+                    "SE_policeofficer_attack_upper");
+
+                Debug.Log("警官が上半身で攻撃");
+
+                break;
+
+            case "ボスの上半身":
+                //ラスボス上半身の攻撃音のSEを鳴らす
+                MultiAudio.ins.PlaySEByName(
+                    "SE_lastboss_attack_upper");
+
+                Debug.Log("ボスが上半身で攻撃");
+
+                break;
+
+            case "キノコの上半身":
+                //主人公上半身の攻撃音のSEを鳴らす
+                MultiAudio.ins.PlaySEByName(
+                    "SE_hero_attack_upper");
+
+                Debug.Log("キノコ雑魚が上半身で攻撃");
+
+                break;
+
+            case "看護師の上半身":
+                //ナース上半身の攻撃音のSEを鳴らす
+                MultiAudio.ins.PlaySEByName(
+                    "SE_nurse_attack_upper");
+
+                Debug.Log("看護師が上半身で攻撃");
+
+                break;
+        }
+
+        //MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
+    }
+
+    // 下半身での攻撃とSE判定
+    private void AttackWithSeLower()
+    {
+        Debug.Log("AttackWithSeLower");
+        //下半身攻撃
+        enemyMoveAnimation.KickStart();
+        OnLowerAttackAnimationFinished();
+        //攻撃者の下半身を確認
+        switch (lowerPart.sPartsName)
+        {
+            case "警察の下半身":
+                //警察官下半身の攻撃音のSEをならす
+                MultiAudio.ins.PlaySEByName(
+                    "SE_policeofficer_attack_lower");
+
+                Debug.Log("警官が下半身で攻撃");
+                break;
+
+            case "ボスの下半身":
+                //ラスボス下半身の攻撃音のSEを鳴らす
+                MultiAudio.ins.PlaySEByName(
+                    "SE_lastboss_attack_lower");
+
+                Debug.Log("ボスが下半身で攻撃");
+
+                break;
+
+            case "キノコの下半身":
+                //主人公下半身の攻撃音のSEを鳴らす
+                MultiAudio.ins.PlaySEByName(
+                    "SE_hero_attack_lower");
+
+                Debug.Log("キノコ雑魚が下半身で攻撃");
+                break;
+
+            case "看護師の下半身":
+                //ナース下半身の攻撃音のSEを鳴らす
+                MultiAudio.ins.PlaySEByName(
+                    "SE_nurse_attack_lower");
+
+                Debug.Log("看護師が下半身で攻撃");
+
+                break;
+        }
     }
 }
 // プレイヤーに向かって移動
