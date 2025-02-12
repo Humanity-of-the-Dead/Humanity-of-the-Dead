@@ -467,11 +467,11 @@ public class EnemyMoveAnimation : MonoBehaviour
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 indexNumber++;
-                yield return new WaitForSeconds(indexNumber);
+                yield return new WaitForSeconds(timeAttackMax);
             }
             else
             {
-                yield return new WaitForSeconds(indexNumber + afterAttackFreezeTime);
+                yield return new WaitForSeconds(timeAttackMax + afterAttackFreezeTime);
             }
         }
 
@@ -496,11 +496,11 @@ public class EnemyMoveAnimation : MonoBehaviour
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 indexNumber++;
-                yield return new WaitForSeconds(indexNumber);
+                yield return new WaitForSeconds(timeAttackMax);
             }
             else
             {
-                yield return new WaitForSeconds(indexNumber + afterAttackFreezeTime);
+                yield return new WaitForSeconds(timeAttackMax + afterAttackFreezeTime);
             }
         }
 
