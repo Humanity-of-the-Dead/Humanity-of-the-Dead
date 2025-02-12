@@ -82,7 +82,7 @@ public class newEnemyParameters : CharacterStats
 
     private bool isFlashing = false;
 
-    private bool hasDroped = false;
+    protected bool hasDroped = false;
 
     private bool hasBossEffect=false;
     //public bool isDropInstantiated = false;
@@ -222,7 +222,7 @@ public class newEnemyParameters : CharacterStats
         }
     }
 
-    private IEnumerator FlashObject(int body = 0)
+    protected virtual IEnumerator FlashObject(int body = 0)
     {
         isFlashing = true;
         float elapsedTime = 0;

@@ -1397,8 +1397,8 @@ MonoBehaviour:
   LowerHP: 1
   Upperbodypart: {fileID: 11400000, guid: 1f44a247b0640614c8806fd0c1ddc7e1, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: e7e6579bcbac34e4190ebc1c174e3a77, type: 2}
-  preUpperPart: {fileID: 1386206347217571068, guid: d7ba048aa67839d4c9d43f365b2308b9, type: 3}
-  preLowerPart: {fileID: 1386206347217571068, guid: 479cb03f901e91b4e83bd9d347a528ff, type: 3}
+  preUpperPart: {fileID: 1386206347217571068, guid: fdbef073658532142ae78e639fb8379d, type: 3}
+  preLowerPart: {fileID: 1386206347217571068, guid: 92ba2f053a127ea47863c2a9531b7e93, type: 3}
   playerControl: {fileID: 0}
   Boss: 0
   needsAttackingBothParts: 0
@@ -3582,8 +3582,7 @@ MonoBehaviour:
   Position:
   - -3.8
   - 16.92462
-  - 35
-  - 38
+  - 50
   Player: {fileID: 967675288}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'

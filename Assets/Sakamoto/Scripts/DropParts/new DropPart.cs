@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class newDropPart : MonoBehaviour//
+public class newDropPart : MonoBehaviour
 {
     //パーツのデータ
     private BodyPartsData partsData;
@@ -28,7 +28,7 @@ public class newDropPart : MonoBehaviour//
     GameObject goPanel;
 
 
-    void Start()
+    protected virtual void Start()
     {
         //GameClearタグを持つゲームオブジェクトを取得
         goPanel = GameObject.Find("GameResult").gameObject;
@@ -51,47 +51,16 @@ public class newDropPart : MonoBehaviour//
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         switch (GameMgr.GetState())
         {
             case GameState.Main:
 
 
-                // Jキーを押したら慰霊する
-                if (Input.GetKeyUp(KeyCode.J) && goButton.Length > 0 && goButton[0] != null && goButton[0].activeSelf)
-                {
-                    PlayerParameter.Instance.comfort(humanityRecoveryAmount);
-                    MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
-                    GameObject obj = Instantiate(goGrave);
-                    obj.transform.position = new Vector3(this.gameObject.transform.position.x, 0.5f, this.gameObject.transform.position.z);
-                    DestroyImmediate(gameObject);
-
-                    if (bBoss)
-                    {
-                        GameClear();
-                    }
-                }
-
-                // Lキーを押したら移植する
-                if (Input.GetKeyDown(KeyCode.L) && goButton.Length > 1 && goButton[1] != null && goButton[1].activeSelf)
-                {
-                    if (isFriendBothParts)
-                    {
-                        PlayerParameter.Instance.transplantFriendBoth();
-                    }
-                    else
-                    {
-                        PlayerParameter.Instance.transplant(partsData);
-                    }
-                    MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
-                    DestroyImmediate(gameObject);
-
-                    if (bBoss)
-                    {
-                        GameClear();
-                    }
-                }
+                DoComfort();
+                DoTransplant();
+               
                 break;
 
             default:
@@ -136,8 +105,47 @@ public class newDropPart : MonoBehaviour//
     }
 
 
+    protected virtual void DoComfort()
+    {
+        // Jキーを押したら慰霊する
+        if (Input.GetKeyUp(KeyCode.J) && goButton.Length > 0 && goButton[0] != null && goButton[0].activeSelf)
+        {
+            PlayerParameter.Instance.comfort(humanityRecoveryAmount);
+            MultiAudio.ins.PlaySEByName("SE_hero_action_irei");
+            GameObject obj = Instantiate(goGrave);
+            obj.transform.position = new Vector3(this.gameObject.transform.position.x, 0.5f, this.gameObject.transform.position.z);
+            DestroyImmediate(gameObject);
+
+            if (bBoss)
+            {
+                GameClear();
+            }
+        }
+    }
+    protected virtual void DoTransplant()
+    {
+        // Lキーを押したら移植する
+        if (Input.GetKeyDown(KeyCode.L) && goButton.Length > 1 && goButton[1] != null && goButton[1].activeSelf)
+        {
+            if (isFriendBothParts)
+            {
+                PlayerParameter.Instance.transplantFriendBoth();
+            }
+            else
+            {
+                PlayerParameter.Instance.transplant(partsData);
+            }
+            MultiAudio.ins.PlaySEByName("SE_hero_action_ishoku");
+            DestroyImmediate(gameObject);
+
+            if (bBoss)
+            {
+                GameClear();
+            }
+        }
+    }
     //ゲームクリア処理
-    private void GameClear()
+    protected virtual void GameClear()
     {
         ////ゲームクリアを表示
         //goPanel.SetActive(true);

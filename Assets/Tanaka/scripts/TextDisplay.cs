@@ -324,7 +324,7 @@ public class TextDisplay : MonoBehaviour
         }
     }
 
-    private void FinishTextShowText()
+    public virtual void FinishTextShowText()
     {
         LoadDataIndex++;
         CloseTextArea();
