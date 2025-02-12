@@ -218,23 +218,15 @@ public class PlayerMoveAnimation : MonoBehaviour
 
 
         }
-
-
-
-
-
-
     }
     private IEnumerator CallAttackIdleWithDelay()
     {
         for (int i = 0; i < animationDataSet.attackIdle.armForwardRotation.Length; i++)
         {
             AttackIdle();
-            attackNumber = (attackNumber + 1) % animationDataSet.attackIdle.armForwardRotation.Length;
+            attackNumber++;
             yield return new WaitForSeconds(attackIdle);
         }
-
-        isAttack = false;
     }
     /// <summary>
     /// 攻撃待機アニメーション
@@ -725,7 +717,6 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     private IEnumerator CallPantieWithDelay()
     {
-        yield return StartCoroutine(CallAttackIdleWithDelay());
         int animationLength = animationDataSet.playerUpper.armForwardRotation.Length;
         for (int i = 0; i < animationLength; i++)
         {
@@ -756,7 +747,6 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     private IEnumerator CallKickWithDelay()
     {
-        yield return StartCoroutine(CallAttackIdleWithDelay());
         int animationLength = animationDataSet.playerUpper.armForwardRotation.Length;
         for (int i = 0; i < animationLength; i++)
         {

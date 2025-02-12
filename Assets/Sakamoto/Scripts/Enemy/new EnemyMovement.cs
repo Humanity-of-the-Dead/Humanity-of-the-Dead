@@ -30,7 +30,7 @@ public class newEnemyMovement : MonoBehaviour
     private newEnemyParameters newEnemyParameters;
     private EnemyMoveAnimation enemyMoveAnimation;
 
-    private enum EnemyState { Search, Walk, Attack, Wait, IsDead }
+    public enum EnemyState { Search, Walk, AttackIdle, Attack, Wait, IsDead }
 
     private EnemyState enemyState = EnemyState.Search;
 
@@ -127,7 +127,7 @@ public class newEnemyMovement : MonoBehaviour
                             timer = 0;
                             if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && IsLeftFromPlayer() == isMovingToPointB)
                             {
-                                enemyState = EnemyState.Attack;
+                                AttackIdle();
                             }
                             else
                             {
@@ -136,6 +136,9 @@ public class newEnemyMovement : MonoBehaviour
                             break;
                         }
                         timer += Time.deltaTime;
+                        break;
+                    case EnemyState.AttackIdle:
+                        // 予備動作アニメーション開始後は何もしない
                         break;
                     case EnemyState.Attack:
                         if (IsLeftFromPlayer() != isMovingToPointB)
@@ -187,6 +190,11 @@ public class newEnemyMovement : MonoBehaviour
 
 
         }
+    }
+
+    public void SetEnemyState(EnemyState newState)
+    {
+        enemyState = newState;
     }
     private void MoveTowards(Vector3 target, float moveSpeed)
     {
@@ -258,6 +266,12 @@ public class newEnemyMovement : MonoBehaviour
         damageable?.TakeDamage(lowerDamage, 1);
         //Debug.Log("下半身攻撃ダメージ判断");
 
+    }
+
+    private void AttackIdle()
+    {
+        enemyState = EnemyState.AttackIdle;
+        enemyMoveAnimation.AttakIdleStart();
     }
 
     // 上半身での攻撃とSE判定

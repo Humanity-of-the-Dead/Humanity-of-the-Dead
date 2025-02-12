@@ -130,22 +130,6 @@ public class EnemyMoveAnimation : MonoBehaviour
     
         if (hitGameObjectInstantiated !=null)
         {
-            switch (debugMoves)
-            {
-                case DebugMove.Walk:
-                    WalkInstance();
-                    break;
-                case DebugMove.Pantie:
-                    PantieStart();
-                    break;
-                case DebugMove.Kick:
-                    KickStart();
-                    break;
-
-                case DebugMove.attackIdle:
-                    AttackIdle();
-                    break;
-            }
             Destroy(hitGameObjectInstantiated);      
         }
 
@@ -183,8 +167,8 @@ public class EnemyMoveAnimation : MonoBehaviour
             indexNumber = (indexNumber + 1) % attackIdleData.armForwardRotation.Length;
             yield return new WaitForSeconds(attackIdle);
         }
-
-        isAttack = false;
+        newEnemyMovement.SetEnemyState(newEnemyMovement.EnemyState.Attack);
+        indexNumber = 0;
     }
     /// <summary>
     /// 攻撃待機アニメーション
@@ -451,9 +435,6 @@ public class EnemyMoveAnimation : MonoBehaviour
 
     private IEnumerator CallPantieWithDelay()
     {
-        // 攻撃待機アニメーションを呼び出す
-        yield return StartCoroutine(CallAttackIdleWithDelay());
-
         int animationLength = upper.armForwardRotation.Length;
         for (int i = 0; i < animationLength; i++)
         {
@@ -480,9 +461,6 @@ public class EnemyMoveAnimation : MonoBehaviour
 
     private IEnumerator CallKickWithDelay()
     {
-        // 攻撃待機アニメーションを呼び出す
-        yield return StartCoroutine(CallAttackIdleWithDelay());
-
         int animationLength = upper.armForwardRotation.Length;
         for (int i = 0; i < animationLength; i++)
         {
@@ -533,6 +511,11 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         time = timeMax * walk.armForwardRotation.Length;
         StartCoroutine(CallWalkWithDelay());
+    }
+
+    public void AttakIdleStart()
+    {
+        StartCoroutine(CallAttackIdleWithDelay());
     }
 
     /// <summary>
