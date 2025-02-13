@@ -201,7 +201,10 @@ public class newEnemyMovement : MonoBehaviour
 
         }
     }
-
+    public EnemyState GetEnemyState()
+    {
+        return enemyState;
+    }
     public void SetEnemyState(EnemyState newState)
     {
         enemyState = newState;
