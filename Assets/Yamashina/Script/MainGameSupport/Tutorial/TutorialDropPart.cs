@@ -5,8 +5,6 @@ using UnityEngine;
 public class TutorialDropPart : newDropPart
 {
     private Tutorial tutorial;
-    private bool isComforted = false;
-    private bool isTransplant = false;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -23,29 +21,32 @@ public class TutorialDropPart : newDropPart
     }
     protected override void DoComfort()
     {
-        base.DoComfort();
-        if (!isComforted)
+        if (Input.GetKeyUp(KeyCode.J) && goButton.Length > 0 && goButton[0] != null && goButton[0].activeSelf && Tutorial.GetState() == Tutorial.Tutorial_State.PlayerComfort)
         {
 
+            Tutorial.ChangeState(Tutorial.Tutorial_State.EnemyDrop);
             TutorialShowText();
 
-            isComforted = true; 
 
         }
-        Tutorial.NextState();
+        base.DoComfort();
+
 
 
     }
     protected override void DoTransplant()
     {
-        base.DoTransplant();
-        if(!isTransplant)
+        if (Input.GetKeyDown(KeyCode.L) && goButton.Length > 1 && goButton[1] != null && goButton[1].activeSelf&&Tutorial.GetState()==Tutorial.Tutorial_State.PlayerTransplant)
         {
+            Tutorial.ChangeState(Tutorial.Tutorial_State.Option);
             TutorialShowText();
-            Tutorial.NextState();
 
-            isTransplant = true;    
         }
+        base.DoTransplant();
+
+
+
+
     }
 
     void TutorialShowText()
@@ -53,7 +54,7 @@ public class TutorialDropPart : newDropPart
 
         GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
         tutorial.UpdateText();
-      
+
         //テキスト表示域を表示域
         tutorial.TextArea.SetActive(true);
     }

@@ -12,12 +12,12 @@ public class newDropPart : MonoBehaviour
     private bool bBoss;
 
     [SerializeField, Header("人間性の回復量")]
-    private int humanityRecoveryAmount = 10;
+    protected int humanityRecoveryAmount = 10;
     //ボタンオブジェクト
-    [SerializeField] GameObject[] goButton;
+    [SerializeField] protected GameObject[] goButton;
 
     //お墓
-    [SerializeField] GameObject goGrave;
+    [SerializeField] protected GameObject goGrave;
 
     [SerializeField, Header("親友の身体か")]
     private bool isFriendBothParts = false;

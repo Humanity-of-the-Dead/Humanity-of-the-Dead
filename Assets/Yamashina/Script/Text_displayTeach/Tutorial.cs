@@ -23,7 +23,7 @@ public class Tutorial : TextDisplay
         int nextIndex = (int)enGameState + 1; // 次のインデックス
         if (nextIndex < System.Enum.GetValues(typeof(Tutorial_State)).Length)
         {
-            enGameState = (Tutorial_State)nextIndex;
+            ChangeState( (Tutorial_State)nextIndex);
         }
         else
         {

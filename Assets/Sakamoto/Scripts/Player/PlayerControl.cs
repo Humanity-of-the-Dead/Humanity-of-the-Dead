@@ -223,7 +223,7 @@ public class PlayerControl : MonoBehaviour
             //ã”¼gUŒ‚
             if (Input.GetKeyDown(KeyCode.I))
             {
-                Tutorial.NextState();       
+                //Tutorial.NextState();       
                 UpperAttack upperattack = PlayerParameter.Instance.UpperData.upperAttack;
                 playerMoveAnimation.PantieStart();
                 // Œx@ã”¼g‚Íe’e‚É“–‚½‚è”»’è‚ğ‚Â
@@ -287,7 +287,7 @@ public class PlayerControl : MonoBehaviour
             //‰º”¼gUŒ‚
             if (Input.GetKeyDown(KeyCode.K))
             {
-                Tutorial.NextState();
+                //Tutorial.NextState();
 
                 #region R•i•ÏX
                 playerMoveAnimation.KickStart();

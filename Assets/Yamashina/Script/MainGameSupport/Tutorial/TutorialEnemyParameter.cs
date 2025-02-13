@@ -39,9 +39,14 @@ public class TutorialEnemyParameter : newEnemyParameters
     public override void TakeDamage(float damage, int body = 0)
     {
         base.TakeDamage(damage, body);
-        if(Tutorial.GetState()==Tutorial.Tutorial_State.EnemyDrop)
+        if (Tutorial.GetState() == Tutorial.Tutorial_State.PlayerAttack)
         {
-            Tutorial.NextState();
+            Tutorial.ChangeState(Tutorial.Tutorial_State.PlayerComfort);
+
+        }
+        if (Tutorial.GetState()==Tutorial.Tutorial_State.EnemyDrop)
+        {
+            Tutorial.ChangeState(Tutorial.Tutorial_State.PlayerTransplant);
 
         }
 

@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Tutorial;
 
 public class Tutorial_PlayerParameter : PlayerParameter
 {
     // Start is called before the first frame update
     private Tutorial tutorial;
-    private bool isDamage = false;
+    //private bool isDamage = false;
     protected override void Awake()
     {
         base.Awake();
@@ -25,15 +26,19 @@ public class Tutorial_PlayerParameter : PlayerParameter
     public override void TakeDamage(float damage, int body = 0)
     {
         base.TakeDamage(damage, body);
-        if(!isDamage) {
+
+        if (Tutorial.GetState() == Tutorial_State.PlayerDoNotMove)
+        {
             GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
             tutorial.UpdateText();
-            Tutorial.NextState();   
+
+            Tutorial.NextState();
             //テキスト表示域を表示域
             tutorial.TextArea.SetActive(true);
         }
-        
-        isDamage = true;    
+         
+
+
 
 
     }
