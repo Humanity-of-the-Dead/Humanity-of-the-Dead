@@ -1344,6 +1344,7 @@ MonoBehaviour:
   TitleButton: {fileID: 2056255068}
   creditReturn: {fileID: 1879344233}
   optionReturn: {fileID: 159453807}
+  skipPanel: {fileID: 5323403301324271791, guid: 9059de291790c5c43b36c87d64d5b519, type: 3}
 --- !u!4 &1750266176
 Transform:
   m_ObjectHideFlags: 0
@@ -1734,10 +1735,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2115568156}
-        m_TargetAssemblyTypeName: SceneTransitionManager, Assembly-CSharp
-        m_MethodName: NextSceneButton
-        m_Mode: 3
+      - m_Target: {fileID: 1750266175}
+        m_TargetAssemblyTypeName: TitleAnimation, Assembly-CSharp
+        m_MethodName: InstantiateSkipPanel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
