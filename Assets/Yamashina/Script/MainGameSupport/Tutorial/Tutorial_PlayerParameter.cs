@@ -42,4 +42,8 @@ public class Tutorial_PlayerParameter : PlayerParameter
 
 
     }
+    protected override void DecreasingHP()
+    {
+        base.DecreasingHP();
+    }
 }

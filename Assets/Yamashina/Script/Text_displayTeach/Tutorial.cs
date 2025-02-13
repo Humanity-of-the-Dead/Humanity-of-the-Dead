@@ -72,7 +72,10 @@ public class Tutorial : TextDisplay
             case GameState.Main:
                 base.Update();
                 ChangeStateToDoNotMoveIfNeeded();
-
+                if (Tutorial.GetState() == Tutorial_State.Option)
+                {
+                    GameMgr.ChangeState(GameState.Clear);
+                }
                 break;
             case GameState.ShowText:
                 base.Update();

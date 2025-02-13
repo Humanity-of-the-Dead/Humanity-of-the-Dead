@@ -432,7 +432,7 @@ public class PlayerParameter : CharacterStats
         }
     }
 
-    private void DecreasingHP()
+    protected virtual void DecreasingHP()
     {
         iHumanity -= Time.deltaTime / iDownTime/* *dgbScale*/;
         iUpperHP -= Time.deltaTime / iDownTime;
