@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7002402190754237188}
   - component: {fileID: 8518237200061102869}
   - component: {fileID: 1960726576125117671}
-  - component: {fileID: 3232088234718742826}
+  - component: {fileID: -5525723649233726408}
   m_Layer: 6
-  m_Name: NomalLowerDrop_Tutorial
+  m_Name: NomalLowerDrop_Tutorial_Ishoku
   m_TagString: Dorops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &3232088234718742826
+--- !u!114 &-5525723649233726408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,12 +297,12 @@ GameObject:
   - component: {fileID: 803551711450563849}
   - component: {fileID: 5588515484702631185}
   m_Layer: 6
-  m_Name: IsyokuButton (Legacy)
+  m_Name: IreiButton (Legacy)
   m_TagString: Dorops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4761116454277647362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -619,7 +619,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goButton:
-  - {fileID: 2182874680941712295}
   - {fileID: 6055618513447132620}
 --- !u!1 &6055618513447132620
 GameObject:
@@ -636,7 +635,7 @@ GameObject:
   - component: {fileID: 4246061609702059101}
   - component: {fileID: 8343801075922974534}
   m_Layer: 6
-  m_Name: IreiButton (Legacy)
+  m_Name: IsyokuButton (Legacy)
   m_TagString: Dorops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

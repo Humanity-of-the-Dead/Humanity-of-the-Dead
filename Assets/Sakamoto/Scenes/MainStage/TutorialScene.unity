@@ -3010,6 +3010,7 @@ MonoBehaviour:
   lowerDataDefault: {fileID: 11400000, guid: dfc091647e8e229438c5335ae549e2ac, type: 2}
   UpperDataForStageFour: {fileID: 11400000, guid: 304625b32bd712d4bad788f0c7bb7feb, type: 2}
   LowerDataForStageFour: {fileID: 11400000, guid: ec2d854efa589b3498f4e85671677160, type: 2}
+  minHP: 1
 --- !u!1 &1647872232
 GameObject:
   m_ObjectHideFlags: 0
@@ -3297,8 +3298,8 @@ MonoBehaviour:
   LowerHP: 1
   Upperbodypart: {fileID: 11400000, guid: 1f44a247b0640614c8806fd0c1ddc7e1, type: 2}
   Lowerbodypart: {fileID: 11400000, guid: e7e6579bcbac34e4190ebc1c174e3a77, type: 2}
-  preUpperPart: {fileID: 1386206347217571068, guid: fdbef073658532142ae78e639fb8379d, type: 3}
-  preLowerPart: {fileID: 1386206347217571068, guid: 92ba2f053a127ea47863c2a9531b7e93, type: 3}
+  preUpperPart: {fileID: 1386206347217571068, guid: 6811574eddb91a248bad381ec3041bab, type: 3}
+  preLowerPart: {fileID: 1386206347217571068, guid: 0c0526c739092e0488fa5692f3889eb2, type: 3}
   playerControl: {fileID: 0}
   Boss: 0
   needsAttackingBothParts: 0
@@ -3584,8 +3585,6 @@ MonoBehaviour:
   - textAsset:
     - {fileID: 4900000, guid: 5145ebf4e2635284d870131a125d668b, type: 3}
   - textAsset:
-    - {fileID: 4900000, guid: d6ac7b13ab1b6024e858c92cbbad3865, type: 3}
-  - textAsset:
     - {fileID: 4900000, guid: 620e72cf11360254cb6a9bf84b99b397, type: 3}
   - textAsset:
     - {fileID: 4900000, guid: 789c19262b0a011478c726a70ccf21db, type: 3}
@@ -3598,7 +3597,7 @@ MonoBehaviour:
   Position:
   - -3.8
   - 16.92462
-  - 50
+  - 300
   Player: {fileID: 967675288}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
