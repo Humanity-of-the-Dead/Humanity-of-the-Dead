@@ -146,18 +146,29 @@ public class newEnemyMovement : MonoBehaviour
                         if (distanceToPlayer <= upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
                         {
                             AttackWithSeUpper();
-
                         }
                         else if (distanceToPlayer > upperPart.AttackArea && distanceToPlayer <= lowerPart.AttackArea)
                         {
                             AttackWithSeLower();
-
                         }
-                        else
+                        // ‚Ç‚¿‚ç‚à”ÍˆÍ“à‚Ìê‡
+                        else if (distanceToPlayer <= upperPart.AttackArea && distanceToPlayer <= lowerPart.AttackArea)
                         {
                             // —”‚ðŽæ“¾‚·‚é
                             int num = Random.Range(0, 2);
                             if (num == 0)
+                            {
+                                AttackWithSeUpper();
+                            }
+                            else
+                            {
+                                AttackWithSeLower();
+                            }
+                        }
+                        else
+                        {
+                            // ‚Ç‚¿‚ç‚à”ÍˆÍŠO‚È‚ç”ÍˆÍ‚ÌL‚¢•û
+                            if (upperPart.AttackArea >= lowerPart.AttackArea)
                             {
                                 AttackWithSeUpper();
                             }

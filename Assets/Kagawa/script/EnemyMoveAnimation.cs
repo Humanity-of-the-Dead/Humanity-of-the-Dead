@@ -116,6 +116,8 @@ public class EnemyMoveAnimation : MonoBehaviour
         time = 0;
         timeAttack = 0;
     }
+    // StopCoroutineの引数にはStartCroutineの返り値を入れないと正常に止まらないかも
+    private Coroutine coroutine;
 
     // Update is called once per frame
     void Update()
@@ -508,11 +510,12 @@ public class EnemyMoveAnimation : MonoBehaviour
     private void WalkStart()
     {
         time = timeMax * walk.armForwardRotation.Length;
-        StartCoroutine(CallWalkWithDelay());
+        coroutine = StartCoroutine(CallWalkWithDelay());
     }
 
     public void AttakIdleStart()
     {
+        StopCoroutine(coroutine);
         StartCoroutine(CallAttackIdleWithDelay());
     }
 
