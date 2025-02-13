@@ -27,6 +27,11 @@ public class TutorialDropPart : newDropPart
             Tutorial.ChangeState(Tutorial.Tutorial_State.EnemyDrop);
             TutorialShowText();
 
+            GameObject GameMain = GameObject.Find("GameMain");
+
+            GameMain = GameMain.transform.Find("Nomal_stg01 Variant_Add").gameObject;
+            Debug.Log(GameMain);
+            GameMain.SetActive(true);
 
         }
         base.DoComfort();

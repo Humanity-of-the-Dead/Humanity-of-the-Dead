@@ -6,7 +6,7 @@ public class Tutorial : TextDisplay
 {
     private Tutorial_spown tutorial_Spawn;
 
-    private const float POSITION_DONOT_MOVE = 30;
+    private const float POSITION_DONOT_MOVE = 21;
     public enum Tutorial_State
     {
         PlayerMove,
