@@ -157,7 +157,6 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     public   IEnumerator ShowHitEffectsBoss( Vector3 enemyVector3 )
     {
-        int body = Random.Range(0, 2);
         if (hasDefeatedBoss)
         {
            yield break;
@@ -166,7 +165,9 @@ public class PlayerMoveAnimation : MonoBehaviour
         for (int i = 1; i <= effectBurstCount; i++)
         {
             Debug.Log("ボスエフェクト開始");
-
+            // 試行回数が少ないので偏るよりかは交互に表示した方がいいかも
+            //int body = Random.Range(0, 2);
+            int body = i % 2;
             ShowHitEffects(body, enemyVector3);
             Debug.Log($"effectCountは {i}");
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");

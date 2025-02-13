@@ -36,6 +36,8 @@ public class newEnemyParameters : CharacterStats
 
     private PlayerMoveAnimation playerMoveAnimation;
 
+    private newEnemyMovement newEnemyMovement;
+
     //ボスフラグ
     [SerializeField, Header("ボスかどうか、チェックが入っているならボス")]
     public bool Boss;
@@ -84,7 +86,7 @@ public class newEnemyParameters : CharacterStats
 
     protected bool hasDroped = false;
 
-    private bool hasBossEffect=false;
+
     //public bool isDropInstantiated = false;
     protected virtual void Start()
     {
@@ -102,6 +104,7 @@ public class newEnemyParameters : CharacterStats
         enemyRenderer = transform.GetComponentsInChildren<Renderer>();
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
+        newEnemyMovement = GetComponent<newEnemyMovement>();
         //Debug.Log(playerControl);
 
     }
@@ -129,43 +132,18 @@ public class newEnemyParameters : CharacterStats
         AdjustHpIfNeededAttackingBothParts();
 
         // 部位が破壊された際にHPバーを一瞬表示
-        if (UpperHP <= 0&&-100<UpperHP)
-        {
-
-            playerControl.RemoveListItem(this.gameObject);
-            StartCoroutine(FlashObject(0));
-
-            if (Boss&& !hasBossEffect)
-            {
-                playerMoveAnimation.StartBossEffect(transform.position);
-                hasBossEffect = true;
-            }
-
-            //Debug.Log("上半身が破壊された");
-            //Drop(Upperbodypart, false);
-
-            UpperHP = -10000;
-
-        }
-        if (LowerHP <= 0 && -100 < LowerHP)
+        if ((UpperHP <= 0 || LowerHP <= 0) && newEnemyMovement.GetEnemyState() != newEnemyMovement.EnemyState.IsDead)
         {
             playerControl.RemoveListItem(this.gameObject);
-            StartCoroutine(FlashObject(1));
+            int body = UpperHP <= 0 ? 0 : 1;
+            StartCoroutine(FlashObject(body));
 
-            if (Boss&&!hasBossEffect)
+            if (Boss)
             {
                 playerMoveAnimation.StartBossEffect(transform.position);
-                hasBossEffect = true;
-                Debug.Log("エフェクト開始");
             }
 
-            //Debug.Log("下半身が破壊された");
-            //Drop(Lowerbodypart, true);
-
-
-            LowerHP = -10000;
-
-
+            newEnemyMovement.SetEnemyState(newEnemyMovement.EnemyState.IsDead);
 
         }
         //if (GameMgr.GetState() == GameState.ShowText&&!Boss)

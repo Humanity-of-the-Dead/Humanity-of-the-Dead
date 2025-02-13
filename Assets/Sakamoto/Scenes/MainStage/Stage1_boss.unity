@@ -3619,8 +3619,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
+      propertyPath: effectBurstCount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: bossEffectInterval
-      value: 5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: afterAttackFreezeTime
