@@ -120,6 +120,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5066492829317263093, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
+      propertyPath: m_Size.x
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5211514210946013214, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
       propertyPath: m_Layer
       value: 10

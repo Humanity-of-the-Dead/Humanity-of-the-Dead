@@ -125,6 +125,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5066492829317263093, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
+      propertyPath: m_Size.x
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066492829317263093, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
       propertyPath: m_UsedByComposite
       value: 1
       objectReference: {fileID: 0}
