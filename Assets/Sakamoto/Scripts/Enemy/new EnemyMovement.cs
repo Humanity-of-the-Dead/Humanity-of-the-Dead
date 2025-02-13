@@ -30,7 +30,7 @@ public class newEnemyMovement : MonoBehaviour
     private newEnemyParameters newEnemyParameters;
     private EnemyMoveAnimation enemyMoveAnimation;
 
-    public enum EnemyState { Search, Walk, AttackIdle, Attack, Wait, IsDead }
+    public enum EnemyState { Search, Walk, AttackIdle, Attack, AfterAttack, Wait, IsDead }
 
     private EnemyState enemyState = EnemyState.Search;
 
@@ -82,6 +82,9 @@ public class newEnemyMovement : MonoBehaviour
                         }
                         else
                         {
+                            // TODO: ここでpointA~Bの範囲外に出てた場合の挙動は検討されてる？
+                            // たとえばプレイヤーを追って範囲外に出てしまう場合
+
                             // いつもの挙動
                             float Target = isMovingToPointB ? pointB : pointA;
                             Vector3 target = new Vector3(Target, transform.position.y, transform.position.z);
@@ -138,16 +141,21 @@ public class newEnemyMovement : MonoBehaviour
                         timer += Time.deltaTime;
                         break;
                     case EnemyState.AttackIdle:
-                        // 予備動作アニメーション開始後は何もしない
+                        // 予備動作アニメーション中は何もしない
+                        // アニメーション関数内でアニメーション後にEnemyState切替
                         break;
                     case EnemyState.Attack:
                         if (IsLeftFromPlayer() != isMovingToPointB)
                         {
-                            // エネミーがプレイヤーを向いていなければ攻撃中止(何もしない)
+                            // エネミーがプレイヤーを向いていなければ攻撃中止
+                            enemyState = EnemyState.Search;
+                            break;
                         }
                         else if (distanceToPlayer > upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
                         {
                             // 両半身とも攻撃範囲外なら攻撃中止
+                            enemyState = EnemyState.Search;
+                            break;
                         }
                         else if (distanceToPlayer <= upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
                         {
@@ -173,9 +181,11 @@ public class newEnemyMovement : MonoBehaviour
                                 AttackWithSeLower();
                             }
                         }
-
-                        enemyState = EnemyState.Search;
-                        //moveAnimation.PlayerPantie();
+                        enemyState = EnemyState.AfterAttack;
+                        break;
+                    case EnemyState.AfterAttack:
+                        // 攻撃アニメーション中は何もしない
+                        // アニメーション関数内でアニメーション後にEnemyState切替
                         break;
                     case EnemyState.IsDead:
                         break;

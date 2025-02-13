@@ -161,28 +161,22 @@ public class EnemyMoveAnimation : MonoBehaviour
     }
     private IEnumerator CallAttackIdleWithDelay()
     {
-        for (int i = 0; i < attackIdleData.armForwardRotation.Length; i++)
+        int animationFrameLength = attackIdleData.armForwardRotation.Length;
+        float animationSecondsPerFrame = animationFrameLength / attackIdle;
+        for (int i = 0; i < animationFrameLength; i++)
         {
-            AttackIdle();
-            indexNumber = (indexNumber + 1) % attackIdleData.armForwardRotation.Length;
-            yield return new WaitForSeconds(attackIdle);
+            AttackIdle(i);
+            yield return new WaitForSeconds(animationSecondsPerFrame);
         }
         newEnemyMovement.SetEnemyState(newEnemyMovement.EnemyState.Attack);
-        indexNumber = 0;
     }
     /// <summary>
     /// 攻撃待機アニメーション
     /// </summary>
-    /// <summary>
-    /// 攻撃待機アニメーション
-    /// </summary>
-    /// <summary>
-    /// 攻撃待機アニメーション
-    /// </summary>
-    private void AttackIdle()
+    private void AttackIdle(int animationIndex)
     {
         // Rotate the whole body
-        playerRc.transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.wholeRotation[indexNumber]);
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.wholeRotation[animationIndex]);
 
         // Arm animation
         if (attackIdleData.armForwardRotation == null || attackIdleData.armBackRotation == null)
@@ -192,10 +186,10 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
         else
         {
-            arm[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.armForwardRotation[indexNumber]);
-            arm[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.armBackRotation[indexNumber]);
-            hand[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.handForwardRotation[indexNumber]);
-            hand[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.handBackRotation[indexNumber]);
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.armForwardRotation[animationIndex]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.armBackRotation[animationIndex]);
+            hand[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.handForwardRotation[animationIndex]);
+            hand[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.handBackRotation[animationIndex]);
 
         }
 
@@ -212,13 +206,15 @@ public class EnemyMoveAnimation : MonoBehaviour
         }
         else
         {
-            leg[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.legForwardRotation[indexNumber]);
-            leg[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.legBackRotation[indexNumber]);
-            foot[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.footForwardRotation[indexNumber]);
-            foot[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.footBackRotation[indexNumber]);
+            leg[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.legForwardRotation[animationIndex]);
+            leg[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.legBackRotation[animationIndex]);
+            foot[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.footForwardRotation[animationIndex]);
+            foot[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.footBackRotation[animationIndex]);
         }
-    }         /// 歩くアニメーション
-              /// </summary>
+    }
+    /// <summary>
+    /// 歩くアニメーション
+    /// </summary>
     public void PlayerWalk()
     {
         switch (status)
@@ -451,12 +447,7 @@ public class EnemyMoveAnimation : MonoBehaviour
                 yield return new WaitForSeconds(timeAttackMax + afterAttackFreezeTime);
             }
         }
-
-        // 攻撃が終わったら
-        PoseWaiting(status == Status.Zombie);
-        time = timeMax;
-        isAttack = false;
-
+        AfterAttackAnimation();
     }
 
     private IEnumerator CallKickWithDelay()
@@ -477,9 +468,16 @@ public class EnemyMoveAnimation : MonoBehaviour
                 yield return new WaitForSeconds(timeAttackMax + afterAttackFreezeTime);
             }
         }
+        AfterAttackAnimation();
+    }
 
-        // 攻撃が終わったら
+    /// <summary>
+    /// 攻撃アニメーション終了後の処理
+    /// </summary>
+    private void AfterAttackAnimation()
+    {
         PoseWaiting(status == Status.Zombie);
+        newEnemyMovement.SetEnemyState(newEnemyMovement.EnemyState.Search);
         time = timeMax;
         isAttack = false;
     }
