@@ -3336,6 +3336,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 186059271}
     m_Modifications:
+    - target: {fileID: -1073221882835409268, guid: 985c669ebb42b2a4395d00374b854793, type: 3}
+      propertyPath: chaseSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1073221882835409268, guid: 985c669ebb42b2a4395d00374b854793, type: 3}
+      propertyPath: normalSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1073221882835409268, guid: 985c669ebb42b2a4395d00374b854793, type: 3}
+      propertyPath: moveDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6746467646807872166, guid: 985c669ebb42b2a4395d00374b854793, type: 3}
       propertyPath: m_Name
       value: Nomal_stg01 Variant

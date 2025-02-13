@@ -32,7 +32,7 @@ public class Tutorial_PlayerParameter : PlayerParameter
             GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
             tutorial.UpdateText();
 
-            Tutorial.NextState();
+            Tutorial.ChangeState(Tutorial_State.PlayerAttack);
             //テキスト表示域を表示域
             tutorial.TextArea.SetActive(true);
         }

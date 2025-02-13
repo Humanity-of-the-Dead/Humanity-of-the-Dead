@@ -18,37 +18,47 @@ public class TutorialEnemyParameter : newEnemyParameters
     // Update is called once per frame
     protected override void Update()
     {
+        // 部位が破壊された際にHPバーを一瞬表示
+        if ((UpperHP <= 0 || LowerHP <= 0) && newEnemyMovement.GetEnemyState() != newEnemyMovement.EnemyState.IsDead&&Tutorial.GetState()==Tutorial.Tutorial_State.PlayerAttack)
+        {
+            GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+            tutorial.UpdateText();
+            Tutorial.ChangeState(Tutorial.Tutorial_State.PlayerComfort);
+
+            //テキスト表示域を表示域
+            tutorial.TextArea.SetActive(true);
+        }
+
+        if ((UpperHP <= 0 || LowerHP <= 0) && newEnemyMovement.GetEnemyState() != newEnemyMovement.EnemyState.IsDead && Tutorial.GetState() == Tutorial.Tutorial_State.EnemyDrop)
+        {
+            GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+            tutorial.UpdateText();
+            Tutorial.ChangeState(Tutorial.Tutorial_State.PlayerTransplant);
+
+            //テキスト表示域を表示域
+            tutorial.TextArea.SetActive(true);
+        }
+       
         base.Update();
     }
 
     protected override IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
     {
-       
+
         return base.ShowHPBarAndDestroy(hpBar, part, typ);
 
     }
     protected override IEnumerator FlashObject(int body = 0)
     {
-        if (!hasDroped)
-        {
-            GameMgr.ChangeState(GameState.Main);
-        }
+       
         return base.FlashObject(body);
     }
 
     public override void TakeDamage(float damage, int body = 0)
     {
         base.TakeDamage(damage, body);
-        if (Tutorial.GetState() == Tutorial.Tutorial_State.PlayerAttack)
-        {
-            Tutorial.ChangeState(Tutorial.Tutorial_State.PlayerComfort);
-
-        }
-        if (Tutorial.GetState()==Tutorial.Tutorial_State.EnemyDrop)
-        {
-            Tutorial.ChangeState(Tutorial.Tutorial_State.PlayerTransplant);
-
-        }
+       
+       
 
     }
 

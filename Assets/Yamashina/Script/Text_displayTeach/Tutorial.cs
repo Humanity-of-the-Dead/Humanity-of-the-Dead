@@ -45,7 +45,7 @@ public class Tutorial : TextDisplay
         previousGameState = enGameState; // 現在のステートを前回のステートとして保存
 
         enGameState = newState;
-        Debug.Log(newState);
+        Debug.Log("ChangeState"+newState);
     }
     // ステートが変わったかを確認する関数
     public static bool HasStateChanged()

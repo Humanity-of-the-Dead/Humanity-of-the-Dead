@@ -7,9 +7,9 @@ public class newEnemyParameters : CharacterStats
 {
     //部位の耐久値を設定できる
     [SerializeField, Header("敵の上半身HP")]
-    private int UpperHP;
+    protected int UpperHP;
     [SerializeField, Header("敵の下半身HP")]
-    private int LowerHP;
+    protected int LowerHP;
 
 
 
@@ -36,7 +36,7 @@ public class newEnemyParameters : CharacterStats
 
     private PlayerMoveAnimation playerMoveAnimation;
 
-    private newEnemyMovement newEnemyMovement;
+    protected newEnemyMovement newEnemyMovement;
 
     //ボスフラグ
     [SerializeField, Header("ボスかどうか、チェックが入っているならボス")]
