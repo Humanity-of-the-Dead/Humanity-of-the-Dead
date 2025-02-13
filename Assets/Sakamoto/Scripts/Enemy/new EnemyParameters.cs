@@ -85,8 +85,6 @@ public class newEnemyParameters : CharacterStats
     private bool isFlashing = false;
 
     private bool hasDroped = false;
-
-    private bool hasShownEffect=false;
     //public bool isDropInstantiated = false;
     private void Start()
     {
@@ -138,10 +136,9 @@ public class newEnemyParameters : CharacterStats
             int body = UpperHP <= 0 ? 0 : 1;
             StartCoroutine(FlashObject(body));
 
-            if (Boss && !hasShownEffect)
+            if (Boss)
             {
                 playerMoveAnimation.StartBossEffect(transform.position);
-                hasShownEffect = true;
             }
 
             newEnemyMovement.SetEnemyState(newEnemyMovement.EnemyState.IsDead);
