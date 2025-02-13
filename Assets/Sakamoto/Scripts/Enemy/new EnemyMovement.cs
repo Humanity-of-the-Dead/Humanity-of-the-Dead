@@ -30,7 +30,7 @@ public class newEnemyMovement : MonoBehaviour
     private newEnemyParameters newEnemyParameters;
     private EnemyMoveAnimation enemyMoveAnimation;
 
-    protected enum EnemyState { Search, Walk, Attack, Wait, IsDead }
+    public enum EnemyState { Search, Walk, AttackIdle, Attack, AfterAttack, Wait, IsDead }
 
     protected EnemyState enemyState = EnemyState.Search;
 
@@ -71,6 +71,7 @@ public class newEnemyMovement : MonoBehaviour
         {
             case GameState.Main:
 
+
                 EnemyAction();
 
 
@@ -82,6 +83,11 @@ public class newEnemyMovement : MonoBehaviour
 
 
         }
+    }
+
+    public void SetEnemyState(EnemyState newState)
+    {
+        enemyState = newState;
     }
     private void MoveTowards(Vector3 target, float moveSpeed)
     {
@@ -153,6 +159,12 @@ public class newEnemyMovement : MonoBehaviour
         damageable?.TakeDamage(lowerDamage, 1);
         //Debug.Log("下半身攻撃ダメージ判断");
 
+    }
+
+    private void AttackIdle()
+    {
+        enemyState = EnemyState.AttackIdle;
+        enemyMoveAnimation.AttakIdleStart();
     }
 
     // 上半身での攻撃とSE判定
@@ -276,110 +288,124 @@ public class newEnemyMovement : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         switch (enemyState)
-        {
-            case EnemyState.Search:
-                enemyMoveAnimation.WalkInstance();
-                // プレイヤーが追跡範囲内に入っているかどうか判断
-                if (distanceToPlayer < chaseRange)
                 {
-                    enemyState = EnemyState.Walk;
-                }
-                else
-                {
-                    // いつもの挙動
-                    float Target = isMovingToPointB ? pointB : pointA;
-                    Vector3 target = new Vector3(Target, transform.position.y, transform.position.z);
-                    // ボスの場合、移動範囲を制限
-                    if (newEnemyParameters.Boss)
-                    {
-                        target.x = Mathf.Clamp(target.x, bossMinX, bossMaxX);
-                    }
-                    MoveTowards(target, normalSpeed);
+                    case EnemyState.Search:
+                        enemyMoveAnimation.WalkInstance();
+                        // プレイヤーが追跡範囲内に入っているかどうか判断
+                        if (distanceToPlayer < chaseRange)
+                        {
+                            enemyState = EnemyState.Walk;
+                        }
+                        else
+                        {
+                            // TODO: ここでpointA~Bの範囲外に出てた場合の挙動は検討されてる？
+                            // たとえばプレイヤーを追って範囲外に出てしまう場合
 
-                    // 敵が折り返し地点に到達したかどうか判断
-                    if (transform.position == target)
-                    {
-                        // 到達したら回れ右
-                        if (isMovingToPointB == true) enemyMoveAnimation.TurnToRight();
-                        else enemyMoveAnimation.TurnToLeft();
-                        isMovingToPointB = !isMovingToPointB;
-                    }
-                }
-                break;
-            case EnemyState.Walk:
-                // プレイヤーを追跡
-                enemyMoveAnimation.WalkInstance();
-                MoveTowards(player.transform.position, chaseSpeed);
-                if (IsLeftFromPlayer() != isMovingToPointB)
-                {
-                    if (isMovingToPointB == true) enemyMoveAnimation.TurnToRight();
-                    else enemyMoveAnimation.TurnToLeft();
-                    isMovingToPointB = !isMovingToPointB;
+                            // いつもの挙動
+                            float Target = isMovingToPointB ? pointB : pointA;
+                            Vector3 target = new Vector3(Target, transform.position.y, transform.position.z);
+                            // ボスの場合、移動範囲を制限
+                            if (newEnemyParameters.Boss)
+                            {
+                                target.x = Mathf.Clamp(target.x, bossMinX, bossMaxX);
+                            }
+                            MoveTowards(target, normalSpeed);
 
-                }
-                // プレイヤーが攻撃範囲内に入っているかどうか判断
-                if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea)
-                    && IsLeftFromPlayer() == isMovingToPointB)
-                {
-                    enemyState = EnemyState.Wait;
-                }
-                break;
-            case EnemyState.Wait:
-                //moveAnimation.Upright();
-                if (timer > waitTime)
-                {
-                    timer = 0;
-                    if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && IsLeftFromPlayer() == isMovingToPointB)
-                    {
-                        enemyState = EnemyState.Attack;
-                    }
-                    else
-                    {
-                        enemyState = EnemyState.Search;
-                    }
-                    break;
-                }
-                timer += Time.deltaTime;
-                break;
-            case EnemyState.Attack:
-                if (IsLeftFromPlayer() != isMovingToPointB)
-                {
-                    // エネミーがプレイヤーを向いていなければ攻撃中止(何もしない)
-                }
-                else if (distanceToPlayer > upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
-                {
-                    // 両半身とも攻撃範囲外なら攻撃中止
-                }
-                else if (distanceToPlayer <= upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
-                {
-                    AttackWithSeUpper();
+                            // 敵が折り返し地点に到達したかどうか判断
+                            if (transform.position == target)
+                            {
+                                // 到達したら回れ右
+                                if (isMovingToPointB == true) enemyMoveAnimation.TurnToRight();
+                                else enemyMoveAnimation.TurnToLeft();
+                                isMovingToPointB = !isMovingToPointB;
+                            }
+                        }
+                        break;
+                    case EnemyState.Walk:
+                        // プレイヤーを追跡
+                        enemyMoveAnimation.WalkInstance();
+                        MoveTowards(player.transform.position, chaseSpeed);
+                        if (IsLeftFromPlayer() != isMovingToPointB)
+                        {
+                            if (isMovingToPointB == true) enemyMoveAnimation.TurnToRight();
+                            else enemyMoveAnimation.TurnToLeft();
+                            isMovingToPointB = !isMovingToPointB;
 
-                }
-                else if (distanceToPlayer > upperPart.AttackArea && distanceToPlayer <= lowerPart.AttackArea)
-                {
-                    AttackWithSeLower();
+                        }
+                        // プレイヤーが攻撃範囲内に入っているかどうか判断
+                        if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea)
+                            && IsLeftFromPlayer() == isMovingToPointB)
+                        {
+                            enemyState = EnemyState.Wait;
+                        }
+                        break;
+                    case EnemyState.Wait:
+                        //moveAnimation.Upright();
+                        if (timer > waitTime)
+                        {
+                            timer = 0;
+                            if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && IsLeftFromPlayer() == isMovingToPointB)
+                            {
+                                AttackIdle();
+                            }
+                            else
+                            {
+                                enemyState = EnemyState.Search;
+                            }
+                            break;
+                        }
+                        timer += Time.deltaTime;
+                        break;
+                    case EnemyState.AttackIdle:
+                        // 予備動作アニメーション中は何もしない
+                        // アニメーション関数内でアニメーション後にEnemyState切替
+                        break;
+                    case EnemyState.Attack:
+                        if (IsLeftFromPlayer() != isMovingToPointB)
+                        {
+                            // エネミーがプレイヤーを向いていなければ攻撃中止
+                            enemyState = EnemyState.Search;
+                            break;
+                        }
+                        else if (distanceToPlayer > upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
+                        {
+                            // 両半身とも攻撃範囲外なら攻撃中止
+                            enemyState = EnemyState.Search;
+                            break;
+                        }
+                        else if (distanceToPlayer <= upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
+                        {
+                            AttackWithSeUpper();
 
-                }
-                else
-                {
-                    // 両半身とも攻撃範囲内の場合
-                    // 乱数を取得する
-                    int num = Random.Range(0, 2);
-                    if (num == 0)
-                    {
-                        AttackWithSeUpper();
-                    }
-                    else
-                    {
-                        AttackWithSeLower();
-                    }
-                }
+                        }
+                        else if (distanceToPlayer > upperPart.AttackArea && distanceToPlayer <= lowerPart.AttackArea)
+                        {
+                            AttackWithSeLower();
 
-                enemyState = EnemyState.Search;
-                //moveAnimation.PlayerPantie();
-                break;
-            case EnemyState.IsDead:
-                break;
+                        }
+                        else
+                        {
+                            // 両半身とも攻撃範囲内の場合
+                            // 乱数を取得する
+                            int num = Random.Range(0, 2);
+                            if (num == 0)
+                            {
+                                AttackWithSeUpper();
+                            }
+                            else
+                            {
+                                AttackWithSeLower();
+                            }
+                        }
+                        enemyState = EnemyState.AfterAttack;
+                        break;
+                    case EnemyState.AfterAttack:
+                        // 攻撃アニメーション中は何もしない
+                        // アニメーション関数内でアニメーション後にEnemyState切替
+                        break;
+                    case EnemyState.IsDead:
+                        break;
+                }
         }
     }
 }

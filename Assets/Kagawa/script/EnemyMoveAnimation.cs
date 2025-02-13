@@ -19,7 +19,8 @@ public enum DebugMove
     None,
     Walk,
     Kick,
-    Pantie
+    Pantie,
+    attackIdle
 }
 
 public class EnemyMoveAnimation : MonoBehaviour
@@ -47,7 +48,11 @@ public class EnemyMoveAnimation : MonoBehaviour
     [SerializeField, Header("---上半身のアニメーション---")] private AnimationData upper;
 
     [SerializeField, Header("---下半身のアニメーション---")] private AnimationData lower;
+    [SerializeField, Header("---攻撃待機アニメーション")] private AnimationData attackIdleData;
 
+    [SerializeField, Header("攻撃待機アニメーションが始まってから\n攻撃するまでの秒数")]
+
+    private float attackIdle = 0;
     //配列の番号
     private int indexNumber;
 
@@ -151,6 +156,60 @@ public class EnemyMoveAnimation : MonoBehaviour
                 Random.Range(lowerEffectYMin, lowerEffectYMax));
 
             hitGameObjectInstantiated= Instantiate(hitGameObject, effectVec3Lower + playerVector3, Quaternion.identity);
+
+        }
+    }
+    private IEnumerator CallAttackIdleWithDelay()
+    {
+        int animationFrameLength = attackIdleData.armForwardRotation.Length;
+        float animationSecondsPerFrame = animationFrameLength / attackIdle;
+        for (int i = 0; i < animationFrameLength; i++)
+        {
+            AttackIdle(i);
+            yield return new WaitForSeconds(animationSecondsPerFrame);
+        }
+        newEnemyMovement.SetEnemyState(newEnemyMovement.EnemyState.Attack);
+    }
+    /// <summary>
+    /// 攻撃待機アニメーション
+    /// </summary>
+    private void AttackIdle(int animationIndex)
+    {
+        // Rotate the whole body
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.wholeRotation[animationIndex]);
+
+        // Arm animation
+        if (attackIdleData.armForwardRotation == null || attackIdleData.armBackRotation == null)
+        {
+            Debug.LogWarning("AttackIdle Armデータが何かしら抜けてる");
+            return;
+        }
+        else
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.armForwardRotation[animationIndex]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.armBackRotation[animationIndex]);
+            hand[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.handForwardRotation[animationIndex]);
+            hand[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.handBackRotation[animationIndex]);
+
+        }
+
+        // Leg animation
+        if (attackIdleData.legForwardRotation == null || attackIdleData.legBackRotation == null)
+        {
+            Debug.LogWarning("AttackIdle Legデータが何かしら抜けてる");
+            return;
+        }
+        else if (attackIdleData.footBackRotation == null || attackIdleData.footForwardRotation == null)
+        {
+            Debug.LogWarning("AttackIdle Footデータが何かしら抜けてる");
+            return;
+        }
+        else
+        {
+            leg[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.legForwardRotation[animationIndex]);
+            leg[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.legBackRotation[animationIndex]);
+            foot[0].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.footForwardRotation[animationIndex]);
+            foot[1].transform.rotation = Quaternion.Euler(0, shaft, attackIdleData.footBackRotation[animationIndex]);
         }
     }
     /// <summary>
@@ -372,7 +431,6 @@ public class EnemyMoveAnimation : MonoBehaviour
 
     private IEnumerator CallPantieWithDelay()
     {
-
         int animationLength = upper.armForwardRotation.Length;
         for (int i = 0; i < animationLength; i++)
         {
@@ -382,19 +440,14 @@ public class EnemyMoveAnimation : MonoBehaviour
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 indexNumber++;
-                yield return new WaitForSeconds(indexNumber);
+                yield return new WaitForSeconds(timeAttackMax);
             }
             else
             {
-                yield return new WaitForSeconds(indexNumber + afterAttackFreezeTime);
+                yield return new WaitForSeconds(timeAttackMax + afterAttackFreezeTime);
             }
         }
-
-        // 攻撃が終わったら
-        PoseWaiting(status == Status.Zombie);
-        time = timeMax;
-        isAttack = false;
-
+        AfterAttackAnimation();
     }
 
     private IEnumerator CallKickWithDelay()
@@ -408,19 +461,25 @@ public class EnemyMoveAnimation : MonoBehaviour
             {
                 // indexNumberの値を増やす(配列番号を上げる)
                 indexNumber++;
-                yield return new WaitForSeconds(indexNumber);
+                yield return new WaitForSeconds(timeAttackMax);
             }
             else
             {
-                yield return new WaitForSeconds(indexNumber + afterAttackFreezeTime);
+                yield return new WaitForSeconds(timeAttackMax + afterAttackFreezeTime);
             }
         }
+        AfterAttackAnimation();
+    }
 
-        // 攻撃が終わったら
+    /// <summary>
+    /// 攻撃アニメーション終了後の処理
+    /// </summary>
+    private void AfterAttackAnimation()
+    {
         PoseWaiting(status == Status.Zombie);
+        newEnemyMovement.SetEnemyState(newEnemyMovement.EnemyState.Search);
         time = timeMax;
         isAttack = false;
-
     }
 
     /// <summary>
@@ -450,6 +509,11 @@ public class EnemyMoveAnimation : MonoBehaviour
     {
         time = timeMax * walk.armForwardRotation.Length;
         StartCoroutine(CallWalkWithDelay());
+    }
+
+    public void AttakIdleStart()
+    {
+        StartCoroutine(CallAttackIdleWithDelay());
     }
 
     /// <summary>
