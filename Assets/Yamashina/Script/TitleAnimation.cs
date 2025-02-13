@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+
 public class TitleAnimation : MonoBehaviour
 {
     [Header("パネルのオブジェクトのセットアクティブ切り替え用")]
@@ -74,21 +75,25 @@ public class TitleAnimation : MonoBehaviour
     [SerializeField, Header("オプション画面の戻るボタン")]
     private Button optionReturn;
 
-    enum PanalView
+    [SerializeField, Header("チュートリアルスキップするかのウィンドウ")] private GameObject skipPanel;
+    private GameObject skipPanelInstance;
+
+
+    enum PanelView
     {
         None,
         Credit,
         Option,
 
     }
-    PanalView panalView = PanalView.None;
+    PanelView panelView = PanelView.None;
 
 
     void Start()
     {
 
         start.onClick.AddListener(() =>
-            SceneTransitionManager.instance.NextSceneButton(1));
+           InstantiateSkipPanel());
 
 
         TitleButton.interactable = false;
@@ -107,6 +112,49 @@ public class TitleAnimation : MonoBehaviour
 
 
     }
+
+
+    public void InstantiateSkipPanel()
+    {
+        if (skipPanelInstance != null) { Destroy(skipPanelInstance); }
+        skipPanelInstance = Instantiate(skipPanel);
+        ChangeStage1();
+        ChangeTutorial();
+    }
+
+    private void ChangeStage1()
+    {
+        Button YesButton = skipPanelInstance.transform.Find("YesButton").GetComponent<Button>();
+        Debug.Log(YesButton);
+
+        if (YesButton != null)
+        {
+            YesButton.onClick.RemoveAllListeners();
+            YesButton.onClick.AddListener(() =>
+            {
+                SceneTransitionManager.instance.NextSceneButton(2);
+                Destroy(skipPanelInstance);
+            });
+
+        }
+    }
+    private void ChangeTutorial()
+    {
+        Button NoButton = skipPanelInstance.transform.Find("NoButton").GetComponent<Button>();
+        Debug.Log(NoButton);
+
+        if (NoButton != null)
+        {
+            NoButton.onClick.RemoveAllListeners();
+            NoButton.onClick.AddListener(() => 
+            { 
+                SceneTransitionManager.instance.NextSceneButton(1);
+                Destroy(skipPanelInstance);
+            });
+
+        }
+    }
+
     public void MainView()//メイン画面に戻る関数
     {
 
@@ -121,7 +169,7 @@ public class TitleAnimation : MonoBehaviour
         //if (OptionPanel.activeSelf) { StartSlideOut(); }
 
 
-        if (panalView == PanalView.Credit)
+        if (panelView == PanelView.Credit)
         {
             MultiAudio.ins.PlayBGM_ByName("BGM_title");
         }
@@ -260,31 +308,31 @@ public class TitleAnimation : MonoBehaviour
 
         if (!OptionPanel.activeSelf && !CreditPanel.activeSelf && mainPanel.activeSelf)
         {
-            panalView = PanalView.None;
+            panelView = PanelView.None;
         }
         else if (!OptionPanel.activeSelf && CreditPanel.activeSelf && !mainPanel.activeSelf)
         {
-            panalView = PanalView.Credit;
+            panelView = PanelView.Credit;
         }
         else if (OptionPanel.activeSelf && !CreditPanel.activeSelf && mainPanel.activeSelf)
         {
-            panalView = PanalView.Option;
+            panelView = PanelView.Option;
         }
         MouseOverObject mouseOver = GameObject.FindAnyObjectByType<MouseOverObject>();
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.G))
         {
-            switch (panalView)
+            switch (panelView)
             {
 
-                case PanalView.None:
+                case PanelView.None:
 
                     option.onClick.Invoke();
-                  
+
 
                     mouseOver.mouseover.SetActive(false);
 
                     break;
-                case PanalView.Credit:
+                case PanelView.Credit:
                     //CreditPanel.SetActive(false);
                     //mainPanel.SetActive(true);
                     //OptionPanel.SetActive(false);
@@ -297,9 +345,9 @@ public class TitleAnimation : MonoBehaviour
                     }
 
                     break;
-                case PanalView.Option:
+                case PanelView.Option:
 
-                    optionReturn.onClick.Invoke();  
+                    optionReturn.onClick.Invoke();
                     mouseOver.mouseover.SetActive(false);
 
 
@@ -314,10 +362,10 @@ public class TitleAnimation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
 
         {
-            switch (panalView)
+            switch (panelView)
             {
 
-                case PanalView.None:
+                case PanelView.None:
 
                     start.onClick.Invoke();
                     break;
@@ -327,15 +375,15 @@ public class TitleAnimation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
 
         {
-            switch (panalView)
+            switch (panelView)
             {
 
-                case PanalView.None:
+                case PanelView.None:
                     CreditView();
                     Credit.onClick.Invoke();
 
-                    panalView = PanalView.Credit;
-
+                    panelView = PanelView.Credit;
+                        
                     break;
             }
 
