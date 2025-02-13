@@ -82,9 +82,6 @@ public class newEnemyMovement : MonoBehaviour
                         }
                         else
                         {
-                            // TODO: ここでpointA~Bの範囲外に出てた場合の挙動は検討されてる？
-                            // たとえばプレイヤーを追って範囲外に出てしまう場合
-
                             // いつもの挙動
                             float Target = isMovingToPointB ? pointB : pointA;
                             Vector3 target = new Vector3(Target, transform.position.y, transform.position.z);
@@ -128,7 +125,7 @@ public class newEnemyMovement : MonoBehaviour
                         if (timer > waitTime)
                         {
                             timer = 0;
-                            if ((distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && IsLeftFromPlayer() == isMovingToPointB)
+                            if (IsAttackableRangeAndDirection())
                             {
                                 AttackIdle();
                             }
@@ -145,19 +142,8 @@ public class newEnemyMovement : MonoBehaviour
                         // アニメーション関数内でアニメーション後にEnemyState切替
                         break;
                     case EnemyState.Attack:
-                        if (IsLeftFromPlayer() != isMovingToPointB)
-                        {
-                            // エネミーがプレイヤーを向いていなければ攻撃中止
-                            enemyState = EnemyState.Search;
-                            break;
-                        }
-                        else if (distanceToPlayer > upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
-                        {
-                            // 両半身とも攻撃範囲外なら攻撃中止
-                            enemyState = EnemyState.Search;
-                            break;
-                        }
-                        else if (distanceToPlayer <= upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
+                        // 上半身下半身どちらか一方だけが攻撃範囲内の場合
+                        if (distanceToPlayer <= upperPart.AttackArea && distanceToPlayer > lowerPart.AttackArea)
                         {
                             AttackWithSeUpper();
 
@@ -169,7 +155,6 @@ public class newEnemyMovement : MonoBehaviour
                         }
                         else
                         {
-                            // 両半身とも攻撃範囲内の場合
                             // 乱数を取得する
                             int num = Random.Range(0, 2);
                             if (num == 0)
@@ -239,6 +224,12 @@ public class newEnemyMovement : MonoBehaviour
         }
     }
 
+    private bool IsAttackableRangeAndDirection()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        return (distanceToPlayer < upperPart.AttackArea || distanceToPlayer < lowerPart.AttackArea) && IsLeftFromPlayer() == isMovingToPointB;
+    }
+
     // 
     bool IsLeftFromPlayer()
     {
@@ -294,7 +285,7 @@ public class newEnemyMovement : MonoBehaviour
         //上半身攻撃
         enemyMoveAnimation.PantieStart();
 
-        if (upperPart.sPartsName != "警察の上半身")
+        if (upperPart.sPartsName != "警察の上半身" && IsAttackableRangeAndDirection())
         {
             OnUpperAttackAnimationFinished();
         }
@@ -364,7 +355,10 @@ public class newEnemyMovement : MonoBehaviour
         Debug.Log("AttackWithSeLower");
         //下半身攻撃
         enemyMoveAnimation.KickStart();
-        OnLowerAttackAnimationFinished();
+        if (IsAttackableRangeAndDirection())
+        {
+            OnLowerAttackAnimationFinished();
+        }
         //攻撃者の下半身を確認
         switch (lowerPart.sPartsName)
         {
