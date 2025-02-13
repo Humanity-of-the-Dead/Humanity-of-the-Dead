@@ -487,8 +487,8 @@ public class PlayerControl : MonoBehaviour
             //Scale‚Ì”¼•ª‚¾‚ÆŒ©‚½–Ú‚Æ‚ÌŒë·‚Å‚¤‚Ü‚­“­‚©‚È‚¢‚½‚ß”¼•ª‚æ‚è‚à­‚µ‘å‚«‚¢’l‚ğæ‚è‚½‚¢‚½‚ß1.5‚Æ‚·‚é
             if((distanceX < this.GetComponent<BoxCollider2D>().size.x * this.transform.localScale.x / 1.5  
                 + enemyObject[i].GetComponent<BoxCollider2D>().size.x * enemyObject[i].transform.localScale.x / 1.5) &&
-                (distanceY < this.GetComponent<BoxCollider2D>().size.y * this.transform.localScale.y / 2
-                + enemyObject[i].GetComponent<BoxCollider2D>().size.y * enemyObject[i].transform.localScale.y / 2))
+                (distanceY < this.GetComponent<BoxCollider2D>().size.y * this.transform.localScale.y /2.5
+                + enemyObject[i].GetComponent<BoxCollider2D>().size.y * enemyObject[i].transform.localScale.y / 2.5))
             {
                 //player‚ª‰E‚ğŒü‚¢‚Ä‚¢‚é‚©‚Âenemy‚ªplayer‚Ì‰E‘¤‚É‚¢‚é‚©
                 //player‚ª¶‚ğŒü‚¢‚Ä‚¢‚é‚©‚Âenemy‚ªplayer‚Ì¶‘¤‚É‚¢‚é‚È‚ç“–‚½‚Á‚Ä‚¢‚é
