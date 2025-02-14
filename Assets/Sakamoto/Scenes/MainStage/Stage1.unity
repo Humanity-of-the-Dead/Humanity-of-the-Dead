@@ -2262,69 +2262,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: playerJumpPower
-      value: 950
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: enemyObject.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174693859135747344, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: enemyObject.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8462856283274023862, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
       propertyPath: m_Name
       value: Player Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: timeMax
-      value: 0.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: attackTimeMax
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: hitGameObject
-      value: 
-      objectReference: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: lowerEffectXMax
-      value: 0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: lowerEffectXMin
-      value: -0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: lowerEffectYMax
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: lowerEffectYMin
-      value: -2.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: upperEffectXMax
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: upperEffectXMin
-      value: 0.48
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: upperEffectYMax
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: upperEffectYMin
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006365512994558057, guid: feb2cd181b14f7b42a42ac36015cbb5a, type: 3}
-      propertyPath: afterAttackFreezeTime
-      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4016,6 +3956,8 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 47bc2a3c906231546ad6a2593814acbd, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 1
+  LoadDataIndex: 0
+  LoadText: 0
   Position:
   - -3.8
   - 184.6349
