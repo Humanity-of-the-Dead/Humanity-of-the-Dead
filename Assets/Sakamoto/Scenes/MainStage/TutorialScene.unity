@@ -2204,6 +2204,10 @@ PrefabInstance:
       value: Nomal_stg01 Variant_Add
       objectReference: {fileID: 0}
     - target: {fileID: 6746467646807872166, guid: 985c669ebb42b2a4395d00374b854793, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6746467646807872166, guid: 985c669ebb42b2a4395d00374b854793, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -3305,7 +3309,7 @@ MonoBehaviour:
   preUpperPart: {fileID: 1386206347217571068, guid: 6811574eddb91a248bad381ec3041bab, type: 3}
   preLowerPart: {fileID: 1386206347217571068, guid: 0c0526c739092e0488fa5692f3889eb2, type: 3}
   playerControl: {fileID: 0}
-  Boss: 0
+  Boss: 1
   needsAttackingBothParts: 0
   bulletDamage: 0
   UpperHPBar: {fileID: 857476731}

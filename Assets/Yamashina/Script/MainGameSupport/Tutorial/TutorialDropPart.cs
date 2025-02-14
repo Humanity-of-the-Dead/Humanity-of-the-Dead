@@ -5,6 +5,7 @@ using UnityEngine;
 public class TutorialDropPart : newDropPart
 {
     private Tutorial tutorial;
+    private string newLayerName = "Enemy"; // ïœçXÇµÇΩÇ¢ÉåÉCÉÑÅ[ñº
 
     // Start is called before the first frame update
     protected override void Start()
@@ -30,8 +31,11 @@ public class TutorialDropPart : newDropPart
             GameObject GameMain = GameObject.Find("GameMain");
 
             GameMain = GameMain.transform.Find("Nomal_stg01 Variant_Add").gameObject;
+            int newLayer = LayerMask.NameToLayer(newLayerName);
+            GameMain.layer = newLayer;
             Debug.Log(GameMain);
             GameMain.SetActive(true);
+
 
         }
         base.DoComfort();

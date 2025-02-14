@@ -74,7 +74,7 @@ public class PlayerParameter : CharacterStats
     }
     protected virtual void Start()
     {
-        enemyMoveAnimation = GameObject.FindObjectOfType<EnemyMoveAnimation>();
+        enemyMoveAnimation = FindObjectOfType<EnemyMoveAnimation>();
 
 
         //ƒV[ƒ“‘JˆÚ‚Å”jŠü‚³‚ê‚È‚¢
