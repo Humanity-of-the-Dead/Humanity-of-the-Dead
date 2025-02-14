@@ -32,7 +32,7 @@ public class TutorialDropPart : newDropPart
 
             GameMain = GameMain.transform.Find("Nomal_stg01 Variant_Add").gameObject;
             int newLayer = LayerMask.NameToLayer(newLayerName);
-            GameMain.layer = newLayer;
+            SetLayerRecursively(GameMain, newLayer);
             Debug.Log(GameMain);
             GameMain.SetActive(true);
 
@@ -57,7 +57,15 @@ public class TutorialDropPart : newDropPart
 
 
     }
-
+    // 再帰的にレイヤーを変更する関数
+    void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, layer);
+        }
+    }
     void TutorialShowText()
     {
 
