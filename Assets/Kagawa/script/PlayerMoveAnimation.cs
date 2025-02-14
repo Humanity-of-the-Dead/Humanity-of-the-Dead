@@ -100,7 +100,9 @@ public class PlayerMoveAnimation : MonoBehaviour
     // 攻撃のタイマー
     public float timeAttack = 0;
     #endregion
+    [SerializeField, Header("攻撃待機アニメーションが始まってから\n攻撃するまでの秒数")]
 
+    private float attackIdle = 0;
     public const int SHAFT_DIRECTION_RIGHT = 0;
     public const int SHAFT_DIRECTION_LEFT = 180;
 
@@ -155,7 +157,6 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     public   IEnumerator ShowHitEffectsBoss( Vector3 enemyVector3 )
     {
-        int body = Random.Range(0, 2);
         if (hasDefeatedBoss)
         {
            yield break;
@@ -164,7 +165,9 @@ public class PlayerMoveAnimation : MonoBehaviour
         for (int i = 1; i <= effectBurstCount; i++)
         {
             Debug.Log("ボスエフェクト開始");
-
+            // 試行回数が少ないので偏るよりかは交互に表示した方がいいかも
+            //int body = Random.Range(0, 2);
+            int body = i % 2;
             ShowHitEffects(body, enemyVector3);
             Debug.Log($"effectCountは {i}");
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
@@ -216,12 +219,63 @@ public class PlayerMoveAnimation : MonoBehaviour
 
 
         }
+    }
+    private IEnumerator CallAttackIdleWithDelay()
+    {
+        for (int i = 0; i < animationDataSet.attackIdle.armForwardRotation.Length; i++)
+        {
+            AttackIdle();
+            attackNumber++;
+            yield return new WaitForSeconds(attackIdle);
+        }
+    }
+    /// <summary>
+    /// 攻撃待機アニメーション
+    /// </summary>
+    /// <summary>
+    /// 攻撃待機アニメーション
+    /// </summary>
+    /// <summary>
+    /// 攻撃待機アニメーション
+    /// </summary>
+    private void AttackIdle()
+    {
+        // Rotate the whole body
+        playerRc.transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.wholeRotation[attackNumber]);
 
+        // Arm animation
+        if (animationDataSet.attackIdle.armForwardRotation == null || animationDataSet.attackIdle.armBackRotation == null)
+        {
+            Debug.LogWarning("AttackIdle Armデータが何かしら抜けてる");
+            return;
+        }
+        else
+        {
+            arm[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.armForwardRotation[attackNumber]);
+            arm[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.armBackRotation[attackNumber]);
+            hand[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.handForwardRotation[attackNumber]);
+            hand[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.handBackRotation[attackNumber]);
 
+        }
 
-
-
-
+        // Leg animation
+        if (animationDataSet.attackIdle.legForwardRotation == null || animationDataSet.attackIdle.legBackRotation == null)
+        {
+            Debug.LogWarning("AttackIdle Legデータが何かしら抜けてる");
+            return;
+        }
+        else if (animationDataSet.attackIdle.footBackRotation == null || animationDataSet.attackIdle.footForwardRotation == null)
+        {
+            Debug.LogWarning("AttackIdle Footデータが何かしら抜けてる");
+            return;
+        }
+        else
+        {
+            leg[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.legForwardRotation[attackNumber]);
+            leg[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.legBackRotation[attackNumber]);
+            foot[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.footForwardRotation[attackNumber]);
+            foot[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.footBackRotation[attackNumber]);
+        }   
     }
     /// <summary>
     /// 歩くアニメーション
@@ -870,7 +924,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         [SerializeField, Header("---ボスパンチのアニメーション---")] public AnimationData bossUpper;
 
         [SerializeField, Header("---ボスキックのアニメーション---")] public AnimationData bossLower;
-        //[SerializeField, Header("---攻撃待機アニメーション---")] public AnimationData　attackIdle ;//まだ制作完了していないのでコメントアウト化
+        [SerializeField, Header("---攻撃待機アニメーション---")] public AnimationData attackIdle;//まだ制作完了していないのでコメントアウト化
 
 
     }

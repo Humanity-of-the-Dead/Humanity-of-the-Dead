@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static Tutorial;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -80,14 +81,14 @@ public class PlayerControl : MonoBehaviour
         mainCameraWidth = mainCameraHeight * mainCamera.aspect;
         // 攻撃アニメーション終了時のコールバックを設定
         // 上半身攻撃アニメーション終了時のコールバックを設定
-         }
+    }
 
     // Update is called once per frame
     void Update()
     {
         //プレイヤーのY座標の制限
         //プレイヤーのY座標が8.0を超えたらリジッドボディのフォースを0にする
-     
+
         switch (GameMgr.GetState())
         {
             case GameState.Main:
@@ -103,13 +104,22 @@ public class PlayerControl : MonoBehaviour
                 if (playerMoveAnimation.SetAttack() == false)
                 {
                     isShot = true;
-
                 }
 
                 MainExecution();
 
                 break;
+            case GameState.ShowText:
+                UpdateTimers();
+
+                break;
             case GameState.ShowOption:
+
+                break;
+
+            case GameState.Tutorial:
+                UpdateTimers();
+                break;
             case GameState.Hint:
                 Time.timeScale = 0.0f;
                 //Debug.Log("プレイヤーが動いていないこと確認");
@@ -128,7 +138,7 @@ public class PlayerControl : MonoBehaviour
         Time.timeScale = 1.0f;
 
     }
-    void MoveAndJump()
+    void Move()
     {
         //現在のポジションを取得
         Vector3 vPosition = transform.position;
@@ -144,8 +154,11 @@ public class PlayerControl : MonoBehaviour
             {
                 if (vPosFromCame.x > -mainCameraWidth / 2)
                 {
-                    vPosition.x -= Time.deltaTime * playerSpeed;
-
+                    if (isEnemyHit() == false)
+                    {
+                        Debug.Log("左に移動します");
+                        vPosition.x -= Time.deltaTime * playerSpeed;
+                    }
                 }
                 playerMoveAnimation.HandleWalk(PlayerMoveAnimation.SHAFT_DIRECTION_LEFT);
             }
@@ -154,14 +167,13 @@ public class PlayerControl : MonoBehaviour
             {
                 if (mainCameraWidth / 2 > vPosFromCame.x)
                 {
-                    vPosition.x += Time.deltaTime * playerSpeed;
+                    if (isEnemyHit() == false)
+                    {
+                        vPosition.x += Time.deltaTime * playerSpeed;
+                    }
                 }
                 playerMoveAnimation.HandleWalk(PlayerMoveAnimation.SHAFT_DIRECTION_RIGHT);
-
             }
-
-            //ジャンプ
-
             if (Input.GetKey(KeyCode.W) && jumpCount < 1)
             {
                 Vector2 upVector = Vector2.up;
@@ -173,6 +185,7 @@ public class PlayerControl : MonoBehaviour
                 jumpCount++;
 
             }
+
             //楽に次のシーン行きたいならこの下のコードをコメントアウト解除　確認後コメントアウトしておいて
 
             //if (Input.GetKeyDown(KeyCode.Escape))
@@ -195,12 +208,15 @@ public class PlayerControl : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         transform.position = vPosition;
     }
+
     //ゲームメインのエクスキュート
     void MainExecution()
     {
-
-        MoveAndJump();
-
+        if(Tutorial.GetState()== Tutorial_State.PlayerDoNotMove)
+        {
+            return;
+        }
+        Move();
 
 
         #region 山品変更
@@ -211,7 +227,7 @@ public class PlayerControl : MonoBehaviour
             //上半身攻撃
             if (Input.GetKeyDown(KeyCode.I))
             {
-
+                //Tutorial.NextState();       
                 UpperAttack upperattack = PlayerParameter.Instance.UpperData.upperAttack;
                 playerMoveAnimation.PantieStart();
                 // 警察上半身は銃弾に当たり判定を持つ
@@ -219,7 +235,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     OnUpperAttackAnimationFinished();
                 }
-                
+
                 #endregion
                 switch (upperattack)
                 {
@@ -267,17 +283,19 @@ public class PlayerControl : MonoBehaviour
                         break;
                 }
 
-               
 
-               
+
+
 
             }
             //下半身攻撃
             if (Input.GetKeyDown(KeyCode.K))
             {
+                //Tutorial.NextState();
+
                 #region 山品変更
                 playerMoveAnimation.KickStart();
-                OnLowerAttackAnimationFinished();   
+                OnLowerAttackAnimationFinished();
 
                 #endregion
                 switch (PlayerParameter.Instance.LowerData.lowerAttack)
@@ -295,12 +313,12 @@ public class PlayerControl : MonoBehaviour
                         MultiAudio.ins.PlaySEByName("SE_nurse_attack_lower");
                         break;
 
-                        case LowerAttack.BOSS:
+                    case LowerAttack.BOSS:
                         MultiAudio.ins.PlaySEByName("SE_lastboss_attack_lower");
                         break;
                 }
 
-                
+
 
             }
         }
@@ -409,13 +427,23 @@ public class PlayerControl : MonoBehaviour
     //床判定
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log(other.gameObject.tag);
         if (other.gameObject.CompareTag("Floor") || other.gameObject.CompareTag("Car"))
         {
             isJump = false;
             jumpCount = 0;
         }
-    }
 
+
+    }
+    //private void OnCollisionExit2D(Collision2D other)
+    //{
+    //    if (other.gameObject.CompareTag("OnTheCar"))
+    //    {
+    //        GameMgr.ChangeState(GameState.Main); // ボス戦直前に状態変更
+
+    //    }
+    //}
 
     //敵の弾との当たり判定
     private void OnTriggerEnter2D(Collider2D playerCollision)
@@ -444,4 +472,38 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    //enemyと当たっているかどうか
+    //return :: true->当たっている    false->当っていない
+    bool isEnemyHit()
+    {
+        for(int i = 0; i < enemyObject.Count; i++)
+        {
+            //敵とのX距離
+            float distanceX =Mathf.Abs(enemyObject[i].transform.position.x - this.transform.position.x);
+            //敵とのY距離
+            float distanceY =Mathf.Abs(enemyObject[i].transform.position.y - this.transform.position.y);
+            //X距離がplayerとenemyのコライダーのXサイズの半分の和より小さく
+            //Y距離がplayerとenemyのコライダーのYサイズの半分の和より小さいならif文に入る
+            //Scaleの半分だと見た目との誤差でうまく働かないため半分よりも少し大きい値を取りたいため1.5とする
+            if((distanceX < this.GetComponent<BoxCollider2D>().size.x * this.transform.localScale.x / 1.5  
+                + enemyObject[i].GetComponent<BoxCollider2D>().size.x * enemyObject[i].transform.localScale.x / 1.5) &&
+                (distanceY < this.GetComponent<BoxCollider2D>().size.y * this.transform.localScale.y /2.5
+                + enemyObject[i].GetComponent<BoxCollider2D>().size.y * enemyObject[i].transform.localScale.y / 2.5))
+            {
+                //playerが右を向いているかつenemyがplayerの右側にいるか
+                //playerが左を向いているかつenemyがplayerの左側にいるなら当たっている
+                if((playerMoveAnimation.isFacingToRight() == true &&
+                    0 < enemyObject[i].transform.position.x - this.transform.position.x) ||
+                    (playerMoveAnimation.isFacingToRight() == false &&
+                    enemyObject[i].transform.position.x - this.transform.position.x < 0))
+                {
+                    Debug.Log("当たってる");
+                    //当たっている
+                    return true;
+                }
+            }
+        }
+        //当っていない
+        return false;
+    }
 }

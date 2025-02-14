@@ -27,17 +27,17 @@ public class TextDisplay : MonoBehaviour
     [SerializeField]
     private float TypingSpeed = 1.0f;  //文字の表示速度
 
-    private int LoadDataIndex = 0; //今何個目の構造体を読み込んでいるか
+    public int LoadDataIndex = 0; //今何個目の構造体を読み込んでいるか
 
-    private int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
+    public int LoadText = 0;   //何枚目のテキストを読み込んでいるのか
 
     private int n = 0;
 
     [SerializeField]
-    private float[] Position;
+    protected float[] Position;
 
     [SerializeField]
-    private PlayerControl Player;
+    protected PlayerControl Player;
 
 
     [SerializeField]
@@ -47,7 +47,7 @@ public class TextDisplay : MonoBehaviour
     private string customNewline = "[BR]"; // 改行として扱う文字列を指定
     private string newline = "\n";
 
-    bool[] Flag;
+    protected bool[] Flag;
 
     [Header("次の文字が表示されるまでの時間")]
     [SerializeField]
@@ -79,7 +79,7 @@ public class TextDisplay : MonoBehaviour
     [SerializeField] GameObject GameClear;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         text.text = "";// 初期化
         Player = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
@@ -95,7 +95,7 @@ public class TextDisplay : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
 
 
@@ -110,20 +110,7 @@ public class TextDisplay : MonoBehaviour
                     Flag[Position.Length - 1] = true;
 
                 }
-                for (int i = 0; i < Position.Length; i++)
-                {
-                    if (Player.transform.position.x > Position[i] && Flag[i] == false)
-                    {
-                        Flag[i] = true;
-
-                        GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
-                        UpdateText();
-                        //テキスト表示域を表示域
-                        TextArea.SetActive(true);
-                    }
-
-
-                }
+                ShowTextChange();
 
                 break;
 
@@ -174,6 +161,7 @@ public class TextDisplay : MonoBehaviour
                 {
                     FinishTextHint();
                 }
+
                 break;
 
             case GameState.Clear:
@@ -263,6 +251,7 @@ public class TextDisplay : MonoBehaviour
 
                 }
                 break;
+
         }
     }
     public void UpdateText()
@@ -293,7 +282,7 @@ public class TextDisplay : MonoBehaviour
         }
     }
 
-    public void ShowHintText()
+    public virtual void ShowHintText()
     {
         GameMgr.ChangeState(GameState.Hint);
         TextArea.SetActive(true);
@@ -302,7 +291,7 @@ public class TextDisplay : MonoBehaviour
         TypingCroutine = StartCoroutine(TextCoroutine(hintTextAssetArray[LoadText].text));
     }
 
-    private void UpdateHintText()
+    protected virtual void UpdateHintText()
     {
         if (isTextFullyDisplayed)
         {
@@ -323,7 +312,7 @@ public class TextDisplay : MonoBehaviour
         }
     }
 
-    private void initCurrentTextDisplay()
+    protected virtual void initCurrentTextDisplay()
     {
         text.text = "";
         isTextFullyDisplayed = false;
@@ -335,7 +324,7 @@ public class TextDisplay : MonoBehaviour
         }
     }
 
-    private void FinishTextShowText()
+    public virtual void FinishTextShowText()
     {
         LoadDataIndex++;
         CloseTextArea();
@@ -345,7 +334,7 @@ public class TextDisplay : MonoBehaviour
     {
         TextArea.SetActive(false);
     }
-    private void FinishTextHint()
+    protected virtual void FinishTextHint()
     {
         CloseTextArea();
         LoadText = 0;
@@ -451,7 +440,7 @@ public class TextDisplay : MonoBehaviour
         int lastCharIndex = textStr.Length - 1;
 
         // 表示されない文字の数
-        string[] invisibleStrs = {"\n", "\x20", "□"};
+        string[] invisibleStrs = { "\n", "\x20", "□" };
         int invisibleCharCount = textStr.Length - RemoveByChars(textStr, invisibleStrs).Length;
 
         // 表示中の各文字(を囲む四角形)の4頂点の座標を取得
@@ -462,7 +451,7 @@ public class TextDisplay : MonoBehaviour
         int vertexCountPerChar = 4; // 1文字につき4頂点
         int vIdx = (lastCharIndex - invisibleCharCount) * vertexCountPerChar;
 
-        Vector3 enterKeyPosition = Vector3.zero; 
+        Vector3 enterKeyPosition = Vector3.zero;
         // vIdxが末尾文字のものとして正しいかチェック
         if (vIdx == vertexs.Count - vertexCountPerChar)
         {
@@ -483,7 +472,7 @@ public class TextDisplay : MonoBehaviour
         else
         {
             // テキストボックス右下辺り
-            Vector3 defaultPosition =new Vector3(545f, 117f, 0f);
+            Vector3 defaultPosition = new Vector3(545f, 117f, 0f);
             enterKeyPosition = defaultPosition;
 
             Debug.Log("failed to get last character position of text.");
@@ -513,7 +502,7 @@ public class TextDisplay : MonoBehaviour
     }
 
     // targetStrからremoveStrsの文字を取り除いて返す
-    private string RemoveByChars(string targetStr,  string[] removeStrs)
+    private string RemoveByChars(string targetStr, string[] removeStrs)
     {
         //削除する文字にマッチするパターンを作成する
         string removePattern = "[" + string.Join("", removeStrs) + "]";
@@ -521,6 +510,25 @@ public class TextDisplay : MonoBehaviour
         return Regex.Replace(targetStr, removePattern, "");
     }
 
+    public virtual void ShowTextChange()
+    {
+        for (int i = 0; i < Position.Length; i++)
+        {
+            if (Player.transform.position.x > Position[i] && Flag[i] == false)
+            {
+                Flag[i] = true;
+
+                GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
+                UpdateText();
+                //テキスト表示域を表示域
+                TextArea.SetActive(true);
+
+            }
+
+
+        }
+
+    }
     //private void OnGUI()
     //{
     //    GUI.skin.label.fontSize = 30;  // 例えば30に設定

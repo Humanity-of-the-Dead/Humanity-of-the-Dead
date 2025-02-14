@@ -120,14 +120,26 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5066492829317263093, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
+      propertyPath: m_Size.x
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5211514210946013214, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6025226992257383609, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
+      propertyPath: attackIdle
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025226992257383609, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
       propertyPath: hitGameObject
       value: 
       objectReference: {fileID: 2915290875536770607, guid: 9d3e22594d3fca943a50345c8febeef4, type: 3}
+    - target: {fileID: 6025226992257383609, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
+      propertyPath: attackIdleData
+      value: 
+      objectReference: {fileID: 11400000, guid: 0df453d8a05d7d4429c799d2c2a7b0ef, type: 2}
     - target: {fileID: 6025226992257383609, guid: 098aeb0e9bb10dc46be1a66c3e653be3, type: 3}
       propertyPath: lowerEffectXMax
       value: 0.21

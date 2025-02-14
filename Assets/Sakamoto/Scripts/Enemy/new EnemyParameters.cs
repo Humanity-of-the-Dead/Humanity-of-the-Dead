@@ -7,9 +7,9 @@ public class newEnemyParameters : CharacterStats
 {
     //部位の耐久値を設定できる
     [SerializeField, Header("敵の上半身HP")]
-    private int UpperHP;
+    protected int UpperHP;
     [SerializeField, Header("敵の下半身HP")]
-    private int LowerHP;
+    protected int LowerHP;
 
 
 
@@ -35,6 +35,8 @@ public class newEnemyParameters : CharacterStats
     public PlayerControl playerControl;
 
     private PlayerMoveAnimation playerMoveAnimation;
+
+    protected newEnemyMovement newEnemyMovement;
 
     //ボスフラグ
     [SerializeField, Header("ボスかどうか、チェックが入っているならボス")]
@@ -82,11 +84,11 @@ public class newEnemyParameters : CharacterStats
 
     private bool isFlashing = false;
 
-    private bool hasDroped = false;
+    protected bool hasDroped = false;
 
-    private bool hasBossEffect=false;
+
     //public bool isDropInstantiated = false;
-    private void Start()
+    protected virtual void Start()
     {
         MaxLowerHP = LowerHP;
         MaxUpperHP = UpperHP;
@@ -102,12 +104,13 @@ public class newEnemyParameters : CharacterStats
         enemyRenderer = transform.GetComponentsInChildren<Renderer>();
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
+        newEnemyMovement = GetComponent<newEnemyMovement>();
         //Debug.Log(playerControl);
 
     }
 
 
-    void Update()
+    protected virtual void Update()
     {
         float DistanceToPlayer = Vector3.Distance(transform.position, playerControl.transform.position);
         // プレイヤーが一定距離以内にいる場合にHPバーを表示playerControl
@@ -129,43 +132,18 @@ public class newEnemyParameters : CharacterStats
         AdjustHpIfNeededAttackingBothParts();
 
         // 部位が破壊された際にHPバーを一瞬表示
-        if (UpperHP <= 0&&-100<UpperHP)
-        {
-
-            playerControl.RemoveListItem(this.gameObject);
-            StartCoroutine(FlashObject(0));
-
-            if (Boss&& !hasBossEffect)
-            {
-                playerMoveAnimation.StartBossEffect(transform.position);
-                hasBossEffect = true;
-            }
-
-            //Debug.Log("上半身が破壊された");
-            //Drop(Upperbodypart, false);
-
-            UpperHP = -10000;
-
-        }
-        if (LowerHP <= 0 && -100 < LowerHP)
+        if ((UpperHP <= 0 || LowerHP <= 0) && newEnemyMovement.GetEnemyState() != newEnemyMovement.EnemyState.IsDead)
         {
             playerControl.RemoveListItem(this.gameObject);
-            StartCoroutine(FlashObject(1));
+            int body = UpperHP <= 0 ? 0 : 1;
+            StartCoroutine(FlashObject(body));
 
-            if (Boss&&!hasBossEffect)
+            if (Boss)
             {
                 playerMoveAnimation.StartBossEffect(transform.position);
-                hasBossEffect = true;
-                Debug.Log("エフェクト開始");
             }
 
-            //Debug.Log("下半身が破壊された");
-            //Drop(Lowerbodypart, true);
-
-
-            LowerHP = -10000;
-
-
+            newEnemyMovement.SetEnemyState(newEnemyMovement.EnemyState.IsDead);
 
         }
         //if (GameMgr.GetState() == GameState.ShowText&&!Boss)
@@ -222,7 +200,7 @@ public class newEnemyParameters : CharacterStats
         }
     }
 
-    private IEnumerator FlashObject(int body = 0)
+    protected virtual IEnumerator FlashObject(int body = 0)
     {
         isFlashing = true;
         float elapsedTime = 0;
@@ -253,7 +231,7 @@ public class newEnemyParameters : CharacterStats
         }
     }
 
-        private IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
+    protected virtual IEnumerator ShowHPBarAndDestroy(Image hpBar, BodyPartsData part, bool typ)
     {
         if (hpBar != null)
         {
@@ -273,7 +251,7 @@ public class newEnemyParameters : CharacterStats
     //BodyPartsData part->生成した後に与えるパラメータデータ
     //int typ->trueなら上半身が落ちる:falseなら下半身が落ちる
     //デフォルト引数はtrue
-    public void Drop(BodyPartsData part, bool typ = true)
+    public virtual void Drop(BodyPartsData part, bool typ = true)
     {
         GameObject drop = null;
         Debug.Log(typ);

@@ -13,7 +13,7 @@ public class PlayerParameter : CharacterStats
     public static PlayerParameter Instance;
 
     [SerializeField, Header("1減少するのにかかる時間")]
-    private float iDownTime;
+    protected float iDownTime;
     [SerializeField, Header("人間性の最大値")]
     public int iHumanityMax;     //人間性の最大値
     [SerializeField, Header("上半身のHPの最大値,パーツが変わる度に\n数値が変わるため設定はそのままでOK")]
@@ -23,9 +23,9 @@ public class PlayerParameter : CharacterStats
 
     public int iLowerHPMax;      //下半身のHPの最大値
 
-    private float iHumanity;     //人間性
-    private float iUpperHP;      //上半身のHP
-    private float iLowerHP;      //下半身のHP
+    protected float iHumanity;     //人間性
+    protected float iUpperHP;      //上半身のHP
+    protected float iLowerHP;      //下半身のHP
 
     [Header("プレイヤーコントロールスクリプト")]
     [SerializeField] private PlayerControl playerControl;
@@ -65,16 +65,16 @@ public class PlayerParameter : CharacterStats
     private const float GAMEOVER_ZOMBIEWALK_SPEED = 0.2f;
 
 
-    public void Awake()
+    protected virtual void Awake()
     {
         CheckInstance();
         InitBodyIndex();
         //コンポーネント取得
         InitializeReferences();
     }
-    private void Start()
+    protected virtual void Start()
     {
-        enemyMoveAnimation = GameObject.FindObjectOfType<EnemyMoveAnimation>();
+        enemyMoveAnimation = FindObjectOfType<EnemyMoveAnimation>();
 
 
         //シーン遷移で破棄されない
@@ -82,7 +82,7 @@ public class PlayerParameter : CharacterStats
       
     }
 
-    private void Update()
+   protected virtual void Update()
     {
         string SceneName = SceneManager.GetActiveScene().name;
         if (!(SceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title)))
@@ -91,13 +91,17 @@ public class PlayerParameter : CharacterStats
             {
                 case GameState.Main:
                     //パラメータの値をiDownTime秒で1減少させる
-                    iHumanity -= Time.deltaTime / iDownTime/* *dgbScale*/;
-                    iUpperHP -= Time.deltaTime / iDownTime;
-                    iLowerHP -= Time.deltaTime / iDownTime;
+                    DecreasingHP();
                     //Debug.Log(iDownTime);
                     if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
                     {
+                        string sceneName = SceneManager.GetActiveScene().name;
 
+                        if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Tutorial)){
+                            iHumanity = 1;
+                            iUpperHP = 1;
+                            iLowerHP = 1;
+                        }
                         Debug.Log("リロードを開始します"); // デバッグログで確認
 
                         AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
@@ -119,13 +123,16 @@ public class PlayerParameter : CharacterStats
                         GameMgr.ChangeState(GameState.GameOver);
 
                     }
+                    break;
+               
+
 
                     ////シーン移動
                     //if (Input.GetKeyDown(KeyCode.M))
                     //{
                     //    SceneManager.LoadScene("Stage2");
                     //}
-                    break;
+               
                 case GameState.GameOver:
                     if (iHumanity < 0)
                     {
@@ -293,7 +300,7 @@ public class PlayerParameter : CharacterStats
     /// シーン読み込み時の初期化処理
     /// upperIndex/upperIndexは初期化されない
     /// </summary>
-    private void InitializeReferences()
+    protected virtual void InitializeReferences()
     {
         // シーン遷移後に必要なオブジェクトを再取得
         goMosaic = GameObject.Find("Player Variant");
@@ -366,7 +373,7 @@ public class PlayerParameter : CharacterStats
         // イベントの解除
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    public override void TakeDamage(float damage, int body = 0)
+    public override  void TakeDamage(float damage, int body = 0)
     {
         //HPが減る仕組み
         //damageはテスト用の関数
@@ -423,5 +430,12 @@ public class PlayerParameter : CharacterStats
 
             MultiAudio.ins.PlaySEByName("SE_common_breakbody");
         }
+    }
+
+    protected virtual void DecreasingHP()
+    {
+        iHumanity -= Time.deltaTime / iDownTime/* *dgbScale*/;
+        iUpperHP -= Time.deltaTime / iDownTime;
+        iLowerHP -= Time.deltaTime / iDownTime;
     }
 }

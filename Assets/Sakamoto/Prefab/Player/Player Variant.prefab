@@ -575,7 +575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: effectBurstCount
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: multiEffectNumber
@@ -583,7 +583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: bossEffectInterval
-      value: 0.0015
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: hand.Array.data[0]
@@ -613,6 +613,10 @@ PrefabInstance:
       propertyPath: animationDataSet.bossUpper
       value: 
       objectReference: {fileID: 11400000, guid: e7766c1a6f6fc414e9785188e74f2397, type: 2}
+    - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
+      propertyPath: animationDataSet.attackIdle
+      value: 
+      objectReference: {fileID: 11400000, guid: 0df453d8a05d7d4429c799d2c2a7b0ef, type: 2}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: animationDataSet.nurseLower
       value: 

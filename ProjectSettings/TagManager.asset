@@ -17,6 +17,9 @@ TagManager:
   - EnemyShoot
   - GameClear
   - UI
+  - OnTheCar
+  - Button
+  - Destroy
   layers:
   - Default
   - TransparentFX
@@ -34,8 +37,8 @@ TagManager:
   - EnemyShoot
   - Fire
   - Floor
-  - 
-  - 
+  - OnTheCar
+  - Transplant_Enemy
   - 
   - 
   - 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+
 public class TitleAnimation : MonoBehaviour
 {
     [Header("パネルのオブジェクトのセットアクティブ切り替え用")]
@@ -74,21 +75,26 @@ public class TitleAnimation : MonoBehaviour
     [SerializeField, Header("オプション画面の戻るボタン")]
     private Button optionReturn;
 
-    enum PanalView
+    [SerializeField, Header("チュートリアルスキップするかのウィンドウ")] private GameObject skipPanel;
+    private GameObject skipPanelInstance;
+
+
+    enum PanelView
     {
         None,
+        Tutorial,
         Credit,
         Option,
 
     }
-    PanalView panalView = PanalView.None;
+    PanelView panelView = PanelView.None;
 
 
     void Start()
     {
 
         start.onClick.AddListener(() =>
-            SceneTransitionManager.instance.NextSceneButton(1));
+           InstantiateSkipPanel());
 
 
         TitleButton.interactable = false;
@@ -107,21 +113,56 @@ public class TitleAnimation : MonoBehaviour
 
 
     }
+
+
+    public void InstantiateSkipPanel()
+    {
+        if (skipPanelInstance != null) { Destroy(skipPanelInstance); }
+        skipPanelInstance = Instantiate(skipPanel);
+        ChangeStage1();
+        ChangeTutorial();
+    }
+
+    private void ChangeStage1()
+    {
+        Button YesButton = skipPanelInstance.transform.Find("YesButton").GetComponent<Button>();
+        Debug.Log(YesButton);
+
+        if (YesButton != null)
+        {
+            YesButton.onClick.RemoveAllListeners();
+            YesButton.onClick.AddListener(() =>
+            {
+                SceneTransitionManager.instance.NextSceneButton(2);
+                Destroy(skipPanelInstance);
+            });
+
+        }
+    }
+    private void ChangeTutorial()
+    {
+        Button NoButton = skipPanelInstance.transform.Find("NoButton").GetComponent<Button>();
+        Debug.Log(NoButton);
+
+        if (NoButton != null)
+        {
+            NoButton.onClick.RemoveAllListeners();
+            NoButton.onClick.AddListener(() => 
+            { 
+                SceneTransitionManager.instance.NextSceneButton(1);
+                Destroy(skipPanelInstance);
+            });
+
+        }
+    }
+
     public void MainView()//メイン画面に戻る関数
     {
 
 
-        //クレジット画面スライドアウト
+      
 
-        //if (CreditPanel.activeSelf)
-        //{
-        //    StartSlideOut();
-
-        //}
-        //if (OptionPanel.activeSelf) { StartSlideOut(); }
-
-
-        if (panalView == PanalView.Credit)
+        if (panelView == PanelView.Credit)
         {
             MultiAudio.ins.PlayBGM_ByName("BGM_title");
         }
@@ -132,10 +173,7 @@ public class TitleAnimation : MonoBehaviour
 
 
 
-        //ボタンのオブジェクトのセットアクティブ切り替え
-
-        //CreditButton.SetActive(true);//クレジットボタン
-        //optionButton.SetActive(true);   
+        
     }
 
 
@@ -155,14 +193,9 @@ public class TitleAnimation : MonoBehaviour
         OptionPanel.SetActive(false);
 
 
-        ////クレジット画面スライドイン開始
-        //if (CreditPanel.activeSelf)
-        //{
-        //    CreditPanel.transform.localPosition = creditPanelStartPosition;
-        //    StartSlideIn();
+     
         MultiAudio.ins.PlayBGM_ByName("BGM_credit");
 
-        //}
         MultiAudio.ins.bgmSource.loop = false;
     }
 
@@ -182,109 +215,50 @@ public class TitleAnimation : MonoBehaviour
 
 
 
-        //クレジット画面スライドイン開始
-        //if (OptionPanel.activeSelf)
-        //{
-        //    OptionPanel.transform.localPosition = OptionPanelStartPosition;
-        //    StartSlideIn();
-        //}
+      
     }
-    //スライドインするための関数呼び出し開始
-    //public void StartSlideIn()
-    //{
-    //    StartCoroutine(AnimateEachPanelIn());
-    //}
-
-    ////各オブジェクトのスライドイン
-    //public IEnumerator AnimateEachPanelIn()
-    //{
-
-    //    float Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
-
-
-    //    //クレジット画面のスライドインのアニメーション
-
-    //    while (Credit <= 1.0f && CreditPanel.activeSelf)
-    //    {
-    //        CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelStartPosition, creditPanelEndPosition, Credit);
-
-    //        Credit += speed * Time.deltaTime;
-
-    //        yield return new WaitForSeconds(Coroutine);
-    //    }
-    //    while (Credit <= 1.0f && OptionPanel.activeSelf)
-    //    {
-    //        OptionPanel.transform.localPosition = Vector3.Lerp(OptionPanelStartPosition, OptionPaneEndPosition, Credit);
-
-    //        Credit += speed * Time.deltaTime;
-
-    //        yield return new WaitForSeconds(Coroutine);
-    //    }
-
-    //}
-
-    //public void StartSlideOut() //画面内から画面外へスライドアウトするための関数呼び出し開始
-    //{
-    //    StartCoroutine(AnimateEachPanelOut());
+  
     //}
 
 
-    //画面内から画面外へスライドアウトするための関数 
-    //public IEnumerator AnimateEachPanelOut()
-    //{
-    //    float Credit = 0f;//クレジットのパネルのトランスフォーム値の変化
-    //                      //var Option = 0f;
-
-    //    //クレジット画面のスライドアウトのアニメーション
-    //    while (Credit <= 1.0f && CreditPanel.activeSelf)
-    //    {
-    //        CreditPanel.transform.localPosition = Vector3.Lerp(creditPanelEndPosition, creditPanelStartPosition, Credit);
-    //        Credit += speed * Time.deltaTime;
-    //        yield return new WaitForSeconds(Coroutine);
-    //    }
-    //    //クレジット画面のスライドアウトのアニメーション
-    //    while (Credit <= 1.0f && OptionPanel.activeSelf)
-    //    {
-    //        OptionPanel.transform.localPosition = Vector3.Lerp(OptionPaneEndPosition, OptionPanelStartPosition, Credit);
-    //        Credit += speed * Time.deltaTime;
-    //        yield return new WaitForSeconds(Coroutine);
-    //    }
-    //    Debug.Log("通った");
-
-    //}
+  
 
     void Update()
     {
         //Gキーもしくはマウス右クリック
+      
 
-
-        if (!OptionPanel.activeSelf && !CreditPanel.activeSelf && mainPanel.activeSelf)
+        if (!OptionPanel.activeSelf && !CreditPanel.activeSelf && mainPanel.activeSelf&&(skipPanelInstance==null||!skipPanelInstance.activeSelf))
         {
-            panalView = PanalView.None;
+            panelView = PanelView.None;
         }
-        else if (!OptionPanel.activeSelf && CreditPanel.activeSelf && !mainPanel.activeSelf)
+        else if(!OptionPanel.activeSelf && !CreditPanel.activeSelf && mainPanel.activeSelf && (skipPanelInstance == null || skipPanelInstance.activeSelf))
         {
-            panalView = PanalView.Credit;
+            panelView = PanelView.Tutorial;
         }
-        else if (OptionPanel.activeSelf && !CreditPanel.activeSelf && mainPanel.activeSelf)
+        else if (!OptionPanel.activeSelf && CreditPanel.activeSelf && !mainPanel.activeSelf&& (skipPanelInstance == null || !skipPanelInstance.activeSelf))
         {
-            panalView = PanalView.Option;
+            panelView = PanelView.Credit;
+        }
+        else if (OptionPanel.activeSelf && !CreditPanel.activeSelf && mainPanel.activeSelf&& (skipPanelInstance == null || !skipPanelInstance.activeSelf))
+        {
+            panelView = PanelView.Option;
         }
         MouseOverObject mouseOver = GameObject.FindAnyObjectByType<MouseOverObject>();
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.G))
         {
-            switch (panalView)
+            switch (panelView)
             {
 
-                case PanalView.None:
+                case PanelView.None:
 
                     option.onClick.Invoke();
-                  
+
 
                     mouseOver.mouseover.SetActive(false);
 
                     break;
-                case PanalView.Credit:
+                case PanelView.Credit:
                     //CreditPanel.SetActive(false);
                     //mainPanel.SetActive(true);
                     //OptionPanel.SetActive(false);
@@ -297,9 +271,9 @@ public class TitleAnimation : MonoBehaviour
                     }
 
                     break;
-                case PanalView.Option:
+                case PanelView.Option:
 
-                    optionReturn.onClick.Invoke();  
+                    optionReturn.onClick.Invoke();
                     mouseOver.mouseover.SetActive(false);
 
 
@@ -314,12 +288,18 @@ public class TitleAnimation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
 
         {
-            switch (panalView)
+            switch (panelView)
             {
 
-                case PanalView.None:
+                case PanelView.None:
 
                     start.onClick.Invoke();
+                    break;
+
+                case PanelView.Tutorial:
+                    Button NoButton = skipPanelInstance.transform.Find("NoButton").GetComponent<Button>();
+
+                    NoButton.onClick.Invoke();
                     break;
             }
 
@@ -327,21 +307,31 @@ public class TitleAnimation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
 
         {
-            switch (panalView)
+            switch (panelView)
             {
 
-                case PanalView.None:
+                case PanelView.None:
                     CreditView();
                     Credit.onClick.Invoke();
 
-                    panalView = PanalView.Credit;
-
+                    panelView = PanelView.Credit;
+                  
                     break;
             }
 
         }
-        //デバッグ用仮
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            switch (panelView)
+            {
+                case PanelView.Tutorial:
+                    Button YesButton = skipPanelInstance.transform.Find("YesButton").GetComponent<Button>();
+                    YesButton.onClick.Invoke();
+                    break;
+            }
+        }
+            //デバッグ用仮
+            if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }
