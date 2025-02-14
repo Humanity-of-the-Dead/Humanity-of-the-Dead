@@ -74,8 +74,7 @@ public class Tutorial : TextDisplay
                 ChangeStateToDoNotMoveIfNeeded();
                 if (GetState() == Tutorial_State.Option)
                 {
-                    GameMgr.ChangeState(GameState.AfterBoss);
-                }
+                    ShowGameClearUI();                }
                 break;
             case GameState.ShowText:
                 base.Update();

@@ -216,41 +216,46 @@ public class TextDisplay : MonoBehaviour
                 {
                     DisplayEnterKeyOnLastCharIfNeeded();
                 }
+                ShowGameClearUI();  
 
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    FinishTextAfterBoss();
-                }
-
-                if (!TextArea.activeSelf)
-                {
-                    GameClear.SetActive(true);
-
-                }
-                //Debug.Log(textDataSet[LoadDataIndex].textAsset.Length > LoadText);
-
-                AudioSource BGM = MultiAudio.ins.bgmSource;
-                if (GameClear.activeSelf) // テキストエリアが非表示の間
-                {
-                    // BGMが再生されていない場合、新しいBGMを再生
-                    if (BGM.isPlaying && BGM.clip.name != "BGM_clear")
-                    {
-                        BGM.Stop();
-                        MultiAudio.ins.PlayBGM_ByName("BGM_clear");
-                        BGM.loop = false; // BGMをループしない
-                    }
-
-
-                    // BGMが最後まで流れたことを確認
-                    if (BGM.time >= BGM.clip.length - clearToTransitionTime) // 0.1秒のマージンを持たせる
-                    {
-                        // クリア状態に遷移
-                        GameMgr.ChangeState(GameState.Clear);
-                    }
-
-
-                }
                 break;
+
+        }
+    }
+
+    protected virtual void ShowGameClearUI()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            FinishTextAfterBoss();
+        }
+
+        if (!TextArea.activeSelf)
+        {
+            GameClear.SetActive(true);
+
+        }
+        //Debug.Log(textDataSet[LoadDataIndex].textAsset.Length > LoadText);
+
+        AudioSource BGM = MultiAudio.ins.bgmSource;
+        if (GameClear.activeSelf) // テキストエリアが非表示の間
+        {
+            // BGMが再生されていない場合、新しいBGMを再生
+            if (BGM.isPlaying && BGM.clip.name != "BGM_clear")
+            {
+                BGM.Stop();
+                MultiAudio.ins.PlayBGM_ByName("BGM_clear");
+                BGM.loop = false; // BGMをループしない
+            }
+
+
+            // BGMが最後まで流れたことを確認
+            if (BGM.time >= BGM.clip.length - clearToTransitionTime) // 0.1秒のマージンを持たせる
+            {
+                // クリア状態に遷移
+                GameMgr.ChangeState(GameState.Clear);
+            }
+
 
         }
     }
