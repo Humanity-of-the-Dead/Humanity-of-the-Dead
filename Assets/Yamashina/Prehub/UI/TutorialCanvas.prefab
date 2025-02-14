@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 211, y: -153}
+  m_AnchoredPosition: {x: 196.4, y: -192.8}
   m_SizeDelta: {x: 364, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3567503204653729679
@@ -340,7 +340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -217.3, y: -153}
+  m_AnchoredPosition: {x: -209, y: -192.8}
   m_SizeDelta: {x: 364, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8222685047383559192
@@ -538,11 +538,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1689266455378361888, guid: d1abe63f9c7bace42b4b91aa4a8e55d5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 1689266455378361888, guid: d1abe63f9c7bace42b4b91aa4a8e55d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -46
       objectReference: {fileID: 0}
     - target: {fileID: 5205130575170655246, guid: d1abe63f9c7bace42b4b91aa4a8e55d5, type: 3}
       propertyPath: m_Color.a
@@ -563,6 +563,14 @@ PrefabInstance:
     - target: {fileID: 5277984861903467287, guid: d1abe63f9c7bace42b4b91aa4a8e55d5, type: 3}
       propertyPath: m_Name
       value: TutorialPanelWithOneButtonPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277984861903467287, guid: d1abe63f9c7bace42b4b91aa4a8e55d5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009180496109683414, guid: d1abe63f9c7bace42b4b91aa4a8e55d5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6210041733345330116, guid: d1abe63f9c7bace42b4b91aa4a8e55d5, type: 3}
       propertyPath: m_Pivot.x
