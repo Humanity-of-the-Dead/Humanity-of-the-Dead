@@ -5,13 +5,16 @@ using UnityEngine;
 public class TutorialDropPart : newDropPart
 {
     private Tutorial tutorial;
-    private string newLayerName = "Enemy"; // ïœçXÇµÇΩÇ¢ÉåÉCÉÑÅ[ñº
+    private GameObject addingEnemy_Isyoku;
+    private const float ADDINGENEMYISYOKU_X = 33.6f;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         tutorial = FindFirstObjectByType<Tutorial>();
+        addingEnemy_Isyoku = GameObject.Find("GameMain");
+        addingEnemy_Isyoku = addingEnemy_Isyoku.transform.Find("Nomal_stg01 Variant_Add").gameObject;
 
     }
 
@@ -28,24 +31,22 @@ public class TutorialDropPart : newDropPart
             Tutorial.ChangeState(Tutorial.Tutorial_State.EnemyDrop);
             TutorialShowText();
 
-            GameObject GameMain = GameObject.Find("GameMain");
+            addingEnemy_Isyoku.transform.position = new Vector3(ADDINGENEMYISYOKU_X, addingEnemy_Isyoku.transform.position.y, addingEnemy_Isyoku.transform.position.z);
 
-            GameMain = GameMain.transform.Find("Nomal_stg01 Variant_Add").gameObject;
-            int newLayer = LayerMask.NameToLayer(newLayerName);
-            SetLayerRecursively(GameMain, newLayer);
-            Debug.Log(GameMain);
-            GameMain.SetActive(true);
+
+            addingEnemy_Isyoku.SetActive(true);
 
 
         }
         base.DoComfort();
+      
 
 
 
     }
     protected override void DoTransplant()
     {
-        if (Input.GetKeyDown(KeyCode.L) && goButton.Length > 1 && goButton[1] != null && goButton[1].activeSelf&&Tutorial.GetState()==Tutorial.Tutorial_State.PlayerTransplant)
+        if (Input.GetKeyDown(KeyCode.L) && goButton.Length > 1 && goButton[1] != null && goButton[1].activeSelf && Tutorial.GetState() == Tutorial.Tutorial_State.PlayerTransplant)
         {
             Tutorial.ChangeState(Tutorial.Tutorial_State.Option);
             TutorialShowText();
