@@ -37,6 +37,7 @@ public class Tutorial : TextDisplay
     static Tutorial_State previousGameState; // 前回のゲームステートを保存
     protected override void Start()
     {
+        enGameState = Tutorial_State.PlayerMove;
         base.Start();
         tutorial_Spawn = FindAnyObjectByType<Tutorial_spown>();
     }
