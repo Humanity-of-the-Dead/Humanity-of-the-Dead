@@ -842,6 +842,7 @@ MonoBehaviour:
   playerJumpPower: 950
   mainCamera: {fileID: 0}
   enemyObject: []
+  sleepThreshold: 30
 --- !u!114 &6489148027962693718
 MonoBehaviour:
   m_ObjectHideFlags: 0

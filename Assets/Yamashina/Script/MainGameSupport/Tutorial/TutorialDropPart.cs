@@ -25,10 +25,10 @@ public class TutorialDropPart : newDropPart
     }
     protected override void DoComfort()
     {
-        if (Input.GetKeyUp(KeyCode.J) && goButton.Length > 0 && goButton[0] != null && goButton[0].activeSelf && Tutorial.GetState() == Tutorial.Tutorial_State.PlayerComfort)
+        if (Input.GetKeyUp(KeyCode.J) && goButton.Length > 0 && goButton[0] != null && goButton[0].activeSelf && Tutorial.GetState() == Tutorial_State.PlayerComfort)
         {
 
-            Tutorial.ChangeState(Tutorial.Tutorial_State.EnemyDrop);
+            Tutorial.ChangeState(Tutorial_State.EnemyDrop);
             TutorialShowText();
 
             addingEnemy_Isyoku.transform.position = new Vector3(ADDINGENEMYISYOKU_X, addingEnemy_Isyoku.transform.position.y, addingEnemy_Isyoku.transform.position.z);
@@ -46,9 +46,9 @@ public class TutorialDropPart : newDropPart
     }
     protected override void DoTransplant()
     {
-        if (Input.GetKeyDown(KeyCode.L) && goButton.Length > 1 && goButton[1] != null && goButton[1].activeSelf && Tutorial.GetState() == Tutorial.Tutorial_State.PlayerTransplant)
+        if (Input.GetKeyDown(KeyCode.L) && goButton.Length > 1 && goButton[1] != null && goButton[1].activeSelf && Tutorial.GetState() == Tutorial_State.PlayerTransplant)
         {
-            Tutorial.ChangeState(Tutorial.Tutorial_State.Option);
+            Tutorial.ChangeState(Tutorial_State.Option);
             TutorialShowText();
 
         }

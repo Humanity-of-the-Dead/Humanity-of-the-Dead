@@ -1,23 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
-
+public enum Tutorial_State
+{
+    PlayerMove,
+    PlayerGauge,
+    PlayerDoNotMove,
+    PlayerAttack,
+    PlayerComfort,
+    EnemyDrop,
+    PlayerTransplant,
+    Option
+}
 public class Tutorial : TextDisplay
 {
     private Tutorial_spown tutorial_Spawn;
 
     private const float POSITION_DONOT_MOVE = 21;
-    public enum Tutorial_State
-    {
-        PlayerMove,
-        PlayerGauge,
-        PlayerDoNotMove,
-        PlayerAttack,
-        PlayerComfort,
-        EnemyDrop,
-        PlayerTransplant,
-        Option
-    }
+   
     public static void NextState()
     {
         int nextIndex = (int)enGameState + 1; // 次のインデックス

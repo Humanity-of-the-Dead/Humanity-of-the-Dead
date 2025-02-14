@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static Tutorial;
+
 
 public class PlayerControl : MonoBehaviour
 {
@@ -57,7 +56,8 @@ public class PlayerControl : MonoBehaviour
 
     //[SerializeField] GameObject[] goObj;
 
-
+    [SerializeField,Header("何秒以上放置しているか")] private float sleepThreshold =30.0f; //sleepThreshold秒以上スリープ状態ならタイトルへ
+    private float sleepTimer = 0f;
 
 
     private Gun Gun;
@@ -99,6 +99,20 @@ public class PlayerControl : MonoBehaviour
                     GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -1);
                 }
                 UpdateTimers();
+
+                if(GetComponent<Rigidbody2D>().IsSleeping())
+                {
+                    sleepTimer += Time.deltaTime;
+                    if (sleepTimer >= sleepThreshold)
+                    {
+                        SceneTransitionManager.instance.NextSceneButton(0);
+                    }
+                }
+                else
+                {
+                    sleepTimer = 0f; // 動いたらリセット
+                }
+        
                 //攻撃アニメーション中でなければbShootFlagをtrueにする
                 //Debug.Log(playerMoveAnimation.SetAttack());
                 if (playerMoveAnimation.SetAttack() == false)

@@ -19,21 +19,21 @@ public class TutorialEnemyParameter : newEnemyParameters
     protected override void Update()
     {
         // 部位が破壊された際にHPバーを一瞬表示
-        if ((UpperHP <= 0 || LowerHP <= 0) && newEnemyMovement.GetEnemyState() != newEnemyMovement.EnemyState.IsDead&&Tutorial.GetState()==Tutorial.Tutorial_State.PlayerAttack)
+        if ((UpperHP <= 0 || LowerHP <= 0) && newEnemyMovement.GetEnemyState() != newEnemyMovement.EnemyState.IsDead&&Tutorial.GetState()==Tutorial_State.PlayerAttack)
         {
             GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
             tutorial.UpdateText();
-            Tutorial.ChangeState(Tutorial.Tutorial_State.PlayerComfort);
+            Tutorial.ChangeState(Tutorial_State.PlayerComfort);
 
             //テキスト表示域を表示域
             tutorial.TextArea.SetActive(true);
         }
 
-        if ((UpperHP <= 0 || LowerHP <= 0) && newEnemyMovement.GetEnemyState() != newEnemyMovement.EnemyState.IsDead && Tutorial.GetState() == Tutorial.Tutorial_State.EnemyDrop)
+        if ((UpperHP <= 0 || LowerHP <= 0) && newEnemyMovement.GetEnemyState() != newEnemyMovement.EnemyState.IsDead && Tutorial.GetState() == Tutorial_State.EnemyDrop)
         {
             GameMgr.ChangeState(GameState.ShowText);    //GameStateがShowTextに変わる
             tutorial.UpdateText();
-            Tutorial.ChangeState(Tutorial.Tutorial_State.PlayerTransplant);
+            Tutorial.ChangeState(Tutorial_State.PlayerTransplant);
 
             //テキスト表示域を表示域
             tutorial.TextArea.SetActive(true);
