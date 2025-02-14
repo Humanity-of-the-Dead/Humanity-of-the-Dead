@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1817916389
+  m_SortingLayerID: 375561339
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cbf286e50c8149b40ac0aa0660c94f46, type: 3}
@@ -173,10 +173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31420de0bf591e459c6add79c2ededf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  humanityRecoveryAmount: 10
   goButton:
   - {fileID: 2182874680941712295}
   - {fileID: 6055618513447132620}
   goGrave: {fileID: 2839263780191614865, guid: fd771b76aae9c0641833c8c5eff54c82, type: 3}
+  isFriendBothParts: 0
 --- !u!1 &1919319660750788736
 GameObject:
   m_ObjectHideFlags: 0
