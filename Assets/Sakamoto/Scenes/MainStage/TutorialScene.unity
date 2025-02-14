@@ -3309,7 +3309,7 @@ MonoBehaviour:
   preUpperPart: {fileID: 1386206347217571068, guid: 6811574eddb91a248bad381ec3041bab, type: 3}
   preLowerPart: {fileID: 1386206347217571068, guid: 0c0526c739092e0488fa5692f3889eb2, type: 3}
   playerControl: {fileID: 0}
-  Boss: 1
+  Boss: 0
   needsAttackingBothParts: 0
   bulletDamage: 0
   UpperHPBar: {fileID: 857476731}
