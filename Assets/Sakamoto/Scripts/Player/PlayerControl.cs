@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerControl : MonoBehaviour
 {
     [System.Serializable]
-    //ƒXƒvƒ‰ƒCƒgŠÖ˜A‚ğˆê‚Â‚ÌƒNƒ‰ƒX‚É‚Ü‚Æ‚ß‚Ä‚µ‚Ü‚Á‚ÄA‚»‚Ìƒf[ƒ^‚ğ[System.Serializable]‚ÅƒCƒ“ƒXƒyƒNƒ^‚Å‚àİ’è‚Å‚«‚é
+    //ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆé–¢é€£ã‚’ä¸€ã¤ã®ã‚¯ãƒ©ã‚¹ã«ã¾ã¨ã‚ã¦ã—ã¾ã£ã¦ã€ãã®ãƒ‡ãƒ¼ã‚¿ã‚’[System.Serializable]ã§ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ã§ã‚‚è¨­å®šã§ãã‚‹
     private class CharacterSprites
     {
         public SpriteRenderer head;
@@ -22,69 +22,69 @@ public class PlayerControl : MonoBehaviour
         public SpriteRenderer footRight;
         public SpriteRenderer footLeft;
     }
-    // ƒLƒƒƒ‰ƒNƒ^[ƒp[ƒc (SpriteRenderer)
-    [SerializeField, Header("ƒLƒƒƒ‰ƒNƒ^[ƒp[ƒc")]
+    // ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ãƒ‘ãƒ¼ãƒ„ (SpriteRenderer)
+    [SerializeField, Header("ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ãƒ‘ãƒ¼ãƒ„")]
     private CharacterSprites characterSprites;
 
-    //ƒ‚[ƒVƒ‡ƒ“ƒAƒjƒƒXƒNƒŠƒvƒg
+    //ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚¢ãƒ‹ãƒ¡ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
     private PlayerMoveAnimation playerMoveAnimation;
 
 
 
     //private Rigidbody2D rigidbody2D;
-    [SerializeField, Header("ˆÚ“®ƒXƒs[ƒh")]
+    [SerializeField, Header("ç§»å‹•ã‚¹ãƒ”ãƒ¼ãƒ‰")]
     private float playerSpeed;
-    [SerializeField, Header("ƒWƒƒƒ“ƒv—Í")]
+    [SerializeField, Header("ã‚¸ãƒ£ãƒ³ãƒ—åŠ›")]
     private float playerJumpPower;
-    //ƒWƒƒƒ“ƒv‚Å‚«‚é‚©‚Ç‚¤‚©
+    //ã‚¸ãƒ£ãƒ³ãƒ—ã§ãã‚‹ã‹ã©ã†ã‹
     private bool isJump = false;
-    //˜A‘±ƒWƒƒƒ“ƒv
+    //é€£ç¶šã‚¸ãƒ£ãƒ³ãƒ—
     private int jumpCount;
 
 
-    //ƒJƒƒ‰ŠÖ˜A
-    [SerializeField, Header("ƒJƒƒ‰‚ğ‘ã“ü")] private Camera mainCamera;
-    //‚‚³
+    //ã‚«ãƒ¡ãƒ©é–¢é€£
+    [SerializeField, Header("ã‚«ãƒ¡ãƒ©ã‚’ä»£å…¥")] private Camera mainCamera;
+    //é«˜ã•
     private float mainCameraHeight;
-    //•
+    //å¹…
     private float mainCameraWidth;
 
-    //ƒ^[ƒQƒbƒg
-    [SerializeField, Header("ƒ{ƒX‚ÌƒIƒuƒWƒFƒNƒg‚ğ“ü‚ê‚é\nƒ{ƒXˆÈŠO‚ÍƒXƒ|ƒi[‚ªŸè‚É¶¬")]
+    //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+    [SerializeField, Header("ãƒœã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¥ã‚Œã‚‹\nãƒœã‚¹ä»¥å¤–ã¯ã‚¹ãƒãƒŠãƒ¼ãŒå‹æ‰‹ã«ç”Ÿæˆ")]
     public List<GameObject> enemyObject;
     //private float originalGravityScale;
     Rigidbody2D playerRigidBody2D;
 
     //[SerializeField] GameObject[] goObj;
 
-    [SerializeField, Header("‰½•bˆÈã•ú’u‚µ‚Ä‚¢‚é‚©")] private float sleepThreshold = 30.0f; //sleepThreshold•bˆÈãƒXƒŠ[ƒvó‘Ô‚È‚çƒ^ƒCƒgƒ‹‚Ö
+    [SerializeField, Header("ä½•ç§’ä»¥ä¸Šæ”¾ç½®ã—ã¦ã„ã‚‹ã‹")] private float sleepThreshold = 30.0f; //sleepThresholdç§’ä»¥ä¸Šã‚¹ãƒªãƒ¼ãƒ—çŠ¶æ…‹ãªã‚‰ã‚¿ã‚¤ãƒˆãƒ«ã¸
 
     private float lastInputTime;
-    [SerializeField, Header("•ú’u‘Îô‰æ–Ê")] private GameObject SleepPanel;
+    [SerializeField, Header("æ”¾ç½®å¯¾ç­–ç”»é¢")] private GameObject SleepPanel;
     private GameObject SleepPanelInstance;
     private Gun Gun;
-    //Œe‚ÌƒVƒ‡ƒbƒgƒtƒ‰ƒO
+    //æ‹³éŠƒã®ã‚·ãƒ§ãƒƒãƒˆãƒ•ãƒ©ã‚°
     private bool isShot;
     void Start()
     {
         playerRigidBody2D = GetComponent<Rigidbody2D>();
 
         SleepPanel = Resources.Load<GameObject>("SleepPanel");
-        lastInputTime = Time.time; // ??????
 
-        //‚±‚êƒ_ƒ‚È“z
+
+        //ã“ã‚Œãƒ€ãƒ¡ãªå¥´
         //playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
-        //‚±‚ê‚¢‚¢‚â‚Â
+        //ã“ã‚Œã„ã„ã‚„ã¤
         playerMoveAnimation = GetComponent<PlayerMoveAnimation>();
         Gun = GetComponent<Gun>();
         mainCamera = FindAnyObjectByType<Camera>();
-        // ƒJƒƒ‰‚Ì‚‚³iorthographicSizej‚ÍƒJƒƒ‰‚Ì’†‰›‚©‚çã‰º‚Ì‹——£‚ğ•\‚·
+        // ã‚«ãƒ¡ãƒ©ã®é«˜ã•ï¼ˆorthographicSizeï¼‰ã¯ã‚«ãƒ¡ãƒ©ã®ä¸­å¤®ã‹ã‚‰ä¸Šä¸‹ã®è·é›¢ã‚’è¡¨ã™
         mainCameraHeight = 2f * mainCamera.orthographicSize;
 
-        // ƒJƒƒ‰‚Ì•‚ÍƒAƒXƒyƒNƒg”ä‚ÉŠî‚Ã‚¢‚ÄŒvZ‚·‚é
+        // ã‚«ãƒ¡ãƒ©ã®å¹…ã¯ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”ã«åŸºã¥ã„ã¦è¨ˆç®—ã™ã‚‹
         mainCameraWidth = mainCameraHeight * mainCamera.aspect;
-        // UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“I—¹‚ÌƒR[ƒ‹ƒoƒbƒN‚ğİ’è
-        // ã”¼gUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“I—¹‚ÌƒR[ƒ‹ƒoƒbƒN‚ğİ’è
+        // æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã‚’è¨­å®š
+        // ä¸ŠåŠèº«æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã‚’è¨­å®š
     }
     public void InstantiateSkipPanel()
     {
@@ -119,7 +119,7 @@ public class PlayerControl : MonoBehaviour
             NoButton.onClick.RemoveAllListeners();
             NoButton.onClick.AddListener(() =>
             {
-               
+
                 Destroy(SleepPanelInstance);
             });
 
@@ -128,14 +128,14 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        //ƒvƒŒƒCƒ„[‚ÌYÀ•W‚Ì§ŒÀ
-        //ƒvƒŒƒCƒ„[‚ÌYÀ•W‚ª8.0‚ğ’´‚¦‚½‚çƒŠƒWƒbƒhƒ{ƒfƒB‚ÌƒtƒH[ƒX‚ğ0‚É‚·‚é
+
+        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Yåº§æ¨™ã®åˆ¶é™
+        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Yåº§æ¨™ãŒ8.0ã‚’è¶…ãˆãŸã‚‰ãƒªã‚¸ãƒƒãƒ‰ãƒœãƒ‡ã‚£ã®ãƒ•ã‚©ãƒ¼ã‚¹ã‚’0ã«ã™ã‚‹
 
         switch (GameMgr.GetState())
         {
             case GameState.Main:
-                //bShootFlag‚ğfalse‚É‚·‚é
+                //bShootFlagã‚’falseã«ã™ã‚‹
                 isShot = false;
                 if (8.0f < transform.position.y)
                 {
@@ -144,7 +144,7 @@ public class PlayerControl : MonoBehaviour
                 UpdateTimers();
 
 
-                //UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“’†‚Å‚È‚¯‚ê‚ÎbShootFlag‚ğtrue‚É‚·‚é
+                //æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ä¸­ã§ãªã‘ã‚Œã°bShootFlagã‚’trueã«ã™ã‚‹
                 //Debug.Log(playerMoveAnimation.SetAttack());
                 if (playerMoveAnimation.SetAttack() == false)
                 {
@@ -167,11 +167,11 @@ public class PlayerControl : MonoBehaviour
                 break;
             case GameState.Hint:
                 Time.timeScale = 0.0f;
-                //Debug.Log("ƒvƒŒƒCƒ„[‚ª“®‚¢‚Ä‚¢‚È‚¢‚±‚ÆŠm”F");
+                //Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå‹•ã„ã¦ã„ãªã„ã“ã¨ç¢ºèª");
 
                 break;
             default:
-                //Debug.Log("ƒvƒŒƒCƒ„[‚ª“®‚¢‚Ä‚¢‚È‚¢‚±‚ÆŠm”F");
+                //Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå‹•ã„ã¦ã„ãªã„ã“ã¨ç¢ºèª");
                 break;
         }
         if (GameMgr.GetState() != GameState.ShowOption)
@@ -186,21 +186,21 @@ public class PlayerControl : MonoBehaviour
         if (Input.anyKey || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 ||
         Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            if (Input.anyKeyDown)
-            {
-                lastInputTime = Time.time;
-            }
-            Debug.Log(Time.time-lastInputTime);
-            // ˆê’èŠÔ‘€ì‚ª‚È‚¯‚ê‚Îu•ú’uv‚Æ”»’è
-            if (Time.time - lastInputTime >= sleepThreshold)
-            {
-                InstantiateSkipPanel();
 
-                Debug.Log("ƒvƒŒƒCƒ„[‚ªˆê’èŠÔ‘€ì‚µ‚Ä‚¢‚Ü‚¹‚ñ");
-            }
-            
+            lastInputTime = Time.time;
+
+            Debug.Log(Time.time - lastInputTime);
         }
-       
+        // ä¸€å®šæ™‚é–“æ“ä½œãŒãªã‘ã‚Œã°ã€Œæ”¾ç½®ã€ã¨åˆ¤å®š
+        if (Time.time - lastInputTime >= sleepThreshold)
+        {
+            InstantiateSkipPanel();
+
+            Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒä¸€å®šæ™‚é–“æ“ä½œã—ã¦ã„ã¾ã›ã‚“");
+        }
+
+
+
     }
     private void UpdateTimers()
     {
@@ -211,29 +211,29 @@ public class PlayerControl : MonoBehaviour
     }
     void Move()
     {
-        //Œ»İ‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğæ“¾
+        //ç¾åœ¨ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å–å¾—
         Vector3 vPosition = transform.position;
 
-        //ƒJƒƒ‰‚Æ‚Ì‹——£‚Ìâ‘Î’l‚ªˆê’èˆÈ‰º‚È‚çƒvƒŒƒCƒ„[‚ª“®‚­@‰æ–ÊŠO‚Éo‚È‚¢‚½‚ß‚Ìˆ’u
-        //ˆÚ“®
-        Vector3 vPosFromCame = vPosition - mainCamera.transform.position; //ƒJƒƒ‰Šî€‚ÌƒvƒŒƒCƒ„[‚ÌˆÊ’u
+        //ã‚«ãƒ¡ãƒ©ã¨ã®è·é›¢ã®çµ¶å¯¾å€¤ãŒä¸€å®šä»¥ä¸‹ãªã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå‹•ãã€€ç”»é¢å¤–ã«å‡ºãªã„ãŸã‚ã®å‡¦ç½®
+        //ç§»å‹•
+        Vector3 vPosFromCame = vPosition - mainCamera.transform.position; //ã‚«ãƒ¡ãƒ©åŸºæº–ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®
 
         if (!playerMoveAnimation.SetAttack())
         {
-            //¶ˆÚ“®
+            //å·¦ç§»å‹•
             if (Input.GetKey(KeyCode.A))
             {
                 if (vPosFromCame.x > -mainCameraWidth / 2)
                 {
                     if (isEnemyHit() == false)
                     {
-                        Debug.Log("¶‚ÉˆÚ“®‚µ‚Ü‚·");
+                        Debug.Log("å·¦ã«ç§»å‹•ã—ã¾ã™");
                         vPosition.x -= Time.deltaTime * playerSpeed;
                     }
                 }
                 playerMoveAnimation.HandleWalk(PlayerMoveAnimation.SHAFT_DIRECTION_LEFT);
             }
-            //‰EˆÚ“®
+            //å³ç§»å‹•
             if (Input.GetKey(KeyCode.D))
             {
                 if (mainCameraWidth / 2 > vPosFromCame.x)
@@ -257,30 +257,30 @@ public class PlayerControl : MonoBehaviour
 
             }
 
-            //Šy‚ÉŸ‚ÌƒV[ƒ“s‚«‚½‚¢‚È‚ç‚±‚Ì‰º‚ÌƒR[ƒh‚ğƒRƒƒ“ƒgƒAƒEƒg‰ğœ@Šm”FŒãƒRƒƒ“ƒgƒAƒEƒg‚µ‚Ä‚¨‚¢‚Ä
+            //æ¥½ã«æ¬¡ã®ã‚·ãƒ¼ãƒ³è¡ŒããŸã„ãªã‚‰ã“ã®ä¸‹ã®ã‚³ãƒ¼ãƒ‰ã‚’ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆè§£é™¤ã€€ç¢ºèªå¾Œã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆã—ã¦ãŠã„ã¦
 
             //if (Input.GetKeyDown(KeyCode.Escape))
             //{
             //    SceneTransitionManager.instance.NextSceneButton(SceneTransitionManager.instance.sceneInformation.GetCurrentScene() + 1); 
             //}
-            //‚±‚±‚Ü‚Å
-            //Šy‚Éƒ{ƒXís‚«‚½‚¢‚È‚çˆÈ‰º‚ÌƒR[ƒh‚ğƒRƒƒ“ƒg‰ğœ
+            //ã“ã“ã¾ã§
+            //æ¥½ã«ãƒœã‚¹æˆ¦è¡ŒããŸã„ãªã‚‰ä»¥ä¸‹ã®ã‚³ãƒ¼ãƒ‰ã‚’ã‚³ãƒ¡ãƒ³ãƒˆè§£é™¤
             //if (Input.GetKeyDown(KeyCode.S))
             //{
             //    vPosition = new Vector2(190.0f, -1.536416f);
             //}
-            //‚±‚±‚Ü‚Å
+            //ã“ã“ã¾ã§
 
         }
 
-        //‘Ì‚ª‰ñ“]‚µ‚È‚¢‚æ‚¤‚É‚·‚é‚ÌƒIƒCƒ‰[‚ğ‚O‚Åİ’è‚·‚ê‚Î‚Å‚«‚é
-        //©•ª‚Ìtransform‚ğæ“¾
+        //ä½“ãŒå›è»¢ã—ãªã„ã‚ˆã†ã«ã™ã‚‹ã®ã‚ªã‚¤ãƒ©ãƒ¼ã‚’ï¼ã§è¨­å®šã™ã‚Œã°ã§ãã‚‹
+        //è‡ªåˆ†ã®transformã‚’å–å¾—
 
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         transform.position = vPosition;
     }
 
-    //ƒQ[ƒ€ƒƒCƒ“‚ÌƒGƒNƒXƒLƒ…[ƒg
+    //ã‚²ãƒ¼ãƒ ãƒ¡ã‚¤ãƒ³ã®ã‚¨ã‚¯ã‚¹ã‚­ãƒ¥ãƒ¼ãƒˆ
     void MainExecution()
     {
         if (Tutorial.GetState() == Tutorial_State.PlayerDoNotMove)
@@ -290,18 +290,18 @@ public class PlayerControl : MonoBehaviour
         Move();
 
 
-        #region R•i•ÏX
-        //ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ‚±‚±‚ÅŒÄ‚Ô‚½‚ßA’Ç‹L
-        //UŒ‚ŠÖ˜A
+        #region å±±å“å¤‰æ›´
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ã“ã“ã§å‘¼ã¶ãŸã‚ã€è¿½è¨˜
+        //æ”»æ’ƒé–¢é€£
         if (!playerMoveAnimation.SetAttack() && playerMoveAnimation.timeAttack < 0)
         {
-            //ã”¼gUŒ‚
+            //ä¸ŠåŠèº«æ”»æ’ƒ
             if (Input.GetKeyDown(KeyCode.I))
             {
                 //Tutorial.NextState();       
                 UpperAttack upperattack = PlayerParameter.Instance.UpperData.upperAttack;
                 playerMoveAnimation.PantieStart();
-                // Œx@ã”¼g‚Íe’e‚É“–‚½‚è”»’è‚ğ‚Â
+                // è­¦å¯Ÿä¸ŠåŠèº«ã¯éŠƒå¼¾ã«å½“ãŸã‚Šåˆ¤å®šã‚’æŒã¤
                 if (upperattack != UpperAttack.POLICE)
                 {
                     OnUpperAttackAnimationFinished();
@@ -318,8 +318,8 @@ public class PlayerControl : MonoBehaviour
 
                     case UpperAttack.POLICE:
                         Vector2 ShootMoveBector = new Vector2(0, 0);
-                        //q‚ÌplayerRC‚Ìƒ[ƒe[ƒVƒ‡ƒ“Y‚ğ‚Á‚Ä‚­‚é
-                        // y = 0‚Ì‚Æ‚«‚Í‰EŒü‚«A0 y = 180‚Ì‚Æ‚«‚Í¶Œü‚«
+                        //å­ã®playerRCã®ãƒ­ãƒ¼ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³Yã‚’æŒã£ã¦ãã‚‹
+                        // y = 0ã®ã¨ãã¯å³å‘ãã€0 y = 180ã®ã¨ãã¯å·¦å‘ã
                         Debug.Log(transform.GetChild(0).transform.eulerAngles.y);
                         if (transform.GetChild(0).transform.eulerAngles.y == 180)
                         {
@@ -331,12 +331,12 @@ public class PlayerControl : MonoBehaviour
                         }
 
                         Debug.Log(ShootMoveBector);
-                        Debug.Log("shootFlag‚Í" + isShot);
+                        Debug.Log("shootFlagã¯" + isShot);
 
-                        //isShot‚ªtrue‚È‚çe‚ğ”­Ë‚·‚é
+                        //isShotãŒtrueãªã‚‰éŠƒã‚’ç™ºå°„ã™ã‚‹
                         if (isShot == true)
                         {
-                            Debug.Log("’e”­Ë");
+                            Debug.Log("å¼¾ç™ºå°„");
                             Gun.Shoot(ShootMoveBector, transform, PlayerParameter.Instance.UpperData.iPartAttack);
 
                             MultiAudio.ins.PlaySEByName("SE_policeofficer_attack_upper");
@@ -359,12 +359,12 @@ public class PlayerControl : MonoBehaviour
 
 
             }
-            //‰º”¼gUŒ‚
+            //ä¸‹åŠèº«æ”»æ’ƒ
             if (Input.GetKeyDown(KeyCode.K))
             {
                 //Tutorial.NextState();
 
-                #region R•i•ÏX
+                #region å±±å“å¤‰æ›´
                 playerMoveAnimation.KickStart();
                 OnLowerAttackAnimationFinished();
 
@@ -397,11 +397,11 @@ public class PlayerControl : MonoBehaviour
 
     }
 
-    //ƒAƒjƒ[ƒVƒ‡ƒ“‚ª‚Á‚Ä‚¢‚½ŠÖ”‚ğˆÚ“®iƒAƒjƒ[ƒVƒ‡ƒ“‚»‚Ì‚à‚Ì‚É‚ÍŠÖŒW‚È‚¢‚½‚ßj
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒæŒã£ã¦ã„ãŸé–¢æ•°ã‚’ç§»å‹•ï¼ˆã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãã®ã‚‚ã®ã«ã¯é–¢ä¿‚ãªã„ãŸã‚ï¼‰
     /// <summary>
-    /// ã”¼g‚ÌƒCƒ[ƒW
+    /// ä¸ŠåŠèº«ã®ã‚¤ãƒ¡ãƒ¼ã‚¸
     /// </summary>
-    /// <param name="upperBody">‰æ‘œƒf[ƒ^W‡‘Ì</param>
+    /// <param name="upperBody">ç”»åƒãƒ‡ãƒ¼ã‚¿é›†åˆä½“</param>
     public void ChangeUpperBody(BodyPartsData upperBody)
     {
         characterSprites.body.sprite = upperBody.spBody;
@@ -410,12 +410,12 @@ public class PlayerControl : MonoBehaviour
         characterSprites.handRight.sprite = upperBody.spRightHand;
         characterSprites.handLeft.sprite = upperBody.spLeftHand;
     }
-    //ƒAƒjƒ[ƒVƒ‡ƒ“‚ª‚Á‚Ä‚¢‚½ŠÖ”‚ğˆÚ“®iƒAƒjƒ[ƒVƒ‡ƒ“‚»‚Ì‚à‚Ì‚É‚ÍŠÖŒW‚È‚¢‚½‚ßj
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒæŒã£ã¦ã„ãŸé–¢æ•°ã‚’ç§»å‹•ï¼ˆã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãã®ã‚‚ã®ã«ã¯é–¢ä¿‚ãªã„ãŸã‚ï¼‰
 
     /// <summary>
-    /// ‰º”¼g‚ÌƒCƒ[ƒW
+    /// ä¸‹åŠèº«ã®ã‚¤ãƒ¡ãƒ¼ã‚¸
     /// </summary>
-    /// <param name="underBody">‰æ‘œƒf[ƒ^W‡‘Ì</param>
+    /// <param name="underBody">ç”»åƒãƒ‡ãƒ¼ã‚¿é›†åˆä½“</param>
     public void ChangeUnderBody(BodyPartsData underBody)
     {
         characterSprites.waist.sprite = underBody.spWaist;
@@ -427,7 +427,7 @@ public class PlayerControl : MonoBehaviour
 
     //private void OnDestroy()
     //{
-    //    // ƒR[ƒ‹ƒoƒbƒN‚Ì‰ğœ
+    //    // ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã®è§£é™¤
     //    if (playerMoveAnimation != null)
     //    {
     //        playerMoveAnimation.OnUpperAttackAnimationFinished -= OnUpperAttackAnimationFinished;
@@ -437,7 +437,7 @@ public class PlayerControl : MonoBehaviour
 
     private void OnUpperAttackAnimationFinished()
     {
-        // ã”¼gUŒ‚”»’è
+        // ä¸ŠåŠèº«æ”»æ’ƒåˆ¤å®š
         for (int i = 0; i < enemyObject.Count; i++)
         {
             UpperBodyAttack(i, enemyObject[i].transform.position, PlayerParameter.Instance.UpperData.AttackArea, PlayerParameter.Instance.UpperData.iPartAttack);
@@ -446,14 +446,14 @@ public class PlayerControl : MonoBehaviour
 
     private void OnLowerAttackAnimationFinished()
     {
-        // ‰º”¼gUŒ‚”»’è
+        // ä¸‹åŠèº«æ”»æ’ƒåˆ¤å®š
         for (int i = 0; i < enemyObject.Count; i++)
         {
             LowerBodyAttack(i, enemyObject[i].transform.position, PlayerParameter.Instance.LowerData.AttackArea, PlayerParameter.Instance.LowerData.iPartAttack);
         }
     }
 
-    //ã”¼gUŒ‚
+    //ä¸ŠåŠèº«æ”»æ’ƒ
     public void UpperBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
         bool isAttackingToEnemy = IsFacingToTarget(transform.position.x, vTargetPos.x, playerMoveAnimation.isFacingToRight());
@@ -465,10 +465,10 @@ public class PlayerControl : MonoBehaviour
         }
         IDamageable damageable = enemyObject[EnemyNum].GetComponent<IDamageable>();
         damageable?.TakeDamage(iDamage, 0);
-        Debug.Log("ã”¼gUŒ‚ƒ_ƒ[ƒW”»’f");
+        Debug.Log("ä¸ŠåŠèº«æ”»æ’ƒãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤æ–­");
 
     }
-    //‰º”¼gUŒ‚
+    //ä¸‹åŠèº«æ”»æ’ƒ
     public void LowerBodyAttack(int EnemyNum, Vector3 vTargetPos, float fReach, int iDamage)
     {
         bool isAttackingToEnemy = IsFacingToTarget(transform.position.x, vTargetPos.x, playerMoveAnimation.isFacingToRight());
@@ -480,7 +480,7 @@ public class PlayerControl : MonoBehaviour
         }
         IDamageable damageable = enemyObject[EnemyNum].GetComponent<IDamageable>();
         damageable?.TakeDamage(iDamage, 1);
-        Debug.Log("‰º”¼gUŒ‚ƒ_ƒ[ƒW”»’f");
+        Debug.Log("ä¸‹åŠèº«æ”»æ’ƒãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤æ–­");
 
     }
 
@@ -495,7 +495,7 @@ public class PlayerControl : MonoBehaviour
     public void AddListItem(GameObject obj) => enemyObject.Add(obj);
     public void RemoveListItem(GameObject obj) => enemyObject.Remove(obj);
 
-    //°”»’è
+    //åºŠåˆ¤å®š
     private void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log(other.gameObject.tag);
@@ -511,12 +511,12 @@ public class PlayerControl : MonoBehaviour
     //{
     //    if (other.gameObject.CompareTag("OnTheCar"))
     //    {
-    //        GameMgr.ChangeState(GameState.Main); // ƒ{ƒXí’¼‘O‚Éó‘Ô•ÏX
+    //        GameMgr.ChangeState(GameState.Main); // ãƒœã‚¹æˆ¦ç›´å‰ã«çŠ¶æ…‹å¤‰æ›´
 
     //    }
     //}
 
-    //“G‚Ì’e‚Æ‚Ì“–‚½‚è”»’è
+    //æ•µã®å¼¾ã¨ã®å½“ãŸã‚Šåˆ¤å®š
     private void OnTriggerEnter2D(Collider2D playerCollision)
     {
         if (playerCollision.gameObject.CompareTag("EnemyShoot"))
@@ -543,38 +543,38 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    //enemy‚Æ“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©
-    //return :: true->“–‚½‚Á‚Ä‚¢‚é    false->“–‚Á‚Ä‚¢‚È‚¢
+    //enemyã¨å½“ãŸã£ã¦ã„ã‚‹ã‹ã©ã†ã‹
+    //return :: true->å½“ãŸã£ã¦ã„ã‚‹    false->å½“ã£ã¦ã„ãªã„
     bool isEnemyHit()
     {
         for (int i = 0; i < enemyObject.Count; i++)
         {
-            //“G‚Æ‚ÌX‹——£
+            //æ•µã¨ã®Xè·é›¢
             float distanceX = Mathf.Abs(enemyObject[i].transform.position.x - this.transform.position.x);
-            //“G‚Æ‚ÌY‹——£
+            //æ•µã¨ã®Yè·é›¢
             float distanceY = Mathf.Abs(enemyObject[i].transform.position.y - this.transform.position.y);
-            //X‹——£‚ªplayer‚Æenemy‚ÌƒRƒ‰ƒCƒ_[‚ÌXƒTƒCƒY‚Ì”¼•ª‚Ì˜a‚æ‚è¬‚³‚­
-            //Y‹——£‚ªplayer‚Æenemy‚ÌƒRƒ‰ƒCƒ_[‚ÌYƒTƒCƒY‚Ì”¼•ª‚Ì˜a‚æ‚è¬‚³‚¢‚È‚çif•¶‚É“ü‚é
-            //Scale‚Ì”¼•ª‚¾‚ÆŒ©‚½–Ú‚Æ‚ÌŒë·‚Å‚¤‚Ü‚­“­‚©‚È‚¢‚½‚ß”¼•ª‚æ‚è‚à­‚µ‘å‚«‚¢’l‚ğæ‚è‚½‚¢‚½‚ß1.5‚Æ‚·‚é
+            //Xè·é›¢ãŒplayerã¨enemyã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®Xã‚µã‚¤ã‚ºã®åŠåˆ†ã®å’Œã‚ˆã‚Šå°ã•ã
+            //Yè·é›¢ãŒplayerã¨enemyã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®Yã‚µã‚¤ã‚ºã®åŠåˆ†ã®å’Œã‚ˆã‚Šå°ã•ã„ãªã‚‰ifæ–‡ã«å…¥ã‚‹
+            //Scaleã®åŠåˆ†ã ã¨è¦‹ãŸç›®ã¨ã®èª¤å·®ã§ã†ã¾ãåƒã‹ãªã„ãŸã‚åŠåˆ†ã‚ˆã‚Šã‚‚å°‘ã—å¤§ãã„å€¤ã‚’å–ã‚ŠãŸã„ãŸã‚1.5ã¨ã™ã‚‹
             if ((distanceX < this.GetComponent<BoxCollider2D>().size.x * this.transform.localScale.x / 1.5
                 + enemyObject[i].GetComponent<BoxCollider2D>().size.x * enemyObject[i].transform.localScale.x / 1.5) &&
                 (distanceY < this.GetComponent<BoxCollider2D>().size.y * this.transform.localScale.y / 2.5
                 + enemyObject[i].GetComponent<BoxCollider2D>().size.y * enemyObject[i].transform.localScale.y / 2.5))
             {
-                //player‚ª‰E‚ğŒü‚¢‚Ä‚¢‚é‚©‚Âenemy‚ªplayer‚Ì‰E‘¤‚É‚¢‚é‚©
-                //player‚ª¶‚ğŒü‚¢‚Ä‚¢‚é‚©‚Âenemy‚ªplayer‚Ì¶‘¤‚É‚¢‚é‚È‚ç“–‚½‚Á‚Ä‚¢‚é
+                //playerãŒå³ã‚’å‘ã„ã¦ã„ã‚‹ã‹ã¤enemyãŒplayerã®å³å´ã«ã„ã‚‹ã‹
+                //playerãŒå·¦ã‚’å‘ã„ã¦ã„ã‚‹ã‹ã¤enemyãŒplayerã®å·¦å´ã«ã„ã‚‹ãªã‚‰å½“ãŸã£ã¦ã„ã‚‹
                 if ((playerMoveAnimation.isFacingToRight() == true &&
                     0 < enemyObject[i].transform.position.x - this.transform.position.x) ||
                     (playerMoveAnimation.isFacingToRight() == false &&
                     enemyObject[i].transform.position.x - this.transform.position.x < 0))
                 {
-                    Debug.Log("“–‚½‚Á‚Ä‚é");
-                    //“–‚½‚Á‚Ä‚¢‚é
+                    Debug.Log("å½“ãŸã£ã¦ã‚‹");
+                    //å½“ãŸã£ã¦ã„ã‚‹
                     return true;
                 }
             }
         }
-        //“–‚Á‚Ä‚¢‚È‚¢
+        //å½“ã£ã¦ã„ãªã„
         return false;
     }
 }
