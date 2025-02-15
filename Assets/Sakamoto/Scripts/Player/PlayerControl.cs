@@ -68,7 +68,6 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         playerRigidBody2D = GetComponent<Rigidbody2D>();
-        lastInputTime = Time.time; // ‰Šú‰»
 
         SleepPanel = Resources.Load<GameObject>("SleepPanel");
         //‚±‚êƒ_ƒ‚È“z
