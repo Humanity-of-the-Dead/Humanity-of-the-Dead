@@ -15,7 +15,6 @@ public class Tutorial_PlayerParameter : PlayerParameter
     }
     protected override void Start()
     {
-        tutorial = FindFirstObjectByType<Tutorial>();
 
         base.Start();
     }
@@ -70,6 +69,12 @@ public class Tutorial_PlayerParameter : PlayerParameter
 
 
 
+
+    }
+    protected override void InitializeReferences()
+    {
+        base.InitializeReferences();
+        tutorial = FindFirstObjectByType<Tutorial>();
 
     }
     protected override void DecreasingHP()
