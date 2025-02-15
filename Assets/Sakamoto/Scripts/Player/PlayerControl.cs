@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -56,18 +57,20 @@ public class PlayerControl : MonoBehaviour
 
     //[SerializeField] GameObject[] goObj;
 
-    [SerializeField,Header("何秒以上放置しているか")] private float sleepThreshold =30.0f; //sleepThreshold秒以上スリープ状態ならタイトルへ
-    private float sleepTimer = 0f;
+    [SerializeField, Header("何秒以上放置しているか")] private float sleepThreshold = 30.0f; //sleepThreshold秒以上スリープ状態ならタイトルへ
 
-
+    private float lastInputTime;
+    [SerializeField, Header("放置対策画面")] private GameObject SleepPanel;
+    private GameObject SleepPanelInstance;
     private Gun Gun;
     //拳銃のショットフラグ
     private bool isShot;
     void Start()
     {
         playerRigidBody2D = GetComponent<Rigidbody2D>();
+        lastInputTime = Time.time; // 初期化
 
-
+        SleepPanel = Resources.Load<GameObject>("SleepPanel");
         //これダメな奴
         //playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
         //これいいやつ
@@ -82,10 +85,49 @@ public class PlayerControl : MonoBehaviour
         // 攻撃アニメーション終了時のコールバックを設定
         // 上半身攻撃アニメーション終了時のコールバックを設定
     }
+    public void InstantiateSkipPanel()
+    {
+        if (SleepPanelInstance != null) { Destroy(SleepPanelInstance); }
+        SleepPanelInstance = Instantiate(SleepPanel);
+        ChangeStage1();
+        ChangeTutorial();
+    }
+    private void ChangeStage1()
+    {
+        Button YesButton = SleepPanelInstance.transform.Find("YesButton").GetComponent<Button>();
+        Debug.Log(YesButton);
 
+        if (YesButton != null)
+        {
+            YesButton.onClick.RemoveAllListeners();
+            YesButton.onClick.AddListener(() =>
+            {
+                SceneTransitionManager.instance.NextSceneButton(0);
+                Destroy(SleepPanelInstance);
+            });
+
+        }
+    }
+    private void ChangeTutorial()
+    {
+        Button NoButton = SleepPanelInstance.transform.Find("NoButton").GetComponent<Button>();
+        Debug.Log(NoButton);
+
+        if (NoButton != null)
+        {
+            NoButton.onClick.RemoveAllListeners();
+            NoButton.onClick.AddListener(() =>
+            {
+               
+                Destroy(SleepPanelInstance);
+            });
+
+        }
+    }
     // Update is called once per frame
     void Update()
     {
+        
         //プレイヤーのY座標の制限
         //プレイヤーのY座標が8.0を超えたらリジッドボディのフォースを0にする
 
@@ -100,19 +142,7 @@ public class PlayerControl : MonoBehaviour
                 }
                 UpdateTimers();
 
-                if(GetComponent<Rigidbody2D>().IsSleeping())
-                {
-                    sleepTimer += Time.deltaTime;
-                    if (sleepTimer >= sleepThreshold)
-                    {
-                        SceneTransitionManager.instance.NextSceneButton(0);
-                    }
-                }
-                else
-                {
-                    sleepTimer = 0f; // 動いたらリセット
-                }
-        
+
                 //攻撃アニメーション中でなければbShootFlagをtrueにする
                 //Debug.Log(playerMoveAnimation.SetAttack());
                 if (playerMoveAnimation.SetAttack() == false)
@@ -143,8 +173,34 @@ public class PlayerControl : MonoBehaviour
                 //Debug.Log("プレイヤーが動いていないこと確認");
                 break;
         }
+        if (GameMgr.GetState() != GameState.ShowOption)
+        {
+            PlayerSleeping();
+
+        }
     }
 
+    private void PlayerSleeping()
+    {
+        if (Input.anyKey || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 ||
+        Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            if (Input.anyKeyDown)
+            {
+                lastInputTime = Time.time;
+            }
+            Debug.Log(Time.time-lastInputTime);
+            // 一定時間操作がなければ「放置」と判定
+            if (Time.time - lastInputTime >= sleepThreshold)
+            {
+                InstantiateSkipPanel();
+
+                Debug.Log("プレイヤーが一定時間操作していません");
+            }
+            
+        }
+       
+    }
     private void UpdateTimers()
     {
         playerMoveAnimation.timeWalk -= Time.deltaTime;
@@ -226,7 +282,7 @@ public class PlayerControl : MonoBehaviour
     //ゲームメインのエクスキュート
     void MainExecution()
     {
-        if(Tutorial.GetState()== Tutorial_State.PlayerDoNotMove)
+        if (Tutorial.GetState() == Tutorial_State.PlayerDoNotMove)
         {
             return;
         }
@@ -490,23 +546,23 @@ public class PlayerControl : MonoBehaviour
     //return :: true->当たっている    false->当っていない
     bool isEnemyHit()
     {
-        for(int i = 0; i < enemyObject.Count; i++)
+        for (int i = 0; i < enemyObject.Count; i++)
         {
             //敵とのX距離
-            float distanceX =Mathf.Abs(enemyObject[i].transform.position.x - this.transform.position.x);
+            float distanceX = Mathf.Abs(enemyObject[i].transform.position.x - this.transform.position.x);
             //敵とのY距離
-            float distanceY =Mathf.Abs(enemyObject[i].transform.position.y - this.transform.position.y);
+            float distanceY = Mathf.Abs(enemyObject[i].transform.position.y - this.transform.position.y);
             //X距離がplayerとenemyのコライダーのXサイズの半分の和より小さく
             //Y距離がplayerとenemyのコライダーのYサイズの半分の和より小さいならif文に入る
             //Scaleの半分だと見た目との誤差でうまく働かないため半分よりも少し大きい値を取りたいため1.5とする
-            if((distanceX < this.GetComponent<BoxCollider2D>().size.x * this.transform.localScale.x / 1.5  
+            if ((distanceX < this.GetComponent<BoxCollider2D>().size.x * this.transform.localScale.x / 1.5
                 + enemyObject[i].GetComponent<BoxCollider2D>().size.x * enemyObject[i].transform.localScale.x / 1.5) &&
-                (distanceY < this.GetComponent<BoxCollider2D>().size.y * this.transform.localScale.y /2.5
+                (distanceY < this.GetComponent<BoxCollider2D>().size.y * this.transform.localScale.y / 2.5
                 + enemyObject[i].GetComponent<BoxCollider2D>().size.y * enemyObject[i].transform.localScale.y / 2.5))
             {
                 //playerが右を向いているかつenemyがplayerの右側にいるか
                 //playerが左を向いているかつenemyがplayerの左側にいるなら当たっている
-                if((playerMoveAnimation.isFacingToRight() == true &&
+                if ((playerMoveAnimation.isFacingToRight() == true &&
                     0 < enemyObject[i].transform.position.x - this.transform.position.x) ||
                     (playerMoveAnimation.isFacingToRight() == false &&
                     enemyObject[i].transform.position.x - this.transform.position.x < 0))
