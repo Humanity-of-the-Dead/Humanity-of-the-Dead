@@ -83,7 +83,11 @@ public class Tutorial_spown : MonoBehaviour
         if (canvasObject != null)
         {
             Destroy(canvasObject);
-            GameMgr.ChangeState(GameState.Main);
+            if (Tutorial.GetState() != Tutorial_State.Option)
+            {
+
+                GameMgr.ChangeState(GameState.Main);
+            }
             ShowNextTutorialImage();
         }
     }
