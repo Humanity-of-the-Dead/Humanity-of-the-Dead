@@ -160,7 +160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3739437666126270148, guid: 33afb1aabe36154469d8929f8802d011, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5026055112253695970, guid: 33afb1aabe36154469d8929f8802d011, type: 3}
       propertyPath: m_Pivot.x
@@ -245,6 +245,10 @@ PrefabInstance:
     - target: {fileID: 8958030382214015986, guid: 33afb1aabe36154469d8929f8802d011, type: 3}
       propertyPath: m_Name
       value: HIntButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8958030382214015986, guid: 33afb1aabe36154469d8929f8802d011, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -662,7 +666,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1817916389
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
@@ -2328,7 +2332,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1817916389
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
@@ -3782,6 +3786,8 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 95e3b98a15948d74690569bdcaaff825, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
+  LoadDataIndex: 0
+  LoadText: 0
   Position:
   - -3.8
   - 180
