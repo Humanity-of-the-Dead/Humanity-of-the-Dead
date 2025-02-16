@@ -2440,7 +2440,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3137860054857002523, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: waitTime
-      value: 1
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: -3137860054857002523, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: lowerPart
@@ -2552,7 +2552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7750010862643081104, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: attackIdle
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7750010862643081104, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: timeAttackMax
