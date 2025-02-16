@@ -16,7 +16,7 @@ MonoBehaviour:
   upperAttack: 4
   lowerAttack: 0
   sPartsName: "\u89AA\u53CB\u306E\u4E0B\u534A\u8EAB"
-  AttackArea: 2.5
+  AttackArea: 0
   iPartHp: 25
   iPartAttack: 100
   spBody: {fileID: 0}
