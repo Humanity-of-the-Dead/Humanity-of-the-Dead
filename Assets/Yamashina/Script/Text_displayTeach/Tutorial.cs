@@ -73,9 +73,7 @@ public class Tutorial : TextDisplay
             case GameState.Main:
                 base.Update();
                 ChangeStateToDoNotMoveIfNeeded();
-                if (GetState() == Tutorial_State.Option)
-                {
-                    ShowGameClearUI();                }
+          
                 break;
             case GameState.ShowText:
                 base.Update();
@@ -86,12 +84,18 @@ public class Tutorial : TextDisplay
                     Debug.Log(GameMgr.GetState().ToString());
 
                 }
+               
                 break;
             case GameState.Tutorial:
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     tutorial_Spawn.DestroyCanvasWithImage();
+                    if (GetState() == Tutorial_State.Option)
+                    {
+                        ShowGameClearUI();
+                    }
                 }
+               
                 break;
             case GameState.Hint:
                 base.Update(); break;
