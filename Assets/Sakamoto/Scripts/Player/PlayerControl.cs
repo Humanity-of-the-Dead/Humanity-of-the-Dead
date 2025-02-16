@@ -59,7 +59,7 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField, Header("何秒以上放置しているか")] private float sleepThreshold = 30.0f; //sleepThreshold秒以上スリープ状態ならタイトルへ
 
-    private float lastInputTime;
+    public static float lastInputTime;
     [SerializeField, Header("放置対策画面")] private GameObject SleepPanel;
     private GameObject SleepPanelInstance;
     private Gun Gun;
@@ -71,7 +71,7 @@ public class PlayerControl : MonoBehaviour
 
         SleepPanel = Resources.Load<GameObject>("SleepPanel");
 
-
+        if(SleepPanelInstance != null ) { Destroy(SleepPanelInstance); }
         //これダメな奴
         //playerParameter = GameObject.FindAnyObjectByType<PlayerParameter>();
         //これいいやつ

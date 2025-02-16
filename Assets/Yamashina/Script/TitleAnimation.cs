@@ -119,6 +119,7 @@ public class TitleAnimation : MonoBehaviour
     {
         if (skipPanelInstance != null) { Destroy(skipPanelInstance); }
         skipPanelInstance = Instantiate(skipPanel);
+        PlayerControl.lastInputTime = Time.time;        
         ChangeStage1();
         ChangeTutorial();
     }
