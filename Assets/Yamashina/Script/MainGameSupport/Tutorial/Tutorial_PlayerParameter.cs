@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static Tutorial;
+using UnityEngine.SceneManagement;
 
 public class Tutorial_PlayerParameter : PlayerParameter
 {
@@ -18,7 +15,6 @@ public class Tutorial_PlayerParameter : PlayerParameter
     }
     protected override void Start()
     {
-        tutorial = FindFirstObjectByType<Tutorial>();
 
         base.Start();
     }
@@ -28,14 +24,28 @@ public class Tutorial_PlayerParameter : PlayerParameter
         switch (GameMgr.GetState())
         {
             case GameState.Main:
-                DecreasingHP();
-
-                if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
+                string sceneName = SceneManager.GetActiveScene().name;
+                if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Tutorial))
                 {
-                    iHumanity = minHP;
-                    iUpperHP = minHP;
-                    iLowerHP = minHP;
+                    DecreasingHP();
+
+                    if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
+                    {
+                        iHumanity = minHP;
+                        iUpperHP = minHP;
+                        iLowerHP = minHP;
+                    }
                 }
+                else
+                {
+                    base.Update();
+                }
+             
+                break;
+
+
+                case GameState.GameOver
+                : base.Update();
                 break;
 
 
@@ -61,23 +71,37 @@ public class Tutorial_PlayerParameter : PlayerParameter
 
 
     }
+    protected override void InitializeReferences()
+    {
+        base.InitializeReferences();
+        tutorial = FindFirstObjectByType<Tutorial>();
+
+    }
     protected override void DecreasingHP()
     {
-        if (iHumanity > minHP)
-            iHumanity -= Time.deltaTime / iDownTime;
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Tutorial))
+        {
+            if (iHumanity > minHP)
+                iHumanity -= Time.deltaTime / iDownTime;
+            else
+                iHumanity = minHP;
+
+
+            if (iUpperHP > minHP)
+                iUpperHP -= Time.deltaTime / iDownTime;
+            else
+                iUpperHP = minHP; // ‚Ò‚Á‚½‚èŽ~‚ß‚é
+
+
+            if (iLowerHP > minHP)
+                iLowerHP -= Time.deltaTime / iDownTime;
+            else
+                iLowerHP = minHP;
+        }
         else
-            iHumanity = minHP; 
-
-
-        if (iUpperHP > minHP)
-            iUpperHP -= Time.deltaTime / iDownTime;
-        else
-            iUpperHP = minHP; // ‚Ò‚Á‚½‚èŽ~‚ß‚é
-
-
-        if (iLowerHP > minHP)
-            iLowerHP -= Time.deltaTime / iDownTime;
-        else
-            iLowerHP = minHP;
+        {
+            base.DecreasingHP();    
+        }
     }
-}
+    }

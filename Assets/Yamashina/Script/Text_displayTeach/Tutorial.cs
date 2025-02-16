@@ -1,29 +1,29 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
-
+public enum Tutorial_State
+{
+    PlayerMove,
+    PlayerGauge,
+    PlayerDoNotMove,
+    PlayerAttack,
+    PlayerComfort,
+    EnemyDrop,
+    PlayerTransplant,
+    Option
+}
 public class Tutorial : TextDisplay
 {
     private Tutorial_spown tutorial_Spawn;
 
     private const float POSITION_DONOT_MOVE = 21;
-    public enum Tutorial_State
-    {
-        PlayerMove,
-        PlayerGauge,
-        PlayerDoNotMove,
-        PlayerAttack,
-        PlayerComfort,
-        EnemyDrop,
-        PlayerTransplant,
-        Option
-    }
+   
     public static void NextState()
     {
         int nextIndex = (int)enGameState + 1; // 次のインデックス
         if (nextIndex < System.Enum.GetValues(typeof(Tutorial_State)).Length)
         {
-            ChangeState( (Tutorial_State)nextIndex);
+            ChangeState((Tutorial_State)nextIndex);
         }
         else
         {
@@ -37,6 +37,7 @@ public class Tutorial : TextDisplay
     static Tutorial_State previousGameState; // 前回のゲームステートを保存
     protected override void Start()
     {
+        enGameState = Tutorial_State.PlayerMove;
         base.Start();
         tutorial_Spawn = FindAnyObjectByType<Tutorial_spown>();
     }
@@ -45,7 +46,7 @@ public class Tutorial : TextDisplay
         previousGameState = enGameState; // 現在のステートを前回のステートとして保存
 
         enGameState = newState;
-        Debug.Log("ChangeState"+newState);
+        Debug.Log("ChangeState" + newState);
     }
     // ステートが変わったかを確認する関数
     public static bool HasStateChanged()
@@ -58,7 +59,7 @@ public class Tutorial : TextDisplay
     }
     private void ChangeStateToDoNotMoveIfNeeded()
     {
-        if( enGameState == Tutorial_State.PlayerGauge && Player.transform.position.x> POSITION_DONOT_MOVE)
+        if (enGameState == Tutorial_State.PlayerGauge && Player.transform.position.x > POSITION_DONOT_MOVE)
         {
             ChangeState(Tutorial_State.PlayerDoNotMove);
         }
@@ -72,10 +73,9 @@ public class Tutorial : TextDisplay
             case GameState.Main:
                 base.Update();
                 ChangeStateToDoNotMoveIfNeeded();
-                if (Tutorial.GetState() == Tutorial_State.Option)
+                if (GetState() == Tutorial_State.Option)
                 {
-                    GameMgr.ChangeState(GameState.Clear);
-                }
+                    ShowGameClearUI();                }
                 break;
             case GameState.ShowText:
                 base.Update();
@@ -83,7 +83,7 @@ public class Tutorial : TextDisplay
                 {
                     GameMgr.ChangeState(GameState.Tutorial);
                     tutorial_Spawn.SpawnTutorial();
-                    Debug.Log(GameMgr.GetState().ToString());   
+                    Debug.Log(GameMgr.GetState().ToString());
 
                 }
                 break;
@@ -94,6 +94,8 @@ public class Tutorial : TextDisplay
                 }
                 break;
             case GameState.Hint:
+                base.Update(); break;
+            case GameState.AfterBoss:
                 base.Update(); break;
 
             case GameState.Clear:
@@ -140,7 +142,7 @@ public class Tutorial : TextDisplay
                 UpdateText();
                 //テキスト表示域を表示域
                 TextArea.SetActive(true);
-                if(i != 0)
+                if (i != 0)
                 {
                     NextState();
                 }
@@ -153,7 +155,7 @@ public class Tutorial : TextDisplay
     {
         GUI.skin.label.fontSize = 30;  // 例えば30に設定
         GUI.skin.label.normal.textColor = Color.black;
-        GUI.skin.label.fontStyle = FontStyle.Bold;  
-        GUI.Label(new Rect(10.0f,400.0f, Screen.width, Screen.height), enGameState.ToString());
+        GUI.skin.label.fontStyle = FontStyle.Bold;
+        GUI.Label(new Rect(10.0f, 400.0f, Screen.width, Screen.height), enGameState.ToString());
     }
 }

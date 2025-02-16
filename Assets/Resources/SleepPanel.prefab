@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1d00a08dd51960c419e0f3072bf4a6ae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bfd54403184c9db41bbb0892ad8237b8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 2025017490195087799}
   - component: {fileID: 9043209754384395574}
   m_Layer: 5
-  m_Name: TutorialCanvas
+  m_Name: SleepPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5222186b1acf406408a79f568097c81d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 732c0748cc9b5454abfcc797667ea1a5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -659,7 +659,7 @@ PrefabInstance:
     - target: {fileID: 6387245123255289555, guid: d1abe63f9c7bace42b4b91aa4a8e55d5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0bc69b1f8d4325549a11410400b356df, type: 3}
+      objectReference: {fileID: 21300000, guid: e5c22e891c90d5340a4da1baa7bf725f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5126547812315834990, guid: d1abe63f9c7bace42b4b91aa4a8e55d5, type: 3}

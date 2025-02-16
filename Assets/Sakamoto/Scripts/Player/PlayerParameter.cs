@@ -95,13 +95,7 @@ public class PlayerParameter : CharacterStats
                     //Debug.Log(iDownTime);
                     if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
                     {
-                        string sceneName = SceneManager.GetActiveScene().name;
-
-                        if (sceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Tutorial)){
-                            iHumanity = 1;
-                            iUpperHP = 1;
-                            iLowerHP = 1;
-                        }
+                     
                         Debug.Log("リロードを開始します"); // デバッグログで確認
 
                         AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();

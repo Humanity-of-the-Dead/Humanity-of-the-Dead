@@ -467,7 +467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2696059808575154406, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.62
+      value: -1.902598
       objectReference: {fileID: 0}
     - target: {fileID: 2696059808575154406, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -543,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: lowerEffectXMin
-      value: 1.09
+      value: -0.33
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: lowerEffectYMax
@@ -555,7 +555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: upperEffectXMax
-      value: 0.95
+      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: upperEffectXMin
@@ -563,7 +563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: upperEffectYMax
-      value: 4.66
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6228428898528793837, guid: 2d5a8a55bfefbae4f97f70af3d57a8f8, type: 3}
       propertyPath: upperEffectYMin
@@ -839,10 +839,10 @@ MonoBehaviour:
     footRight: {fileID: 2163172073584536342}
     footLeft: {fileID: 5394447456034409450}
   playerSpeed: 7
-  playerJumpPower: 850
+  playerJumpPower: 950
   mainCamera: {fileID: 0}
-  enemyObject:
-  - {fileID: 0}
+  enemyObject: []
+  sleepThreshold: 30
 --- !u!114 &6489148027962693718
 MonoBehaviour:
   m_ObjectHideFlags: 0

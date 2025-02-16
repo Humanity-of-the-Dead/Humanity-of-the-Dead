@@ -181,6 +181,11 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void InitMainGameIfTitleToStgOne(SceneInformation.SCENE currentScene, SceneInformation.SCENE newScene)
     {
+        if (currentScene == SceneInformation.SCENE.Title && newScene == SceneInformation.SCENE.Tutorial)
+        {
+            PlayerParameter.Instance?.InitBodyIndex();
+        }
+
         if (currentScene == SceneInformation.SCENE.Title && newScene == SceneInformation.SCENE.StageOne)
         {
             PlayerParameter.Instance?.InitBodyIndex();
@@ -233,7 +238,7 @@ public class SceneTransitionManager : MonoBehaviour
     // <returns></returns>
     private IEnumerator FadeOut(string stageName)
     {
-        if(fadeInstance == null)
+        if (fadeInstance == null)
         {
             Debug.LogError("fadeInstance=null");
         }
