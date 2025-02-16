@@ -164,7 +164,7 @@ public class EnemyMoveAnimation : MonoBehaviour
     private IEnumerator CallAttackIdleWithDelay()
     {
         int animationFrameLength = attackIdleData.armForwardRotation.Length;
-        float animationSecondsPerFrame = animationFrameLength / attackIdle;
+        float animationSecondsPerFrame = attackIdle / animationFrameLength;
         for (int i = 0; i < animationFrameLength; i++)
         {
             AttackIdle(i);
