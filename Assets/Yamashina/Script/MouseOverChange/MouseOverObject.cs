@@ -17,12 +17,15 @@ public class MouseOverObject: MonoBehaviour
     public void OnPointerEnter()
     {
         mouseover.SetActive(true);
+        Debug.Log(mouseover.activeSelf+gameObject.name);
     }
     // 元の状態に戻す
 
     public void OnPointerExit()
     {
         mouseover.SetActive(false);
+        Debug.Log(mouseover.activeSelf+gameObject.name);
+
     }
     public void MyButtonSelect()
     {
