@@ -620,6 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goButton:
   - {fileID: 2182874680941712295}
+  - {fileID: 6055618513447132620}
 --- !u!1 &6055618513447132620
 GameObject:
   m_ObjectHideFlags: 0
