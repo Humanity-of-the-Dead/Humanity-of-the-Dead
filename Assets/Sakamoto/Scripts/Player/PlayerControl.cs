@@ -186,10 +186,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.anyKey || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 ||
         Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-
             lastInputTime = Time.time;
-
-            Debug.Log(Time.time - lastInputTime);
         }
         // 一定時間操作がなければ「放置」と判定
         if (Time.time - lastInputTime >= sleepThreshold)

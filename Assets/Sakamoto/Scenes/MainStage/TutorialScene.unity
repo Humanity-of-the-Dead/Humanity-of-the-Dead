@@ -1433,12 +1433,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde6131f3d67f53489c63626b95e9198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistance: 5
-  normalSpeed: 2
+  moveDistance: 0
+  normalSpeed: 4
   chaseSpeed: 4
   chaseRange: 5
   attackRange: 2
-  waitTime: 1
+  waitTime: 0.1
   upperPart: {fileID: 11400000, guid: bf007733aa9c0d04693e3b6b83f4a2a4, type: 2}
   lowerPart: {fileID: 11400000, guid: 7d9d52264658ff545900ef75ac8fdcd6, type: 2}
   player: {fileID: 0}
@@ -3489,6 +3489,14 @@ PrefabInstance:
       propertyPath: moveDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1924099738880734706, guid: 985c669ebb42b2a4395d00374b854793, type: 3}
+      propertyPath: attackIdle
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924099738880734706, guid: 985c669ebb42b2a4395d00374b854793, type: 3}
+      propertyPath: afterAttackFreezeTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6746467646807872166, guid: 985c669ebb42b2a4395d00374b854793, type: 3}
       propertyPath: m_Name
       value: Nomal_stg01 Variant
@@ -3737,28 +3745,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDataSet:
   - textAsset:
-    - {fileID: 4900000, guid: b9fa64873ee6da445b1b46517b1140a4, type: 3}
+    - {fileID: 4900000, guid: 5ebe35ce1c7eb984facc7dc640f59d56, type: 3}
+    - {fileID: 4900000, guid: 597767ded4b8dea4389c7a65da8d8fd0, type: 3}
   - textAsset:
-    - {fileID: 4900000, guid: b329413050f7e40469c324ef28c5b8f0, type: 3}
+    - {fileID: 4900000, guid: dcd78076e49602c4587c16588dfbbcbb, type: 3}
+    - {fileID: 4900000, guid: 853fe24c8779ec0429a3cf9059aab45c, type: 3}
+    - {fileID: 4900000, guid: 25e9fe1067d4aaa429f39696e32fb531, type: 3}
   - textAsset:
-    - {fileID: 4900000, guid: cee1f46d89f7f324f8a577910ed6514d, type: 3}
+    - {fileID: 4900000, guid: e8dbac7e7244afd4c87ea97866181efa, type: 3}
+    - {fileID: 4900000, guid: 030595790df3f9a4aab1854bbfb5f99b, type: 3}
+    - {fileID: 4900000, guid: 288c4fd8ec65f2340a2ef6937d4f0f92, type: 3}
+    - {fileID: 4900000, guid: 26e27b98d55fa524184ebae13d808268, type: 3}
   - textAsset:
-    - {fileID: 4900000, guid: 8e4e98a733277d445bad674e9d8fb981, type: 3}
+    - {fileID: 4900000, guid: b838de1be92d01b47854d03b624f2c5d, type: 3}
+    - {fileID: 4900000, guid: 31e7e7cd544960f4d960b2f0678c37aa, type: 3}
   - textAsset:
-    - {fileID: 4900000, guid: 5145ebf4e2635284d870131a125d668b, type: 3}
+    - {fileID: 4900000, guid: c603f48182e659c468575448636057b9, type: 3}
+    - {fileID: 4900000, guid: d08efbe8aa30b2241a06be25fbd9984a, type: 3}
+    - {fileID: 4900000, guid: 14e3848b7dcbac04ab53a7e410e52b26, type: 3}
   - textAsset:
-    - {fileID: 4900000, guid: 620e72cf11360254cb6a9bf84b99b397, type: 3}
+    - {fileID: 4900000, guid: c8a0b97f132c058468ffe3a0f0ce3603, type: 3}
+    - {fileID: 4900000, guid: 4220caa9bd8d3704da768fbf75747ae8, type: 3}
+    - {fileID: 4900000, guid: f43fb94a8784a3a4cbdb56dae4f7de66, type: 3}
+    - {fileID: 4900000, guid: 3eda49b75109c08448b3d6d6d0f635a0, type: 3}
+    - {fileID: 4900000, guid: baabfd5ee8399024a81a5ce6cdebdf83, type: 3}
   - textAsset:
-    - {fileID: 4900000, guid: 789c19262b0a011478c726a70ccf21db, type: 3}
+    - {fileID: 4900000, guid: 2d188ba493a6360449f5ae154fedcf0a, type: 3}
   hintTextAssetArray:
-  - {fileID: 4900000, guid: f9130cb67fcc95d4f86370b60fab03c8, type: 3}
+  - {fileID: 4900000, guid: cf4ec5293e4523d42b3eff77b208655f, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 1
   LoadDataIndex: 0
   LoadText: 0
   Position:
   - -3.8
-  - 13.7
+  - 9
   - 300
   Player: {fileID: 967675288}
   TextArea: {fileID: 259418451}
