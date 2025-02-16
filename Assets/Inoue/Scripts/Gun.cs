@@ -50,7 +50,7 @@ public class Gun : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
         // ”­Ë•ûŒü‚ÉŠî‚Ã‚¢‚Ävelocity‚ğİ’è
-        rb.velocity = new Vector2(direction.x * bullet.GetComponent<Bullet>().speed, 0);
+        rb.velocity = new Vector2(direction.x * bullet.GetComponent<Bullet>().speed / Mathf.Abs(direction.x), 0);
 
         // ’e‚ª‰E‚É”ò‚Ôê‡
         if (rb.velocity.x > 0)

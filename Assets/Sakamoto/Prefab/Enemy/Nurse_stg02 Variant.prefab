@@ -138,7 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6025226992257383609, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
       propertyPath: attackIdle
-      value: 0.7
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6025226992257383609, guid: f1c71b8ef25e91a47ba4c17ea77737b6, type: 3}
       propertyPath: hitGameObject
@@ -322,7 +322,7 @@ MonoBehaviour:
   chaseSpeed: 2
   chaseRange: 5
   attackRange: 2
-  waitTime: 1
+  waitTime: 0.3
   upperPart: {fileID: 11400000, guid: b3c738c686f207e43ab6d2f69e448405, type: 2}
   lowerPart: {fileID: 11400000, guid: 590fb0006d0e45543af6ae97c8f66a7e, type: 2}
   player: {fileID: 0}

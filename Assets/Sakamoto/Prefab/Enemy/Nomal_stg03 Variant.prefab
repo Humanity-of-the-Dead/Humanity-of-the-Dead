@@ -298,7 +298,7 @@ MonoBehaviour:
   chaseSpeed: 2
   chaseRange: 5
   attackRange: 2
-  waitTime: 0.8
+  waitTime: 0.2
   upperPart: {fileID: 11400000, guid: a381b1820ebc2b74f95be12226b0a839, type: 2}
   lowerPart: {fileID: 11400000, guid: 8d0e0a1c2680c8f45a3608a698c14866, type: 2}
   player: {fileID: 0}
