@@ -706,7 +706,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1817916389
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
@@ -2372,7 +2372,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1817916389
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
@@ -3278,7 +3278,7 @@ PrefabInstance:
       objectReference: {fileID: 5779087832182671212, guid: 171c5874f482c4146bda3b5c155341de, type: 3}
     - target: {fileID: 2752137397931085381, guid: 3317f5acf86fe8348955e461d751624f, type: 3}
       propertyPath: currentScene
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2752137397931085381, guid: 3317f5acf86fe8348955e461d751624f, type: 3}
       propertyPath: sceneInformation
@@ -3851,6 +3851,8 @@ MonoBehaviour:
   - {fileID: 4900000, guid: c60c168866918c04384e6768c952f104, type: 3}
   text: {fileID: 977587877}
   TypingSpeed: 0.5
+  LoadDataIndex: 0
+  LoadText: 0
   Position:
   - -3.71
   - 180

@@ -103,8 +103,12 @@ public class SceneInformation : ScriptableObject
         switch (newScene)
         {
             case SCENE.Title:
-                nextScene = SCENE.StageOne;
+                nextScene = SCENE.Tutorial;
                 break;
+                case SCENE.Tutorial:
+                nextScene = SCENE.StageOne; 
+                break;     
+
             case SCENE.StageOne:
                 nextScene = SCENE.StageOne_BOSS;
                 break;
