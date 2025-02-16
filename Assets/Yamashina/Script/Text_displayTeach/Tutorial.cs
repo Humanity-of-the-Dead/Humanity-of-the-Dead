@@ -90,12 +90,13 @@ public class Tutorial : TextDisplay
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     tutorial_Spawn.DestroyCanvasWithImage();
-                    if (GetState() == Tutorial_State.Option)
-                    {
-                        ShowGameClearUI();
-                    }
+                    
                 }
-               
+                if (GetState() == Tutorial_State.Option&&tutorial_Spawn.canvasObject==null)
+                {
+                    ShowGameClearUI();
+                }
+
                 break;
             case GameState.Hint:
                 base.Update(); break;
