@@ -2540,11 +2540,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6868419856064601450, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: LowerHP
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6868419856064601450, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: UpperHP
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7750010862643081104, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: timeMax
