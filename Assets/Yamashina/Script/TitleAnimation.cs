@@ -24,6 +24,12 @@ public class TitleAnimation : MonoBehaviour
     [Tooltip("オプションボタンのイベントトリガーを入れる")]
     [SerializeField] EventTrigger eventTrigger_option;
 
+    [Tooltip("はじめからボタンのイベントトリガーを入れる")]
+    [SerializeField] EventTrigger eventTrigger_Start;
+    [Tooltip("クレジットボタンのイベントトリガーを入れる")]
+    [SerializeField] EventTrigger eventTrigger_Credit;
+
+ 
     [Header("ボタンのアクティブ切り替え")]
 
     [Tooltip("クレジットボタンそのものを入れる")]
@@ -92,7 +98,8 @@ public class TitleAnimation : MonoBehaviour
 
     void Start()
     {
-
+        eventTrigger_Start=start.GetComponent<EventTrigger>();  
+        eventTrigger_Credit=Credit.GetComponent<EventTrigger>();    
         start.onClick.AddListener(() =>
            InstantiateSkipPanel());
 
@@ -107,6 +114,7 @@ public class TitleAnimation : MonoBehaviour
 
 
         }
+        option.onClick.AddListener(() =>  OptionView());
         mainPanel.SetActive(true);　　//タイトル画面
         CreditPanel.SetActive(false);//クレジット画面
         OptionPanel.SetActive(false);
@@ -122,6 +130,15 @@ public class TitleAnimation : MonoBehaviour
         PlayerControl.lastInputTime = Time.time;        
         ChangeStage1();
         ChangeTutorial();
+        start.interactable = false;
+        eventTrigger_Start.enabled = false;
+        eventTrigger_option.enabled = false;    
+        option.interactable = false;    
+        option.GetComponent<AudioButtonHandler>().enabled = false;  
+        start.GetComponent<AudioButtonHandler>().enabled = false;    
+        Credit.interactable = false;    
+        Credit.GetComponent<AudioButtonHandler>().enabled = false;
+        eventTrigger_Credit.enabled = false;
     }
 
     private void ChangeStage1()
@@ -172,9 +189,16 @@ public class TitleAnimation : MonoBehaviour
         OptionPanel.SetActive(false);
         CreditPanel.SetActive(false);
 
+        start.interactable = true;
+        eventTrigger_Start.enabled = true;
+        start.GetComponent<AudioButtonHandler>().enabled = true;
+        eventTrigger_option.enabled = true;
+        option.interactable = true;
+        option.GetComponent<AudioButtonHandler>().enabled = true;
+        Credit.interactable = true;
+        Credit.GetComponent<AudioButtonHandler>().enabled = true;
+        eventTrigger_Credit.enabled = true;
 
-
-        
     }
 
 
@@ -215,14 +239,16 @@ public class TitleAnimation : MonoBehaviour
         OptionPanel.SetActive(true);
 
 
+        option.interactable = false;
+        option.GetComponent<AudioButtonHandler>().enabled = false;
+        eventTrigger_option.enabled = false;
 
-      
     }
-  
+
     //}
 
 
-  
+
 
     void Update()
     {
@@ -245,7 +271,7 @@ public class TitleAnimation : MonoBehaviour
         {
             panelView = PanelView.Option;
         }
-        MouseOverObject mouseOver = GameObject.FindAnyObjectByType<MouseOverObject>();
+        MouseOverObject mouseOver = FindAnyObjectByType<MouseOverObject>();
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.G))
         {
             switch (panelView)
