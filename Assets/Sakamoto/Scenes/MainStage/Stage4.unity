@@ -307,7 +307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3137860054857002523, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: waitTime
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3137860054857002523, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: gamestate
@@ -454,12 +454,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7750010862643081104, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
+      propertyPath: attackIdle
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750010862643081104, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: timeAttackMax
-      value: 0.15
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7750010862643081104, guid: 4a0ac4c15ed6b3447a303bd0a35bf015, type: 3}
       propertyPath: afterAttackFreezeTime
-      value: 0.15
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
