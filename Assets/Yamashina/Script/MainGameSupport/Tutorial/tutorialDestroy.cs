@@ -12,7 +12,12 @@ public class tutorialDestroy : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            gameObject.SetActive(false);     
+            SetActiveSelf();
         }
+    }
+    public void SetActiveSelf()
+    {
+        gameObject.SetActive(false);
+
     }
 }
