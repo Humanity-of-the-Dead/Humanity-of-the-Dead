@@ -40,7 +40,7 @@ public class Tutorial_spown : MonoBehaviour
         }
         canvasObject = Instantiate(canvasPrefab);
         newImageObject = Instantiate(imagePrefab, canvasObject.transform);
-        Image imageComponent = newImageObject.gameObject.transform.GetChild(0).GetComponent<Image>();
+        Image imageComponent = newImageObject.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>();
 
         if (imageComponent != null)
         {

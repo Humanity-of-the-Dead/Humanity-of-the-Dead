@@ -156,11 +156,11 @@ public class Tutorial : TextDisplay
 
         }
     }
-    private void OnGUI()
-    {
-        GUI.skin.label.fontSize = 30;  // 例えば30に設定
-        GUI.skin.label.normal.textColor = Color.black;
-        GUI.skin.label.fontStyle = FontStyle.Bold;
-        GUI.Label(new Rect(10.0f, 400.0f, Screen.width, Screen.height), enGameState.ToString());
-    }
+    //private void OnGUI()
+    //{
+    //    GUI.skin.label.fontSize = 30;  // 例えば30に設定
+    //    GUI.skin.label.normal.textColor = Color.black;
+    //    GUI.skin.label.fontStyle = FontStyle.Bold;
+    //    GUI.Label(new Rect(10.0f, 400.0f, Screen.width, Screen.height), enGameState.ToString());
+    //}
 }

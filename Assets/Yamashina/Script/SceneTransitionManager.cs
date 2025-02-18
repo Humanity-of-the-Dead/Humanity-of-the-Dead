@@ -144,7 +144,6 @@ public class SceneTransitionManager : MonoBehaviour
 
             case string name when name == sceneInformation.GetSceneName(SceneInformation.SCENE.End):
                 bgmName = "BGM_credit";
-                MultiAudio.ins.bgmSource.loop = false;
                 break;
             default:
                 Debug.LogWarning($"No BGM assigned for the scene '{sceneName}'.");
@@ -154,6 +153,13 @@ public class SceneTransitionManager : MonoBehaviour
         if (!string.IsNullOrEmpty(bgmName))
         {
             MultiAudio.ins.PlayBGM_ByName(bgmName); // BGMを再生
+
+            if (sceneName== sceneInformation.GetSceneName(SceneInformation.SCENE.End)){
+                MultiAudio.ins.bgmSource.loop = false;
+
+            }
+            
+
             Debug.Log(bgmName);
         }
     }
