@@ -58,6 +58,10 @@ public class GameMgr : MonoBehaviour
                 }
                 break;
             case GameState.ShowOption:
+
+                //ŽžŠÔ’âŽ~
+                Time.timeScale = 0.0f;
+
                 TitleButton.onClick.AddListener(() =>
            SceneTransitionManager.instance.NextSceneButton(0));
                 TitleButton.onClick.AddListener(() => ResetTime());

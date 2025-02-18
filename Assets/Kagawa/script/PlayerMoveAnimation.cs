@@ -76,7 +76,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     //体の軸
     private int shaft = 0;
 
-    //歩いているときに方向を変更されたか数
+    //歩いているかどうか
     private bool isWalk = false;
 
 
@@ -118,7 +118,15 @@ public class PlayerMoveAnimation : MonoBehaviour
         timeWalk = 0;
         timeAttack = 0;
     }
+    private void Update()
+    {
 
+        if (isWalk)
+        {
+            Debug.Log($"isWalk: {isWalk}");
+
+        }
+    }
     public void StartBossEffect(Vector3 enemyVector3)
     {
         StartCoroutine(ShowHitEffectsBoss(enemyVector3));
@@ -137,21 +145,27 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     public void HandleWalk(int direction, bool walksLikeZombie = false)
     {
+        Debug.Log("HandleWalkStart");
         shaft = direction;
 
         if (isStop)
         {
             WalkInit(walksLikeZombie);
+            Debug.Log("WalkInitが呼ばれている");
+
         }
         if (!isWalk)
         {
             isWalk = true;
             ChangeArmAnime();
             KeepWalk(walksLikeZombie);
+            Debug.Log("KeepWalkが呼ばれている");
+
         }
         else if (isWalk && !isAttack)
         {
             PlayerWalk(walksLikeZombie);
+            Debug.Log("PlayerWalkが呼ばれている");
         }
     }
 
@@ -284,6 +298,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         AnimationData walkAnimation = walksLikeZombie ? animationDataSet.zombieWalk : animationDataSet.walk;
         WalkPoseByIndex(walkAnimation, walkIndex, walksLikeZombie);
+        //Debug.Log(timeWalk);
     }
 
     /// <summary>
@@ -615,6 +630,9 @@ public class PlayerMoveAnimation : MonoBehaviour
             return;
         }
 
+        Debug.Log($"animation: { animation}");
+        Debug.Log($"index: {index}");
+
         // 胴体
         playerRc.transform.rotation = Quaternion.Euler(0, shaft, animation.wholeRotation[index]);
 
@@ -622,6 +640,7 @@ public class PlayerMoveAnimation : MonoBehaviour
         // ChangeArmAnime()にてisActiveを使用して左右の動きをスイッチしているので注意
         if (walksLikeZombie)
         {
+            Debug.Log("walksLikeZombie");
             arm[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
             arm[1].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
             hand[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
@@ -629,6 +648,8 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
         else
         {
+            Debug.Log("NotwalksLikeZombie");
+
             arm[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
             arm[1].transform.rotation = Quaternion.Euler(0, shaft, -animation.armForwardRotation[index]);
             hand[0].transform.rotation = Quaternion.Euler(0, shaft, animation.armForwardRotation[index]);
@@ -638,6 +659,8 @@ public class PlayerMoveAnimation : MonoBehaviour
         // 脚
         if (isActive)
         {
+            Debug.Log("isActive");
+
             leg[0].transform.rotation = Quaternion.Euler(0, shaft, animation.legBackRotation[index]);
             leg[1].transform.rotation = Quaternion.Euler(0, shaft, animation.legForwardRotation[index]);
             foot[0].transform.rotation = Quaternion.Euler(0, shaft, animation.footBackRotation[index]);
@@ -645,6 +668,8 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
         else
         {
+            Debug.Log("isnotActive");
+
             leg[0].transform.rotation = Quaternion.Euler(0, shaft, animation.legForwardRotation[index]);
             leg[1].transform.rotation = Quaternion.Euler(0, shaft, animation.legBackRotation[index]);
             foot[0].transform.rotation = Quaternion.Euler(0, shaft, animation.footForwardRotation[index]);
@@ -699,7 +724,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     private IEnumerator CallWalkWithDelay(bool walksLikeZombie = false)
     {
         isWalk = true;
-
+        Debug.Log(GameMgr.GetState());
         AnimationData walkAnimation = walksLikeZombie ? animationDataSet.zombieWalk : animationDataSet.walk;
         for (int i = 0; i < walkAnimation.armForwardRotation.Length; i++)
         {
@@ -711,7 +736,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                 yield return new WaitForSeconds(timeMax);
             }
         }
-
+        Debug.Log("CallWalkWithDelay isWalk=False");
         isWalk = false;
         isActive = !isActive;
     }
@@ -797,6 +822,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         AnimationData walkAnimation = walksLikeZombie ? animationDataSet.zombieWalk : animationDataSet.walk;
         timeWalk = timeMax * walkAnimation.armForwardRotation.Length;
+        Debug.Log("TimeWalkは"+timeWalk);
         if (walksLikeZombie)
         {
             StartCoroutine(CallWalkWithDelay(true));
