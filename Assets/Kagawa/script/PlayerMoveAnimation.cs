@@ -146,7 +146,6 @@ public class PlayerMoveAnimation : MonoBehaviour
         if (!isWalk)
         {
             isWalk = true;
-            ChangeArmAnime();
             KeepWalk(walksLikeZombie);
         }
         else if (isWalk && !isAttack)
@@ -782,11 +781,11 @@ public class PlayerMoveAnimation : MonoBehaviour
         //三項演算子(各要素に対して変換操作を行う)
         if (isActive)
         {
-            animationDataSet.walk.armForwardRotation = animationDataSet.walk.armForwardRotation.Select(value => value > 0 ? -value : value).ToArray();
+            animationDataSet.walk.armForwardRotation = animationDataSet.walk.armForwardRotation.Select(value => value < 0 ? -value : value).ToArray();
         }
         else if (!isActive)
         {
-            animationDataSet.walk.armForwardRotation = animationDataSet.walk.armForwardRotation.Select(value => value < 0 ? -value : value).ToArray();
+            animationDataSet.walk.armForwardRotation = animationDataSet.walk.armForwardRotation.Select(value => value > 0 ? -value : value).ToArray();
         }
     }
 
