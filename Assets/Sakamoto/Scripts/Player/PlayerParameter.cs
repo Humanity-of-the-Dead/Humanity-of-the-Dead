@@ -305,6 +305,11 @@ public class PlayerParameter : CharacterStats
         //コンポーネント取得
         playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
 
+        UpperData = upperIndex;
+        LowerData = lowerIndex;
+        Debug.Log($"upperIndexは{upperIndex}");
+        Debug.Log($"lowerIndexは{lowerIndex}");
+
         //最大値を設定
         iUpperHPMax = UpperData.iPartHp;
         iLowerHPMax = LowerData.iPartHp;
@@ -314,11 +319,7 @@ public class PlayerParameter : CharacterStats
         iLowerHP = iLowerHPMax;
         //Debug.Log(hitGameObject);
 
-        UpperData = upperIndex;
-        LowerData = lowerIndex;
-        Debug.Log($"upperIndexは{upperIndex}");
-        Debug.Log($"lowerIndexは{lowerIndex}");
-
+        
         hasDroped = false;
 
         playerControl.ChangeUpperBody(UpperData);
