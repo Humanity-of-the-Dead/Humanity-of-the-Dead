@@ -2448,6 +2448,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 186059271}
     m_Modifications:
+    - target: {fileID: 147732817189180694, guid: 0930cbf92e8231a40a9dc7d8a38f1e0a, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 147732817189180694, guid: 0930cbf92e8231a40a9dc7d8a38f1e0a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1745115145
+      objectReference: {fileID: 0}
     - target: {fileID: 5637202728560031613, guid: 0930cbf92e8231a40a9dc7d8a38f1e0a, type: 3}
       propertyPath: m_Constraints
       value: 4
@@ -3814,6 +3822,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 186059271}
     m_Modifications:
+    - target: {fileID: 147732817189180694, guid: 0930cbf92e8231a40a9dc7d8a38f1e0a, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 147732817189180694, guid: 0930cbf92e8231a40a9dc7d8a38f1e0a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1745115145
+      objectReference: {fileID: 0}
     - target: {fileID: 5637202728560031613, guid: 0930cbf92e8231a40a9dc7d8a38f1e0a, type: 3}
       propertyPath: m_Constraints
       value: 4
