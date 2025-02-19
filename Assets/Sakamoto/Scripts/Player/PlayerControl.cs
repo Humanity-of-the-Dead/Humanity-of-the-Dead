@@ -146,7 +146,7 @@ public class PlayerControl : MonoBehaviour
 
                 //攻撃アニメーション中でなければbShootFlagをtrueにする
                 //Debug.Log(playerMoveAnimation.SetAttack());
-                if (playerMoveAnimation.SetAttack() == false)
+                if (playerMoveAnimation.GetIsAttack() == false)
                 {
                     isShot = true;
                 }
@@ -201,10 +201,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void UpdateTimers()
     {
-        playerMoveAnimation.timeWalk -= Time.deltaTime;
-        playerMoveAnimation.timeAttack -= Time.deltaTime;
         Time.timeScale = 1.0f;
-
     }
     void Move()
     {
@@ -215,7 +212,7 @@ public class PlayerControl : MonoBehaviour
         //移動
         Vector3 vPosFromCame = vPosition - mainCamera.transform.position; //カメラ基準のプレイヤーの位置
 
-        if (!playerMoveAnimation.SetAttack())
+        if (!playerMoveAnimation.GetIsAttack())
         {
             //左移動
             if (Input.GetKey(KeyCode.A))
@@ -290,7 +287,7 @@ public class PlayerControl : MonoBehaviour
         #region 山品変更
         //アニメーションをここで呼ぶため、追記
         //攻撃関連
-        if (!playerMoveAnimation.SetAttack() && playerMoveAnimation.timeAttack < 0)
+        if (!playerMoveAnimation.GetIsAttack())
         {
             //上半身攻撃
             if (Input.GetKeyDown(KeyCode.I))
