@@ -145,26 +145,11 @@ public class PlayerMoveAnimation : MonoBehaviour
 
     public void HandleWalk(int direction, bool walksLikeZombie = false)
     {
-        Debug.Log("HandleWalkStart");
         shaft = direction;
 
-        if (isStop)
-        {
-            WalkInit(walksLikeZombie);
-            Debug.Log("WalkInitが呼ばれている");
-
-        }
         if (!isWalk)
         {
-            isWalk = true;
-            KeepWalk(walksLikeZombie);
-            Debug.Log("KeepWalkが呼ばれている");
-
-        }
-        else if (isWalk && !isAttack)
-        {
-            PlayerWalk(walksLikeZombie);
-            Debug.Log("PlayerWalkが呼ばれている");
+            WalkInit(walksLikeZombie);
         }
     }
 
@@ -858,37 +843,12 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     private void WalkInit(bool walksLikeZombie = false)
     {
-        Debug.Log("WalkInitStart");
-        if (timeWalk < 0)
-        {
-            Debug.Log("WalkInit  timeWalk < 0");
-            walkIndex = 0;
-            attackNumber = 0;
-            isActive = false;
-            isStop = false;
-            WalkStart(walksLikeZombie);
-        }
-    }
-
-    /// <summary>
-    /// 歩くことを継続したとき
-    /// </summary>
-    private void KeepWalk(bool walksLikeZombie = false)
-    {
-        // 連続入力されているか
-        #region 山品変更
-        Debug.Log("KeepWalkStart");
-
-        Debug.Log($"timeWalk: {timeWalk}");
-        if (timeWalk < 0.01f + Mathf.Epsilon)
-        {
-            #endregion
-            Debug.Log("KeepWalk  timeWalk < 0.01f");
-            walkIndex = 0;
-            attackNumber = 0;
-            ChangeArmAnime();
-            WalkStart(walksLikeZombie);
-        }
+        walkIndex = 0;
+        attackNumber = 0;
+        isStop = false;
+        isWalk = true;
+        ChangeArmAnime();
+        WalkStart(walksLikeZombie);
     }
 
     /// <summary>
