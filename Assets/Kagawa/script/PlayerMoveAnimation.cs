@@ -169,11 +169,11 @@ public class PlayerMoveAnimation : MonoBehaviour
         }
     }
 
-    public   IEnumerator ShowHitEffectsBoss( Vector3 enemyVector3 )
+    public IEnumerator ShowHitEffectsBoss(Vector3 enemyVector3)
     {
         if (hasDefeatedBoss)
         {
-           yield break;
+            yield break;
         }
 
         for (int i = 1; i <= effectBurstCount; i++)
@@ -187,7 +187,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
             yield return new WaitForSeconds(bossEffectInterval);
 
-            hasDefeatedBoss=true;
+            hasDefeatedBoss = true;
         }
 
         Debug.Log("ボスエフェクトコルーチン関数呼び出し終了");
@@ -289,7 +289,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             leg[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.legBackRotation[attackNumber]);
             foot[0].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.footForwardRotation[attackNumber]);
             foot[1].transform.rotation = Quaternion.Euler(0, shaft, animationDataSet.attackIdle.footBackRotation[attackNumber]);
-        }   
+        }
     }
     /// <summary>
     /// 歩くアニメーション
@@ -630,7 +630,7 @@ public class PlayerMoveAnimation : MonoBehaviour
             return;
         }
 
-        Debug.Log($"animation: { animation}");
+        Debug.Log($"animation: {animation}");
         Debug.Log($"index: {index}");
 
         // 胴体
@@ -734,6 +734,7 @@ public class PlayerMoveAnimation : MonoBehaviour
                 walkIndex = i;
                 PlayerWalk(walksLikeZombie);
                 yield return new WaitForSeconds(timeMax);
+
             }
         }
         Debug.Log("CallWalkWithDelay isWalk=False");
@@ -822,7 +823,7 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         AnimationData walkAnimation = walksLikeZombie ? animationDataSet.zombieWalk : animationDataSet.walk;
         timeWalk = timeMax * walkAnimation.armForwardRotation.Length;
-        Debug.Log("TimeWalkは"+timeWalk);
+        Debug.Log("TimeWalkは" + timeWalk);
         if (walksLikeZombie)
         {
             StartCoroutine(CallWalkWithDelay(true));
@@ -858,8 +859,10 @@ public class PlayerMoveAnimation : MonoBehaviour
     /// </summary>
     private void WalkInit(bool walksLikeZombie = false)
     {
+        Debug.Log("WalkInitStart");
         if (timeWalk < 0)
         {
+            Debug.Log("WalkInit  timeWalk < 0");
             walkIndex = 0;
             attackNumber = 0;
             isActive = false;
@@ -875,11 +878,13 @@ public class PlayerMoveAnimation : MonoBehaviour
     {
         // 連続入力されているか
         #region 山品変更
+        Debug.Log("KeepWalkStart");
 
+        Debug.Log($"timeWalk: {timeWalk}");
         if (timeWalk < 0.01f + Mathf.Epsilon)
         {
             #endregion
-            //Debug.Log("Keep");
+            Debug.Log("KeepWalk  timeWalk < 0.01f");
             walkIndex = 0;
             attackNumber = 0;
             ChangeArmAnime();
