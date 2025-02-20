@@ -272,7 +272,7 @@ public class TitleAnimation : MonoBehaviour
             panelView = PanelView.Option;
         }
         MouseOverObject mouseOver = FindAnyObjectByType<MouseOverObject>();
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G))
         {
             switch (panelView)
             {
