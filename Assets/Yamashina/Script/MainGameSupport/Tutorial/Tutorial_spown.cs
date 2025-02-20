@@ -19,7 +19,7 @@ public class Tutorial_spown : MonoBehaviour
 
 
     public GameObject canvasObject;  // 生成したキャンバスのインスタンスを保持する変数
-    private GameObject newImageObject;  // 現在のImageのオブジェクト
+    public GameObject newImageObject;  // 現在のImageのオブジェクト
 
     private int currentImageIndex = 0;  // 現在表示している画像のインデックス
 
