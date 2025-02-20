@@ -3795,7 +3795,7 @@ MonoBehaviour:
   clearToTransitionTime: 0.1
   CharacterSendingFeaturePrefab: {fileID: 0}
   GameClear: {fileID: 247270896}
-  tutorialDelete: 0
+  tutorialDelete: 2
 --- !u!1001 &3080663084566546927
 PrefabInstance:
   m_ObjectHideFlags: 0
