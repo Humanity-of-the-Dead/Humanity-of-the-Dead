@@ -3845,7 +3845,7 @@ MonoBehaviour:
   Player: {fileID: 2130770304}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
-  TextSpeed: 0.1
+  TextSpeed: 0.07
   clearToTransitionTime: 0.1
   CharacterSendingFeaturePrefab: {fileID: 0}
   GameClear: {fileID: 247270896}
