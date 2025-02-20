@@ -3216,11 +3216,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1924099738880734706, guid: bff141109eec02945aaf975460d83215, type: 3}
       propertyPath: attackIdle
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1924099738880734706, guid: bff141109eec02945aaf975460d83215, type: 3}
       propertyPath: afterAttackFreezeTime
-      value: 0.3
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3068039938150837346, guid: bff141109eec02945aaf975460d83215, type: 3}
       propertyPath: m_LocalRotation.w
