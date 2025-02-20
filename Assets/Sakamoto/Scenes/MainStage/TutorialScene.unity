@@ -3140,7 +3140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2eecb872f506b148b45817a32ae28f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iDownTime: 1
+  iDownTime: 2
   slowFactor: 0
   iHumanityMax: 30
   iUpperHPMax: 0
