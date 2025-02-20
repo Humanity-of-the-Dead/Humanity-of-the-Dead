@@ -14,6 +14,9 @@ public class PlayerParameter : CharacterStats
 
     [SerializeField, Header("1減少するのにかかる時間")]
     protected float iDownTime;
+    [SerializeField, Header("ステージ１の減少速度の調整用")]
+
+    protected float slowFactor;
     [SerializeField, Header("人間性の最大値")]
     public int iHumanityMax;     //人間性の最大値
     [SerializeField, Header("上半身のHPの最大値,パーツが変わる度に\n数値が変わるため設定はそのままでOK")]
@@ -79,10 +82,10 @@ public class PlayerParameter : CharacterStats
 
         //シーン遷移で破棄されない
         DontDestroyOnLoad(gameObject);
-      
+
     }
 
-   protected virtual void Update()
+    protected virtual void Update()
     {
         string SceneName = SceneManager.GetActiveScene().name;
         if (!(SceneName == SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title)))
@@ -95,7 +98,7 @@ public class PlayerParameter : CharacterStats
                     //Debug.Log(iDownTime);
                     if (iHumanity < 0 || iUpperHP < 0 || iLowerHP < 0)
                     {
-                     
+
                         Debug.Log("リロードを開始します"); // デバッグログで確認
 
                         AudioSource BGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
@@ -118,15 +121,15 @@ public class PlayerParameter : CharacterStats
 
                     }
                     break;
-               
 
 
-                    ////シーン移動
-                    //if (Input.GetKeyDown(KeyCode.M))
-                    //{
-                    //    SceneManager.LoadScene("Stage2");
-                    //}
-               
+
+                ////シーン移動
+                //if (Input.GetKeyDown(KeyCode.M))
+                //{
+                //    SceneManager.LoadScene("Stage2");
+                //}
+
                 case GameState.GameOver:
                     if (iHumanity < 0)
                     {
@@ -151,7 +154,7 @@ public class PlayerParameter : CharacterStats
                     break;
             }
         }
-       
+
     }
 
     //慰霊
@@ -300,7 +303,7 @@ public class PlayerParameter : CharacterStats
         goMosaic = GameObject.Find("Player Variant");
         goMosaic = goMosaic.transform.Find("Mosaic").gameObject;
         goPanel = GameObject.Find("GameResult");
-        goPanel= goPanel.transform.Find("GameOver").gameObject;
+        goPanel = goPanel.transform.Find("GameOver").gameObject;
         playerControl = GameObject.Find("Player Variant").GetComponent<PlayerControl>();
         //コンポーネント取得
         playerMoveAnimation = playerControl.GetComponent<PlayerMoveAnimation>();
@@ -319,7 +322,7 @@ public class PlayerParameter : CharacterStats
         iLowerHP = iLowerHPMax;
         //Debug.Log(hitGameObject);
 
-        
+
         hasDroped = false;
 
         playerControl.ChangeUpperBody(UpperData);
@@ -368,7 +371,7 @@ public class PlayerParameter : CharacterStats
         // イベントの解除
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    public override  void TakeDamage(float damage, int body = 0)
+    public override void TakeDamage(float damage, int body = 0)
     {
         //HPが減る仕組み
         //damageはテスト用の関数
@@ -387,16 +390,16 @@ public class PlayerParameter : CharacterStats
         {
             //下半身のHPを減らす
             LowerHP -= damage;
-            enemyMoveAnimation. ShowHitEffects(body,playerControl.transform.position);
+            enemyMoveAnimation.ShowHitEffects(body, playerControl.transform.position);
             MultiAudio.ins.PlaySEByName("SE_common_hit_attack");
 
             //Debug.Log(LowerHP);
         }
     }
-  
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        string sceneName =SceneTransitionManager.instance.sceneInformation.GetCurrentSceneName();
+        string sceneName = SceneTransitionManager.instance.sceneInformation.GetCurrentSceneName();
 
         // シーンが Title または End でない場合に InitializeReferences を実行
         if (sceneName != SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.Title) &&
@@ -404,8 +407,8 @@ public class PlayerParameter : CharacterStats
         {
             InitializeReferences();
         }
-        
-            Debug.Log($"シーン {scene.name} がロードされました");
+
+        Debug.Log($"シーン {scene.name} がロードされました");
     }
 
     private void DropAndRemovePlayerOnce(bool dropsUpper)
@@ -429,7 +432,19 @@ public class PlayerParameter : CharacterStats
 
     protected virtual void DecreasingHP()
     {
-        iHumanity -= Time.deltaTime / iDownTime/* *dgbScale*/;
+        string sceneName = SceneTransitionManager.instance.sceneInformation.GetCurrentSceneName();
+
+        if (sceneName != SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne))
+        {
+            iHumanity -= Time.deltaTime / iDownTime/* *dgbScale*/;
+
+        }
+        else
+        {
+            iHumanity -= (Time.deltaTime / iDownTime) * slowFactor;
+
+        }
+
         iUpperHP -= Time.deltaTime / iDownTime;
         iLowerHP -= Time.deltaTime / iDownTime;
     }
