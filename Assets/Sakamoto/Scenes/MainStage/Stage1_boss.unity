@@ -315,7 +315,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 53820a2b51ab44c4d82c11d0f0fd5205, type: 2}
     - target: {fileID: -7373263027973009250, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: chaseRange
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -7373263027973009250, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: chaseSpeed
@@ -335,7 +335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: LowerHP
-      value: 28
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: -867265186688299090, guid: ce39dd89b5cb57148ba9ea4b8acd1403, type: 3}
       propertyPath: UpperHP
@@ -3851,7 +3851,7 @@ MonoBehaviour:
   customNewline: '[BR]'
   TextSpeed: 0.1
   clearToTransitionTime: 0.1
-  enterKeyPrefab: {fileID: 5479822308329242555, guid: 3ec0f355a36f42446be87c8c039b6ede, type: 3}
+  CharacterSendingFeaturePrefab: {fileID: 0}
   GameClear: {fileID: 247270896}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
