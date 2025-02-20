@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class AudioButtonHandler : MonoBehaviour, IPointerClickHandler
+public class AudioButtonHandler : MonoBehaviour, IPointerClickHandler,IPointerEnterHandler
 
 {
     public string clickSEName = "";
@@ -17,6 +17,11 @@ public class AudioButtonHandler : MonoBehaviour, IPointerClickHandler
         MultiAudio.ins.PlaySEByName(hoverSEName);
         MultiAudio.ins.PlayUIByName(clickSEName);
 
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        MultiAudio.ins.PlaySEByName(hoverSEName);
+        MultiAudio.ins.PlayUIByName(clickSEName);
     }
 
     // SEを再生する
