@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class AudioButtonHandler : MonoBehaviour, IPointerEnterHandler
+public class AudioButtonHandler : MonoBehaviour, IPointerClickHandler
 
 {
     public string clickSEName = "";
@@ -12,13 +12,13 @@ public class AudioButtonHandler : MonoBehaviour, IPointerEnterHandler
     // BGMを再生する
    
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        //UIの場合再生
-        MultiAudio.ins.PlayUIByName(hoverSEName);
-        //SEの場合再生
         MultiAudio.ins.PlaySEByName(hoverSEName);
+        MultiAudio.ins.PlayUIByName(clickSEName);
+
     }
+
     // SEを再生する
     public void PlaySE()
     {
