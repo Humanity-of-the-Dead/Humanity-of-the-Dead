@@ -104,11 +104,10 @@ public class newEnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Floor"))
+        if (!collision.gameObject.CompareTag("Floor") && !collision.gameObject.CompareTag("Player"))
         {
             //Debug.Log($"Collided with: {collision.gameObject.name}, Tag: {collision.gameObject.tag}");
 
-            //Debug.Log("敵同士が衝突し、回れ右");
             if (isMovingToPointB)
             {
                 enemyMoveAnimation?.TurnToRight();
@@ -178,7 +177,6 @@ public class newEnemyMovement : MonoBehaviour
     // 上半身での攻撃とSE判定
     private void AttackWithSeUpper()
     {
-        Debug.Log("AttackWithSeUpper");
         //上半身攻撃
         enemyMoveAnimation.PantieStart();
 
@@ -193,7 +191,7 @@ public class newEnemyMovement : MonoBehaviour
             case "警察の上半身":
                 Vector2 ShootMoveVector = (player.transform.position - enemyMoveAnimation.playerRc.transform.position).normalized;
                 float enemyRotationY = enemyMoveAnimation.playerRc.transform.eulerAngles.y;
-                Debug.Log(enemyRotationY);
+                // エネミーの進行方向に銃弾を打つ
                 if (enemyRotationY == 180)
                 {
                     // 左向きの場合、方向ベクトルのxを反転
@@ -249,7 +247,6 @@ public class newEnemyMovement : MonoBehaviour
     // 下半身での攻撃とSE判定
     private void AttackWithSeLower()
     {
-        Debug.Log("AttackWithSeLower");
         //下半身攻撃
         enemyMoveAnimation.KickStart();
         if (IsAttackableRangeAndDirection())

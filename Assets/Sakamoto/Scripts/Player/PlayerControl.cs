@@ -221,7 +221,6 @@ public class PlayerControl : MonoBehaviour
                 {
                     if (isEnemyHit() == false)
                     {
-                        Debug.Log("左に移動します");
                         vPosition.x -= Time.deltaTime * playerSpeed;
                     }
                 }
@@ -244,7 +243,6 @@ public class PlayerControl : MonoBehaviour
                 Vector2 upVector = Vector2.up;
                 playerRigidBody2D.velocity = upVector;
                 playerRigidBody2D.AddForce(transform.up * playerJumpPower, ForceMode2D.Force);
-                Debug.Log(transform.position);
                 MultiAudio.ins.PlaySEByName("SE_hero_action_jump");
                 isJump = true;
                 jumpCount++;
@@ -562,7 +560,6 @@ public class PlayerControl : MonoBehaviour
                     (playerMoveAnimation.isFacingToRight() == false &&
                     enemyObject[i].transform.position.x - this.transform.position.x < 0))
                 {
-                    Debug.Log("当たってる");
                     //当たっている
                     return true;
                 }
