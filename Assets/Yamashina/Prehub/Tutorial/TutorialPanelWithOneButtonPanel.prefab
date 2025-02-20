@@ -320,6 +320,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnterUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5479822308329242555, guid: 3ec0f355a36f42446be87c8c039b6ede, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
