@@ -437,15 +437,17 @@ public class PlayerParameter : CharacterStats
         if (sceneName != SceneTransitionManager.instance.sceneInformation.GetSceneName(SceneInformation.SCENE.StageOne))
         {
             iHumanity -= Time.deltaTime / iDownTime/* *dgbScale*/;
+            iUpperHP -= Time.deltaTime / iDownTime;
+            iLowerHP -= Time.deltaTime / iDownTime;
+
 
         }
         else
         {
             iHumanity -= (Time.deltaTime / iDownTime) * slowFactor;
-
+            iUpperHP -= Time.deltaTime / iDownTime * slowFactor;
+            iLowerHP -= Time.deltaTime / iDownTime * slowFactor;
         }
 
-        iUpperHP -= Time.deltaTime / iDownTime;
-        iLowerHP -= Time.deltaTime / iDownTime;
     }
 }

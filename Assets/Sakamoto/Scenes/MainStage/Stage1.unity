@@ -143,8 +143,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
+      propertyPath: fEnemyMax
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fTimerMax
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
@@ -839,8 +843,8 @@ Transform:
   - {fileID: 542768800}
   - {fileID: 377555327}
   - {fileID: 259418452}
-  - {fileID: 1632990567}
   - {fileID: 1421559162}
+  - {fileID: 1632990567}
   - {fileID: 1489469006}
   - {fileID: 1154591538}
   - {fileID: 493126646}
@@ -2062,6 +2066,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
+      propertyPath: fEnemyMax
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fTimerMax
       value: 5
       objectReference: {fileID: 0}
@@ -2405,7 +2413,7 @@ PrefabInstance:
       objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fEnemyMax
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fTimerMax
@@ -2842,11 +2850,11 @@ PrefabInstance:
       objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fEnemyMax
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fTimerMax
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: goEnemyObject
@@ -3926,7 +3934,7 @@ PrefabInstance:
       objectReference: {fileID: 798675964}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fEnemyMax
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2265794557398285376, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: fTimerMax
@@ -3954,7 +3962,7 @@ PrefabInstance:
       objectReference: {fileID: 261565240}
     - target: {fileID: 7604454603304143861, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.94
+      value: -13.8
       objectReference: {fileID: 0}
     - target: {fileID: 7604454603304143861, guid: c1c6f8f246b95ba4da777273f7ae9bca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4254,7 +4262,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
-  TextSpeed: 0.1
+  TextSpeed: 0.07
   clearToTransitionTime: 0.1
   CharacterSendingFeaturePrefab: {fileID: 0}
   GameClear: {fileID: 247270896}
@@ -4312,6 +4320,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5702745298637968536, guid: 06fbbe3a6bfe05d4f85b2bd6e1853ff6, type: 3}
       propertyPath: iDownTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702745298637968536, guid: 06fbbe3a6bfe05d4f85b2bd6e1853ff6, type: 3}
+      propertyPath: slowFactor
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5702745298637968536, guid: 06fbbe3a6bfe05d4f85b2bd6e1853ff6, type: 3}

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 public enum Tutorial_State
 {
     PlayerMove,
@@ -17,7 +16,10 @@ public class Tutorial : TextDisplay
     private Tutorial_spown tutorial_Spawn;
 
     private const float POSITION_DONOT_MOVE = 21;
-   
+
+    [SerializeField, Header("チュートリアル画像を消すまでの時間")] private float tutorialDelete;
+
+    private float tutorialTimer = 0;
     public static void NextState()
     {
         int nextIndex = (int)enGameState + 1; // 次のインデックス
@@ -73,7 +75,7 @@ public class Tutorial : TextDisplay
             case GameState.Main:
                 base.Update();
                 ChangeStateToDoNotMoveIfNeeded();
-          
+
                 break;
             case GameState.ShowText:
                 base.Update();
@@ -84,15 +86,40 @@ public class Tutorial : TextDisplay
                     Debug.Log(GameMgr.GetState().ToString());
 
                 }
-               
+
                 break;
             case GameState.Tutorial:
-                if (Input.GetKeyDown(KeyCode.Space))
+                if(tutorial_Spawn.newImageObject != null) 
                 {
-                    tutorial_Spawn.DestroyCanvasWithImage();
-                    
+                    Image enterUIImage = tutorial_Spawn.newImageObject.transform.Find("EnterUI").gameObject.GetComponent<Image>();
+
+                    Color enterUIcolor = enterUIImage.color;
+
+                    if (tutorialTimer > tutorialDelete)
+                    {
+                        Debug.Log(tutorial_Spawn.newImageObject?.transform.Find("EnterUI").gameObject);
+                        Debug.Log(enterUIcolor);
+                        Debug.Log(enterUIcolor.a);
+                        enterUIcolor.a = 1f;
+                        Debug.Log(enterUIcolor.a);
+                        enterUIImage.color = enterUIcolor; // 変更後の色を適用
+
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+
+
+
+                            tutorial_Spawn.DestroyCanvasWithImage();
+
+                            tutorialTimer = 0;
+                        }
+                    }
+
                 }
-                if (GetState() == Tutorial_State.Option&&tutorial_Spawn.canvasObject==null)
+               
+                tutorialTimer += Time.deltaTime;
+
+                if (GetState() == Tutorial_State.Option && tutorial_Spawn.canvasObject == null)
                 {
                     ShowGameClearUI();
                 }
