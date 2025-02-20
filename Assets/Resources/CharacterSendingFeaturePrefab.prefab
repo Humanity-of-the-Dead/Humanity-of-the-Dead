@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1660716718289173555}
   - component: {fileID: 6386753173971305481}
   m_Layer: 10
-  m_Name: EnterUI
+  m_Name: CharacterSendingFeaturePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

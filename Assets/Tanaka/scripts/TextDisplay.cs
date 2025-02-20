@@ -88,6 +88,7 @@ public class TextDisplay : MonoBehaviour
         //テキスト表示域を非表示
         Flag = new bool[Position.Length];
         GameClear.SetActive(false);
+        CharacterSendingFeaturePrefab = Resources.Load<GameObject>("CharacterSendingFeaturePrefab");
 
         //TextArea.SetActive(true);
 
@@ -116,7 +117,7 @@ public class TextDisplay : MonoBehaviour
 
             case GameState.ShowText:
 
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     if (!isTextFullyDisplayed)
                     {
@@ -140,7 +141,7 @@ public class TextDisplay : MonoBehaviour
                     DisplayEnterKeyOnLastCharIfNeeded();
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     FinishTextShowText();
                 }
@@ -148,7 +149,7 @@ public class TextDisplay : MonoBehaviour
                 break;
 
             case GameState.Hint:
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     UpdateHintText();
                 }
@@ -157,7 +158,7 @@ public class TextDisplay : MonoBehaviour
                     DisplayEnterKeyOnLastCharIfNeeded();
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     FinishTextHint();
                 }
@@ -187,7 +188,7 @@ public class TextDisplay : MonoBehaviour
             case GameState.AfterBoss:
 
 
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
 
                     if (!isTextFullyDisplayed)
@@ -225,7 +226,7 @@ public class TextDisplay : MonoBehaviour
 
     protected virtual void ShowGameClearUI()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             FinishTextAfterBoss();
         }
