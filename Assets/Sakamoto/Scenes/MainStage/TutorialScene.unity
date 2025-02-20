@@ -888,6 +888,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 06600acb8bfe3e44789b4df65b10bcbd, type: 3}
   - {fileID: 21300000, guid: cfd7525b1c692164d9819321baeee7eb, type: 3}
   canvasObject: {fileID: 0}
+  newImageObject: {fileID: 0}
 --- !u!1 &247270896
 GameObject:
   m_ObjectHideFlags: 0
@@ -3140,6 +3141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iDownTime: 1
+  slowFactor: 0
   iHumanityMax: 30
   iUpperHPMax: 0
   iLowerHPMax: 0
@@ -3789,10 +3791,11 @@ MonoBehaviour:
   Player: {fileID: 967675288}
   TextArea: {fileID: 259418451}
   customNewline: '[BR]'
-  TextSpeed: 0.1
+  TextSpeed: 0.07
   clearToTransitionTime: 0.1
-  enterKeyPrefab: {fileID: 5479822308329242555, guid: 3ec0f355a36f42446be87c8c039b6ede, type: 3}
+  CharacterSendingFeaturePrefab: {fileID: 0}
   GameClear: {fileID: 247270896}
+  tutorialDelete: 2
 --- !u!1001 &3080663084566546927
 PrefabInstance:
   m_ObjectHideFlags: 0
