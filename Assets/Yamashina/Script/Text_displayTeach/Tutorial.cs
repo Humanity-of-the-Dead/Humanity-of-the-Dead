@@ -89,29 +89,34 @@ public class Tutorial : TextDisplay
 
                 break;
             case GameState.Tutorial:
-                Image enterUIImage = tutorial_Spawn.newImageObject.transform.Find("EnterUI").gameObject.GetComponent<Image>();
-
-                Color enterUIcolor = enterUIImage.color;
-
-                if (tutorialTimer > tutorialDelete)
+                if(tutorial_Spawn.newImageObject != null) 
                 {
-                    Debug.Log(tutorial_Spawn.newImageObject.transform.Find("EnterUI").gameObject);
-                    Debug.Log(enterUIcolor);
-                    Debug.Log(enterUIcolor.a);
-                    enterUIcolor.a = 1f;
-                    Debug.Log(enterUIcolor.a);
-                    enterUIImage.color = enterUIcolor; // 変更後の色を適用
+                    Image enterUIImage = tutorial_Spawn.newImageObject.transform.Find("EnterUI").gameObject.GetComponent<Image>();
 
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    Color enterUIcolor = enterUIImage.color;
+
+                    if (tutorialTimer > tutorialDelete)
                     {
+                        Debug.Log(tutorial_Spawn.newImageObject?.transform.Find("EnterUI").gameObject);
+                        Debug.Log(enterUIcolor);
+                        Debug.Log(enterUIcolor.a);
+                        enterUIcolor.a = 1f;
+                        Debug.Log(enterUIcolor.a);
+                        enterUIImage.color = enterUIcolor; // 変更後の色を適用
+
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
 
 
 
-                        tutorial_Spawn.DestroyCanvasWithImage();
+                            tutorial_Spawn.DestroyCanvasWithImage();
 
-                        tutorialTimer = 0;
+                            tutorialTimer = 0;
+                        }
                     }
+
                 }
+               
                 tutorialTimer += Time.deltaTime;
 
                 if (GetState() == Tutorial_State.Option && tutorial_Spawn.canvasObject == null)
