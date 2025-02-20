@@ -88,7 +88,11 @@ public class PlayerControl : MonoBehaviour
     }
     public void InstantiateSkipPanel()
     {
-        if (SleepPanelInstance != null) { Destroy(SleepPanelInstance); }
+        if (SleepPanelInstance != null) 
+        {
+            return;
+        }
+
         SleepPanelInstance = Instantiate(SleepPanel);
         ChangeStage1();
         ChangeTutorial();
@@ -141,7 +145,6 @@ public class PlayerControl : MonoBehaviour
                 {
                     GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -1);
                 }
-                UpdateTimers();
 
 
                 //攻撃アニメーション中でなければbShootFlagをtrueにする
@@ -155,7 +158,7 @@ public class PlayerControl : MonoBehaviour
 
                 break;
             case GameState.ShowText:
-                UpdateTimers();
+                
 
                 break;
             case GameState.ShowOption:
@@ -163,10 +166,8 @@ public class PlayerControl : MonoBehaviour
                 break;
 
             case GameState.Tutorial:
-                UpdateTimers();
                 break;
             case GameState.Hint:
-                Time.timeScale = 0.0f;
                 //Debug.Log("プレイヤーが動いていないこと確認");
 
                 break;
@@ -199,10 +200,7 @@ public class PlayerControl : MonoBehaviour
 
 
     }
-    private void UpdateTimers()
-    {
-        Time.timeScale = 1.0f;
-    }
+   
     void Move()
     {
         //現在のポジションを取得

@@ -8,8 +8,8 @@ public enum GameState
     ShowOption,
     ShowText,
     Tutorial,
-    
-    
+
+
 
     Clear, //クリア表示
     BeforeBoss, // 新しく追加：ボス戦直前
@@ -60,11 +60,10 @@ public class GameMgr : MonoBehaviour
             case GameState.ShowOption:
 
                 //時間停止
-                Time.timeScale = 0.0f;
+
 
                 TitleButton.onClick.AddListener(() =>
            SceneTransitionManager.instance.NextSceneButton(0));
-                TitleButton.onClick.AddListener(() => ResetTime());
                 ////TitleButton.onClick.AddListener(() => PlayerParameter.Instance.ResetPlayerData()
                 //);
                 if (Input.GetKeyDown(KeyCode.G))
@@ -96,7 +95,31 @@ public class GameMgr : MonoBehaviour
     {
         previousGameState = enGameState; // 現在のステートを前回のステートとして保存
 
+
+
         enGameState = newState;
+        switch (newState)
+        {
+            case GameState.Main:
+                Time.timeScale = 1.0f;
+                break;
+            case GameState.ShowOption:
+                Time.timeScale = 0.0f;
+                break;
+            case GameState.ShowText:
+                Time.timeScale = 1.0f;  
+                break;
+
+            case GameState.Tutorial:
+                Time.timeScale = 1.0f;
+                break;
+
+                case GameState.Hint:
+                Time.timeScale = 0.0f;
+                break;
+
+
+        }
         Debug.Log(newState);
     }
     // ステートが変わったかを確認する関数
@@ -109,11 +132,8 @@ public class GameMgr : MonoBehaviour
     {
         return enGameState;
     }
-    public void ResetTime()
-    {
-        Time.timeScale = 1.0f;
 
-    }
+
 
     //private void OnGUI()
     //{
