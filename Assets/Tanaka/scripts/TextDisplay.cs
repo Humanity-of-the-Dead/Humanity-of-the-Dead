@@ -61,14 +61,14 @@ public class TextDisplay : MonoBehaviour
 
     private Coroutine TypingCroutine;  //コルーチンの管理
 
-    private bool displaysEnterKey = false;  // enterKeyを表示しているかどうか
+    private bool displaysEnterKey = false;  // CharacterSendingFeaturePrefabを表示しているかどうか
     private string enterKeyAlternativeChar = "・";   // enterKeyの位置を決めるための代替文字
 
     float timer = 0;
-    [SerializeField, Header("EnterKeyのプレハブ")]
-    private GameObject enterKeyPrefab;
+    [SerializeField, Header("文字送りのプレハブ")]
+    private GameObject CharacterSendingFeaturePrefab;
 
-    private GameObject enterKeyInstance; // 既存の enterKeyInstance を保持する変数
+    private GameObject CharacterSendingFeatureInstance; // 既存の CharacterSendingFeatureInstance を保持する変数
 
     public bool IsTextFullyDisplayed()
     {
@@ -88,6 +88,7 @@ public class TextDisplay : MonoBehaviour
         //テキスト表示域を非表示
         Flag = new bool[Position.Length];
         GameClear.SetActive(false);
+        CharacterSendingFeaturePrefab = Resources.Load<GameObject>("CharacterSendingFeaturePrefab");
 
         //TextArea.SetActive(true);
 
@@ -116,7 +117,7 @@ public class TextDisplay : MonoBehaviour
 
             case GameState.ShowText:
 
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     if (!isTextFullyDisplayed)
                     {
@@ -140,7 +141,7 @@ public class TextDisplay : MonoBehaviour
                     DisplayEnterKeyOnLastCharIfNeeded();
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     FinishTextShowText();
                 }
@@ -148,7 +149,7 @@ public class TextDisplay : MonoBehaviour
                 break;
 
             case GameState.Hint:
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     UpdateHintText();
                 }
@@ -157,7 +158,7 @@ public class TextDisplay : MonoBehaviour
                     DisplayEnterKeyOnLastCharIfNeeded();
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     FinishTextHint();
                 }
@@ -187,7 +188,7 @@ public class TextDisplay : MonoBehaviour
             case GameState.AfterBoss:
 
 
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
 
                     if (!isTextFullyDisplayed)
@@ -225,7 +226,7 @@ public class TextDisplay : MonoBehaviour
 
     protected virtual void ShowGameClearUI()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             FinishTextAfterBoss();
         }
@@ -484,24 +485,24 @@ public class TextDisplay : MonoBehaviour
             Debug.Log($"vIdx= {vIdx}, vertexs.Count= {vertexs.Count}");
         }
 
-        // 末尾の文字の位置に新しい enterKeyInstance を生成して置換
-        enterKeyInstance = Instantiate(enterKeyPrefab);
+        // 末尾の文字の位置に新しい CharacterSendingFeatureInstance を生成して置換
+        CharacterSendingFeatureInstance = Instantiate(CharacterSendingFeaturePrefab);
         if (textStr.Length > 0)
         {
             text.text = textStr.Remove(textStr.Length - 1);
         }
-        enterKeyInstance.transform.localPosition = enterKeyPosition;
-        enterKeyInstance.transform.SetParent(TextArea.transform.GetChild(0).transform.GetChild(0).transform, false);
-        //Debug.Log($"新しい enterKeyInstance を生成: {enterKeyInstance.transform.localPosition}");
+        CharacterSendingFeatureInstance.transform.localPosition = enterKeyPosition;
+        CharacterSendingFeatureInstance.transform.SetParent(TextArea.transform.GetChild(0).transform.GetChild(0).transform, false);
+        //Debug.Log($"新しい CharacterSendingFeatureInstance を生成: {CharacterSendingFeatureInstance.transform.localPosition}");
 
         displaysEnterKey = true;
     }
 
     private void RemoveEnterKey()
     {
-        if (enterKeyInstance != null)
+        if (CharacterSendingFeatureInstance != null)
         {
-            Destroy(enterKeyInstance);
+            Destroy(CharacterSendingFeatureInstance);
         }
         displaysEnterKey = false;
     }

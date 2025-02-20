@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31420de0bf591e459c6add79c2ededf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  humanityRecoveryAmount: 10
+  humanityRecoveryAmount: 100
   goButton:
   - {fileID: 2182874680941712295}
   - {fileID: 6055618513447132620}
