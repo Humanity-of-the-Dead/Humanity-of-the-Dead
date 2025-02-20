@@ -88,7 +88,11 @@ public class PlayerControl : MonoBehaviour
     }
     public void InstantiateSkipPanel()
     {
-        if (SleepPanelInstance != null) { Destroy(SleepPanelInstance); }
+        if (SleepPanelInstance != null) 
+        {
+            return;
+        }
+
         SleepPanelInstance = Instantiate(SleepPanel);
         ChangeStage1();
         ChangeTutorial();
