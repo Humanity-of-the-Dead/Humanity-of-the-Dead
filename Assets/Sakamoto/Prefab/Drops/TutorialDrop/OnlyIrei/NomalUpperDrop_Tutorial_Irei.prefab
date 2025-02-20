@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9fc69f2bb8c80f45801affb5ca0ab95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  humanityRecoveryAmount: 10
+  humanityRecoveryAmount: 100
   goButton:
   - {fileID: 2182874680941712295}
   goGrave: {fileID: 2839263780191614865, guid: fd771b76aae9c0641833c8c5eff54c82, type: 3}
