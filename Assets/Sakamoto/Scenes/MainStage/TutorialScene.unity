@@ -3141,7 +3141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iDownTime: 1
-  slowFactor: 0
+  slowFactor: 1
   iHumanityMax: 30
   iUpperHPMax: 0
   iLowerHPMax: 0
