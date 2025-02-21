@@ -357,12 +357,7 @@ public class TitleAnimation : MonoBehaviour
                     break;
             }
         }
-            //デバッグ用仮
-            if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-
+          
 
 
     }
