@@ -277,7 +277,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &92859003
@@ -819,15 +819,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f36aef9290bac749a33b7c6de7739be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scGameMgr: {fileID: 498662820}
-  goMosaic: {fileID: 1264595294}
   iDownTime: 1
+  slowFactor: 0
   iHumanityMax: 100
   iUpperHPMax: 30
   iLowerHPMax: 30
-  goPlayer: {fileID: 285081240}
+  playerControl: {fileID: 0}
   UpperData: {fileID: 11400000, guid: a72cdc466c72ac54b99427c79e98c125, type: 2}
   LowerData: {fileID: 11400000, guid: 823af4672cb62674f8af8f1d901261ae, type: 2}
+  upperDataDefault: {fileID: 0}
+  lowerDataDefault: {fileID: 0}
+  UpperDataForStageFour: {fileID: 0}
+  LowerDataForStageFour: {fileID: 0}
 --- !u!4 &261565242
 Transform:
   m_ObjectHideFlags: 0
@@ -1156,12 +1159,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a77a3114fa5a409a5786c62d230a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scGameMgr: {fileID: 498662820}
-  fSpeed: 7
-  fJmpPower: 450
-  goCamera: {fileID: 244809042}
-  liObj: []
-  playerParameter: {fileID: 261565241}
+  characterSprites:
+    head: {fileID: 0}
+    body: {fileID: 0}
+    armRight: {fileID: 0}
+    armLeft: {fileID: 0}
+    handRight: {fileID: 0}
+    handLeft: {fileID: 0}
+    waist: {fileID: 0}
+    legRight: {fileID: 0}
+    legLeft: {fileID: 0}
+    footRight: {fileID: 0}
+    footLeft: {fileID: 0}
+  playerSpeed: 0
+  playerJumpPower: 0
+  mainCamera: {fileID: 0}
+  enemyObject: []
+  sleepThreshold: 30
+  SleepPanel: {fileID: 0}
 --- !u!1 &325012994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,13 +1207,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goEnemyObject: {fileID: 8095061270098347470, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-  goPlayerParameter: {fileID: 261565240}
-  playerParameter: {fileID: 261565241}
-  goPlayerControl: {fileID: 285081240}
-  gameMgr: {fileID: 498662820}
-  goTarget: {fileID: 285081240}
+  playerControl: {fileID: 0}
   liEnemyList: []
-  goMarker: {fileID: 99492949}
+  randomOffsetXRange: 2
   fTimerMax: 30
   fEnemyMax: 3
 --- !u!4 &325012996
@@ -1750,13 +1761,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goEnemyObject: {fileID: 8095061270098347470, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-  goPlayerParameter: {fileID: 261565240}
-  playerParameter: {fileID: 261565241}
-  goPlayerControl: {fileID: 285081240}
-  gameMgr: {fileID: 498662820}
-  goTarget: {fileID: 285081240}
+  playerControl: {fileID: 0}
   liEnemyList: []
-  goMarker: {fileID: 1447581697}
+  randomOffsetXRange: 2
   fTimerMax: 30
   fEnemyMax: 3
 --- !u!4 &577768600
@@ -2105,6 +2112,12 @@ MonoBehaviour:
   goHumanity_Bar: {fileID: 252931442}
   goUpperHP_Bar: {fileID: 1440257034}
   goLowerHP_Bar: {fileID: 2076811909}
+  alertLevel: 0.3
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  normalColor_Isyoku: {r: 0, g: 1, b: 1, a: 1}
+  warningFlashColor1: {r: 1, g: 0.2, b: 0.2, a: 1}
+  warningFlashColor2: {r: 0.6, g: 0, b: 0, a: 1}
+  warningFlashSpeed: 2
 --- !u!1 &1021531510
 GameObject:
   m_ObjectHideFlags: 0
@@ -3308,90 +3321,9 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1634302241
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 839164661511794095, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: gamestate
-      value: 
-      objectReference: {fileID: 498662820}
-    - target: {fileID: 839164661511794095, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: scPlayerParameter
-      value: 
-      objectReference: {fileID: 261565241}
-    - target: {fileID: 2904060275149615235, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.38999
-      objectReference: {fileID: 0}
-    - target: {fileID: 2904060275149615235, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.9473952
-      objectReference: {fileID: 0}
-    - target: {fileID: 2904060275149615235, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2904060275149615235, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2904060275149615235, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2904060275149615235, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2904060275149615235, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2904060275149615235, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2904060275149615235, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2904060275149615235, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6605922515007862427, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: PlayerControl
-      value: 
-      objectReference: {fileID: 285081240}
-    - target: {fileID: 6605922515007862427, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: PlayerParameter
-      value: 
-      objectReference: {fileID: 261565240}
-    - target: {fileID: 6605922515007862427, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: sceneTransitionManager
-      value: 
-      objectReference: {fileID: 1810562236}
-    - target: {fileID: 8095061270098347470, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_Name
-      value: Enemy_Zonbi_Spoon
-      objectReference: {fileID: 0}
-    - target: {fileID: 8095061270098347470, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
 --- !u!1 &1647872232
 GameObject:
   m_ObjectHideFlags: 0
@@ -3692,7 +3624,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1745963462
@@ -3770,17 +3702,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745963462}
   m_CullTransparentMesh: 1
---- !u!114 &1810562236 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2752137397931085381, guid: 3317f5acf86fe8348955e461d751624f, type: 3}
-  m_PrefabInstance: {fileID: 1043331641}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbc1a23c4a1d9b94c9fb06f310419419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1867379933
 GameObject:
   m_ObjectHideFlags: 0
@@ -3811,13 +3732,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goEnemyObject: {fileID: 8095061270098347470, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-  goPlayerParameter: {fileID: 261565240}
-  playerParameter: {fileID: 261565241}
-  goPlayerControl: {fileID: 285081240}
-  gameMgr: {fileID: 498662820}
-  goTarget: {fileID: 285081240}
+  playerControl: {fileID: 0}
   liEnemyList: []
-  goMarker: {fileID: 396787228}
+  randomOffsetXRange: 2
   fTimerMax: 30
   fEnemyMax: 3
 --- !u!4 &1867379935
@@ -4020,13 +3937,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goEnemyObject: {fileID: 8095061270098347470, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-  goPlayerParameter: {fileID: 261565240}
-  playerParameter: {fileID: 261565241}
-  goPlayerControl: {fileID: 285081240}
-  gameMgr: {fileID: 498662820}
-  goTarget: {fileID: 285081240}
+  playerControl: {fileID: 0}
   liEnemyList: []
-  goMarker: {fileID: 1564283588}
+  randomOffsetXRange: 2
   fTimerMax: 30
   fEnemyMax: 3
 --- !u!4 &2002881422
@@ -4166,13 +4079,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goEnemyObject: {fileID: 8095061270098347470, guid: ebb4ab08d338ac74bb325bea0a8bba00, type: 3}
-  goPlayerParameter: {fileID: 261565240}
-  playerParameter: {fileID: 261565241}
-  goPlayerControl: {fileID: 285081240}
-  gameMgr: {fileID: 498662820}
-  goTarget: {fileID: 285081240}
+  playerControl: {fileID: 0}
   liEnemyList: []
-  goMarker: {fileID: 1270248636}
+  randomOffsetXRange: 2
   fTimerMax: 30
   fEnemyMax: 3
 --- !u!4 &2116608657
@@ -4518,20 +4427,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bcbd9866e119824bbf8563bf159eddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textAsset:
-  - {fileID: 4900000, guid: c304ff9bd852c4f4984b6f46cabe270b, type: 3}
-  - {fileID: 4900000, guid: bcd6c9a146566ce4496b19eb3594b5e4, type: 3}
-  - {fileID: 4900000, guid: 9f51a60990858db4784073db90ed78c1, type: 3}
-  - {fileID: 4900000, guid: c89c4e974f2726e4687f2aa7d2f95619, type: 3}
+  textDataSet: []
+  hintTextAssetArray: []
   text: {fileID: 8347251639881320452}
   TypingSpeed: 0.5
+  LoadDataIndex: 0
+  LoadText: 0
   Position:
   - -1
   - 180
   Player: {fileID: 285081240}
-  GameManager: {fileID: 498662820}
   TextArea: {fileID: 259418451}
+  customNewline: '[BR]'
   TextSpeed: 0.1
+  clearToTransitionTime: 0.1
+  CharacterSendingFeaturePrefab: {fileID: 0}
+  GameClear: {fileID: 0}
 --- !u!1 &6397921676348784042
 GameObject:
   m_ObjectHideFlags: 0
@@ -4654,4 +4565,3 @@ SceneRoots:
   - {fileID: 92859004}
   - {fileID: 613798102}
   - {fileID: 492203196}
-  - {fileID: 1634302241}
