@@ -175,11 +175,11 @@ public class PlayerControl : MonoBehaviour
                 //Debug.Log("プレイヤーが動いていないこと確認");
                 break;
         }
-        if (GameMgr.GetState() != GameState.ShowOption)
-        {
-            PlayerSleeping();
+        //if (GameMgr.GetState() != GameState.ShowOption)
+        //{
+        //    PlayerSleeping();
 
-        }
+        //}
     }
 
     private void PlayerSleeping()
