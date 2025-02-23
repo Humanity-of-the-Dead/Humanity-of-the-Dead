@@ -51,6 +51,7 @@ public class SceneTransitionManager : MonoBehaviour
         }
         InitializeReferences();
         PlayBGMForScene();
+        DestroyPlayerParameterIfIsTitle(sceneInformation.currentScene);
 
 
         isReloading = false; // シーン変更が完了したのでリセット
@@ -195,6 +196,18 @@ public class SceneTransitionManager : MonoBehaviour
         if (currentScene == SceneInformation.SCENE.Title && newScene == SceneInformation.SCENE.StageOne)
         {
             PlayerParameter.Instance?.InitBodyIndex();
+        }
+    }
+
+    private void DestroyPlayerParameterIfIsTitle(SceneInformation.SCENE newScene)
+    {
+        if (newScene == SceneInformation.SCENE.Title)
+        {
+            PlayerParameter pp = FindObjectOfType<PlayerParameter>();
+            if (pp != null)
+            {
+                Destroy(pp.gameObject);
+            }
         }
     }
 
