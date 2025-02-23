@@ -43,6 +43,11 @@ public class Tutorial : TextDisplay
         base.Start();
         tutorial_Spawn = FindAnyObjectByType<Tutorial_spown>();
     }
+    public static void ResetTutorialState()
+    {
+        enGameState = Tutorial_State.PlayerMove;
+
+    }
     public static void ChangeState(Tutorial_State newState)
     {
         previousGameState = enGameState; // 現在のステートを前回のステートとして保存

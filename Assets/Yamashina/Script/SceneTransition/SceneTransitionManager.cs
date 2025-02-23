@@ -196,6 +196,7 @@ public class SceneTransitionManager : MonoBehaviour
         if (currentScene == SceneInformation.SCENE.Title && newScene == SceneInformation.SCENE.StageOne)
         {
             PlayerParameter.Instance?.InitBodyIndex();
+            Tutorial.ResetTutorialState();  
         }
     }
 
